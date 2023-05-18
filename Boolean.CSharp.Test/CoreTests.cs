@@ -15,9 +15,17 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        public void TestQuestion1()
+        public void AddUser()
         {
+            // Arrange
+            string name = "Max";
+            string password = "password";
 
+            // Act
+            _core.CreateAccount(name, password);
+
+            // Assert
+            Assert.AreEqual(_core.AccountList.Count, 1);
         }
 
     }
