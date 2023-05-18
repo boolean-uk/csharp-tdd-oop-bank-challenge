@@ -21,9 +21,10 @@ namespace Boolean.CSharp.Test
             // Arrange
             string name = "Max";
             string password = "password";
+            bool savingsaccount = false;
 
             // Act
-            _core.CreateAccount(name, password);
+            _core.CreateAccount(name, password, savingsaccount);
 
             // Assert
             Assert.AreEqual(_core.AccountList.Count, 1);
@@ -35,9 +36,10 @@ namespace Boolean.CSharp.Test
             // Arrange
             _core.CreateAccount("name", "password", false);
             Assert.IsFalse(_core.AccountList.First().SavingsAccount);
+            var user = _core.AccountList.First();
 
             // Act
-            _core.SavingsAccount();
+            _core.SavingsAccount(user);
 
             // Assert
             Assert.IsTrue(_core.AccountList.First().SavingsAccount);
