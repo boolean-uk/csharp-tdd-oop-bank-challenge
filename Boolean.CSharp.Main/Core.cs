@@ -10,30 +10,22 @@ namespace Boolean.CSharp.Main
 {
     public class Core
     {
-        private List<IAccount> _AccountList = new List<IAccount>();
+        private List<IUser> _userList = new List<IUser>();
 
         #region CreateAccount()
-        public void CreateAccount(string name, string password, bool savingsaccount)
+        public void CreateUser(string name, string password)
         {
-            createAccount(name, password, savingsaccount);
+            createUser(name, password);
         }
-        private void createAccount(string name, string password, bool savingsaccount)
+        private void createUser(string name, string password)
         {
-            _AccountList.Add(new User(name, password, savingsaccount));
+            _userList.Add(new User(name, password));
         }
         #endregion
 
         #region SavingsAccount()
-        public void SavingsAccount(IAccount user)
-        {
-            savingsAccount(user);
-        }
-        private void savingsAccount(IAccount user)
-        {
-            user.SavingsAccount = true;
-        }
         #endregion
 
-        public List<IAccount> AccountList { get { return _AccountList; } set { _AccountList = value; } }
+        public List<IUser> UserList { get { return _userList; } set { _userList = value; } }
     }
 }

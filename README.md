@@ -26,21 +26,30 @@ Your task is to use everything you've learned to build a small banking applicati
 
 ```
 As a customer,
-So I can safely store use my money,
-I want to create a current account.
+So I can manage my bankaccount,
+I want to create a user account.
 ```
 | Classes         | Methods            | Scenario                                   | Outputs                       |
 |-----------------|--------------------|--------------------------------------------|-------------------------------|
-| `Core`		  | `CreateAccount()`  | Create account with username and password  | Account stored in AccountList |
+| `Core`		  | `CreateUser()`	   | Create account with username and password  | Account stored in AccountList |
+
+```
+As a customer,
+So I can safely store use my money,
+I want to create a bank account.
+```
+| Classes         | Methods                | Scenario                                             | Outputs                    |
+|-----------------|------------------------|------------------------------------------------------|----------------------------|
+| `Core`		  | `CreateBankAccount()`  | Create bankaccount that contains a transaction list  | Bankaccount stored in User |
 
 ```
 As a customer,
 So I can save for a rainy day,
 I want to create a savings account.
 ```
-| Classes         | Methods            | Scenario                         | Outputs                                |
-|-----------------|--------------------|----------------------------------|----------------------------------------|
-| `Core`		  | `SavingsAccount()` | Turn bool SavingsAccount on/off  | Shows if SavingsAccount in AccountList |
+| Classes         | Methods                  | Scenario                                             | Outputs                       |
+|-----------------|--------------------------|------------------------------------------------------|-------------------------------|
+| `Core`		  | `CreateSavingsAccount()` | Create bankaccount that contains a transaction list  | Savingsaccount stored in User |
 
 ```
 As a customer,

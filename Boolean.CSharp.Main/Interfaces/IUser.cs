@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main
 {
-    public interface IAccount
+    public interface IUser
     {
         public string Username { get; set; }
         public string Password { get; set; }
-        public bool SavingsAccount { get; set; } 
     }
 }

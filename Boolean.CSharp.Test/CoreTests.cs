@@ -7,29 +7,37 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class CoreTests
     {
-        private Core _core;
-
-        public CoreTests()
-        {
-            _core = new Core();
-
-        }
-
         [Test]
-        public void AddUser()
+        public void CreateUser()
         {
-            // I want to create a current account.
+            // I want to create a user account.
 
             // Arrange
+            Core _core = new Core();
+
             string name = "Max";
             string password = "password";
-            bool savingsaccount = false;
 
             // Act
-            _core.CreateAccount(name, password, savingsaccount);
+            _core.CreateUser(name, password);
 
             // Assert
-            Assert.AreEqual(_core.AccountList.Count, 1);
+            Assert.AreEqual(_core.UserList.Count, 1);
+        }
+
+/*        [Test]
+        public void CreateBankAccount()
+        {
+            // I want to create a bank account.
+
+            // Arrange
+            _core.CreateUser("name", "password", false);
+
+            // Act
+            _core.CreateUser(name, password, savingsaccount);
+
+            // Assert
+            Assert.AreEqual(_core.UserList.Count, 1);
         }
 
         [Test]
@@ -38,15 +46,15 @@ namespace Boolean.CSharp.Test
             // I want to create a savings account.
 
             // Arrange
-            _core.CreateAccount("name", "password", false);
-            Assert.IsFalse(_core.AccountList.First().SavingsAccount);
-            var user = _core.AccountList.First();
+            _core.CreateUser("name", "password", false);
+            Assert.IsFalse(_core.UserList.First().SavingsAccount);
+            var user = _core.UserList.First();
 
             // Act
             _core.SavingsAccount(user);
 
             // Assert
-            Assert.IsTrue(_core.AccountList.First().SavingsAccount);
+            Assert.IsTrue(_core.UserList.First().SavingsAccount);
         }
 
         [Test]
@@ -63,7 +71,7 @@ namespace Boolean.CSharp.Test
             _core.DepositAmount(user, amount);
 
             // Assert
-            Assert.AreEqual(amount, _core.AccountList.First().Balance);
-        }
+            Assert.AreEqual(amount, _core.AccountList.First().Transaction.Balance);
+        }*/
     }
 }
