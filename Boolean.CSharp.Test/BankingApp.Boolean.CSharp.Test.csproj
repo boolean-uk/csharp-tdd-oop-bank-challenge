@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Boolean.CSharp.Main\Boolean.CSharp.Main.csproj" />
+    <ProjectReference Include="..\Boolean.CSharp.Main\BankingApp.Boolean.CSharp.Main.csproj" />
   </ItemGroup>
 
 </Project>

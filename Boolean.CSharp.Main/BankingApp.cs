@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 
 
-namespace Boolean.CSharp.Main
+namespace BamkingApp.Boolean.CSharp.Main
 {
     public class Core
+
     {
 
 
