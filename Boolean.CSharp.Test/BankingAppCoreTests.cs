@@ -37,5 +37,17 @@ namespace Boolean.CSharp.Test
             Assert.IsNull(account.Transactions);
         }
 
+        [Test]
+        public void GenerateBankStatementTest()
+        {
+            var account = new CurrentAccount();
+
+            var bankStatement = account.GenerateStatement();
+
+            Assert.IsNotNull(bankStatement);
+        
+        
+        }
+
     }
 }
