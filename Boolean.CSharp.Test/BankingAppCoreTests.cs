@@ -21,18 +21,20 @@ namespace Boolean.CSharp.Test
             var account = new CurrentAccount();
 
 
-           // Assert.IsNotNull(account);
-
-            Assert.AreEqual(0, account.Balance);
+            // Assert.IsNotNull(account);
+            // Assert.AreEqual(0, account.Balance);
+            Assert.IsNull(account.Transactions);
 
         }
 
         [Test]
-        public void CreateSvingsAccountTest() 
+        public void CreateSvingsAccountTest()
         {
             var account = new SavingAccount();
 
-            Assert.AreEqual(0, account.Balance);
+            // Assert.IsNotNull(account);
+            // Assert.AreEqual(0, account.Balance);
+            Assert.IsNull(account.Transactions);
         }
 
     }

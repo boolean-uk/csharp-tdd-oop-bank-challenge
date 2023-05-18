@@ -9,5 +9,6 @@ namespace BankingApp.Boolean.CSharp.Main.Accounts
     public class SavingAccount
     {
         public float Balance { get; set; }
+        public string? Transactions { get; set; }
     }
 }
