@@ -44,15 +44,22 @@ I want to create a savings account.
 
 ```
 As a customer,
-So I can keep a record of my finances,
-I want to generate bank statements with transaction dates, amounts, and balance at the time of transaction.
-```
-
-```
-As a customer,
 So I can use my account,
 I want to deposit and withdraw funds.
 ```
+| Classes         | Methods            | Scenario                            | Outputs                  |
+|-----------------|--------------------|-------------------------------------|--------------------------|
+| `Core`		  | `DepositAmount()`  | Customer is able to deposit money   | Transaction log			|
+| `Core`		  | `WithdrawAmount()` | Customer is able to withdraw money  | Transaction log			|
+
+```
+As a customer,
+So I can keep a record of my finances,
+I want to generate bank statements with transaction dates, amounts, and balance at the time of transaction.
+```
+| Classes         | Methods            | Scenario                            | Outputs                  |
+|-----------------|--------------------|-------------------------------------|--------------------------|
+| `Core`		  | `BankStatements()` | Collect bankdata 					 | Generated bankstatements |
 
 ## Acceptance Criteria
 
