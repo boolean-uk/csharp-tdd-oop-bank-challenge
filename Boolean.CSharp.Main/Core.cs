@@ -12,10 +12,16 @@ namespace Boolean.CSharp.Main
     {
         private List<IAccount> _AccountList = new List<IAccount>();
 
+        #region CreateAccount()
         public void CreateAccount(string name, string password)
+        {
+            createAccount(name, password);
+        }
+        private void createAccount(string name, string password)
         {
             _AccountList.Add(new User(name, password));
         }
+        #endregion
 
         public List<IAccount> AccountList { get { return _AccountList; } set { _AccountList = value; } }
     }

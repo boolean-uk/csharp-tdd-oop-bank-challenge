@@ -1,5 +1,6 @@
 ﻿using Boolean.CSharp.Main;
 using NUnit.Framework;
+using System.Xml.Linq;
 
 namespace Boolean.CSharp.Test
 {
@@ -28,5 +29,18 @@ namespace Boolean.CSharp.Test
             Assert.AreEqual(_core.AccountList.Count, 1);
         }
 
+        [Test]
+        public void IsSavingsAccount()
+        {
+            // Arrange
+            _core.CreateAccount("name", "password", false);
+            Assert.IsFalse(_core.AccountList.First().SavingsAccount);
+
+            // Act
+            _core.SavingsAccount();
+
+            // Assert
+            Assert.IsTrue(_core.AccountList.First().SavingsAccount);
+        }
     }
 }

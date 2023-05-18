@@ -38,6 +38,9 @@ As a customer,
 So I can save for a rainy day,
 I want to create a savings account.
 ```
+| Classes         | Methods            | Scenario                         | Outputs                                |
+|-----------------|--------------------|----------------------------------|----------------------------------------|
+| `Core`		  | `SavingsAccount()` | Turn bool SavingsAccount on/off  | Shows if SavingsAccount in AccountList |
 
 ```
 As a customer,
