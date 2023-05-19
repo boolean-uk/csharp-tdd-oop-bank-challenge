@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Source
 {
-    internal class BankStatement
+    public class BankStatement
     {
     }
 }

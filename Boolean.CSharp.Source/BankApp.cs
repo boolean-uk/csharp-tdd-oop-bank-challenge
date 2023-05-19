@@ -6,9 +6,9 @@ using System.Text;
 
 namespace Boolean.CSharp.Main
 {
-    public class Core
+    public class BankApp
     {
-
+        
 
     }
 }
