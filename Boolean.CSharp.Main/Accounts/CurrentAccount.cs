@@ -7,18 +7,10 @@ using System.Threading.Tasks;
 
 namespace BankingApp.Boolean.CSharp.Main.Accounts
 {
-    public class CurrentAccount : Account
+    public class CurrentAccount : Account, IAccount
     {
-        public CurrentAccount()
-        {
-        }
+    public CurrentAccount() : base() { }
 
-        public float Balance { get; set; }
-        public string Transactions { get; set; }
-
-        public object GenerateStatement()
-        {
-            return new BankStatement();
-        }
+        public bool isSavingAccount => false;
     }
 }

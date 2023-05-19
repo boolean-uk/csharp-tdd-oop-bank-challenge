@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace BankingApp.Boolean.CSharp.Main.Accounts
 {
-    public class SavingAccount
+    public class SavingAccount : Account, IAccount
     {
-        public float Balance { get; set; }
-        public string? Transactions { get; set; }
+        public SavingAccount() : base() { }
+
+        public bool isSavingAccount => true;
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 
-namespace BamkingApp.Boolean.CSharp.Main
+namespace BankingApp.Boolean.CSharp.Main
 {
     public class Core
 

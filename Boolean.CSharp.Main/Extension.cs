@@ -1,5 +1,5 @@
 ﻿
-using BamkingApp.Boolean.CSharp.Main;
+using BankingApp.Boolean.CSharp.Main;
 using System;
 using System.Collections.Generic;
 using System.Linq;

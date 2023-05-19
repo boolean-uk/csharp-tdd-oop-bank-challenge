@@ -7,11 +7,18 @@ using System.Threading.Tasks;
 
 namespace BankingApp.Boolean.CSharp.Main
 {
-    public class BankStatement
+    public static class BankStatement
     {
-        public void PrintStatement()
+        public static string PrintStatement(List<Transaction> transactions)
         {
-            Console.WriteLine("Your Bank Statement: ");
+            var bankStatement = "date || credit || debit || balance \n";
+            foreach (var transaction in transactions.OrderByDescending(x => x.Date))
+            {
+                string transactionInfo = $"{transaction.Date} || {(transaction.Type == TransactionType.Deposit ? transaction.Amount : "")} || {(transaction.Type == TransactionType.Withdraw ? transaction.Amount : "")} || {transaction.BalanceAfterTransaction}\n";
+                bankStatement += transactionInfo;
+                
+            }
+            return bankStatement;
         }
     }
 }

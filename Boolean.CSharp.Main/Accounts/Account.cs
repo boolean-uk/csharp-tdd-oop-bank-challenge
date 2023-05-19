@@ -15,18 +15,32 @@ namespace BankingApp.Boolean.CSharp.Main.Accounts
         {
             Transactions = new List<Transaction>();
         }
-        public virtual void Deposit(decimal amount)
+        public  Transaction Deposit(DateTime date, decimal amount)
         {
+            Balance += amount;
+            var transaction = new Transaction(date, amount, Balance, TransactionType.Deposit);
+            Transactions.Add( transaction );
+            return transaction;
+        }
+        public  Transaction Withdraw(DateTime date, decimal amount)
+        {
+            if(Balance >= amount)
+            {
+                Balance -= amount;
+                var transaction = new Transaction(date, amount, Balance, TransactionType.Withdraw);
+                Transactions.Add( transaction );
+                return transaction;
+            }
+            else
+            {
+                throw new Exception("Insufficient balance");
+            }
 
         }
-        public virtual void Withdraw(decimal amount)
-        {
 
-        }
-
-        public BankStatement GenerateStatement()
+        public List<Transaction> GenerateStatement()
         {
-            return new BankStatement();
+            return Transactions;
         }
     }
 }
