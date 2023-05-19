@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Source
 {
-    internal class SavingsAccount
+    public class SavingsAccount
     {
+        public object? balance;
+
+        public decimal DepositSaving(decimal v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

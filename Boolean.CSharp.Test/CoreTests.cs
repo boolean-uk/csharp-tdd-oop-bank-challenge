@@ -16,19 +16,26 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        public void TestDepositMoney()
+        public void TestDepositMoneyCurrentAccount()
         {
             CurrentAccount account = new CurrentAccount();
             decimal balance = account.DepositMoney(500M);
             Assert.AreEqual(balance, account.balance);
         }
         [Test]
-        public void TestWithdrawMoney()
+        public void TestWithdrawMoneyCurrentAccount()
         {
             CurrentAccount account = new CurrentAccount();
             decimal balance = account.DepositMoney(1000M);
             balance = account.WithdrawMoney(500M);
             Assert.AreEqual(balance, account.balance);
+        }
+        [Test]
+        public void TestDepositMoneySavingsAccount()
+        {
+            SavingsAccount savings = new SavingsAccount();
+            decimal balance = savings.DepositSaving(1000M);
+            Assert.AreEqual(balance, savings.balance);
         }
 
     }

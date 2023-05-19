@@ -12,7 +12,7 @@
 
         public decimal WithdrawMoney(decimal withdraw)
         {
-            balance=+withdraw;
+            balance=-withdraw;
             return balance;
         }
     }
