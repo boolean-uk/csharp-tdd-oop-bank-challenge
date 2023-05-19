@@ -9,6 +9,5 @@ namespace Boolean.CSharp.Main
     public interface IAccount
     {
         public List<Transaction> TransactionList { get; set; }
-
     }
 }

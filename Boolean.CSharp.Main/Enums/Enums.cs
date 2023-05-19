@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main
 {
+    public enum AccountType
+    {
+        Current,
+        Savings
+    }
     public enum TransactionType
     {
         Credit,

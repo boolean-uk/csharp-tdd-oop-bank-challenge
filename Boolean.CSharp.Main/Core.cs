@@ -28,25 +28,21 @@ namespace Boolean.CSharp.Main
         }
         #endregion
 
-        #region CreateCurrentAccount()
-        public void CreateCurrentAccount(IUser user)
+        #region BankAccount()
+        public void CreateBankAccount(IUser user, AccountType type)
         {
-            createCurrentAccount(user);
+            createBankAccount(user, type);
         }
-        private void createCurrentAccount(IUser user)
+        private void createBankAccount(IUser user, AccountType type)
         {
-            user.AccountsList.Add(CurrentAccount);
-        }
-        #endregion
-
-        #region CreateSavingsAccount()
-        public void CreateSavingsAccount(IUser user)
-        {
-            createSavingsAccount(user);
-        }
-        private void createSavingsAccount(IUser user)
-        {
-            user.AccountsList.Add(SavingsAccount);
+            if (type == AccountType.Current)
+            {
+                user.AccountsList.Add(CurrentAccount);
+            }
+            else if (type == AccountType.Savings)
+            {
+                user.AccountsList.Add(SavingsAccount);
+            }
         }
         #endregion
 
