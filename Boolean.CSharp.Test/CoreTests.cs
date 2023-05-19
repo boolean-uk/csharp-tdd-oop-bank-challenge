@@ -1,5 +1,6 @@
 ﻿using Boolean.CSharp.Main;
 using Boolean.CSharp.Main.CustomerAccounts;
+using Boolean.CSharp.Main.Transaction;
 using Boolean.CSharp.Main.Users;
 using NUnit.Framework;
 
@@ -21,7 +22,7 @@ namespace Boolean.CSharp.Test
         {
             Account account1 = new CurrentAccount(1000);
             Account account2 = new SavingsAccount(500);
-            User user = new Customer("Iasonas", "Kotsarapoglou", "BlaBla@gmail.com", account1 , account2);
+            User user = new Customer("Iasonas", "Kotsarapoglou", "BlaBla@gmail.com", account1, account2);
             core.makeADeposit(user, ((Customer)user).account1, 20);
             Assert.AreEqual(((Customer)user).account1.Balance, 1020);
         }
@@ -74,6 +75,26 @@ namespace Boolean.CSharp.Test
             Account account2 = new SavingsAccount(500);
             User user = new Customer("Iasonas", "Kotsarapoglou", "BlaBla@gmail.com", account1, account2);
             Assert.AreEqual(((Customer)user).account2.SavingsTransactions, core.printBankStatement(user, account2));
+
+        }
+
+        [Test]
+        public void sendSms()
+        {
+            Account account1 = new CurrentAccount(1000);
+            Account account2 = new SavingsAccount(500);
+            User user = new Customer("Iasonas", "Kotsarapoglou", "BlaBla@gmail.com", account1, account2);
+            core.makeADeposit(user, ((Customer)user).account2, 20);
+            List<Transaction> transactions = new List<Transaction>();
+            transactions = core.printBankStatement(user, account2);
+            string message1 = "";
+            foreach (Transaction t in transactions)
+            {
+                message1 += "date: " + t.dateTime.ToString() + " credit: " + t.credit.ToString() + " debit: " + t.debit.ToString() + " Balance: " + t.newBalance.ToString();
+                message1 += "\n";
+            }
+            core.send(message1);
+            Assert.AreEqual(true, true);
 
         }
 

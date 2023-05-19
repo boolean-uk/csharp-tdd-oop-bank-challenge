@@ -26,5 +26,6 @@ namespace Boolean.CSharp.Main.Transaction
         public decimal credit { get { return _credit; } set { _credit = value; } }
         public decimal debit { get { return _debit; } set { _debit = value; } }
         public decimal newBalance { get { return _newBalance; } set { _newBalance = value; } }
+
     }
 }

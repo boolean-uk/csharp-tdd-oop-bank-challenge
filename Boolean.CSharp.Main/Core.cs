@@ -1,8 +1,11 @@
 ﻿using Boolean.CSharp.Main.CustomerAccounts;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
 
 
 namespace Boolean.CSharp.Main
@@ -67,6 +70,19 @@ namespace Boolean.CSharp.Main
                 }
             }
             return list;
+        }
+
+        public void send(string message1)
+        {
+            string accountSid = "AC63f7efc78a0cfceffd15f4f500fed81b";
+            string authToken = "f0903b71b85ff447c57a76aa26ad19a7";
+            TwilioClient.Init(accountSid, authToken);
+
+
+            var message = MessageResource.Create(
+                body: message1,
+                from: new Twilio.Types.PhoneNumber("+12546003615"), // virtual Twilio number
+                to: new Twilio.Types.PhoneNumber("+306949873855"));
         }
 
 
