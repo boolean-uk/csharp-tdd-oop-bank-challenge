@@ -10,9 +10,10 @@
             return balance;
         }
 
-        public decimal WithdrawMoney(decimal v)
+        public decimal WithdrawMoney(decimal withdraw)
         {
-            throw new NotImplementedException();
+            balance=+withdraw;
+            return balance;
         }
     }
 }
