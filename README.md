@@ -38,18 +38,18 @@ As a customer,
 So I can safely store use my money,
 I want to create a bank account.
 ```
-| Classes         | Methods                | Scenario                                             | Outputs                    |
-|-----------------|------------------------|------------------------------------------------------|----------------------------|
-| `Core`		  | `CreateBankAccount()`  | Create bankaccount that contains a transaction list  | Bankaccount stored in User |
+| Classes         | Methods                  | Scenario                                                   | Outputs                       |
+|-----------------|--------------------------|------------------------------------------------------------|-------------------------------|
+| `Core`		  | `CreateCurrentAccount()` | Create currentaccount that contains a transaction list     | Currentaccount stored in User |
 
 ```
 As a customer,
 So I can save for a rainy day,
 I want to create a savings account.
 ```
-| Classes         | Methods                  | Scenario                                             | Outputs                       |
-|-----------------|--------------------------|------------------------------------------------------|-------------------------------|
-| `Core`		  | `CreateSavingsAccount()` | Create bankaccount that contains a transaction list  | Savingsaccount stored in User |
+| Classes         | Methods                  | Scenario                                                | Outputs                       |
+|-----------------|--------------------------|---------------------------------------------------------|-------------------------------|
+| `Core`		  | `CreateSavingsAccount()` | Create savingsaccount that contains a transaction list  | Savingsaccount stored in User |
 
 ```
 As a customer,

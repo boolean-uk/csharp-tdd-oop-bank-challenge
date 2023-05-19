@@ -6,15 +6,17 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main
 {
-    public class User : IUser
+    public class Customer : IUser
     {
         public string Username { get; set; }
         public string Password { get; set; }
+        public List<List<Transaction>> AccountsList { get; set; } = new List<List<Transaction>>();
 
-        public User(string Username, string Password)
+        public Customer(string Username, string Password, List<List<Transaction>> AccountsList)
         {
             this.Username = Username;
             this.Password = Password;
+            this.AccountsList = AccountsList;
         }
     }
 }

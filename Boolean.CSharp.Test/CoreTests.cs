@@ -17,44 +17,51 @@ namespace Boolean.CSharp.Test
 
             string name = "Max";
             string password = "password";
+            List<List<Transaction>> accountslist = new List<List<Transaction>>();
 
             // Act
-            _core.CreateUser(name, password);
-
-            // Assert
-            Assert.AreEqual(_core.UserList.Count, 1);
-        }
-
-/*        [Test]
-        public void CreateBankAccount()
-        {
-            // I want to create a bank account.
-
-            // Arrange
-            _core.CreateUser("name", "password", false);
-
-            // Act
-            _core.CreateUser(name, password, savingsaccount);
+            _core.CreateUser(name, password, accountslist);
 
             // Assert
             Assert.AreEqual(_core.UserList.Count, 1);
         }
 
         [Test]
-        public void IsSavingsAccount()
+        public void CreateCurrentAccount()
+        {
+            // I want to create a bank account.
+
+            // Arrange
+            Core _core = new Core();
+
+            List<List<Transaction>> accountslist = new List<List<Transaction>>();
+            _core.CreateUser("Max", "password", accountslist);
+            var user = _core.UserList.First();
+
+            // Act
+            _core.CreateCurrentAccount(user);
+
+            // Assert
+            Assert.AreEqual(accountslist.Count, 1);
+        }
+
+        [Test]
+        public void CreateSavingsAccount()
         {
             // I want to create a savings account.
 
             // Arrange
-            _core.CreateUser("name", "password", false);
-            Assert.IsFalse(_core.UserList.First().SavingsAccount);
+            Core _core = new Core();
+
+            List<List<Transaction>> accountslist = new List<List<Transaction>>();
+            _core.CreateUser("Max", "password", accountslist);
             var user = _core.UserList.First();
 
             // Act
-            _core.SavingsAccount(user);
+            _core.CreateSavingsAccount(user);
 
             // Assert
-            Assert.IsTrue(_core.UserList.First().SavingsAccount);
+            Assert.AreEqual(accountslist.Count, 1);
         }
 
         [Test]
@@ -63,15 +70,77 @@ namespace Boolean.CSharp.Test
             // I want to deposit funds.
 
             // Arrange
-            _core.CreateAccount("name", "password", false);
-            var user = _core.AccountList.First();
+            Core _core = new Core();
+
+            List<List<Transaction>> accountslist = new List<List<Transaction>>();
+            _core.CreateUser("Max", "password", accountslist);
+            var user = _core.UserList.First();
+
+            _core.CreateCurrentAccount(user);
+
+            var accountname = _core.UserList.First().AccountsList.First();
+
             int amount = 1000;
 
             // Act
-            _core.DepositAmount(user, amount);
+            _core.DepositAmount(user, amount, accountname);
 
             // Assert
-            Assert.AreEqual(amount, _core.AccountList.First().Transaction.Balance);
-        }*/
+            Assert.AreEqual(amount, user.AccountsList.First().First().Balance);
+        }
+
+        [Test]
+        public void WithdrawAmount()
+        {
+            // I want to withdraw funds.
+
+            // Arrange
+            Core _core = new Core();
+
+            List<List<Transaction>> accountslist = new List<List<Transaction>>();
+            _core.CreateUser("Max", "password", accountslist);
+            var user = _core.UserList.First();
+
+            _core.CreateCurrentAccount(user);
+
+            var accountname = _core.UserList.First().AccountsList.First();
+
+            int amount = 1000;
+
+            // Act
+            _core.WithdrawAmount(user, amount, accountname);
+
+            // Assert
+            Assert.AreEqual(-amount, user.AccountsList.First().First().Balance);
+        }
+
+        [Test]
+        public void CheckBalance()
+        {
+            // I want to check the balance.
+
+            // Arrange
+            Core _core = new Core();
+
+            List<List<Transaction>> accountslist = new List<List<Transaction>>();
+            _core.CreateUser("Max", "password", accountslist);
+            var user = _core.UserList.First();
+
+            _core.CreateCurrentAccount(user);
+
+            var accountname = _core.UserList.First().AccountsList.First();
+
+            int amount = 1000;
+            int amount1 = 500;
+
+            _core.DepositAmount(user, amount, accountname);
+            _core.WithdrawAmount(user, amount1, accountname);
+
+            // Act
+            var balance = _core.GetBalance(user, accountname);
+
+            // Assert
+            Assert.AreEqual(amount - amount1, balance);
+        }
     }
 }
