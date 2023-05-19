@@ -6,11 +6,11 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class CoreTests
     {
-        private Core _core;
+        private BankStatement _bankstatement;
 
         public CoreTests()
         {
-            _core = new Core();
+            _bankstatement = new BankStatement();
 
         }
 
