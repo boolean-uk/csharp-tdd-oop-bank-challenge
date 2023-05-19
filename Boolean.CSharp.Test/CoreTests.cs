@@ -138,14 +138,44 @@ namespace Boolean.CSharp.Test
             int amount = 1000;
             int amount1 = 500;
 
+            // Act
             _core.DepositAmount(user, amount, accountname);
             _core.WithdrawAmount(user, amount1, accountname);
 
+            // Assert
+            Assert.AreEqual(amount - amount1, _core._balance);
+        }
+
+        [Test]
+        public void PrintBankStatement()
+        {
+            // I want to generate bank statements with transaction dates, amounts, and balance at the time of transaction.
+
+            // Arrange
+            Core _core = new Core();
+
+            List<List<Transaction>> accountslist = new List<List<Transaction>>();
+            _core.CreateUser("Max", "password", accountslist);
+            var user = _core.UserList.First();
+            var type = AccountType.Current;
+
+            _core.CreateBankAccount(user, type);
+
+            var accountname = _core.UserList.First().AccountsList.First();
+
+            int amount = 1000;
+            int amount1 = 2000;
+            int amount2 = 500;
+
+            _core.DepositAmount(user, amount, accountname);
+            _core.DepositAmount(user, amount1, accountname);
+            _core.WithdrawAmount(user, amount2, accountname);
+
             // Act
-            var balance = _core.GetBalance(user, accountname);
+            _core.BankStatement(user, accountname);
 
             // Assert
-            Assert.AreEqual(amount - amount1, balance);
+            Assert.AreEqual(amount + amount1 - amount2, _core._balance);
         }
     }
 }

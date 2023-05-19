@@ -15,7 +15,7 @@ namespace Boolean.CSharp.Main
         private List<Transaction> _currentAccount = new List<Transaction>();
         private List<Transaction> _savingsAccount = new List<Transaction>();
 
-        private int _balance { get; set; }
+        public int _balance { get; set; }
 
         #region CreateAccount()
         public void CreateUser(string name, string password, List<List<Transaction>> AccountsList)
@@ -61,7 +61,8 @@ namespace Boolean.CSharp.Main
                     {
                         if (a == accountname)
                         {
-                            accountname.Add(new Transaction(TransactionType.Credit, DateTime.Now, amount, _balance + amount));
+                            _balance = _balance + amount;
+                            accountname.Add(new Transaction(TransactionType.Credit, DateTime.Now, amount, _balance));
                         }
                     }
                 }
@@ -84,7 +85,8 @@ namespace Boolean.CSharp.Main
                     {
                         if (a == accountname)
                         {
-                            accountname.Add(new Transaction(TransactionType.Debit, DateTime.Now, amount, _balance - amount));
+                            _balance = _balance - amount;
+                            accountname.Add(new Transaction(TransactionType.Debit, DateTime.Now, amount, _balance));
                         }
                     }
                 }
@@ -92,13 +94,8 @@ namespace Boolean.CSharp.Main
         }
         #endregion
 
-        #region GetBalance()
-        public int GetBalance(IUser user, List<Transaction> accountname)
-        { 
-            return getBalance(user, accountname);
-        }
-
-        private int getBalance(IUser user, List<Transaction> accountname)
+        #region BankStatement()
+        public void BankStatement(IUser user, List<Transaction> accountname)
         {
             foreach (IUser x in UserList)
             {
@@ -107,23 +104,22 @@ namespace Boolean.CSharp.Main
                     foreach (List<Transaction> a in user.AccountsList)
                     {
                         if (a == accountname)
-                        { 
-                            foreach (Transaction t in accountname)
+                        {
+                            foreach(Transaction t in accountname)
                             {
-                                if (t.Type == TransactionType.Credit)
+                                if (t.Type == TransactionType.Debit)
                                 {
-                                    _balance += t.Amount;
+                                    Console.WriteLine($"{t.Date} {t.Amount} {t.Balance}");
                                 }
-                                else if (t.Type == TransactionType.Debit)
+                                else if (t.Type == TransactionType.Credit)
                                 {
-                                    _balance -= t.Amount;
+                                    Console.WriteLine($"{t.Date} {t.Amount} {t.Balance}");
                                 }
                             }
                         }
                     }
                 }
             }
-            return _balance;
         }
         #endregion
 

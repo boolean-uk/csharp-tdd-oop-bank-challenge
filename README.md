@@ -68,7 +68,7 @@ I want to generate bank statements with transaction dates, amounts, and balance 
 ```
 | Classes         | Methods            | Scenario                            | Outputs                  |
 |-----------------|--------------------|-------------------------------------|--------------------------|
-| `Core`		  | `BankStatements()` | Collect bankdata 					 | Generated bankstatements |
+| `Core`		  | `BankStatement()`  | Collect bankdata 					 | Generated bankstatements |
 
 ## Acceptance Criteria
 
