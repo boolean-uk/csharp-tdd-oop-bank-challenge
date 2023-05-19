@@ -62,7 +62,7 @@ namespace Boolean.CSharp.Main
                         if (a == accountname)
                         {
                             _balance = _balance + amount;
-                            accountname.Add(new Transaction(TransactionType.Credit, DateTime.Now, amount, _balance));
+                            accountname.Add(new Transaction(TransactionType.Credit, DateTime.Today, amount, _balance));
                         }
                     }
                 }
@@ -105,17 +105,21 @@ namespace Boolean.CSharp.Main
                     {
                         if (a == accountname)
                         {
-                            foreach(Transaction t in accountname)
+                            Console.WriteLine("{0,10} || {1,10} || {2,10} || {3,10}", "Date", "Credit", "Debit", "Balance");
+                            Console.WriteLine("----------------------------------------------------");
+                            foreach (Transaction t in accountname)
                             {
                                 if (t.Type == TransactionType.Debit)
                                 {
-                                    Console.WriteLine($"{t.Date} {t.Amount} {t.Balance}");
+                                    Console.WriteLine("{0,10} || {1,10} || {2,10} || {3,10}", $"{t.Date.ToShortDateString()}", "", $"{t.Amount}", $"{t.Balance}");
                                 }
                                 else if (t.Type == TransactionType.Credit)
                                 {
-                                    Console.WriteLine($"{t.Date} {t.Amount} {t.Balance}");
+                                    Console.WriteLine("{0,10} || {1,10} || {2,10} || {3,10}", $"{t.Date.ToShortDateString()}", $"{t.Amount}", "", $"{t.Balance}");
                                 }
                             }
+                            Console.WriteLine("----------------------------------------------------");
+                            Console.WriteLine("{0,10}    {1,10}    {2,10}    {3,10}", "", "", "", $"{_balance}");
                         }
                     }
                 }
