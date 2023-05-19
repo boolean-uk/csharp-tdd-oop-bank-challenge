@@ -9,5 +9,10 @@
             balance=+ deposit;
             return balance;
         }
+
+        public decimal WithdrawMoney(decimal v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
