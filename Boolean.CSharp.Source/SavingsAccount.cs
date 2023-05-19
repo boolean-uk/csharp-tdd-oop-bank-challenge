@@ -16,9 +16,10 @@ namespace Boolean.CSharp.Source
             return balance; ;
         }
 
-        public decimal WithdrawSaving(decimal v)
+        public decimal WithdrawSaving(decimal withdraw)
         {
-            throw new NotImplementedException();
+            balance=-withdraw;
+            return balance;
         }
     }
 }
