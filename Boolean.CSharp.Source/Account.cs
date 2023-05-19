@@ -11,6 +11,7 @@ namespace Boolean.CSharp.Source
     public abstract class Account
     {
         public List<Transaction> transactions = new List<Transaction> ();
+        public Customer customer { get; set; };
         public decimal balance;
 
         public decimal DepositMoney(decimal deposit)
