@@ -6,11 +6,18 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Source
 {
-    public class BankStatement
+    public class Transaction
     {
         // for current and savingsaccount
         // display transactions (deposits and withdraws)
         // including dates
         // balance after each transaction
+        public DateTime date { get; set; }
+        public decimal credit { get; set; }
+        public decimal debit { get; set; }
+        public decimal newBalance { get; set; }
+
+        // foreach transaction (deposit/withdraw) output
+        // date credit debit newBalance
     }
 }

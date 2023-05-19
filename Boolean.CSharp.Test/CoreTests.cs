@@ -34,7 +34,7 @@ namespace Boolean.CSharp.Test
         public void TestDepositMoneySavingsAccount()
         {
             SavingsAccount savings = new SavingsAccount();
-            decimal balance = savings.DepositSaving(1000M);
+            decimal balance = savings.DepositMoney(1000M);
             Assert.AreEqual(balance, savings.balance);
         }
 
@@ -42,9 +42,21 @@ namespace Boolean.CSharp.Test
         public void TestWithdrawMoneySavingsAccount()
         {
             SavingsAccount savings = new SavingsAccount();
-            decimal balance = savings.DepositSaving(1000M);
-            balance = savings.WithdrawSaving(500M);
+            decimal balance = savings.DepositMoney(1000M);
+            balance = savings.WithdrawMoney(500M);
             Assert.AreEqual(balance, savings.balance);
+        }
+
+        [Test]
+        public void TestDifferenceAccount()
+        {
+            SavingsAccount savings = new SavingsAccount();
+            CurrentAccount balance = new CurrentAccount();
+            savings.DepositMoney(1000M);
+            balance.DepositMoney(500M);
+            Assert.AreEqual(savings.balance, 1000M);
+            Assert.AreEqual(balance.balance, 500M);
+
         }
 
     }

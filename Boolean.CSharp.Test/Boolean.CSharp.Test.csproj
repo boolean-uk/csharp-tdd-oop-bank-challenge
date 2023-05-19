@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Boolean.CSharp.Main\Boolean.CSharp.Main.csproj" />
     <ProjectReference Include="..\Boolean.CSharp.Source\Boolean.CSharp.Source.csproj" />
   </ItemGroup>
 
