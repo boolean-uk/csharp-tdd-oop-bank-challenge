@@ -2,11 +2,12 @@
 {
     public class CurrentAccount
     {
-        public object? balance;
+        public decimal balance;
 
-        public decimal DepositMoney(decimal v)
+        public decimal DepositMoney(decimal deposit)
         {
-            throw new NotImplementedException();
+            balance=+ deposit;
+            return balance;
         }
     }
 }
