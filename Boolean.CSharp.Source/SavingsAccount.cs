@@ -15,5 +15,10 @@ namespace Boolean.CSharp.Source
             balance=+deposit;
             return balance; ;
         }
+
+        public decimal WithdrawSaving(decimal v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

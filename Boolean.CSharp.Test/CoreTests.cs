@@ -38,5 +38,14 @@ namespace Boolean.CSharp.Test
             Assert.AreEqual(balance, savings.balance);
         }
 
+        [Test]
+        public void TestWithdrawMoneySavingsAccount()
+        {
+            SavingsAccount savings = new SavingsAccount();
+            decimal balance = savings.DepositSaving(1000M);
+            balance = savings.WithdrawSaving(500M);
+            Assert.AreEqual(balance, savings.balance);
+        }
+
     }
 }
