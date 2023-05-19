@@ -8,11 +8,12 @@ namespace Boolean.CSharp.Source
 {
     public class SavingsAccount
     {
-        public object? balance;
+        public decimal balance;
 
-        public decimal DepositSaving(decimal v)
+        public decimal DepositSaving(decimal deposit)
         {
-            throw new NotImplementedException();
+            balance=+deposit;
+            return balance; ;
         }
     }
 }
