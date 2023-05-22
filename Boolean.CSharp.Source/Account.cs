@@ -11,6 +11,7 @@ namespace Boolean.CSharp.Source
     public abstract class Account
     {
         public List<Transaction> transactions = new List<Transaction> ();
+        public List<OverdraftRequest> overdraft = new List<OverdraftRequest>();
         public Customer customer { get; set; }
         public string brancheName { get; set; }
         public decimal GetBalance()
@@ -35,10 +36,19 @@ namespace Boolean.CSharp.Source
         public void WithdrawMoney(decimal withdraw)
         {
             Transaction transaction = new Transaction();
+            if (GetBalance() - withdraw >0) { 
             transaction.date = DateTime.Now;
             transaction.credit = withdraw;
             transaction.newBalance = GetBalance() - withdraw;
             transactions.Add(transaction);
+            }
+            else
+            {
+                OverdraftRequest request = new OverdraftRequest ();
+                request.overdraftRequest = GetBalance() - withdraw;
+                request.status = false;
+                // add to overdraftrequestlist 
+            }
         }
         public void BankStatement()
         {
