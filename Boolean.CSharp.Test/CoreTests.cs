@@ -6,30 +6,33 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class CoreTests
     {
-      /*
+      
         [Test]
         public void TestDepositMoneyCurrentAccount()
         {
             CurrentAccount account = new CurrentAccount();
-            decimal balance = account.DepositMoney(500M);
-            Assert.AreEqual(balance, account.balance);
+            account.DepositMoney(500M);
+            decimal balance = account.GetBalance();
+            Assert.AreEqual(balance, 500M);
         }
         [Test]
         public void TestWithdrawMoneyCurrentAccount()
         {
             CurrentAccount account = new CurrentAccount();
-            decimal balance = account.DepositMoney(1000M);
-            balance = account.WithdrawMoney(500M);
-            Assert.AreEqual(balance, account.balance);
+            account.DepositMoney(1000M);
+            account.WithdrawMoney(500M);
+            decimal balance = account.GetBalance();
+            Assert.AreEqual(balance, 500M);
         }
         [Test]
         public void TestDepositMoneySavingsAccount()
         {
             SavingsAccount savings = new SavingsAccount();
-            decimal balance = savings.DepositMoney(1000M);
-            Assert.AreEqual(balance, savings.balance);
+            savings.DepositMoney(1000M);
+            decimal balance = savings.GetBalance();
+            Assert.AreEqual(balance, 1000M);
         }
-      */
+      
         [Test]
         public void TestWithdrawMoneySavingsAccount()
         {
@@ -39,7 +42,7 @@ namespace Boolean.CSharp.Test
             decimal balance = savings.GetBalance();
             Assert.AreEqual(balance, 500M);
         }
-        /*
+        
         [Test]
         public void TestDifferenceAccount()
         {
@@ -47,10 +50,10 @@ namespace Boolean.CSharp.Test
             CurrentAccount balance = new CurrentAccount();
             savings.DepositMoney(1000M);
             balance.DepositMoney(500M);
-            Assert.AreEqual(savings.balance, 1000M);
-            Assert.AreEqual(balance.balance, 500M);
+            Assert.AreEqual(savings.GetBalance(), 1000M);
+            Assert.AreEqual(balance.GetBalance(), 500M);
         }
-        */
+        
         [Test]
         public void TestBankStatement()
         {
