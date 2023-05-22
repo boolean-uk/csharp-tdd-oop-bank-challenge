@@ -63,10 +63,20 @@ namespace Boolean.CSharp.Main
                 if (account is CurrentAccount)
                 {
                     list = ((Users.Customer)user).account1.printBankStatement();
+                    Console.WriteLine(String.Format("|{0,5}|{1,5}|{2,5}|{3,5}|", "Date", "Credit", "Debit", "New Balance"));
+                    foreach (Transaction.Transaction t in list)
+                    {
+                        Console.WriteLine(String.Format("|{0,5}|{1,5}|{2,5}|{3,5}|", t.dateTime.ToString(), t.credit.ToString(), t.debit.ToString(), t.newBalance.ToString()));
+                    }
                 }
                 if (account is SavingsAccount)
                 {
                     list = ((Users.Customer)user).account2.printBankStatement();
+                    Console.WriteLine(String.Format("|{0,5}|{1,5}|{2,5}|{3,5}|", "Date", "Credit", "Debit", "New Balance"));
+                    foreach (Transaction.Transaction t in list)
+                    {
+                        Console.WriteLine(String.Format("|{0,5}|{1,5}|{2,5}|{3,5}|", t.dateTime.ToString(), t.credit.ToString(), t.debit.ToString(), t.newBalance.ToString()));
+                    }
                 }
             }
             return list;
