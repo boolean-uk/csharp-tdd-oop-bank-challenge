@@ -47,6 +47,7 @@ namespace Boolean.CSharp.Source
                 OverdraftRequest request = new OverdraftRequest ();
                 request.overdraftRequest = GetBalance() - withdraw;
                 request.status = false;
+                overdraft.Add(request);
                 // add to overdraftrequestlist 
             }
         }

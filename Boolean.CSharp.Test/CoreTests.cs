@@ -66,8 +66,9 @@ namespace Boolean.CSharp.Test
         public void TestOverdraft()
         {
             CurrentAccount account = new CurrentAccount();
+            account.DepositMoney(250M);
             account.WithdrawMoney(500M);
-            Assert.AreEqual(account.GetBalance(), -500);
+            Assert.AreEqual(account.GetBalance(), 250);
         }
     }
 }
