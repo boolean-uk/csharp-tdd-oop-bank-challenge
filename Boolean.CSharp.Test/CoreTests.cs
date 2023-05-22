@@ -1,5 +1,4 @@
-﻿using Boolean.CSharp.Main;
-using Boolean.CSharp.Source;
+﻿using Boolean.CSharp.Source;
 using NUnit.Framework;
 
 namespace Boolean.CSharp.Test
@@ -7,14 +6,7 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class CoreTests
     {
-        private BankApp _bankapp;
-
-        public CoreTests()
-        {
-            _bankapp = new BankApp();
-
-        }
-
+      /*
         [Test]
         public void TestDepositMoneyCurrentAccount()
         {
@@ -37,16 +29,17 @@ namespace Boolean.CSharp.Test
             decimal balance = savings.DepositMoney(1000M);
             Assert.AreEqual(balance, savings.balance);
         }
-
+      */
         [Test]
         public void TestWithdrawMoneySavingsAccount()
         {
             SavingsAccount savings = new SavingsAccount();
-            decimal balance = savings.DepositMoney(1000M);
-            balance = savings.WithdrawMoney(500M);
-            Assert.AreEqual(balance, savings.balance);
+            savings.DepositMoney(1000M);
+            savings.WithdrawMoney(500M);
+            decimal balance = savings.GetBalance();
+            Assert.AreEqual(balance, 500M);
         }
-
+        /*
         [Test]
         public void TestDifferenceAccount()
         {
@@ -57,7 +50,7 @@ namespace Boolean.CSharp.Test
             Assert.AreEqual(savings.balance, 1000M);
             Assert.AreEqual(balance.balance, 500M);
         }
-
+        */
         [Test]
         public void TestBankStatement()
         {

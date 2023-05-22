@@ -12,28 +12,38 @@ namespace Boolean.CSharp.Source
     {
         public List<Transaction> transactions = new List<Transaction> ();
         public Customer customer { get; set; }
-        public decimal balance;
+        //public decimal balance;
 
-        public decimal DepositMoney(decimal deposit)
+        public decimal GetBalance()
+        {
+            decimal balance = 0;
+            foreach (Transaction t in transactions)
+            {
+                balance -= t.credit;
+                balance += t.debit;
+            }
+            return balance;
+        }
+        public void DepositMoney(decimal deposit)
         {
             Transaction transaction = new Transaction ();
             transaction.date = DateTime.Now;
             transaction.debit = deposit;
-            balance= balance + deposit;
-            transaction.newBalance = balance;
+            //balance= balance + deposit;
+            //transaction.newBalance = balance;
             transactions.Add (transaction);
-            return balance;
+            //return balance;
         }
 
-        public decimal WithdrawMoney(decimal withdraw)
+        public void WithdrawMoney(decimal withdraw)
         {
             Transaction transaction = new Transaction();
             transaction.date = DateTime.Now;
             transaction.credit = withdraw;
-            balance = balance - withdraw;
-            transaction.newBalance = balance;
+            //balance = balance - withdraw;
+            //transaction.newBalance = balance;
             transactions.Add(transaction);
-            return balance;
+            //return balance;
         }
         public void BankStatement()
         {
