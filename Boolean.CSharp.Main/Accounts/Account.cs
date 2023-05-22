@@ -9,26 +9,48 @@ namespace BankingApp.Boolean.CSharp.Main.Accounts
     public abstract class Account
     {
         public List<Transaction> Transactions { get; set; }
-        public decimal Balance { get; set; }
+        public decimal Balance
+        {
+            get
+            {
+                {
+                    decimal balance = 0;
+                    foreach (var transaction in Transactions.OrderBy(x=> x.Date))
+                    {
+                        if (transaction.Type == TransactionType.Deposit)
+                        {
+                            balance += transaction.Amount;
+                        }
+                        else if (transaction.Type == TransactionType.Withdraw)
+                        {
+                            balance -= transaction.Amount;
+                        }
+                            
+                    }
+                    return balance;
+
+                }
+            }
+        }
 
         public Account()
         {
             Transactions = new List<Transaction>();
         }
-        public  Transaction Deposit(DateTime date, decimal amount)
+        public Transaction Deposit(DateTime date, decimal amount)
         {
-            Balance += amount;
-            var transaction = new Transaction(date, amount, Balance, TransactionType.Deposit);
-            Transactions.Add( transaction );
+            var newBalance = Balance + amount;
+            var transaction = new Transaction(date, amount, newBalance, TransactionType.Deposit);
+            Transactions.Add(transaction);
             return transaction;
         }
-        public  Transaction Withdraw(DateTime date, decimal amount)
+        public Transaction Withdraw(DateTime date, decimal amount)
         {
-            if(Balance >= amount)
+            if (Balance >= amount)
             {
-                Balance -= amount;
-                var transaction = new Transaction(date, amount, Balance, TransactionType.Withdraw);
-                Transactions.Add( transaction );
+                var newBalance = Balance - amount;
+                var transaction = new Transaction(date, amount, newBalance, TransactionType.Withdraw);
+                Transactions.Add(transaction);
                 return transaction;
             }
             else
