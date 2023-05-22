@@ -1,10 +1,12 @@
 ﻿using Boolean.CSharp.Main;
+using Boolean.CSharp.Main.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
+using System.Transactions;
 
 
 namespace Boolean.CSharp.Main
@@ -12,15 +14,13 @@ namespace Boolean.CSharp.Main
     public class Core
     {
         private List<IUser> _userList = new List<IUser>();
-        private List<Transaction> _currentAccount = new List<Transaction>();
-        private List<Transaction> _savingsAccount = new List<Transaction>();
 
         #region CreateAccount()
-        public void CreateUser(string name, string password, List<List<Transaction>> AccountsList)
+        public void CreateUser(string name, string password, List<IAccount> AccountsList)
         {
             createUser(name, password, AccountsList);
         }
-        private void createUser(string name, string password, List<List<Transaction>> AccountsList)
+        private void createUser(string name, string password, List<IAccount> AccountsList)
         {
             _userList.Add(new Customer(name, password, AccountsList));
         }
@@ -35,39 +35,39 @@ namespace Boolean.CSharp.Main
         {
             if (type == AccountType.Current)
             {
-                user.AccountsList.Add(CurrentAccount);
+                user.AccountsList.Add(new CurrentAccount(type, branch, new List<Transaction>()));
             }
             else if (type == AccountType.Savings)
             {
-                user.AccountsList.Add(SavingsAccount);
+                user.AccountsList.Add(new SavingsAccount(type, branch, new List<Transaction>()));
             }
         }
         #endregion
 
         #region DepositAmount()
-        public void DepositAmount(IUser user, int amount, List<Transaction> accountname)
+        public void DepositAmount(IUser user, int amount, IAccount accountname)
         {
             depositAmount(user, amount, accountname);
         }
-        private void depositAmount(IUser user, int amount, List<Transaction> accountname)
+        private void depositAmount(IUser user, int amount, IAccount accountname)
         {
             foreach (IUser x in UserList)
             {
                 if (x == user)
                 {
-                    foreach (List<Transaction> a in user.AccountsList)
+                    foreach (IAccount a in user.AccountsList)
                     {
                         if (a == accountname)
                         {
-                            if (a.Count == 0)
+                            if (a.Transactions.Count == 0)
                             {
                                 var balance =+ amount;
-                                accountname.Add(new Transaction(TransactionType.Credit, DateTime.Now, amount, balance));
+                                accountname.Transactions.Add(new Transaction(TransactionType.Credit, DateTime.Now, amount, balance));
                             }
-                            else if (a.Count != 0)
+                            else if (a.Transactions.Count != 0)
                             {
-                                var balance = accountname.Last().Balance + amount;
-                                accountname.Add(new Transaction(TransactionType.Credit, DateTime.Now, amount, balance));
+                                var balance = accountname.Transactions.Last().Balance + amount;
+                                accountname.Transactions.Add(new Transaction(TransactionType.Credit, DateTime.Now, amount, balance));
                             }
                         }
                     }
@@ -77,29 +77,29 @@ namespace Boolean.CSharp.Main
         #endregion
 
         #region WithdrawAmount()
-        public void WithdrawAmount(IUser user, int amount, List<Transaction> accountname)
+        public void WithdrawAmount(IUser user, int amount, IAccount accountname)
         {
             withdrawAmount(user, amount, accountname);
         }
-        private void withdrawAmount(IUser user, int amount, List<Transaction> accountname)
+        private void withdrawAmount(IUser user, int amount, IAccount accountname)
         {
             foreach (IUser x in UserList)
             {
                 if (x == user)
                 {
-                    foreach (List<Transaction> a in user.AccountsList)
+                    foreach (IAccount a in user.AccountsList)
                     {
                         if (a == accountname)
                         {
-                            if (a.Count == 0)
+                            if (a.Transactions.Count == 0)
                             {
                                 var balance =- amount;
-                                accountname.Add(new Transaction(TransactionType.Debit, DateTime.Now, amount, balance));
+                                accountname.Transactions.Add(new Transaction(TransactionType.Debit, DateTime.Now, amount, balance));
                             }
-                            else if (a.Count != 0)
+                            else if (a.Transactions.Count != 0)
                             {
-                                var balance = accountname.Last().Balance - amount;
-                                accountname.Add(new Transaction(TransactionType.Debit, DateTime.Now, amount, balance));
+                                var balance = accountname.Transactions.Last().Balance - amount;
+                                accountname.Transactions.Add(new Transaction(TransactionType.Debit, DateTime.Now, amount, balance));
                             }
                         }
                     }
@@ -109,19 +109,19 @@ namespace Boolean.CSharp.Main
         #endregion
 
         #region BankStatement()
-        public void BankStatement(IUser user, List<Transaction> accountname)
+        public void BankStatement(IUser user, IAccount accountname)
         {
             foreach (IUser x in UserList)
             {
                 if (x == user)
                 {
-                    foreach (List<Transaction> a in user.AccountsList)
+                    foreach (IAccount a in user.AccountsList)
                     {
                         if (a == accountname)
                         {
                             Console.WriteLine("{0,10} || {1,10} || {2,10} || {3,10}", "Date", "Credit", "Debit", "Balance");
                             Console.WriteLine("----------------------------------------------------");
-                            foreach (Transaction t in accountname)
+                            foreach (Transaction t in accountname.Transactions)
                             {
                                 if (t.Type == TransactionType.Debit)
                                 {
@@ -133,7 +133,7 @@ namespace Boolean.CSharp.Main
                                 }
                             }
                             Console.WriteLine("----------------------------------------------------");
-                            Console.WriteLine("{0,10}    {1,10}    {2,10}    {3,10}", "", "", "", $"{accountname.Last().Balance}");
+                            Console.WriteLine("{0,10}    {1,10}    {2,10}    {3,10}", "", "", "", $"{accountname.Transactions.Last().Balance}");
                         }
                     }
                 }
@@ -142,8 +142,5 @@ namespace Boolean.CSharp.Main
         #endregion
 
         public List<IUser> UserList { get { return _userList; } set { _userList = value; } }
-        public List<Transaction> CurrentAccount { get { return _currentAccount; } set { _currentAccount = value; } }
-        public List<Transaction> SavingsAccount { get { return _savingsAccount; } set { _savingsAccount = value; } }
-
     }
 }

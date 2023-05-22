@@ -3,6 +3,7 @@ using NUnit.Framework;
 using System.Security.Principal;
 using System;
 using System.Xml.Linq;
+using Boolean.CSharp.Main.Interfaces;
 
 namespace Boolean.CSharp.Test
 {
@@ -19,7 +20,7 @@ namespace Boolean.CSharp.Test
 
             string name = "Max";
             string password = "password";
-            List<List<Transaction>> accountslist = new List<List<Transaction>>();
+            List<IAccount> accountslist = new List<IAccount>();
 
             // Act
             _core.CreateUser(name, password, accountslist);
@@ -36,7 +37,7 @@ namespace Boolean.CSharp.Test
             // Arrange
             Core _core = new Core();
 
-            List<List<Transaction>> accountslist = new List<List<Transaction>>();
+            List<IAccount> accountslist = new List<IAccount>();
             _core.CreateUser("Max", "password", accountslist);
             var user = _core.UserList.First();
             var type = AccountType.Current;
@@ -57,7 +58,7 @@ namespace Boolean.CSharp.Test
             // Arrange
             Core _core = new Core();
 
-            List<List<Transaction>> accountslist = new List<List<Transaction>>();
+            List<IAccount> accountslist = new List<IAccount>();
             _core.CreateUser("Max", "password", accountslist);
             var user = _core.UserList.First();
             var type = AccountType.Savings;
@@ -78,7 +79,7 @@ namespace Boolean.CSharp.Test
             // Arrange
             Core _core = new Core();
 
-            List<List<Transaction>> accountslist = new List<List<Transaction>>();
+            List<IAccount> accountslist = new List<IAccount>();
             _core.CreateUser("Max", "password", accountslist);
             var user = _core.UserList.First();
             var type = AccountType.Current;
@@ -94,7 +95,7 @@ namespace Boolean.CSharp.Test
             _core.DepositAmount(user, amount, accountname);
 
             // Assert
-            Assert.AreEqual(amount, user.AccountsList.First().First().Balance);
+            Assert.AreEqual(amount, user.AccountsList.First().Transactions.First().Balance);
         }
 
         [Test]
@@ -105,7 +106,7 @@ namespace Boolean.CSharp.Test
             // Arrange
             Core _core = new Core();
 
-            List<List<Transaction>> accountslist = new List<List<Transaction>>();
+            List<IAccount> accountslist = new List<IAccount>();
             _core.CreateUser("Max", "password", accountslist);
             var user = _core.UserList.First();
             var type = AccountType.Current;
@@ -121,7 +122,7 @@ namespace Boolean.CSharp.Test
             _core.WithdrawAmount(user, amount, accountname);
 
             // Assert
-            Assert.AreEqual(-amount, user.AccountsList.First().First().Balance);
+            Assert.AreEqual(-amount, user.AccountsList.First().Transactions.First().Balance);
         }
 
         [Test]
@@ -133,7 +134,7 @@ namespace Boolean.CSharp.Test
             // Arrange
             Core _core = new Core();
 
-            List<List<Transaction>> accountslist = new List<List<Transaction>>();
+            List<IAccount> accountslist = new List<IAccount>();
             _core.CreateUser("Max", "password", accountslist);
             var user = _core.UserList.First();
             var type = AccountType.Current;
@@ -151,7 +152,7 @@ namespace Boolean.CSharp.Test
             _core.DepositAmount(user, amount, accountname);
 
             // Assert
-            Assert.AreEqual(-amount1 + amount, _core.UserList.First().AccountsList.First().Last().Balance);
+            Assert.AreEqual(-amount1 + amount, _core.UserList.First().AccountsList.First().Transactions.Last().Balance);
         }
 
         [Test]
@@ -162,7 +163,7 @@ namespace Boolean.CSharp.Test
             // Arrange
             Core _core = new Core();
 
-            List<List<Transaction>> accountslist = new List<List<Transaction>>();
+            List<IAccount> accountslist = new List<IAccount>();
             _core.CreateUser("Max", "password", accountslist);
             var user = _core.UserList.First();
             var type = AccountType.Current;
@@ -184,7 +185,7 @@ namespace Boolean.CSharp.Test
             _core.BankStatement(user, accountname);
 
             // Assert
-            Assert.AreEqual(amount + amount1 - amount2, _core.UserList.First().AccountsList.First().Last().Balance);
+            Assert.AreEqual(amount + amount1 - amount2, _core.UserList.First().AccountsList.First().Transactions.Last().Balance);
         }
     }
 }

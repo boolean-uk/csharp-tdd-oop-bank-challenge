@@ -1,8 +1,9 @@
 ﻿using Boolean.CSharp.Main;
+using Boolean.CSharp.Main.Interfaces;
 
 Core _core = new Core();
 
-List<List<Transaction>> accountslist = new List<List<Transaction>>();
+List<IAccount> accountslist = new List<IAccount>();
 _core.CreateUser("Max", "password", accountslist);
 var user = _core.UserList.First();
 var type = AccountType.Current;

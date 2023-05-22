@@ -1,4 +1,5 @@
 ﻿using Boolean.CSharp.Main;
+using Boolean.CSharp.Main.Interfaces;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class ExtensionTests
     {
-        /*[Test]
+        [Test]
         public void BankBranch()
         {
             // I want accounts to be associated with specific branches.
@@ -19,7 +20,7 @@ namespace Boolean.CSharp.Test
             // Arrange
             Core _core = new Core();
 
-            List<List<Transaction>> accountslist = new List<List<Transaction>>();
+            List<IAccount> accountslist = new List<IAccount>();
             _core.CreateUser("Max", "password", accountslist);
             var user = _core.UserList.First();
             var type = AccountType.Current;
@@ -29,7 +30,7 @@ namespace Boolean.CSharp.Test
             _core.CreateBankAccount(user, type, branch);
 
             // Assert
-            Assert.AreEqual("Amsterdam", _core.UserList.First().AccountsList.First());
-        }*/
+            Assert.AreEqual(BankBranchType.Amsterdam, _core.UserList.First().AccountsList.First().BranchType);
+        }
     }
 }

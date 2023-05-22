@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Boolean.CSharp.Main.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,6 @@ namespace Boolean.CSharp.Main
     {
         public string Username { get; set; }
         public string Password { get; set; }
-        public List<List<Transaction>> AccountsList { get; set; }
+        public List<IAccount> AccountsList { get; set; }
     }
 }
