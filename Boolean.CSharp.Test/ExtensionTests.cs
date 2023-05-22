@@ -13,7 +13,12 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class ExtensionTests
     {
-      
+        private Extension _extension;
+        public ExtensionTests()
+        {
+            _extension = new Extension();
+        }
+
 
         //As an engineer,
         //So I don't need to keep track of state,
