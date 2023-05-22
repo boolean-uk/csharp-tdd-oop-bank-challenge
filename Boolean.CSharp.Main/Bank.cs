@@ -42,7 +42,7 @@ namespace Main
             if (bankAccounts.Contains(account))
             {
 
-                if (transaction.TransactionType == TransactionType.Debit)
+                if (transaction.TransactionType == TransactionType.Debit && transaction.transactionAmount <= account.balance)
                 {
                     transaction.transactionTime.ToString("d/M/yyyy");
                     user.balance -= transaction.transactionAmount;
