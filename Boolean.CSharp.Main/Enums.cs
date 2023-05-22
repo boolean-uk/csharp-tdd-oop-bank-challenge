@@ -1,6 +1,6 @@
 ﻿namespace BankingApp.Boolean.CSharp.Main
 {
-    public enum TransactionType
+    public enum Enums
     {
         Deposit,
         Withdraw

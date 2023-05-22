@@ -17,11 +17,11 @@ namespace BankingApp.Boolean.CSharp.Main.Accounts
                     decimal balance = 0;
                     foreach (var transaction in Transactions.OrderBy(x=> x.Date))
                     {
-                        if (transaction.Type == TransactionType.Deposit)
+                        if (transaction.TransactionType == Enums.Deposit)
                         {
                             balance += transaction.Amount;
                         }
-                        else if (transaction.Type == TransactionType.Withdraw)
+                        else if (transaction.TransactionType == Enums.Withdraw)
                         {
                             balance -= transaction.Amount;
                         }
@@ -40,7 +40,7 @@ namespace BankingApp.Boolean.CSharp.Main.Accounts
         public Transaction Deposit(DateTime date, decimal amount)
         {
             var newBalance = Balance + amount;
-            var transaction = new Transaction(date, amount, newBalance, TransactionType.Deposit);
+            var transaction = new Transaction(date, amount, newBalance, Enums.Deposit);
             Transactions.Add(transaction);
             return transaction;
         }
@@ -49,7 +49,7 @@ namespace BankingApp.Boolean.CSharp.Main.Accounts
             if (Balance >= amount)
             {
                 var newBalance = Balance - amount;
-                var transaction = new Transaction(date, amount, newBalance, TransactionType.Withdraw);
+                var transaction = new Transaction(date, amount, newBalance, Enums.Withdraw);
                 Transactions.Add(transaction);
                 return transaction;
             }

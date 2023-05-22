@@ -12,18 +12,17 @@ namespace BankingApp.Boolean.CSharp.Main
         public DateTime Date { get; set; }
         public decimal Amount { get; set; }
         public decimal BalanceAfterTransaction { get; set; }
-        public TransactionType Type { get; set; }
-        public DateTime Now { get; }
+        public Enums TransactionType { get; set; }
         
         
 
-        public Transaction(DateTime date, decimal amount, decimal balance, TransactionType type ) 
+        public Transaction(DateTime date, decimal amount, decimal balance, Enums type ) 
         {
             
             Date = date;
             Amount = amount;
             BalanceAfterTransaction = balance;
-            Type = type;
+            TransactionType = type;
         
         }
     }

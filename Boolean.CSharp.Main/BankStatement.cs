@@ -14,7 +14,7 @@ namespace BankingApp.Boolean.CSharp.Main
             var bankStatement = "date || credit || debit || balance \n";
             foreach (var transaction in transactions.OrderByDescending(x => x.Date))
             {
-                string transactionInfo = $"{transaction.Date} || {(transaction.Type == TransactionType.Deposit ? transaction.Amount : "")} || {(transaction.Type == TransactionType.Withdraw ? transaction.Amount : "")} || {transaction.BalanceAfterTransaction}\n";
+                string transactionInfo = $"{transaction.Date} || {(transaction.TransactionType == Enums.Deposit ? transaction.Amount : "")} || {(transaction.TransactionType == Enums.Withdraw ? transaction.Amount : "")} || {transaction.BalanceAfterTransaction}\n";
                 bankStatement += transactionInfo;
                 
             }
