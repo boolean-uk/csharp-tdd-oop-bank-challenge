@@ -26,5 +26,11 @@ namespace BankingApp.Boolean.CSharp.Main.Overdraft
 
         public void AddRequest(OverdraftRequest request)
         { Requests.Add(request); }
+
+        public void ApproveRequest(OverdraftRequest request)
+        {
+            request.IsApproved = true;
+           request.Account.OverdraftLimit = request.RequestedAmount;
+        }
     }
 }

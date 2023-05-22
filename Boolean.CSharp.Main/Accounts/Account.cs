@@ -67,7 +67,7 @@ namespace BankingApp.Boolean.CSharp.Main.Accounts
             return Transactions;
         }
 
-        public decimal OverdraftLimit { get; set; } = 0;
+        public decimal OverdraftLimit { get; set; } = 500;
         public OverdraftHistory OverdraftHistory { get;}
     }
 }
