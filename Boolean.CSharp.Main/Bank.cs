@@ -45,7 +45,8 @@ namespace Main
                 if (transaction.TransactionType == TransactionType.Debit && transaction.transactionAmount <= account.balance)
                 {
                     transaction.transactionTime.ToString("d/M/yyyy");
-                    user.balance -= transaction.transactionAmount;
+                    account.balance -= transaction.transactionAmount;
+                    user.balance = account.balance;
                     transaction.newBalance = user.balance;
                     user.transactions.Add(transaction);
                     return "Witdhawal completed succesfully";
@@ -55,7 +56,8 @@ namespace Main
                     transaction.transactionTime.ToString("d/M/yyyy");
 
 
-                    user.balance += transaction.transactionAmount;
+                    account.balance += transaction.transactionAmount;
+                    user.balance = account.balance;
                     transaction.newBalance = user.balance;
                     user.transactions.Add(transaction);
                     return "Desposit completed succesfully";
@@ -65,6 +67,31 @@ namespace Main
             }
             else { return "Account doesnt exist"; }
 
+        }
+
+        public decimal GetBalance(User user, Account account)
+        {
+            decimal l = 0;
+            if (bankAccounts.Contains(account))
+            {
+                
+                foreach (var k in user.transactions)
+                {
+                    if (k.TransactionType == TransactionType.Credit)
+                    {
+                        l += k.transactionAmount;
+                    }
+                    else
+                    {
+                        l -= k.transactionAmount;
+                    }
+
+                }
+
+
+            }
+            
+            return l;
         }
 
 

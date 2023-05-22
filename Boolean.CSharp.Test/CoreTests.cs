@@ -10,7 +10,7 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class CoreTests
     {
-        private Bank _core;
+        
 
        
 
