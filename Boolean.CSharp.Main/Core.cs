@@ -74,15 +74,15 @@ namespace Boolean.CSharp.Main
 
         public void send(string message1)
         {
-            string accountSid = "AC63f7efc78a0cfceffd15f4f500fed81b";
-            string authToken = "f0903b71b85ff447c57a76aa26ad19a7";
+            string accountSid = "ACd91a7b12d75c0a5162b3316b913cbb65";
+            string authToken = "dca504a42d0ec819d89b95bf69b1492b";
             TwilioClient.Init(accountSid, authToken);
 
 
             var message = MessageResource.Create(
                 body: message1,
-                from: new Twilio.Types.PhoneNumber("+12546003615"), // virtual Twilio number
-                to: new Twilio.Types.PhoneNumber("+306949873855"));
+                from: new Twilio.Types.PhoneNumber("+12544015317"), // virtual Twilio number
+                to: new Twilio.Types.PhoneNumber("+306949873855"));//myNumber
         }
 
 

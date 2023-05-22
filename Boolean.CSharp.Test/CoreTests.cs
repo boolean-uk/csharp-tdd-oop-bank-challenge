@@ -87,6 +87,7 @@ namespace Boolean.CSharp.Test
             core.makeADeposit(user, ((Customer)user).account2, 20);
             List<Transaction> transactions = new List<Transaction>();
             transactions = core.printBankStatement(user, account2);
+            Assert.AreEqual(true, true);
             string message1 = "";
             foreach (Transaction t in transactions)
             {
@@ -94,8 +95,6 @@ namespace Boolean.CSharp.Test
                 message1 += "\n";
             }
             core.send(message1);
-            Assert.AreEqual(true, true);
-
         }
 
 
