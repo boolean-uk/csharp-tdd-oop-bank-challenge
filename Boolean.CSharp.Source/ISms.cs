@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Source
 {
-    internal interface ISms
+    public interface ISms
     {
+        void sendSms(string smsMessage);
     }
 }
