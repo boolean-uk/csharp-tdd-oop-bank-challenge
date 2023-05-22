@@ -4,6 +4,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,6 +18,10 @@ namespace Boolean.CSharp.Test
         {
             _extension = new Extension();
         }
+
+        //As an engineer,
+        //So I don't need to keep track of state,
+        //I want account balances to be calculated based on transaction history instead of stored in memory.
         [Test]
         public void BalanceIsBasedOnTransactionHistory()
         {
@@ -30,10 +35,18 @@ namespace Boolean.CSharp.Test
 
 
         }
+        // As a bank manager,
+        //So I can expand,
+        //I want accounts to be associated with specific branches.
         [Test]
-        private void TestQuestion2()
+        public void AccontCanBeAssociatetWithBranch()
         {
+            var testAccount = new CurrentAccount
+            {
+                Branch = Branch.Amsterdam
+            };
 
+            Assert.AreEqual(Branch.Amsterdam, testAccount.Branch);
         }
     }
 }

@@ -1,7 +1,11 @@
 ﻿using BankingApp.Boolean.CSharp.Main;
 using BankingApp.Boolean.CSharp.Main.Accounts;
 using NUnit.Framework;
+using System.Data.Common;
+using System;
+using System.Security.Principal;
 using System.Transactions;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace Boolean.CSharp.Test
 {
@@ -15,7 +19,9 @@ namespace Boolean.CSharp.Test
             _core = new Core();
 
         }
-
+        //As a customer,
+        //So I can safely store use my money,
+        //I want to create a current account.
         [Test]
         public void CreateCurrentAccountTest()
         {
@@ -28,6 +34,9 @@ namespace Boolean.CSharp.Test
 
         }
 
+        //As a customer,
+        //So I can save for a rainy day,
+        //I want to create a savings account.
         [Test]
         public void CreateSavingsAccountTest()
         {
@@ -38,6 +47,13 @@ namespace Boolean.CSharp.Test
 
         }
 
+        //As a customer,
+        //So I can keep a record of my finances,
+        //I want to generate bank statements with transaction dates, amounts, and balance at the time of transaction.
+
+        //As a customer,
+        //So I can use my account,
+        //I want to deposit and withdraw funds.
         [Test]
         public void BankStatementTest()
         {

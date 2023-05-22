@@ -59,7 +59,7 @@ namespace BankingApp.Boolean.CSharp.Main.Accounts
             }
 
         }
-
+        public Branch Branch { get; set; }
         public List<Transaction> GenerateStatement()
         {
             return Transactions;
