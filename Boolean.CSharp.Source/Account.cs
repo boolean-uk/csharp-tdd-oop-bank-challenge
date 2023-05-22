@@ -12,7 +12,7 @@ namespace Boolean.CSharp.Source
     {
         public List<Transaction> transactions = new List<Transaction> ();
         public Customer customer { get; set; }
-
+        public string brancheName { get; set; }
         public decimal GetBalance()
         {
             decimal balance = 0;

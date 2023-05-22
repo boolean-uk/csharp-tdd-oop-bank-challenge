@@ -55,14 +55,11 @@ namespace Boolean.CSharp.Test
         }
         
         [Test]
-        public void TestBankStatement()
+        public void TestBrancheName()
         {
             CurrentAccount account = new CurrentAccount();
-            account.DepositMoney(1000M);
-            account.WithdrawMoney(500M);
-            //Assert.AreEqual(account.BankStatement(), "??" );
+            string branche = account.brancheName = "Test";
+            Assert.AreEqual(branche, "Test");
         }
-
-
     }
 }
