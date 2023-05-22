@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BankingApp.Boolean.CSharp.Main.Overdraft;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,6 +37,7 @@ namespace BankingApp.Boolean.CSharp.Main.Accounts
         public Account()
         {
             Transactions = new List<Transaction>();
+            OverdraftHistory = new OverdraftHistory();
         }
         public Transaction Deposit(DateTime date, decimal amount)
         {
@@ -64,5 +66,8 @@ namespace BankingApp.Boolean.CSharp.Main.Accounts
         {
             return Transactions;
         }
+
+        public decimal OverdraftLimit { get; set; } = 0;
+        public OverdraftHistory OverdraftHistory { get;}
     }
 }

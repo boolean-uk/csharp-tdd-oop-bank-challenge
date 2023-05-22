@@ -1,5 +1,6 @@
 ﻿using BankingApp.Boolean.CSharp.Main;
 using BankingApp.Boolean.CSharp.Main.Accounts;
+using BankingApp.Boolean.CSharp.Main.Overdraft;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -48,6 +49,24 @@ namespace Boolean.CSharp.Test
             };
 
             Assert.AreEqual(Branch.Amsterdam, testAccount.Branch);
+        }
+
+        //As a customer,
+        //So I have an emergency fund,
+        //I want to be able to request an overdraft on my account.
+        [Test]
+        public void RequestAnOverdraft()
+        {
+            var testAccount = new CurrentAccount();
+            var request = new OverdraftRequest
+            {
+                Account = testAccount,
+                RequestedAmount = 200
+            };
+
+            testAccount.OverdraftHistory.AddRequest(request);
+
+            Assert.Contains(request, testAccount.OverdraftHistory.Requests);
         }
     }
 }
