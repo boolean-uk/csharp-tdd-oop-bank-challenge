@@ -98,8 +98,16 @@ namespace Boolean.CSharp.Main
                             }
                             else if (a.Transactions.Count != 0)
                             {
-                                var balance = accountname.Transactions.Last().Balance - amount;
-                                accountname.Transactions.Add(new Transaction(TransactionType.Debit, DateTime.Now, amount, balance));
+                                if ((accountname.Transactions.Last().Balance - amount) > 0)
+                                {
+                                    var balance = accountname.Transactions.Last().Balance - amount;
+                                    accountname.Transactions.Add(new Transaction(TransactionType.Debit, DateTime.Now, amount, balance));
+                                } 
+                                else if ((accountname.Transactions.Last().Balance - amount) < 0)
+                                {
+                                    int overdraft = accountname.Transactions.Last().Balance - amount;
+                                    OverdraftRequest(user, accountname, overdraft);
+                                }
                             }
                         }
                     }
@@ -136,6 +144,21 @@ namespace Boolean.CSharp.Main
                             Console.WriteLine("{0,10}    {1,10}    {2,10}    {3,10}", "", "", "", $"{accountname.Transactions.Last().Balance}");
                         }
                     }
+                }
+            }
+        }
+        #endregion
+
+        public bool good = false;
+        #region OverdraftRequest()
+        public void OverdraftRequest(IUser user, IAccount accountname, int overdraft)
+        {
+            foreach (IUser x in UserList)
+            {
+                if (x == user)
+                {
+                    Console.WriteLine($"{user} wants to request an overdraft of £{overdraft} on {accountname}.");
+                    good = true;
                 }
             }
         }

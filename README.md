@@ -111,6 +111,9 @@ As a customer,
 So I have an emergency fund,
 I want to be able to request an overdraft on my account.
 ```
+| Classes         | Methods               | Scenario                                    | Outputs                                |
+|-----------------|-----------------------|---------------------------------------------|----------------------------------------|
+| `Core`		  | `RequestOverdraft()`  | If balance goes below 0, request overdraft  | Overdraft request gets send to manager |
 
 ```
 As a bank manager,
