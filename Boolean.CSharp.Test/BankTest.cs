@@ -18,12 +18,13 @@ namespace Boolean.CSharp.Test
         [Test]
         public void ChecksIfAccountWasCreated()
         {
-            Bank bank = new Bank();
             IUser customer = new Customer("Stavros", "1212121212");
+            IUser manager = new BankManager("Nigel", "1231231231");
+            Bank bank = new Bank(manager);
             BankAccount currentAccount = new BankAccount(customer);
 
-            Assert.AreEqual(bank.CreateAccount(currentAccount, AccountType.Current), $"Current account created sucessfully for {currentAccount.User.Name}");
-            Assert.AreEqual(bank.CreateAccount(currentAccount, AccountType.Current), $"A current account already exists for {currentAccount.User.Name}");
+            Assert.AreEqual(bank.CreateAccount(currentAccount, AccountType.Current, Branches.Athens), $"Current account created sucessfully for {currentAccount.User.Name}");
+            Assert.AreEqual(bank.CreateAccount(currentAccount, AccountType.Current, Branches.Athens), $"A current account already exists for {currentAccount.User.Name}");
             Assert.AreEqual(bank.BankAccounts.Count, 1);
         }
     }

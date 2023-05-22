@@ -19,4 +19,20 @@ namespace Boolean.CSharp.Main.Enums
         Savings
     }
 
+    public enum Branches
+    {
+        Athens,
+        London,
+        Amsterdam,
+        Berlin,
+        Paris,
+        Madrid
+    }
+    public enum Status
+    {
+        Pending,
+        Approved,
+        Declined
+    }
+
 }

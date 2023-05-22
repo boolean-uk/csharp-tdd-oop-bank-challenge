@@ -17,11 +17,12 @@ namespace Boolean.CSharp.Test
         [Test]
         public void ChecksIfFundsWasDeposited()
         {
-            Bank bank = new Bank();
             IUser customer = new Customer("Stavros", "1212121212");
+            IUser manager = new BankManager("Nigel", "1231231231");
+            Bank bank = new Bank(manager);
             BankAccount currentAccount = new BankAccount(customer);
 
-            bank.CreateAccount(currentAccount, AccountType.Current);
+            bank.CreateAccount(currentAccount, AccountType.Current, Branches.Athens);
             Transaction transcaction1 = new Transaction(TransactionType.Credit, 1000, DateTime.Now);
             Transaction transcaction2 = new Transaction(TransactionType.Credit, 2000, DateTime.Now);
 
@@ -34,11 +35,12 @@ namespace Boolean.CSharp.Test
         [Test]
         public void ChecksIfFundsWasWitdrawed()
         {
-            Bank bank = new Bank();
             IUser customer = new Customer("Stavros", "1212121212");
+            IUser manager = new BankManager("Nigel", "1231231231");
+            Bank bank = new Bank(manager);
             BankAccount savingsAccount = new BankAccount(customer);
 
-            bank.CreateAccount(savingsAccount, AccountType.Savings);
+            bank.CreateAccount(savingsAccount, AccountType.Savings, Branches.Athens);
             Transaction transcaction1 = new Transaction(TransactionType.Credit, 1000, DateTime.Now);
             Transaction transcaction2 = new Transaction(TransactionType.Credit, 2000, DateTime.Now);
             Transaction transcaction3 = new Transaction(TransactionType.Debit, 500, DateTime.Now);
@@ -53,11 +55,12 @@ namespace Boolean.CSharp.Test
         [Test]
         public void CalculateBalanceTest()
         {
-            Bank bank = new Bank();
             IUser customer = new Customer("Stavros", "1212121212");
+            IUser manager = new BankManager("Nigel", "1231231231");
+            Bank bank = new Bank(manager);
             BankAccount savingsAccount = new BankAccount(customer);
 
-            bank.CreateAccount(savingsAccount, AccountType.Savings);
+            bank.CreateAccount(savingsAccount, AccountType.Savings, Branches.Athens);
             Transaction transcaction1 = new Transaction(TransactionType.Credit, 1000, DateTime.Now);
             Transaction transcaction2 = new Transaction(TransactionType.Credit, 2000, DateTime.Now);
             Transaction transcaction3 = new Transaction(TransactionType.Debit, 500, DateTime.Now);
@@ -66,6 +69,28 @@ namespace Boolean.CSharp.Test
             savingsAccount.WithdrawFunds(transcaction3);
 
             Assert.AreEqual(savingsAccount.CalculateBalance(), 2500.00);
+        }
+
+        [Test]
+        public void OverdraftChekingTest()
+        {
+            IUser customer = new Customer("Stavros", "1212121212");
+            IUser manager = new BankManager("Nigel", "1231231231");
+            Bank bank = new Bank(manager);
+            BankAccount savingsAccount = new BankAccount(customer);
+            bank.CreateAccount(savingsAccount, AccountType.Savings, Branches.Athens);
+
+            OverdraftRequest request = new OverdraftRequest(500, DateTime.Now);
+
+            Assert.AreEqual(savingsAccount.ApplyForOverdraft(request), "Your request has been added to the list");
+            bank.CheckRequest(request);
+
+            Transaction transcaction1 = new Transaction(TransactionType.Debit, 100, DateTime.Now);
+
+            savingsAccount.WithdrawFunds(transcaction1);
+
+            Assert.AreEqual(savingsAccount.CalculateBalance(), -100);
+
         }
     }
 }

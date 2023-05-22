@@ -1,5 +1,6 @@
 ﻿using Boolean.CSharp.Main.Enums;
 using Boolean.CSharp.Main.Interfaces;
+using Boolean.CSharp.Main.IUsers;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,10 @@ namespace Boolean.CSharp.Main.BankAccounts
         private Transaction transcation;
         private IUser user;
         private decimal balance;
-        //either current or savings account
         private AccountType typeOfAccount;
         private List<Transaction> listOfTransactions = new List<Transaction>();
+        private Branches branch;
+        private List<OverdraftRequest> overdraftRequests = new List<OverdraftRequest>();
 
         public BankAccount(IUser user)
         {
@@ -35,14 +37,13 @@ namespace Boolean.CSharp.Main.BankAccounts
                     if (transaction.Amount > 0)
                     {
                         if (listOfTransactions.Count == 0)
-                        { 
+                        {
                             this.balance = 0;
                             transaction.OldBalance = this.balance;
                             this.balance += transaction.Amount;
                             transaction.NewBalance = this.balance;
                             this.listOfTransactions.Add(transaction);
                             return "Deposit has been made successfully";
-
                         }
                         else
                         {
@@ -50,7 +51,7 @@ namespace Boolean.CSharp.Main.BankAccounts
                             this.balance = +transaction.Amount;
                             transaction.NewBalance = this.balance;
                             this.listOfTransactions.Add(transaction);
-                            return "Deposit has been made successfully"; 
+                            return "Deposit has been made successfully";
                         }
                     }
                 }
@@ -66,7 +67,7 @@ namespace Boolean.CSharp.Main.BankAccounts
                 {
                     if (transaction.Amount > 0)
                     {
-                        if (this.balance >= transaction.Amount)
+                        if (this.balance + OverdraftChecking() >= transaction.Amount)
                         {
                             transaction.OldBalance = balance;
                             this.balance -= transaction.Amount;
@@ -79,7 +80,17 @@ namespace Boolean.CSharp.Main.BankAccounts
             }
             return "Nothing to withdraw";
         }
-            
+
+        public decimal OverdraftChecking()
+        {
+            var overdraftRequest = OverdraftRequests.OrderByDescending(x => x.Date).Where(x => x.Status == Status.Approved).FirstOrDefault();
+            if (overdraftRequest != null)
+            {
+                return overdraftRequest.Amount;
+            }
+            return 0;
+        }
+
         public decimal CalculateBalance()
         {
             decimal total = 0;
@@ -100,9 +111,22 @@ namespace Boolean.CSharp.Main.BankAccounts
             return total;
         }
 
+        public string ApplyForOverdraft(OverdraftRequest request)
+        { 
+            if (request != null)
+            {
+                overdraftRequests.Add(request);
+                return "Your request has been added to the list";
+            }
+            return "There isn't any request";
+        }
+
+
         public IUser User { get => this.user; }
-        public decimal Balance { get => this.balance; }
+        public decimal Balance { get => this.balance; set => this.balance = value; }
         public AccountType TypeOfAccount { get => this.typeOfAccount; set => this.typeOfAccount = value; }
+        public Branches Branch { get => this.branch; set => this.branch = value; }
         public List<Transaction> ListOfTransactions { get => this.listOfTransactions; }
+        public List<OverdraftRequest> OverdraftRequests { get => this.overdraftRequests; }
     }
 }
