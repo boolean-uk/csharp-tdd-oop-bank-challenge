@@ -1,0 +1,35 @@
+﻿Banking App
+_____________________________________________________|
+
+User Roles:
+_____________________________________________________|
+Customer
+-Name or ID
+// Engineer
+// Bank Manager
+
+
+Type of transaction:
+_____________________________________________________|
+Deposit
+Withdraw
+
+Transaction (for bank statement):
+_____________________________________________________|
+Unique ID
+Type: debit or credit
+Date
+Amount
+Balance at the moment
+
+
+Accounts:
+_____________________________________________________|
+
+Current
+Savings
+
+balance, transactions
+
+handle deposit, withdrawal, get statement
+______________________________________________________|

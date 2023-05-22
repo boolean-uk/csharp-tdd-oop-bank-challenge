@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankingApp.Boolean.CSharp.Main
+namespace BankingApp.Boolean.CSharp.Main.SMS
 {
-    public class Core
+    public interface ISMS
     {
+        string SMS { get; }
     }
 }
