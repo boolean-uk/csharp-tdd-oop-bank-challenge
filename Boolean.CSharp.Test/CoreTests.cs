@@ -1,5 +1,7 @@
 ﻿using Boolean.CSharp.Main;
 using NUnit.Framework;
+using System.Security.Principal;
+using System;
 using System.Xml.Linq;
 
 namespace Boolean.CSharp.Test
@@ -122,6 +124,7 @@ namespace Boolean.CSharp.Test
         public void CheckBalance()
         {
             // I want to check the balance.
+            // I want account balances to be calculated based on transaction history instead of stored in memory.
 
             // Arrange
             Core _core = new Core();
@@ -139,11 +142,11 @@ namespace Boolean.CSharp.Test
             int amount1 = 500;
 
             // Act
-            _core.DepositAmount(user, amount, accountname);
             _core.WithdrawAmount(user, amount1, accountname);
+            _core.DepositAmount(user, amount, accountname);
 
             // Assert
-            Assert.AreEqual(amount - amount1, _core._balance);
+            Assert.AreEqual(-amount1 + amount, _core.UserList.First().AccountsList.First().Last().Balance);
         }
 
         [Test]
@@ -175,7 +178,7 @@ namespace Boolean.CSharp.Test
             _core.BankStatement(user, accountname);
 
             // Assert
-            Assert.AreEqual(amount + amount1 - amount2, _core._balance);
+            Assert.AreEqual(amount + amount1 - amount2, _core.UserList.First().AccountsList.First().Last().Balance);
         }
     }
 }

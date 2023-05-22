@@ -61,8 +61,16 @@ namespace Boolean.CSharp.Main
                     {
                         if (a == accountname)
                         {
-                            _balance = _balance + amount;
-                            accountname.Add(new Transaction(TransactionType.Credit, DateTime.Today, amount, _balance));
+                            if (a.Count == 0)
+                            {
+                                var balance =+ amount;
+                                accountname.Add(new Transaction(TransactionType.Credit, DateTime.Now, amount, balance));
+                            }
+                            else if (a.Count != 0)
+                            {
+                                var balance = accountname.Last().Balance + amount;
+                                accountname.Add(new Transaction(TransactionType.Credit, DateTime.Now, amount, balance));
+                            }
                         }
                     }
                 }
@@ -85,8 +93,16 @@ namespace Boolean.CSharp.Main
                     {
                         if (a == accountname)
                         {
-                            _balance = _balance - amount;
-                            accountname.Add(new Transaction(TransactionType.Debit, DateTime.Now, amount, _balance));
+                            if (a.Count == 0)
+                            {
+                                var balance =- amount;
+                                accountname.Add(new Transaction(TransactionType.Debit, DateTime.Now, amount, balance));
+                            }
+                            else if (a.Count != 0)
+                            {
+                                var balance = accountname.Last().Balance - amount;
+                                accountname.Add(new Transaction(TransactionType.Debit, DateTime.Now, amount, balance));
+                            }
                         }
                     }
                 }
