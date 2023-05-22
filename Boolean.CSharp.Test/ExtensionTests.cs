@@ -11,20 +11,25 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class ExtensionTests
     {
-        private Extension _extension;
-        public ExtensionTests()
+        /*[Test]
+        public void BankBranch()
         {
-            _extension = new Extension();
-        }
-        [Test]
-        private void TestQuestion1()
-        {
+            // I want accounts to be associated with specific branches.
 
-        }
-        [Test]
-        private void TestQuestion2()
-        {
+            // Arrange
+            Core _core = new Core();
 
-        }
+            List<List<Transaction>> accountslist = new List<List<Transaction>>();
+            _core.CreateUser("Max", "password", accountslist);
+            var user = _core.UserList.First();
+            var type = AccountType.Current;
+            var branch = BankBranchType.Amsterdam;
+
+            // Act
+            _core.CreateBankAccount(user, type, branch);
+
+            // Assert
+            Assert.AreEqual("Amsterdam", _core.UserList.First().AccountsList.First());
+        }*/
     }
 }

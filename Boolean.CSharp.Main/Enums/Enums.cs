@@ -16,4 +16,10 @@ namespace Boolean.CSharp.Main
         Credit,
         Debit
     }
+    public enum BankBranchType
+    {
+        Amsterdam,
+        London,
+        Athens
+    }
 }

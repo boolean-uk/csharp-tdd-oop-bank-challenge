@@ -15,8 +15,6 @@ namespace Boolean.CSharp.Main
         private List<Transaction> _currentAccount = new List<Transaction>();
         private List<Transaction> _savingsAccount = new List<Transaction>();
 
-        public int _balance { get; set; }
-
         #region CreateAccount()
         public void CreateUser(string name, string password, List<List<Transaction>> AccountsList)
         {
@@ -28,12 +26,12 @@ namespace Boolean.CSharp.Main
         }
         #endregion
 
-        #region BankAccount()
-        public void CreateBankAccount(IUser user, AccountType type)
+        #region CreateBankAccount()
+        public void CreateBankAccount(IUser user, AccountType type, BankBranchType branch)
         {
-            createBankAccount(user, type);
+            createBankAccount(user, type, branch);
         }
-        private void createBankAccount(IUser user, AccountType type)
+        private void createBankAccount(IUser user, AccountType type, BankBranchType branch)
         {
             if (type == AccountType.Current)
             {
@@ -135,7 +133,7 @@ namespace Boolean.CSharp.Main
                                 }
                             }
                             Console.WriteLine("----------------------------------------------------");
-                            Console.WriteLine("{0,10}    {1,10}    {2,10}    {3,10}", "", "", "", $"{_balance}");
+                            Console.WriteLine("{0,10}    {1,10}    {2,10}    {3,10}", "", "", "", $"{accountname.Last().Balance}");
                         }
                     }
                 }

@@ -102,6 +102,9 @@ As a bank manager,
 So I can expand,
 I want accounts to be associated with specific branches.
 ```
+| Classes         | Methods               | Scenario                                  | Outputs                 |
+|-----------------|-----------------------|-------------------------------------------|-------------------------|
+| `Core`		  | `CreateBankAccount()` | Upon creation of bankaccount, add branch  | Bankaccount with branch	|
 
 ```
 As a customer,

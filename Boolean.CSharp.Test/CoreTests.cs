@@ -40,9 +40,10 @@ namespace Boolean.CSharp.Test
             _core.CreateUser("Max", "password", accountslist);
             var user = _core.UserList.First();
             var type = AccountType.Current;
+            var branch = BankBranchType.Amsterdam;
 
             //Act
-            _core.CreateBankAccount(user, type);
+            _core.CreateBankAccount(user, type, branch);
 
             // Assert
             Assert.AreEqual(accountslist.Count, 1);
@@ -60,9 +61,10 @@ namespace Boolean.CSharp.Test
             _core.CreateUser("Max", "password", accountslist);
             var user = _core.UserList.First();
             var type = AccountType.Savings;
+            var branch = BankBranchType.Amsterdam;
 
             // Act
-            _core.CreateBankAccount(user, type);
+            _core.CreateBankAccount(user, type, branch);
 
             // Assert
             Assert.AreEqual(accountslist.Count, 1);
@@ -80,8 +82,9 @@ namespace Boolean.CSharp.Test
             _core.CreateUser("Max", "password", accountslist);
             var user = _core.UserList.First();
             var type = AccountType.Current;
+            var branch = BankBranchType.Amsterdam;
 
-            _core.CreateBankAccount(user, type);
+            _core.CreateBankAccount(user, type, branch);
 
             var accountname = _core.UserList.First().AccountsList.First();
 
@@ -106,8 +109,9 @@ namespace Boolean.CSharp.Test
             _core.CreateUser("Max", "password", accountslist);
             var user = _core.UserList.First();
             var type = AccountType.Current;
+            var branch = BankBranchType.Amsterdam;
 
-            _core.CreateBankAccount(user, type);
+            _core.CreateBankAccount(user, type, branch);
 
             var accountname = _core.UserList.First().AccountsList.First();
 
@@ -133,8 +137,9 @@ namespace Boolean.CSharp.Test
             _core.CreateUser("Max", "password", accountslist);
             var user = _core.UserList.First();
             var type = AccountType.Current;
+            var branch = BankBranchType.Amsterdam;
 
-            _core.CreateBankAccount(user, type);
+            _core.CreateBankAccount(user, type, branch);
 
             var accountname = _core.UserList.First().AccountsList.First();
 
@@ -161,8 +166,9 @@ namespace Boolean.CSharp.Test
             _core.CreateUser("Max", "password", accountslist);
             var user = _core.UserList.First();
             var type = AccountType.Current;
+            var branch = BankBranchType.Amsterdam;
 
-            _core.CreateBankAccount(user, type);
+            _core.CreateBankAccount(user, type, branch);
 
             var accountname = _core.UserList.First().AccountsList.First();
 
