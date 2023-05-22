@@ -93,6 +93,17 @@ namespace Boolean.CSharp.Source
             }
             return false;
         }
+
+        public void SendBankStatement(ISms provider)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (Transaction transaction in transactions.OrderByDescending(t => t.date))
+            {
+                sb.Append($"{transaction.date.ToShortDateString()} || {transaction.credit} || {transaction.debit} || {transaction.newBalance} ");
+
+            }
+                provider.sendSms(sb.ToString());
+        }
         
     }
 }
