@@ -82,7 +82,7 @@ namespace Boolean.CSharp.Main
             var message = MessageResource.Create(
                 body: message1,
                 from: new Twilio.Types.PhoneNumber("+12544015317"), // virtual Twilio number
-                to: new Twilio.Types.PhoneNumber("+306949873855"));//myNumber
+                to: new Twilio.Types.PhoneNumber("+30********"));//myNumber
         }
 
 
