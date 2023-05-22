@@ -8,6 +8,7 @@ namespace Boolean.CSharp.Source
 {
     public class OverdraftRequest
     {
+        public int id {  get; set; }
         public decimal overdraftRequest { get; set; }
         public bool status { get; set;} = false;
     }

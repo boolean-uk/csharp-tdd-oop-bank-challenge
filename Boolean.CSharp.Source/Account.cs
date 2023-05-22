@@ -14,6 +14,8 @@ namespace Boolean.CSharp.Source
         public List<OverdraftRequest> overdraft = new List<OverdraftRequest>();
         public Customer customer { get; set; }
         public string brancheName { get; set; }
+        public Roles roles { get; set; }
+
         public decimal GetBalance()
         {
             decimal balance = 0;
@@ -23,6 +25,11 @@ namespace Boolean.CSharp.Source
                 balance += t.debit;
             }
             return balance;
+        }
+        public decimal OverdraftAmount()
+        {
+            OverdraftRequest overdraftRequest = overdraft.OrderByDescending(o => o.id).Where(o => o.status == true).FirstOrDefault();
+            return overdraftRequest != null ? overdraftRequest.overdraftRequest : 0M ;
         }
         public void DepositMoney(decimal deposit)
         {
@@ -36,7 +43,7 @@ namespace Boolean.CSharp.Source
         public void WithdrawMoney(decimal withdraw)
         {
             Transaction transaction = new Transaction();
-            if (GetBalance() - withdraw >0) { 
+            if ((GetBalance() - withdraw) + OverdraftAmount() >= 0) { 
             transaction.date = DateTime.Now;
             transaction.credit = withdraw;
             transaction.newBalance = GetBalance() - withdraw;
@@ -46,11 +53,11 @@ namespace Boolean.CSharp.Source
             {
                 OverdraftRequest request = new OverdraftRequest ();
                 request.overdraftRequest = GetBalance() - withdraw;
-                request.status = false;
+                request.id = overdraft.Count == 0 ? 1: overdraft.Max(o => o.id)+1;
                 overdraft.Add(request);
-                // add to overdraftrequestlist 
             }
-        }
+        }     
+
         public void BankStatement()
         {
            
@@ -65,6 +72,21 @@ namespace Boolean.CSharp.Source
               
             }
             ;
+        }
+        public bool OverdraftAcceptance(int id)
+        {
+           // get the overdraft Request 
+           // manager
+           // change status
+           var req = overdraft.Where(o => o.id == id).FirstOrDefault();
+            if (req != null) { 
+                if(roles == Roles.manager)
+                {
+                    req.status=true;
+                    return true;
+                }
+            }
+            return false;
         }
         
     }

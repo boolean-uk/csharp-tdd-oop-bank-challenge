@@ -68,7 +68,25 @@ namespace Boolean.CSharp.Test
             CurrentAccount account = new CurrentAccount();
             account.DepositMoney(250M);
             account.WithdrawMoney(500M);
-            Assert.AreEqual(account.GetBalance(), 250);
+            Assert.AreEqual(account.GetBalance(), 250); // with overdraft premission -250 without overdraft premission 250
+        }
+
+        [Test]
+        public void TestOverdraftAcceptance()
+        {
+            CurrentAccount account = new CurrentAccount();
+            account.WithdrawMoney(500M);
+            Assert.IsTrue(account.OverdraftAcceptance(1) == true);
+        }
+
+        [Test]
+        public void TestOverdraftAccepted()
+        {
+            CurrentAccount account = new CurrentAccount();
+            account.WithdrawMoney(500M);
+            Assert.IsTrue(account.OverdraftAcceptance(1) == true);
+            account.WithdrawMoney(500M);
+            Assert.AreEqual(account.GetBalance(), -500);
         }
     }
 }
