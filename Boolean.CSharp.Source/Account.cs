@@ -11,7 +11,7 @@ namespace Boolean.CSharp.Source
     public abstract class Account
     {
         public List<Transaction> transactions = new List<Transaction> ();
-        public Customer customer { get; set; };
+        public Customer customer { get; set; }
         public decimal balance;
 
         public decimal DepositMoney(decimal deposit)
@@ -50,8 +50,6 @@ namespace Boolean.CSharp.Source
             }
             ;
         }
-        // put deposit and withdraw methodes in here?
-        // keep track of both balances in here?
-        // transactionrecords in here?
+        
     }
 }

@@ -18,6 +18,6 @@ namespace Boolean.CSharp.Source
         public decimal newBalance { get; set; }
 
         // foreach transaction (deposit/withdraw) output
-        // date credit debit newBalance
+        // date credit debit newBalance this is in Account
     }
 }

@@ -56,8 +56,17 @@ namespace Boolean.CSharp.Test
             balance.DepositMoney(500M);
             Assert.AreEqual(savings.balance, 1000M);
             Assert.AreEqual(balance.balance, 500M);
-
         }
+
+        [Test]
+        public void TestBankStatement()
+        {
+            CurrentAccount account = new CurrentAccount();
+            account.DepositMoney(1000M);
+            account.WithdrawMoney(500M);
+            //Assert.AreEqual(account.BankStatement(), "??" );
+        }
+
 
     }
 }
