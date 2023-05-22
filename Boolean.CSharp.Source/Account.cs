@@ -30,6 +30,7 @@ namespace Boolean.CSharp.Source
         {
             OverdraftRequest overdraftRequest = overdraft.OrderByDescending(o => o.id).Where(o => o.status == true).FirstOrDefault();
             return overdraftRequest != null ? overdraftRequest.overdraftRequest : 0M ;
+            //return 500M;
         }
         public void DepositMoney(decimal deposit)
         {
@@ -43,7 +44,11 @@ namespace Boolean.CSharp.Source
         public void WithdrawMoney(decimal withdraw)
         {
             Transaction transaction = new Transaction();
-            if ((GetBalance() - withdraw) + OverdraftAmount() >= 0) { 
+            // if balance + overdraftAmount
+            
+            //if (GetBalance() + OverdraftAmount() > withdraw)
+            if ((GetBalance() - withdraw) + Math.Abs(OverdraftAmount()) >= 0)
+                { 
             transaction.date = DateTime.Now;
             transaction.credit = withdraw;
             transaction.newBalance = GetBalance() - withdraw;
