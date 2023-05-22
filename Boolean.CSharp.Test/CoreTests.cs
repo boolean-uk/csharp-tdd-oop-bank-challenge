@@ -61,5 +61,13 @@ namespace Boolean.CSharp.Test
             string branche = account.brancheName = "Test";
             Assert.AreEqual(branche, "Test");
         }
+
+        [Test]
+        public void TestOverdraft()
+        {
+            CurrentAccount account = new CurrentAccount();
+            account.WithdrawMoney(500M);
+            Assert.AreEqual(account.GetBalance(), -500);
+        }
     }
 }
