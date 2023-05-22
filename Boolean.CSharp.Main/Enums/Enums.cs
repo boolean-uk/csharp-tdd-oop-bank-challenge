@@ -14,7 +14,8 @@ namespace Boolean.CSharp.Main
     public enum TransactionType
     {
         Credit,
-        Debit
+        Debit,
+        Overdraft
     }
     public enum BankBranchType
     {

@@ -1,4 +1,5 @@
 ﻿using Boolean.CSharp.Main;
+using Boolean.CSharp.Main.AccountTypes;
 using Boolean.CSharp.Main.Interfaces;
 using NUnit.Framework;
 using System;
@@ -22,7 +23,8 @@ namespace Boolean.CSharp.Test
             Core _core = new Core();
 
             List<IAccount> accountslist = new List<IAccount>();
-            _core.CreateUser("Max", "password", accountslist);
+            List<OverdraftRequest> overdraftrequests = new List<OverdraftRequest>();
+            _core.CreateUser("Max", "password", accountslist, overdraftrequests);
             var user = _core.UserList.First();
             var type = AccountType.Current;
             var branch = BankBranchType.Amsterdam;
@@ -43,7 +45,8 @@ namespace Boolean.CSharp.Test
             Core _core = new Core();
 
             List<IAccount> accountslist = new List<IAccount>();
-            _core.CreateUser("Max", "password", accountslist);
+            List<OverdraftRequest> overdraftrequests = new List<OverdraftRequest>();
+            _core.CreateUser("Max", "password", accountslist, overdraftrequests);
             var user = _core.UserList.First();
             var type = AccountType.Current;
             var branch = BankBranchType.Amsterdam;
@@ -61,7 +64,42 @@ namespace Boolean.CSharp.Test
             _core.WithdrawAmount(user, amount1, accountname);
 
             // Assert
-            Assert.IsTrue(_core.good);
+            Assert.AreEqual(1, _core.UserList.First().OverdraftRequests.Count());
+        }
+
+        [Test]
+        public void ApproveOverdraft()
+        {
+            // I want to approve or reject overdraft requests.
+
+            // Arrange
+            Core _core = new Core();
+
+            List<IAccount> accountslist = new List<IAccount>();
+            List<OverdraftRequest> overdraftrequests = new List<OverdraftRequest>();
+            _core.CreateUser("Max", "password", accountslist, overdraftrequests);
+            var user = _core.UserList.First();
+            var type = AccountType.Current;
+            var branch = BankBranchType.Amsterdam;
+
+            _core.CreateBankAccount(user, type, branch);
+
+            var accountname = _core.UserList.First().AccountsList.First();
+
+            int amount = 1000;
+            int amount1 = 2000;
+
+            _core.DepositAmount(user, amount, accountname);
+            _core.WithdrawAmount(user, amount1, accountname);
+
+            //manager can select id of overdraftrequest to approve
+            int id = 0;
+
+            // Act
+            _core.ApproveOverdraft(user, id);
+
+            // Assert
+            Assert.AreEqual(0, _core.UserList.First().AccountsList.First().Transactions.Last().Balance);
         }
     }
 }

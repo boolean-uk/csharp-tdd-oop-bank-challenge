@@ -1,4 +1,5 @@
 ﻿using Boolean.CSharp.Main;
+using Boolean.CSharp.Main.AccountTypes;
 using Boolean.CSharp.Main.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -16,13 +17,13 @@ namespace Boolean.CSharp.Main
         private List<IUser> _userList = new List<IUser>();
 
         #region CreateAccount()
-        public void CreateUser(string name, string password, List<IAccount> AccountsList)
+        public void CreateUser(string name, string password, List<IAccount> AccountsList, List<OverdraftRequest> OverdraftRequests)
         {
-            createUser(name, password, AccountsList);
+            createUser(name, password, AccountsList, OverdraftRequests);
         }
-        private void createUser(string name, string password, List<IAccount> AccountsList)
+        private void createUser(string name, string password, List<IAccount> AccountsList, List<OverdraftRequest> OverdraftRequests)
         {
-            _userList.Add(new Customer(name, password, AccountsList));
+            _userList.Add(new Customer(name, password, AccountsList, OverdraftRequests));
         }
         #endregion
 
@@ -61,12 +62,12 @@ namespace Boolean.CSharp.Main
                         {
                             if (a.Transactions.Count == 0)
                             {
-                                var balance =+ amount;
+                                int balance =+ amount;
                                 accountname.Transactions.Add(new Transaction(TransactionType.Credit, DateTime.Now, amount, balance));
                             }
                             else if (a.Transactions.Count != 0)
                             {
-                                var balance = accountname.Transactions.Last().Balance + amount;
+                                int balance = accountname.Transactions.Last().Balance + amount;
                                 accountname.Transactions.Add(new Transaction(TransactionType.Credit, DateTime.Now, amount, balance));
                             }
                         }
@@ -93,20 +94,22 @@ namespace Boolean.CSharp.Main
                         {
                             if (a.Transactions.Count == 0)
                             {
-                                var balance =- amount;
+                                int balance =- amount;
                                 accountname.Transactions.Add(new Transaction(TransactionType.Debit, DateTime.Now, amount, balance));
                             }
                             else if (a.Transactions.Count != 0)
                             {
                                 if ((accountname.Transactions.Last().Balance - amount) > 0)
                                 {
-                                    var balance = accountname.Transactions.Last().Balance - amount;
+                                    int balance = accountname.Transactions.Last().Balance - amount;
                                     accountname.Transactions.Add(new Transaction(TransactionType.Debit, DateTime.Now, amount, balance));
                                 } 
                                 else if ((accountname.Transactions.Last().Balance - amount) < 0)
                                 {
-                                    int overdraft = accountname.Transactions.Last().Balance - amount;
-                                    OverdraftRequest(user, accountname, overdraft);
+                                    int balance = accountname.Transactions.Last().Balance - amount;
+                                    int overdraft = amount - accountname.Transactions.Last().Balance;
+                                    var date = DateTime.Now;
+                                    OverdraftRequest(user, accountname, date, amount, overdraft, balance);
                                 }
                             }
                         }
@@ -149,16 +152,31 @@ namespace Boolean.CSharp.Main
         }
         #endregion
 
-        public bool good = false;
         #region OverdraftRequest()
-        public void OverdraftRequest(IUser user, IAccount accountname, int overdraft)
+        public void OverdraftRequest(IUser user, IAccount accountname, DateTime date, int amount, int overdraft, int balance)
         {
+            user.OverdraftRequests.Add(new OverdraftRequest(user, accountname, date, amount, overdraft, balance));
+        }
+        #endregion
+
+        #region ApproveOverdraft()
+        public void ApproveOverdraft(IUser user, int id)
+        {
+            var accountname = user.OverdraftRequests[id].Accountname;
+
             foreach (IUser x in UserList)
             {
                 if (x == user)
                 {
-                    Console.WriteLine($"{user} wants to request an overdraft of £{overdraft} on {accountname}.");
-                    good = true;
+                    foreach (IAccount a in user.AccountsList)
+                    {
+                        if (a == accountname)
+                        {
+                            int balance = user.OverdraftRequests[id].Balance + user.OverdraftRequests[id].Overdraft;
+                            accountname.Transactions.Add(new Transaction(TransactionType.Overdraft, DateTime.Now, user.OverdraftRequests[id].Overdraft, balance));
+                            WithdrawAmount(user, user.OverdraftRequests[id].Amount, user.OverdraftRequests[id].Accountname);
+                        }
+                    }
                 }
             }
         }

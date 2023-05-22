@@ -4,6 +4,7 @@ using System.Security.Principal;
 using System;
 using System.Xml.Linq;
 using Boolean.CSharp.Main.Interfaces;
+using Boolean.CSharp.Main.AccountTypes;
 
 namespace Boolean.CSharp.Test
 {
@@ -18,12 +19,11 @@ namespace Boolean.CSharp.Test
             // Arrange
             Core _core = new Core();
 
-            string name = "Max";
-            string password = "password";
             List<IAccount> accountslist = new List<IAccount>();
+            List<OverdraftRequest> overdraftrequests = new List<OverdraftRequest>();
 
             // Act
-            _core.CreateUser(name, password, accountslist);
+            _core.CreateUser("Max", "password", accountslist, overdraftrequests);
 
             // Assert
             Assert.AreEqual(_core.UserList.Count, 1);
@@ -38,7 +38,8 @@ namespace Boolean.CSharp.Test
             Core _core = new Core();
 
             List<IAccount> accountslist = new List<IAccount>();
-            _core.CreateUser("Max", "password", accountslist);
+            List<OverdraftRequest> overdraftrequests = new List<OverdraftRequest>();
+            _core.CreateUser("Max", "password", accountslist, overdraftrequests);
             var user = _core.UserList.First();
             var type = AccountType.Current;
             var branch = BankBranchType.Amsterdam;
@@ -59,7 +60,8 @@ namespace Boolean.CSharp.Test
             Core _core = new Core();
 
             List<IAccount> accountslist = new List<IAccount>();
-            _core.CreateUser("Max", "password", accountslist);
+            List<OverdraftRequest> overdraftrequests = new List<OverdraftRequest>();
+            _core.CreateUser("Max", "password", accountslist, overdraftrequests);
             var user = _core.UserList.First();
             var type = AccountType.Savings;
             var branch = BankBranchType.Amsterdam;
@@ -80,7 +82,8 @@ namespace Boolean.CSharp.Test
             Core _core = new Core();
 
             List<IAccount> accountslist = new List<IAccount>();
-            _core.CreateUser("Max", "password", accountslist);
+            List<OverdraftRequest> overdraftrequests = new List<OverdraftRequest>();
+            _core.CreateUser("Max", "password", accountslist, overdraftrequests);
             var user = _core.UserList.First();
             var type = AccountType.Current;
             var branch = BankBranchType.Amsterdam;
@@ -107,7 +110,8 @@ namespace Boolean.CSharp.Test
             Core _core = new Core();
 
             List<IAccount> accountslist = new List<IAccount>();
-            _core.CreateUser("Max", "password", accountslist);
+            List<OverdraftRequest> overdraftrequests = new List<OverdraftRequest>();
+            _core.CreateUser("Max", "password", accountslist, overdraftrequests);
             var user = _core.UserList.First();
             var type = AccountType.Current;
             var branch = BankBranchType.Amsterdam;
@@ -135,7 +139,8 @@ namespace Boolean.CSharp.Test
             Core _core = new Core();
 
             List<IAccount> accountslist = new List<IAccount>();
-            _core.CreateUser("Max", "password", accountslist);
+            List<OverdraftRequest> overdraftrequests = new List<OverdraftRequest>();
+            _core.CreateUser("Max", "password", accountslist, overdraftrequests);
             var user = _core.UserList.First();
             var type = AccountType.Current;
             var branch = BankBranchType.Amsterdam;
@@ -164,7 +169,8 @@ namespace Boolean.CSharp.Test
             Core _core = new Core();
 
             List<IAccount> accountslist = new List<IAccount>();
-            _core.CreateUser("Max", "password", accountslist);
+            List<OverdraftRequest> overdraftrequests = new List<OverdraftRequest>();
+            _core.CreateUser("Max", "password", accountslist, overdraftrequests);
             var user = _core.UserList.First();
             var type = AccountType.Current;
             var branch = BankBranchType.Amsterdam;

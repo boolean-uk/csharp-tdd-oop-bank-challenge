@@ -1,10 +1,12 @@
 ﻿using Boolean.CSharp.Main;
+using Boolean.CSharp.Main.AccountTypes;
 using Boolean.CSharp.Main.Interfaces;
 
 Core _core = new Core();
 
 List<IAccount> accountslist = new List<IAccount>();
-_core.CreateUser("Max", "password", accountslist);
+List<OverdraftRequest> overdraftrequests = new List<OverdraftRequest>();
+_core.CreateUser("Max", "password", accountslist, overdraftrequests);
 var user = _core.UserList.First();
 var type = AccountType.Current;
 var branch = BankBranchType.Amsterdam;

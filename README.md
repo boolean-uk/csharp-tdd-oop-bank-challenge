@@ -120,6 +120,9 @@ As a bank manager,
 So I can safeguard our funds,
 I want to approve or reject overdraft requests.
 ```
+| Classes         | Methods               | Scenario                              | Outputs                                |
+|-----------------|-----------------------|---------------------------------------|-------------------|
+| `Core`		  | `ApproveOverdraft()`  | Accept or decline OverdraftRequest()  | Withdraw complete |
 
 ```
 As a customer,
