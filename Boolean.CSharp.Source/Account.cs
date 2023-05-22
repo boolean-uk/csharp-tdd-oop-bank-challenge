@@ -30,8 +30,9 @@ namespace Boolean.CSharp.Source
             transaction.date = DateTime.Now;
             transaction.debit = deposit;
             //balance= balance + deposit;
-            //transaction.newBalance = balance;
+            transaction.newBalance = GetBalance() + deposit;
             transactions.Add (transaction);
+            
             //return balance;
         }
 
@@ -42,6 +43,7 @@ namespace Boolean.CSharp.Source
             transaction.credit = withdraw;
             //balance = balance - withdraw;
             //transaction.newBalance = balance;
+            transaction.newBalance = GetBalance() - withdraw;
             transactions.Add(transaction);
             //return balance;
         }
@@ -53,8 +55,8 @@ namespace Boolean.CSharp.Source
             {
                     Console.WriteLine("{0,10} || {1,10} || {2,10} || {3,10} ",
                             transaction.date.ToShortDateString(),
-                            transaction.credit,
-                            transaction.debit,
+                            transaction.credit == 0 ? "":transaction.credit,
+                            transaction.debit == 0 ? "" : transaction.debit,
                             transaction.newBalance);
               
             }
