@@ -85,12 +85,39 @@ namespace Boolean.CSharp.Test
             Assert.AreEqual(savingsAccount.ApplyForOverdraft(request), "Your request has been added to the list");
             bank.CheckRequest(request);
 
-            Transaction transcaction1 = new Transaction(TransactionType.Debit, 100, DateTime.Now);
+            Transaction transcaction = new Transaction(TransactionType.Debit, 100, DateTime.Now);
 
-            savingsAccount.WithdrawFunds(transcaction1);
+            savingsAccount.WithdrawFunds(transcaction);
 
             Assert.AreEqual(savingsAccount.CalculateBalance(), -100);
 
+        }
+
+        //[Test]
+        //public void SendSmsTest()
+        //{
+        //    IUser customer = new Customer("Stavros", "1212121212");
+        //    IUser manager = new BankManager("Nigel", "1231231231");
+        //    Bank bank = new Bank(manager);
+        //    BankAccount savingsAccount = new BankAccount(customer);
+        //    bank.CreateAccount(savingsAccount, AccountType.Savings, Branches.Athens);
+        //    //Transaction transcaction1 = new Transaction(TransactionType.Credit, 1000, DateTime.Now);
+        //    //Transaction transcaction2 = new Transaction(TransactionType.Credit, 2000, DateTime.Now);
+        //    //Transaction transcaction3 = new Transaction(TransactionType.Debit, 500, DateTime.Now);
+        //    //savingsAccount.DepositFunds(transcaction1);
+        //    //savingsAccount.DepositFunds(transcaction2);
+        //    //savingsAccount.WithdrawFunds(transcaction3);
+        //    ISmsSender provider = new TwilioSMSProvider();
+
+        //    Assert.IsTrue(savingsAccount.SendSms(provider));
+        //}
+
+        [Test]
+        public void SMS()
+        {
+            ISmsSender provider = new TwilioSMSProvider();
+            provider.SendSMS("Hello");
+            Assert.Pass();
         }
     }
 }

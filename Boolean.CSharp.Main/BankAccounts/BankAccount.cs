@@ -121,6 +121,24 @@ namespace Boolean.CSharp.Main.BankAccounts
             return "There isn't any request";
         }
 
+        public void SendSms(ISmsSender provider)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("Date      || Credit || Debit || Balance\n");
+            
+            foreach(var transaction in listOfTransactions.OrderByDescending(x => x.Date))
+            {
+                string date = transaction.Date.ToShortDateString();
+                decimal creditAmount = transaction.Type == TransactionType.Credit ? transaction.Amount : 0;
+                decimal debitAmount = transaction.Type == TransactionType.Debit ? transaction.Amount : 0;
+                decimal balance = transaction.NewBalance;
+                sb.Append(date + "      || " + creditAmount + " || " + debitAmount + " || " + balance);
+            }
+
+            provider.SendSMS(sb.ToString());
+            //provider.SendSMS("Have a nice day");
+        }
+
 
         public IUser User { get => this.user; }
         public decimal Balance { get => this.balance; set => this.balance = value; }
