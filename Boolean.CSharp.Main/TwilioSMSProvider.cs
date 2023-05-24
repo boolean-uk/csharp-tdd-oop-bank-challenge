@@ -24,12 +24,12 @@ namespace Boolean.CSharp.Main
             //string accountSid = ConfigurationManager.AppSettings["TWILIO_ACCOUNT_SID"];
             //string authToken = ConfigurationManager.AppSettings["TWILIO_AUTH_TOKEN"];
 
-            TwilioClient.Init("ACf6fcb85363060ac08fbc998caff2a260", "425cfb7c5383a0d228c927f7385edf43");
+            TwilioClient.Init("", "");
 
             var message = MessageResource.Create(
                 body: smsMessage,
-                from: new Twilio.Types.PhoneNumber("+12545406970"),
-                to: new Twilio.Types.PhoneNumber("+306972118679")
+                from: new Twilio.Types.PhoneNumber(""),
+                to: new Twilio.Types.PhoneNumber("")
             );
 
             Console.WriteLine(message.Sid);
