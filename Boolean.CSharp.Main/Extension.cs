@@ -9,10 +9,10 @@ namespace Boolean.CSharp.Main
 {
     public class Extension
     {
-        private Core _core;
+        private Bank _core;
         public Extension()
         {
-            Core? core = new Core();
+            Bank? core = new Bank();
         }                      
     }
 }
