@@ -7,6 +7,7 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class AccountTests
     {
+        // I want to create a current account
         [Test]
         public void CreateCurrentAccountTest()
         {
