@@ -33,7 +33,7 @@ namespace Boolean.CSharp.Main
 
         public string ToString()
         {
-            return "";
+            return $"{_date.ToString("dd/MM/yyyy")} || {(_type == TransactionType.Credit ? _amount : ""), 6} || {(_type == TransactionType.Debit ? _amount : ""), 6} || {_newBalance}";
         }
 
     }
