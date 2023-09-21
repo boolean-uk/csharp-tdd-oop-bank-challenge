@@ -6,19 +6,12 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class CoreTests
     {
-        private Core _core;
-
-        public CoreTests()
-        {
-            _core = new Core();
-
-        }
-
         [Test]
-        public void TestQuestion1()
+        public void DoingADepositShouldIncreaseTheBalance()
         {
-
+            var account = new Account();
+            account.Deposit(100, DateTime.Now);
+            Assert.AreEqual(100, account.Balance);
         }
-
     }
 }

@@ -11,10 +11,10 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class ExtensionTests
     {
-        private Extension _extension;
+        private CurrentAccount _extension;
         public ExtensionTests()
         {
-            _extension = new Extension();
+            _extension = new CurrentAccount();
         }
         [Test]
         private void TestQuestion1()
