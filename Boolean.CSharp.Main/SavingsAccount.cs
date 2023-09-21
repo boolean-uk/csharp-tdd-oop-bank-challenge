@@ -1,6 +1,6 @@
 ﻿namespace Boolean.CSharp.Main
 {
-    public class SavingsAccount
+    public class SavingsAccount : Account
     {
     }
 }

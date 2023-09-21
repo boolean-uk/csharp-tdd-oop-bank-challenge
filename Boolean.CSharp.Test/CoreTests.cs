@@ -41,8 +41,15 @@ namespace Boolean.CSharp.Test
         [Test]
         public void DoesCurrentAccountInheritFromAccAndInitializeItCorrectly()
         {
-            var currentAccount = new Account();
+            var currentAccount = new CurrentAccount();
             Assert.AreEqual(0, currentAccount.Balance);
+        }
+
+        [Test]
+        public void DoesSAvingAccountInheritFromAccAndInitializeItCorrectly()
+        {
+            var savingsAccount = new SavingsAccount();
+            Assert.AreEqual(0, savingsAccount.Balance);
         }
     }
 }
