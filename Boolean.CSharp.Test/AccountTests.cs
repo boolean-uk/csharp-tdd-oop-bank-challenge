@@ -49,5 +49,34 @@ namespace Boolean.CSharp.Test
             Assert.AreEqual(amount, savings.GetBalance());
         }
 
+        // User Story: I want to [...] withdraw funds
+        [Test]
+        public void WithdrawFundsFromCurrentAccountTest()
+        {
+            decimal depositAmount = 2000.00m;
+            decimal withdrawAmount = 500.00m;
+            decimal expected = depositAmount - withdrawAmount;
+            CurrentAccount current = new CurrentAccount(1);
+
+            current.Deposit(depositAmount);
+            current.Withdraw(withdrawAmount);
+
+            Assert.AreEqual(expected, current.GetBalance());
+        }
+
+        // User Story: I want to [...] withdraw funds
+        [Test]
+        public void WithdrawFundsFromSavingsAccountTest()
+        {
+            decimal depositAmount = 1000.00m;
+            decimal withdrawAmount = 50.00m;
+            decimal expected = depositAmount - withdrawAmount;
+            SavingsAccount savings = new SavingsAccount(1);
+
+            savings.Deposit(depositAmount);
+            savings.Withdraw(withdrawAmount);
+
+            Assert.AreEqual(expected, savings.GetBalance());
+        }
     }
 }

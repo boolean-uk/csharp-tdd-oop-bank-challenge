@@ -45,6 +45,11 @@ namespace Boolean.CSharp.Main
             _transactions.Insert(0, new Transaction(DateTime.Now, TransactionType.Credit, amount, GetBalance()));
         }
 
+        public void Withdraw(decimal amount)
+        {
+            
+        }
+
         public string Number { get => _number; }
     }
 }
