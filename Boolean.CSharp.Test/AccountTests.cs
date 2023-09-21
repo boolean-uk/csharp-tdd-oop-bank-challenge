@@ -20,11 +20,12 @@ namespace Boolean.CSharp.Test
         [Test]
         public void CreateSavingsAccountTest()
         {
-            SavingsAccount current = new SavingsAccount(1);
+            SavingsAccount savings = new SavingsAccount(1);
 
-            Assert.AreEqual(8, current.Number.Length);
+            Assert.AreEqual(8, savings.Number.Length);
         }
 
+        // User Story: I want to deposit [...] funds
         [Test]
         public void DepositFundsToCurrentAccountTest()
         {
@@ -34,6 +35,18 @@ namespace Boolean.CSharp.Test
             current.Deposit(amount);
 
             Assert.AreEqual(amount, current.GetBalance());
+        }
+
+        // User Story: I want to deposit [...] funds
+        [Test]
+        public void DepositFundsToSavingsAccountTest()
+        {
+            decimal amount = 1000.00m;
+            SavingsAccount savings = new SavingsAccount(1);
+
+            savings.Deposit(amount);
+
+            Assert.AreEqual(amount, savings.GetBalance());
         }
 
     }

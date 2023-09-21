@@ -35,6 +35,8 @@ namespace Boolean.CSharp.Main
         {
             if (_transactions.Count == 0)
                 return 0.0m;
+            
+            // NOTE: keep _transactions list sorted (most frequent transaction first), so that the balance is always accessible by retrieving the NewBalance from the first element
             return _transactions[0].NewBalance;
         }
 
