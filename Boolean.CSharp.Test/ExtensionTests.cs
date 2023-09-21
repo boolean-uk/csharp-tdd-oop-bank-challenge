@@ -1,30 +1,9 @@
-﻿using Boolean.CSharp.Main;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using NUnit.Framework;
 
 namespace Boolean.CSharp.Test
 {
     [TestFixture]
     public class ExtensionTests
     {
-        private CurrentAccount _extension;
-        public ExtensionTests()
-        {
-            _extension = new CurrentAccount();
-        }
-        [Test]
-        private void TestQuestion1()
-        {
-
-        }
-        [Test]
-        private void TestQuestion2()
-        {
-
-        }
     }
 }
