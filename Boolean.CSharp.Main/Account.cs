@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Boolean.CSharp.Main.Enums;
 
 namespace Boolean.CSharp.Main
 {
@@ -34,12 +35,12 @@ namespace Boolean.CSharp.Main
         {
             if (_transactions.Count == 0)
                 return 0.0m;
-            return 0.0m;    // TODO: handle case where there are transactions
+            return _transactions[0].NewBalance;
         }
 
         public void Deposit(decimal amount)
         {
-            return;
+            _transactions.Insert(0, new Transaction(DateTime.Now, TransactionType.Credit, amount, GetBalance()));
         }
 
         public string Number { get => _number; }

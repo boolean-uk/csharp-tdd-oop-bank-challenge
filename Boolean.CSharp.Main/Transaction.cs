@@ -9,7 +9,7 @@ namespace Boolean.CSharp.Main
     public class Transaction
     {
         private static int id = 0;
-        
+
         private int _id;
         private DateTime _date;
         TransactionType _type;
@@ -37,5 +37,6 @@ namespace Boolean.CSharp.Main
             return $"{_date.ToString("dd/MM/yyyy")} || {(_type == TransactionType.Credit ? _amount : ""), 6} || {(_type == TransactionType.Debit ? _amount : ""), 6} || {_newBalance}";
         }
 
+        public decimal NewBalance { get => _newBalance; }
     }
 }
