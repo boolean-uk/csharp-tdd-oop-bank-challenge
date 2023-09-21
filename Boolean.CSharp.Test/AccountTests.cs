@@ -25,5 +25,16 @@ namespace Boolean.CSharp.Test
             Assert.AreEqual(8, current.Number.Length);
         }
 
+        [Test]
+        public void DepositFundsToCurrentAccountTest()
+        {
+            decimal amount = 2000.00m;
+            CurrentAccount current = new CurrentAccount(1);
+
+            current.Deposit(amount);
+
+            Assert.AreEqual(amount, current.GetBalance());
+        }
+
     }
 }

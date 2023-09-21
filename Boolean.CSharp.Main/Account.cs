@@ -30,6 +30,18 @@ namespace Boolean.CSharp.Main
             return myRandomNo.ToString("00000000");
         }
 
+        public decimal GetBalance()
+        {
+            if (_transactions.Count == 0)
+                return 0.0m;
+            return 0.0m;    // TODO: handle case where there are transactions
+        }
+
+        public void Deposit(decimal amount)
+        {
+            return;
+        }
+
         public string Number { get => _number; }
     }
 }
