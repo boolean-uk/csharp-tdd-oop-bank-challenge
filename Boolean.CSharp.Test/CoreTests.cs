@@ -32,10 +32,10 @@ namespace Boolean.CSharp.Test
             account.Withdraw(999, new DateTime(1992, 5, 7));
             var statement = account.PrintStatement();
             var expectedStatement =
-                "date       || credit  || debit  || balance\n" +
-                "07/05/1992 ||         || 999.00 || 2001.00\n" +
-                "06/05/1992 || 2000.00 ||        || 3000.00\n" +
-                "05/05/1992 || 1000.00 ||        || 1000.00";
+    "date       || credit  || debit  || balance" + Environment.NewLine +
+    "07/05/1992 ||         || 999.00 || 2001.00" + Environment.NewLine +
+    "06/05/1992 || 2000.00 ||        || 3000.00" + Environment.NewLine +
+    "05/05/1992 || 1000.00 ||        || 1000.00";
             Assert.AreEqual(expectedStatement, statement);
         }
     }
