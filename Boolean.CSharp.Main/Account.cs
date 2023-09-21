@@ -50,6 +50,11 @@ namespace Boolean.CSharp.Main
             _transactions.Insert(0, new Transaction(DateTime.Now, TransactionType.Debit, amount, GetBalance()));
         }
 
+        public string GetBankStatement()
+        {
+            return "";
+        }
+
         public string Number { get => _number; }
     }
 }

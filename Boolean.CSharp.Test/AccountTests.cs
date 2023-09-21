@@ -78,5 +78,20 @@ namespace Boolean.CSharp.Test
 
             Assert.AreEqual(expected, savings.GetBalance());
         }
+
+        // User Story: I want to generate bank statements with transaction dates, amounts, and balance at the time of transaction
+        [Test]
+        public void BankStatementOfCurrentAccountTest()
+        {
+            string date = DateTime.Now.ToString("dd/MM/yyyy");
+            string expected = $"date       || credit  || debit  || balance\n{date} ||         || 500.00 || 2500.00\n{date} || 2000.00 ||        || 3000.00\n{date} || 1000.00 ||        || 1000.00";
+            CurrentAccount current = new CurrentAccount(1);
+
+            current.Deposit(1000.00m);
+            current.Deposit(2000.00m);
+            current.Withdraw(500.00m);
+
+            Assert.AreEqual(expected, current.GetBankStatement());
+        }
     }
 }
