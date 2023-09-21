@@ -14,7 +14,7 @@ namespace Boolean.CSharp.Test
             decimal amount = 2000.00m;
             string expected = $"{date.ToString("dd/MM/yyyy")} || {amount} ||        || {amount}";
 
-            Transaction t = new Transaction(1, date, TransactionType.Credit, amount, 0m);
+            Transaction t = new Transaction(date, TransactionType.Credit, amount, 0m);
 
             Assert.AreEqual(expected, t.ToString());
         }
@@ -27,7 +27,7 @@ namespace Boolean.CSharp.Test
             decimal amount = 2000.00m;
             string expected = $"{date.ToString("dd/MM/yyyy")} ||        || {amount} || {prevBalance - amount}";
 
-            Transaction t = new Transaction(1, date, TransactionType.Debit, amount, prevBalance);
+            Transaction t = new Transaction(date, TransactionType.Debit, amount, prevBalance);
 
             Assert.AreEqual(expected, t.ToString());
         }

@@ -8,15 +8,17 @@ namespace Boolean.CSharp.Main
 {
     public class Transaction
     {
+        private static int id = 0;
+        
         private int _id;
         private DateTime _date;
         TransactionType _type;
         private decimal _amount;
         private decimal _newBalance;
 
-        public Transaction(int id, DateTime date, TransactionType type, decimal amount, decimal prevBalance)
+        public Transaction(DateTime date, TransactionType type, decimal amount, decimal prevBalance)
         {
-            _id = id;
+            _id = ++id;
             _date = date;
             _type = type;
             _amount = amount;
@@ -28,7 +30,6 @@ namespace Boolean.CSharp.Main
             {
                 _newBalance = prevBalance - amount;
             }
-            
         }
 
         public string ToString()
