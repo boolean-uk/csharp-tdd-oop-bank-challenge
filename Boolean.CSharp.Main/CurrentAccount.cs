@@ -1,11 +1,8 @@
 ﻿namespace Boolean.CSharp.Main
 {
-    public class CurrentAccount
+    public class CurrentAccount : Account
     {
-        private Account _core;
-        public CurrentAccount()
-        {
-            Account? core = new Account();
-        }
+
     }
+
 }

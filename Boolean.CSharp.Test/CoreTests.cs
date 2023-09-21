@@ -38,5 +38,11 @@ namespace Boolean.CSharp.Test
     "05/05/1992 || 1000.00 ||        || 1000.00";
             Assert.AreEqual(expectedStatement, statement);
         }
+        [Test]
+        public void DoesCurrentAccountInheritFromAccAndInitializeItCorrectly()
+        {
+            var currentAccount = new Account();
+            Assert.AreEqual(0, currentAccount.Balance);
+        }
     }
 }
