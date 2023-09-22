@@ -108,7 +108,8 @@ namespace Boolean.CSharp.Main
         private bool HandleOverdraftRequest(BankManager manager, int overdraftId, OverdraftStatus status)
         {
             Overdraft overdraft = _overdraftRequests.Find(r => r.Id == overdraftId);
-            // TODO: if there's no overdraft with such id, return false
+            if (overdraft is null)
+                return false;
             overdraft.Status = status;
             return true;
         }
