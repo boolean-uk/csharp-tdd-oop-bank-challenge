@@ -6,11 +6,13 @@ IAccount             |                                                          
                      |                                                           | Withdraw(double, DateTime)                  | 
                      |                                                           | PrintStatement()                            | String 
                      |                                                           | GetBalance()                                | Double 
+                     |                                                           | Branch()                                    | The branches
 ------------------------------------------------------------------------------------------------------------------------------------------------------
-Account              |                                                           | Deposit(double, DateTime)                   | 
+Account              | branch with Branches                                      | Deposit(double, DateTime)                   | 
 (Implements IAccount)| transactionList: List Transaction                         | Withdraw(double, DateTime)                  | 
                      |                                                           | PrintStatement()                            | String
                      |                                                           | GetBalance()                                | Double
+                     |                                                           | Branch()                                    | The branches
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 CurrentAccount       | Inherits attributes and methods from Account              |  All methods are inherited                  | 
 (Implements IAccount)|                                                           |                                             | 
