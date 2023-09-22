@@ -12,7 +12,7 @@ IAccount             |                                                          
                      |                                                           | RejectOverdraft()                           |
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 User                 | username string                                           | Create()                                    |
-                     | password string                                           | Login()                                     | Boolean
+                     | password string hashed with BCrypt                        | Login()                                     | Boolean
                      | street string                                             |                                             |
                      | postcode string                                           |                                             |
                      | email string                                              |                                             |

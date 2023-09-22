@@ -21,7 +21,7 @@ namespace Boolean.CSharp.Test
             Console.SetIn(new StringReader(inputForRegister));
             User registeredUser = userManager.Register();
             Assert.AreEqual("Harry Potter", registeredUser.Username);
-            Assert.AreEqual("LordVoldemort23!", registeredUser.Password);
+            Assert.IsTrue(BCrypt.Net.BCrypt.Verify("LordVoldemort23!", registeredUser.Password));
             Assert.AreEqual("SneepyWeepyStreet", registeredUser.Street);
             Assert.AreEqual("11111", registeredUser.Postcode);
             Assert.AreEqual("harry@potter.hogwarts", registeredUser.Email);

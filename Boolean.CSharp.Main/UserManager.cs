@@ -12,6 +12,11 @@
             Console.WriteLine("Enter password:");
             string password = Console.ReadLine();
 
+            if (string.IsNullOrEmpty(password))
+            {
+                throw new ArgumentException("Password cannot be empty.");
+            }
+
             Console.WriteLine("Enter street:");
             string street = Console.ReadLine();
 
@@ -36,9 +41,9 @@
             Console.WriteLine("Enter password:");
             string password = Console.ReadLine();
 
-            var user = users.FirstOrDefault(u => u.Username == username && u.Password == password);
+            var user = users.FirstOrDefault(u => u.Username == username);
 
-            if (user != null)
+            if (user != null && BCrypt.Net.BCrypt.Verify(password, user.Password)) //for verifying the provided password with the stored hashed password
             {
                 Console.WriteLine($"Welcome back {username}!");
                 return user;

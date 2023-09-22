@@ -16,7 +16,7 @@ namespace Boolean.CSharp.Test
             string expectedEmail = "harry@potter.hogwarts";
             var user = new User(expectedUsername, expectedPassword, expectedStreet, expectedPostcode, expectedEmail);
             Assert.AreEqual(expectedUsername, user.Username);
-            Assert.AreEqual(expectedPassword, user.Password);
+            Assert.IsTrue(BCrypt.Net.BCrypt.Verify("LordVoldemort23!", user.Password));
             Assert.AreEqual(expectedStreet, user.Street);
             Assert.AreEqual(expectedPostcode, user.Postcode);
             Assert.AreEqual(expectedEmail, user.Email);
