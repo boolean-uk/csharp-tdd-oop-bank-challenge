@@ -17,6 +17,6 @@ I want to deposit and withdraw funds.
 
 Classes: BankAccount												|	BankTransaction
 Enums:	Account { Current, Savings }								|	Transaction { Withdraw, Deposit } 
-																	|	transaction { type, amount } ??
+																	|	
 Functions:  Create_Account(string id, int balance, accounttype)		|	List<Transaction> TransactionHistory
-			Write_Statement(date, cred_amount, deb_amount, balance)		
+			Write_Statement(date, cred_amount, deb_amount, balance)		Create_Transaction(type, amount , account_id)	
