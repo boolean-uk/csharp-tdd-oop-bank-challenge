@@ -119,6 +119,11 @@ namespace Boolean.CSharp.Main
             return HandleOverdraftRequest(manager, overdraftId, OverdraftStatus.Approved);
         }
 
+        public bool RejectOverdraftRequest(BankManager manager, int overdraftId)
+        {
+            return false;
+        }
+
         public string Number { get => _number; }
         public BranchLocation Branch { get => _branch; }
     }

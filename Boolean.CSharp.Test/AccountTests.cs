@@ -185,7 +185,7 @@ namespace Boolean.CSharp.Test
 
         // User Story: I want to approve [...] overdraft requests
         [Test]
-        public void DontApproveOverdraftRequestOnCurrentAccountTest()
+        public void FailToApproveOverdraftRequestOnCurrentAccountTest()
         {
             decimal amount = 200.00m;
             CurrentAccount current = new CurrentAccount(customer, BranchLocation.Athens);
@@ -197,7 +197,7 @@ namespace Boolean.CSharp.Test
 
         // User Story: I want to approve [...] overdraft requests
         [Test]
-        public void DontApproveOverdraftRequestOnSavingsAccountTest()
+        public void FailToApproveOverdraftRequestOnSavingsAccountTest()
         {
             decimal amount = 200.00m;
             SavingsAccount savings = new SavingsAccount(customer, BranchLocation.Athens);
@@ -208,5 +208,53 @@ namespace Boolean.CSharp.Test
         }
 
         // User Story: I want to [...] reject overdraft requests
+        [Test]
+        public void RejectOverdraftRequestOnCurrentAccountTest()
+        {
+            decimal amount = 2000.00m;
+            CurrentAccount current = new CurrentAccount(customer, BranchLocation.Athens);
+            int overdraftId = current.RequestOverdraft(customer, amount);
+
+            bool result = current.RejectOverdraftRequest(manager, overdraftId);
+
+            Assert.IsTrue(result);
+        }
+
+        // User Story: I want to [...] reject overdraft requests
+        [Test]
+        public void RejectOverdraftRequestOnSavingsAccountTest()
+        {
+            decimal amount = 2000.00m;
+            SavingsAccount savings = new SavingsAccount(customer, BranchLocation.Athens);
+            int overdraftId = savings.RequestOverdraft(customer, amount);
+
+            bool result = savings.RejectOverdraftRequest(manager, overdraftId);
+
+            Assert.IsTrue(result);
+        }
+
+        // User Story: I want to [...] reject overdraft requests
+        [Test]
+        public void FailToRejectOverdraftRequestOnCurrentAccountTest()
+        {
+            decimal amount = 2000.00m;
+            CurrentAccount current = new CurrentAccount(customer, BranchLocation.Athens);
+
+            bool result = current.RejectOverdraftRequest(manager, 100);
+
+            Assert.IsFalse(result);
+        }
+
+        // User Story: I want to [...] reject overdraft requests
+        [Test]
+        public void FailToRejectOverdraftRequestOnSavingsAccountTest()
+        {
+            decimal amount = 2000.00m;
+            SavingsAccount savings = new SavingsAccount(customer, BranchLocation.Athens);
+
+            bool result = savings.RejectOverdraftRequest(manager, 100);
+
+            Assert.IsFalse(result);
+        }
     }
 }
