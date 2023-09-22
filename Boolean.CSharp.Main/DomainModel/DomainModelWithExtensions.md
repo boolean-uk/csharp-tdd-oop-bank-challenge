@@ -2,26 +2,25 @@
 
 Class                | Attribute                                                 | Method                                      | Output
 ------------------------------------------------------------------------------------------------------------------------------------------------------
-IAccount             |                                                           | deposit(double, DateTime)                   |
-                     |                                                           | withdraw(double, DateTime)                  | 
-                     |                                                           | printStatement()                            | String 
-                     |                                                           | getBalance()                                | Double 
+IAccount             |                                                           | Deposit(double, DateTime)                   |
+                     |                                                           | Withdraw(double, DateTime)                  | 
+                     |                                                           | PrintStatement()                            | String 
+                     |                                                           | GetBalance()                                | Double 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
-Account              |                                                           | deposit(double, DateTime)                   | 
-(Implements IAccount)| transactionList: List Transaction                         | withdraw(double, DateTime)                  | 
-                     |                                                           | printStatement()                            | String
+Account              |                                                           | Deposit(double, DateTime)                   | 
+(Implements IAccount)| transactionList: List Transaction                         | Withdraw(double, DateTime)                  | 
+                     |                                                           | PrintStatement()                            | String
                      |                                                           | GetBalance()                                | Double
 ------------------------------------------------------------------------------------------------------------------------------------------------------
-CurrentAccount       | Inherits from Account                                     |  All methods are inherited                  | 
+CurrentAccount       | Inherits attributes and methods from Account              |  All methods are inherited                  | 
 (Implements IAccount)|                                                           |                                             | 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
-SavingsAccount       | Inherits from Account                                     |  All methods are inherited                  | 
+SavingsAccount       | Inherits attributes and methods from Account              |  All methods are inherited                  | 
 (Implements IAccount)|                                                           |                                             | 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 Transaction          | date: DateTime                                            |                                             | 
                      | credit: double                                            |                                             | 
                      | debit: double                                             |                                             | 
-                     | balanceAtTransactionTime: double                          |                                             | 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
 The extension stories
