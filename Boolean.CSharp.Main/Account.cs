@@ -105,15 +105,18 @@ namespace Boolean.CSharp.Main
             return overdraft.Id;
         }
 
-        public bool ApproveOverdraftRequest(BankManager manager, int overdraftId)
+        private bool HandleOverdraftRequest(BankManager manager, int overdraftId, OverdraftStatus status)
         {
-            return false;
+            Overdraft overdraft = _overdraftRequests.Find(r => r.Id == overdraftId);
+            // TODO: if there's no overdraft with such id, return false
+            overdraft.Status = status;
+            return true;
         }
 
-        // public void HandleOverdraft(BankManager manager)
-        // {
-        //     // TODO: randomly choose to approve / reject request
-        // }
+        public bool ApproveOverdraftRequest(BankManager manager, int overdraftId)
+        {
+            return HandleOverdraftRequest(manager, overdraftId, OverdraftStatus.Approved);
+        }
 
         public string Number { get => _number; }
         public BranchLocation Branch { get => _branch; }
