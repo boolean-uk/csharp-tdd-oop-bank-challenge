@@ -8,7 +8,7 @@ namespace Boolean.CSharp.Main
     public class BankManager : User
     {
 
-        public BankManager(int id, string name, string address, string phoneNumber) : base(id, name, address, phoneNumber)
+        public BankManager(string name, string address, string phoneNumber) : base(id, name, address, phoneNumber)
         {
             
         }
