@@ -136,12 +136,23 @@ namespace Boolean.CSharp.Test
         public void RequestOverdraftOnCurrentAccountTest()
         {
             decimal amount = 2000.00m;
-            
             CurrentAccount current = new CurrentAccount(customer, BranchLocation.Athens);
 
-            current.Deposit(amount);
+            bool result = current.RequestOverdraft(customer, amount);
 
-            Assert.AreEqual(amount, current.GetBalance());
+            Assert.IsTrue(result);
+        }
+
+        // User Story: I want to be able to request an overdraft on my account
+        [Test]
+        public void RequestOverdraftOnSavingsAccountTest()
+        {
+            decimal amount = 2000.00m;
+            SavingsAccount savings = new SavingsAccount(customer, BranchLocation.Athens);
+
+            bool result = savings.RequestOverdraft(customer, amount);
+
+            Assert.IsTrue(result);
         }
 
     }
