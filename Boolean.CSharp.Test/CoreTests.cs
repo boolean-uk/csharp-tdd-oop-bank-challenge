@@ -36,7 +36,7 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        public void WriteStatement()
+        public void WriteStatementAndCheckBalance()
         {
             newcurrentaccount.Create_Account("GR2342456708", 500, "Current");
 
@@ -61,7 +61,7 @@ namespace Boolean.CSharp.Test
 
             menu.TransactionHistory.Add(thirdtransaction);
 
-            Assert.Pass();
+            Assert.AreEqual(newcurrentaccount.balance, 2200); // the correct balance after all the transactions
         }
     }
 }
