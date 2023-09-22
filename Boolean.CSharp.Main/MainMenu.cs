@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
+using System.Transactions;
 
 namespace Boolean.CSharp.Main
 {
-    public class BankAccount
+    public class MainMenu
     {
-        public void Create_Account(string id, int balance,string accounttype)
-        {
-            throw new NotImplementedException();
-        }
+        List<Transaction> TransactionHistory = new List<Transaction>();
+
+
 
         public void Write_Statement(object date, int cred_amount, int deb_amount, int balance)
         {

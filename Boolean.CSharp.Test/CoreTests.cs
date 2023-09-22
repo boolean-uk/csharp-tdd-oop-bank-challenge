@@ -7,7 +7,8 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class CoreTests
     {
-        BankAccount newaccount = new BankAccount();
+        MainMenu menu = new MainMenu();
+        CurrentAccount newaccount = new CurrentAccount();
         BankTransaction newtransaction = new BankTransaction();
 
         [Test]
@@ -22,7 +23,7 @@ namespace Boolean.CSharp.Test
         public void WriteStatement()
         {
             newaccount.Create_Account("GR2342456708", 500, "current");
-            newaccount.Write_Statement(date, 500, 0, 500);
+            menu.Write_Statement(date, 500, 0, 500);
 
             Assert.Pass();
         }
