@@ -6,10 +6,15 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class CoreTests
     {
+        private User GetSampleUser()
+        {
+            return new User("Harry Potter", "LordVoldemort23", "SneepyWeepyStreet", "111111", "harry@potter.hogwarts");
+        }
+
         [Test]
         public void DoingADepositShouldIncreaseTheBalance()
         {
-            var account = new Account(AllEnums.Branches.Antwerpen);
+            var account = new Account(AllEnums.Branches.Antwerpen, GetSampleUser());
             account.Deposit(100, DateTime.Now);
             Assert.AreEqual(100, account.GetBalance());
         }
@@ -17,7 +22,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void DoingWithdrawShouldDecreaseTheBalance()
         {
-            var account = new Account(AllEnums.Branches.Antwerpen);
+            var account = new Account(AllEnums.Branches.Antwerpen, GetSampleUser());
             account.Deposit(200, DateTime.Now);
             account.Withdraw(100, DateTime.Now);
             Assert.AreEqual(100, account.GetBalance());
@@ -26,7 +31,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void PrintStateMentShouldReturnFormattedStateMent()
         {
-            var account = new Account(AllEnums.Branches.Antwerpen);
+            var account = new Account(AllEnums.Branches.Antwerpen, GetSampleUser());
             account.Deposit(1000, new DateTime(1992, 5, 5));
             account.Deposit(2000, new DateTime(1992, 5, 6));
             account.Withdraw(999, new DateTime(1992, 5, 7));
@@ -41,14 +46,14 @@ namespace Boolean.CSharp.Test
         [Test]
         public void DoesCurrentAccountInheritFromAccAndInitializeItCorrectly()
         {
-            var currentAccount = new CurrentAccount(AllEnums.Branches.Antwerpen);
+            var currentAccount = new CurrentAccount(AllEnums.Branches.Antwerpen, GetSampleUser());
             Assert.AreEqual(0, currentAccount.GetBalance());
         }
 
         [Test]
         public void DoesSAvingAccountInheritFromAccAndInitializeItCorrectly()
         {
-            var savingsAccount = new SavingsAccount(AllEnums.Branches.Antwerpen);
+            var savingsAccount = new SavingsAccount(AllEnums.Branches.Antwerpen, GetSampleUser());
             Assert.AreEqual(0, savingsAccount.GetBalance());
         }
     }

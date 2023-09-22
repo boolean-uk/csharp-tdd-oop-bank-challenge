@@ -11,11 +11,21 @@ IAccount             |                                                          
                      |                                                           | ApproveOverdraft()                          |
                      |                                                           | RejectOverdraft()                           |
 ------------------------------------------------------------------------------------------------------------------------------------------------------
+User                 | username string                                           | Create()                                    |
+                     | password string                                           | Login()                                     | Boolean
+                     | street string                                             |                                             |
+                     | postcode string                                           |                                             |
+                     | email string                                              |                                             |
+------------------------------------------------------------------------------------------------------------------------------------------------------
+UserManager          | users List User                                           | Register()                                  | User
+                     |                                                           | Login()                                     | User Null
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
 Account              | branch with Branches                                      | Deposit(double, DateTime)                   | 
-(Implements IAccount)| transactionList: List Transaction                         | Withdraw(double, DateTime)                  | 
+(Implements IAccount)| transactionList List Transaction                          | Withdraw(double, DateTime)                  | 
                      | overdraftLimit with double                                | PrintStatement()                            | String
                      | overdraftStatus with OverdraftStatus                      | GetBalance()                                | Double
-                     |                                                           | Branch()                                    | The branches
+                     | accountHolder with User                                   | Branch()                                    | The branches
                      |                                                           | RequestOverdraft()                          |
                      |                                                           | ApproveOverdraft ()                         |
                      |                                                           | RejectOverdraft ()                          |

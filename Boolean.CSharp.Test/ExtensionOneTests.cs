@@ -6,11 +6,16 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class ExtensionOneTests
     {
+        private User GetSampleUser()
+        {
+            return new User("Harry Potter", "LordVoldemort23", "SneepyWeepyStreet", "111111", "harry@potter.hogwarts");
+        }
+
         [Test]
         // test if to order for transactions doesnt mather
         public void BalanceIsCorrectlyCalculatedBasedOnTransactionHistory()
         {
-            var account = new Account(AllEnums.Branches.Antwerpen);
+            var account = new Account(AllEnums.Branches.Antwerpen, GetSampleUser());
             account.Deposit(1000, DateTime.Now);
             account.Deposit(500, DateTime.Now.AddDays(1));
             account.Withdraw(200, DateTime.Now.AddDays(2));
@@ -21,14 +26,14 @@ namespace Boolean.CSharp.Test
         [Test]
         public void IfWeMakeANewAccountItShouldHaveABalanceOfZero()
         {
-            var account = new Account(AllEnums.Branches.Antwerpen);
+            var account = new Account(AllEnums.Branches.Antwerpen, GetSampleUser());
             Assert.AreEqual(0, account.GetBalance());
         }
 
         [Test]
         public void TheBalanceShouldBeNegativeWhenWeDoOnlyAWidawal()
         { // will change this test after adding overdraft with extension 3
-            var account = new Account(AllEnums.Branches.Antwerpen);
+            var account = new Account(AllEnums.Branches.Antwerpen, GetSampleUser());
             account.Deposit(200, DateTime.Now);
             account.Withdraw(150, DateTime.Now);
             Assert.AreEqual(50, account.GetBalance());

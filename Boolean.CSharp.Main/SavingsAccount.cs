@@ -2,6 +2,6 @@
 {
     public class SavingsAccount : Account
     {
-        public SavingsAccount(AllEnums.Branches branches) : base(branches) { }
+        public SavingsAccount(AllEnums.Branches branches, User user) : base(branches, user) { }
     }
 }

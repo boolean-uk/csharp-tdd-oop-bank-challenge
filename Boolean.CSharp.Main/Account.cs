@@ -10,10 +10,13 @@ namespace Boolean.CSharp.Main
         public Branches Branch { get; private set; }
         public double OverdraftLimit { get; private set; } = 0;
         public OverdraftStatus OverdraftStatus { get; private set; } = OverdraftStatus.None;
+        public User AccountHolder { get; private set; }
 
-        public Account(Branches branch)
+        public Account(Branches branch, User accountHolder)
         {
             this.Branch = branch;
+            this.AccountHolder = accountHolder;
+
         }
 
         public double GetBalance()
