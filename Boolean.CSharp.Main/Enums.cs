@@ -17,4 +17,11 @@ namespace Boolean.CSharp.Main.Enums
         Athens,
         Amsterdam
     }
+
+    public enum OverdraftStatus
+    {
+        Pending,    // customer has requested an overdraft
+        Rejected,   // bank manager has rejected the overdraft request
+        Approved,   // bank manager has approved the overdraft request
+    }
 }

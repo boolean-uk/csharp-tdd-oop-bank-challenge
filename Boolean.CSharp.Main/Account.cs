@@ -11,12 +11,13 @@ namespace Boolean.CSharp.Main
         private string _number;
         private int _customerId;
         private BranchLocation _branch;
-        List<Transaction> _transactions = new List<Transaction>();
+        private List<Transaction> _transactions = new List<Transaction>();
+        private List<Overdraft> _overdraftRequests = new List<Overdraft>();
 
-        public Account(int customerId, BranchLocation branch)
+        public Account(Customer customer, BranchLocation branch)
         {
             _number = GenerateAccountNumber();
-            _customerId = customerId;
+            _customerId = customer.Id;
             _branch = branch;
         }
 
@@ -57,6 +58,34 @@ namespace Boolean.CSharp.Main
             Transact(TransactionType.Debit, amount);
         }
 
+        // public bool Withdraw(decimal amount)
+        // {
+        //     decimal balance = GetBalance();
+        //     decimal fundsNeeded;
+
+        //     if (balance < amount)
+        //     {
+        //         fundsNeeded = amount - balance;
+        //         // check if there is overdraft amount available
+        //         if (_overdraft.GetAmountAvailable() < fundsNeeded)
+        //             return false;   // not enough money available, do not perform transaction
+        //         _overdraft.GetFunds(fundsNeeded);   // remove fundsNeeded amount of money from the overdraft balance
+        //         // perform the transaction
+        //         /**
+        //         * approved overdraft: 500.00
+        //         * balance: 0.00
+        //         * withdraw: 100.00
+        //         * withdraw: 200.00
+        //         * TODO: what should the new balance be?
+        //         date       || credit  || debit  || balance
+        //         14/01/2012 ||         || 200.00 || ?????
+        //         14/01/2012 ||         || 100.00 || ?????
+        //         */
+        //     }
+        //     Transact(TransactionType.Debit, amount);
+        //     return true;
+        // }
+
         public string GetBankStatement()
         {
             StringBuilder sb = new StringBuilder();
@@ -66,6 +95,18 @@ namespace Boolean.CSharp.Main
 
             return sb.ToString();
         }
+
+        public bool RequestOverdraft(Customer customer, decimal amount)
+        {
+            // if (customer.Id != _customerId)
+            //     return false;
+            return false;
+        }
+
+        // public void HandleOverdraft(BankManager manager)
+        // {
+        //     // TODO: randomly choose to approve / reject request
+        // }
 
         public string Number { get => _number; }
         public BranchLocation Branch { get => _branch; }

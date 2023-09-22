@@ -8,7 +8,7 @@ namespace Boolean.CSharp.Main
     public class Customer : User
     {
 
-        public Customer(string name, string address, string phoneNumber) : base(id, name, address, phoneNumber)
+        public Customer(string name, string address, string phoneNumber) : base(name, address, phoneNumber)
         {
             
         }

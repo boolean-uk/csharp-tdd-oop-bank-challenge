@@ -9,7 +9,7 @@ namespace Boolean.CSharp.Main
     public class CurrentAccount : Account
     {
 
-        public CurrentAccount(int customerId, BranchLocation branch) : base(customerId, branch)
+        public CurrentAccount(Customer customer, BranchLocation branch) : base(customer, branch)
         {
             
         }
