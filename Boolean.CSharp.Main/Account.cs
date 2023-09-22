@@ -121,7 +121,7 @@ namespace Boolean.CSharp.Main
 
         public bool RejectOverdraftRequest(BankManager manager, int overdraftId)
         {
-            return false;
+            return HandleOverdraftRequest(manager, overdraftId, OverdraftStatus.Rejected);
         }
 
         public string Number { get => _number; }
