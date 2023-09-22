@@ -9,6 +9,8 @@ namespace Boolean.CSharp.Test
     {
         private Customer customer = new Customer("Konstantina", "Athens, Greece", "+30 694 663 2041");
 
+        private BankManager manager = new BankManager("Georgia", "Athens, Greece", "+30 694 663 3636");
+
         // User Story: I want to create a current account
         [Test]
         public void CreateCurrentAccountTest()
@@ -138,9 +140,9 @@ namespace Boolean.CSharp.Test
             decimal amount = 2000.00m;
             CurrentAccount current = new CurrentAccount(customer, BranchLocation.Athens);
 
-            bool result = current.RequestOverdraft(customer, amount);
+            int result = current.RequestOverdraft(customer, amount);
 
-            Assert.IsTrue(result);
+            Assert.AreEqual(1, result);
         }
 
         // User Story: I want to be able to request an overdraft on my account
@@ -150,10 +152,23 @@ namespace Boolean.CSharp.Test
             decimal amount = 2000.00m;
             SavingsAccount savings = new SavingsAccount(customer, BranchLocation.Athens);
 
-            bool result = savings.RequestOverdraft(customer, amount);
+            int result = savings.RequestOverdraft(customer, amount);
 
-            Assert.IsTrue(result);
+            Assert.AreEqual(2, result);
         }
 
+        // // User Story: I want to approve [...] overdraft requests
+        // [Test]
+        // public void ApproveOverdraftRequestOnCurrentAccountTest()
+        // {
+        //     decimal amount = 200.00m;
+        //     CurrentAccount current = new CurrentAccount(customer, BranchLocation.Athens);
+
+        //     bool result = current.Approve(manager);
+
+        //     Assert.IsTrue(result);
+        // }
+
+        // User Story: I want to [...] reject overdraft requests
     }
 }

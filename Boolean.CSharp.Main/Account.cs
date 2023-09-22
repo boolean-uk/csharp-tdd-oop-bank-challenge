@@ -96,11 +96,13 @@ namespace Boolean.CSharp.Main
             return sb.ToString();
         }
 
-        public bool RequestOverdraft(Customer customer, decimal amount)
+        public int RequestOverdraft(Customer customer, decimal amount)
         {
-            // if (customer.Id != _customerId)
-            //     return false;
-            return false;
+            if (customer.Id != _customerId)
+                return -1;
+            Overdraft overdraft = new Overdraft(amount);
+            _overdraftRequests.Add(overdraft);
+            return overdraft.Id;
         }
 
         // public void HandleOverdraft(BankManager manager)
