@@ -105,6 +105,11 @@ namespace Boolean.CSharp.Main
             return overdraft.Id;
         }
 
+        public bool ApproveOverdraftRequest(BankManager manager, int overdraftId)
+        {
+            return false;
+        }
+
         // public void HandleOverdraft(BankManager manager)
         // {
         //     // TODO: randomly choose to approve / reject request

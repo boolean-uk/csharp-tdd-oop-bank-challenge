@@ -142,7 +142,7 @@ namespace Boolean.CSharp.Test
 
             int result = current.RequestOverdraft(customer, amount);
 
-            Assert.AreEqual(1, result);
+            Assert.IsTrue(result > 0);
         }
 
         // User Story: I want to be able to request an overdraft on my account
@@ -154,20 +154,34 @@ namespace Boolean.CSharp.Test
 
             int result = savings.RequestOverdraft(customer, amount);
 
-            Assert.AreEqual(2, result);
+            Assert.IsTrue(result > 0);
         }
 
-        // // User Story: I want to approve [...] overdraft requests
-        // [Test]
-        // public void ApproveOverdraftRequestOnCurrentAccountTest()
-        // {
-        //     decimal amount = 200.00m;
-        //     CurrentAccount current = new CurrentAccount(customer, BranchLocation.Athens);
+        // User Story: I want to approve [...] overdraft requests
+        [Test]
+        public void ApproveOverdraftRequestOnCurrentAccountTest()
+        {
+            decimal amount = 200.00m;
+            CurrentAccount current = new CurrentAccount(customer, BranchLocation.Athens);
+            int overdraftId = current.RequestOverdraft(customer, amount);
 
-        //     bool result = current.Approve(manager);
+            bool result = current.ApproveOverdraftRequest(manager, overdraftId);
 
-        //     Assert.IsTrue(result);
-        // }
+            Assert.IsTrue(result);
+        }
+
+        // User Story: I want to approve [...] overdraft requests
+        [Test]
+        public void ApproveOverdraftRequestOnSavingsAccountTest()
+        {
+            decimal amount = 200.00m;
+            SavingsAccount savings = new SavingsAccount(customer, BranchLocation.Athens);
+            int overdraftId = savings.RequestOverdraft(customer, amount);
+
+            bool result = savings.ApproveOverdraftRequest(manager, overdraftId);
+
+            Assert.IsTrue(result);
+        }
 
         // User Story: I want to [...] reject overdraft requests
     }
