@@ -25,7 +25,7 @@ namespace Boolean.CSharp.Test
             DateTime date = DateTime.Now;
             decimal prevBalance = 5000m;
             decimal amount = 2000.00m;
-            string expected = $"{date.ToString("dd/MM/yyyy")} ||        || {amount} || {prevBalance - amount}";
+            string expected = $"{date.ToString("dd/MM/yyyy")} ||         || {amount} || {prevBalance - amount}";
 
             Transaction t = new Transaction(date, TransactionType.Debit, amount, prevBalance);
 

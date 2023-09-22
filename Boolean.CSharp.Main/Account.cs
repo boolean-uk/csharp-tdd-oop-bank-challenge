@@ -52,7 +52,12 @@ namespace Boolean.CSharp.Main
 
         public string GetBankStatement()
         {
-            return "";
+            StringBuilder sb = new StringBuilder();
+            sb.Append($"{"date",-10} || {"credit",-7} || {"debit",-6} || {"balance",-6}");
+
+            _transactions.ForEach(t => sb.Append('\n').Append(t.ToString()));
+
+            return sb.ToString();
         }
 
         public string Number { get => _number; }

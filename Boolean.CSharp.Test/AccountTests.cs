@@ -91,6 +91,8 @@ namespace Boolean.CSharp.Test
             current.Deposit(2000.00m);
             current.Withdraw(500.00m);
 
+            System.Console.WriteLine(current.GetBankStatement());
+
             Assert.AreEqual(expected, current.GetBankStatement());
         }
     }
