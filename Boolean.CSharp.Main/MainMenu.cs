@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Boolean.CSharp.Main.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,13 +10,21 @@ namespace Boolean.CSharp.Main
 {
     public class MainMenu
     {
-        List<Transaction> TransactionHistory = new List<Transaction>();
+        public List<BankTransaction> TransactionHistory = new List<BankTransaction>();
 
 
 
-        public void Write_Statement(object date, int cred_amount, int deb_amount, int balance)
+        public void Write_Statement()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("{0,10} || {1,10} || {2,10} ", "Credit", "Debit", "Balance");
+            foreach (BankTransaction transaction in TransactionHistory)
+            {
+
+                Console.WriteLine("{0,10} || {1,10} || {2,10} ",
+                        transaction.Transaction_type == Enums.Transaction.Withdraw ? transaction.Amount : 0,
+                        transaction.Transaction_type == Enums.Transaction.Deposit ? transaction.Amount : 0,
+                        transaction.NewBalance);
+            };
         }
     }
 }

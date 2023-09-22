@@ -8,34 +8,60 @@ namespace Boolean.CSharp.Test
     public class CoreTests
     {
         MainMenu menu = new MainMenu();
-        CurrentAccount newaccount = new CurrentAccount();
+        CurrentAccount newcurrentaccount = new CurrentAccount();
         BankTransaction newtransaction = new BankTransaction();
+        BankTransaction secondtransaction = new BankTransaction();
+        BankTransaction thirdtransaction = new BankTransaction();
 
         [Test]
         public void CreateAccount()
         {
-            newaccount.Create_Account("GR2342456708", 500, "current");
+            newcurrentaccount.Create_Account("GR2342456708", 500, "Current");
 
-            Assert.Pass();
+            Assert.IsTrue(newcurrentaccount.account_id == "GR2342456708");
+            Assert.AreEqual(newcurrentaccount.balance, 500);
+        }
+
+
+        [Test]
+        public void ShouldCreateTransaction()
+        {
+            newcurrentaccount.Create_Account("GR2342456708", 500, "Current");
+            newtransaction.Transaction_type = Main.Enums.Transaction.Withdraw;
+            newtransaction.Amount = 500;
+            newtransaction.OldBalance = newcurrentaccount.balance;
+            newtransaction.Calculate_Transaction("Withdraw", 500, newcurrentaccount);
+
+            Assert.AreEqual(newcurrentaccount.balance, 0);
         }
 
         [Test]
         public void WriteStatement()
         {
-            newaccount.Create_Account("GR2342456708", 500, "current");
-            menu.Write_Statement(date, 500, 0, 500);
+            newcurrentaccount.Create_Account("GR2342456708", 500, "Current");
+
+            newtransaction.Transaction_type = Main.Enums.Transaction.Withdraw;
+            newtransaction.Amount = 500;
+            newtransaction.OldBalance = newcurrentaccount.balance;
+            newtransaction.Calculate_Transaction("Withdraw", 500, newcurrentaccount);
+
+            menu.TransactionHistory.Add(newtransaction);
+
+            secondtransaction.Transaction_type = Main.Enums.Transaction.Deposit;
+            secondtransaction.Amount = 1500;
+            secondtransaction.OldBalance = newcurrentaccount.balance;
+            secondtransaction.Calculate_Transaction("Deposit", 1500, newcurrentaccount);
+
+            menu.TransactionHistory.Add(secondtransaction);
+
+            thirdtransaction.Transaction_type = Main.Enums.Transaction.Deposit;
+            thirdtransaction.Amount = 700;
+            thirdtransaction.OldBalance = newcurrentaccount.balance;
+            thirdtransaction.Calculate_Transaction("Deposit", 700, newcurrentaccount);
+
+            menu.TransactionHistory.Add(thirdtransaction);
 
             Assert.Pass();
         }
-
-        [Test]
-        public void ShouldCreateTransaction()
-        {
-            newaccount.Create_Account("GR2342456708", 500, "current");
-            newtransaction.Create_Transaction("withdraw", 500, "GR2342456708");
-
-            Assert.Pass();
-        }
-
     }
 }
