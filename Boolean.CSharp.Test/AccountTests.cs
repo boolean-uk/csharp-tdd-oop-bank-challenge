@@ -183,6 +183,30 @@ namespace Boolean.CSharp.Test
             Assert.IsTrue(result);
         }
 
+        // User Story: I want to approve [...] overdraft requests
+        [Test]
+        public void DontApproveOverdraftRequestOnCurrentAccountTest()
+        {
+            decimal amount = 200.00m;
+            CurrentAccount current = new CurrentAccount(customer, BranchLocation.Athens);
+
+            bool result = current.ApproveOverdraftRequest(manager, 100);
+
+            Assert.IsFalse(result);
+        }
+
+        // User Story: I want to approve [...] overdraft requests
+        [Test]
+        public void DontApproveOverdraftRequestOnSavingsAccountTest()
+        {
+            decimal amount = 200.00m;
+            SavingsAccount savings = new SavingsAccount(customer, BranchLocation.Athens);
+
+            bool result = savings.ApproveOverdraftRequest(manager, 100);
+
+            Assert.IsFalse(result);
+        }
+
         // User Story: I want to [...] reject overdraft requests
     }
 }
