@@ -1,11 +1,18 @@
 ﻿using System.Globalization;
 using System.Text;
+using static Boolean.CSharp.Main.AllEnums;
 
 namespace Boolean.CSharp.Main
 {
     public class Account : IAccount
     {
         private List<Transaction> transactionList = new List<Transaction>();
+        public Branches Branch { get; private set; }
+
+        public Account(Branches branch)
+        {
+            this.Branch = branch;
+        }
 
         public double GetBalance()
         {
@@ -36,18 +43,17 @@ namespace Boolean.CSharp.Main
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("date       || credit  || debit  || balance");
             List<Transaction> reversedTransactions = transactionList.OrderByDescending(t => t.Date).ToList();
-            double runningBalance = 0;
+            double runningBalance = GetBalance();
 
-            for (int i = reversedTransactions.Count - 1; i >= 0; i--)
+            for (int i = 0; i < reversedTransactions.Count; i++)
             {
                 var transaction = reversedTransactions[i];
-                runningBalance += transaction.Credit;
-                runningBalance -= transaction.Debit;
                 string creditValue = (transaction.Credit > 0 ? transaction.Credit.ToString("F2", CultureInfo.InvariantCulture) : "").PadLeft(7);
                 string debitValue = (transaction.Debit > 0 ? transaction.Debit.ToString("F2", CultureInfo.InvariantCulture) : "      ");
                 sb.AppendLine($"{transaction.Date.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)} || {creditValue} || {debitValue} || {runningBalance.ToString("F2", CultureInfo.InvariantCulture).PadLeft(7)}");
+                runningBalance -= transaction.Credit;
+                runningBalance += transaction.Debit;
             }
-
             return sb.ToString().TrimEnd('\r', '\n');
         }
     }
