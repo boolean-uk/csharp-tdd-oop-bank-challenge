@@ -39,6 +39,13 @@ namespace Boolean.CSharp.Main
             _transactions.Insert(0, new Transaction(DateTime.Now, type, amount, GetBalance()));
         }
 
+        private decimal GetOverdraftFunds()
+        {
+            decimal total = 0.0m;
+            _overdraftRequests.Where(r => r.Status == OverdraftStatus.Approved).ToList().ForEach(r => total += r.Amount);
+            return total;
+        }
+
         public decimal GetBalance()
         {
             if (_transactions.Count == 0)
@@ -53,38 +60,16 @@ namespace Boolean.CSharp.Main
             Transact(TransactionType.Credit, amount);
         }
 
-        public void Withdraw(decimal amount)
+        public bool Withdraw(decimal amount)
         {
+            decimal fundsAvailable = GetBalance() + GetOverdraftFunds();
+
+            if (fundsAvailable < amount)
+                return false;
+
             Transact(TransactionType.Debit, amount);
+            return true;
         }
-
-        // public bool Withdraw(decimal amount)
-        // {
-        //     decimal balance = GetBalance();
-        //     decimal fundsNeeded;
-
-        //     if (balance < amount)
-        //     {
-        //         fundsNeeded = amount - balance;
-        //         // check if there is overdraft amount available
-        //         if (_overdraft.GetAmountAvailable() < fundsNeeded)
-        //             return false;   // not enough money available, do not perform transaction
-        //         _overdraft.GetFunds(fundsNeeded);   // remove fundsNeeded amount of money from the overdraft balance
-        //         // perform the transaction
-        //         /**
-        //         * approved overdraft: 500.00
-        //         * balance: 0.00
-        //         * withdraw: 100.00
-        //         * withdraw: 200.00
-        //         * TODO: what should the new balance be?
-        //         date       || credit  || debit  || balance
-        //         14/01/2012 ||         || 200.00 || ?????
-        //         14/01/2012 ||         || 100.00 || ?????
-        //         */
-        //     }
-        //     Transact(TransactionType.Debit, amount);
-        //     return true;
-        // }
 
         public string GetBankStatement()
         {

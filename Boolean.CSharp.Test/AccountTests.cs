@@ -187,7 +187,6 @@ namespace Boolean.CSharp.Test
         [Test]
         public void FailToApproveOverdraftRequestOnCurrentAccountTest()
         {
-            decimal amount = 200.00m;
             CurrentAccount current = new CurrentAccount(customer, BranchLocation.Athens);
 
             bool result = current.ApproveOverdraftRequest(manager, 100);
@@ -199,7 +198,6 @@ namespace Boolean.CSharp.Test
         [Test]
         public void FailToApproveOverdraftRequestOnSavingsAccountTest()
         {
-            decimal amount = 200.00m;
             SavingsAccount savings = new SavingsAccount(customer, BranchLocation.Athens);
 
             bool result = savings.ApproveOverdraftRequest(manager, 100);
@@ -237,7 +235,6 @@ namespace Boolean.CSharp.Test
         [Test]
         public void FailToRejectOverdraftRequestOnCurrentAccountTest()
         {
-            decimal amount = 2000.00m;
             CurrentAccount current = new CurrentAccount(customer, BranchLocation.Athens);
 
             bool result = current.RejectOverdraftRequest(manager, 100);
@@ -249,12 +246,55 @@ namespace Boolean.CSharp.Test
         [Test]
         public void FailToRejectOverdraftRequestOnSavingsAccountTest()
         {
-            decimal amount = 2000.00m;
             SavingsAccount savings = new SavingsAccount(customer, BranchLocation.Athens);
 
             bool result = savings.RejectOverdraftRequest(manager, 100);
 
             Assert.IsFalse(result);
+        }
+
+        // User Story: I want to deposit and withdraw funds (using overdrafts as well)
+        [Test]
+        public void DontWithdrawIfFundsNotAvailableInCurrentAccount()
+        {
+            CurrentAccount current = new CurrentAccount(customer, BranchLocation.Athens);
+            current.Deposit(150.00m);
+            int overdraftId = current.RequestOverdraft(customer, 50.00m);
+            Assert.IsTrue(current.ApproveOverdraftRequest(manager, overdraftId));
+
+            bool result = current.Withdraw(400.00m);
+
+            Assert.IsFalse(result);
+        }
+
+        [Test]
+        public void DontWithdrawIfFundsNotAvailableInSavingsAccount()
+        {
+            SavingsAccount savings = new SavingsAccount(customer, BranchLocation.Athens);
+
+            bool result = savings.Withdraw(400.00m);
+
+            Assert.IsFalse(result);
+        }
+
+        // User Story: I want to deposit and withdraw funds (using overdrafts as well)
+        [Test]
+        public void ShouldCreateCorrectBankStatement()
+        {
+            string date = DateTime.Now.ToString("dd/MM/yyyy");
+            string expected = $"date       || credit  || debit  || balance\n{date} ||  500.00 ||        || 150.00\n{date} ||         ||  50.00 || -350.00\n{date} ||  100.00 ||        || -300.00\n{date} ||         || 400.00 || -400.00";
+            decimal amount1 = 200.00m, amount2 = 300.00m;
+            CurrentAccount current = new CurrentAccount(customer, BranchLocation.Athens);
+            int overdraftId = current.RequestOverdraft(customer, amount1);
+            Assert.IsTrue(current.ApproveOverdraftRequest(manager, overdraftId));
+            overdraftId = current.RequestOverdraft(customer, amount2);
+            Assert.IsTrue(current.ApproveOverdraftRequest(manager, overdraftId));
+            current.Withdraw(400.00m);
+            current.Deposit(100.00m);
+            current.Withdraw(50.00m);
+            current.Deposit(500.00m);
+
+            Assert.AreEqual(expected, current.GetBankStatement());
         }
     }
 }
