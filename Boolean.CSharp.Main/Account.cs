@@ -5,23 +5,30 @@ namespace Boolean.CSharp.Main
 {
     public class Account : IAccount
     {
-        public double Balance { get; private set; }
         private List<Transaction> transactionList = new List<Transaction>();
+
+        public double GetBalance()
+        {
+            double balance = 0;
+            foreach (var transaction in transactionList)
+            {
+                balance += transaction.Credit - transaction.Debit;
+            }
+            return balance;
+        }
 
         public void Deposit(double amount, DateTime date)
         {
-            Balance += amount;
-            transactionList.Add(new Transaction(date, amount, 0, Balance));
+            transactionList.Add(new Transaction(date, amount, 0, GetBalance() + amount));
         }
 
         public void Withdraw(double amount, DateTime date)
         {
-            if (amount > Balance)
+            if (amount > GetBalance())
             {
                 throw new ArgumentException("You don't have enough funds on account");
             }
-            Balance -= amount;
-            transactionList.Add(new Transaction(date, 0, amount, Balance));
+            transactionList.Add(new Transaction(date, 0, amount, GetBalance() - amount));
         }
 
         public string PrintStatement()

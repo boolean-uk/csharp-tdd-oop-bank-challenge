@@ -11,7 +11,7 @@ namespace Boolean.CSharp.Test
         {
             var account = new Account();
             account.Deposit(100, DateTime.Now);
-            Assert.AreEqual(100, account.Balance);
+            Assert.AreEqual(100, account.GetBalance());
         }
 
         [Test]
@@ -20,7 +20,7 @@ namespace Boolean.CSharp.Test
             var account = new Account();
             account.Deposit(200, DateTime.Now);
             account.Withdraw(100, DateTime.Now);
-            Assert.AreEqual(100, account.Balance);
+            Assert.AreEqual(100, account.GetBalance());
         }
 
         [Test]
@@ -42,14 +42,14 @@ namespace Boolean.CSharp.Test
         public void DoesCurrentAccountInheritFromAccAndInitializeItCorrectly()
         {
             var currentAccount = new CurrentAccount();
-            Assert.AreEqual(0, currentAccount.Balance);
+            Assert.AreEqual(0, currentAccount.GetBalance());
         }
 
         [Test]
         public void DoesSAvingAccountInheritFromAccAndInitializeItCorrectly()
         {
             var savingsAccount = new SavingsAccount();
-            Assert.AreEqual(0, savingsAccount.Balance);
+            Assert.AreEqual(0, savingsAccount.GetBalance());
         }
     }
 }
