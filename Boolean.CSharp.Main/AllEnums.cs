@@ -28,5 +28,12 @@
             Vlaamsbrabant,
             WaalsBrabant
         }
+        public enum OverdraftStatus
+        {
+            None,
+            Requested,
+            Approved,
+            Rejected
+        }
     }
 }

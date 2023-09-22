@@ -7,5 +7,10 @@
         void Withdraw(double amount, DateTime date);
         string PrintStatement();
         double GetBalance();
+        double OverdraftLimit { get; }
+        AllEnums.OverdraftStatus OverdraftStatus { get; }
+        void RequestOverdraft(double amount);
+        void ApproveOverdraft();
+        void RejectOverdraft();
     }
 }

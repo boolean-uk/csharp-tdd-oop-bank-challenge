@@ -8,6 +8,8 @@ namespace Boolean.CSharp.Main
     {
         private List<Transaction> transactionList = new List<Transaction>();
         public Branches Branch { get; private set; }
+        public double OverdraftLimit { get; private set; } = 0;
+        public OverdraftStatus OverdraftStatus { get; private set; } = OverdraftStatus.None;
 
         public Account(Branches branch)
         {
@@ -36,6 +38,41 @@ namespace Boolean.CSharp.Main
                 throw new ArgumentException("You don't have enough funds on account");
             }
             transactionList.Add(new Transaction(date, 0, amount));
+        }
+        public void RequestOverdraft(double amount)
+        {
+            if (amount > 0)
+            {
+                OverdraftLimit = amount;
+                OverdraftStatus = OverdraftStatus.Requested;
+            }
+            else
+            {
+                throw new ArgumentException("Overdraft request needs to be greater than 0");
+            }
+        }
+        public void ApproveOverdraft()
+        {
+            if (OverdraftStatus == OverdraftStatus.Requested)
+            {
+                OverdraftStatus = OverdraftStatus.Approved;
+            }
+            else
+            {
+                throw new InvalidOperationException("There's no pending overdraft request, no approval possible");
+            }
+        }
+        public void RejectOverdraft()
+        {
+            if (OverdraftStatus == OverdraftStatus.Requested)
+            {
+                OverdraftLimit = 0;
+                OverdraftStatus = OverdraftStatus.Rejected;
+            }
+            else
+            {
+                throw new InvalidOperationException("There's no pending overdraft request, no rejection possible");
+            }
         }
 
         public string PrintStatement()

@@ -6,13 +6,19 @@ IAccount             |                                                          
                      |                                                           | Withdraw(double, DateTime)                  | 
                      |                                                           | PrintStatement()                            | String 
                      |                                                           | GetBalance()                                | Double 
-                     |                                                           | Branch()                                    | The branches
+                     |                                                           | Branch()                                    | The branches  
+                     |                                                           | RequestOverdraft()                          |
+                     |                                                           | ApproveOverdraft()                          |
+                     |                                                           | RejectOverdraft()                           |
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 Account              | branch with Branches                                      | Deposit(double, DateTime)                   | 
 (Implements IAccount)| transactionList: List Transaction                         | Withdraw(double, DateTime)                  | 
-                     |                                                           | PrintStatement()                            | String
-                     |                                                           | GetBalance()                                | Double
+                     | overdraftLimit with double                                | PrintStatement()                            | String
+                     | overdraftStatus with OverdraftStatus                      | GetBalance()                                | Double
                      |                                                           | Branch()                                    | The branches
+                     |                                                           | RequestOverdraft()                          |
+                     |                                                           | ApproveOverdraft ()                         |
+                     |                                                           | RejectOverdraft ()                          |
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 CurrentAccount       | Inherits attributes and methods from Account              |  All methods are inherited                  | 
 (Implements IAccount)|                                                           |                                             | 
