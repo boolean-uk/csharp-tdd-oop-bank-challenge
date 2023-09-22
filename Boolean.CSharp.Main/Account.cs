@@ -10,12 +10,14 @@ namespace Boolean.CSharp.Main
     {
         private string _number;
         private int _customerId;
+        private BranchLocation _branch;
         List<Transaction> _transactions = new List<Transaction>();
 
-        public Account(int customerId)
+        public Account(int customerId, BranchLocation branch)
         {
             _number = GenerateAccountNumber();
             _customerId = customerId;
+            _branch = branch;
         }
 
         private string GenerateAccountNumber()
@@ -66,5 +68,6 @@ namespace Boolean.CSharp.Main
         }
 
         public string Number { get => _number; }
+        public BranchLocation Branch { get => _branch; }
     }
 }

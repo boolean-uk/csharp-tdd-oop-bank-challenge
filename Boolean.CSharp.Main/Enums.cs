@@ -10,4 +10,11 @@ namespace Boolean.CSharp.Main.Enums
         Credit,
         Debit
     }
+
+    public enum BranchLocation
+    {
+        London,
+        Athens,
+        Amsterdam
+    }
 }
