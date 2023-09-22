@@ -31,6 +31,11 @@ namespace Boolean.CSharp.Main
             return myRandomNo.ToString("00000000");
         }
 
+        private void Transact(TransactionType type, decimal amount)
+        {
+            _transactions.Insert(0, new Transaction(DateTime.Now, type, amount, GetBalance()));
+        }
+
         public decimal GetBalance()
         {
             if (_transactions.Count == 0)
@@ -42,12 +47,12 @@ namespace Boolean.CSharp.Main
 
         public void Deposit(decimal amount)
         {
-            _transactions.Insert(0, new Transaction(DateTime.Now, TransactionType.Credit, amount, GetBalance()));
+            Transact(TransactionType.Credit, amount);
         }
 
         public void Withdraw(decimal amount)
         {
-            _transactions.Insert(0, new Transaction(DateTime.Now, TransactionType.Debit, amount, GetBalance()));
+            Transact(TransactionType.Debit, amount);
         }
 
         public string GetBankStatement()
