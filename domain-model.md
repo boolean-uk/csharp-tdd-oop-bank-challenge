@@ -22,13 +22,11 @@ As a customer,
 So I can use my account,
 I want to deposit and withdraw funds.
 
-Domain Model 1: Basic Bank Account System
-Class	Method	Scenario	Output
-Account	Deposit(amount)	Deposit $1000 into the account	Balance: $1000
-Account	Withdraw(amount)	Withdraw $500 from the account	Balance: $500
-Account	GenerateStatement()	Generate a bank statement after transactions	List of transactions
-Account	CalculateBalance()	Calculate the current balance	Balance: $500
-Account	SendStatementToPhone(phoneNumber)	Send statement to a phone	Message sent to the phone
-BankStatement	AddTransaction(transaction)	Add a transaction to the statement	Updated list of transactions
-BankStatement	GenerateReport()	Generate a report from transactions	Formatted report
-Transaction	(No methods)	(Data container)	N/A
+
+| Classes                | Methods                                                | Scenario                                                                                   | Expected Output                                                                         |
+|------------------------|--------------------------------------------------------|--------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|
+| `Account`              | `Deposit(decimal amount, DateTime? date = null)`       | `Making a deposit of an amount into an account.`                                           | `The updated balance of the account is returned.`                                       |
+|                        | `Withdraw(decimal amount, DateTime? date = null)`      | `Making a withdraw of an amount from an account.`                                          | `The updated balance of the account is returned.`                                       |
+|                        | `GenerateStatement()`                                  | `Generating a bank statement with all the transactions made.`                              | `A bank statement with all the transactions made is generated.`                         |
+|                        | `CalculateBalance()`                                   | `Calculating the balance of an account.`                                                   | `The balance of the account is returned.`                                               |
+| `Program`              | `PrintBankStatement(BankStatement statement)`          | `Printing a bank statement with all the transactions made.`                                | `A bank statement with all the transactions made is printed.`                           |

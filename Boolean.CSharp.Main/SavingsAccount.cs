@@ -11,7 +11,7 @@ namespace Boolean.CSharp.Main
     {
         public decimal InterestRate { get; private set; }
 
-        public SavingsAccount(decimal interestRate)
+        public SavingsAccount(decimal interestRate, string branch) : base(branch)
         {
             InterestRate = interestRate;
         }
@@ -23,7 +23,7 @@ namespace Boolean.CSharp.Main
             return interestAmount; 
         }
 
-        public override void Withdraw(decimal amount)
+        public override void Withdraw(decimal amount, DateTime? date = null)
         {
             if (amount <= 0)
             {

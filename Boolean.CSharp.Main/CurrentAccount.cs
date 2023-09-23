@@ -9,48 +9,10 @@ namespace Boolean.CSharp.Main
 {
     public class CurrentAccount : Account
     {
-        //public decimal OverdraftLimit { get; private set; }
-        //public List<OverdraftRequest> OverdraftRequests { get; private set; }
-
-        //public CurrentAccount(decimal overdraftLimit)
-        //{
-        //    OverdraftLimit = overdraftLimit;
-        //    OverdraftRequests = new List<OverdraftRequest>();
-        //}
-
-        //public void RequestOverdraft(decimal amount)
-        //{
-        //    if (amount <= 0)
-        //    {
-        //        throw new ArgumentException("Overdraft request amount must be greater than zero.");
-        //    }
-
-        //    if (amount > OverdraftLimit)
-        //    {
-        //        throw new InvalidOperationException("Overdraft request exceeds the overdraft limit.");
-        //    }
-
-        //    if ((balance - amount) < -OverdraftLimit)
-        //    {
-        //        throw new InvalidOperationException("Overdraft request would result in a negative balance beyond the overdraft limit.");
-        //    }
-
-        //    var overdraftTransaction = new Transaction
-        //    {
-        //        Date = DateTime.Now,
-        //        Amount = amount,
-        //        Balance = balance - amount, 
-        //        IsDeposit = false 
-        //    };
-
-        //    transactions.Add(overdraftTransaction);
-        //    balance -= amount; 
-        //}
-
         public decimal OverdraftLimit { get; private set; }
         public List<OverdraftRequest> OverdraftRequests { get; private set; }
 
-        public CurrentAccount(decimal overdraftLimit)
+        public CurrentAccount(decimal overdraftLimit, string branch) : base(branch)
         {
             OverdraftLimit = overdraftLimit;
             OverdraftRequests = new List<OverdraftRequest>();
@@ -74,8 +36,6 @@ namespace Boolean.CSharp.Main
                 IsApproved = false,
                 RequestDate = DateTime.Now
             };
-
-            // var overdraftRequest = new OverdraftRequest(amount); // Provide the 'amount' parameter
 
             OverdraftRequests.Add(overdraftRequest);
         }
@@ -103,6 +63,7 @@ namespace Boolean.CSharp.Main
             }
 
             OverdraftRequests.RemoveAll(request => !request.IsApproved);
+
         }
     }
 }

@@ -27,14 +27,10 @@ As a customer,
 So I can stay up to date,
 I want statements to be sent as messages to my phone.
 
-Class	Method	Scenario	Output
-Account	Deposit(amount)	Deposit $1000 into the account	Balance: $1000
-Account	Withdraw(amount)	Withdraw $500 from the account	Balance: $500
-Account	GenerateStatement()	Generate a bank statement after transactions	List of transactions
-Account	CalculateBalance()	Calculate the current balance	Balance: $500
-Account	SendStatementToPhone(phoneNumber)	Send statement to a phone	Message sent to the phone
-BankStatement	AddTransaction(transaction)	Add a transaction to the statement	Updated list of transactions
-BankStatement	GenerateReport()	Generate a report from transactions	Formatted report
-Transaction	(No methods)	(Data container)	N/A
-SavingsAccount	CalculateInterest()	Calculate interest and add to balance	Balance with interest added
-CurrentAccount	RequestOverdraft(amount)	Request an overdraft	Balance with overdraft applied
+
+| Classes                | Methods                                                | Scenario                                                                                   | Expected Output                                                                         |
+|------------------------|--------------------------------------------------------|--------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|
+| `Account`              | `SendStatementToPhone()`                               | `Sending a statement via text message to a phone number.`                                  | `A statement is sent via text message to the phone number provided.`                    |
+| `CurrentAccount`       | `RequestOverdraft(decimal amount)`                     | `Making an overdraft request.`                                                             | `The overdraft is applied to balance.`                                                  |
+| `CurrentAccount`       | `ApproveOverdraftRequests()`                           | `Approving or rejecting an overdraft request.`                                             | `The overdraft request is either approved or not.`                                      |
+| `SavingaAccount`       | `CalculateInterest()`                                  | `Calculating interest and adding it to balance.`                                           | `The interest is applied to balance.`                                                   |

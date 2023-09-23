@@ -14,7 +14,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestDeposit()
         {
-            var account = new Account();
+            var account = new Account("Main Branch");
 
             account.Deposit(1000);
 
@@ -24,7 +24,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestDepositNegativeAmount()
         {
-            var account = new Account();
+            var account = new Account("Main Branch");
 
             Assert.Throws<ArgumentException>(() => account.Deposit(-100));
         }
@@ -32,9 +32,9 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestWithdraw()
         {
-            var account = new Account();
-            account.Deposit(1000);
+            var account = new Account("Main Branch");
 
+            account.Deposit(1000);
             account.Withdraw(500);
 
             Assert.AreEqual(500, account.CalculateBalance());
@@ -43,7 +43,8 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestWithdrawNegativeAmount()
         {
-            var account = new Account();
+            var account = new Account("Main Branch");
+
             account.Deposit(1000);
 
             Assert.Throws<ArgumentException>(() => account.Withdraw(-100));
@@ -52,7 +53,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestWithdrawInsufficientFunds()
         {
-            var account = new Account();
+            var account = new Account("Main Branch");
 
             Assert.Throws<InvalidOperationException>(() => account.Withdraw(100));
         }
@@ -60,7 +61,8 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestGenerateStatement()
         {
-            var account = new Account();
+            var account = new Account("Main Branch");
+
             account.Deposit(1000);
             account.Withdraw(500);
 
@@ -84,7 +86,8 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestCalculateBalance()
         {
-            var account = new Account();
+            var account = new Account("Main Branch");
+
             account.Deposit(1000);
             account.Withdraw(500);
 

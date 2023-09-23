@@ -4,6 +4,7 @@ using System.Text;
 using System.Transactions;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Boolean.CSharp.Main
 {
@@ -11,14 +12,16 @@ namespace Boolean.CSharp.Main
     {
         protected decimal balance;
         protected List<Transaction> transactions;
+        public string Branch { get; set; }
 
-        public Account()
+        public Account(string branch)
         {
             balance = 0;
+            Branch = branch;
             transactions = new List<Transaction>();
         }
 
-        public virtual void Deposit(decimal amount)
+        public virtual void Deposit(decimal amount, DateTime? date = null)
         {
             if (amount <= 0)
             {
@@ -28,14 +31,14 @@ namespace Boolean.CSharp.Main
             balance += amount;
             transactions.Add(new Transaction
             {
-                Date = DateTime.Now,
+                Date = date ?? DateTime.Now, 
                 Amount = amount,
                 Balance = balance,
                 IsDeposit = true
             });
         }
 
-        public virtual void Withdraw(decimal amount)
+        public virtual void Withdraw(decimal amount, DateTime? date = null)
         {
             if (amount <= 0)
             {
@@ -50,7 +53,7 @@ namespace Boolean.CSharp.Main
             balance -= amount;
             transactions.Add(new Transaction
             {
-                Date = DateTime.Now,
+                Date = date ?? DateTime.Now, 
                 Amount = amount,
                 Balance = balance,
                 IsDeposit = false
@@ -80,8 +83,6 @@ namespace Boolean.CSharp.Main
 
             return balance;
         }
-
-        public string Branch { get; set; }
 
         public void SendStatementToPhone()
         {
