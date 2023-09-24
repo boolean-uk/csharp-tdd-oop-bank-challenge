@@ -19,4 +19,22 @@ namespace Boolean.CSharp.Main.Enums
         Current,
         Savings
     }
+    
+    public enum Branch
+    {
+        Not_Set,
+        Athens,
+        London,
+        Belgium,
+        Prague,
+        Mosca
+    }
+
+    public enum Overdraft
+    {
+        None,
+        Approved,
+        Pending,
+        Rejected
+    }
 }

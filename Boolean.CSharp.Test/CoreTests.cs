@@ -16,7 +16,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void CreateAccount()
         {
-            newcurrentaccount.Create_Account("GR2342456708", 500, "Current");
+            newcurrentaccount.Create_Account("GR2342456708", 500, "Current", "Athens", "None");
 
             Assert.IsTrue(newcurrentaccount.account_id == "GR2342456708");
             Assert.AreEqual(newcurrentaccount.balance, 500);
@@ -26,7 +26,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void ShouldCreateTransaction()
         {
-            newcurrentaccount.Create_Account("GR2342456708", 500, "Current");
+            newcurrentaccount.Create_Account("GR2342456708", 500, "Current", "Athens", "None");
             newtransaction.Date = DateTime.Now.ToString("dd/MM/yyyy");
             newtransaction.Transaction_type = Main.Enums.Transaction.Withdraw;
             newtransaction.Amount = 500;
@@ -39,7 +39,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void WriteStatementAndCheckBalance()
         {
-            newcurrentaccount.Create_Account("GR2342456708", 500, "Current");
+            newcurrentaccount.Create_Account("GR2342456708", 500, "Current", "Athens", "None");
 
             newtransaction.Date = DateTime.Now.ToString("dd/MM/yyyy");
             newtransaction.Transaction_type = Main.Enums.Transaction.Withdraw;

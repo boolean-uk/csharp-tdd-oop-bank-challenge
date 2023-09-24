@@ -11,20 +11,26 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class ExtensionTests
     {
-        private Extension _extension;
-        public ExtensionTests()
-        {
-            _extension = new Extension();
-        }
-        [Test]
-        private void TestQuestion1()
-        {
 
-        }
-        [Test]
-        private void TestQuestion2()
-        {
+        MainMenu menu = new MainMenu();
+        CurrentAccount newcurrentaccount = new CurrentAccount();
 
+        [Test]
+        public void CreateOverdraft()
+        {
+            newcurrentaccount.Request_Overdraft(Main.Enums.Overdraft.Pending, 1000);
+
+            Assert.IsTrue(newcurrentaccount.Overdraft == Main.Enums.Overdraft.Pending);
+        }
+
+        [Test]
+        public void QualifyOverdraftbyManager()
+        {
+            newcurrentaccount.Request_Overdraft(Main.Enums.Overdraft.Pending, 1000);
+            // As a manager
+            menu.Qualify_Overdraft(newcurrentaccount);
+
+            Assert.IsTrue(newcurrentaccount.Overdraft == Main.Enums.Overdraft.Approved);
         }
     }
 }

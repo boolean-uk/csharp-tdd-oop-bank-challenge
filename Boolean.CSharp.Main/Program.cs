@@ -10,7 +10,7 @@ BankTransaction newtransaction = new BankTransaction();
 BankTransaction secondtransaction = new BankTransaction();
 BankTransaction thirdtransaction = new BankTransaction();
 
-newcurrentaccount.Create_Account("GR2342456708", 500, "Current");
+newcurrentaccount.Create_Account("GR2342456708", 500, "Current", "Athens", "None");
 
 newtransaction.Date = DateTime.Now.ToString("dd/MM/yyyy");
 newtransaction.Transaction_type = Boolean.CSharp.Main.Enums.Transaction.Withdraw;

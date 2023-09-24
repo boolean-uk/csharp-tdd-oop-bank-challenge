@@ -12,8 +12,6 @@ namespace Boolean.CSharp.Main
     {
         public List<BankTransaction> TransactionHistory = new List<BankTransaction>();
 
-
-
         public void Write_Statement()
         {
             Console.WriteLine("{0,10} || {1,10} || {2,10} || {3,10}","Date", "Credit", "Debit", "Balance");
@@ -27,5 +25,19 @@ namespace Boolean.CSharp.Main
                         transaction.NewBalance);
             };
         }
+
+        // As a manager
+        public void Qualify_Overdraft(CurrentAccount account)
+        {
+            if(account.overdraft_amount <= 2000)
+            {
+                account.Overdraft = Overdraft.Approved;
+            }
+            else
+            {
+                account.Overdraft = Overdraft.Rejected;
+            }
+        }
+
     }
 }
