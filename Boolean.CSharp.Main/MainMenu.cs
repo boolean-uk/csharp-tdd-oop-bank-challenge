@@ -16,11 +16,12 @@ namespace Boolean.CSharp.Main
 
         public void Write_Statement()
         {
-            Console.WriteLine("{0,10} || {1,10} || {2,10} ", "Credit", "Debit", "Balance");
+            Console.WriteLine("{0,10} || {1,10} || {2,10} || {3,10}","Date", "Credit", "Debit", "Balance");
             foreach (BankTransaction transaction in TransactionHistory)
             {
 
-                Console.WriteLine("{0,10} || {1,10} || {2,10} ",
+                Console.WriteLine("{0,10} || {1,10} || {2,10} || {3,10}",
+                        transaction.Date,
                         transaction.Transaction_type == Enums.Transaction.Withdraw ? transaction.Amount : 0,
                         transaction.Transaction_type == Enums.Transaction.Deposit ? transaction.Amount : 0,
                         transaction.NewBalance);

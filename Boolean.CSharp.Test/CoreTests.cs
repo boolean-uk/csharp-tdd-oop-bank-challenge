@@ -27,6 +27,7 @@ namespace Boolean.CSharp.Test
         public void ShouldCreateTransaction()
         {
             newcurrentaccount.Create_Account("GR2342456708", 500, "Current");
+            newtransaction.Date = DateTime.Now.ToString("dd/MM/yyyy");
             newtransaction.Transaction_type = Main.Enums.Transaction.Withdraw;
             newtransaction.Amount = 500;
             newtransaction.OldBalance = newcurrentaccount.balance;
@@ -40,6 +41,7 @@ namespace Boolean.CSharp.Test
         {
             newcurrentaccount.Create_Account("GR2342456708", 500, "Current");
 
+            newtransaction.Date = DateTime.Now.ToString("dd/MM/yyyy");
             newtransaction.Transaction_type = Main.Enums.Transaction.Withdraw;
             newtransaction.Amount = 500;
             newtransaction.OldBalance = newcurrentaccount.balance;
@@ -47,6 +49,7 @@ namespace Boolean.CSharp.Test
 
             menu.TransactionHistory.Add(newtransaction);
 
+            secondtransaction.Date = DateTime.Now.ToString("dd/MM/yyyy");
             secondtransaction.Transaction_type = Main.Enums.Transaction.Deposit;
             secondtransaction.Amount = 1500;
             secondtransaction.OldBalance = newcurrentaccount.balance;
@@ -54,6 +57,7 @@ namespace Boolean.CSharp.Test
 
             menu.TransactionHistory.Add(secondtransaction);
 
+            thirdtransaction.Date = DateTime.Now.ToString("dd/MM/yyyy");
             thirdtransaction.Transaction_type = Main.Enums.Transaction.Deposit;
             thirdtransaction.Amount = 700;
             thirdtransaction.OldBalance = newcurrentaccount.balance;

@@ -12,6 +12,7 @@ namespace Boolean.CSharp.Main
 {
     public class BankTransaction
     {
+        public string Date { get; set; }
         public Enums.Transaction Transaction_type { get; set; }
         public int Amount { get; set; }
         public int OldBalance { get; set; }
