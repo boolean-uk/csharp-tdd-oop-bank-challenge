@@ -1,0 +1,141 @@
+﻿@page "/dashboard"
+@using Boolean.CSharp.Main
+@inject UserManager UserManager
+
+<h3>Welcome to your Gringotts Dashboard</h3>
+
+@if (CurrentUser != null)
+{
+    <h4>Balance: @Account.GetBalance() Galleons</h4>
+
+    <!-- Deposit Section -->
+    <label>Deposit Amount:</label>
+    <input type="number" @bind="depositAmount" min="0" step="0.01" />
+    <button @onclick="Deposit">Deposit</button>
+
+    <!-- Withdraw Section -->
+    <label>Withdraw Amount:</label>
+    <input type="number" @bind="withdrawAmount" min="0" step="0.01" />
+    <button @onclick="Withdraw">Withdraw</button>
+
+    <!-- Overdraft Section -->
+    <label>Overdraft Request Amount:</label>
+    <input type="number" @bind="overdraftAmount" min="0" step="0.01" />
+    <button @onclick="RequestOverdraft">Request Overdraft</button>
+    <button @onclick="ApproveOverdraft">Approve Overdraft</button>
+    <button @onclick="RejectOverdraft">Reject Overdraft</button>
+    <p>Overdraft Limit: @Account.OverdraftLimit Galleons</p>
+    <p>Overdraft Status: @Account.OverdraftStatus</p>
+
+    <!-- Statement Section -->
+    <button @onclick="ShowStatement">Print Statement</button>
+
+    @if (showStatement)
+    {
+        <pre>@Account.PrintStatement()</pre>
+    }
+}
+else
+{
+    <p>@errorMessage</p>
+}
+
+@code {
+    User CurrentUser;
+    Account Account;
+    string errorMessage = string.Empty;
+
+    double depositAmount = 0;
+    double withdrawAmount = 0;
+    double overdraftAmount = 0;
+    bool showStatement = false;
+
+    protected override void OnInitialized()
+    {
+        try
+        {
+            CurrentUser = UserManager.GetLoggedInUser(); 
+
+            if (CurrentUser == null)
+            {
+                errorMessage = "Failed to retrieve user details. Please try logging in again.";
+            }
+            else
+            {
+                Account = new CurrentAccount(AllEnums.Branches.Antwerpen, CurrentUser);
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"An error occurred: {ex.Message}";
+        }
+    }
+
+    void Deposit()
+    {
+        try
+        {
+            Account.Deposit(depositAmount, DateTime.Now);
+            depositAmount = 0; 
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message;
+        }
+    }
+
+    void Withdraw()
+    {
+        try
+        {
+            Account.Withdraw(withdrawAmount, DateTime.Now);
+            withdrawAmount = 0;
+        }
+        catch (ArgumentException ex)
+        {
+            errorMessage = ex.Message;
+        }
+    }
+
+    void RequestOverdraft()
+    {
+        try
+        {
+            Account.RequestOverdraft(overdraftAmount);
+            overdraftAmount = 0; 
+        }
+        catch (ArgumentException ex)
+        {
+            errorMessage = ex.Message;
+        }
+    }
+
+    void ApproveOverdraft()
+    {
+        try
+        {
+            Account.ApproveOverdraft();
+        }
+        catch (InvalidOperationException ex)
+        {
+            errorMessage = ex.Message;
+        }
+    }
+
+    void RejectOverdraft()
+    {
+        try
+        {
+            Account.RejectOverdraft();
+        }
+        catch (InvalidOperationException ex)
+        {
+            errorMessage = ex.Message;
+        }
+    }
+
+    void ShowStatement()
+    {
+        showStatement = true;
+    }
+}
