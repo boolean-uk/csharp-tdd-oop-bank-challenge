@@ -36,7 +36,7 @@ namespace Boolean.CSharp.Main
 
         public void Withdraw(double amount, DateTime date)
         {
-            if (amount > GetBalance())
+            if (amount > (GetBalance() + (OverdraftStatus == OverdraftStatus.Approved ? OverdraftLimit : 0)))
             {
                 throw new ArgumentException("You don't have enough funds on account");
             }
