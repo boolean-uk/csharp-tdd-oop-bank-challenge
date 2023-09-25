@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
+using Transaction = Boolean.CSharp.Main.Enums.Transaction;
 
 namespace Boolean.CSharp.Main
 {
@@ -37,6 +38,22 @@ namespace Boolean.CSharp.Main
             {
                 account.Overdraft = Overdraft.Rejected;
             }
+        }
+
+        public int BalanceFromTransactions(List<BankTransaction> transactionHistory)
+        {
+            int balance = 0;
+
+            foreach (BankTransaction transaction in transactionHistory.Where(t => t.Transaction_type == Transaction.Withdraw))
+            {
+                balance = balance - transaction.Amount;
+            }
+            foreach (BankTransaction transaction in transactionHistory.Where(t => t.Transaction_type == Transaction.Deposit))
+            {
+                balance = balance + transaction.Amount;
+            }
+
+            return balance;
         }
 
     }

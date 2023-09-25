@@ -20,7 +20,7 @@ namespace Boolean.CSharp.Main
         {
             this.account_id = account_id;
             this.balance = balance;
-            this.Account_type = Account.Current;
+            this.Account_type = Account.Savings;
             this.Branch = default;
             this.Overdraft = default;
         }

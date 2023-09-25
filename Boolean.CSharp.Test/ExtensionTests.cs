@@ -32,5 +32,32 @@ namespace Boolean.CSharp.Test
 
             Assert.IsTrue(newcurrentaccount.Overdraft == Main.Enums.Overdraft.Approved);
         }
+
+        [Test]
+        public void GetBalanceFromTransactions()
+        {
+            BankTransaction newtransaction = new BankTransaction();
+            BankTransaction secondtransaction = new BankTransaction();
+
+            newtransaction.Date = DateTime.Now.ToString("dd/MM/yyyy");
+            newtransaction.Transaction_type = Main.Enums.Transaction.Withdraw;
+            newtransaction.Amount = 500;
+            newtransaction.OldBalance = newcurrentaccount.balance;
+            newtransaction.Calculate_Transaction("Withdraw", 500, newcurrentaccount);
+
+            menu.TransactionHistory.Add(newtransaction);
+
+            secondtransaction.Date = DateTime.Now.ToString("dd/MM/yyyy");
+            secondtransaction.Transaction_type = Main.Enums.Transaction.Deposit;
+            secondtransaction.Amount = 1500;
+            secondtransaction.OldBalance = newcurrentaccount.balance;
+            secondtransaction.Calculate_Transaction("Deposit", 1500, newcurrentaccount);
+
+            menu.TransactionHistory.Add(secondtransaction);
+
+            menu.BalanceFromTransactions(menu.TransactionHistory);
+
+            Assert.IsTrue(menu.BalanceFromTransactions(menu.TransactionHistory) == 1000);
+        }
     }
 }
