@@ -34,13 +34,12 @@ public Account createAccount(int accountNr, string type)
 return: createdAccount
 
 Abstract Class: Account
-private string type
 private int accountNr
 private float balance
 
 Methods:
-public void withdraw(int accountNr, float amount)
-public void deposit(int accountNr, float amount)
+public void withdraw(float amount)
+public void deposit(float amount)
 
 Class: SavingsAccount : Account
 

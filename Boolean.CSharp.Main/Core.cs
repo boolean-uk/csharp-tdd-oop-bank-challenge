@@ -17,10 +17,6 @@ namespace Boolean.CSharp.Main
         
         private List<Account> accounts = new List<Account>();
         public List<Account> Accounts { get { return accounts; } }
-        public Customer()
-        {
-
-        }
         public Account createAccount(int accountNr, accountType type)
         {
             if(type == accountType.current)
@@ -40,18 +36,18 @@ namespace Boolean.CSharp.Main
     public abstract class Account
     {
         private int _accountNr;
-        private float _balance;
+        private float _balance = 0;
         public int AccountNr { get { return _accountNr; } }
         public float Balance { get { return _balance; } }
         public Account(int accountNr)
         {
             _accountNr = accountNr;
         }
-        public void withdraw(int accountNr, float ammount)
+        public void withdraw(float amount)
         {
 
         }
-        public void deposit(int accountNr, float ammount)
+        public void deposit(float amount)
         {
 
         }
