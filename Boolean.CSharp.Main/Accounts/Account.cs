@@ -52,7 +52,7 @@ namespace Boolean.CSharp.Main.Accounts
             return false;
         }
 
-        private void CreateTransaction(double credit, double debit)
+        public void CreateTransaction(double credit, double debit)
         {
             Transaction transaction = new(credit, debit, _balance);
             _transactions.Add(transaction);
