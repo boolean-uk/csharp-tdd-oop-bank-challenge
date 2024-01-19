@@ -14,28 +14,28 @@ namespace Boolean.CSharp.Main
     {
         public List<Transaction> Transactions { get; } = new List<Transaction>();
 
+
         public override bool Deposit(decimal amount)
         {
-            return true;
+            return base.Deposit(amount);
+
         }
 
         public override bool Withdraw(decimal amount)
         {
-            return true;
+            return base.Withdraw(amount);
+
         }
 
         public override string GenerateStatement()
         {
-            return "";
+            return base.GenerateStatement();
         }
-        protected override void RecordTransaction(Transaction transaction)
-        {
-            Transactions.Add(transaction);
-        }
+
 
         public override decimal GetBalance()
         {
-            return 0m;
+            return base.GetBalance();
         }
     }
 

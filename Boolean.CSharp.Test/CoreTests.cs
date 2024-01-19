@@ -73,6 +73,10 @@ namespace Boolean.CSharp.Test
 
             Assert.IsTrue(CurrentAccountDeposit);
             Assert.That(currentAccountDeposit.GetBalance(), Is.EqualTo(1000m));
+
+            bool CurrentAccountDepositAgain = currentAccountDeposit.Deposit(1000m);
+            Assert.IsTrue(CurrentAccountDepositAgain);
+            Assert.That(currentAccountDeposit.GetBalance(), Is.EqualTo(2000m));
         }
 
 
@@ -84,7 +88,10 @@ namespace Boolean.CSharp.Test
             CurrentAccount currentAccountDepositNegative = _bankuser.Accounts.First() as CurrentAccount;
 
             Assert.IsFalse(currentAccountDepositNegative.Deposit(-100m));
-            Assert.Throws<ArgumentException>(() => currentAccountDepositNegative.Deposit(-100m));
+
+            //checking that nothing has been deposited
+            Assert.That(currentAccountDepositNegative.GetBalance(), Is.EqualTo(0m));
+          
         }
 
 
@@ -95,7 +102,7 @@ namespace Boolean.CSharp.Test
         {
             bool CurrentAccountWithdr = _bankuser.CreateCurrentAccount();
             CurrentAccount currentAccountWithdraw = _bankuser.Accounts.First() as CurrentAccount;
-            currentAccountWithdraw.Withdraw(1000m);
+            currentAccountWithdraw.Deposit(1000m);
             bool CurrentAccountWithdrawal = currentAccountWithdraw.Withdraw(500m);
 
             Assert.IsTrue(CurrentAccountWithdrawal);
@@ -110,9 +117,12 @@ namespace Boolean.CSharp.Test
             bool AccountBalanceTooLow = _bankuser.CreateSavingsAccount();
             SavingsAccount accountBalanceTooLow = _bankuser.Accounts.First() as SavingsAccount;
             accountBalanceTooLow.Deposit(50m);
+            Assert.That(accountBalanceTooLow.GetBalance(), Is.EqualTo(50m));
 
             Assert.IsFalse(accountBalanceTooLow.Withdraw(-100m));
-            Assert.Throws<ArgumentException>(() => accountBalanceTooLow.Withdraw(-100m));
+
+            //testing if the balance is unchanged
+            Assert.That(accountBalanceTooLow.GetBalance(), Is.EqualTo(50m));
         }
 
 
@@ -135,50 +145,49 @@ namespace Boolean.CSharp.Test
             SavingsAccount savingsAccountDepositNegative = _bankuser.Accounts.First() as SavingsAccount;
 
             Assert.IsFalse(savingsAccountDepositNegative.Deposit(-100m));
-            Assert.Throws<ArgumentException>(() => savingsAccountDepositNegative.Deposit(-100m));
+            //checking that nothing has been deposited
+            Assert.That(savingsAccountDepositNegative.GetBalance(), Is.EqualTo(0m));
         }
 
-        
+
+
         [Test]
-        public void Account_RecordTransaction_ShouldAddTransaction()
+        public void Account_GenerateStatement_ShouldReturnCorrectStatement()
         {
-            // Arrange
             SavingsAccount account = new SavingsAccount();
-            Main.Transaction expectedTransaction = new Main.Transaction(DateTime.Now, 500m, 0m);
 
-            // Act
+            // Mock transactions
             account.Deposit(100m);
+            account.Withdraw(50m);
+            account.Deposit(200m);
 
-            // Assert
-            CollectionAssert.Contains(account.Transactions, expectedTransaction);
-        }
-
-        [Test]
-        public void CurrentAccount_GenerateStatement_ShouldReturnCorrectStatement()
-        {
-            // Arrange
-            CurrentAccount currentAccount = new CurrentAccount();
-
-            // Act
-            string statement = currentAccount.GenerateStatement();
-
-            // Assert
-            Assert.AreEqual("Current Account Statement", statement);
-        }
-
-        [Test]
-        public void SavingsAccount_GenerateStatement_ShouldReturnCorrectStatement()
-        {
-            // Arrange
-            SavingsAccount savingsAccount = new SavingsAccount();
+            // Expected statement
+            string expectedStatement =
+                "Transaction Date: " + DateTime.Today.Date.ToString("dd-MM-yyyy HH:mm:ss") + Environment.NewLine +
+                "Credit: 100" + Environment.NewLine +
+                "Debit: 0" + Environment.NewLine +
+                "Balance at the time of transaction: 100" + Environment.NewLine +
+                Environment.NewLine +
+                "Transaction Date: " + DateTime.Today.Date.ToString("dd-MM-yyyy HH:mm:ss") + Environment.NewLine +
+                "Credit: 0" + Environment.NewLine +
+                "Debit: 50" + Environment.NewLine +
+                "Balance at the time of transaction: 50" + Environment.NewLine +
+                Environment.NewLine +
+                "Transaction Date: " + DateTime.Today.Date.ToString("dd-MM-yyyy HH:mm:ss") + Environment.NewLine +
+                "Credit: 200" + Environment.NewLine +
+                "Debit: 0" + Environment.NewLine +
+                "Balance at the time of transaction: 250" + Environment.NewLine +
+                Environment.NewLine;
 
             // Act
-            string statement = savingsAccount.GenerateStatement();
+            string generatedStatement = account.GenerateStatement();
 
             // Assert
-            Assert.AreEqual("Savings Account Statement", statement);
+            Assert.AreEqual(expectedStatement, generatedStatement);
         }
-        
+
+
+
         [Test]
         public void TransactionPropertiesTest()
         {

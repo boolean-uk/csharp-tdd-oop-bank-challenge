@@ -18,13 +18,15 @@ namespace Boolean.CSharp.Main
 
         public bool CreateSavingsAccount()
         {
-            
+            SavingsAccount savingsAccount = new SavingsAccount();
+            Accounts.Add(savingsAccount);
             return true;
         }
 
         public bool CreateCurrentAccount()
         {
-           
+            CurrentAccount currentAccount = new CurrentAccount();
+            Accounts.Add(currentAccount);
             return true;
         }
     }

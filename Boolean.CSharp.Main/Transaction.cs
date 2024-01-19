@@ -18,11 +18,14 @@ namespace Boolean.CSharp.Main
 
         public Transaction(DateTime date, decimal credit, decimal debit)
         {
-            Date = date;
-            Credit = credit;
-            Debit = debit;
+            if ((credit >= 0 && debit == 0) || (credit == 0 && debit >= 0))
+            {
+                Date = date;
+                Credit = credit;
+                Debit = debit;
+            }
+            else { throw new ArgumentException("Can't deposit and withdraw at the same time"); }
         }
-
 
     }
 

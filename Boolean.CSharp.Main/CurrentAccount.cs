@@ -20,27 +20,24 @@ namespace Boolean.CSharp.Main
 
         public override bool Deposit(decimal amount)
         {
-            return true;
+            return base.Deposit(amount);
+            
         }
 
         public override bool Withdraw(decimal amount)
         {
-            return true;
+            return base.Withdraw(amount);
+         
         }
 
         public override string GenerateStatement()
         {
-            return "";
-        }
-
-        protected override void RecordTransaction(Transaction transaction)
-        {
-            Transactions.Add(transaction);
+            return base.GenerateStatement();
         }
 
         public override decimal GetBalance()
         {
-            return 0m;
+            return base.GetBalance();
         }
     }
 
