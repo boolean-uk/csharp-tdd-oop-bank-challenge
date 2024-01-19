@@ -1,0 +1,25 @@
+classDiagram
+
+Customer --o Account : contains accounts
+
+class Customer{
+    -Dictionary<string, Account> _myBankAccounts
+
+}
+
+class Transaction{
+    -string transactionDate
+    -string creditIn
+    -string debitOut
+
+
+}
+
+class Account{
+    -double _balance
+    +double Balance readonly
+
+    -string _accountName
+
+    +string AccountName
+}
