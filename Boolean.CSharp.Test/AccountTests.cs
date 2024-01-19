@@ -72,5 +72,28 @@ namespace Boolean.CSharp.Test
             Assert.That(balance, Is.Not.Null);
             Assert.That(balance, Is.EqualTo(1000.14));
         }
+
+        [Test]
+        public void TestGenerateBankStatement()
+        {
+            //setup
+            DateTime before = DateTime.Now;
+            _account.Deposit(14.44);
+            _account.Withdraw(4.39);
+
+            //execute
+            List<Transaction> statement = _account.GenerateBankStatement();
+
+            //verify
+            Assert.That(statement, Is.Not.Null);
+            Assert.That(statement[0].GetDate(), Is.GreaterThan(before));
+            Assert.That(statement[0].GetDate(), Is.LessThan(DateTime.Now));
+            Assert.That(statement[0].GetCredit(), Is.EqualTo(14.44));
+            Assert.That(statement[0].GetDebit(), Is.EqualTo(0));
+            Assert.That(statement[0].GetBalance(), Is.EqualTo(14.44));
+            Assert.That(statement[1].GetDebit(), Is.EqualTo(4.39));
+            Assert.That(statement[1].GetCredit(), Is.EqualTo(0));
+            Assert.That(statement[1].GetBalance(), Is.EqualTo(14.44 - 4.39));
+        }
     }
 }

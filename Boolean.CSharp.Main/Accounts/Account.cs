@@ -1,4 +1,5 @@
-﻿namespace Boolean.CSharp.Main.Accounts
+﻿
+namespace Boolean.CSharp.Main.Accounts
 {
     public abstract class Account : IAccount
     {
@@ -45,6 +46,11 @@
                 return true;
             };
             return false;
+        }
+
+        public List<Transaction> GenerateBankStatement()
+        {
+            throw new NotImplementedException();
         }
     }
 }
