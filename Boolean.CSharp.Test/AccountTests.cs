@@ -20,7 +20,7 @@ namespace Boolean.CSharp.Test
         {
             _user = new Account();
             _genAccount = new GeneralAccount();
-            _savingsAccount = new SavingsAccount();        
+            _savingsAccount = new SavingsAccount();
         }
 
         [Test]
@@ -47,8 +47,10 @@ namespace Boolean.CSharp.Test
         public void UserCanDepositMoney(float amount, TransactionType type, float newBalance)
         {
             IAccount acc = _user.createAccount(_genAccount);
-            Transaction transaction = new Transaction(amount, type, acc.getBalance());
-            bool isSuccess = acc.MakeTransaction(transaction);
+
+            // float amount, TransactionType type, string date = null
+
+            bool isSuccess = acc.MakeTransaction( amount , type , DateTime.Now.ToString());
 
             float balance = acc.getBalance();
             Assert.IsTrue(isSuccess);
@@ -56,8 +58,8 @@ namespace Boolean.CSharp.Test
             
 
             IAccount acc2 = _user.createAccount(_savingsAccount);
-            Transaction transaction2 = new Transaction(amount, type, acc2.getBalance());
-            bool isSuccess2 = acc2.MakeTransaction(transaction2);
+           
+            bool isSuccess2 = acc2.MakeTransaction(amount, type, DateTime.Now.ToString());
 
             float balance2 = acc2.getBalance();
             Assert.AreEqual(newBalance, balance2);
@@ -72,13 +74,12 @@ namespace Boolean.CSharp.Test
         {
             IAccount acc = _user.createAccount(_genAccount);
 
-            Transaction initTransaction = new Transaction(1000.0F, TransactionType.DEPOSIT, acc.getBalance());
-            bool initSuccess = acc.MakeTransaction(initTransaction);
+     
+            bool initSuccess = acc.MakeTransaction(1000.0F, TransactionType.DEPOSIT, DateTime.Now.ToString());
 
             Assert.IsTrue(initSuccess);
 
-            Transaction transaction = new Transaction(amount, type, acc.getBalance());
-            bool isSuccess = acc.MakeTransaction(transaction);
+            bool isSuccess = acc.MakeTransaction(amount, type, DateTime.Now.ToString());
             float balance = acc.getBalance();
 
             Assert.AreEqual(newBalance, balance);
@@ -87,10 +88,10 @@ namespace Boolean.CSharp.Test
 
 
             IAccount acc2 = _user.createAccount(_savingsAccount);
-            bool isSuccess3 = acc2.MakeTransaction(initTransaction);
+            bool isSuccess3 = acc2.MakeTransaction(1000.0F, TransactionType.DEPOSIT, DateTime.Now.ToString());
 
-            Transaction transaction2 = new Transaction(amount, type, acc2.getBalance());
-            bool isSuccess4 = acc2.MakeTransaction(transaction2);
+          
+            bool isSuccess4 = acc2.MakeTransaction(amount, type, DateTime.Now.ToString());
             float balance2 = acc2.getBalance();
 
             Assert.IsTrue(isSuccess3);
@@ -103,11 +104,10 @@ namespace Boolean.CSharp.Test
         public void userCantWithdrawIfBalanceGoesToNegative(float amount, TransactionType type, float newBalance)
         {
             IAccount acc = _user.createAccount(_genAccount);
-            Transaction initTransaction = new Transaction(1000.0F, TransactionType.DEPOSIT, acc.getBalance());
-            acc.MakeTransaction(initTransaction);
+            
+            acc.MakeTransaction(1000.0F, TransactionType.DEPOSIT, DateTime.Now.ToString());
 
-            Transaction transaction = new Transaction(amount, type, acc.getBalance());
-            bool isSuccess = acc.MakeTransaction(transaction);
+            bool isSuccess = acc.MakeTransaction(amount, type, DateTime.Now.ToString());
             float sum = acc.getBalance();
 
             Assert.False(isSuccess);
@@ -124,22 +124,19 @@ namespace Boolean.CSharp.Test
 
             // here
             IAccount acc = _user.createAccount(_genAccount);
-            Transaction it1 = new Transaction("10/01/2012", 1000.0F, TransactionType.DEPOSIT, acc.getBalance());
-            Transaction it2 = new Transaction("13/01/2012", 2000.0F, TransactionType.DEPOSIT, acc.getBalance());
-            Transaction it3 = new Transaction("14/01/2012", 500.0F, TransactionType.WITHDRAW, acc.getBalance());
-
-            acc.MakeTransaction(it1);
-            acc.MakeTransaction(it2);
-            acc.MakeTransaction(it3);
+           
+            acc.MakeTransaction(1000.0F, TransactionType.DEPOSIT, "10/01/2012");
+            acc.MakeTransaction( 2000.0F, TransactionType.DEPOSIT, "13/01/2012");
+            acc.MakeTransaction( 500.0F, TransactionType.WITHDRAW, "14/01/2012");
 
             acc.ListBankStatement();
 
             var outputLines = stringWriter.ToString().Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
 
             Assert.That("    date    || credit  || debit  || balance", Is.EqualTo(outputLines[0]));
-            Assert.That(" 14/01/2012 ||         || 500.00 || 2500.00", Is.EqualTo(outputLines[1]));
-            Assert.That(" 13/01/2012 || 2000.00 ||        || 3000.00", Is.EqualTo(outputLines[2]));
-            Assert.That(" 10/01/2012 || 1000.00 ||        || 1000.00", Is.EqualTo(outputLines[3]));
+            Assert.That(" 14/01/2012 ||         || 500,00 || 2500,00", Is.EqualTo(outputLines[1]));
+            Assert.That(" 13/01/2012 || 2000,00 ||        || 3000,00", Is.EqualTo(outputLines[2]));
+            Assert.That(" 10/01/2012 || 1000,00 ||        || 1000,00", Is.EqualTo(outputLines[3]));
 
 
         }
