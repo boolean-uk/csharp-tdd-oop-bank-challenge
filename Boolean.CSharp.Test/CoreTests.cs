@@ -7,10 +7,12 @@ namespace Boolean.CSharp.Test
     public class CoreTests
     {
         private Customer _customer;
+        private BankStatement _bankStatement;
 
         public CoreTests()
         {
             _customer = new Customer();
+            _bankStatement = new BankStatement();
         }
 
         [Test]
@@ -42,6 +44,15 @@ namespace Boolean.CSharp.Test
             currentAccount.withdraw(10f);
             Assert.That(savingsAccount.Balance, Is.EqualTo(900f));
             Assert.That(currentAccount.Balance, Is.EqualTo(40f));
+        }
+        [Test]
+        public void transactionsAddToList()
+        {
+            SavingsAccount savingsAccount = (SavingsAccount)_customer.createAccount(123456, accountType.savings);
+            savingsAccount.deposit(1000f);
+            DateTime now = DateTime.Now;
+            Transaction transaction = new Transaction(1000f, Transaction.transactionType.deposit, now);
+            Assert.That(_bankStatement.Transaction.ElementAt(0).Equals(transaction));
         }
     }
 }

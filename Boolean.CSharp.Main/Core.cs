@@ -14,7 +14,6 @@ namespace Boolean.CSharp.Main
     }
     public class Customer
     {
-        
         private List<Account> accounts = new List<Account>();
         public List<Account> Accounts { get { return accounts; } }
         public Account createAccount(int accountNr, accountType type)
@@ -68,12 +67,17 @@ namespace Boolean.CSharp.Main
     }
     public class Transaction
     {
-        private float _amount;
-        private string _type;
-        private DateTime _timeStamp;
-        public Transaction()
+        public enum transactionType
         {
-
+            deposit,
+            withdraw
+        }
+        private float _amount;
+        private DateTime _timeStamp;
+        public Transaction(float amount, transactionType type, DateTime timeStamp)
+        {
+            _amount = amount;
+            _timeStamp = timeStamp;
         }
         public Transaction createTransaction()
         {
@@ -82,7 +86,8 @@ namespace Boolean.CSharp.Main
     }
     public class BankStatement
     {
-        private List<Transaction> transaction;
+        private List<Transaction> transaction = new List<Transaction>();
+        public List<Transaction> Transaction { get { return transaction; } }
         public BankStatement()
         {
 
