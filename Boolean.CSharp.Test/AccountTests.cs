@@ -42,24 +42,27 @@ namespace Boolean.CSharp.Test
         }
 
         [TestCase(1000.0F, TransactionType.DEPOSIT, 1000.0F)]
-        [TestCase(0.0F, TransactionType.DEPOSIT, 0.0F)]
+        [TestCase(0.0F, TransactionType.DEPOSIT, 1000.0F)]
+        [TestCase(200.0F, TransactionType.DEPOSIT, 1200.0F)]
         public void UserCanDepositMoney(float amount, TransactionType type, float newBalance)
         {
             IAccount acc = _user.createAccount(_genAccount);
             Transaction transaction = new Transaction(amount, type, acc.getBalance());
-
-            acc.MakeTransaction(transaction);
+            bool isSuccess = acc.MakeTransaction(transaction);
 
             float balance = acc.getBalance();
             Assert.AreEqual(newBalance, balance);
+            Assert.IsTrue(isSuccess);
+
+
 
             IAccount acc2 = _user.createAccount(_savingsAccount);
             Transaction transaction2 = new Transaction(amount, type, acc.getBalance());
-
-            acc.MakeTransaction(transaction2);
+            bool isSuccess2 = acc.MakeTransaction(transaction2);
 
             float balance2 = acc2.getBalance();
             Assert.AreEqual(newBalance, balance2);
+            Assert.IsTrue(isSuccess2);
 
 
         }
@@ -71,22 +74,28 @@ namespace Boolean.CSharp.Test
         {
             IAccount acc = _user.createAccount(_genAccount);
             Transaction initTransaction = new Transaction(1000.0F, TransactionType.DEPOSIT, acc.getBalance());
-            acc.MakeTransaction(initTransaction);
+            bool initSuccess = acc.MakeTransaction(initTransaction);
+
+            Assert.IsTrue(initSuccess);
 
             Transaction transaction = new Transaction(amount, type, acc.getBalance());
-            acc.MakeTransaction(transaction);
-
+            bool isSuccess = acc.MakeTransaction(transaction);
             float balance = acc.getBalance();
+
             Assert.AreEqual(newBalance, balance);
+            Assert.IsTrue(isSuccess);
 
 
-            IAccount acc2 = _user.createAccount(_genAccount);
-            acc2.MakeTransaction(initTransaction);
+
+            IAccount acc2 = _user.createAccount(_savingsAccount);
+            bool isSuccess3 = acc2.MakeTransaction(initTransaction);
 
             Transaction transaction2 = new Transaction(amount, type, acc2.getBalance());
-            acc2.MakeTransaction(transaction2);
-
+            bool isSuccess4 = acc2.MakeTransaction(transaction2);
             float balance2 = acc2.getBalance();
+
+            Assert.IsTrue(isSuccess3);
+            Assert.IsTrue(isSuccess4);
             Assert.AreEqual(newBalance, balance2);
 
         }
