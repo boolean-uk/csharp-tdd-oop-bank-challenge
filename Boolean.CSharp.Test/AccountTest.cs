@@ -44,7 +44,7 @@ namespace Boolean.CSharp.Test
         {
             _account.Deposit(23);
             _account.Withdraw(45);
-            Assert.DoesNotThrow(() => _account.GenerateBankStatements());
+            Assert.That(_account.BankStatements.Count, Is.EqualTo(2));
         }
     }
 }

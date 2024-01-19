@@ -10,17 +10,16 @@ namespace Boolean.CSharp.Main.Accounts
     {
         public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public double Balance { get { return _balance; } }
-        private double _balance = 100d;
 
-        public bool Deposit(double amount)
+        public List<BankStatement> BankStatements { get { return _bankStatements; } }
+
+        private double _balance = 100d;
+        private readonly List<BankStatement> _bankStatements = [];
+
+        public void Deposit(double amount)
         {
             _balance += amount;
-            return true;
-        }
-
-        public void GenerateBankStatements()
-        {
-            throw new NotImplementedException();
+            GenerateBankStatements(amount);
         }
 
         public double Withdraw(double amount)
@@ -30,7 +29,15 @@ namespace Boolean.CSharp.Main.Accounts
                 throw new Exception("Can't withdraw more than the current balance!");
             }
             _balance -= amount;
+            GenerateBankStatements(amount);
             return amount;
         }
+
+        public void GenerateBankStatements(double amount)
+        {
+            BankStatement bankStatement = new(_balance, amount);
+            _bankStatements.Add(bankStatement);
+        }
+
     }
 }
