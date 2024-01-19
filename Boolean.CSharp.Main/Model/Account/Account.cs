@@ -47,12 +47,16 @@ public abstract class Account : IAccount
     public StringBuilder PrintReceipt()
     {
         StringBuilder sb = new StringBuilder();
+        var sortedListDescending = _transactions.OrderByDescending(obj => obj.Date).ToList();
         sb.AppendLine($"Date      || {FormatField("Credit")} || {FormatField("Debit")} || {FormatField("Balance")} || {FormatField("Signature")}");
-        foreach (Transaction t in _transactions)
+        foreach (Transaction t in sortedListDescending)
         {
-            if(t.Type == TransactionType.CREDIT)
+            if(t.Type == TransactionType.CREDIT) {
                 sb.AppendLine($"{t.Date.Day + "/" + t.Date.Month + "/" + t.Date.Year} || {FormatField(t.Amount.ToString())} || {FormatField("")} || {FormatField(t.Balance.ToString())} || {FormatField(t.Signature.Id.ToString())}");
-            sb.AppendLine($"{t.Date.Day + "/" + t.Date.Month + "/" + t.Date.Year} || {FormatField("")} || {FormatField(t.Amount.ToString())} || {FormatField(t.Balance.ToString())} || {FormatField(t.Signature.Id.ToString())}");
+            } else {
+                sb.AppendLine($"{t.Date.Day + "/" + t.Date.Month + "/" + t.Date.Year} || {FormatField("")} || {FormatField(t.Amount.ToString())} || {FormatField(t.Balance.ToString())} || {FormatField(t.Signature.Id.ToString())}");
+            }
+            
         }
         return sb;
     }
