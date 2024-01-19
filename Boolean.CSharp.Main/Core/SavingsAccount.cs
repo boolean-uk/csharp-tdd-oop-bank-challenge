@@ -6,16 +6,11 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main.Core
 {
-    public class SavingsAccount : IAccount
+    public class SavingsAccount : AAccount
     {
-        public SavingsAccount()
+        public SavingsAccount() : base()
         {
 
-        }
-
-        public bool Withdraw(double v)
-        {
-            throw new NotImplementedException();
         }
     }
 }

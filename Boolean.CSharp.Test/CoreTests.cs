@@ -33,10 +33,25 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        public void depositSavingsAccount()
+        public void DepositSavingsAccount()
         {
+            Assert.That(saving.Deposit(15.10d), Is.True);
+        }
+
+        [Test]
+        public void WithdrawSavingsAccount()
+        {
+            saving.Deposit(15.10d);
             Assert.That(saving.Withdraw(15.10d), Is.True);
         }
+
+        [Test]
+        public void WithdrawOverTotalSavingsAccount()
+        {
+            Assert.That(saving.Withdraw(15.10d), Is.False);
+        }
+
+
 
     }
 }

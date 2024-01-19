@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main.Core
 {
-    public class CurrentAccount : IAccount
+    public class CurrentAccount : AAccount
     {
-        public CurrentAccount() { }
+        public CurrentAccount() : base() { }
     }
 }

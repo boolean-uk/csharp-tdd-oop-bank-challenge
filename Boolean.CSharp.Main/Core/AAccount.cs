@@ -8,10 +8,23 @@ namespace Boolean.CSharp.Main.Core
 {
     public abstract class AAccount
     {
-        private double _savings;
-
-        public bool Withdraw()
+        public double _savings { get; private set; }
+        
+        public AAccount()
         {
+            _savings = 0;
+        }
+
+
+        public bool Deposit(double amount)
+        {
+            _savings += amount;
+            return true;
+        }
+
+        public bool Withdraw(double amount)
+        {
+            _savings -= amount;
             return true;
         }
     }
