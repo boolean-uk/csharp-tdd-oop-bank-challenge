@@ -4,6 +4,13 @@ namespace Boolean.CSharp.Main;
 
 public class CreditAccount : IAccount
 {
+    private Branch branch;
+
+    public CreditAccount(Branch branch)
+    {
+        this.branch = branch;
+    }
+
     public List<Transaction> Transactions => throw new NotImplementedException();
 
     public Branch Branch => throw new NotImplementedException();

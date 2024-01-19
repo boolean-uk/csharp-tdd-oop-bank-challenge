@@ -12,6 +12,10 @@ public class PersonalAccount : IAccount
 
     public Guid Id => throw new NotImplementedException();
 
+    public PersonalAccount(Branch branch) {
+
+    }
+
     public Transaction Deposit(int amount)
     {
         throw new NotImplementedException();

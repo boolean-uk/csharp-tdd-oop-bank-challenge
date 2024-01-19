@@ -14,4 +14,7 @@ public class Transaction {
         _balance = balance;
         _signature = signature;
     }
+
+    public int Amount {get {return _amount;}}
+    public int Balance {get {return _balance;}}
 }

@@ -1,4 +1,4 @@
-﻿using Boolean.CSharp.Main;
+using Boolean.CSharp.Main;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -9,21 +9,17 @@ using System.Threading.Tasks;
 namespace Boolean.CSharp.Test
 {
     [TestFixture]
-    public class ExtensionTests
+    public class SignatureTests
     {
-        public ExtensionTests()
+        public SignatureTests()
         {
             
         }
-        [Test]
-        private void TestQuestion1()
-        {
+
+        public void CanCreateSignature(string name, int code)
+        { 
 
         }
-        [Test]
-        private void TestQuestion2()
-        {
 
-        }
     }
 }
