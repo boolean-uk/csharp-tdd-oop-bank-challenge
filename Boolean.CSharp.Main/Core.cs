@@ -23,42 +23,49 @@ namespace Boolean.CSharp.Main
         }
         public Account createAccount(int accountNr, accountType type)
         {
-            return null;
+            if(type == accountType.current)
+            {
+                CurrentAccount account = new CurrentAccount(accountNr);
+                accounts.Add(account);
+                return account;
+            }
+            else
+            {
+                SavingsAccount account = new SavingsAccount(accountNr);
+                accounts.Add(account);
+                return account;
+            }
         }
     }
     public abstract class Account
     {
-        private string _type;
         private int _accountNr;
         private float _balance;
-        public string Type { get { return _type; } }
         public int AccountNr { get { return _accountNr; } }
         public float Balance { get { return _balance; } }
-        public Account(string type, int accountNr, float balance)
+        public Account(int accountNr)
         {
-            _type = type;
             _accountNr = accountNr;
-            _balance = balance;
         }
-        public void withdraw(int accountNr, float amount)
+        public void withdraw(int accountNr, float ammount)
         {
 
         }
-        public void deposit(int accountNr, float amount)
+        public void deposit(int accountNr, float ammount)
         {
 
         }
     }
     public class CurrentAccount : Account
     {
-        public CurrentAccount(string type, int accountNr, float balance) : base(type, accountNr, balance)
+        public CurrentAccount(int accountNr) : base(accountNr)
         {
 
         }
     }
     public class SavingsAccount : Account
     {
-        public SavingsAccount(string type, int accountNr, float balance) : base(type, accountNr, balance)
+        public SavingsAccount(int accountNr) : base(accountNr)
         {
 
         }
