@@ -3,25 +3,26 @@ title: OOP Bank Challange
 ---
 classDiagram
     
-    Account<|--PersonalAccount
-    Account<|--SavingsAccount
+    IAccount<|--PersonalAccount : implements
+    IAccount<|--SavingsAccount : implements
+    IAccount<|--CreditAccount : implements
 
-    Account..>Transaction
-    Account..>Branch
-    Account..>Signature
+    IAccount..>Transaction
+    IAccount..>Branch
+    IAccount..>Signature
 
-    BankManager..>Signature
-
-    Bank..>Account
+    Bank..>IAccount
     Bank..>Transaction
 
-    class Account{
-    - List<Transaction> _transactions
-    - Branch _branch
-    - Signature _signature
-    + Deposit(int amount)
-    + Withdrawl(int amount)
-    + PrintReceipt()
+    class IAccount {
+    <<interface>>
+    IAccount : List<Transaction> Transactions
+    IAccount : Branch Branch
+    IAccount : Guid id
+    IAccount : Signature Signature
+    IAccount : Deposit(int amount)
+    IAccount : Withdrawl(int amount)
+    IAccount : PrintTransaction()
     }
     class PersonalAccount{
     }
@@ -36,12 +37,6 @@ classDiagram
     - int balance
     - Signature _signature 
     }
-    class BankManager {
-    - Signature _signature
-    + ApproveTransaction(Transaction)
-    + RejectTransaction(Transaction)
-
-    }
     class Signature {
     - Guid _signature
     - bool isManager()
@@ -51,6 +46,12 @@ classDiagram
     - string _address
     }
     class Bank{
-    + List<Accounts> Accounts
-    + List<Transaction> Overdrafts
+    - List<IAccount> Accounts
+    - List<Transaction> Overdrafts
+    + AddAccount(IAccount account)
+    + List overdrafts	CreateAccount(IAccount account)
+    + RemoveAccount(IAccount account)
+    + RequestOverdraft(IAccount account)
+    + ApproveOverdraft(Signature signature, Transaction tranaction)	
+    + DeclineOverdraft(Signature signature, Transaction transaction)
     }
