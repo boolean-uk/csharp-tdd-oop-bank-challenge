@@ -2,12 +2,33 @@
 {
     public class User
     {
-        public bool CreateCurrent()
+        public readonly List<Account> accounts;
+
+        public User()
         {
-            throw new NotImplementedException();
+            accounts = new List<Account>();
+        }
+
+        public void CreateCurrent()
+        {
+            accounts.Add(new CurrentAccount());
+        }
+
+        public void CreateSavings()
+        {
+            accounts.Add(new SavingsAccount());
         }
     }
     public class Account
+    {
+
+    }
+
+    public class CurrentAccount : Account
+    {
+
+    }
+    public class SavingsAccount : Account
     {
 
     }

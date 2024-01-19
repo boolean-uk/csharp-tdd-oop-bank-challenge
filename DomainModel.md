@@ -22,14 +22,12 @@ I want to deposit and withdraw funds.
 
 class User
 	PROPERTIES:
-		private List<Account> accounts
+		public readonly List<Account> accounts
 
 	METHODS:
 		public bool CreateCurrent()
-			If there already is an current account return false
 
 		public bool CreateSavings()
-			If there already is an savings account return false
 
 class Account 
 	PROPERTIES:
@@ -38,7 +36,7 @@ class Account
 		
 	METHODS:
 		public bool DepositMoney(float money) 
-			return false if depositing negative amount
+			return false if depositing negative or 0 amount
 
 		public bool WithdrawMoney(float money)
 			return false if withdrawing more than balance or negetive amount
