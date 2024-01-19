@@ -9,13 +9,8 @@ namespace Boolean.CSharp.Main.Accounts
     public abstract class Account : IAccount
     {
         public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public double Balance => throw new NotImplementedException();
-        private double _balance;
-
-        public Account(double startBalance)
-        {
-            _balance = startBalance;
-        }
+        public double Balance { get { return _balance; } }
+        private double _balance = 100d;
 
         public bool Deposit(double amount)
         {
@@ -29,7 +24,12 @@ namespace Boolean.CSharp.Main.Accounts
 
         public double Withdraw(double amount)
         {
-            throw new NotImplementedException();
+            if (amount > _balance)
+            {
+                throw new Exception("Can't withdraw more than the current balance!");
+            }
+            _balance -= amount;
+            return amount;
         }
     }
 }

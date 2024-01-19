@@ -11,6 +11,7 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class AccountTest
     {
+        #pragma warning disable
         private IAccount _account;
         [SetUp]
         public void SetUp()
@@ -24,7 +25,6 @@ namespace Boolean.CSharp.Test
         [TestCase(23.23, 100-23.23)]
         public void WithdrawMoneyTest(double amount, double fact)
         {
-            double currentFunds = _account.Balance;
             _account.Withdraw(amount);
             Assert.That(Math.Round(_account.Balance), Is.EqualTo(Math.Round(fact)));
         }
