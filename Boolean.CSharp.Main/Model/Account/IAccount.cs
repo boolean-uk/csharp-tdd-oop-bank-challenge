@@ -12,5 +12,6 @@ public interface IAccount
 
     Transaction Deposit(int amount);
     Transaction Withdrawl(int amount);
+    int GetBalance();
     StringBuilder PrintReceipt();
 }
