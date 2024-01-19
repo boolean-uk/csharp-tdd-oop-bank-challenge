@@ -37,6 +37,17 @@ namespace Boolean.CSharp.Main.Core
         {
             if (amount > _savings) return false;
             _savings -= amount;
+            Transaction transaction = new Transaction(DateTime.Now, -amount,  _savings);
+            transactions.Add(transaction);
+            return true;
+        }
+
+        public bool Withdraw(double amount, DateTime time)
+        {
+            if (amount > _savings) return false;
+            _savings -= amount;
+            Transaction transaction = new Transaction(time, -amount, _savings);
+            transactions.Add(transaction);
             return true;
         }
     }

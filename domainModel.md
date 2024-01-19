@@ -21,4 +21,4 @@ I want to deposit and withdraw funds.,
 | Account                  | Create()                | Creates and account                                                               | void   |
 |                          | getBankStatement()      | Generates a bank statement with dates, amounts and balance at time of transaction | string |
 |                          | Deposit(double amount)  | Deposits money into the account Returns true if transaction successful            | bool   |
-|                          | Withfraw(double amount) | Withdraws mony from the account Returns true if transaction successful            | bool   |
+|                          | Withdraw(double amount) | Withdraws mony from the account Returns true if transaction successful            | bool   |
