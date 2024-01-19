@@ -51,14 +51,22 @@ namespace Boolean.CSharp.Test
             acc.MakeTransaction(transaction);
 
             float balance = acc.getBalance();
-
             Assert.AreEqual(newBalance, balance);
-           
+
+            IAccount acc2 = _user.createAccount(_savingsAccount);
+            Transaction transaction2 = new Transaction(amount, type, acc.getBalance());
+
+            acc.MakeTransaction(transaction2);
+
+            float balance2 = acc2.getBalance();
+            Assert.AreEqual(newBalance, balance2);
+
 
         }
 
         [TestCase(1000.0F, TransactionType.WITHDRAW, 0.0F)]
         [TestCase(100.0F, TransactionType.WITHDRAW, 900.0F)]
+        [TestCase(1200.0F, TransactionType.WITHDRAW, 1000.0F)]
         public void UserCanWithdrawMoney(float amount, TransactionType type, float newBalance)
         {
             IAccount acc = _user.createAccount(_genAccount);
@@ -66,12 +74,36 @@ namespace Boolean.CSharp.Test
             acc.MakeTransaction(initTransaction);
 
             Transaction transaction = new Transaction(amount, type, acc.getBalance());
-
             acc.MakeTransaction(transaction);
 
             float balance = acc.getBalance();
-
             Assert.AreEqual(newBalance, balance);
+
+
+            IAccount acc2 = _user.createAccount(_genAccount);
+            acc2.MakeTransaction(initTransaction);
+
+            Transaction transaction2 = new Transaction(amount, type, acc2.getBalance());
+            acc2.MakeTransaction(transaction2);
+
+            float balance2 = acc2.getBalance();
+            Assert.AreEqual(newBalance, balance2);
+
+        }
+
+        [Test]
+        public void BankStatements()
+        {
+
+            var stringWriter = new StringWriter();
+            Console.SetOut(stringWriter);
+
+
+            // here
+
+
+            var outputLines = stringWriter.ToString().Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
+            Assert.That("Basket size exceeded!", Is.EqualTo(outputLines[0]));
 
         }
 
