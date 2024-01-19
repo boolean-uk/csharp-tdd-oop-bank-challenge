@@ -2,6 +2,7 @@
 {
     public class CurrentAccount : Account
     {
-        public CurrentAccount(int id) : base(id) { }
+        public float OverdraftLimit { get; set; }
+        public CurrentAccount(int id , Branch branch) : base(id , branch) { }
     }
 }

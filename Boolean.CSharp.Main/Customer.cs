@@ -9,16 +9,16 @@
             Accounts = new List<Account>();
         }
 
-        public CurrentAccount CreateCurrentAccount()
+        public CurrentAccount CreateCurrentAccount(Branch branch)
         {
-            var account = new CurrentAccount(Accounts.Count + 1);
+            var account = new CurrentAccount(Accounts.Count + 1 , branch);
             Accounts.Add(account);
             return account;
         }
 
-        public SavingsAccount CreateSavingsAccount()
+        public SavingsAccount CreateSavingsAccount(Branch branch)
         {
-            var account = new SavingsAccount(Accounts.Count + 1);
+            var account = new SavingsAccount(Accounts.Count + 1 , branch);
             Accounts.Add(account);
             return account;
         }
@@ -26,7 +26,11 @@
         public BankStatement GenerateBankStatement(int accountId)
         {
             var account = Accounts.FirstOrDefault(a => a.Id == accountId);
-            if(account == null) return null;
+            if(account == null)
+            {
+                Console.WriteLine("Account does not exist.");
+                return null;
+            }
 
             return new BankStatement(account.Transactions);
         }
