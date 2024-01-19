@@ -46,5 +46,17 @@ namespace Boolean.CSharp.Test
             _account.Withdraw(45);
             Assert.That(_account.BankStatements.Count, Is.EqualTo(2));
         }
+
+        [Test]
+        public void WithdrawShouldNotAcceptNegativeValues()
+        {
+            Assert.Throws<Exception>(() => _account.Withdraw(-1));
+        }
+
+        [Test]
+        public void DepositShouldNotAcceptNegativeValues()
+        {
+            Assert.Throws<Exception>(() => _account.Deposit(-1));
+        }
     }
 }
