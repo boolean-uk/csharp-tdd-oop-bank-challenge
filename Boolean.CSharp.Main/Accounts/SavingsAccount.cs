@@ -1,4 +1,4 @@
-﻿namespace Boolean.CSharp.Main
+﻿namespace Boolean.CSharp.Main.Accounts
 {
     public class SavingsAccount(Customer customer) : Account(customer)
     {

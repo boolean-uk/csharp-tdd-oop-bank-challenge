@@ -1,14 +1,5 @@
-﻿
-namespace Boolean.CSharp.Main
+﻿namespace Boolean.CSharp.Main.Accounts
 {
-    public interface IAccount
-    {
-        AccountTypes GetAccountType();
-        double GetBalance();
-        Customer GetAccountOwner();
-        bool Deposit(double amount);
-        bool Withdraw(double amount);
-    }
     public abstract class Account : IAccount
     {
         private Customer _owner;

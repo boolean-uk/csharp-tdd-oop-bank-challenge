@@ -1,4 +1,5 @@
 ﻿using Boolean.CSharp.Main;
+using Boolean.CSharp.Main.Accounts;
 using NUnit.Framework;
 
 namespace Boolean.CSharp.Test
@@ -11,7 +12,7 @@ namespace Boolean.CSharp.Test
         {
             //setup
             Bank bank = new();
-            Customer customer = new();
+            Customer customer = new("I");
 
             //execute
             Account? shouldBeCurrentAccount = bank.CreateAccount(customer, AccountTypes.Current);
@@ -30,7 +31,7 @@ namespace Boolean.CSharp.Test
         {
             //setup
             Bank bank = new();
-            Customer customer = new();
+            Customer customer = new("K");
             Account? a1 = bank.CreateAccount(customer, AccountTypes.Current);
             Account? a2 = bank.CreateAccount(customer, AccountTypes.Savings);
 
