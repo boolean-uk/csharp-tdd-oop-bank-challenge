@@ -53,26 +53,24 @@ I want statements to be sent as messages to my phone.
 * `public Account()`
   - `Account Constructor`
 
-* `public getBalance()`
+* `public float getBalance()`
   - `return transactions(x => x.Amount).Sum()`
   
-* `public getBranch()`
+* `public string getBranch()`
   - `return countryBranch`
 
-* `public void SubmitFund(float amout)`
-  - `balance.Add(amount)`
+* `public void SubmitFund(Transaction transaction)`
+  - `transactions.Add(transaction)`
   
 * `public void RequestOverdraft(Manager manager, float amout)`
   - `requests manager for overdraft. Sends user id, account id, overdraft amount and current account balance to Manager.`
   - `bool accepted = Manager.overDraftRequestResponse()`
   - `if accepted message "overdraft accepted" else send a message "not accepted!"`
 
-* `public void WithdrawFund(float amout)`
-  - `float newBalance = balance.Sum() - amount;`
-  - `balance.Clear()`
-  - `balance.Add(newBalance)`
+* `public void WithdrawFund(Transaction transaction)`
+  - `transactions.Add(transaction)`
   
-* `public void ListBankStatements()`
+* `public void ListBankStatement()`
   - `Console.WriteLine transaction list items`
 
 
@@ -116,6 +114,7 @@ I want statements to be sent as messages to my phone.
 
 
 
+
 ### Class:
 * `Manager`
 
@@ -145,6 +144,5 @@ I want statements to be sent as messages to my phone.
 * `float currentBalance`
 
 #### Methods
-* `public Account(DateTime dt, float Amount, Enum enum, float currentBalance)`
-  - `Account Constructor`
+* `public Transaction(DateTime dt, float Amount, string type)`
 
