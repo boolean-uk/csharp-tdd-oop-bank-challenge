@@ -80,4 +80,3 @@ As a customer,
 So I can stay up to date,
 I want statements to be sent as messages to my phone.
 ```
-

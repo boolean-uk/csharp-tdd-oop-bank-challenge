@@ -1,0 +1,60 @@
+---
+title: Bank
+---
+classDiagram
+class IAccount{
+    <<Interface>>
+    -Float _balance get
+
+    +bool deposit(float amount)
+    +bool withdrawal(float amount)
+}
+
+class CurrentAccount{
+    -Float _balance get
+
+    +bool deposit(float amount)
+    +bool withdrawal(float amount)
+}
+
+class SavingsAccount{
+    -Float _balance get
+
+    +bool deposit(float amount)
+    +bool withdrawal(float amount)
+}
+
+class Transaction{
+    -DateTime _time get
+    -String _typeOfTransaction get
+    -Float _amount get
+    -Float _balance get
+}
+
+class BankStatement{
+    -List<Transaction transaction> BankStatementList
+
+    +void AddTransaction(DateTime time, string type, float amount, float balande)
+    +string PrintBankStatement()
+}
+
+class Bank{
+    -CurrentAccount _currentAccount
+    -SavingsAccount _savingsAccount
+    -BankStatement _bankStatement
+
+    +string DepositToCurrentAccount(float amount)
+    +string DepositToSavingsACcount(float amount)
+    +string WithdrawFromCurrentAccount(float amount)
+    +string WithdrawFromSavingsAccount(float amount)
+    +string GetBankStatement()
+}
+
+BankStatement "1" --> "*" Transaction
+
+Bank "1" --> "1" CurrentAccount
+Bank "1" --> "1" SavingsAccount
+Bank "1" --> "1" BankStatement
+
+IAccount <|-- CurrentAccount : implements
+IAccount <|-- SavingsAccount : implements
