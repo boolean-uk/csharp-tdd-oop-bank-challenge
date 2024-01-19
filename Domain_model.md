@@ -33,7 +33,7 @@ Methods:
 public Account createAccount(int accountNr, string type)
 return: createdAccount
 
-Class: Account
+Abstract Class: Account
 private string type
 private int accountNr
 private float balance
