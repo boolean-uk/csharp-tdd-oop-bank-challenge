@@ -6,18 +6,20 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class CoreTests
     {
-        private Core _core;
-
-        public CoreTests()
+        [Test]
+        public void CreateCurrentAccount()
         {
-            _core = new Core();
-
+            User user = new User();
+            Assert.That(user.CreateCurrent(), Is.True);
+            Assert.That(user.accounts[0], Is.TypeOf<CurrentAccount>());
         }
 
         [Test]
-        public void TestQuestion1()
+        public void CreateSavingsAccount()
         {
-
+            User user = new User();
+            Assert.That(user.CreateSavings(), Is.True);
+            Assert.That(user.accounts[0], Is.TypeOf<SavingsAccount>());
         }
 
     }
