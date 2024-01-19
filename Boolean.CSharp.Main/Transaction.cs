@@ -6,7 +6,12 @@ using System.Text;
 
 namespace Boolean.CSharp.Main
 {
-    public class Core
+    public enum TransactionType
+    {
+        DEPOSIT,
+        WITHDRAW
+    }
+    public class Transaction
     {
 
 

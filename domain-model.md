@@ -59,7 +59,7 @@ I want statements to be sent as messages to my phone.
 * `public string getBranch()`
   - `return countryBranch`
 
-* `public void SubmitFund(Transaction transaction)`
+* `public void DepositFund(Transaction transaction)`
   - `transactions.Add(transaction)`
   
 * `public void RequestOverdraft(Manager manager, float amout)`
