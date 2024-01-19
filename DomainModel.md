@@ -17,6 +17,10 @@ As a customer,
 So I can use my account,
 I want to deposit and withdraw funds.
 
+As an engineer,
+So I don't need to keep track of state,
+I want account balances to be calculated based on transaction history instead of stored in memory.
+
 ```
 ```
 
@@ -28,7 +32,7 @@ class User
 
 class Account 
 	PROPERTIES:
-		private float balance
+		
 		private List<Transaction> transactions
 		
 	METHODS:
@@ -49,7 +53,7 @@ class currentAccunt : Account
 struct Transaction
 	PROPERTIES:
 		pulic float amount {get;}
-		public float balance {get;}
+
 		public bool isCredit {get;}
 		public DateOnly transactionDate {get;} // Initialized at creation
 

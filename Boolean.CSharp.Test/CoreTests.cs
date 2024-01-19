@@ -50,14 +50,38 @@ namespace Boolean.CSharp.Test
             Assert.That(currentAcount.GetBalance(), Is.EqualTo(startingAmount - balanceChange));
         }
 
-        [TestCase(10f)]
-        [TestCase(0)]
-        public void GetBalanceTest(float amount)
+        [Test]
+        public void GetBalanceTest()
         {
             User user = new User();
             Account current = user.CreateCurrent();
-            current.DepositMoney(amount);
-            Assert.That(current.GetBalance(), Is.EqualTo(amount));
+            float expetecdAmount = 0;
+            Random random = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                int rndCase = random.Next(0, 2);
+                float rndAmount = random.Next(0, 10000);
+                switch (rndCase)
+                {
+                    case 0:
+                        if (current.DepositMoney(rndAmount))
+                        {
+                            expetecdAmount += rndAmount;
+                        }
+
+                        break;
+                    case 1:
+                        if (current.WithdrawMoney(rndAmount))
+                        {
+                            expetecdAmount -= rndAmount;
+                        }
+                        break;
+                    default:
+                        Assert.Fail();
+                        break;
+                }
+            }
+            Assert.That(current.GetBalance(), Is.EqualTo(expetecdAmount));
         }
 
         [TestCase(10f, 10f, true)]
