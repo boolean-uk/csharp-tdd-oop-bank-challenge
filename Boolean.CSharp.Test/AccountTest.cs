@@ -28,5 +28,15 @@ namespace Boolean.CSharp.Test
             _account.Withdraw(amount);
             Assert.That(Math.Round(_account.Balance), Is.EqualTo(Math.Round(fact)));
         }
+
+        [Test]
+        [TestCase(10, 110)]
+        [TestCase(125.3, 225.3)]
+        [TestCase(10.45, 110.45)]
+        public void DepositMoneyTest(double amount, double fact)
+        {
+            _account.Deposit(amount);
+            Assert.That(Math.Round(_account.Balance), Is.EqualTo(Math.Round(fact)));
+        }
     }
 }
