@@ -33,14 +33,14 @@ class User
 
 class Account 
 	PROPERTIES:
-		protected float balance
-		protected List<Transaction> transactions
+		private float balance
+		private List<Transaction> transactions
 		
 	METHODS:
 		public bool DepositMoney(float money) 
 			return false if depositing negative amount
 
-		public bool WithdrawMoney(float money, Account account)
+		public bool WithdrawMoney(float money)
 			return false if withdrawing more than balance or negetive amount
 
 		public string[] GenerateBankStatement() //Also print to console
@@ -49,10 +49,9 @@ class savingsAccount : Account
 
 class currentAccunt : Account
 
-
 struct Transaction
 	PROPERTIES:
-		private DateTime transactionDate {get;}
+		private DateOnly transactionDate {get;}
 		private float amount {get;}
 		private bool isCredit {get;}
 		private float balance {get;}
