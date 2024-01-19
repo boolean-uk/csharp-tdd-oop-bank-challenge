@@ -33,22 +33,22 @@ Class: Account
 private string type
 private int accountNr
 private float balance
-private int PIN
 public float amount
-public list<Transaction> 
 
 Methods:
-public void withdraw(int accountNr, int PIN, float amount)
-public void deposit(int accountNr, int PIN, float amount)
+public void withdraw(int accountNr, float amount)
+public void deposit(int accountNr, float amount)
 
-Class: Transaction
+Class: Transaction : Account
 private float amount
-private string type
+private string transactionType
 private DateTime timeStamp
 
+Methods:
 public string createTransaction()
 
 Class: BankStatement
+public list<Transaction> transaction
 
 Methods:
 public void printStatement()

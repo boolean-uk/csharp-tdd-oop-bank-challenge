@@ -1,11 +1,10 @@
 classDiagram
 
-    Customer <.. Account
+    Customer <-- Account
     Transaction --> BankStatement
     Account <|-- Transaction
     
     class Customer {
-        -int PIN
         +createAccount(int accountNr)
     }
 
@@ -13,10 +12,9 @@ classDiagram
         -string type
         -int accountNr
         -float balance
-        -int PIN
         +float amount
-        +withdraw(int accountNr, int PIN, float amount)
-        +deposit(int accountNr, int PIN, float amount)
+        +withdraw(int accountNr, float amount)
+        +deposit(int accountNr,float amount)
     }
     class Transaction{
         -float amount
@@ -25,5 +23,6 @@ classDiagram
         +string createTransaction(float amount, string type, DateTime timeStamp)
     }
     class BankStatement{
+        +List<Transaction> transactions
         +printStatement(int accountNr)
     }
