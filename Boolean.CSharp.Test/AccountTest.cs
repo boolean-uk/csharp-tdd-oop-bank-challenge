@@ -16,7 +16,7 @@ namespace Boolean.CSharp.Test
         [SetUp]
         public void SetUp()
         {
-            _account = new CurrentAccount();
+            _account = new CurrentAccount("Test Account");
         }
 
         [Test]

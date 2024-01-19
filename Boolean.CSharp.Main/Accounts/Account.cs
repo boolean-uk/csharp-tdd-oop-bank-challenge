@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main.Accounts
 {
-    public abstract class Account : IAccount
+    public abstract class Account(string name) : IAccount
     {
-        public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Name { get {  return name; } }
         public double Balance { get { return _balance; } }
 
         public List<BankStatement> BankStatements { get { return _bankStatements; } }

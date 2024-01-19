@@ -8,5 +8,8 @@ namespace Boolean.CSharp.Main.Accounts
 {
     public class CurrentAccount : Account
     {
+        public CurrentAccount(string name) : base(name)
+        {
+        }
     }
 }

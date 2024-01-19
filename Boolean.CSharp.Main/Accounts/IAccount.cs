@@ -2,7 +2,7 @@
 {
     public interface IAccount
     {
-        public string Name { get; set; }
+        public string Name { get; }
         public double Balance { get; }
         public List<BankStatement> BankStatements { get; }
         public void GenerateBankStatements(double amount);

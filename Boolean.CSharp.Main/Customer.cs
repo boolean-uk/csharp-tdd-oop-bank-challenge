@@ -9,10 +9,18 @@ namespace Boolean.CSharp.Main
 {
     public class Customer
     {
-        private List<IAccount> _accounts = new();
-        public void CreateAccount(string name)
+        private List<IAccount> _accounts = [];
+        public void CreateAccount(string name, AccountType type)
         {
-            throw new NotImplementedException();
+            switch (type)
+            {
+                case (AccountType.Current):
+                    _accounts.Add(new CurrentAccount(name));
+                    break;
+                case AccountType.Savings:
+                    _accounts.Add(new SavingsAccount(name));
+                    break;
+            }
         }
 
         public List<IAccount> GetAccounts()
