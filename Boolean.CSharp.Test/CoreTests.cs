@@ -51,6 +51,27 @@ namespace Boolean.CSharp.Test
             Assert.That(saving.Withdraw(15.10d), Is.False);
         }
 
+        [Test]
+        public void WithdrawWithInfo()
+        {
+            saving.Deposit(15.10d);
+            Transaction transaction = saving.transactions[0];
+            Assert.That(transaction.Time, Is.EqualTo(DateTime.Now.ToString("dd/mm/yyyy")));
+            Assert.That(transaction.Balance, Is.EqualTo(15.10d.ToString("C2")));
+            Assert.That(transaction.Amount, Is.EqualTo(15.10d.ToString("C2")));
+        }
+
+        [Test]
+        public void DepositWithInfo()
+        {
+            saving.Deposit(15.10d);
+            saving.Withdraw(15.10d);
+            Transaction transaction = saving.transactions[1];
+            Assert.That(transaction.Time, Is.EqualTo(DateTime.Now.ToString("dd/mm/yyyy")));
+            Assert.That(transaction.Balance, Is.EqualTo(15.10d.ToString("C2")));
+            Assert.That(transaction.Amount, Is.EqualTo(15.10d.ToString("C2")));
+        }
+
 
 
     }

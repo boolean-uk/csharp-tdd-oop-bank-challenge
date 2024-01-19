@@ -11,7 +11,7 @@ namespace Boolean.CSharp.Main.Core
         private DateTime time;
         private double amount, balance;
 
-        Transaction(DateTime time, double amount, double balance)
+        public Transaction(DateTime time, double amount, double balance)
         {
             this.time = time;
             this.amount = amount;
