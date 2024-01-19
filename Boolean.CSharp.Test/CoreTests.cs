@@ -15,5 +15,11 @@ namespace Boolean.CSharp.Test
             Assert.Pass();
         }
 
+        [Test]
+        public void createSavingsAccount() { 
+            SavingsAccount savingsAccount = new SavingsAccount();
+            Assert.Pass();
+        }
+
     }
 }
