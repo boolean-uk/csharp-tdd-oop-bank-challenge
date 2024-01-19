@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main.Core
 {
-    public interface IAccount
+    public abstract class AAccount
     {
+        private double _savings;
+
+        public bool Withdraw()
+        {
+            return true;
+        }
     }
 }

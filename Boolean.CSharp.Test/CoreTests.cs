@@ -8,6 +8,17 @@ namespace Boolean.CSharp.Test
     public class CoreTests
     {
 
+        CurrentAccount current;
+        SavingsAccount saving;
+
+        [SetUp]
+        public void setup()
+        {
+            current = new CurrentAccount();
+            saving = new SavingsAccount();
+
+        }
+
         [Test]
         public void createCurrentAccount()
         {
@@ -19,6 +30,12 @@ namespace Boolean.CSharp.Test
         public void createSavingsAccount() { 
             SavingsAccount savingsAccount = new SavingsAccount();
             Assert.Pass();
+        }
+
+        [Test]
+        public void depositSavingsAccount()
+        {
+            Assert.That(saving.Withdraw(15.10d), Is.True);
         }
 
     }

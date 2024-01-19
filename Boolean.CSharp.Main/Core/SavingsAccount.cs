@@ -12,5 +12,10 @@ namespace Boolean.CSharp.Main.Core
         {
 
         }
+
+        public bool Withdraw(double v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
