@@ -1,0 +1,56 @@
+---
+title: OOP Bank Challange
+---
+classDiagram
+    
+    Account<|--PersonalAccount
+    Account<|--SavingsAccount
+
+    Account..>Transaction
+    Account..>Branch
+    Account..>Signature
+
+    BankManager..>Signature
+
+    Bank..>Account
+    Bank..>Transaction
+
+    class Account{
+    - List<Transaction> _transactions
+    - Branch _branch
+    - Signature _signature
+    + Deposit(int amount)
+    + Withdrawl(int amount)
+    + PrintReceipt()
+    }
+    class PersonalAccount{
+    }
+    class SavingsAccount{
+    }
+    class CreditAccount{
+    + OverDraft(Signature signature, int amount)
+    }
+    class Transaction {
+    - DateTime _date
+    - int amount
+    - int balance
+    - Signature _signature 
+    }
+    class BankManager {
+    - Signature _signature
+    + ApproveTransaction(Transaction)
+    + RejectTransaction(Transaction)
+
+    }
+    class Signature {
+    - Guid _signature
+    - bool isManager()
+    }
+    class Branch {
+    - int _softCode
+    - string _address
+    }
+    class Bank{
+    + List<Accounts> Accounts
+    + List<Transaction> Overdrafts
+    }
