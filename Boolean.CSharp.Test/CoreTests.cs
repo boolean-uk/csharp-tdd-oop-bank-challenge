@@ -29,7 +29,7 @@ namespace Boolean.CSharp.Test
         [TestCase("HTH", 10000, "23/01/2001", false)]
         public void DepositMoney(string code, float amount, string date, bool expected)
         {
-            bool result = bankAccount.DepositFunds("LAX", amount, date);
+            bool result = bankAccount.DepositFunds(code, amount, date);
             Assert.That(expected, Is.EqualTo(result));
         }
 
@@ -52,18 +52,19 @@ namespace Boolean.CSharp.Test
         [Test]
         public void GetTotalBalance()
         {
-            float result = bankAccount.GetBalance("LAX");
-            Assert.That(1400, Is.EqualTo(result));
+            float result = bankAccount.GetTotalBalance("LAX");
+            Assert.That(10400, Is.EqualTo(result));
         }
 
         [TestCase("LAX", 100, "23/01/2001", true)]
         [TestCase("LAX", 10000, "23/01/2001", true)]
         [TestCase("LAX", 1000000, "", false)]
+        [TestCase("LAX", 1000000, "23/01/2001", false)]
         [TestCase("LAX", -50, "26/12/2005", false)]
         [TestCase("HTH", 10000, "23/01/2001", false)]
         public void RequestOverdraftFromManager(string code, float amount, string date, bool expected)
         {
-            bool result = manager.RequestOverdraft(bankAccount, amount, code, date);
+            bool result = manager.RequestOverdraft(bankAccount, code, amount, date);
             Assert.That(expected, Is.EqualTo(result));
         }
     }

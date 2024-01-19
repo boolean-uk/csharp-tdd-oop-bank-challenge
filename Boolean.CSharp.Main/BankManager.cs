@@ -13,9 +13,22 @@ namespace Boolean.CSharp.Main
 
         }
 
-        public bool RequestOverdraft(Account account, float amount, string sortCode, string date)
+        public bool RequestOverdraft(Account account, string sortCode, float amount, string date)
         {
-            return false;
+            if (account == null)
+                return false;
+
+            if (amount == 0 || amount < 0)
+                return false;
+
+            if (date == "")
+                return false;
+
+            if (amount - account.GetTotalBalance(sortCode) > 100000)
+                return false;
+            
+            bool request = account.WithdrawFunds(sortCode, amount, date, true);
+            return request;
         }
     }
 }
