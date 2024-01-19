@@ -26,7 +26,7 @@ namespace Boolean.CSharp.Main
 
         public List<Account> GetAccounts(Customer customer)
         {
-            return _accounts.Where(x => x.Owner == customer).ToList();
+            return _accounts.Where(x => x.GetOwner() == customer).ToList();
         }
     }
 }

@@ -4,23 +4,46 @@ namespace Boolean.CSharp.Main
     public interface IAccount
     {
         AccountTypes GetAccountType();
-        bool GetBalance();
+        double GetBalance();
+        Customer GetAccountOwner();
+        bool Deposit(double amount);
+        bool Withdraw(double amount);
     }
     public abstract class Account : IAccount
     {
-        public Customer Owner { get; set; }
-
+        private Customer _owner;
+        private double _balance;
         public Account(Customer owner)
         {
-            Owner = owner;
+            _owner = owner;
+            _balance = 0;
         }
 
+        public Customer GetOwner()
+        {
+            return _owner;
+        }
 
-        public bool GetBalance()
+        public double GetBalance()
         {
             throw new NotImplementedException();
         }
 
         public abstract AccountTypes GetAccountType();
+
+        public Customer GetAccountOwner()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Deposit(double amount)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Withdraw(double amount)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

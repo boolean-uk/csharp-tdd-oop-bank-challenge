@@ -34,9 +34,9 @@ I want to deposit and withdraw funds.
 ```
 | Classes         | Methods                                     | Scenario                 | Outputs                         |
 |-----------------|---------------------------------------------|--------------------------|---------------------------------|
-| `Account`	      | `deposit(int amount)`                       | If account doesn't exist | false, prints "Invalid account" |
+| `Account`	      | `deposit(double amount)`                    | If account doesn't exist | false, prints "Invalid account" |
 |                 |                                             | If amount <= 0	       | false, prints "Invalid amount to deposit, must be greater than 0"     |
 |                 |                                             | Else           	       | true                            |
-| `Account`	      | `withdraw(int amount)`                      | If account doesn't exist | false, prints "Invalid account" |
+| `Account`	      | `withdraw(double amount)`                   | If account doesn't exist | false, prints "Invalid account" |
 |                 |                                             | If amount > balance      | false, prints $"Balance too low to withdraw {amount}" |
 |                 |                                             | Else	                   | true                            |
