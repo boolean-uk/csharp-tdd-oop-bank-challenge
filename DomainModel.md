@@ -21,13 +21,10 @@ I want to deposit and withdraw funds.
 ```
 
 class User
-	PROPERTIES:
-		public readonly List<Account> accounts
-
 	METHODS:
-		public bool CreateCurrent()
+		public CurrentAccount CreateCurrent()
+		public SavingsAccount CreateSavings()
 
-		public bool CreateSavings()
 
 class Account 
 	PROPERTIES:
@@ -35,11 +32,13 @@ class Account
 		private List<Transaction> transactions
 		
 	METHODS:
-		public bool DepositMoney(float money) 
+		public float GetBalance()
+
+		public bool DepositMoney(float amount) 
 			return false if depositing negative or 0 amount
 
-		public bool WithdrawMoney(float money)
-			return false if withdrawing more than balance or negetive amount
+		public bool WithdrawMoney(float amount)
+			return false if withdrawing more than balance or negetive amount or 0
 
 		public string[] GenerateBankStatement() //Also print to console
 
@@ -49,10 +48,10 @@ class currentAccunt : Account
 
 struct Transaction
 	PROPERTIES:
-		private DateOnly transactionDate {get;}
-		private float amount {get;}
-		private bool isCredit {get;}
-		private float balance {get;}
+		pulic float amount {get;}
+		public float balance {get;}
+		public bool isCredit {get;}
+		public DateOnly transactionDate {get;} // Initialized at creation
 
 	METHODS:
-		Transaction(float amount, DateTime date, bool isCredit, float balance) //constructor
+		Transaction(float amount, float balance, bool isCredit) //constructor

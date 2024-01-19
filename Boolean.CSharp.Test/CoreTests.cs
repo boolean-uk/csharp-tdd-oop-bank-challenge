@@ -10,9 +10,9 @@ namespace Boolean.CSharp.Test
         public void CreateCurrentAccount()
         {
             User user = new User();
-            user.CreateCurrent();
-            Assert.That(user.accounts.Count, Is.EqualTo(1));
-            Assert.That(user.accounts[0], Is.TypeOf<CurrentAccount>());
+            Account currentAcount = user.CreateCurrent();
+            Assert.That(currentAcount, Is.TypeOf<CurrentAccount>());
+            Assert.That(currentAcount.GetBalance(), Is.EqualTo(0));
 
         }
 
@@ -20,20 +20,88 @@ namespace Boolean.CSharp.Test
         public void CreateSavingsAccount()
         {
             User user = new User();
-            user.CreateSavings();
-            Assert.That(user.accounts.Count, Is.EqualTo(1));
-            Assert.That(user.accounts[0], Is.TypeOf<SavingsAccount>());
+            Account savings = user.CreateSavings();
+            Assert.That(savings.GetBalance(), Is.EqualTo(0));
+            Assert.That(savings, Is.TypeOf<SavingsAccount>());
         }
 
-        [TestCase(0f, false)]
-        [TestCase(-1f, false)]
-        [TestCase(10f, true)]
-        public void DepositMoney(float amount, bool expectedResult)
+        [TestCase(0f, 0f, false)]
+        [TestCase(-1f, 0f, false)]
+        [TestCase(10f, 10f, true)]
+        public void DepositMoney(float amount, float balanceAmount, bool expectedResult)
         {
             User user = new User();
-            user.CreateCurrent();
-            Assert.That(user.accounts[0].DepositMoney(amount), Is.EqualTo(expectedResult));
+            Account currentAcount = user.CreateCurrent();
+            Assert.That(currentAcount.DepositMoney(amount), Is.EqualTo(expectedResult));
+            Assert.That(currentAcount.GetBalance(), Is.EqualTo(balanceAmount));
         }
+
+        [TestCase(0, 0, false)]
+        [TestCase(-1f, 0, false)]
+        [TestCase(10f, 10f, true)]
+        [TestCase(1000f, 0f, false)]
+        public void WithdrawMoney(float amount, float balanceChange, bool expectedResult)
+        {
+            float startingAmount = 20;
+            User user = new User();
+            Account currentAcount = user.CreateCurrent();
+            currentAcount.DepositMoney(startingAmount);
+            Assert.That(currentAcount.WithdrawMoney(amount), Is.EqualTo(expectedResult));
+            Assert.That(currentAcount.GetBalance(), Is.EqualTo(startingAmount - balanceChange));
+        }
+
+        [TestCase(10f)]
+        [TestCase(0)]
+        public void GetBalanceTest(float amount)
+        {
+            User user = new User();
+            Account current = user.CreateCurrent();
+            current.DepositMoney(amount);
+            Assert.That(current.GetBalance(), Is.EqualTo(amount));
+        }
+
+        [TestCase(10f, 10f, true)]
+        public void Transaction(float amount, float balance, bool isCredit)
+        {
+            DateOnly date = new DateOnly();
+            Transaction transaction = new Transaction(amount, balance, isCredit);
+            Assert.That(transaction.Amount, Is.EqualTo(amount));
+            Assert.That(transaction.balance, Is.EqualTo(balance));
+            Assert.That(transaction.IsCredit, Is.True);
+            Assert.That(date, Is.EqualTo(transaction.transactionDate));
+        }
+
+        [Test]
+        public void GenerateBankStatmentEmpty()
+        {
+            User user = new User();
+            Account current = user.CreateCurrent();
+            string[] bankStatement = current.GenerateBankStatement();
+            string[] expectedResult = { "date    || credit || debit || balance " };
+            Assert.That(bankStatement, Is.EqualTo(expectedResult));
+        }
+
+        //Hmmm
+        [Test]
+        public void GenerateBankStatment()
+        {
+            User user = new User();
+            Account current = user.CreateCurrent();
+            current.DepositMoney(1000);
+            current.DepositMoney(2000);
+            current.WithdrawMoney(500);
+            DateOnly date = new DateOnly();
+            List<string> bankStatement = current.GenerateBankStatement();
+            List<string> expectedResult = new List<string>
+            {
+                "date\t||credit\t||debit\t||balance",
+                $"{date}\t||\t||500\t||2500",
+                $"{date}\t||2000\t||\t||3000",
+                $"{date}\t||1000\t||500\t||1000"
+            };
+            Assert.That(bankStatement, Is.EqualTo(expectedResult));
+        }
+
 
     }
 }
