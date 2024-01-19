@@ -20,7 +20,7 @@ namespace Boolean.CSharp.Test
         {
             _user = new Account();
             _genAccount = new GeneralAccount();
-            _savingsAccount = new SavingsAccount();
+            _savingsAccount = new SavingsAccount();        
         }
 
         [Test]
@@ -71,6 +71,7 @@ namespace Boolean.CSharp.Test
         public void UserCanWithdrawMoney(float amount, TransactionType type, float newBalance)
         {
             IAccount acc = _user.createAccount(_genAccount);
+
             Transaction initTransaction = new Transaction(1000.0F, TransactionType.DEPOSIT, acc.getBalance());
             bool initSuccess = acc.MakeTransaction(initTransaction);
 
@@ -122,10 +123,24 @@ namespace Boolean.CSharp.Test
 
 
             // here
+            IAccount acc = _user.createAccount(_genAccount);
+            Transaction it1 = new Transaction("10/01/2012", 1000.0F, TransactionType.DEPOSIT, acc.getBalance());
+            Transaction it2 = new Transaction("13/01/2012", 2000.0F, TransactionType.DEPOSIT, acc.getBalance());
+            Transaction it3 = new Transaction("14/01/2012", 500.0F, TransactionType.WITHDRAW, acc.getBalance());
 
+            acc.MakeTransaction(it1);
+            acc.MakeTransaction(it2);
+            acc.MakeTransaction(it3);
+
+            acc.ListBankStatement();
 
             var outputLines = stringWriter.ToString().Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
-            Assert.That("Basket size exceeded!", Is.EqualTo(outputLines[0]));
+
+            Assert.That("    date    || credit  || debit  || balance", Is.EqualTo(outputLines[0]));
+            Assert.That(" 14/01/2012 ||         || 500.00 || 2500.00", Is.EqualTo(outputLines[1]));
+            Assert.That(" 13/01/2012 || 2000.00 ||        || 3000.00", Is.EqualTo(outputLines[2]));
+            Assert.That(" 10/01/2012 || 1000.00 ||        || 1000.00", Is.EqualTo(outputLines[3]));
+
 
         }
 

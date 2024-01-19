@@ -22,11 +22,24 @@ namespace Boolean.CSharp.Main
 
         public TransactionType TransactionType { get { return _type; } }
         public float Amount { get { return _amount; } }
+
+        public DateTime DateTime { get { return _dateTime; } }
         public float BalanceBeforeTransaction { get { return _currentBalance; } }
+
+
         public Transaction(float amount, TransactionType type, float beforeBalance)
         {
             _ID = Guid.NewGuid().ToString();
             _dateTime = DateTime.Now;
+            _amount = amount;
+            _type = type;
+            _currentBalance = beforeBalance;
+        }
+
+        public Transaction(string date, float amount, TransactionType type, float beforeBalance)
+        {
+            _ID = Guid.NewGuid().ToString();
+            _dateTime = DateTime.Parse(date);
             _amount = amount;
             _type = type;
             _currentBalance = beforeBalance;
