@@ -24,6 +24,7 @@ namespace Boolean.CSharp.Main.Core
 
         public bool Withdraw(double amount)
         {
+            if (amount > _savings) return false;
             _savings -= amount;
             return true;
         }
