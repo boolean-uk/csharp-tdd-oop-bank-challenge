@@ -26,24 +26,34 @@ namespace Boolean.CSharp.Main
 
         public double GetBalance()
         {
-            throw new NotImplementedException();
+            return Math.Round(_balance, 2);
         }
 
         public abstract AccountTypes GetAccountType();
 
         public Customer GetAccountOwner()
         {
-            throw new NotImplementedException();
+            return _owner;
         }
 
         public bool Deposit(double amount)
         {
-            throw new NotImplementedException();
+            if (amount > 0)
+            {
+                _balance += amount;
+                return true;
+            };
+            return false;
         }
 
         public bool Withdraw(double amount)
         {
-            throw new NotImplementedException();
+            if (amount <= GetBalance())
+            {
+                _balance -= amount;
+                return true;
+            };
+            return false;
         }
     }
 }
