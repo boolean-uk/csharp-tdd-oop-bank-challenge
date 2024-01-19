@@ -27,7 +27,7 @@ I want to deposit and withdraw funds.
 	</thead>
 	<tbody>
 		<td><code>Customer</code></td>
-		<td><code>CreateAccount(string accountName, AccountType type)</code></td>
+		<td><code>AddAccount(string accountName, AccountType type)</code></td>
 		<td>Creates an account for the user with the given account name</td>
 		<td>Account</td>
 	</tbody>
