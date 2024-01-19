@@ -20,6 +20,22 @@
 
         public float GetBalance()
         {
+            float balance = 0f;
+            foreach (var item in transactions)
+            {
+                if (item.IsCredit)
+                {
+                    balance += item.Amount;
+                }
+                else if (!item.IsCredit)
+                {
+                    balance -= item.Amount;
+                }
+                else
+                {
+                    throw new Exception("Get balance Is credit error");
+                }
+            }
             return balance;
         }
 
@@ -55,29 +71,34 @@
 
         public List<string> GenerateBankStatement()
         {
+            float balance = GetBalance();
             List<string> transactionOutput = new List<string>();
             transactionOutput.Add("date\t\t||credit||debit\t||balance");
 
             for (int i = transactions.Count - 1; i >= 0; i--)
             {
+                float tempBalance = balance;
                 var date = transactions[i].transactionDate.ToString("dd-MM-yyyy");
                 string credit = "";
                 string debit = "";
                 if (transactions[i].IsCredit)
                 {
                     credit = transactions[i].Amount.ToString();
+                    balance -= transactions[i].Amount;
+
                 }
                 else
                 {
                     debit = transactions[i].Amount.ToString();
+                    balance += transactions[i].Amount;
                 }
-                var balance = transactions[i].balance.ToString();
-                transactionOutput.Add($"{date}\t||{credit}\t||{debit}\t||{balance}");
+                transactionOutput.Add($"{date}\t||{credit}\t||{debit}\t||{tempBalance}");
+                tempBalance = balance;
             }
+
             foreach (var item in transactionOutput)
             {
                 Console.WriteLine(item);
-
             }
             return transactionOutput;
         }
@@ -95,13 +116,11 @@
     public struct Transaction
     {
         public float Amount { get; }
-        public float balance { get; }
         public bool IsCredit { get; }
         public DateTime transactionDate { get; }
         public Transaction(float amount, float balance, bool isCredit)
         {
             this.Amount = amount;
-            this.balance = balance;
             this.IsCredit = isCredit;
             this.transactionDate = DateTime.Today;
         }

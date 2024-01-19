@@ -90,7 +90,6 @@ namespace Boolean.CSharp.Test
             DateTime date = DateTime.Today;
             Transaction transaction = new Transaction(amount, balance, isCredit);
             Assert.That(transaction.Amount, Is.EqualTo(amount));
-            Assert.That(transaction.balance, Is.EqualTo(balance));
             Assert.That(transaction.IsCredit, Is.True);
             Assert.That(date, Is.EqualTo(transaction.transactionDate));
         }
