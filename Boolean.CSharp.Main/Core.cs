@@ -45,11 +45,11 @@ namespace Boolean.CSharp.Main
         }
         public void withdraw(float amount)
         {
-
+            _balance -= amount;
         }
         public void deposit(float amount)
         {
-
+            _balance += amount;
         }
     }
     public class CurrentAccount : Account
