@@ -24,9 +24,11 @@ namespace Boolean.CSharp.Main
             return deposits - withdraws;
         }
 
-        public bool MakeTransaction(Transaction transaction)
+        public bool MakeTransaction(float amount, TransactionType type, string date)
         {
             float currentBalance = getBalance();
+
+            Transaction transaction = new Transaction(date, amount, type, currentBalance);
 
             if (transaction.TransactionType == TransactionType.WITHDRAW & currentBalance - transaction.Amount < 0)
             {
@@ -41,6 +43,19 @@ namespace Boolean.CSharp.Main
 
         public void ListBankStatement()
         {
+            Console.WriteLine("    date    || credit  || debit  || balance");
+
+            foreach (Transaction t in _transactions.OrderByDescending(x => x.DateTime))
+            {
+                if (t.TransactionType is TransactionType.DEPOSIT)
+                {
+                    Console.WriteLine($" {DateOnly.FromDateTime(t.DateTime)} || {t.Amount:0.00} ||        || {t.Balance + t.Amount:0.00}");
+                }
+                else
+                {
+                    Console.WriteLine($" {DateOnly.FromDateTime(t.DateTime.Date)} ||         || {t.Amount:0.00} || {t.Balance - t.Amount:0.00}");
+                }
+            }
 
         }
     }

@@ -1,7 +1,9 @@
-﻿using System;
+﻿using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 namespace Boolean.CSharp.Main
@@ -23,9 +25,12 @@ namespace Boolean.CSharp.Main
             return deposits - withdraws;
         }
 
-        public bool MakeTransaction(Transaction transaction)
+        public bool MakeTransaction(float amount, TransactionType type, string date)
         {
             float currentBalance = getBalance();
+
+            Transaction transaction = new Transaction(date, amount, type, currentBalance);
+
 
             if (transaction.TransactionType == TransactionType.WITHDRAW & currentBalance - transaction.Amount < 0)
             {
@@ -41,7 +46,19 @@ namespace Boolean.CSharp.Main
 
         public void ListBankStatement()
         {
+            Console.WriteLine("    date    || credit  || debit  || balance");
 
+            foreach(Transaction t in _transactions)
+            {
+                if (t.TransactionType is TransactionType.DEPOSIT)
+                {
+                    Console.WriteLine($" {t.DateTime} ||         || {t.Amount} || {t.Balance + t.Amount} ");
+                }
+                else
+                {
+                    Console.WriteLine($" {t.DateTime} || {t.Amount}  ||        || {t.Balance - t.Amount} ");
+                }
+            }
         }
 
     }
