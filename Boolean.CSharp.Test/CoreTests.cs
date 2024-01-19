@@ -6,19 +6,19 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class CoreTests
     {
-        private Core _core;
+        // private Core _core;
 
-        public CoreTests()
-        {
-            _core = new Core();
+        // public CoreTests()
+        // {
+        //     _core = new Core();
 
-        }
+        // }
 
-        [Test]
-        public void TestQuestion1()
-        {
+        // [Test]
+        // public void TestQuestion1()
+        // {
 
-        }
+        // }
 
     }
 }
