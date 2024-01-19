@@ -8,25 +8,28 @@ namespace Boolean.CSharp.Test
     {
         private BankAccount bankAccount;
         private SavingsAccount savingsAccount;
+        private BankManager manager;
 
         [SetUp]
         public void SetUp()
         {
-            bankAccount = new BankAccount();
-            savingsAccount = new SavingsAccount();
+            bankAccount = new BankAccount("LAX");
+            savingsAccount = new SavingsAccount("HRW");
+            manager = new BankManager();
 
-            bankAccount.DepositFunds(10000, "23/07/2008");
-            bankAccount.DepositFunds(500, "23/07/2008");
-            bankAccount.WithdrawFunds(100, "24/07/2008");
-            savingsAccount.DepositFunds(50000, "29/02/2016");
+            bankAccount.DepositFunds("LAX", 10000, "23/07/2008");
+            bankAccount.DepositFunds("LAX", 500, "23/07/2008");
+            bankAccount.WithdrawFunds("LAX", 100, "24/07/2008");
+            savingsAccount.DepositFunds("HRW", 50000, "29/02/2016");
         }
 
-        [TestCase(10000, "23/01/2001", true)]
-        [TestCase(1000, "", false)]
-        [TestCase(-50, "26/12/2005", false)]
-        public void DepositMoney(float amount, string date, bool expected)
+        [TestCase("LAX", 10000, "23/01/2001", true)]
+        [TestCase("LAX", 1000, "", false)]
+        [TestCase("LAX", -50, "26/12/2005", false)]
+        [TestCase("HTH", 10000, "23/01/2001", false)]
+        public void DepositMoney(string code, float amount, string date, bool expected)
         {
-            bool result = bankAccount.DepositFunds(amount, date);
+            bool result = bankAccount.DepositFunds("LAX", amount, date);
             Assert.That(expected, Is.EqualTo(result));
         }
 
@@ -35,15 +38,33 @@ namespace Boolean.CSharp.Test
         [TestCase(-50, "", false)]
         public void WithdrawMoney(float amount, string date, bool expected)
         {
-            bool result = bankAccount.WithdrawFunds(amount, date);
+            bool result = bankAccount.WithdrawFunds("LAX", amount, date);
             Assert.That(expected, Is.EqualTo(result));
         }
 
         [Test]
         public void PrintTransactions()
         {
-            string result = bankAccount.GetTransactions();
+            string result = bankAccount.GetTransactions("LAX");
             Console.WriteLine(result);
+        }
+
+        [Test]
+        public void GetTotalBalance()
+        {
+            float result = bankAccount.GetBalance("LAX");
+            Assert.That(1400, Is.EqualTo(result));
+        }
+
+        [TestCase("LAX", 100, "23/01/2001", true)]
+        [TestCase("LAX", 10000, "23/01/2001", true)]
+        [TestCase("LAX", 1000000, "", false)]
+        [TestCase("LAX", -50, "26/12/2005", false)]
+        [TestCase("HTH", 10000, "23/01/2001", false)]
+        public void RequestOverdraftFromManager(string code, float amount, string date, bool expected)
+        {
+            bool result = manager.RequestOverdraft(bankAccount, amount, code, date);
+            Assert.That(expected, Is.EqualTo(result));
         }
     }
 }
