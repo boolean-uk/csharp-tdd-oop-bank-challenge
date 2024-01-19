@@ -43,12 +43,6 @@ I want statements to be sent as messages to my phone.
 ### Class:
 * `IAccount`
 
-#### Properties
-* `private List<Transaction> transactions`
-* `private string countryBranch`
-* `private Guid _ID`
-* `private User user`
-
 #### Methods
 * `public Account()`
   - `Account Constructor`
@@ -79,9 +73,11 @@ I want statements to be sent as messages to my phone.
 * `SavingsAccount : IAccount`
 
 #### Properties
+
 * `private List<Transaction> transactions`
 * `private string countryBranch`
 * `private Guid _ID`
+* `private User user`
 
 #### Methods
 * `(Same as IAccount)`
@@ -95,6 +91,7 @@ I want statements to be sent as messages to my phone.
 * `private List<Transaction> transactions`
 * `private string countryBranch`
 * `private Guid _ID`
+* `private User user`
 
 #### Methods
 * `(Same as IAccount)`
@@ -137,12 +134,12 @@ I want statements to be sent as messages to my phone.
 * `Transaction`
 
 #### Properties
-* `Guid id`
+* `string id`
 * `DateTime`
 * `float Amount`
 * `Enum {Withdraw, Submit}`
 * `float currentBalance`
 
 #### Methods
-* `public Transaction(DateTime dt, float Amount, string type)`
+* `public Transaction(float Amount, Enum type, string type)`
 

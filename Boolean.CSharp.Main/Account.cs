@@ -6,12 +6,12 @@ using System.Text;
 
 namespace Boolean.CSharp.Main
 {
-    public class User
+    public class Account
     {
         private string _ID;
         private List<IAccount> _accounts = new List<IAccount>();
 
-        public User()
+        public Account()
         {
             _ID = Guid.NewGuid().ToString();
 

@@ -9,6 +9,8 @@ namespace Boolean.CSharp.Main
     public interface IAccount
     {
         public float getBalance();
+
+        public void MakeTransaction(Transaction transaction);
  
     }
 }

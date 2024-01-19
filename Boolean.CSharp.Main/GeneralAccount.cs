@@ -19,7 +19,14 @@ namespace Boolean.CSharp.Main
 
         public float getBalance()
         {
-            return 0;
+            float deposits = _transactions.Where(x => x.TransactionType == TransactionType.DEPOSIT).Select(x => x.Amount).ToList().Sum();
+            float withdraws = _transactions.Where(x => x.TransactionType == TransactionType.WITHDRAW).Select(x => x.Amount).ToList().Sum();
+            return deposits - withdraws;
+        }
+
+        public void MakeTransaction(Transaction transaction)
+        {
+            _transactions.Add(transaction);
         }
     }
 }
