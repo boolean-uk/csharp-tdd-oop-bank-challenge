@@ -12,7 +12,7 @@ namespace Boolean.CSharp.Main
 
         public string GetName()
         {
-            throw new NotImplementedException();
+            return _name;
         }
     }
 }
