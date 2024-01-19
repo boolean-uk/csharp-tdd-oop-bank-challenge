@@ -14,7 +14,8 @@ namespace Boolean.CSharp.Main.Accounts
 
         public bool Deposit(double amount)
         {
-            throw new NotImplementedException();
+            _balance += amount;
+            return true;
         }
 
         public void GenerateBankStatements()
