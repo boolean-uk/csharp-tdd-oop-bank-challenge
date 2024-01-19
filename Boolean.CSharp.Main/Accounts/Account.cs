@@ -5,10 +5,12 @@ namespace Boolean.CSharp.Main.Accounts
     {
         private Customer _owner;
         private double _balance;
+        private List<Transaction> _transactions;
         public Account(Customer owner)
         {
             _owner = owner;
             _balance = 0;
+            _transactions = [];
         }
 
         public Customer GetOwner()
@@ -33,6 +35,7 @@ namespace Boolean.CSharp.Main.Accounts
             if (amount > 0)
             {
                 _balance += amount;
+                CreateTransaction(amount, 0);
                 return true;
             };
             return false;
@@ -43,14 +46,21 @@ namespace Boolean.CSharp.Main.Accounts
             if (amount <= GetBalance())
             {
                 _balance -= amount;
+                CreateTransaction(0, amount);
                 return true;
             };
             return false;
         }
 
+        private void CreateTransaction(double credit, double debit)
+        {
+            Transaction transaction = new(credit, debit, _balance);
+            _transactions.Add(transaction);
+        }
+
         public List<Transaction> GenerateBankStatement()
         {
-            throw new NotImplementedException();
+            return _transactions;
         }
     }
 }

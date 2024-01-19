@@ -14,19 +14,9 @@
             _balance = balance;
         }
 
-        public bool GetCredit()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool GetDate()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool GetDebit()
-        {
-            throw new NotImplementedException();
-        }
+        public DateTime GetDate() { return _date; }
+        public double GetCredit() { return _credit; }
+        public double GetDebit() { return _debit; }
+        public double GetBalance() { return _balance; }
     }
 }
