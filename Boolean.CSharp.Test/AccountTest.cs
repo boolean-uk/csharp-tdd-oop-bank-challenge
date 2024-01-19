@@ -38,5 +38,13 @@ namespace Boolean.CSharp.Test
             _account.Deposit(amount);
             Assert.That(Math.Round(_account.Balance), Is.EqualTo(Math.Round(fact)));
         }
+
+        [Test]
+        public void GenerateBankStatementTest()
+        {
+            _account.Deposit(23);
+            _account.Withdraw(45);
+            Assert.DoesNotThrow(() => _account.GenerateBankStatements());
+        }
     }
 }
