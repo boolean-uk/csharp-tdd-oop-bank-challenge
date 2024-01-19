@@ -32,7 +32,7 @@ I want to deposit and withdraw funds.
 		<td>Account</td>
 	</tbody>
 	<tbody>
-		<td><code>Account</code></td>
+		<td><code>IAccount</code></td>
 		<td><code>GenerateBankStatements()</code></td>
 		<td>Prints all transactions, showing transaction date, amount, and balance
 		at the time of the transaction.</td>
