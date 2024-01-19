@@ -18,12 +18,14 @@ namespace Boolean.CSharp.Main.Accounts
 
         public void Deposit(double amount)
         {
+            ArgumentOutOfRangeException.ThrowIfNegative(amount);
             _balance += amount;
             GenerateBankStatements(amount);
         }
 
         public double Withdraw(double amount)
         {
+            ArgumentOutOfRangeException.ThrowIfNegative(amount);
             if (amount > _balance)
             {
                 throw new Exception("Can't withdraw more than the current balance!");

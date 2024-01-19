@@ -50,13 +50,13 @@ namespace Boolean.CSharp.Test
         [Test]
         public void WithdrawShouldNotAcceptNegativeValues()
         {
-            Assert.Throws<Exception>(() => _account.Withdraw(-1));
+            Assert.Throws<ArgumentOutOfRangeException>(() => _account.Withdraw(-1));
         }
 
         [Test]
         public void DepositShouldNotAcceptNegativeValues()
         {
-            Assert.Throws<Exception>(() => _account.Deposit(-1));
+            Assert.Throws<ArgumentOutOfRangeException>(() => _account.Deposit(-1));
         }
     }
 }
