@@ -24,9 +24,24 @@ namespace Boolean.CSharp.Main
             return deposits - withdraws;
         }
 
-        public void MakeTransaction(Transaction transaction)
+        public bool MakeTransaction(Transaction transaction)
         {
+            float currentBalance = getBalance();
+
+            if (transaction.TransactionType == TransactionType.WITHDRAW & currentBalance - transaction.Amount < 0)
+            {
+                Console.WriteLine("WITHDRAW DENIED!");
+                return false;
+    
+            }
+
             _transactions.Add(transaction);
+            return true;
+        }
+
+        public void ListBankStatement()
+        {
+
         }
     }
 }

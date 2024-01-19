@@ -10,7 +10,10 @@ namespace Boolean.CSharp.Main
     {
         public float getBalance();
 
-        public void MakeTransaction(Transaction transaction);
- 
+        public bool MakeTransaction(Transaction transaction);
+
+        public void ListBankStatement();
+
+
     }
 }
