@@ -42,8 +42,8 @@ namespace Boolean.CSharp.Test
         }
 
         [TestCase(1000.0F, TransactionType.DEPOSIT, 1000.0F)]
-        [TestCase(0.0F, TransactionType.DEPOSIT, 1000.0F)]
-        [TestCase(200.0F, TransactionType.DEPOSIT, 1200.0F)]
+        [TestCase(0.0F, TransactionType.DEPOSIT, 0.0F)]
+        [TestCase(200.0F, TransactionType.DEPOSIT, 200.0F)]
         public void UserCanDepositMoney(float amount, TransactionType type, float newBalance)
         {
             IAccount acc = _user.createAccount(_genAccount);
@@ -51,14 +51,13 @@ namespace Boolean.CSharp.Test
             bool isSuccess = acc.MakeTransaction(transaction);
 
             float balance = acc.getBalance();
-            Assert.AreEqual(newBalance, balance);
             Assert.IsTrue(isSuccess);
-
-
+            Assert.AreEqual(newBalance, balance);
+            
 
             IAccount acc2 = _user.createAccount(_savingsAccount);
-            Transaction transaction2 = new Transaction(amount, type, acc.getBalance());
-            bool isSuccess2 = acc.MakeTransaction(transaction2);
+            Transaction transaction2 = new Transaction(amount, type, acc2.getBalance());
+            bool isSuccess2 = acc2.MakeTransaction(transaction2);
 
             float balance2 = acc2.getBalance();
             Assert.AreEqual(newBalance, balance2);
@@ -69,7 +68,6 @@ namespace Boolean.CSharp.Test
 
         [TestCase(1000.0F, TransactionType.WITHDRAW, 0.0F)]
         [TestCase(100.0F, TransactionType.WITHDRAW, 900.0F)]
-        [TestCase(1200.0F, TransactionType.WITHDRAW, 1000.0F)]
         public void UserCanWithdrawMoney(float amount, TransactionType type, float newBalance)
         {
             IAccount acc = _user.createAccount(_genAccount);
@@ -98,6 +96,21 @@ namespace Boolean.CSharp.Test
             Assert.IsTrue(isSuccess4);
             Assert.AreEqual(newBalance, balance2);
 
+        }
+
+        [TestCase(1200.0F, TransactionType.WITHDRAW, 1000.0F)]
+        public void userCantWithdrawIfBalanceGoesToNegative(float amount, TransactionType type, float newBalance)
+        {
+            IAccount acc = _user.createAccount(_genAccount);
+            Transaction initTransaction = new Transaction(1000.0F, TransactionType.DEPOSIT, acc.getBalance());
+            acc.MakeTransaction(initTransaction);
+
+            Transaction transaction = new Transaction(amount, type, acc.getBalance());
+            bool isSuccess = acc.MakeTransaction(transaction);
+            float sum = acc.getBalance();
+
+            Assert.False(isSuccess);
+            Assert.AreEqual(sum, newBalance);
         }
 
         [Test]
