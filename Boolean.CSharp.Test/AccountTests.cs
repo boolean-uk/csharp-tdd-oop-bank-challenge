@@ -11,14 +11,14 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class AccountTests
     {
-        private User _user;
+        private Account _user;
         private GeneralAccount _genAccount;
         private SavingsAccount _savingsAccount;
 
         [SetUp]
         public void SetUp()
         {
-            _user = new User();
+            _user = new Account();
             _genAccount = new GeneralAccount();
             _savingsAccount = new SavingsAccount();
         }
@@ -41,32 +41,37 @@ namespace Boolean.CSharp.Test
 
         }
 
-        [TestCase(1000.0, TransactionType.DEPOSIT, 1000.0)]
-        [TestCase(100.0, TransactionType.WITHDRAW, 900.0)]
+        [TestCase(1000.0F, TransactionType.DEPOSIT, 1000.0F)]
+        [TestCase(0.0F, TransactionType.DEPOSIT, 0.0F)]
         public void UserCanDepositMoney(float amount, TransactionType type, float newBalance)
         {
             IAccount acc = _user.createAccount(_genAccount);
-            Transaction transaction = new Transaction(amount, type);
+            Transaction transaction = new Transaction(amount, type, acc.getBalance());
 
-            acc.DepositFund(transaction);
+            acc.MakeTransaction(transaction);
 
-            float sum = acc.getBalance();
+            float balance = acc.getBalance();
 
-            Assert.AreEqual(newBalance, sum);
+            Assert.AreEqual(newBalance, balance);
            
 
         }
 
-        [TestCase(1000.0, TransactionType.DEPOSIT, 1000.0)]
-        [TestCase(100.0, TransactionType.WITHDRAW, 900.0)]
-        public void UserCanWithdrawMoney(float amount, TransactionType type, string newBalance)
+        [TestCase(1000.0F, TransactionType.WITHDRAW, 0.0F)]
+        [TestCase(100.0F, TransactionType.WITHDRAW, 900.0F)]
+        public void UserCanWithdrawMoney(float amount, TransactionType type, float newBalance)
         {
             IAccount acc = _user.createAccount(_genAccount);
-            Transaction transaction = new Transaction(amount, type);
+            Transaction initTransaction = new Transaction(1000.0F, TransactionType.DEPOSIT, acc.getBalance());
+            acc.MakeTransaction(initTransaction);
 
-            acc.WithdrawFund(transaction);
+            Transaction transaction = new Transaction(amount, type, acc.getBalance());
 
-            Assert.AreEqual(newBalance, sum);
+            acc.MakeTransaction(transaction);
+
+            float balance = acc.getBalance();
+
+            Assert.AreEqual(newBalance, balance);
 
         }
 
