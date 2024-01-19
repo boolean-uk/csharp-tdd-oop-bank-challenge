@@ -1,12 +1,16 @@
-# C# Bank Challenge
+## C# Bank Challenge
 
-## Learning Objectives
+
+### Learning Objectives
+
 - Create domain models from user stories
 - Create class diagrams from domain models
 - Use a red, green, refactor approach to develop robust software
 - Use object-oriented principles to organise a codebase
 
-## Set up instructions
+
+### Set up instructions
+
 - Fork this repository and clone the forked version to your machine
 - Open the Boolean.sln
 
@@ -14,7 +18,8 @@ It's time to flex your programming skills. There are no classes or tests include
 
 Your task is to use everything you've learned to build a small banking application.
 
-## Requirements
+
+### Requirements
 
 1. You **must** create domain models from the user stories provided and include them in the repository
 2. You **must** create class diagrams from your domain models
@@ -22,7 +27,8 @@ Your task is to use everything you've learned to build a small banking applicati
 4. You **must** demonstrate object-oriented principles. You need not include every concept, but you should strive to include as many as possible
 5. You can decide whether to use composition, inheritance, or a combination of both, but at least one **must** be present
 
-## User Stories
+
+### User Stories
 
 ```
 As a customer,
@@ -42,7 +48,8 @@ So I can use my account,
 I want to deposit and withdraw funds.
 ```
 
-## Acceptance Criteria
+
+### Acceptance Criteria
 
 **Given** a client makes a deposit of 1000 on 10-01-2012  
 **And** a deposit of 2000 on 13-01-2012  
@@ -57,7 +64,8 @@ date       || credit  || debit  || balance
 10/01/2012 || 1000.00 ||        || 1000.00
 ```
 
-## Extensions
+
+### Extensions
 
 ```
 As an engineer,
@@ -80,4 +88,3 @@ As a customer,
 So I can stay up to date,
 I want statements to be sent as messages to my phone.
 ```
-
