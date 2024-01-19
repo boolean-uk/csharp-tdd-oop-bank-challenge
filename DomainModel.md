@@ -40,7 +40,7 @@ class Account
 		public bool WithdrawMoney(float amount)
 			return false if withdrawing more than balance or negetive amount or 0
 
-		public string[] GenerateBankStatement() //Also print to console
+		public List<string> GenerateBankStatement() //Also print to console
 
 class savingsAccount : Account
 

@@ -63,7 +63,7 @@ namespace Boolean.CSharp.Test
         [TestCase(10f, 10f, true)]
         public void Transaction(float amount, float balance, bool isCredit)
         {
-            DateOnly date = new DateOnly();
+            DateTime date = DateTime.Today;
             Transaction transaction = new Transaction(amount, balance, isCredit);
             Assert.That(transaction.Amount, Is.EqualTo(amount));
             Assert.That(transaction.balance, Is.EqualTo(balance));
@@ -76,8 +76,8 @@ namespace Boolean.CSharp.Test
         {
             User user = new User();
             Account current = user.CreateCurrent();
-            string[] bankStatement = current.GenerateBankStatement();
-            string[] expectedResult = { "date    || credit || debit || balance " };
+            List<string> bankStatement = current.GenerateBankStatement();
+            List<string> expectedResult = new List<string> { "date\t\t||credit||debit\t||balance" };
             Assert.That(bankStatement, Is.EqualTo(expectedResult));
         }
 
@@ -90,14 +90,15 @@ namespace Boolean.CSharp.Test
             current.DepositMoney(1000);
             current.DepositMoney(2000);
             current.WithdrawMoney(500);
-            DateOnly date = new DateOnly();
+            DateTime date = DateTime.Today;
+            string formatedDate = date.ToString("dd-MM-yyyy");
             List<string> bankStatement = current.GenerateBankStatement();
             List<string> expectedResult = new List<string>
             {
-                "date\t||credit\t||debit\t||balance",
-                $"{date}\t||\t||500\t||2500",
-                $"{date}\t||2000\t||\t||3000",
-                $"{date}\t||1000\t||500\t||1000"
+                "date\t\t||credit||debit\t||balance",
+                $"{formatedDate}\t||\t||500\t||2500",
+                $"{formatedDate}\t||2000\t||\t||3000",
+                $"{formatedDate}\t||1000\t||\t||1000"
             };
             Assert.That(bankStatement, Is.EqualTo(expectedResult));
         }
