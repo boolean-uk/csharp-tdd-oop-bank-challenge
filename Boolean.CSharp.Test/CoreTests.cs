@@ -15,9 +15,10 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        public void TestQuestion1()
+        public void createCurrentAccount()
         {
-
+            CurrentAccount current = new CurrentAccount();
+            Assert.Pass();
         }
 
     }
