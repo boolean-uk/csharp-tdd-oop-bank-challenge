@@ -2,17 +2,32 @@ classDiagram
 
     Customer <-- Account
     Transaction --> BankStatement
-    Account <|-- Transaction
-    
+    Account <-- Transaction
+    Account <|-- SavingsAccount
+    Account <|-- CurrentAccount
     class Customer {
-        +createAccount(int accountNr)
+        -List<Account> accounts
+        +Account createAccount(int accountNr)
     }
 
     class Account{
         -string type
         -int accountNr
         -float balance
-        +float amount
+        +withdraw(int accountNr, float amount)
+        +deposit(int accountNr,float amount)
+    }
+    class CurrentAccount{
+        -string type
+        -int accountNr
+        -float balance
+        +withdraw(int accountNr, float amount)
+        +deposit(int accountNr,float amount)
+    }
+    class SavingsAccount{
+        -string type
+        -int accountNr
+        -float balance
         +withdraw(int accountNr, float amount)
         +deposit(int accountNr,float amount)
     }
@@ -20,7 +35,7 @@ classDiagram
         -float amount
         -string type
         -DateTime timeStamp
-        +string createTransaction(float amount, string type, DateTime timeStamp)
+        +Transaction createTransaction(float amount, string type, DateTime timeStamp)
     }
     class BankStatement{
         +List<Transaction> transactions

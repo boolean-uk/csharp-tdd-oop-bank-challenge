@@ -24,28 +24,36 @@ Then she would see:
 	13/01/2012 || 2000.00 ||        || 3000.00
 	10/01/2012 || 1000.00 ||        || 1000.00
 
+enum accountType: currentAccount, savingsAccount
+
 Class: Customer
+private List<Account> accounts
 
 Methods:
-public void createAccount(int accountNr)
+public Account createAccount(int accountNr, string type)
+return: createdAccount
 
 Class: Account
 private string type
 private int accountNr
 private float balance
-public float amount
 
 Methods:
 public void withdraw(int accountNr, float amount)
 public void deposit(int accountNr, float amount)
 
-Class: Transaction : Account
+Class: SavingsAccount : Account
+
+Class: CurrentAccount : Account
+
+Class: Transaction
 private float amount
 private string transactionType
 private DateTime timeStamp
 
 Methods:
-public string createTransaction()
+public Transaction createTransaction()
+return: this
 
 Class: BankStatement
 public list<Transaction> transaction
