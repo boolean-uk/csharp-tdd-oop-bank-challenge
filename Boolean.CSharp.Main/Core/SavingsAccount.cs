@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main.Core
 {
-    public class SavingsAccount
+    public class SavingsAccount : IAccount
     {
+        public SavingsAccount()
+        {
+
+        }
     }
 }

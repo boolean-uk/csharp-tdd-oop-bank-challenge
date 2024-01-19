@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main.Core
 {
-    public class CurrentAccount : IAccount
+    public interface IAccount
     {
-        public CurrentAccount() { }
+
     }
 }
