@@ -52,3 +52,60 @@ I want to deposit and withdraw funds.
 		<td>double</td>
 	</tbody>
 </table>
+
+```
+As an engineer,
+So I don't need to keep track of state,
+I want account balances to be calculated based on transaction history instead of stored in memory.
+
+As a bank manager,
+So I can expand,
+I want accounts to be associated with specific branches.
+
+As a customer,
+So I have an emergency fund,
+I want to be able to request an overdraft on my account.
+
+As a bank manager,
+So I can safeguard our funds,
+I want to approve or reject overdraft requests.
+
+As a customer,
+So I can stay up to date,
+I want statements to be sent as messages to my phone.
+```
+
+<table>
+	<thead>
+		<td>Class</td>
+		<td>Method</td>
+		<td>Description</td>
+		<td>Output Type</td>
+	</thead>
+	<tbody>
+		<td><code>BankManager</code></td>
+		<td><code>ApproveOverdraftRequest(bool approved)</code></td>
+		<td>Gets an overdraft request from a list and lets the manager
+		approve or deny it.</td>
+		<td>void</td>
+	</tbody>
+	<tbody>
+		<td></td>
+		<td><code>AssignBranch(Account account, BranchType branch)</code></td>
+		<td>Assigns a specified branch to the given account</td>
+		<td>void</td>
+	</tbody>
+	<tbody>
+		<td><code>Customer</code></td>
+		<td><code>RequestOverdraft(Account account)</code></td>
+		<td>Requests an overdraft to the customers bank manager.
+		Returns true if accepted, otherwise false</td>
+		<td>bool</td>
+	</tbody>
+	<tbody>
+		<td></td>
+		<td><code>MessageStatements()</code></td>
+		<td>Sends the statements to the customers phone via SMS</td>
+		<td>void</td>
+	</tbody>
+</table>
