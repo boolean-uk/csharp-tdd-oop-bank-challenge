@@ -83,6 +83,8 @@ namespace Boolean.CSharp.Test
 
             //execute
             List<Transaction> statement = _account.GenerateBankStatement();
+            //For testing purposes also print a visual bank statement:
+            _account.PrintBankStatement();
 
             //verify
             Assert.That(statement, Is.Not.Null);

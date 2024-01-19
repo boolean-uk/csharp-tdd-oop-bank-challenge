@@ -62,5 +62,22 @@ namespace Boolean.CSharp.Main.Accounts
         {
             return _transactions;
         }
+
+        public void PrintBankStatement()
+        {
+            Console.WriteLine("date       || credit  || debit   || balance\n------------------------------------------");
+            foreach (Transaction t in _transactions)
+            {
+                if (t.GetCredit() == 0)
+                {
+                    Console.WriteLine($"{t.GetDate().ToShortDateString()} ||         || {t.GetDebit()}    || {t.GetBalance()}");
+                }
+                else
+                {
+                    Console.WriteLine($"{t.GetDate().ToShortDateString()} || {t.GetCredit()}   ||         || {t.GetBalance()}");
+                }
+
+            }
+        }
     }
 }

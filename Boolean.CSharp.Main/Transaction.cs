@@ -9,9 +9,9 @@
 
         public Transaction(double credit, double debit, double balance)
         {
-            _credit = credit;
-            _debit = debit;
-            _balance = balance;
+            _credit = Math.Round(credit, 2);
+            _debit = Math.Round(debit, 2);
+            _balance = Math.Round(balance, 2);
         }
 
         public DateTime GetDate() { return _date; }
