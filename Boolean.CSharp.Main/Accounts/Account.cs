@@ -29,7 +29,7 @@ namespace Boolean.CSharp.Main.Accounts
                 throw new Exception("Can't withdraw more than the current balance!");
             }
             _balance -= amount;
-            GenerateBankStatements(amount);
+            GenerateBankStatements(-amount);
             return amount;
         }
 
@@ -39,5 +39,20 @@ namespace Boolean.CSharp.Main.Accounts
             _bankStatements.Add(bankStatement);
         }
 
+        public void PrintBankStatements()
+        {
+            var statements = _bankStatements;
+            statements.Sort((a, b) => a.Date.CompareTo(b.Date));
+            Console.WriteLine("{0,10}{1,10}{2,10}{3,10}",
+                "Date", "Credit", "Debit", "Balance");
+            foreach (var statement in statements)
+            {
+                Console.WriteLine("{0,10}{1,10}{2,10}{3,10}",
+                    $"{statement.Date:dd/MM/yyyy}", 
+                    $"{statement.Credit:0.00}", 
+                    $"{statement.Debit:0.00}", 
+                    $"{statement.Balance:0.00}");
+            }
+        }
     }
 }

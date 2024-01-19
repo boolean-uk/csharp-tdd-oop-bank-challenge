@@ -8,19 +8,19 @@ namespace Boolean.CSharp.Main
 {
     public class BankStatement
     {
-        public DateTime Date { get; } = new DateTime();
+        public DateTime Date { get; } = DateTime.Now;
         public double? Credit { get; }
-        public double Debit { get; }
-        public double? Balance { get; }
+        public double? Debit { get; }
+        public double Balance { get; }
 
         public BankStatement(double balance, double amount)
         {
-            if (amount > 0)
+            if (Math.Round(amount) > 0)
             {
                 Credit = amount;
-            } else
+            } else if (amount < 0)
             {
-                Debit = amount;
+                Debit = Math.Abs(amount);
             }
             Balance = balance;
         }
