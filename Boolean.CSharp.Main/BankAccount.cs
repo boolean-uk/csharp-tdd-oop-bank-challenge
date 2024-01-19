@@ -8,7 +8,8 @@ namespace Boolean.CSharp.Main
 {
     public class BankAccount : Account
     {
-        public BankAccount()
+        public BankAccount(string sortCode)
+            : base(sortCode)
         {
 
         }

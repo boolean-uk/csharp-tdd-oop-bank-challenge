@@ -8,16 +8,16 @@ namespace Boolean.CSharp.Main
 {
     public class Account
     {
-        protected float balance;
-        List<Transaction> transactions;
+        private List<Transaction> transactions;
+        protected string sortCode;
 
-        public Account()
+        public Account(string sortCode)
         {
-            balance = 0.0f;
             transactions = new List<Transaction>();
+            this.sortCode = sortCode;
         }
 
-        public bool DepositFunds(float amount, string date)
+        public bool DepositFunds(string sortCode, float amount, string date)
         {
             if (amount < 0)
                 return false;
@@ -25,25 +25,20 @@ namespace Boolean.CSharp.Main
             if (date == "")
                 return false;
 
-            balance += amount;
-            transactions.Add(new Transaction(date, amount, 0.0f, balance));
+            transactions.Add(new Transaction(date, amount, 0.0f));
             return true;
         }
 
-        public bool WithdrawFunds(float amount, string date)
+        public bool WithdrawFunds(string sortCode, float amount, string date)
         {
-            if (balance < amount)
-                return false;
-
             if (date == "")
                 return false;
 
-            balance -= amount;
-            transactions.Add(new Transaction(date, 0.0f, amount, balance));
+            transactions.Add(new Transaction(date, 0.0f, amount));
             return true;
         }
 
-        public string GetTransactions()
+        public string GetTransactions(string sortCode)
         {
             string message = "Date\t|| Credit || Debit || Balance\n";
 
@@ -51,10 +46,20 @@ namespace Boolean.CSharp.Main
             {
                 if (i > 0)
                     message += "\n";
-                message += transactions[i].date + " || " + transactions[i].credit + " || " + transactions[i].debit + " || " + transactions[i].balance;
+                message += transactions[i].date + " || " + transactions[i].credit + " || " + transactions[i].debit;
             }
 
             return message;
+        }
+
+        public float GetBalance(string sortCode)
+        {
+            return 0.0f;
+        }
+
+        private void PrintStatements()
+        {
+
         }
     }
 }

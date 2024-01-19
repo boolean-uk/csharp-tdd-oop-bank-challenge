@@ -11,14 +11,12 @@ namespace Boolean.CSharp.Main
         public string date;
         public float credit;
         public float debit;
-        public float balance;
 
-        public Transaction(string date, float credit, float debit, float balance)
+        public Transaction(string date, float credit, float debit)
         {
             this.date = date;
             this.credit = credit;
             this.debit = debit;
-            this.balance = balance;
         }
     }
 }
