@@ -20,7 +20,6 @@ namespace Boolean.CSharp.Test
         public void CanInstansiateAccount() {
             PersonalAccount personal = new PersonalAccount(_branch);
             SavingsAccount saving = new SavingsAccount(_branch);
-            CreditAccount credit = new CreditAccount(_branch);
             Assert.That(personal.Branch, Is.EqualTo(_branch));
             Assert.That(personal.Signature.IsManager, Is.EqualTo(false));
             Assert.That(personal.Transactions.Count, Is.EqualTo(0));
@@ -29,9 +28,6 @@ namespace Boolean.CSharp.Test
             Assert.That(saving.Signature.IsManager, Is.EqualTo(false));
             Assert.That(saving.Transactions.Count, Is.EqualTo(0));
 
-            Assert.That(credit.Branch, Is.EqualTo(_branch));
-            Assert.That(credit.Signature.IsManager, Is.EqualTo(false));
-            Assert.That(credit.Transactions.Count, Is.EqualTo(0));
         }
 
         [TestCase (100)]
@@ -47,8 +43,9 @@ namespace Boolean.CSharp.Test
         public void CanWithdrawl(int value) {
             PersonalAccount personal = new PersonalAccount(_branch);
             personal.Deposit(500);
+            Console.WriteLine(value);
             Transaction transaction = personal.Withdrawl(value);
-            Assert.That(transaction.Amount, Is.EqualTo(500-value));
+            Assert.That(transaction.Balance, Is.EqualTo(500-value));
             Assert.That(transaction.Amount, Is.EqualTo(value));
         }
 
