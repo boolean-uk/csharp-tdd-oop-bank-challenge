@@ -39,118 +39,149 @@ As a customer,
 So I can stay up to date,
 I want statements to be sent as messages to my phone.
 
+_______
 
 
-
-
-
-### Class:
-* `IAccount`
+### Class
+* interface IAccount
 
 #### Methods
-* `public Account()`
-  - `Account Constructor`
+* public AccountType ACCTYPE { get; }
+* public string BRANCH { get; }
+* public string ID { get; }
+* public float getBalance();
+* public bool MakeTransaction();
+* public void ListBankStatement();
 
-* `public float getBalance()`
-  - `return transactions(x => x.Amount).Sum()`
+_______
+
+### Class
+* abstract Account : IAccount
+
+#### Properties
+* private string _ID;
+* private AccountType _type;
+* private string _branch;
+* private List<Transaction> _transactions = new List<Transaction>();
+
+#### Methods
+* public Account(AccountType type, string branch)
+  - Account Constructor
+
+* public void acceptOverdraft(float amount, TransactionType type)
+  - processes the accepted overdraft
   
-* `public string getBranch()`
-  - `return countryBranch`
+* public static Account createAccount(AccountType type, string branch)
+  - creates a new account.
 
-* `public void DepositFund(Transaction transaction)`
-  - `transactions.Add(transaction)`
+* public float getBalance()
+  - calculates the current balance from the _transactions list
   
-* `public void RequestOverdraft(Manager manager, float amout)`
-  - `requests manager for overdraft. Sends user id, account id, overdraft amount and current account balance to Manager.`
-  - `bool accepted = Manager.overDraftRequestResponse()`
-  - `if accepted message "overdraft accepted" else send a message "not accepted!"`
+* public bool MakeTransaction(float amount, TransactionType type)
+  - adds a new transaction to the _transactions list. Type can be either DEPOSIT or WITHDRAW.
 
-* `public void WithdrawFund(Transaction transaction)`
-  - `transactions.Add(transaction)`
+* public bool MakeTransaction(float amount, TransactionType type, string date)
+  - adds a new transaction to the _transactions list. Type can be either DEPOSIT or WITHDRAW. Date of the transaction is specified separately.
+
+
+* public void ListBankStatement()
+  - prints the _transactions list in the desired format
   
-* `public void ListBankStatement()`
-  - `Console.WriteLine transaction list items`
+_______
 
+### Class:
+* SavingsAccount : Account
 
+#### Methods
+* public SavingsAccount(AccountType type, string branch) : base(type, branch)
+  - Constructor
 
+_______
 
+### Class:
+* GeneralAccount : Account
 
+#### Methods
+* public SavingsAccount(AccountType type, string branch) : base(type, branch)
+  - Constructor
+
+_______
 
 
 
 ### Class:
-* `SavingsAccount : IAccount`
+* Customer
 
 #### Properties
-
-* `private List<Transaction> transactions`
-* `private string countryBranch`
-* `private Guid _ID`
-* `private User user`
+* List<IAccount> _accounts
+* private Guid _ID
 
 #### Methods
-* `(Same as IAccount)`
+* public Customer()
+  - Customer Constructor
 
+* public IAccount addAccount(AccountType type, string branch)
+  - creates new account and adds it to the _accounts list
+  - returns the account
+
+* public bool requestOvedraft(string accountID, float amount)
+  - requests overdraft from manager.
+  - makes sure that the account exists and is a GeneralAccount
+  - if request accepted, the account calls the acceptOverdraft method
+  - returns true if overdraft was successful, false otherwise
+
+* public List<IAccount> ListAccounts()
+  - returns the _accounts list
+
+_______
 
 
 ### Class:
-* `GeneralAccount : IAccount`
+* Manager
 
 #### Properties
-* `private List<Transaction> transactions`
-* `private string countryBranch`
-* `private Guid _ID`
-* `private User user`
+* private static List<Customer> _users= new List<Customer>();
+* public static List<Customer> Users { get { return _users;  } }
 
 #### Methods
-* `(Same as IAccount)`
+* public Manager()
+  - Constructor
+   
+* public void registerCustomer(Customer user)
+  - adds customer to the _users list
 
+* public static bool handleOverdraftRequest(string ID, GeneralAccount account, float amount)
+  - console.writelines the customer id, the requested withdraw amount and the accounts balance
+  - Accepts user input (console.readline) for a Y/N answer
+  - return true if input is Y, false otherwise
 
-
+_______
 
 
 ### Class:
-* `Customer`
+* Transaction
 
 #### Properties
-* `List<IAccount> _accounts`
-* `private Guid _ID`
+* private string _ID;
+* private DateTime _dateTime;
+* private TransactionType _type;
+* private float _amount;
+* private float _currentBalance;
 
 #### Methods
-* `public Customer()`
-  - `Customer Constructor`
+* public TransactionType TransactionType { get { return _type; } }
+  
+* public float Amount { get { return _amount; } }
+  
+* public DateTime DateTime { get { return _dateTime; } }
+  
+* public float Balance { get { return _currentBalance; } }
 
 
+* public Transaction(float amount, TransactionType type, float balance)
+  - constructor, date DateTime.Now
 
+* public Transaction(string date, float amount, TransactionType type, float balance)
+ - constructor, date specified
 
-### Class:
-* `Manager`
-
-#### Properties
-* `List<User> _users`
-
-#### Methods
-* `public Manager()`
-  - `Account Constructor` 
-
-* `public bool overDraftRequestResponse(User user, Account account, float amount, float currentBalance)`
-  - `if user.ID and account.ID exist, accept (true) or reject (false) the request` 
-
-
-
-
-
-
-### Class:
-* `Transaction`
-
-#### Properties
-* `string id`
-* `DateTime`
-* `float Amount`
-* `Enum {Withdraw, Submit}`
-* `float currentBalance`
-
-#### Methods
-* `public Transaction(float Amount, Enum type, string type)`
-
+_______
