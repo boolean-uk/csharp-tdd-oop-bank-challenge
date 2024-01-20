@@ -21,22 +21,45 @@ As an engineer,
 So I don't need to keep track of state,
 I want account balances to be calculated based on transaction history instead of stored in memory.
 
+As a bank manager,
+So I can expand,
+I want accounts to be associated with specific branches.
+
+TODO----------------------------------------------------------
+As a customer,
+So I can stay up to date,
+I want statements to be sent as messages to my phone.
+
 ```
 ```
+
+class BankManager
+	PROPERTIES:
+
+	METHODS:
+		public Transaction ApproveOverdraft(Account account)
+		public bool RejectOverdraft(Account account)
+
+----------------------------------------------------------
 
 class User
 	METHODS:
-		public CurrentAccount CreateCurrent()
-		public SavingsAccount CreateSavings()
+		public CurrentAccount CreateCurrent(BranchCode)
+		public SavingsAccount CreateSavings(BranchCode)
 
+
+----------------------------------------------------------
 
 class Account 
 	PROPERTIES:
-		
-		private List<Transaction> transactions
+		public BranchCode branchCode {get;}
+		public List<Transaction> transactions {get;}
+		public Queue<Overdraft> overdraftRequests {get;}
 		
 	METHODS:
-		public float GetBalance()
+		public Account(BranchCode branchCode)
+
+		public float GetBalance() //Return current balance
 
 		public bool DepositMoney(float amount) 
 			return false if depositing negative or 0 amount
@@ -46,16 +69,29 @@ class Account
 
 		public List<string> GenerateBankStatement() //Also print to console
 
+		public bool OverdraftMoney(float amount)
+			// Check that the withdrawal exceeds the balance amount, not 0, not -i
+
+		public bool CancelOverdraft()
+
 class savingsAccount : Account
 
 class currentAccunt : Account
 
-struct Transaction
+public enum BranchCode
+
+----------------------------------------------------------
+
+class Transaction
 	PROPERTIES:
 		pulic float amount {get;}
 
 		public bool isCredit {get;}
+
 		public DateOnly transactionDate {get;} // Initialized at creation
 
 	METHODS:
-		Transaction(float amount, float balance, bool isCredit) //constructor
+		Transaction(float amount, bool isCredit) //constructor
+
+class Overdraft : Transaction // isCredit locked to true
+
