@@ -1,20 +1,47 @@
-﻿using System;
+﻿using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 namespace Boolean.CSharp.Main
 {
-    public class GeneralAccount : IAccount
+    public enum AccountType
     {
-
+        GENERAL,
+        SAVINGS
+    }
+    public abstract class Account : IAccount
+    {
         private string _ID;
-        List<Transaction> _transactions = new List<Transaction>();
+        private AccountType _type;
+        private List<Transaction> _transactions = new List<Transaction>();
 
-        public GeneralAccount()
+        
+        public string ID { get { return _ID; } }
+        public AccountType Type { get { return _type; } }
+
+        public List<Transaction> transactions { get { return _transactions; } }
+
+        public Account(AccountType type)
         {
             _ID = Guid.NewGuid().ToString();
+            _type = type;
+        }
+
+        public static Account createAccount(AccountType type)
+        {
+            switch (type)
+            {
+                case AccountType.GENERAL:
+                    return new GeneralAccount(type);
+                case AccountType.SAVINGS:
+                    return new SavingsAccount(type);
+                default:
+                    throw new Exception("account type does not exist!");
+            }
         }
 
         public float getBalance()
@@ -30,15 +57,17 @@ namespace Boolean.CSharp.Main
 
             Transaction transaction = new Transaction(date, amount, type, currentBalance);
 
+
             if (transaction.TransactionType == TransactionType.WITHDRAW & currentBalance - transaction.Amount < 0)
             {
                 Console.WriteLine("WITHDRAW DENIED!");
                 return false;
-    
+
             }
 
             _transactions.Add(transaction);
             return true;
+
         }
 
         public void ListBankStatement()
@@ -58,5 +87,6 @@ namespace Boolean.CSharp.Main
             }
 
         }
+
     }
 }

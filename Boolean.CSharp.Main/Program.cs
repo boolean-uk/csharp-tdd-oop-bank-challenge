@@ -4,10 +4,10 @@ using Boolean.CSharp.Main;
 Console.WriteLine("Hello, World!");
 
 
-Account _user = new Account();
+Customer _user = new Customer();
 GeneralAccount _genAccount = new GeneralAccount();
 
-IAccount acc = _user.createAccount(_genAccount);
+IAccount acc = _user.addAccount(AccountType.GENERAL);
 
 
 acc.MakeTransaction(1000.0F, TransactionType.DEPOSIT, "10/01/2012");

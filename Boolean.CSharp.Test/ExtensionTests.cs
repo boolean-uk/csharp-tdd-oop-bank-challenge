@@ -11,16 +11,35 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class ExtensionTests
     {
-        private Extension _extension;
-        public ExtensionTests()
+        private Customer _user;
+
+        [SetUp]
+        public void SetUp()
         {
-            _extension = new Extension();
+            _user = new Customer();
         }
-        [Test]
-        public void TestQuestion1()
+
+
+        [TestCase(AccountType.GENERAL, Branch.ITALY)]
+        [TestCase(AccountType.SAVINGS, Branch.FRANCE)]
+        [TestCase(AccountType.SAVINGS, Branch.SPAIN)]
+        public void AccountsAssosiactedWithBranches(AccountType type, Branch branch)
         {
+            IAccount acc = _user.addAccount(type, branch);
+            Assert.That(acc.Type, branch);
 
         }
+
+        [TestCase(AccountType.GENERAL, Branch.NOTHING)]
+        [TestCase(AccountType.SAVINGS, Branch.NOTHING)]
+        public void NonexistendBranch(AccountType type, Branch branch)
+        {
+            Exception ex = Assert.Throws<System.Exception>(() => _user.addAccount(type, branch));
+            Assert.That(ex.Message, Is.EqualTo("Branch does not exist!"));
+
+        }
+
+
         [Test]
         public void TestQuestion2()
         {

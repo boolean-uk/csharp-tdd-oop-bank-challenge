@@ -6,9 +6,13 @@ using System.Text;
 
 namespace Boolean.CSharp.Main
 {
-    public class IIAccount
+    public class GeneralAccount : Account
     {
+    
+        public GeneralAccount(AccountType type) : base(type)
+        {
 
-
+        }
+      
     }
 }

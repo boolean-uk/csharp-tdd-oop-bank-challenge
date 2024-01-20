@@ -40,6 +40,10 @@ So I can stay up to date,
 I want statements to be sent as messages to my phone.
 
 
+
+
+
+
 ### Class:
 * `IAccount`
 
@@ -66,6 +70,11 @@ I want statements to be sent as messages to my phone.
   
 * `public void ListBankStatement()`
   - `Console.WriteLine transaction list items`
+
+
+
+
+
 
 
 
@@ -98,16 +107,18 @@ I want statements to be sent as messages to my phone.
 
 
 
+
+
 ### Class:
-* `User`
+* `Customer`
 
 #### Properties
 * `List<IAccount> _accounts`
 * `private Guid _ID`
 
 #### Methods
-* `public User()`
-  - `Account Constructor`
+* `public Customer()`
+  - `Customer Constructor`
 
 
 

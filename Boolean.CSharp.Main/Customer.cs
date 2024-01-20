@@ -6,19 +6,20 @@ using System.Text;
 
 namespace Boolean.CSharp.Main
 {
-    public class Account
+    public class Customer
     {
         private string _ID;
         private List<IAccount> _accounts = new List<IAccount>();
 
-        public Account()
+        public Customer()
         {
             _ID = Guid.NewGuid().ToString();
 
         }
 
-        public IAccount createAccount(IAccount account)
+        public IAccount addAccount(AccountType type)
         {
+            IAccount account = Account.createAccount(type);
             _accounts.Add(account);
             return account;
         }
