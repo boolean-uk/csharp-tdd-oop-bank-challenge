@@ -12,6 +12,8 @@ namespace Boolean.CSharp.Main
 
         public string BRANCH { get; }
 
+        public string ID { get; }
+
         public float getBalance();
 
         public bool MakeTransaction( float amount, TransactionType type, string date);

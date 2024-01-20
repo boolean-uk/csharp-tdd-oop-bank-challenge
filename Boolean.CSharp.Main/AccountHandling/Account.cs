@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Transactions;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
@@ -35,6 +36,13 @@ namespace Boolean.CSharp.Main
             _branch = branch;
         }
 
+        public void acceptOverdraft(float amount, TransactionType type)
+        {
+            float currentBalance = getBalance();
+            Transaction transaction = new Transaction(amount, type, currentBalance);
+            _transactions.Add(transaction);
+
+        }
         public static Account createAccount(AccountType type, string branch)
         {
             List<string> _branches = new List<string> { "ITALY", "SPAIN", "FRANCE" };
@@ -68,6 +76,22 @@ namespace Boolean.CSharp.Main
 
             Transaction transaction = new Transaction(date, amount, type, currentBalance);
 
+            if (type == TransactionType.WITHDRAW & currentBalance - transaction.Amount < 0)
+            {
+                Console.WriteLine("WITHDRAW DENIED!");
+                return false;
+
+            }
+
+            _transactions.Add(transaction);
+            return true;
+
+        }
+        public bool MakeTransaction(float amount, TransactionType type)
+        {
+            float currentBalance = getBalance();
+
+            Transaction transaction = new Transaction(amount, type, currentBalance);
 
             if (transaction.TransactionType == TransactionType.WITHDRAW & currentBalance - transaction.Amount < 0)
             {

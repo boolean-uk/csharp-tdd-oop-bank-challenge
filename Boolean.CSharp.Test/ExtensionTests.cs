@@ -51,7 +51,7 @@ namespace Boolean.CSharp.Test
 
             acc.MakeTransaction(500.0F, TransactionType.DEPOSIT);
 
-            var reader = new StringReader("N");
+            var reader = new StringReader(str);
             var writer = new StringWriter();
 
             Console.SetIn(reader);
