@@ -26,7 +26,7 @@ namespace Boolean.CSharp.Test
         public void AccountsAssosiactedWithBranches(AccountType type, string branch)
         {
             IAccount acc = _user.addAccount(type, branch);
-            Assert.AreEqual(acc.ACCTYPE, branch);
+            Assert.AreEqual(acc.BRANCH, branch);
 
         }
 

@@ -22,8 +22,8 @@ namespace Boolean.CSharp.Test
         [Test]
         public void userCanCreateSavingsAndGeneralAccount()
         {
-            IAccount acc = _user.addAccount(AccountType.GENERAL);
-            IAccount acc2 = _user.addAccount(AccountType.SAVINGS);
+            IAccount acc = _user.addAccount(AccountType.GENERAL, "SPAIN");
+            IAccount acc2 = _user.addAccount(AccountType.SAVINGS, "SPAIN");
 
             Assert.IsNotNull(acc);
             Assert.IsNotNull(acc2);
@@ -42,7 +42,7 @@ namespace Boolean.CSharp.Test
         [TestCase(200.0F, TransactionType.DEPOSIT, 200.0F)]
         public void UserCanDepositMoney(float amount, TransactionType type, float newBalance)
         {
-            IAccount acc = _user.addAccount(AccountType.GENERAL);
+            IAccount acc = _user.addAccount(AccountType.GENERAL, "SPAIN");
 
             // float amount, TransactionType type, string date = null
 
@@ -53,7 +53,7 @@ namespace Boolean.CSharp.Test
             Assert.AreEqual(newBalance, balance);
             
 
-            IAccount acc2 = _user.addAccount(AccountType.SAVINGS);
+            IAccount acc2 = _user.addAccount(AccountType.SAVINGS, "SPAIN");
            
             bool isSuccess2 = acc2.MakeTransaction(amount, type, DateTime.Now.ToString());
 
@@ -68,7 +68,7 @@ namespace Boolean.CSharp.Test
         [TestCase(100.0F, TransactionType.WITHDRAW, 900.0F)]
         public void UserCanWithdrawMoney(float amount, TransactionType type, float newBalance)
         {
-            IAccount acc = _user.addAccount(AccountType.GENERAL);
+            IAccount acc = _user.addAccount(AccountType.GENERAL, "SPAIN");
 
      
             bool initSuccess = acc.MakeTransaction(1000.0F, TransactionType.DEPOSIT, DateTime.Now.ToString());
@@ -83,7 +83,7 @@ namespace Boolean.CSharp.Test
 
 
 
-            IAccount acc2 = _user.addAccount(AccountType.SAVINGS);
+            IAccount acc2 = _user.addAccount(AccountType.SAVINGS, "SPAIN");
             bool isSuccess3 = acc2.MakeTransaction(1000.0F, TransactionType.DEPOSIT, DateTime.Now.ToString());
 
           
@@ -99,7 +99,7 @@ namespace Boolean.CSharp.Test
         [TestCase(1200.0F, TransactionType.WITHDRAW, 1000.0F)]
         public void userCantWithdrawIfBalanceGoesToNegative(float amount, TransactionType type, float newBalance)
         {
-            IAccount acc = _user.addAccount(AccountType.GENERAL);
+            IAccount acc = _user.addAccount(AccountType.GENERAL, "SPAIN");
             
             acc.MakeTransaction(1000.0F, TransactionType.DEPOSIT, DateTime.Now.ToString());
 
@@ -119,7 +119,7 @@ namespace Boolean.CSharp.Test
 
 
             // here
-            IAccount acc = _user.addAccount(AccountType.GENERAL);
+            IAccount acc = _user.addAccount(AccountType.GENERAL, "SPAIN");
            
             acc.MakeTransaction(1000.0F, TransactionType.DEPOSIT, "10/01/2012");
             acc.MakeTransaction( 2000.0F, TransactionType.DEPOSIT, "13/01/2012");
