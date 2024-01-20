@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Transactions;
 
 
 namespace Boolean.CSharp.Main
@@ -22,6 +23,14 @@ namespace Boolean.CSharp.Main
             _users.Add(user);
         }
 
+        public static void acceptOverdraft(GeneralAccount account, float amount)
+        {
+           
+            float currentBalance = account.getBalance() - amount;
+            Transaction transaction = new Transaction(amount, TransactionType.WITHDRAW, currentBalance);
+            account.transactions.Add(transaction);
+        }
+
         public static bool handleOverdraftRequest(string ID, GeneralAccount account, float amount)
         {
             Console.WriteLine($"User ID = {ID} is requesting an overdraft.");
@@ -32,6 +41,7 @@ namespace Boolean.CSharp.Main
 
             if ( input == "Y" ) 
             {
+               
                 return true;
             }
             else

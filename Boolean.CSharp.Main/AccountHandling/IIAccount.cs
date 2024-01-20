@@ -18,6 +18,8 @@ namespace Boolean.CSharp.Main
 
         public bool MakeTransaction( float amount, TransactionType type, string date);
 
+        public bool MakeTransaction(float amount, TransactionType type);
+
         public void ListBankStatement();
 
     }

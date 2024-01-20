@@ -48,7 +48,7 @@ namespace Boolean.CSharp.Main
 
                 if (res)
                 {
-                    generalAccount.acceptOverdraft(amount, TransactionType.WITHDRAW);
+                    Manager.acceptOverdraft(generalAccount, amount);
                     return res;
                 }
 
