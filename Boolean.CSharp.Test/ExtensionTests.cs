@@ -14,6 +14,7 @@ namespace Boolean.CSharp.Test
     {
         private Customer _user;
         private Manager _manager;
+        
 
         [SetUp]
         public void SetUp()
@@ -42,6 +43,7 @@ namespace Boolean.CSharp.Test
         }
 
 
+
         [TestCase("N", false)]
         [TestCase("Y", true)]
         public void RequestOverdraft(string str, bool result)
@@ -63,6 +65,39 @@ namespace Boolean.CSharp.Test
 
             Assert.AreEqual(accepted, result);
 
+        }
+
+        [Test]
+        public void OverdraftNotNeeded()
+        {
+            var stringWriter = new StringWriter();
+            Console.SetOut(stringWriter);
+
+            _manager.registerCustomer(_user);
+            var acc = _user.addAccount(AccountType.GENERAL, "ITALY") as GeneralAccount;
+
+            acc.MakeTransaction(500.0F, TransactionType.DEPOSIT);
+
+            bool accepted = _user.requestOvedraft(acc.ID, 100.0F);
+
+            var outputLines = stringWriter.ToString().Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
+
+            Assert.That("Your requested amount does not exceed account balance!", Is.EqualTo(outputLines[0]));
+
+        }
+
+        [Test]
+        public void noOverdraftsForSavingsAccount()
+        {
+      
+            _manager.registerCustomer(_user);
+            var acc = _user.addAccount(AccountType.SAVINGS, "ITALY") as SavingsAccount;
+
+            acc.MakeTransaction(500.0F, TransactionType.DEPOSIT);
+
+            bool accepted = _user.requestOvedraft(acc.ID, 600.0F);
+
+            Assert.IsFalse(accepted);
 
         }
     }

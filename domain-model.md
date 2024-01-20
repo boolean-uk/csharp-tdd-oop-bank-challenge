@@ -67,9 +67,6 @@ _______
 #### Methods
 * public Account(AccountType type, string branch)
   - Account Constructor
-
-* public void acceptOverdraft(float amount, TransactionType type)
-  - processes the accepted overdraft
   
 * public static Account createAccount(AccountType type, string branch)
   - creates a new account.
@@ -82,7 +79,6 @@ _______
 
 * public bool MakeTransaction(float amount, TransactionType type, string date)
   - adds a new transaction to the _transactions list. Type can be either DEPOSIT or WITHDRAW. Date of the transaction is specified separately.
-
 
 * public void ListBankStatement()
   - prints the _transactions list in the desired format
@@ -149,6 +145,9 @@ _______
    
 * public void registerCustomer(Customer user)
   - adds customer to the _users list
+
+* public void acceptOverdraft(GeneralAccount account, float amount, TransactionType type)
+  - processes the accepted overdraft
 
 * public static bool handleOverdraftRequest(string ID, GeneralAccount account, float amount)
   - console.writelines the customer id, the requested withdraw amount and the accounts balance
