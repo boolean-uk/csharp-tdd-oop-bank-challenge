@@ -1,4 +1,5 @@
 ﻿using Boolean.CSharp.Main;
+using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -12,11 +13,13 @@ namespace Boolean.CSharp.Test
     public class ExtensionTests
     {
         private Customer _user;
+        private Manager _manager;
 
         [SetUp]
         public void SetUp()
         {
             _user = new Customer();
+            _manager = new Manager();
         }
 
 
@@ -36,13 +39,30 @@ namespace Boolean.CSharp.Test
         {
             Exception ex = Assert.Throws<System.Exception>(() => _user.addAccount(type, branch));
             Assert.That(ex.Message, Is.EqualTo("Branch does not exist!"));
-
         }
 
 
-        [Test]
-        public void TestQuestion2()
+        [TestCase("N", false)]
+        [TestCase("Y", true)]
+        public void RequestOverdraft(string str, bool result)
         {
+            _manager.registerCustomer(_user);
+            var acc = _user.addAccount(AccountType.GENERAL, "ITALY") as GeneralAccount;
+
+            acc.MakeTransaction(500.0F, TransactionType.DEPOSIT);
+
+            var reader = new StringReader("N");
+            var writer = new StringWriter();
+
+            Console.SetIn(reader);
+            Console.SetOut(writer);
+
+            bool accepted = _user.requestOvedraft(acc.ID, 600.0F);
+
+            string actualMessage = writer.ToString();
+
+            Assert.AreEqual(accepted, result);
+
 
         }
     }
