@@ -20,19 +20,19 @@ namespace Boolean.CSharp.Test
         }
 
 
-        [TestCase(AccountType.GENERAL, Branch.ITALY)]
-        [TestCase(AccountType.SAVINGS, Branch.FRANCE)]
-        [TestCase(AccountType.SAVINGS, Branch.SPAIN)]
-        public void AccountsAssosiactedWithBranches(AccountType type, Branch branch)
+        [TestCase(AccountType.GENERAL, "ITALY")]
+        [TestCase(AccountType.SAVINGS, "FRANCE")]
+        [TestCase(AccountType.SAVINGS, "SPAIN")]
+        public void AccountsAssosiactedWithBranches(AccountType type, string branch)
         {
             IAccount acc = _user.addAccount(type, branch);
-            Assert.That(acc.Type, branch);
+            Assert.AreEqual(acc.ACCTYPE, branch);
 
         }
 
-        [TestCase(AccountType.GENERAL, Branch.NOTHING)]
-        [TestCase(AccountType.SAVINGS, Branch.NOTHING)]
-        public void NonexistendBranch(AccountType type, Branch branch)
+        [TestCase(AccountType.GENERAL, "nothing")]
+        [TestCase(AccountType.SAVINGS, "nothing")]
+        public void NonexistendBranch(AccountType type, string branch)
         {
             Exception ex = Assert.Throws<System.Exception>(() => _user.addAccount(type, branch));
             Assert.That(ex.Message, Is.EqualTo("Branch does not exist!"));
