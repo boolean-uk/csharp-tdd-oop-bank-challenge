@@ -9,7 +9,7 @@ namespace Boolean.CSharp.Main
     public class GeneralAccount : Account
     {
     
-        public GeneralAccount(AccountType type) : base(type)
+        public GeneralAccount(AccountType type, string branch) : base(type, branch)
         {
 
         }

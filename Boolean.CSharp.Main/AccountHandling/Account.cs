@@ -13,32 +13,43 @@ namespace Boolean.CSharp.Main
         GENERAL,
         SAVINGS
     }
+
     public abstract class Account : IAccount
     {
         private string _ID;
         private AccountType _type;
+        private string _branch;
         private List<Transaction> _transactions = new List<Transaction>();
 
         
         public string ID { get { return _ID; } }
-        public AccountType Type { get { return _type; } }
+        public AccountType ACCTYPE { get { return _type; } }
 
+        public string BRANCH { get { return _branch; } }
         public List<Transaction> transactions { get { return _transactions; } }
 
-        public Account(AccountType type)
+        public Account(AccountType type, string branch)
         {
             _ID = Guid.NewGuid().ToString();
             _type = type;
+            _branch = branch;
         }
 
-        public static Account createAccount(AccountType type)
+        public static Account createAccount(AccountType type, string branch)
         {
+            List<string> _branches = new List<string> { "ITALY", "SPAIN", "FRANCE" };
+
+            if (!_branches.Contains(branch))
+            {
+                throw new Exception("Branch does not exist!");
+            }
+
             switch (type)
             {
                 case AccountType.GENERAL:
-                    return new GeneralAccount(type);
+                    return new GeneralAccount(type, branch);
                 case AccountType.SAVINGS:
-                    return new SavingsAccount(type);
+                    return new SavingsAccount(type, branch);
                 default:
                     throw new Exception("account type does not exist!");
             }

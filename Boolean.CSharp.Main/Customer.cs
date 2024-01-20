@@ -17,9 +17,9 @@ namespace Boolean.CSharp.Main
 
         }
 
-        public IAccount addAccount(AccountType type)
+        public IAccount addAccount(AccountType type, string branch)
         {
-            IAccount account = Account.createAccount(type);
+            IAccount account = Account.createAccount(type, branch);
             _accounts.Add(account);
             return account;
         }

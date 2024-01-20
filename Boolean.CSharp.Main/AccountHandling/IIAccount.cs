@@ -8,7 +8,9 @@ namespace Boolean.CSharp.Main
 {
     public interface IAccount
     {
-        public AccountType Type { get; }
+        public AccountType ACCTYPE { get; }
+
+        public string BRANCH { get; }
 
         public float getBalance();
 

@@ -11,7 +11,7 @@ namespace Boolean.CSharp.Main
     public class SavingsAccount : Account
     {
         
-        public SavingsAccount(AccountType type) : base(type)
+        public SavingsAccount(AccountType type, string branch) : base(type, branch)
         {
 
         }
