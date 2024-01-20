@@ -33,13 +33,6 @@ I want statements to be sent as messages to my phone.
 ```
 ```
 
-class BankManager
-	PROPERTIES:
-
-	METHODS:
-		public Transaction ApproveOverdraft(Account account)
-		public bool RejectOverdraft(Account account)
-
 ----------------------------------------------------------
 
 class User
@@ -50,7 +43,7 @@ class User
 
 ----------------------------------------------------------
 
-class Account 
+abstract class Account 
 	PROPERTIES:
 		public BranchCode branchCode {get;}
 		public List<Transaction> transactions {get;}
@@ -69,10 +62,12 @@ class Account
 
 		public List<string> GenerateBankStatement() //Also print to console
 
-		public bool OverdraftMoney(float amount)
+		public bool RequestOverdraft(float amount)
 			// Check that the withdrawal exceeds the balance amount, not 0, not -i
 
-		public bool CancelOverdraft()
+		public bool RejectOverdraft()
+
+		public bool ApproveOverdraft()
 
 class savingsAccount : Account
 
@@ -93,5 +88,5 @@ class Transaction
 	METHODS:
 		Transaction(float amount, bool isCredit) //constructor
 
-class Overdraft : Transaction // isCredit locked to true
+class Overdraft : Transaction // isCredit locked to false
 

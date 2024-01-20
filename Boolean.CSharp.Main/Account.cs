@@ -1,16 +1,16 @@
 ﻿namespace Boolean.CSharp.Main
 {
-    public class Account
+    public abstract class Account
     {
         public BranchCode BranchCode { get; }
         private List<Transaction> transactions;
-        private Queue<Transaction> overdraftRequests;
+        private Queue<Overdraft> overdraftRequests;
 
         public Account(BranchCode branchCode)
         {
             this.BranchCode = branchCode;
             transactions = new List<Transaction>();
-            overdraftRequests = new Queue<Transaction>();
+            overdraftRequests = new Queue<Overdraft>();
         }
 
         public float GetBalance()
@@ -26,10 +26,6 @@
                 {
                     balance -= item.Amount;
                 }
-                else
-                {
-                    throw new Exception("Get balance Is credit error");
-                }
             }
             return balance;
         }
@@ -38,7 +34,6 @@
         {
             if (amount > 0)
             {
-                //balance += amount;
                 Transaction newTrans = new Transaction(amount, true);
                 transactions.Add(newTrans);
                 return true;
@@ -53,7 +48,6 @@
         {
             if (amount <= GetBalance() && amount > 0)
             {
-                //balance -= amount;
                 Transaction newTrans = new Transaction(amount, false);
                 transactions.Add(newTrans);
                 return true;
@@ -98,14 +92,28 @@
             return transactionOutput;
         }
 
-        public bool OverdraftMoney(float amount)
+        public bool RequestOverdraft(float amount)
         {
-            throw new NotImplementedException();
+            float balance = GetBalance();
+            if (amount <= 0) { return false; }
+            if (amount - balance <= 0) { return false; }
+            overdraftRequests.Enqueue(new Overdraft(amount));
+            return true;
         }
 
-        public bool CancelOverdraft()
+        public bool RejectOverdraft()
         {
-            throw new NotImplementedException();
+            return overdraftRequests.TryDequeue(out _);
+        }
+
+        public bool ApproveOverdraft()
+        {
+            Overdraft overdraft;
+            overdraftRequests.TryDequeue(out overdraft);
+            if (overdraft == null) { return false; }
+
+            transactions.Add(overdraft);
+            return true;
         }
 
     }

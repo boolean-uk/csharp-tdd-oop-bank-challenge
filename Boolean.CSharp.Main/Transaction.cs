@@ -15,7 +15,7 @@
 
     public class Overdraft : Transaction
     {
-        public Overdraft(float amount) : base(amount, true)
+        public Overdraft(float amount) : base(amount, false)
         {
         }
     }

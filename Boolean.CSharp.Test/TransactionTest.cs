@@ -21,7 +21,7 @@ namespace Boolean.CSharp.Test
             DateTime date = DateTime.Today;
             Overdraft transaction = new Overdraft(amount);
             Assert.That(transaction.Amount, Is.EqualTo(amount));
-            Assert.That(transaction.IsCredit, Is.True);
+            Assert.That(transaction.IsCredit, Is.False);
             Assert.That(date, Is.EqualTo(transaction.transactionDate));
         }
     }

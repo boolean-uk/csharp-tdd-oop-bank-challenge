@@ -97,27 +97,50 @@ namespace Boolean.CSharp.Test
             Assert.That(bankStatement, Is.EqualTo(expectedResult));
         }
 
-        [TestCase(1000f, false)]
-        [TestCase(1f, true)]
+        [TestCase(1000f, true)]
+        [TestCase(1f, false)]
+        [TestCase(500f, false)]
         [TestCase(0f, false)]
         [TestCase(-10f, false)]
-        public void OverdraftMoneyTest(float overdraftAmount, bool expectedResult)
+        public void RequestOverdraft(float overdraftAmount, bool expectedResult)
         {
             User user = new User();
             Account current = user.CreateCurrent(0);
             current.DepositMoney(500f);
-            Assert.That(current.OverdraftMoney(overdraftAmount), Is.EqualTo(expectedResult));
+            Assert.That(current.RequestOverdraft(overdraftAmount), Is.EqualTo(expectedResult));
         }
 
         [Test]
-        public void CancelOverdraf()
+        public void RemoveOverdraft()
         {
             User user = new User();
             Account current = user.CreateCurrent(0);
-            Assert.That(current.CancelOverdraft(), Is.EqualTo(false));
-            current.OverdraftMoney(100f);
-            Assert.That(current.CancelOverdraft(), Is.EqualTo(true));
+            Assert.That(current.RejectOverdraft(), Is.False);
+            current.RequestOverdraft(100f);
+            Assert.That(current.RejectOverdraft(), Is.True);
+            Assert.That(current.RejectOverdraft(), Is.False);
 
+        }
+
+        [TestCase(100f)]
+        public void AddOverdraft(float amount)
+        {
+            CurrentAccount current = new CurrentAccount(0);
+            Assert.That(current.ApproveOverdraft(), Is.False);
+            current.RequestOverdraft(amount);
+            Assert.That(current.ApproveOverdraft(), Is.True);
+            Assert.That(current.GetBalance, Is.EqualTo(-amount));
+            Assert.That(current.ApproveOverdraft(), Is.False);
+        }
+
+        [Test]
+        public void TestDeclineOverdraft()
+        {
+            CurrentAccount current = new CurrentAccount(0);
+            Assert.That(current.RejectOverdraft(), Is.False);
+            current.RequestOverdraft(100f);
+            Assert.That(current.RejectOverdraft(), Is.True);
+            Assert.That(current.RejectOverdraft(), Is.False);
         }
     }
 }
