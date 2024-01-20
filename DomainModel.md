@@ -40,7 +40,6 @@ class User
 		public CurrentAccount CreateCurrent(BranchCode)
 		public SavingsAccount CreateSavings(BranchCode)
 
-
 ----------------------------------------------------------
 
 abstract class Account 
@@ -68,6 +67,8 @@ abstract class Account
 		public bool RejectOverdraft()
 
 		public bool ApproveOverdraft()
+
+		public void RequestSMSNotificaiton(Account account)
 
 class savingsAccount : Account
 

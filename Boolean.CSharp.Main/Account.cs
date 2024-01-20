@@ -1,4 +1,7 @@
-﻿namespace Boolean.CSharp.Main
+﻿using Twilio;
+using Twilio.Rest.Api.V2010.Account;
+
+namespace Boolean.CSharp.Main
 {
     public abstract class Account
     {
@@ -113,6 +116,33 @@
             if (overdraft == null) { return false; }
 
             transactions.Add(overdraft);
+            return true;
+        }
+
+        public bool RequestSMSNotification(Account account, string fromTwilioNr, string recivingNr)
+        {
+            /*
+            Console.WriteLine("Twilio NR to send from: ");
+            string sendingNr = Console.ReadLine();
+            Console.WriteLine("Who is the reciver: ");
+            string recivingNr = Console.ReadLine();
+            */
+
+            // Find your Account SID and Auth Token at twilio.com/console
+            // and set the environment variables. See http://twil.io/secure
+            string accountSid = Environment.GetEnvironmentVariable("TWILIO_ACCOUNT_SID");
+            string authToken = Environment.GetEnvironmentVariable("TWILIO_AUTH_TOKEN");
+
+            if (accountSid == null || authToken == null) { return false; }
+
+            TwilioClient.Init(accountSid, authToken);
+
+            var message = MessageResource.Create(
+                body: "Your current balance is: " + GetBalance().ToString(),
+                from: new Twilio.Types.PhoneNumber(fromTwilioNr),
+                to: new Twilio.Types.PhoneNumber(recivingNr)
+            );
+
             return true;
         }
 
