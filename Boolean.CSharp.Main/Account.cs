@@ -23,8 +23,23 @@ namespace Boolean.CSharp.Main
 
         public double GetBalance()
         {
-            return balance;
+            double calculatedBalance = 0.0;
+
+            foreach (var transaction in transactionList)
+            {
+                if (transaction.Type == TransactionType.CREDIT)
+                {
+                    calculatedBalance += transaction.Credit;
+                }
+                else
+                {
+                    calculatedBalance -= transaction.Debit;
+                }
+            }
+
+            return calculatedBalance;
         }
+
 
         public string PrintStatement()
         {

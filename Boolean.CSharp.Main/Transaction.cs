@@ -11,6 +11,7 @@ namespace Boolean.CSharp.Main
         public double Credit { get; }
         public double Debit { get; }
         public double BalanceAtTransactionTime { get; }
+        public TransactionType Type { get; }
 
         public Transaction(DateTime date, double amount, TransactionType type, double balanceAtTransactionTime)
         {
@@ -24,6 +25,7 @@ namespace Boolean.CSharp.Main
                 Debit = amount;
             }
             BalanceAtTransactionTime = balanceAtTransactionTime;
+            Type = type;
         }   
     }
 }

@@ -17,8 +17,22 @@ namespace Boolean.CSharp.Test
             _extension = new Extension();
         }
         [Test]
-        private void TestQuestion1()
+        public void GetBalanceBasedOnTransactionHistory()
         {
+            //Arrange
+            IAccount account = new Account();
+
+            //Act
+            account.Deposit(1000, new DateTime(2022, 1, 10));
+            account.Deposit(640, new DateTime(2022, 1, 12));
+            account.Withdraw(140, new DateTime(2022, 1, 29));
+
+            //Asssert
+            account.PrintStatement();
+            double calculatedBalance = account.GetBalance();
+            Console.WriteLine($"Calculated balance: {calculatedBalance}");
+
+            Assert.AreEqual(1500, calculatedBalance);
 
         }
         [Test]
