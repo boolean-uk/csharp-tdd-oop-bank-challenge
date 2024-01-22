@@ -142,6 +142,23 @@ namespace Boolean.CSharp.Test
 
         }
 
+        [Test]
+        public void TestRequestOverdraft()
+        {
+            double amount1 = 100000.00;
+            TransactionType type1 = TransactionType.Overdraft;
+            String mark1 = "Request some money for my son! PLEASE!";
+            Transaction request1 = new Transaction() { Amount = amount1, Mark = mark1, Type = type1};
+
+
+            Guid acc1 = custommer1.getAccAccounts().Keys.First();
+            custommer1.RequestOverdraft(acc1, request1);
+
+            //Should be 1 overdraft request in the list.
+            Assert.IsTrue(custommer1.getRequest().Count == 1);
+
+        }
+
 
 
 
