@@ -9,8 +9,8 @@ namespace Boolean.CSharp.Main.Accounts
 {
     public abstract class Account : IAccount
     {
-        public AccountType _Type; 
-        public int _AccId { get; set; }
+         public AccountType _Type;
+        public  int _AccId { get; set; }
 
         public bool _IsAccActive { get; set; } = true;
         public Branches _Branch { get; }
@@ -22,6 +22,8 @@ namespace Boolean.CSharp.Main.Accounts
             _AccId = randomID.Next(1000);
             
         }
+
+
 
 
 

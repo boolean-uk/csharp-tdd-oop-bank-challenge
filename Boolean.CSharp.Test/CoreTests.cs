@@ -4,6 +4,7 @@ using Boolean.CSharp.Main.Accounts.Constants;
 using Boolean.CSharp.Main.Users;
 using NUnit.Framework;
 using System.Transactions;
+using Transaction = Boolean.CSharp.Main.Transaction;
 
 namespace Boolean.CSharp.Test
 {
@@ -109,9 +110,9 @@ namespace Boolean.CSharp.Test
         public void TestTransaction()
         {
             double amount = 999.0;
-            TransectionType type = TransactionType.Deposit;
+            TransactionType type = TransactionType.Deposit;
             String mark = "Saving 01/01/24";
-            Transaction transaction1 = new Transaction() {Amount = amount, Type = type, Mark = mark };
+            Transaction transaction1 = new Transaction() { Amount = amount, Type = type, Mark = mark };
 
             double transactionAmount = transaction1.Amount;
             String transactionMark = transaction1.Mark;
