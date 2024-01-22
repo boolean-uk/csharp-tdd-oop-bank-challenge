@@ -13,6 +13,8 @@
         public Account(string name)
         {
             _name = name;
+            _balance = 0;
+            _transactions = new();
         }
 
         public decimal GetBalance()
@@ -22,12 +24,21 @@
 
         public string Deposit(decimal amount)
         {
-            throw new NotImplementedException();
+            _transactions.Add(new(TransactionType.Debit, amount, _balance));
+            _balance += amount;
+            return $"{amount} deposited to {_name}, new balance is {_balance}";
         }
 
         public string Withdraw(decimal amount)
         {
-            throw new NotImplementedException();
+            Transaction withdrawal = new(TransactionType.Credit, amount, _balance);
+            if (withdrawal.NewValue < 0) 
+            {
+                return $"Cannot withdraw from {_name}, balance is less than withdrawal amount";
+            }
+            _transactions.Add(withdrawal);
+            _balance -= amount;
+            return $"{amount} withdrawn from {_name}, new balance is {_balance}";
         }
 
         public string GenerateStatement()

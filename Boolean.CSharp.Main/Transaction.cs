@@ -29,7 +29,16 @@
             _date = DateTime.Now;
             _amount = amount;
             _previousValue = previousValue;
-            _newValue = _amount + _previousValue;
+
+            if(type == TransactionType.Debit)
+            {
+                _newValue = _previousValue + _amount;
+            }
+            else
+            {
+                _newValue = _previousValue - _amount;
+            }
+            
 
         }
     }
