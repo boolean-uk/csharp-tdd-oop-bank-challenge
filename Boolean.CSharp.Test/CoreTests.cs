@@ -38,51 +38,64 @@ namespace Boolean.CSharp.Test
         }
 
         [TestCase(100.00f, 100.00f, true)]
+        [TestCase(0f, 0f, false)]
+        [TestCase(-100.00f, 0f, false)]
         public void TestDepositToSavingsAccount(float input, float expectedBalance, bool expectedReturn)
         {
             bool returnBool = _savingsAccount.Deposit(input);
+            if (returnBool)
+            {
+                Assert.That(_savingsAccount.Transactions.Count(), Is.EqualTo(1));
+                Assert.That(_savingsAccount.Transactions[0].Amount, Is.EqualTo(input));
+                Assert.That(_savingsAccount.Transactions[0].Balance, Is.EqualTo(expectedBalance));
+                Assert.That(_savingsAccount.Transactions[0].TypeOfTransaction, Is.EqualTo(Transaction.TransactionType.Credit));
+            }
             Assert.That(_savingsAccount.Balance, Is.EqualTo(expectedBalance));
-            Assert.That(_savingsAccount.Transactions.Count(), Is.EqualTo(1));
-            Assert.That(_savingsAccount.Transactions[0].Amount, Is.EqualTo(input));
-            Assert.That(_savingsAccount.Transactions[0].Balance, Is.EqualTo(expectedBalance));
-            Assert.That(_savingsAccount.Transactions[0].TypeOfTransaction, Is.EqualTo(Transaction.TransactionType.Credit));
             Assert.That(returnBool, Is.EqualTo(expectedReturn));
         }
 
         [TestCase(100.00f, 100.00f, true)]
+        [TestCase(0f, 0f, false)]
+        [TestCase(-100.00f, 0f, false)]
         public void TestDepositToCurrentAccount(float input, float expectedBalance, bool expectedReturn)
         {
             bool returnBool = _currentAccount.Deposit(input);
-            Assert.That(_currentAccount.Balance, Is.EqualTo(expectedBalance));
+            if (returnBool)
+            {
             Assert.That(_currentAccount.Transactions.Count(), Is.EqualTo(1));
             Assert.That(_currentAccount.Transactions[0].Amount, Is.EqualTo(input));
             Assert.That(_currentAccount.Transactions[0].Balance, Is.EqualTo(expectedBalance));
             Assert.That(_currentAccount.Transactions[0].TypeOfTransaction, Is.EqualTo(Transaction.TransactionType.Credit));
+            }
+            Assert.That(_currentAccount.Balance, Is.EqualTo(expectedBalance));
             Assert.That(returnBool, Is.EqualTo(expectedReturn));
         }
 
-        [TestCase(100.00f, 100.00f, true, 2)]
-        [TestCase(100.00f, 1000.00f, false, 1)]
-        public void TestWithdrawFromCurrentAccount(float initialBalance, float withdraw, bool expectedReturn, int transactions)
+        [TestCase(100.00f, 100.00f, 0.0f, true)]
+        [TestCase(100.00f, 1000.00f, 100.00f, false)]
+        [TestCase(100.00f, 0f, 100.00f, false)]
+        [TestCase(100.00f, -100.00f, 100.00f, false)]
+        public void TestWithdrawFromCurrentAccount(float initialBalance, float withdraw, float balanceAfter, bool expectedReturn)
         {
             _currentAccount.Deposit(initialBalance);
             bool returnBool = _currentAccount.Withdraw(withdraw);
             if (returnBool)
             {
-                Assert.That(_currentAccount.Balance, Is.EqualTo(0));
                 Assert.That(_currentAccount.Transactions.Count(), Is.EqualTo(2));
                 Assert.That(_currentAccount.Transactions[1].Amount, Is.EqualTo(withdraw));
                 Assert.That(_currentAccount.Transactions[1].Balance, Is.EqualTo(0.00f));
                 Assert.That(_currentAccount.Balance, Is.EqualTo(0.00f));
                 Assert.That(_currentAccount.Transactions[1].TypeOfTransaction, Is.EqualTo(Transaction.TransactionType.Debit));
-
             }
+            Assert.That(_currentAccount.Balance, Is.EqualTo(balanceAfter));
             Assert.That(returnBool, Is.EqualTo(expectedReturn));
         }
 
-        [TestCase(100.00f, 100.00f, true)]
-        [TestCase(100.00f, 1000.00f, false)]
-        public void TestWithdrawFromSavingsAccount(float initialBalance, float withdraw, bool expectedReturn)
+        [TestCase(100.00f, 100.00f, 0.0f, true)]
+        [TestCase(100.00f, 1000.00f, 100.00f, false)]
+        [TestCase(100.00f, 0f, 100.00f, false)]
+        [TestCase(100.00f, -100.00f, 100.00f, false)]
+        public void TestWithdrawFromSavingsAccount(float initialBalance, float withdraw, float balanceAfter, bool expectedReturn)
         {
             _savingsAccount.Deposit(initialBalance);
             bool returnBool = _savingsAccount.Withdraw(withdraw);
@@ -91,9 +104,9 @@ namespace Boolean.CSharp.Test
                 Assert.That(_savingsAccount.Transactions.Count(), Is.EqualTo(2));
                 Assert.That(_savingsAccount.Transactions[1].Amount, Is.EqualTo(withdraw));
                 Assert.That(_savingsAccount.Transactions[1].Balance, Is.EqualTo(0.00f));
-                Assert.That(_currentAccount.Balance, Is.EqualTo(0f));
                 Assert.That(_savingsAccount.Transactions[1].TypeOfTransaction, Is.EqualTo(Transaction.TransactionType.Debit));
             }
+            Assert.That(_savingsAccount.Balance, Is.EqualTo(balanceAfter));
             Assert.That(returnBool, Is.EqualTo(expectedReturn));
         }
 

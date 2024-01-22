@@ -24,6 +24,10 @@ namespace Boolean.CSharp.Main
         }
         public bool Deposit(float amount)
         {
+            if (amount <= 0)
+            {
+                return false;
+            }
             _balance += amount;
             _transactions.Add(new Transaction(DateTime.Now, Transaction.TransactionType.Credit, amount, this._balance));
             return true;
@@ -31,6 +35,10 @@ namespace Boolean.CSharp.Main
 
         public bool Withdraw(float amount)
         {
+            if (amount <= 0)
+            {
+                return false;
+            }
             if (_balance >= amount)
             {
                 _balance -= amount;
