@@ -47,12 +47,12 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        public void TestDepositFunds() 
+        public void TestDepositFunds()
         {
             // Arrange
             Customer user = new RegularCustomer();
             user.OpenNewAccount("general");
-            Account account = user.GetAccounts()[0];
+            IAccount account = user.GetAccounts()[0];
 
             // Act
             decimal preBalance = account.GetBalance();
@@ -66,5 +66,39 @@ namespace Boolean.CSharp.Test
 
         }
 
+        [Test]
+        public void TestWithdrawFunds()
+        {
+            // Arrange
+            Customer user = new RegularCustomer();
+            user.OpenNewAccount("general");
+            IAccount account = user.GetAccounts()[0];
+            account.Deposit(5000m);
+
+            // Act
+            decimal preBalance = account.GetBalance();
+            decimal withdrawnAmount = account.Withdraw(1337m);
+            decimal postBalance = account.GetBalance();
+
+            // Assert
+            Assert.That(withdrawnAmount, Is.EqualTo(1337m));
+            Assert.That(preBalance, Is.EqualTo(5000m));
+            Assert.That(postBalance, Is.EqualTo(5000m - 1337m));
+        }
+
+        [Test]
+        public void TestAcceptanceCriteria() 
+        {
+            Customer user = new RegularCustomer();
+            user.OpenNewAccount("general");
+            IAccount account = user.GetAccounts()[0];
+
+            // TODO: Look into mocking the DateTime that will be generated
+            account.Deposit(1000m);  // 2012-01-10
+            account.Deposit(2000m);  // 2012-01-13
+            account.Withdraw(500m);  // 2012-01-14
+
+            account.PrintBankStatement();
+        }
     }
 }

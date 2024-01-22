@@ -9,7 +9,7 @@ namespace Boolean.CSharp.Main.Users
 {
     public abstract class Customer : IUser
     {
-        public List<Account> GetAccounts()
+        public List<IAccount> GetAccounts()
         {
             throw new NotImplementedException();
         }

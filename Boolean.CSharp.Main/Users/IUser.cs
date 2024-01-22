@@ -11,6 +11,6 @@ namespace Boolean.CSharp.Main.Users
     {
         string GetName();
 
-        List<Account> GetAccounts();
+        List<IAccount> GetAccounts();
     }
 }
