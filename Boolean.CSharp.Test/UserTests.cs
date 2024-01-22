@@ -14,11 +14,10 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestUserCreation()
         {
-            User user = new User(0, "Kristian", "Test@email.com", "password", BankLocation.Stavanger);
+            User user = new User(0, "Kristian", BankLocation.Stavanger);
 
-            Assert.That(user.ID, Is.EqualTo(0));
+            Assert.That(user.Id, Is.EqualTo(0));
             Assert.That(user.Name, Is.EqualTo("Kristian"));
-            Assert.That(user.Email, Is.EqualTo("Test@email.com"));
             Assert.That(user.Account.GetBalance(), Is.EqualTo(0));
             Assert.That(user.SavingsAccount.GetBalance(), Is.EqualTo(0));
         }
@@ -26,7 +25,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestDeposit()
         {
-            User user = new User(0, "Kristian", "Test@email.com", "password", BankLocation.Stavanger);
+            User user = new User(0, "Kristian", BankLocation.Stavanger);
 
             user.Deposit(100, user.Account);
 
@@ -37,7 +36,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestWithdrawalFail()
         {
-            User user = new User(0, "Kristian", "Test@email.com", "password", BankLocation.Stavanger);
+            User user = new User(0, "Kristian", BankLocation.Stavanger);
 
             Assert.That(user.Withdraw(100, user.Account), Is.False);
         }
@@ -45,7 +44,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestWithdrawal()
         {
-            User user = new User(0, "Kristian", "Test@email.com", "password", BankLocation.Stavanger);
+            User user = new User(0, "Kristian", BankLocation.Stavanger);
 
             user.Deposit(100, user.Account);
             

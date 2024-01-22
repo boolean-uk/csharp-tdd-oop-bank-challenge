@@ -37,18 +37,18 @@ namespace Boolean.CSharp.Main
             return true;
         }
 
-        public bool RemoveUser(int ID)
+        public bool RemoveUser(int Id)
         {
             foreach (User user in Users)
             {
-                if (user.ID == ID)
+                if (user.Id == Id)
                 {
                     _users.Remove(user);
                     return true;
                 }
             }
 
-            Console.WriteLine($"User with ID {ID} does not exist");
+            Console.WriteLine($"User with ID {Id} does not exist");
             return false;
         }
     }

@@ -2,7 +2,7 @@
 
 using Boolean.CSharp.Main;
 
-User user = new User(0, "Kristian", "Test@email.com", "password", BankLocation.Stavanger);
+User user = new User(0, "Kristian", BankLocation.Stavanger);
 
 user.Deposit(1000, user.Account);
 user.Deposit(2000, user.Account);

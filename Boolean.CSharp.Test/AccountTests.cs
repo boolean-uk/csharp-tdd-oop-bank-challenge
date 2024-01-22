@@ -15,7 +15,7 @@ namespace Boolean.CSharp.Test
         // Currently testing with null owner because user is not implemented yet
         public void TestCurrentAccountCreation()
         {
-            User user = new User(0, "Kristian", "Test@email.com", "password", BankLocation.Stavanger);
+            User user = new User(0, "Kristian", BankLocation.Stavanger);
             Account account = new CurrentAccount(user);
 
             Assert.That(account.GetBalance(), Is.EqualTo(0));
@@ -26,7 +26,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestSavingsAccountCreation()
         {
-            User user = new User(0, "Kristian", "Test@email.com", "password", BankLocation.Stavanger);
+            User user = new User(0, "Kristian", BankLocation.Stavanger);
             Account account = new SavingsAccount(user);
 
             Assert.That(account.GetBalance(), Is.EqualTo(0));
@@ -37,7 +37,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestAccountDeposit()
         {
-            User user = new User(0, "Kristian", "Test@email.com", "password", BankLocation.Stavanger);
+            User user = new User(0, "Kristian", BankLocation.Stavanger);
             Account account = new SavingsAccount(user);
 
             account.Deposit(100);
@@ -50,7 +50,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestAccountWithdrawalFail()
         {
-            User user = new User(0, "Kristian", "Test@email.com", "password", BankLocation.Stavanger);
+            User user = new User(0, "Kristian", BankLocation.Stavanger);
             Account account = new SavingsAccount(user);
 
             Assert.That(account.Withdraw(100), Is.False);
@@ -62,7 +62,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestAccountWithdrawal()
         {
-            User user = new User(0, "Kristian", "Test@email.com", "password", BankLocation.Stavanger);
+            User user = new User(0, "Kristian", BankLocation.Stavanger);
             Account account = new SavingsAccount(user);
 
             account.Deposit(200);
@@ -76,7 +76,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestAccountDepositTransaction()
         {
-            User user = new User(0, "Kristian", "Test@email.com", "password", BankLocation.Stavanger);
+            User user = new User(0, "Kristian", BankLocation.Stavanger);
             Account account = new SavingsAccount(user);
 
             account.Deposit(100);

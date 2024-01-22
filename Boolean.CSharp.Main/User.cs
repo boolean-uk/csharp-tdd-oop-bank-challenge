@@ -7,28 +7,23 @@ namespace Boolean.CSharp.Main
 {
     public class User
     {
-        private int _ID;
+        private int _Id;
         private string _name;
-        private string _email;
-        private string _password;
         private BankLocation _location;
         private IAccount _account;
         private IAccount _savingsAccount;
 
-        public User(int ID, string name, string email, string password, BankLocation location)
+        public User(int Id, string name, BankLocation location)
         {
-            _ID = ID;
+            _Id = Id;
             _name = name;
-            _email = email;
-            _password = password;
             _location = location;
             _account = new CurrentAccount(this);
             _savingsAccount = new SavingsAccount(this);
         }
 
-        public int ID { get => _ID; }
+        public int Id { get => _Id; }
         public string Name { get => _name; }
-        public string Email { get => _email; }
         public BankLocation Location { get => _location; set => _location = value; }
         public IAccount Account { get => _account; }
         public IAccount SavingsAccount { get => _savingsAccount; }
