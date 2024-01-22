@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using System.Reflection.Metadata;
 using System.Security.Cryptography.X509Certificates;
+using System.Transactions;
 
 namespace Boolean.CSharp.Test
 {
@@ -21,10 +22,11 @@ namespace Boolean.CSharp.Test
         {
             User user = new User("Øystein", "Bjørkeng");
             SavingsAccount savingsAccount = new SavingsAccount("My savings account", user, 2000.0m);
+            Main.Transaction transaction = new Main.Transaction(200.0m, "Debit");
 
-            savingsAccount.Withdraw(200.0m, "Debit");
+            savingsAccount.Withdraw(transaction);
 
-            Assert.That(savingsAccount.balance == 1800.0m);
+            Assert.That(savingsAccount.Balance == 1800.0m);
         }
 
         [Test]
@@ -33,9 +35,11 @@ namespace Boolean.CSharp.Test
             User user = new User("Øystein", "Bjørkeng");
             SavingsAccount savingsAccount = new SavingsAccount("My savings account", user, 2000.0m);
 
-            savingsAccount.Deposit(200.0m, "Credit");
+            Main.Transaction transaction = new Main.Transaction(200.0m, "Credit");
 
-            Assert.That(savingsAccount.balance == 2200.0m);
+            savingsAccount.Deposit(transaction);
+
+            Assert.That(savingsAccount.Balance == 2200.0m);
         }
 
     }
