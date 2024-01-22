@@ -14,12 +14,13 @@ namespace Boolean.CSharp.Main.Accounts
 
         public List<BankStatement> BankStatements { get { return _bankStatements; } }
 
-        public IBranch Branch => throw new NotImplementedException();
+        public IBranch Branch { get; }
 
         private readonly List<BankStatement> _bankStatements = [];
 
         public Account(IBranch branch, string name)
         {
+            Branch = branch;
             Name = name;
         }
 
