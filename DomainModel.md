@@ -46,7 +46,7 @@ Properties
 
 
 private IDictionary<string,Account>() _myBankAcounts 
-- Holds each acount conected to a string that describes the account. 
+- Holds each account conected to a string that describes the account. 
 
 public IDictionary<string,Account>() MyBankAcounts { Get{return _myBankAcounts } }
 
@@ -79,7 +79,7 @@ public List<Transation> TransactionHistory {Get{return _transactionHistory}} // 
 
 Methods 
 
-public void GetAcountBalance() 
+public string GetAcountBalance() 
 -retuns balance of account
 
 public string DepositMoney(double amount)
@@ -89,6 +89,10 @@ if transaction is possible store the provided information in transation and then
 public WithdrawalMoney(double amount)
 if transaction is possible store the provided information in transation and then add it to the transactionList.
 -returns a message saying if it was able to remove money from the account.
+
+public List<string> GetTransactionHistory()
+returns a list of strings of all transaction history.
+also prints it in the console.
 
 private bool IsTransactionPossible()
 -internal method for testing if its posible to do a transaction.

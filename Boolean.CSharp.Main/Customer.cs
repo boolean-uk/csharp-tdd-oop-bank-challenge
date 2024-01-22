@@ -20,7 +20,9 @@ namespace Boolean.CSharp.Main
 
         public void CreateAccount(string accountID)
         {
-            throw new NotImplementedException();
+            Account account = new Account(accountID);
+
+            _myBankAccounts.Add(accountID, account);
         }
 
     }

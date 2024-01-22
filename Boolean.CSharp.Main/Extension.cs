@@ -12,7 +12,7 @@ namespace Boolean.CSharp.Main
         private Account _core;
         public Extension()
         {
-            Account? core = new Account();
+            //Account? core = new Account();
         }                      
     }
 }

@@ -26,31 +26,65 @@ namespace Boolean.CSharp.Main
 
         public string GetAcountBalance()
         {
-            
 
-            throw new NotImplementedException();
+
+            return _balance.ToString();
         }
 
         public string DepositMoney(double amount)
         {
-            throw new NotImplementedException();
+            if (amount < 0)
+            {
+                TransactionIsNotPossible("amount can not be a negative number");
+            }
+            _balance += amount;
+            Transaction transaction = new Transaction(amount, 0d, Balance);
+            _transactionHistory.Add(transaction);
+
+            return new string($"{amount} was added to the Account({AccountID})");
             
         }
 
-        public string WithdrawalMoney(double amount)
+        public string WithdrawMoney(double amount)
         {
-            throw new NotImplementedException();
+
+            if (_balance < amount)
+            {
+                TransactionIsNotPossible("Can not withdraw more than what is on the acount ");
+            }
+            if (amount < 0 )
+            {
+                TransactionIsNotPossible("amount can not be a negative number");
+            }
+            _balance -= amount;
+            Transaction transaction = new Transaction(0d, amount, Balance);
+            _transactionHistory.Add(transaction);
+
+            return new string($"{amount} was removed from the Account({AccountID})");
+
+        }
+
+        public List<string> GetTransactionHistory()
+        {
+            List<string> temp = new List<string>();
+            temp.Add("Date       || credit || debit || balance");
             
+            foreach (Transaction transaction in _transactionHistory)
+            {
+                string history = new string($"{transaction.transactionDate} || +{transaction.creditIn} || -{transaction.debitOut} || {transaction.ballance}");
+                temp.Add(history);
+            }
+            foreach(string print in temp)
+            {
+                Console.WriteLine(print);
+            }
+            
+            return temp;
         }
 
-        public void GetTransactionHistory()
+        private bool TransactionIsNotPossible(string message)
         {
-            throw new NotImplementedException();
-        }
-
-        private bool IsTransactionPossible()
-        {
-            throw new NotImplementedException();
+            throw new TransactionNotPossible(message);
         }
 
         internal class Transaction
@@ -63,10 +97,10 @@ namespace Boolean.CSharp.Main
 
             public Transaction(double MoneyIn, double MoneyOut, double ballance) 
             {
-                _transactionDate = DateTime.Today.ToString();
-                _creditIn = MoneyIn.ToString();
-                _debitOut = MoneyOut.ToString();
-                _ballance = ballance.ToString();
+                _transactionDate = DateTime.Now.ToString("yyyy-MM-dd");
+                _creditIn = MoneyIn.ToString("0.##");
+                _debitOut = MoneyOut.ToString("0.##");
+                _ballance = ballance.ToString("0.##");
                 
             }
 
@@ -77,5 +111,10 @@ namespace Boolean.CSharp.Main
         }
 
 
+    }
+
+    public class TransactionNotPossible : Exception
+    {
+        public TransactionNotPossible(string message) : base(message) { }
     }
 }

@@ -1,25 +1,50 @@
 classDiagram
 
 Customer --o Account : contains accounts
+Account o-- Transaction : internal class Transactions
+
+GenericAccount --|> Account : inherits
+SavingsAccount --|> Account : inherits
 
 class Customer{
-    -Dictionary<string, Account> _myBankAccounts
+    -IDictionary<string, Account> _myBankAccounts
+    +IDictionary<string, Account> MyBankAccounts
+
+    +CreateAccount(string)
+
+    
 
 }
 
 class Transaction{
-    -string transactionDate
-    -string creditIn
-    -string debitOut
+    -string _transactionDate
+    -string _creditIn
+    -string _debitOut
+    -string _ballance
+    +string transactionDate readonly
+    +string creditIn readonly
+    +string debitOut readonly
+    +string ballance readonly
+
 
 
 }
 
 class Account{
     -double _balance
-    +double Balance readonly
-
     -string _accountName
-
+    -List<Transaction> _transactionHistory
+    +double Balance readonly
     +string AccountName
+
+    + string GetAcountBalance()
+    + string DepositMoney(double)
+    + string WithdrawalMoney(double)
+    + List<string> GetTransactionHistory()
+
+    -bool IsTransactionPossible()
 }
+
+class GenericAccount
+
+class SavingsAccount
