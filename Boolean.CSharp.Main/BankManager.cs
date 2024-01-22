@@ -11,9 +11,6 @@ namespace Boolean.CSharp.Main
     {
         public List<Account> Accounts {  get; set; } = new List<Account>();
 
-        public BankManager()
-        {
-        }
 
         public void CreateCurrentAccount(string accountName)
         {

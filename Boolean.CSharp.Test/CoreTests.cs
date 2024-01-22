@@ -1,6 +1,7 @@
 ﻿using Boolean.CSharp.Main;
 using Boolean.CSharp.Main.Objects;
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 
 namespace Boolean.CSharp.Test
 {
@@ -37,15 +38,23 @@ namespace Boolean.CSharp.Test
             Assert.IsTrue(bankManager.Accounts[0].AccountType == "SavingsAccount");
         }
 
-        [Test]
-        public void PrintBankStatementTest()
+        [TestCase(1000, 500)]
+        public void PrintBankStatementTest(int depositAmount, int withdrawAmount)
         {
             //arrange
+            BankStatement bankStatement = new BankStatement();
+
+            CurrentAccount account = new CurrentAccount("Current account 1");
+            account.Deposit(depositAmount);
+            account.Withdraw(withdrawAmount);
 
             //act
+            account.PrintBankStatement();
 
             //assert
-            Assert.Fail();
+            Assert.AreEqual(account.AccountStatement.Transactions[0].Amount, depositAmount);
+            Assert.AreEqual(account.AccountStatement.Transactions[1].Amount, withdrawAmount);
+
         }
 
         [TestCase(300)]

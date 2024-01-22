@@ -10,7 +10,7 @@ namespace Boolean.CSharp.Main.Interfaces
     public interface ITransaction
     {
         public int Id { get; set; }
-        public DateTime Date { get; }
+        public DateOnly Date { get; }
         public TransactionStatus Status { get; set; }
         public TransactionType Type { get; set; }
         public double Amount { get; set; }

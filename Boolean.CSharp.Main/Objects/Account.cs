@@ -13,6 +13,8 @@ namespace Boolean.CSharp.Main.Objects
         private string _accountName;
         private string _accountType;
         private double _balance;
+        private BankStatement _accountStatement = new BankStatement();
+
         public Account(string accountName)
         {
             _id += 1;
@@ -21,11 +23,12 @@ namespace Boolean.CSharp.Main.Objects
             _accountType = "";
         }
 
+        
         public int Id { get { return _id; } set { _id = value; } }
         public string AccountName { get { return _accountName; } set { _accountName = value; } }
         public string AccountType { get { return _accountType; } set { _accountType = value; } }
         public double Balance { get { return _balance; } set { _balance = value; } }
-
+        public BankStatement AccountStatement { get { return _accountStatement; } set { _accountStatement = value; } }
 
         public void Deposit(double amount)
         {
@@ -34,8 +37,7 @@ namespace Boolean.CSharp.Main.Objects
             Balance += amount;
             Console.WriteLine("You now have " + Balance + " in your account");
             Deposit transcation = new Deposit(TransactionStatus.Success, amount, Balance, oldBalance);
-            BankStatement bankStatement = new BankStatement();
-            bankStatement.Transactions.Add(transcation);
+            AccountStatement.Transactions.Add(transcation);
         }
 
 
@@ -48,13 +50,29 @@ namespace Boolean.CSharp.Main.Objects
                 Balance -= amount;
                 Console.WriteLine("You now have " + Balance + " left in your account");
                 Withdraw transaction = new Withdraw(TransactionStatus.Success, amount, Balance, oldBalance);
-                BankStatement bankStatement = new BankStatement();
-                bankStatement.Transactions.Add(transaction);
+                AccountStatement.Transactions.Add(transaction);
             }
             else
             {
                 Console.Write("You do not have enough in your balance to withdraw " + amount);
             }
+        }
+
+        public void PrintBankStatement()
+        {
+            Console.WriteLine("date       || credit  || debit  || balance");
+            foreach(var transaction in AccountStatement.Transactions)
+            {
+                if(transaction.Type == TransactionType.Deposit)
+                {
+                    Console.WriteLine($"{transaction.Date} || {transaction.Amount} ||        || {transaction.NewBalance}");
+
+                } else if (transaction.Type == TransactionType.Withdraw)
+                {
+                    Console.WriteLine($"{transaction.Date} ||         || {transaction.Amount} || {transaction.NewBalance}");
+                }
+            }
+
         }
     }
 }
