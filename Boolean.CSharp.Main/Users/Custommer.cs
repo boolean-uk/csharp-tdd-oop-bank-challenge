@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace Boolean.CSharp.Main.Users
 {
@@ -15,9 +16,9 @@ namespace Boolean.CSharp.Main.Users
         private int _Id;
         private bool _IsActive = true;
         private Branches _branch;
-        
 
-        private Dictionary<string,IAccount> accounts = new Dictionary<string,IAccount>();
+
+        private Dictionary<string, IAccount> accounts = new Dictionary<string, IAccount>();
 
         public string Name { get { return _name; } set { _name = value; } }
         public int Id { get { return _Id; } set { _Id = value; } }
@@ -30,17 +31,17 @@ namespace Boolean.CSharp.Main.Users
         /// </summary>
         /// <param name="accType">Account type the user wants to create.</param>
         /// 
-        public void makeAccount(AccountType accType)
+        public void makeAccount(Enums accType)
         {
             switch (accType)
             {
-                case AccountType.Current:
+                case Enums.Current:
                     NormalAcc newAcc1 = new NormalAcc(_branch);
 
-                    accounts.Add(newAcc1._AccId,new NormalAcc(_branch));
+                    accounts.Add(newAcc1._AccId, new NormalAcc(_branch));
                     Console.WriteLine("Current account created ");
                     break;
-                case AccountType.Saving:
+                case Enums.Saving:
                     SavingAcc newAcc2 = new SavingAcc(_branch);
                     accounts.Add(newAcc2._AccId, new SavingAcc(_branch));
                     Console.WriteLine("Saving account created");
@@ -57,5 +58,43 @@ namespace Boolean.CSharp.Main.Users
         /// <returns>List of the user's accounts.</returns>
         public Dictionary<string, IAccount> getAccAccounts() => accounts;
 
+
+        /// <summary>
+        /// Method to deposite the money in the specified account.
+        /// </summary>
+        /// <param name="acc"> Acount to deposit money</param>
+        /// <param name="transaction1">Deposit request</param>
+        /// <exception cref="Exception"></exception>
+        public void Deposit(string acc, Transaction transaction1)
+        {
+            if (accounts.ContainsKey(acc))
+            {
+                accounts[acc].Deposit(transaction1);
+            }
+            else
+            {
+                throw new Exception("No account available");
+
+            }
+        }
+
+        /// <summary>
+        /// The method is used to return the balance of user's specificed account.
+        /// </summary>
+        /// <param name="acc"> ID of the wanted account</param>
+        /// <returns>The account's balance</returns>
+        /// <exception cref="Exception"></exception>
+        public double getBalance(string acc)
+        {
+            if (accounts.ContainsKey(acc))
+            {
+                return accounts[acc].getBlance();
+            }
+            else
+            {
+                throw new Exception("No account available");
+
+            }
+        }
     }
 }

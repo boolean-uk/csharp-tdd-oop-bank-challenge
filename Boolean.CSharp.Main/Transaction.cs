@@ -17,11 +17,15 @@ namespace Boolean.CSharp.Main
         double _amount;
         string _mark;
         TransactionType _type;
+        DateTime _transactionDate = DateTime.Now;
 
         public double Amount { get { return _amount; } set {  _amount = value; } }
         public string Mark { get { return _mark;} set { _mark = value; } }  
         public TransactionType Type { get { return _type;} set { _type = value; } } 
+        public DateTime DateInfo { get { return _transactionDate; } }
 
+
+        
 
 
     }

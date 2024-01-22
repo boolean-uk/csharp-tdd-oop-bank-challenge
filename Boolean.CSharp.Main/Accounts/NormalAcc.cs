@@ -11,7 +11,7 @@ namespace Boolean.CSharp.Main.Accounts
     {
         public NormalAcc(Branches branch) : base(branch)
         {
-            _Type = AccountType.Current;
+            _Type = Enums.Current;
         }
     }
 }

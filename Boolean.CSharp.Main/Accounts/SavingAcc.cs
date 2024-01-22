@@ -11,7 +11,7 @@ namespace Boolean.CSharp.Main.Accounts
     {
         public SavingAcc(Branches branch) : base(branch)
         {
-            _Type = AccountType.Saving;
+            _Type = Enums.Saving;
     }
     }
 }

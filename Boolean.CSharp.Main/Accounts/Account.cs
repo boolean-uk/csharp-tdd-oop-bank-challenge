@@ -10,15 +10,17 @@ namespace Boolean.CSharp.Main.Accounts
     public abstract class Account : IAccount
     {
         private static int _accountCounter = 0;     //To keep track of how many acc we have created.
+        protected Enums _Type;
+        private double _Balance = 0;
+        private List<Transaction> _transactions = new List<Transaction>();   
 
-        public AccountType _Type;
+
         public string _AccId { get; set; }
 
         public bool _IsAccActive { get; set; } = true;
         public Branches _Branch { get; }
 
-        Random randomID = new Random();
-
+        
         public Account(Branches branch) {
             _Branch = branch;
             
@@ -29,9 +31,30 @@ namespace Boolean.CSharp.Main.Accounts
 
         }
 
+        public double getBlance()
+        {
+            return _Balance;
+        }
 
+        public void Deposit(Transaction transaction)
+        {
+            _transactions.Add(transaction);
+            _Balance += transaction.Amount;
+        }
 
+        public void Withdraw(Transaction transaction)
+        {
+            throw new NotImplementedException();
+        }
 
+        public List<Transaction> getOverview()
+        {
+            return _transactions;
+        }
 
+        public bool getAccountStatus()
+        {
+            return _IsAccActive;
+        }
     }
 }
