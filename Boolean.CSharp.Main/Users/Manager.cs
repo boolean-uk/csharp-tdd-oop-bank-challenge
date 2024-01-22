@@ -1,4 +1,5 @@
 ﻿using Boolean.CSharp.Main.Accounts;
+using Boolean.CSharp.Main.Branch;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,10 +8,11 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main.Users
 {
-    public class Manager : IUser
+    public class Manager : IEmployee
     {
         private string _name;
         private List<IAccount> _accounts = new List<IAccount>();
+        private IBankBranch _branch;
 
         public Manager(string name)
         {
@@ -25,6 +27,11 @@ namespace Boolean.CSharp.Main.Users
         public string GetName()
         {
             return _name;
+        }
+
+        public bool RegisterWithBankBranch(IBankBranch branch)
+        {
+            throw new NotImplementedException();
         }
     }
 }

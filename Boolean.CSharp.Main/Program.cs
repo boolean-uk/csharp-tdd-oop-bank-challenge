@@ -2,10 +2,15 @@
 
 
 using Boolean.CSharp.Main.Accounts;
+using Boolean.CSharp.Main.Branch;
 using Boolean.CSharp.Main.enums;
 using Boolean.CSharp.Main.Users;
 
-Customer user = new RegularCustomer("Bob");
+
+DateTime dob = new DateTime(1996, 8, 20);
+IBankBranch branch = new LocalBank("123 Bank Road, 987 City");
+
+Customer user = new RegularCustomer("Bob", dob);
 user.OpenNewAccount(AccountType.General);
 IAccount account = user.GetAccounts()[0];
 DateTime now = DateTime.Now;

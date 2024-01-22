@@ -1,4 +1,5 @@
 ﻿using Boolean.CSharp.Main.Accounts;
+using Boolean.CSharp.Main.Branch;
 using Boolean.CSharp.Main.enums;
 using System;
 using System.Collections.Generic;
@@ -8,19 +9,27 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main.Users
 {
-    public abstract class Customer : IUser
+    public abstract class Customer(string name, DateTime DoB) : IUser
     {
         private List<IAccount> _associatedAccounts = new List<IAccount>();
-        private string _name;
-
-        public Customer(string name)
-        {
-            _name = name;
-        }
+        private string _name = name;
+        private IBankBranch _branch;
+        private DateTime _birthDate = DoB;
+        private DateTime _lastLogin = DateTime.Now;
 
         public List<IAccount> GetAccounts()
         {
             return new List<IAccount>(this._associatedAccounts);
+        }
+
+        public void RegisterAccount(IAccount account) 
+        {
+            _associatedAccounts.Add(account);
+        }
+
+        public List<IAccount> GetAssociatedAccounts() 
+        {
+            return new List<IAccount>(_associatedAccounts);
         }
 
         public string GetName()
@@ -33,18 +42,27 @@ namespace Boolean.CSharp.Main.Users
             IAccount newAcc;
             int val1;
             int val2;
+            val1 = _associatedAccounts.Count;
             if (accountType == AccountType.General)
             {
-                newAcc = new GeneralAccount();
+                newAcc = new GeneralAccount(this);
             }
             else 
             {
-                newAcc = new SavingsAccount();
+                newAcc = new SavingsAccount(this);
             }
-            val1 = _associatedAccounts.Count;
-            _associatedAccounts.Add(newAcc);
             val2 = _associatedAccounts.Count;
             return val1 < val2;
+        }
+
+        public void LogIn() 
+        {
+            _lastLogin = DateTime.Now;
+        }
+
+        public bool RegisterWithBankBranch(IBankBranch branch)
+        {
+            throw new NotImplementedException();
         }
     }
 }

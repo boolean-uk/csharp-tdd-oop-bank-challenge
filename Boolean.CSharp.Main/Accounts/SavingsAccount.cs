@@ -1,4 +1,5 @@
-﻿using Boolean.CSharp.Main.Transactions;
+﻿using Boolean.CSharp.Main.Branch;
+using Boolean.CSharp.Main.Transactions;
 using Boolean.CSharp.Main.Users;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,21 @@ namespace Boolean.CSharp.Main.Accounts
 {
     public class SavingsAccount : IAccount
     {
-        IBankTransaction _transactions = new TransactionManager();
-        List<IUser> authorizedUsers = new List<IUser>();
+        IBankTransaction _transactions;
+        List<IUser> authorizedUsers;
         private decimal _balance = 0m;
+
+        public SavingsAccount(Customer user)
+        {
+            _transactions = new TransactionManager();
+            authorizedUsers = new List<IUser> { user };
+            user.RegisterAccount(this);
+        }
+
+        public bool AddAccountToBankBranch(IBankBranch branch)
+        {
+            throw new NotImplementedException();
+        }
 
         public bool AddUserToAccount(IUser user)
         {
@@ -40,6 +53,11 @@ namespace Boolean.CSharp.Main.Accounts
         public decimal GetBalance()
         {
             return _balance;
+        }
+
+        public IBankBranch GetBankBranch()
+        {
+            throw new NotImplementedException();
         }
 
         public void PrintBankStatement(DateTime start, DateTime end)

@@ -1,4 +1,5 @@
-﻿using Boolean.CSharp.Main.Transactions;
+﻿using Boolean.CSharp.Main.Branch;
+using Boolean.CSharp.Main.Transactions;
 using Boolean.CSharp.Main.Users;
 using System;
 using System.Collections.Generic;
@@ -11,13 +12,15 @@ namespace Boolean.CSharp.Main.Accounts
     public class GeneralAccount : IAccount
     {
         IBankTransaction _transactions;
-        List<IUser> authorizedUsers = new List<IUser>();
+        List<IUser> authorizedUsers;
         private decimal _balance = 0m;
         private decimal _overdrawLimit = 0m;
 
-        public GeneralAccount()
+        public GeneralAccount(Customer user)
         {
             _transactions = new TransactionManager();
+            authorizedUsers = new List<IUser> { user };
+            user.RegisterAccount(this);
         }
 
         public decimal setOverdrawLimit(decimal limit, IUser user) 
@@ -84,5 +87,6 @@ namespace Boolean.CSharp.Main.Accounts
             }
             
         }
+
     }
 }

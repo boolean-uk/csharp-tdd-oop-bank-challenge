@@ -11,7 +11,7 @@
   <Class Name="Boolean.CSharp.Main.Accounts.SavingsAccount">
     <Position X="3.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EACAAABAAAAAAAAAAAAAAAJEAAAAAAIAAAAAAAAAAAI=</HashCode>
+      <HashCode>EACAAABAADAAAAAAAAAAAAJEAAAAAAIAAAAAAAAAAAI=</HashCode>
       <FileName>Accounts\SavingsAccount.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -19,20 +19,21 @@
   <Class Name="Boolean.CSharp.Main.Users.Customer">
     <Position X="7" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAIAAAAAAAAAAAAIAAAAAAACAAAAAAAIAAAAAABAA=</HashCode>
+      <HashCode>AAAAIAAAAAAIAAAAAIAAAAAEACAAABAAAIBAAAEABAA=</HashCode>
       <FileName>Users\Customer.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Boolean.CSharp.Main.Users.Manager">
     <Position X="8.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAIAAAAAAAQAAAAIAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <HashCode>AAAAIAAAAAAAQAAAAIAAAAAEAAAAAAAAAAAAAAEABAA=</HashCode>
       <FileName>Users\Manager.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Boolean.CSharp.Main.Users.RegularCustomer" Collapsed="true">
-    <Position X="7" Y="4.5" Width="1.5" />
+    <Position X="7" Y="6" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Users\RegularCustomer.cs</FileName>
@@ -40,17 +41,25 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Boolean.CSharp.Main.Transactions.TransactionManager">
-    <Position X="11.25" Y="2.5" Width="1.5" />
+    <Position X="11.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgCAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgCAAAgAAAAQAAAAAAAAAA=</HashCode>
       <FileName>Transactions\TransactionManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Boolean.CSharp.Main.Branch.LocalBank">
+    <Position X="15.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAwAAABIAAAAAAAAABAEAAACAAAAAhEAA=</HashCode>
+      <FileName>Branch\LocalBank.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Interface Name="Boolean.CSharp.Main.Users.IUser">
     <Position X="7.75" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAEAAAAAAAAAAAAAAAABAA=</HashCode>
       <FileName>Users\IUser.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -64,8 +73,15 @@
   <Interface Name="Boolean.CSharp.Main.Transactions.IBankTransaction">
     <Position X="11.25" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgCAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgCAAAgAAAAQAAAAAAAAAA=</HashCode>
       <FileName>Transactions\IBankTransaction.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Boolean.CSharp.Main.Branch.IBankBranch">
+    <Position X="15.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAgAAABIAAAAAAAAABAAAAAAAAAAABEAA=</HashCode>
+      <FileName>Branch\IBankBranch.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />

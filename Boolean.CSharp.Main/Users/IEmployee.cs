@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main.Users
 {
-    public class RegularCustomer : Customer, IUser
+    public interface IEmployee : IUser
     {
-        public RegularCustomer(string name, DateTime dateOfBirth) : base(name, dateOfBirth)
-        {
-        }
     }
 }

@@ -9,11 +9,13 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class CoreTests
     {
+        DateTime dob = new DateTime(1996, 8, 20);
+
         [Test]
         public void TestCreateGeneralAccount()
         {
             // Arrange
-            IUser user1 = new RegularCustomer("Bob");
+            IUser user1 = new RegularCustomer("Bob", dob);
             IUser user2 = new Manager("Jim");
 
             // Act
@@ -32,7 +34,7 @@ namespace Boolean.CSharp.Test
         public void TestCreateSavingsAccount()
         {
             // Arrange
-            IUser user1 = new RegularCustomer("Bob");
+            IUser user1 = new RegularCustomer("Bob", dob);
             IUser user2 = new Manager("Jim");
 
             // Act
@@ -51,7 +53,7 @@ namespace Boolean.CSharp.Test
         public void TestDepositFunds()
         {
             // Arrange
-            Customer user = new RegularCustomer("Bob");
+            Customer user = new RegularCustomer("Bob", dob);
             user.OpenNewAccount(AccountType.General);
             IAccount account = user.GetAccounts()[0];
 
@@ -71,7 +73,7 @@ namespace Boolean.CSharp.Test
         public void TestWithdrawFunds()
         {
             // Arrange
-            Customer user = new RegularCustomer("Bob");
+            Customer user = new RegularCustomer("Bob", dob);
             user.OpenNewAccount(AccountType.General);
             IAccount account = user.GetAccounts()[0];
             account.Deposit(5000m);
@@ -90,7 +92,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestAcceptanceCriteria() 
         {
-            Customer user = new RegularCustomer("Bob");
+            Customer user = new RegularCustomer("Bob", dob);
             user.OpenNewAccount(AccountType.General);
             IAccount account = user.GetAccounts()[0];
             DateTime now = DateTime.Now;

@@ -86,7 +86,9 @@ namespace Boolean.CSharp.Main.Transactions
             decimal creditValue;
             decimal debitValue;
 
+            // Gather the items matching the start/end intervall and order by descending based on DateTime
             List<Tuple<DateTime, decimal, TransactionType, decimal>> historySegment = _history.Where(t => (start < t.Item1) && (t.Item1 < end)).OrderByDescending(t => t.Item1).ToList();
+            
             Console.Write($"date".PadRight(_padLeft) + " || " + $"credit".PadRight(_padMiddleLeft) + " || ");
             Console.Write($"debit".PadRight(_padMiddleRight) + " || " + $"balance".PadRight(_padRight) +"\n");
             foreach (Tuple<DateTime, decimal, TransactionType, decimal> tuple in historySegment) 
