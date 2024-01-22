@@ -8,7 +8,7 @@
 |			| `Deposit(string account, decimal amount)`	| string	|														| funds are added to account and returns new balance |
 |			| `Withdraw(string account, decimal amount)`| string	| customer has enough funds	in account					| funds are withdrawn from account and returns new balance	|
 |			|											|			| customer doesn't have enough funds in account			| funds are not withdrawn and returns warning |
-|`Account`	| `GetBalance()`							| double	|														| returns the balance of the account |
+|`Account`	| `GetBalance()`							| decimal	|														| returns the balance of the account |
 |			| `Deposit(decimal amount)`					| string	|														| funds are deposited to account and returns new balance |
 |			| `Withdraw(decimal amount)`				| string	| customer has enough funds	in account					| funds are withdrawn from account and returns new balance |
 |			|											| string	| customer doesn't have enough funds in account			| funds are not withdrawn and returns warning |
