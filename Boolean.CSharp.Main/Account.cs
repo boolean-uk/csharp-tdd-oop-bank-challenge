@@ -9,12 +9,15 @@ namespace Boolean.CSharp.Main
     {
         private double balance;
         private List<Transaction> transactionList;
+        public Branch AssociatedBranch { get; }
 
-        public Account()
+        public Account(Branch associatedBranch)
         {
             balance = 0.0;
             transactionList = new List<Transaction>();
+            AssociatedBranch = associatedBranch;
         }
+
         public void Deposit(double amount, DateTime date)
         {
             balance += amount;
@@ -44,6 +47,7 @@ namespace Boolean.CSharp.Main
         public string PrintStatement()
         {
             StringBuilder statement = new StringBuilder();
+            statement.AppendLine($"Account in branch: {AssociatedBranch.BranchName}");
             statement.AppendLine("date       || credit  || debit  || balance");
 
             foreach (var transaction in transactionList)

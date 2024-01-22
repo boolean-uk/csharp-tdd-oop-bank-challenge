@@ -6,7 +6,11 @@ namespace Boolean.CSharp.Main
     {
         public static void Main()
         {
-            IAccount account = new Account();
+            // Create a Branch
+            Branch branch = new Branch("Main Branch");
+
+            // Create an Account associated with the Branch
+            IAccount account = new Account(branch);
 
             // Depositing and withdrawing to console
             account.Deposit(1000, new DateTime(2012, 1, 10));
@@ -16,10 +20,14 @@ namespace Boolean.CSharp.Main
             // Using the print method
             PrintAccountStatement(account);
         }
+
+        // Method to print the account statement
         public static void PrintAccountStatement(IAccount account)
         {
-            // PrintStatement from IAccount
+            // Call the PrintStatement method of the IAccount interface
             string statement = account.PrintStatement();
+
+            // Output the statement to the console
             Console.WriteLine(statement);
         }
     }

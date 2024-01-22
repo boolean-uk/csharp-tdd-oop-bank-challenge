@@ -20,7 +20,8 @@ namespace Boolean.CSharp.Test
         public void GetBalanceBasedOnTransactionHistory()
         {
             //Arrange
-            IAccount account = new Account();
+            Branch branch = new Branch("NorwegianBranch");
+            IAccount account = new Account(branch);
 
             //Act
             account.Deposit(1000, new DateTime(2022, 1, 10));
@@ -36,8 +37,16 @@ namespace Boolean.CSharp.Test
 
         }
         [Test]
-        private void TestQuestion2()
+        public void AccountShouldHaveAsscBranch()
         {
+            Branch branch = new Branch("NorwegianBranch");
+            IAccount account = new Account(branch);
+
+            Branch associatedBranch = (account as Account)?.AssociatedBranch;
+
+            Assert.IsNotNull(associatedBranch);
+            Assert.AreEqual("NorwegianBranch", associatedBranch.BranchName);
+            Console.WriteLine($"{associatedBranch.BranchName}");
 
         }
     }

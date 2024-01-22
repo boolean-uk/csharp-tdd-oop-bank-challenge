@@ -10,7 +10,8 @@ namespace Boolean.CSharp.Test
         public void DepositShouldIncreaseBalance() 
         {
             //Arrange
-            IAccount account = new Account();
+            Branch branch = new Branch("NorwegianBranch");
+            IAccount account = new Account(branch);
             double initialBalance = account.GetBalance();
             double depositAmount = 1000;
 
@@ -26,7 +27,8 @@ namespace Boolean.CSharp.Test
         public void DepositShouldDecreaseBalance() 
         {
             //Arrange
-            IAccount account = new Account();
+            Branch branch = new Branch("NorwegianBranch");
+            IAccount account = new Account(branch);
             account.Deposit(2000, DateTime.Now);
             double initialBalance = account.GetBalance();
             double withdrawalAmount = 500;
@@ -43,7 +45,8 @@ namespace Boolean.CSharp.Test
         public void PrintStatementShouldShouldReturnString()
         {
             //Arrange
-            IAccount account = new Account();
+            Branch branch = new Branch("NorwegianBranch");
+            IAccount account = new Account(branch);
             account.Deposit(1000, DateTime.Now);
 
             //Act
@@ -56,13 +59,14 @@ namespace Boolean.CSharp.Test
         [Test]
         public void PrintBankStatementShouldShowCorrectTransactions()
         {
-            IAccount account = new Account();
+            Branch branch = new Branch("NorwegianBranch");
+            IAccount account = new Account(branch);
             account.Deposit(1000, new DateTime(2012, 1, 10));
             account.Deposit(2000, new DateTime(2012, 1, 13));
             account.Withdraw(500, new DateTime(2012, 1, 14));
 
             // Print the statement to the console
-            account.PrintStatement();
+            Console.WriteLine(account.PrintStatement());
 
         }
 
