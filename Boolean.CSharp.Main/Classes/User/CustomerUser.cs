@@ -40,7 +40,7 @@ namespace Boolean.CSharp.Main.Classes.User
         {
             if (_accounts.Count >= account)
             {
-                if (withdrawl <= _accounts[account].Money())
+                if (_accounts[account].Money()-withdrawl >= -1*_accounts[account].OverdraftAmount())
                 {
                     _accounts[account].Transaction(new BankStatement(withdrawl, true, eType.Debit, DateTime.Now));
                     return true;

@@ -61,5 +61,15 @@ namespace Boolean.CSharp.Main.Classes.Accounts
         {
             _overdrafts.Add(a);
         }
+
+        public double OverdraftAmount()
+        {
+            double amount = 0;
+            foreach (var ov in _overdrafts.Where(t => t.RequestStatus == eStatus.Approved))
+            {
+                amount += ov.Amount;
+            }
+            return amount;
+        }
     }
 }
