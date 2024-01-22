@@ -15,8 +15,8 @@ namespace Boolean.CSharp.Test
             Customer customer = new("I");
 
             //execute
-            Account? shouldBeCurrentAccount = bank.CreateAccount(customer, AccountTypes.Current);
-            Account? shouldBeSavingsAccount = bank.CreateAccount(customer, AccountTypes.Savings);
+            Account? shouldBeCurrentAccount = bank.CreateAccount(customer, AccountTypes.Current, AccountBranches.Bergen);
+            Account? shouldBeSavingsAccount = bank.CreateAccount(customer, AccountTypes.Savings, AccountBranches.Bergen);
 
             //verify
             Assert.That(shouldBeCurrentAccount, Is.Not.Null);
@@ -32,8 +32,8 @@ namespace Boolean.CSharp.Test
             //setup
             Bank bank = new();
             Customer customer = new("K");
-            Account? a1 = bank.CreateAccount(customer, AccountTypes.Current);
-            Account? a2 = bank.CreateAccount(customer, AccountTypes.Savings);
+            Account? a1 = bank.CreateAccount(customer, AccountTypes.Current, AccountBranches.Bergen);
+            Account? a2 = bank.CreateAccount(customer, AccountTypes.Savings, AccountBranches.Bergen);
 
             //execute
             List<Account> accounts = bank.GetAccounts(customer);

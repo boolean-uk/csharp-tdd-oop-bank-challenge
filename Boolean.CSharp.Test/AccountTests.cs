@@ -16,7 +16,7 @@ namespace Boolean.CSharp.Test
         {
             _bank = new Bank();
             _customer = new Customer("M");
-            _account = _bank.CreateAccount(_customer, AccountTypes.Current)!;
+            _account = _bank.CreateAccount(_customer, AccountTypes.Current, AccountBranches.Bergen)!;
         }
 
         [Test]

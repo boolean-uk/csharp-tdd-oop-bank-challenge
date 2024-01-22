@@ -8,19 +8,19 @@ namespace Boolean.CSharp.Main
     {
         private readonly List<Account> _accounts = [];
 
-        public Account? CreateAccount(Customer customer, AccountTypes accountType)
+        public Account? CreateAccount(Customer customer, AccountTypes accountType, AccountBranches ab)
         {
             if (customer == null) return null;
 
             Account account;
             if (accountType == AccountTypes.Current)
             {
-                account = new CurrentAccount(customer);
+                account = new CurrentAccount(customer, ab);
                 _accounts.Add(account);
             }
             else
             {
-                account = new SavingsAccount(customer);
+                account = new SavingsAccount(customer, ab);
                 _accounts.Add(account);
             }
             return account;

@@ -6,10 +6,12 @@ namespace Boolean.CSharp.Main.Accounts
     {
         private Customer _owner;
         private List<Transaction> _transactions;
-        public Account(Customer owner)
+        private AccountBranches _branch;
+        public Account(Customer owner, AccountBranches ab)
         {
             _owner = owner;
             _transactions = [];
+            _branch = ab;
         }
 
         public Customer GetOwner()
@@ -81,7 +83,7 @@ namespace Boolean.CSharp.Main.Accounts
 
         public AccountBranches GetBranch()
         {
-            throw new NotImplementedException();
+            return _branch;
         }
     }
 }
