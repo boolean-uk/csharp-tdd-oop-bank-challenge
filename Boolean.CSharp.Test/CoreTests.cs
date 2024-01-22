@@ -1,4 +1,6 @@
 ﻿using Boolean.CSharp.Main;
+using Boolean.CSharp.Main.Accounts.Constants;
+using Boolean.CSharp.Main.Users;
 using NUnit.Framework;
 
 namespace Boolean.CSharp.Test
@@ -16,15 +18,16 @@ namespace Boolean.CSharp.Test
         public void TestMakeUserAccount()
         {
             BankApplication bankApp = new BankApplication();
-            Custommer custommer1 = new Custommer();
-            
+            Custommer custommer1 = new Custommer() { Name = "Kanthee", Branch = Branches.Bergen, 
+            Id = 1111};
 
-            custommer1.makeAccount("Normal");
-            custommer1.makeAccount("Saving");
-            var users = bankApp.seeAccount();
+            bankApp.Add(custommer1);
+            custommer1.makeAccount(AccountType.Saving);
+            custommer1.makeAccount(AccountType.Current);
+            var users = bankApp.seeUsers();
 
             // There should be 1 user in the bank and the custommer should have 2 accounts.
-            Assert.IsTrue(users.Count == 1 && custommer1.accounts.Count == 2);
+            Assert.IsTrue(users.Count == 1 && custommer1.getAccAccounts().Count == 2);
 
 
         }
