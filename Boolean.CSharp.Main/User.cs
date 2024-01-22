@@ -11,15 +11,17 @@ namespace Boolean.CSharp.Main
         private string _name;
         private string _email;
         private string _password;
+        private BankLocation _location;
         private CurrentAccount _account;
         private SavingsAccount _savingsAccount;
 
-        public User(int ID, string name, string email, string password)
+        public User(int ID, string name, string email, string password, BankLocation location)
         {
             _ID = ID;
             _name = name;
             _email = email;
             _password = password;
+            _location = location;
             _account = new CurrentAccount(this);
             _savingsAccount = new SavingsAccount(this);
         }
@@ -27,6 +29,7 @@ namespace Boolean.CSharp.Main
         public int ID { get => _ID; }
         public string Name { get => _name; }
         public string Email { get => _email; }
+        public BankLocation Location { get => _location; set => _location = value; }
         public CurrentAccount Account { get => _account; }
         public SavingsAccount SavingsAccount { get => _savingsAccount; }
 

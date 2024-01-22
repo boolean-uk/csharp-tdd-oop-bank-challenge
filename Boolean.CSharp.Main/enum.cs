@@ -20,6 +20,9 @@ namespace Boolean.CSharp.Main
 
     public enum BankLocation
     {
-        Stavanger
+        Stavanger,
+        Oslo,
+        Bergen,
+        Kristiansand
     }
 }

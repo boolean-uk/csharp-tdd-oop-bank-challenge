@@ -21,6 +21,7 @@ namespace Boolean.CSharp.Main
 
         public void AddUser(User user)
         {
+            user.Location = _location;
             Users.Add(user);
         }
 

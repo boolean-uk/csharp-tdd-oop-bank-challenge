@@ -24,7 +24,7 @@ namespace Boolean.CSharp.Test
         public void TestAddUser()
         {
             Bank bank = new Bank(BankLocation.Stavanger);
-            User user = new User(0, "Kristian", "Test@email.com", "password");
+            User user = new User(0, "Kristian", "Test@email.com", "password", BankLocation.Stavanger);
 
             bank.AddUser(user);
 
@@ -36,7 +36,7 @@ namespace Boolean.CSharp.Test
         public void TestRemoveUserFail()
         {
             Bank bank = new Bank(BankLocation.Stavanger);
-            User user = new User(0, "Kristian", "Test@email.com", "password");
+            User user = new User(0, "Kristian", "Test@email.com", "password", BankLocation.Stavanger);
 
             Assert.That(bank.RemoveUser(user), Is.False);
             Assert.That(bank.Users.Count, Is.EqualTo(0));
@@ -46,7 +46,7 @@ namespace Boolean.CSharp.Test
         public void TestRemoveUser()
         {
             Bank bank = new Bank(BankLocation.Stavanger);
-            User user = new User(0, "Kristian", "Test@email.com", "password");
+            User user = new User(0, "Kristian", "Test@email.com", "password", BankLocation.Stavanger);
 
             bank.AddUser(user);
 
@@ -58,7 +58,7 @@ namespace Boolean.CSharp.Test
         public void TestRemoveUserID()
         {
             Bank bank = new Bank(BankLocation.Stavanger);
-            User user = new User(0, "Kristian", "Test@email.com", "password");
+            User user = new User(0, "Kristian", "Test@email.com", "password", BankLocation.Stavanger);
 
             bank.AddUser(user);
 
