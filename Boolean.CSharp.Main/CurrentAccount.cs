@@ -39,6 +39,14 @@ namespace Boolean.CSharp.Main
         {
             return base.GetBalance();
         }
+
+
+        //Extension
+
+        public override bool setBranch(string Branch)
+        {
+            return base.setBranch(Branch);
+        }
     }
 
 

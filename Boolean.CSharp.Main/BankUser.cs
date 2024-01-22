@@ -29,5 +29,14 @@ namespace Boolean.CSharp.Main
             Accounts.Add(currentAccount);
             return true;
         }
+
+
+        //Extension
+
+        public bool requestOverdraft(Account account, decimal amount)
+        {
+            return true;
+        }
+
     }
 }

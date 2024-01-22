@@ -14,6 +14,12 @@ namespace Boolean.CSharp.Main
     {
        
         public List<Transaction> Transactions { get; } = new List<Transaction>();
+        public string branch { get; protected set; }
+
+        public Account()
+        {
+            this.branch=string.Empty;
+        }
 
         public virtual bool Deposit(decimal amount)
         {
@@ -71,6 +77,17 @@ namespace Boolean.CSharp.Main
 
             return balance;
         }
+
+
+
+        //Extension
+        public virtual bool setBranch(string Branch)
+        {
+            this.branch = Branch;
+            return true;
+        }
+
+        
     }
 
 
