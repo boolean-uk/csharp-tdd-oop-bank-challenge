@@ -15,63 +15,73 @@ namespace Boolean.CSharp.Test
         // Currently testing with null owner because user is not implemented yet
         public void TestCurrentAccountCreation()
         {
-            Account account = new CurrentAccount(null);
+            User user = new User(0, "Kristian", "Test@email.com", "password");
+            Account account = new CurrentAccount(user);
 
             Assert.That(account.Balance, Is.EqualTo(0));
-            Assert.That(account.Owner, Is.Null);
+            Assert.That(account.Owner, Is.EqualTo(user));
             Assert.That(account.Transactions.Count, Is.EqualTo(0));
         }
 
         [Test]
         public void TestSavingsAccountCreation()
         {
-            Account account = new SavingsAccount(null);
+            User user = new User(0, "Kristian", "Test@email.com", "password");
+            Account account = new SavingsAccount(user);
 
             Assert.That(account.Balance, Is.EqualTo(0));
-            Assert.That(account.Owner, Is.Null);
+            Assert.That(account.Owner, Is.EqualTo(user));
             Assert.That(account.Transactions.Count, Is.EqualTo(0));
         }
 
         [Test]
         public void TestInitialBalanceCreation()
         {
-            Account account = new SavingsAccount(null, 200);
+            User user = new User(0, "Kristian", "Test@email.com", "password");
+            Account account = new SavingsAccount(user, 200);
 
             Assert.That(account.Balance, Is.EqualTo(200));
             Assert.That(account.Transactions.Count, Is.EqualTo(0));
+            Assert.That(account.Owner, Is.EqualTo(user));
         }
 
         [Test]
         public void TestAccountDeposit()
         {
-            Account account = new SavingsAccount(null);
+            User user = new User(0, "Kristian", "Test@email.com", "password");
+            Account account = new SavingsAccount(user);
 
             account.Deposit(100);
 
             Assert.That(account.Balance, Is.EqualTo(100));
             Assert.That(account.Transactions.Count, Is.EqualTo(1));
+            Assert.That(account.Owner, Is.EqualTo(user));
         }
 
         [Test]
         public void TestAccountWithdrawalFail()
         {
-            Account account = new SavingsAccount(null);
+            User user = new User(0, "Kristian", "Test@email.com", "password");
+            Account account = new SavingsAccount(user);
 
             Assert.That(account.Withdraw(100), Is.False);
             Assert.That(account.Balance, Is.EqualTo(0));
             Assert.That(account.Transactions.Count, Is.EqualTo(0));
+            Assert.That(account.Owner, Is.EqualTo(user));
         }
 
         [Test]
         public void TestAccountWithdrawal()
         {
-            Account account = new SavingsAccount(null);
+            User user = new User(0, "Kristian", "Test@email.com", "password");
+            Account account = new SavingsAccount(user);
 
             account.Deposit(200);
 
             Assert.That(account.Withdraw(100), Is.True);
             Assert.That(account.Balance, Is.EqualTo(100));
             Assert.That(account.Transactions.Count, Is.EqualTo((2)));
+            Assert.That(account.Owner, Is.EqualTo(user));
         }
     }
 }
