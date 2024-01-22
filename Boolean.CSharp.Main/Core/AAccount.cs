@@ -50,5 +50,17 @@ namespace Boolean.CSharp.Main.Core
             transactions.Add(transaction);
             return true;
         }
+
+        public void CreateBankStatement()
+        {
+            Console.WriteLine("{0, -11}|| {1, -10}|| {2, -10}|| {3, -10}", "date", "credit", "debit", "balance");
+            foreach( Transaction elm in transactions)
+            {
+                string[] val = { "", "" };
+                if (elm.isCredit) val[0] = elm.Amount;
+                else val[1] = elm.Amount;
+                Console.WriteLine("{0, -11}||{1, 10} ||{2, 10} || {3, -10}", elm.Time, val[0], val[1], elm.Balance);
+            }
+        }
     }
 }
