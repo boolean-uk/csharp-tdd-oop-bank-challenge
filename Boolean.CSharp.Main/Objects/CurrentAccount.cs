@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boolean.CSharp.Main
+namespace Boolean.CSharp.Main.Objects
 {
     public class CurrentAccount : Account
     {
         public CurrentAccount(string accountName) : base(accountName)
         {
-            base.AccountType = "CurrentAccount";
+            AccountType = "CurrentAccount";
         }
     }
 }

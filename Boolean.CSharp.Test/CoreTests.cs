@@ -1,4 +1,5 @@
 ﻿using Boolean.CSharp.Main;
+using Boolean.CSharp.Main.Objects;
 using NUnit.Framework;
 
 namespace Boolean.CSharp.Test
