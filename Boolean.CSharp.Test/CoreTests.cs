@@ -3,6 +3,7 @@ using Boolean.CSharp.Main.Accounts;
 using Boolean.CSharp.Main.Accounts.Constants;
 using Boolean.CSharp.Main.Users;
 using NUnit.Framework;
+using System.Transactions;
 
 namespace Boolean.CSharp.Test
 {
@@ -19,8 +20,12 @@ namespace Boolean.CSharp.Test
         public void TestMakeUserAccount()
         {
             BankApplication bankApp = new BankApplication();
-            Custommer custommer1 = new Custommer() { Name = "Kanthee", Branch = Branches.Bergen, 
-            Id = 1111};
+            Custommer custommer1 = new Custommer()
+            {
+                Name = "Kanthee",
+                Branch = Branches.Bergen,
+                Id = 1111
+            };
 
             bankApp.Add(custommer1);
             custommer1.makeAccount(AccountType.Saving);
@@ -99,6 +104,46 @@ namespace Boolean.CSharp.Test
             Assert.IsTrue(result1 == 2 && result2 == 1);
 
         }
+
+        [Test]
+        public void TestTransaction()
+        {
+            double amount = 999.0;
+            TransectionType type = TransactionType.Deposit;
+            String mark = "Saving 01/01/24";
+            Transaction transaction1 = new Transaction() {Amount = amount, Type = type, Mark = mark };
+
+            double transactionAmount = transaction1.Amount;
+            String transactionMark = transaction1.Mark;
+            
+
+
+            Assert.IsTrue(transactionAmount == amount && transactionMark == transactionMark);
+
+        }
+
+
+        [Test]
+        public void TestDepositFunds()
+        {
+            BankApplication bankApp = new BankApplication();
+            Custommer custommer1 = new Custommer()
+            {
+                Name = "Kanthee",
+                Branch = Branches.Bergen,
+                Id = 1111
+            };
+
+            bankApp.Add(custommer1);
+            custommer1.makeAccount(AccountType.Current);
+            
+
+            // The result you return 1 since we have 1 SavingAcc.
+            //Assert.IsTrue(result1 == 2 && result2 == 1);
+
+        }
+
+
 
 
 
