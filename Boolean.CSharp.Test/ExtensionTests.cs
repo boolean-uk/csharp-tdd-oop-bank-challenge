@@ -16,29 +16,58 @@ namespace Boolean.CSharp.Test
     {
         public BankApplication bankApp;
         public Custommer custommer1;
+        public Custommer custommer2;
+        public Custommer custommer3;
         public Engineer engineer1;
+        public Manager manager1;
 
         [SetUp]
         public void Setup()
         {
             bankApp = new BankApplication();
 
-            custommer1 = new Custommer()
+             custommer1 = new Custommer()
             {
                 Name = "Kanthee",
                 Branch = Branches.Bergen,
-                Id = 1000
+                Id = 1001
+            };
+            custommer2 = new Custommer()
+            {
+                Name = "Kanthee2",
+                Branch = Branches.Bergen,
+                Id = 1002
+            };
+            custommer3 = new Custommer()
+            {
+                Name = "Kanthee3",
+                Branch = Branches.Oslo,
+                Id = 1003
             };
 
-            engineer1 = new Engineer() { 
+            engineer1 = new Engineer()
+            {
                 Name = "Idaa",
                 Id = 0001
             };
 
+            manager1 = new Manager()
+            {
+                Name = "Nigel",
+                Id = 9001
+            };
+
+
+
             bankApp.Add(custommer1);
             bankApp.Add(engineer1);
+            bankApp.Add(custommer2);
+            bankApp.Add(custommer3);
+            bankApp.Add(manager1);
             custommer1.makeAccount(Enums.Saving);
             custommer1.makeAccount(Enums.Current);
+            custommer2.makeAccount(Enums.Current);
+            custommer3.makeAccount(Enums.Current);
 
         }
 
@@ -46,11 +75,11 @@ namespace Boolean.CSharp.Test
         public void TestMakeEngineerAccount()
         {
 
-         
+
             var users = bankApp.seeUsers();
 
-            // There should be 2 users in the bank and the custommer should have 2 accounts.
-            Assert.IsTrue(users.Count == 2 && custommer1.getAccAccounts().Count == 2);
+            // There should be 5 users in the bank and the custommer1 should have 2 accounts.
+            Assert.IsTrue(users.Count == 5 && custommer1.getAccAccounts().Count == 2);
 
         }
 
@@ -58,12 +87,12 @@ namespace Boolean.CSharp.Test
         public void TestEngineerCheckCustommerBalance1()
         {
 
-           
+
             // As an ennigneer, I want to check the balance of the 1. acc on the custommer1.
             Guid acc1 = custommer1.getAccAccounts().Keys.First();
             double balanceOfAcc1Custommer1 = engineer1.getBalanceOfCustommerAcc(custommer1, acc1);
 
-            
+
             // The balance should be 0.
             Assert.IsTrue(balanceOfAcc1Custommer1 == 0);
 
@@ -82,7 +111,7 @@ namespace Boolean.CSharp.Test
             custommer1.Deposit(acc1, transaction1);
 
             // As an ennigneer, I want to check the balance of the 1. acc on the custommer1.
-            
+
             double balanceOfAcc1Custommer1 = engineer1.getBalanceOfCustommerAcc(custommer1, acc1);
 
 
@@ -90,6 +119,29 @@ namespace Boolean.CSharp.Test
             Assert.IsTrue(balanceOfAcc1Custommer1 == 999.0);
 
         }
+
+        [Test]
+        public void TestManangerGetAccoutBranches()
+        {
+            //Make a list of custommers
+            List<Custommer> custommers = bankApp.seeUsers().Values.OfType<Custommer>().ToList();
+            
+
+            /*int numberOfBranch1 = custommers
+            .SelectMany(custommer => custommer.getAccAccounts().Values)
+            .Count(account => account._Branch == Branches.Bergen);*/
+            
+            //Get a number of account that are assigned to branch Bergen and Oslo.
+            var numberOfAccountsByBranch = custommers
+            .SelectMany(custommer => custommer.getAccAccounts().Values)
+             .GroupBy(account => account._Branch)
+             .ToDictionary(group => group.Key, group => group.Count());
+
+            //Should be 3 accounts at Bergen and 1 at Oslo.
+            Assert.IsTrue(numberOfAccountsByBranch[Branches.Bergen] == 3 && numberOfAccountsByBranch[Branches.Oslo] == 1);
+
+        }
+
 
 
 
