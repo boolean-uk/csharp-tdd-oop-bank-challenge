@@ -11,17 +11,17 @@ namespace Boolean.CSharp.Main.Classes
         public BankStatement(double c, bool v, eType e, DateTime d = default(DateTime)) 
         {
             _creditDebit = c;
-            _valid = v;
-            _type = e;
-            _date = d;
+            Status = v;
+            Type = e;
+            Date = d;
 
         }
-        double _creditDebit;
+        public readonly double _creditDebit;
         // transactionstatus enum?
-        bool _valid;
-        eType _type;
-        DateTime _date;
+        public readonly bool Status;
+        public readonly eType Type;
+        public readonly DateTime Date;
 
-        public double Transaction { get { return _type == eType.Deposit ? _creditDebit : _creditDebit * -1d; } }
+        public double Transaction { get { return Type == eType.Credit ? _creditDebit : _creditDebit * -1d; } }
     }
 }

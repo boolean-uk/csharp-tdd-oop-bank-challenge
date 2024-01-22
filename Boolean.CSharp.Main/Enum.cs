@@ -8,7 +8,7 @@ namespace Boolean.CSharp.Main
 {
     public enum eType
     {
-        Withdraw,
-        Deposit
+        Debit,  //  Withdraw
+        Credit  //  Deposit
     }
 }

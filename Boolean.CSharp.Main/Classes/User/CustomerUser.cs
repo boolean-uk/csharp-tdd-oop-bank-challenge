@@ -31,7 +31,7 @@ namespace Boolean.CSharp.Main.Classes.User
         {
             if (_accounts.Count >= account)
             {
-                return _accounts[account].Transaction(new BankStatement(money, true, eType.Deposit, DateTime.Now));
+                return _accounts[account].Transaction(new BankStatement(money, true, eType.Credit, DateTime.Now));
             }
             return -1d;
         }
@@ -42,14 +42,14 @@ namespace Boolean.CSharp.Main.Classes.User
             {
                 if (withdrawl <= _accounts[account].Money())
                 {
-                    _accounts[account].Transaction(new BankStatement(withdrawl, true, eType.Withdraw, DateTime.Now));
+                    _accounts[account].Transaction(new BankStatement(withdrawl, true, eType.Debit, DateTime.Now));
                     return true;
                 }
             }
             return false;
         }
 
-        public int GenerateStatement()
+        public string GenerateStatement(int account)
         {
             throw new NotImplementedException();
         }
