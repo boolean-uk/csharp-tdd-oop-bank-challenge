@@ -32,11 +32,11 @@ public abstarct class Account : IAccount{
 }
 
 public class SavingsAccount : Account {
-    public override AccountTypes GetAccountType()
+    public override AccountTypes GetAccountType();
 }
 
 public class CurrentAccount : Account {
-    public override AccountTypes GetAccountType()
+    public override AccountTypes GetAccountType();
 }
 
 public class Transactions {

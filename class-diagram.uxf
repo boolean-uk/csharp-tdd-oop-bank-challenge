@@ -1,4 +1,4 @@
-<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>20</x><y>240</y><w>210</w><h>130</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>120</x><y>130</y><w>210</w><h>130</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
 IAccount
 --
 + AccountName: string
@@ -8,7 +8,7 @@ IAccount
 + Withdraw(decimal): void
 + GenerateStatement(): string
 
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>20</x><y>410</y><w>210</w><h>160</h></coordinates><panel_attributes>&lt;&lt;Class&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>140</x><y>430</y><w>210</w><h>160</h></coordinates><panel_attributes>&lt;&lt;Class&gt;&gt;
 Account
 --
 - List&lt;Transactions&gt;
@@ -19,7 +19,7 @@ Account
 +Deposit(decimal): void
 +Withdraw(decimal): void
 +GenerateStatement(): string
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>310</x><y>270</y><w>290</w><h>130</h></coordinates><panel_attributes>&lt;&lt;Class&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>480</x><y>450</y><w>290</w><h>130</h></coordinates><panel_attributes>&lt;&lt;Class&gt;&gt;
 Transactions
 --
 +Amount: decimal
@@ -28,4 +28,18 @@ Transactions
 +DateOfTransaction: DateTime
 --
 +Transactions(decimal, TransactionType, decimal)
-</panel_attributes><additional_attributes></additional_attributes></element></diagram>
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>190</x><y>400</y><w>100</w><h>30</h></coordinates><panel_attributes>/AbstractClass/
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>210</x><y>250</y><w>50</w><h>170</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;30;150</additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>690</y><w>210</w><h>80</h></coordinates><panel_attributes>&lt;&lt;Class&gt;&gt;
+CurrentAccount
+--
+
+--
++GetAccountType(): AccountTypes 
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>240</x><y>690</y><w>210</w><h>80</h></coordinates><panel_attributes>&lt;&lt;Class&gt;&gt;
+SavingsAccount
+--
+
+--
++GetAccountType(): AccountTypes 
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>90</x><y>580</y><w>160</w><h>130</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>140;10;10;110</additional_attributes></element><element><id>Relation</id><coordinates><x>230</x><y>580</y><w>140</w><h>130</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;120;110</additional_attributes></element><element><id>Relation</id><coordinates><x>340</x><y>510</y><w>160</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>140;10;10;10</additional_attributes></element></diagram>
