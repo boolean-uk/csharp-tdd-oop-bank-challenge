@@ -1,5 +1,6 @@
 ﻿using Boolean.CSharp.Main;
 using Boolean.CSharp.Main.Core;
+using Boolean.CSharp.Main.Enums;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -48,7 +49,22 @@ namespace Boolean.CSharp.Test
         public void OverdraftRequest()
         {
             saving.RequestOverdraft();
-            Assert.That(saving.Overdraft, Is.EqualTo(Overdraft.Requested));
+            Assert.That(saving.Overdraft, Is.EqualTo(OverdraftStatus.Requested));
+        }
+
+        [Test]
+        public void AcceptOverdraft()
+        {
+            current.RequestOverdraft();
+            current.AcceptOverdraft();
+            Assert.That(current.Withdraw(50d), Is.True);
+        }
+
+        [Test]
+        public void RejectOverdraft() {
+            current.RequestOverdraft();
+            current.RejectOverdraft();
+            Assert.That(current.Withdraw(50d), Is.False);
         }
     }
 }

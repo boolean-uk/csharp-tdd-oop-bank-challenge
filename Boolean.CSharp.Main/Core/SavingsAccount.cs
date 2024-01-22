@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Boolean.CSharp.Main.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,5 @@ namespace Boolean.CSharp.Main.Core
         public SavingsAccount() : base() { }
         public SavingsAccount(Branch branch) : base(branch) { }
 
-        public bool getBranch()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

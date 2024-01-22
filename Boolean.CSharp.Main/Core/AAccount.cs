@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Boolean.CSharp.Main.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main.Core
 {
-    public enum Branch { Yorkshire, Berkshire, Lincolnshire, Worcestershire, 
-        Shropshire, Oxforshire, Warwickshire, Cambridgeshire, Derbyshire, Gloucestershire, 
-        Lancashire, Nottinghamshire, Staffordshire, Buckinghamshire, Wiltshire, Bedfordshire, 
-        Northamptonshire}
+
 
     public abstract class AAccount
     {
         public List<Transaction> transactions { get; private set; } = new List<Transaction>();
+
+        public OverdraftStatus Overdraft { get; private set; } = OverdraftStatus.Default;
+
         public Branch Branch { get; private set; }
 
         public AAccount() {
@@ -71,6 +72,27 @@ namespace Boolean.CSharp.Main.Core
                 else val[1] = elm.Amount;
                 Console.WriteLine("{0, -11}||{1, 10} ||{2, 10} || {3, -10}", elm.Time, val[0], val[1], elm.Balance);
             }
+        }
+
+        public bool RequestOverdraft()
+        {
+            if ( Overdraft == OverdraftStatus.Default)
+            {
+                Overdraft = OverdraftStatus.Requested;
+                return true;
+            }
+            return false;
+        }
+
+
+        public bool AcceptOverdraft()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool RejectOverdraft()
+        {
+            throw new NotImplementedException();
         }
     }
 }
