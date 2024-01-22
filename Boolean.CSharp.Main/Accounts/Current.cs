@@ -9,9 +9,6 @@ namespace Boolean.CSharp.Main.Accounts
     public class Current : Account
     {
         public Current() : base() { }
-        public Current(double balance) : base(balance)
-        {
-        }
 
     }
 }

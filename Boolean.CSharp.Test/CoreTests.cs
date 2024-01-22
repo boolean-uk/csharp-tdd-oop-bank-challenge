@@ -29,21 +29,21 @@ namespace Boolean.CSharp.Test
         public void DepositMoneyToAccount()
         {
             Customer c = new Customer(1, "Elsa");
-            Savings account = new Savings(120.0d);
+            Savings account = new Savings();
             c.AddAccount(account);
 
-            account.deposit(50d);
-            Assert.That(account.Balance, Is.EqualTo(170.0d));
+            account.Deposit(50d);
+            Assert.That(account.Balance, Is.EqualTo(50d));
         }
         [Test]
         public void WithDrawMoneyFromAccount()
         {
             Customer c = new Customer(1, "Elsa");
-            Current account = new Current(120.0d);
+            Current account = new Current();
             c.AddAccount(account);
 
-            account.withDraw(20d);
-            Assert.That(account.Balance, Is.EqualTo(100.0d));
+            account.WithDraw(20d);
+            Assert.That(account.Balance, Is.EqualTo(-20d));
         }
 
     }

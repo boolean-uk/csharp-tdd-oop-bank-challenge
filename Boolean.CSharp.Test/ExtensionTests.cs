@@ -1,4 +1,5 @@
 ﻿using Boolean.CSharp.Main;
+using Boolean.CSharp.Main.Accounts;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -11,20 +12,36 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class ExtensionTests
     {
-        private Extension _extension;
-        public ExtensionTests()
+
+        [Test]
+        public void ShouldCalculateBalanceBasedOnTransactionHistory()
         {
-            _extension = new Extension();
+            Customer c = new Customer(1, "Elsa");
+            Current current = new Current();
+            c.AddAccount(current);
+            current.Deposit(100);
+            current.Deposit(100);
+
+            Assert.That(current.Balance, Is.EqualTo(200d));
         }
         [Test]
-        private void TestQuestion1()
+        public void ShouldReturnNegativeValue()
         {
+            Customer c = new Customer(1, "Elsa");
+            Current current = new Current();
+            c.AddAccount(current);
+            current.WithDraw(100);
+            current.WithDraw(100);
 
+            Assert.That(current.Balance, Is.EqualTo(-200d));
         }
         [Test]
-        private void TestQuestion2()
+        public void ShouldReturnZero() 
         {
-
+            Customer c = new Customer(1, "Elsa");
+            Current current = new Current();
+            c.AddAccount(current);
+            Assert.That(current.Balance, Is.EqualTo(0));
         }
     }
 }

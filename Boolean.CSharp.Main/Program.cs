@@ -10,11 +10,11 @@ customer.AddAccount(savings);
 
 Console.WriteLine($"--------- DnB ---------");
 Console.WriteLine($"\nHello, {customer.Name}\n*Deposit £50 to your Savings account*\n");
-savings.deposit(50);
+savings.Deposit(50);
 customer.DisplayTransactions(savings);
 Console.WriteLine("\nDoing another deposit of £200 to Savings account\n");
-savings.deposit(200);
+savings.Deposit(200);
 customer.DisplayTransactions(savings);
 Console.WriteLine("\n*Withdraw £130 from your Savings account*\n");
-savings.withDraw(130);
+savings.WithDraw(130);
 customer.DisplayTransactions(savings);
