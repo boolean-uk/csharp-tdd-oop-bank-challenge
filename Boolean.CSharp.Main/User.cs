@@ -40,6 +40,11 @@ namespace Boolean.CSharp.Main
             return account.Withdraw(balance);
         }
 
+        public double GetBalance(IAccount account)
+        {
+            return account.GetBalance();
+        }
+
         public void GenerateBankStatement(IAccount account)
         {
             Console.WriteLine("{0,10} || {1, 11} || {2,11} || {3,11} ", "Date", "Deposit", "Withdraw", "Balance");

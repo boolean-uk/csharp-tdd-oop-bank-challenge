@@ -19,8 +19,8 @@ namespace Boolean.CSharp.Test
             Assert.That(user.ID, Is.EqualTo(0));
             Assert.That(user.Name, Is.EqualTo("Kristian"));
             Assert.That(user.Email, Is.EqualTo("Test@email.com"));
-            Assert.That(user.Account.Balance, Is.EqualTo(0));
-            Assert.That(user.SavingsAccount.Balance, Is.EqualTo(0));
+            Assert.That(user.Account.GetBalance(), Is.EqualTo(0));
+            Assert.That(user.SavingsAccount.GetBalance(), Is.EqualTo(0));
         }
 
         [Test]
@@ -30,7 +30,7 @@ namespace Boolean.CSharp.Test
 
             user.Deposit(100, user.Account);
 
-            Assert.That(user.Account.Balance, Is.EqualTo(100));
+            Assert.That(user.Account.GetBalance(), Is.EqualTo(100));
 
         }
 
@@ -50,7 +50,7 @@ namespace Boolean.CSharp.Test
             user.Deposit(100, user.Account);
             
             Assert.That(user.Withdraw(50, user.Account), Is.True);
-            Assert.That(user.Account.Balance, Is.EqualTo(50));
+            Assert.That(user.Account.GetBalance(), Is.EqualTo(50));
 
         }
 

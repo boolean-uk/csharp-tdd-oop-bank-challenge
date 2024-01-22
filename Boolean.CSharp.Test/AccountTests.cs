@@ -18,7 +18,7 @@ namespace Boolean.CSharp.Test
             User user = new User(0, "Kristian", "Test@email.com", "password");
             Account account = new CurrentAccount(user);
 
-            Assert.That(account.Balance, Is.EqualTo(0));
+            Assert.That(account.GetBalance(), Is.EqualTo(0));
             Assert.That(account.Owner, Is.EqualTo(user));
             Assert.That(account.Transactions.Count, Is.EqualTo(0));
         }
@@ -29,20 +29,9 @@ namespace Boolean.CSharp.Test
             User user = new User(0, "Kristian", "Test@email.com", "password");
             Account account = new SavingsAccount(user);
 
-            Assert.That(account.Balance, Is.EqualTo(0));
+            Assert.That(account.GetBalance(), Is.EqualTo(0));
             Assert.That(account.Owner, Is.EqualTo(user));
             Assert.That(account.Transactions.Count, Is.EqualTo(0));
-        }
-
-        [Test]
-        public void TestInitialBalanceCreation()
-        {
-            User user = new User(0, "Kristian", "Test@email.com", "password");
-            Account account = new SavingsAccount(user, 200);
-
-            Assert.That(account.Balance, Is.EqualTo(200));
-            Assert.That(account.Transactions.Count, Is.EqualTo(0));
-            Assert.That(account.Owner, Is.EqualTo(user));
         }
 
         [Test]
@@ -53,7 +42,7 @@ namespace Boolean.CSharp.Test
 
             account.Deposit(100);
 
-            Assert.That(account.Balance, Is.EqualTo(100));
+            Assert.That(account.GetBalance(), Is.EqualTo(100));
             Assert.That(account.Transactions.Count, Is.EqualTo(1));
             Assert.That(account.Owner, Is.EqualTo(user));
         }
@@ -65,7 +54,7 @@ namespace Boolean.CSharp.Test
             Account account = new SavingsAccount(user);
 
             Assert.That(account.Withdraw(100), Is.False);
-            Assert.That(account.Balance, Is.EqualTo(0));
+            Assert.That(account.GetBalance(), Is.EqualTo(0));
             Assert.That(account.Transactions.Count, Is.EqualTo(0));
             Assert.That(account.Owner, Is.EqualTo(user));
         }
@@ -79,7 +68,7 @@ namespace Boolean.CSharp.Test
             account.Deposit(200);
 
             Assert.That(account.Withdraw(100), Is.True);
-            Assert.That(account.Balance, Is.EqualTo(100));
+            Assert.That(account.GetBalance(), Is.EqualTo(100));
             Assert.That(account.Transactions.Count, Is.EqualTo((2)));
             Assert.That(account.Owner, Is.EqualTo(user));
         }
@@ -92,7 +81,7 @@ namespace Boolean.CSharp.Test
 
             account.Deposit(100);
 
-            Assert.That(account.Balance, Is.EqualTo(100));
+            Assert.That(account.GetBalance(), Is.EqualTo(100));
             Assert.That(account.Transactions.Count, Is.EqualTo(1));
             Assert.That(account.Transactions[0].Amount, Is.EqualTo(100));
         }

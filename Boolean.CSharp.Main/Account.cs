@@ -9,49 +9,41 @@ namespace Boolean.CSharp.Main
 {
     public abstract class Account : IAccount
     {
-        private double _balance;
         private User _owner;
         private List<Transaction> _transactions;
 
         public Account(User user)
         {
-            _balance = 0;
             _owner = user;
             _transactions = new List<Transaction>();
         }
 
-        public Account(User user, double balance)
-        {
-            _balance = balance;
-            _owner = user;
-            _transactions = new List<Transaction>();
-        }
-
-        public double Balance { get => _balance; set => _balance = value; }
         public User Owner { get => _owner; }
         public List<Transaction> Transactions { get => _transactions; }
 
         public void Deposit(double amount)
         {
-            Transaction transaction = new Transaction(amount, TransactionType.Deposit, Balance);
-            Balance += transaction.Amount;
+            Transaction transaction = new Transaction(amount, TransactionType.Deposit, GetBalance());
             Transactions.Add(transaction);
         }
         
         public bool Withdraw(double amount)
         {
-            if (amount < 0 || Balance-amount < 0)
+            Transaction transaction = new Transaction(amount, TransactionType.Withdrawal, GetBalance());
+            if (transaction.NewBalance < 0)
             {
-                Console.WriteLine("Not enough balance for withdrawal");
+                Console.WriteLine("The balance is too low for the withdrawal");
                 return false;
             }
 
-            Transaction transaction = new Transaction(amount, TransactionType.Withdrawal, Balance);
-            Balance -= transaction.Amount;
             Transactions.Add(transaction);
 
             return true;
         }
 
+        public double GetBalance()
+        {
+            return Transactions.Count > 0  ? Transactions[Transactions.Count - 1].NewBalance : 0;
+        }
     }
 }

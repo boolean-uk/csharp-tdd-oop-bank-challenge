@@ -10,9 +10,5 @@ namespace Boolean.CSharp.Main
         public CurrentAccount(User user) : base(user)
         {
         }
-
-        public CurrentAccount(User user, double balance) : base(user, balance)
-        {
-        }
     }
 }
