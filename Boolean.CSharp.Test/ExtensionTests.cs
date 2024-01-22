@@ -19,12 +19,16 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestBranchAssociation()
         {
+            // Generate branch
             IBankBranch branch = new LocalBank("123 Bank Road, 987 City");
+            // Genereate a customer
             DateTime dob = new DateTime(1996, 8, 20);
             Customer user = new RegularCustomer("Bob", dob);
+            // Register customer and make a bank account
             user.RegisterWithBankBranch(branch);
             user.OpenNewAccount(AccountType.General);
             IAccount acc = user.GetAccounts()[0];
+            branch.AddAccountToBranch(acc);
 
             // Act
             IAccount res1 = branch.GetAccounts()[0];

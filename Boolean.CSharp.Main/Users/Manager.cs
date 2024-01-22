@@ -31,7 +31,8 @@ namespace Boolean.CSharp.Main.Users
 
         public bool RegisterWithBankBranch(IBankBranch branch)
         {
-            throw new NotImplementedException();
+            _branch = branch;
+            return branch.AddEmployeeToBranch(this);
         }
     }
 }

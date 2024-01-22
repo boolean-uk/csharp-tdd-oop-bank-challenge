@@ -10,9 +10,9 @@ namespace Boolean.CSharp.Main.Branch
 {
     public class LocalBank : IBankBranch
     {
-        private List<IAccount> _accounts;
-        private List<Customer> _customers;
-        private List<IUser> _employees;
+        private List<IAccount> _accounts = new List<IAccount>();
+        private List<Customer> _customers = new List<Customer>();
+        private List<IUser> _employees = new List<IUser>();
         private string _location;
 
         public LocalBank(string location)
@@ -24,37 +24,46 @@ namespace Boolean.CSharp.Main.Branch
 
         public bool AddAccountToBranch(IAccount account)
         {
-            throw new NotImplementedException();
+            int val1 = _accounts.Count;
+            _accounts.Add(account);
+            int val2 = _accounts.Count;
+            return val2 > val1;
         }
 
         public bool AddEmployeeToBranch(IEmployee employee)
         {
-            throw new NotImplementedException();
+            int val1 = _employees.Count;
+            _employees.Add(employee);
+            int val2 = _employees.Count;
+            return val2 > val1;
         }
 
         public bool AddUserToBranch(Customer user)
         {
-            throw new NotImplementedException();
+            int val1 = _customers.Count;
+            _customers.Add(user);
+            int val2 = _customers.Count;
+            return val2 > val1;
         }
 
         public List<IAccount> GetAccounts()
         {
-            throw new NotImplementedException();
+            return new List<IAccount>(this._accounts);
         }
 
         public List<Customer> GetCustomers()
         {
-            throw new NotImplementedException();
+            return new List<Customer>(_customers);
         }
 
         public List<IUser> GetEmployees()
         {
-            throw new NotImplementedException();
+            return new List<IUser>(_employees);
         }
 
         public string GetLocation()
         {
-            throw new NotImplementedException();
+            return _location;
         }
     }
 }
