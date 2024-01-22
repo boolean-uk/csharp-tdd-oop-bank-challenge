@@ -26,30 +26,32 @@ I want to deposit and withdraw funds.
 		<td>Output Type</td>
 	</thead>
 	<tbody>
-		<td><code>Customer</code></td>
-		<td><code>AddAccount(string accountName, AccountType type)</code></td>
-		<td>Creates an account for the user with the given account name</td>
-		<td>Account</td>
-	</tbody>
-	<tbody>
-		<td><code>IAccount</code></td>
-		<td><code>GenerateBankStatements()</code></td>
-		<td>Prints all transactions, showing transaction date, amount, and balance
-		at the time of the transaction.</td>
-		<td>void</td>
-	</tbody>
-	<tbody>
-		<td></td>
-		<td><code>Deposit(double amount)</code></td>
-		<td>Deposit an amount of money into the specified account. 
-		Returns true if successful, otherwise false</td>
-		<td>bool</td>
-	</tbody>	
-	<tbody>
-		<td></td>
-		<td><code>Withdraw(double amount)</code></td>
-		<td>Withdraw an amount of money from the specified account. Returns the amount withdrawn.</td>
-		<td>double</td>
+		<tr>
+			<td><code>Customer</code></td>
+			<td><code>AddAccount(IAccount account)</code></td>
+			<td>Creates an account for the user with the given account name</td>
+			<td>void</td>
+		</tr>
+		<tr>
+			<td><code>IAccount</code></td>
+			<td><code>GenerateBankStatements(double amount)</code></td>
+			<td>Prints all transactions, showing transaction date, amount, and balance
+			at the time of the transaction.</td>
+			<td>void</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><code>Deposit(double amount)</code></td>
+			<td>Deposit an amount of money into the specified account. 
+			Returns true if successful, otherwise false</td>
+			<td>bool</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><code>Withdraw(double amount)</code></td>
+			<td>Withdraw an amount of money from the specified account. Returns the amount withdrawn.</td>
+			<td>double</td>
+		</tr>
 	</tbody>
 </table>
 
@@ -83,29 +85,25 @@ I want statements to be sent as messages to my phone.
 		<td>Output Type</td>
 	</thead>
 	<tbody>
-		<td><code>BankManager</code></td>
-		<td><code>ApproveOverdraftRequest(bool approved)</code></td>
-		<td>Gets an overdraft request from a list and lets the manager
-		approve or deny it.</td>
-		<td>void</td>
-	</tbody>
-	<tbody>
-		<td></td>
-		<td><code>AssignBranch(Account account, BranchType branch)</code></td>
-		<td>Assigns a specified branch to the given account</td>
-		<td>void</td>
-	</tbody>
-	<tbody>
-		<td><code>Customer</code></td>
-		<td><code>RequestOverdraft(Account account)</code></td>
-		<td>Requests an overdraft to the customers bank manager.
-		Returns true if accepted, otherwise false</td>
-		<td>bool</td>
-	</tbody>
-	<tbody>
-		<td></td>
-		<td><code>MessageStatements()</code></td>
-		<td>Sends the statements to the customers phone via SMS</td>
-		<td>void</td>
+		<tr>
+			<td><code>Branch</code></td>
+			<td><code>ReviewRequests(bool approved)</code></td>
+			<td>Reviews all requests from customer, allowing a manager to 
+			approve or deny the requests</td>
+			<td>void</td>
+		</tr>
+		<tr>
+			<td><code>Customer</code></td>
+			<td><code>RequestOverdraft(Account account)</code></td>
+			<td>Requests an overdraft to the customers bank manager.
+			Returns true if accepted, otherwise false</td>
+			<td>bool</td>
+		</tr>
+		<tr>
+			<td><code>IAccount</code></td>
+			<td><code>MessageStatements()</code></td>
+			<td>Sends the statements to the customers phone via SMS</td>
+			<td>void</td>
+		</tr>
 	</tbody>
 </table>
