@@ -31,7 +31,7 @@ namespace Boolean.CSharp.Main
                 return false;
 
             transactions.Add(new Transaction(date, amount, 0.0f));
-            PrintStatements("Deposited $" + amount + " on date " + date);
+            Console.WriteLine("Deposited $" + amount + " on date " + date);
             return true;
         }
 
@@ -40,14 +40,14 @@ namespace Boolean.CSharp.Main
             if (this.sortCode != sortCode)
                 return false;
 
-            if (GetTotalBalance(sortCode) < amount && !managerApprove)
+            if (GetTotalBalance() < amount && !managerApprove)
                 return false;
 
             if (date == "")
                 return false;
 
             transactions.Add(new Transaction(date, 0.0f, amount));
-            PrintStatements("Withdrew $" + amount + " on date " + date);
+            Console.WriteLine("Withdrew $" + amount + " on date " + date);
             return true;
         }
 
@@ -70,11 +70,8 @@ namespace Boolean.CSharp.Main
             return message;
         }
 
-        public float GetTotalBalance(string sortCode)
+        public float GetTotalBalance()
         {
-            if (this.sortCode != sortCode)
-                return 0.0f;
-
             float totalBalance = 0.0f;
 
             for (int i = 0; i < transactions.Count(); i++)
@@ -83,11 +80,6 @@ namespace Boolean.CSharp.Main
             }
 
             return totalBalance;
-        }
-
-        private void PrintStatements(string message)
-        {
-            Console.WriteLine(message);
         }
     }
 }

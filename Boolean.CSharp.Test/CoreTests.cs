@@ -1,5 +1,6 @@
 ﻿using Boolean.CSharp.Main;
 using NUnit.Framework;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Boolean.CSharp.Test
 {
@@ -47,12 +48,16 @@ namespace Boolean.CSharp.Test
         {
             string result = bankAccount.GetTransactions("LAX");
             Console.WriteLine(result);
+            Assert.That("Date\t|| Credit || Debit || Balance\n" +
+                "23/07/2008 || 10000 || 0 || 10000\n" +
+                "23/07/2008 || 500 || 0 || 10500\n" +
+                "24/07/2008 || 0 || 100 || 10400", Is.EqualTo(result));
         }
 
         [Test]
         public void GetTotalBalance()
         {
-            float result = bankAccount.GetTotalBalance("LAX");
+            float result = bankAccount.GetTotalBalance();
             Assert.That(10400, Is.EqualTo(result));
         }
 
@@ -66,6 +71,16 @@ namespace Boolean.CSharp.Test
         {
             bool result = manager.RequestOverdraft(bankAccount, code, amount, date);
             Assert.That(expected, Is.EqualTo(result));
+        }
+
+        [Test]
+        public void RequestMoreOverdrafts()
+        {
+            manager.RequestOverdraft(bankAccount, "LAX", 10000, "23/01/2001");
+            manager.RequestOverdraft(bankAccount, "LAX", 10000, "23/01/2001");
+            manager.RequestOverdraft(bankAccount, "LAX", 10000, "23/01/2001");
+            bool result = manager.RequestOverdraft(bankAccount, "LAX", 10000, "23/01/2001");
+            Assert.That(false, Is.EqualTo(result));
         }
     }
 }

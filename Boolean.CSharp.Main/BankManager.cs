@@ -18,15 +18,18 @@ namespace Boolean.CSharp.Main
             if (account == null)
                 return false;
 
+            if (account.GetTotalBalance() < -30000)
+                return false;
+
             if (amount == 0 || amount < 0)
                 return false;
 
             if (date == "")
                 return false;
 
-            if (amount - account.GetTotalBalance(sortCode) > 100000)
+            if (amount - account.GetTotalBalance() > 10000)
                 return false;
-            
+
             bool request = account.WithdrawFunds(sortCode, amount, date, true);
             return request;
         }
