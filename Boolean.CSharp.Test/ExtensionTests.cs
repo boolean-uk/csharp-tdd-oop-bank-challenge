@@ -1,4 +1,5 @@
 ﻿using Boolean.CSharp.Main;
+using Boolean.CSharp.Main.Classes;
 using Boolean.CSharp.Main.Classes.Accounts;
 using Boolean.CSharp.Main.Classes.User;
 using NUnit.Framework;
@@ -54,14 +55,19 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        public void RequestingOverdraft()
+        public void RequestingOverdraft(double deposit, double draft)
         {
             //  Arrange - set up test values
+            string result;
+            CurrentAccount testAccount = new CurrentAccount();
+            customer.CreateAccount(testAccount);
+            customer.Deposit(deposit, 0);
 
             //  Act - use the fucntion we want to test
+            BankStatement test = customer.RequestOverdraft(draft, 0);
 
             //  Assert - check the results
-            Assert.IsTrue(false);
+            Assert.That(Math.Round(test.Transaction,2), Is.EqualTo(Math.Round(deposit-draft,2)));
         }
 
         [Test]
