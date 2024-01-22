@@ -1,5 +1,5 @@
-﻿using Twilio;
-using Twilio.Rest.Api.V2010.Account;
+﻿//using Twilio;
+//using Twilio.Rest.Api.V2010.Account;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main
 {
+    /*
     public class Twillo : IMessenger
     {
         private string accountSid, authToken;
@@ -36,7 +37,7 @@ namespace Boolean.CSharp.Main
             {
                 { Console.WriteLine(e.Message); }
             }
-            Console.WriteLine(SMS.Body);
         }
     }
+    */
 }
