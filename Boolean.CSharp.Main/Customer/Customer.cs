@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Boolean.CSharp.Main.Customer
 {
@@ -37,5 +38,6 @@ namespace Boolean.CSharp.Main.Customer
         {
             return _accounts;
         }
+        
     }
 }

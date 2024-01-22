@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace Boolean.CSharp.Main.Accounts
 {
@@ -32,7 +33,7 @@ namespace Boolean.CSharp.Main.Accounts
             {
                 return false;
             }
-            Transaction transaction = new Transaction(type, _balance, amount);
+            BankTransaction transaction = new BankTransaction(type, _balance, amount);
             _transactions.Add(transaction);
             _balance = transaction.NewBalance;
             return true;
@@ -41,6 +42,23 @@ namespace Boolean.CSharp.Main.Accounts
         public List<ITransaction> GetTransactions()
         {
             return _transactions;
+        }
+
+        /// <summary>
+        /// Method outputs a statement to the console
+        /// </summary>
+        public void WriteStatement()
+        {
+            Console.WriteLine("{0,10} || {1,10} || {2,10} || {3,10} ", "Date", "Credit", "Debit", "Balance");
+            foreach (ITransaction transaction in _transactions.OrderByDescending(t => t.Date))
+            {
+
+                Console.WriteLine("{0,10} || {1,10} || {2,10} || {3,10} ",
+                        transaction.Date.ToShortDateString(),
+                        transaction.Type == TransactionType.Credit ? transaction.Amount : 0,
+                        transaction.Type == TransactionType.Debit ? transaction.Amount : 0,
+                        transaction.NewBalance);
+            };
         }
     }
 }

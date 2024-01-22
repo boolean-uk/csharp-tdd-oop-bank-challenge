@@ -7,7 +7,7 @@ using System.Transactions;
 
 namespace Boolean.CSharp.Main.Transactions
 {
-    public class Transaction : ITransaction
+    public class BankTransaction : ITransaction
     {
         private Guid _id;
         private DateTime _date = DateTime.Now;
@@ -23,7 +23,7 @@ namespace Boolean.CSharp.Main.Transactions
         public double NewBalance { get { return _newbalance; } }
         public double OldBalance { get { return _oldbalance; } }
 
-        public Transaction(TransactionType type, double oldB, double amount)
+        public BankTransaction(TransactionType type, double oldB, double amount)
         {
             _id = Guid.NewGuid();
             _type = type;
