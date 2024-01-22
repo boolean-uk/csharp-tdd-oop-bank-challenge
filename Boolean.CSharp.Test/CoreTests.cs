@@ -1,4 +1,6 @@
 ﻿using Boolean.CSharp.Main;
+using Boolean.CSharp.Main.Concretes;
+using Boolean.CSharp.Main.Interfaces;
 using NUnit.Framework;
 
 namespace Boolean.CSharp.Test
@@ -15,9 +17,15 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        public void TestQuestion1()
+        public void AddAccountTest()
         {
+            ICustomer customer = new Customer();
+            customer.AddSavingsAccount();
+            customer.AddCurrentAccount();
 
+            List<IAccount> accounts = customer.GetAccounts();
+
+            Assert.That(accounts.Count,Is.EqualTo(2));
         }
 
     }

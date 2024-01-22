@@ -17,14 +17,10 @@ namespace Boolean.CSharp.Test
             _extension = new Extension();
         }
         [Test]
-        private void TestQuestion1()
+        public void TestQuestion1()
         {
-
+            Assert.Pass();
         }
-        [Test]
-        private void TestQuestion2()
-        {
-
-        }
+        
     }
 }
