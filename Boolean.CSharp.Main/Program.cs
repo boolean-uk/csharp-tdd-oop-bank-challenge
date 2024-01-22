@@ -3,8 +3,6 @@ using Boolean.CSharp.Main.Core;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Diagnostics;
 
-Console.WriteLine("Hello, World!");
-
 
 CurrentAccount current = new CurrentAccount();
 SavingsAccount saving = new SavingsAccount();

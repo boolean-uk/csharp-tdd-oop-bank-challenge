@@ -11,6 +11,8 @@ namespace Boolean.CSharp.Main.Core
 
     public abstract class AAccount
     {
+
+        private IMessenger messenger = new ConsoleMessenger();
         public List<Transaction> transactions { get; private set; } = new List<Transaction>();
 
         public OverdraftStatus Overdraft { get; private set; } = OverdraftStatus.Default;
@@ -64,14 +66,22 @@ namespace Boolean.CSharp.Main.Core
 
         public void CreateBankStatement()
         {
-            Console.WriteLine("{0, -11}|| {1, -10}|| {2, -10}|| {3, -10}", "date", "credit", "debit", "balance");
+            string statement = "";
+            statement += 
+                String.Format("{0, -11}|| {1, -10}|| {2, -10}|| {3, -10}\n", 
+                              "date", "credit", "debit", "balance"
+                             );
             foreach( Transaction elm in transactions)
             {
                 string[] val = { "", "" };
                 if (elm.isCredit) val[0] = elm.Amount;
                 else val[1] = elm.Amount;
-                Console.WriteLine("{0, -11}||{1, 10} ||{2, 10} || {3, -10}", elm.Time, val[0], val[1], elm.Balance);
+                statement +=
+                    String.Format("{0, -11}||{1, 10} ||{2, 10} || {3, -10}\n", 
+                    elm.Time, val[0], val[1], elm.Balance);
             }
+
+            messenger.send(statement);
         }
 
         public bool RequestOverdraft()
