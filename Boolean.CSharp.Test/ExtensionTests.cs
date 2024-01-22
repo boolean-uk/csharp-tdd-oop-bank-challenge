@@ -12,12 +12,12 @@ public class ExtensionTests
         _extension = new Extension();
     }
     [Test]
-    private void TestQuestion1()
+    public void TestQuestion1()
     {
 
     }
     [Test]
-    private void TestQuestion2()
+    public void TestQuestion2()
     {
 
     }

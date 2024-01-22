@@ -1,5 +1,6 @@
 ﻿using Boolean.CSharp.Main;
 using NUnit.Framework;
+using System.Diagnostics;
 
 namespace Boolean.CSharp.Test;
 
@@ -33,11 +34,11 @@ public class CoreTests
     [Test]
     public void createSavingsAccountTest()
     {
-        bool result = _core.createSavingsAccount("123456789");
-        bool result1 = _core.createSavingsAccount("12345678901");
-        bool result2 = _core.createSavingsAccount("12345678901");
-        bool result3 = _core.createSavingsAccount("12345678902");
-        bool result4 = _core.createSavingsAccount("1234567890112");
+        bool result = _core.createSavingsAccount("223456789");
+        bool result1 = _core.createSavingsAccount("22345678901");
+        bool result2 = _core.createSavingsAccount("22345678901");
+        bool result3 = _core.createSavingsAccount("22345678902");
+        bool result4 = _core.createSavingsAccount("2234567890112");
 
         Assert.IsFalse(result); // to short (valid length = 11)
         Assert.IsTrue(result1); // valid
@@ -49,7 +50,7 @@ public class CoreTests
     [Test]
     public void checkBalanceTest()
     {
-        SavingsAccount account = new SavingsAccount("12345678901");
+        SavingsAccount account = new SavingsAccount("32345678901");
         
         double result = account.checkBalance();
         Assert.That(result, Is.EqualTo(0));
@@ -72,17 +73,18 @@ public class CoreTests
     [Test]
     public void generateBankStatementTest()
     {
-        BankAccount account = new BankAccount("12345678901");
+        BankAccount account = new BankAccount("42345678901");
         DateOnly date = DateOnly.FromDateTime(DateTime.Now);
+        string expected = string.Format("{0,-10} {1,-10} {2, -10} {3, -10}\n", "date", "credit", "debit", "balance");
+        expected += string.Format("{0,-10} {1,-10} {2, -10} {3, -10}\n", date, 10000.00, "", 10000.00);
+        expected += string.Format("{0,-10} {1,-10} {2, -10} {3, -10}\n", date, "", 5000.00, 5000.00);
+        expected += string.Format("{0,-10} {1,-10} {2, -10} {3, -10}\n", date, 3500.00, "", 8500.00);
 
         account.deposit(10000);
         account.withdraw(5000);
         account.deposit(3500);
         string result = account.generateBankStatement();
 
-        Assert.That(result, Is.EqualTo($"date       || credit   || debit   || balance\r\n" +
-                                           $"{date} || 10000.00 ||         || 10000.00\r\n" +
-                                           $"{date} ||          || 5000.00 ||  5000.00\r\n" +
-                                           $"{date} ||  3500.00 ||         ||  8500.00"));
+        Assert.That(result, Is.EqualTo(expected));
     }
 }
