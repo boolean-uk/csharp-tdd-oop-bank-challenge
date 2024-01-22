@@ -30,7 +30,7 @@
             _amount = amount;
             _previousValue = previousValue;
 
-            if(type == TransactionType.Debit)
+            if(type == TransactionType.Credit)
             {
                 _newValue = _previousValue + _amount;
             }

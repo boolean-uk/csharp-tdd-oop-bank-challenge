@@ -26,14 +26,14 @@ namespace Boolean.CSharp.Main
 
         public string Deposit(decimal amount)
         {
-            _transactions.Add(new(TransactionType.Debit, amount, _balance));
+            _transactions.Add(new(TransactionType.Credit, amount, _balance));
             _balance += amount;
             return $"{amount} deposited to {_name}, new balance is {_balance}";
         }
 
         public string Withdraw(decimal amount)
         {
-            Transaction withdrawal = new(TransactionType.Credit, amount, _balance);
+            Transaction withdrawal = new(TransactionType.Debit, amount, _balance);
             if (withdrawal.NewValue < 0) 
             {
                 return $"Cannot withdraw from {_name}, balance is less than withdrawal amount";

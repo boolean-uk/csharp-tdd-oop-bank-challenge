@@ -1,10 +1,16 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Boolean.CSharp.Main;
 
-Console.WriteLine("Hello, World!");
 
-Account account = new("test");
-account.Deposit(500);
-account.Deposit(1000);
-account.Withdraw(750);
-Console.WriteLine(account.GenerateStatement());
+Customer customer = new();
+customer.CreateSavingsAccount("test");
+customer.Deposit("test", 500);
+customer.Deposit("test", 1000);
+customer.Withdraw("test", 750);
+
+customer.CreateCurrentAccount("other test");
+customer.Deposit("other test", 1000);
+customer.Withdraw("other test", 250);
+
+
+Console.WriteLine(customer.GenerateStatement());

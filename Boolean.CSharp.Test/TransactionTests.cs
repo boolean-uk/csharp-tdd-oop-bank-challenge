@@ -9,7 +9,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void CreateTransaction()
         {
-            Transaction transaction = new(TransactionType.Debit, 500, 0);
+            Transaction transaction = new(TransactionType.Credit, 500, 0);
             Assert.That(transaction.NewValue, Is.EqualTo(500));
         }
     }

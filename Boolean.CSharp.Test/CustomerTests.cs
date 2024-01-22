@@ -33,14 +33,14 @@ namespace Boolean.CSharp.Test
         [Test]
         public void CreateCurrentAcc()
         {
-            Assert.That(customer.CreateSavingsAccount("Current"), Is.EqualTo("Current account Current has been created"));
+            Assert.That(customer.CreateCurrentAccount("Current"), Is.EqualTo("Current account Current has been created"));
         }
 
         [Test]
         public void CantCreateDuplicateCurrentAcc()
         {
-            customer.CreateSavingsAccount("Current");
-            Assert.That(customer.CreateSavingsAccount("Current"), Is.EqualTo("Could not create account, Current already exists"));
+            customer.CreateCurrentAccount("Current");
+            Assert.That(customer.CreateCurrentAccount("Current"), Is.EqualTo("Could not create account, Current already exists"));
         }
 
         [Test]
