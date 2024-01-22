@@ -3,5 +3,5 @@
 | IAccount                             	|                                                	| Deposit(double, DateTime), Withdraw(double, DateTime), PrintStatement(), GetBalance() 	|   String, double 	|
 | Account (implements IAccount)        	| transactionList : List Transaction             	| Deposit(double, DateTime), Withdraw(double, Datetime), PrintStatement(), GetBalance() 	|   String, double 	|
 | CurrentAccount (implements IAccount) 	| inherits attributes and methods from Account   	| All methods are inherited                                                             	|                  	|
-| SavingsAccount (implements IAccount) 	| inherits attributes and methods from¨ Account  	| All methods are inherited                                                             	|                  	|
+| SavingsAccount (implements IAccount) 	| inherits attributes and methods from Account  	| All methods are inherited                                                             	|                  	|
 | Transaction                          	| date: DateTime, credit: double, debit: double, 	|                                                                                       	|                  	|

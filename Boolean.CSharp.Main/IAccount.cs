@@ -10,5 +10,7 @@ namespace Boolean.CSharp.Main
         int deposit { get; set; }
         int withdraw { get; set; }
         int printStatement { get; set; }
+
+        void GetBalance();
     }
 }

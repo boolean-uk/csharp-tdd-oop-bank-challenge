@@ -30,13 +30,5 @@ namespace Boolean.CSharp.Main
             {
             }
         }
-
-        public int balanceAtTransactionTime
-        {
-            get => default;
-            set
-            {
-            }
-        }
     }
 }

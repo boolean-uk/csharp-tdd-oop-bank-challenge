@@ -4,21 +4,54 @@ using NUnit.Framework;
 namespace Boolean.CSharp.Test
 {
     [TestFixture]
-    public class CoreTests
+    public class Core
     {
-        private Core _core;
-
-        public CoreTests()
+        [Test]
+        public void DepositShouldIncreaseBalance() 
         {
-            _core = new Core();
+            //Arrange
+            IAccount account = new Account();
+            double initialBalance = account.GetBalance();
+            double depositAmount = 1000;
 
+            //Act
+            account.Deposit(depositAmount, DateTime.Now);
+
+            //Assert
+            double expectedBalance = initialBalance + depositAmount;
+            Assert.AreEqual(expectedBalance, account.GetBalance());
         }
 
         [Test]
-        public void TestQuestion1()
+        public void DepositShouldDecreaseBalance() 
         {
+            //Arrange
+            IAccount account = new Account();
+            account.Deposit(2000, DateTime.Now);
+            double initialBalance = account.GetBalance();
+            double withdrawalAmount = 500;
 
+            //Act
+            account.Withdraw(withdrawalAmount, DateTime.Now);
+
+            //Assert
+            double expectedBalance = initialBalance - withdrawalAmount;
+            Assert.AreEqual(expectedBalance, account.GetBalance());
         }
 
-    }
+        [Test]
+        public void PrintStatementShouldShouldReturnString()
+        {
+            //Arrange
+            IAccount account = new Account();
+            account.Deposit(1000, DateTime.Now);
+
+            //Act
+            string statement = account.PrintStatement();
+
+            //Assert
+            Assert.IsNotNull(statement);
+            Assert.IsNotEmpty(statement);
+        }
+    }    
 }
