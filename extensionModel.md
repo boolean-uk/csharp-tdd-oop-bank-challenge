@@ -5,7 +5,7 @@ I want account balances to be calculated based on transaction history instead of
 ```
 | Classes         | Methods                                     | Scenario               | Outputs                     |
 |-----------------|---------------------------------------------|------------------------|-----------------------------|
-| `Account`       | `generateStatement()`                       | any                    | string bankstatement        |
+| `Account`       | `getBalance()`                              | any                    | double balance, now generated based on transaction history instead of getting balance value. |
 
 ```
 As a bank manager,
