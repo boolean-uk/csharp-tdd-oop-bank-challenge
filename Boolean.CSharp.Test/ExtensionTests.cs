@@ -45,11 +45,19 @@ namespace Boolean.CSharp.Test
             bankApp.Add(engineer1);
             custommer1.makeAccount(Enums.Saving);
             custommer1.makeAccount(Enums.Current);
-            var users = bankApp.seeUsers();
 
-            // There should be 1 user in the bank and the custommer should have 2 accounts.
-            Assert.IsTrue(users.Count == 2 && custommer1.getAccAccounts().Count == 2);
+            // As an ennigneer, I want to check the balance of the 1. acc on the custommer1.
+            Guid acc1 = custommer1.getAccAccounts().Keys.First();
+            double balanceOfAcc1Custommer1 = engineer1.getBalanceOfCustommerAcc(custommer1, acc1);
+
+            
+            // The balance should be 0.
+            Assert.IsTrue(balanceOfAcc1Custommer1 == 0);
 
         }
+
+
+
+
     }
 }
