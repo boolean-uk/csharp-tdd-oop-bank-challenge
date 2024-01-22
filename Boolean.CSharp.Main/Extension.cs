@@ -2,17 +2,30 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace Boolean.CSharp.Main
 {
-    public class Extension
+    public class Manager : BankUser
     {
-        private Core _core;
-        public Extension()
+        private BankUser _bankuser;
+        private SavingsAccount _savingsaccount;
+        private string branch;
+        public List<Transaction> Transactions { get; } = new List<Transaction>();
+        public Manager()
         {
-            Core? core = new Core();
-        }                      
+            _bankuser = new BankUser();
+            _savingsaccount = new SavingsAccount();
+            this.branch = string.Empty;
+    }
+
+
+
+      
+
+
     }
 }
