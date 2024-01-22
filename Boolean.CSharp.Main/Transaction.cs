@@ -21,7 +21,7 @@
         public Transaction(TransactionType type, decimal amount, decimal previousValue) 
         {
             //generate id 
-            Random random = new Random();
+            Random random = new();
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             _id = new string(Enumerable.Range(1, 10).Select(_ => chars[random.Next(chars.Length)]).ToArray());
 

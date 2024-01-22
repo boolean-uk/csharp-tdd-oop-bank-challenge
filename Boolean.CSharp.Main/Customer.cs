@@ -59,5 +59,15 @@ namespace Boolean.CSharp.Main
             Account withdrawAccount = _accounts.Find(a => a.Name == account)!;
             return withdrawAccount.Withdraw(amount);
         }
+
+        public void RequestOverdraft(decimal amount)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string Overdraft(Overdraft overdraft)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
