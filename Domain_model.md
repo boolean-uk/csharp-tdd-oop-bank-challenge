@@ -34,32 +34,28 @@ public Account createAccount(int accountNr, string type)
 return: createdAccount
 
 Abstract Class: Account
+public list<Transaction> transaction
 private int accountNr
 private float balance
 
 Methods:
-public void withdraw(float amount)
-public void deposit(float amount)
+public Transaction withdraw(float amount)
+public Transaction deposit(float amount)
+public void printStatement()
 
 Class: SavingsAccount : Account
 
 Class: CurrentAccount : Account
 
+enum transactionType: deposit, withdraw
+
 Class: Transaction
 private float amount
+private float newBalance
 private string transactionType
 private DateTime timeStamp
 
-Methods:
-public Transaction createTransaction()
-return: this
-
-Class: BankStatement
-public list<Transaction> transaction
-
-Methods:
-public void printStatement()
-
+Mermaid arrow cheatsheet:
 ______________________
 TYPE	DESCRIPTION  |
 <|--	Inheritance  |

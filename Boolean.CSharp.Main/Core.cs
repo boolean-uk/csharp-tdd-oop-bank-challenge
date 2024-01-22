@@ -107,10 +107,6 @@ namespace Boolean.CSharp.Main
             _time = timeStamp;
             _newTotal = newtotal;
         }
-        public Transaction createTransaction()
-        {
-            return this;
-        }
     }/*
     public class BankStatement
     {
