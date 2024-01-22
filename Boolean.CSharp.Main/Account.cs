@@ -1,4 +1,6 @@
-﻿namespace Boolean.CSharp.Main
+﻿using System.Text;
+
+namespace Boolean.CSharp.Main
 {
     public class Account
     {
@@ -43,7 +45,21 @@
 
         public string GenerateStatement()
         {
-            throw new NotImplementedException();
+            StringBuilder sb = new();
+            sb.AppendFormat("|{0,-10}| {1,-7}| {2,-7}| {3,-7}|\n", "date", "credit", "debit", "balance");
+            foreach(Transaction transaction in _transactions)
+            {
+                if (transaction.Type == TransactionType.Credit)
+                {
+                    sb.AppendFormat("|{0,-10}| {1,-7}| {2,-7}| {3,-7}|\n", transaction.Date.ToString("dd/MM/yyyy"), transaction.Amount, 0, transaction.NewValue);
+                }
+                else
+                {
+                    sb.AppendFormat("|{0,-10}| {1,-7}| {2,-7}| {3,-7}|\n", transaction.Date.ToString("dd/MM/yyyy"), 0, transaction.Amount, transaction.NewValue);
+                }
+            }
+
+            return sb.ToString();
         }
     }
 }
