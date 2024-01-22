@@ -10,17 +10,9 @@ namespace Boolean.CSharp.Main
     public class Customer
     {
         private List<IAccount> _accounts = [];
-        public void CreateAccount(string name, AccountType type)
+        public void CreateAccount(IAccount account)
         {
-            switch (type)
-            {
-                case (AccountType.Current):
-                    _accounts.Add(new CurrentAccount(name));
-                    break;
-                case AccountType.Savings:
-                    _accounts.Add(new SavingsAccount(name));
-                    break;
-            }
+            _accounts.Add(account);
         }
 
         public List<IAccount> GetAccounts()

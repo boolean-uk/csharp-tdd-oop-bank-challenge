@@ -1,5 +1,6 @@
 ﻿using Boolean.CSharp.Main;
 using Boolean.CSharp.Main.Accounts;
+using Boolean.CSharp.Main.Branches;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -16,8 +17,9 @@ namespace Boolean.CSharp.Test
         public void CustomerCanCreateAccount()
         {
             Customer customer = new();
-            customer.CreateAccount("Savings Account", AccountType.Savings);
-            customer.CreateAccount("Spending Account", AccountType.Current);
+            Branch branch = new("Test", "Test");
+            customer.CreateAccount(new CurrentAccount(branch, "Current Account"));
+            customer.CreateAccount(new SavingsAccount(branch, "Savings Account"));
             Assert.That(customer.GetNumberOfAccounts(), Is.EqualTo(2));
         }
     }

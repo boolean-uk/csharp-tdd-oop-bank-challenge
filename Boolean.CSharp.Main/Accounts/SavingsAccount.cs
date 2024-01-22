@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Boolean.CSharp.Main.Branches;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace Boolean.CSharp.Main.Accounts
 {
     public class SavingsAccount : Account
     {
-        public SavingsAccount(string name) : base(name)
+        public SavingsAccount(IBranch branch, string name) : base(branch, name)
         {
         }
     }

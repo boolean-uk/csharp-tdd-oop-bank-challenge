@@ -1,4 +1,5 @@
 ﻿using Boolean.CSharp.Main.Accounts;
+using Boolean.CSharp.Main.Branches;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,8 @@ namespace Boolean.CSharp.Test
         [SetUp]
         public void SetUp()
         {
-            _account = new CurrentAccount("Test Account");
+            IBranch _branch = new Branch("Test Branch", "The branch that tests them all");
+            _account = new CurrentAccount(_branch, "Test Account");
         }
 
         [Test]
@@ -61,5 +63,11 @@ namespace Boolean.CSharp.Test
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => _account.Deposit(-1));
         }
+
+        [Test]
+        public void IsAssosciatedWithBranch()
+        {
+            Assert.NotNull(_account.Branch);
+        } 
     }
 }
