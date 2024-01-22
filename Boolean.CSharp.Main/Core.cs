@@ -61,6 +61,17 @@ namespace Boolean.CSharp.Main
         public float getTotal()
         {
             float total = 0;
+            foreach(Transaction transaction in transactions)
+            {
+                if(transaction.Type == TransactionType.deposit)
+                {
+                    total += transaction.Amount;
+                }
+                else if(transaction.Type == TransactionType.withdraw)
+                {
+                    total -= transaction.Amount;
+                }
+            }
             return total;
         }
         public Transaction withdraw(float amount)
