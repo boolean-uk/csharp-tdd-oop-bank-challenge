@@ -26,12 +26,16 @@ namespace Boolean.CSharp.Test
         public void CreateSavingsAccountTest()
         {
             //arrange
+            BankManager bankManager = new BankManager();
+            AccountList accountList = new AccountList();
 
             //act
+            bankManager.CreateSavingsAccount();
 
 
             //assert
-            Assert.Fail();
+            Assert.IsTrue(accountList.Accounts.Count > 0);
+            Assert.IsTrue(accountList.Accounts[0].AccountType == "SavingsAccount");
         }
 
         [Test]
