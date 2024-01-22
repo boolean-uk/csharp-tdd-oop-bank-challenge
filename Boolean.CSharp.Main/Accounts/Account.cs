@@ -55,6 +55,7 @@ namespace Boolean.CSharp.Main.Accounts
             };
             Overdraft o = new(amount - GetBalance());
             _overdrafts.Add(o);
+            Console.WriteLine($"Balance too low to withdraw {amount}. Overdraft request created.");
             return false;
         }
 
