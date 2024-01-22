@@ -22,7 +22,7 @@ namespace Boolean.CSharp.Main.Classes
 
         public ABankAccount() 
         {
-            
+            _transactions = new List<BankStatement>();
         }
     }
 }

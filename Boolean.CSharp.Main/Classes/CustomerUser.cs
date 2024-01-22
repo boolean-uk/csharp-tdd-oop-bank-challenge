@@ -11,9 +11,19 @@ namespace Boolean.CSharp.Main.Classes
     {
         List<ABankAccount> _accounts;
 
+        public CustomerUser() 
+        {
+            _accounts = new List<ABankAccount>();
+        }
+
         public string CreateAccount(ABankAccount account)
         {
-            throw new NotImplementedException();
+            if (account != null)
+            {
+                _accounts.Add(account);
+                return "New Account has been made";
+            }
+            return "Error, something went wrong and we cant make your account";
         }
 
         public bool Withdraw(double money, ABankAccount account)

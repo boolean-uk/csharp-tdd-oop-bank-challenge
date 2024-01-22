@@ -47,19 +47,19 @@ namespace Boolean.CSharp.Test
         [Test]
         public void GenerateBankStatements()
         {
-
+            Assert.IsTrue(false);
         }
 
         [Test]
         public void DepositMoney()
         {
-
+            Assert.IsTrue(false);
         }
 
         [Test]
         public void WithdrawMoney()
         {
-
+            Assert.IsTrue(false);
         }
 
     }
