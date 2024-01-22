@@ -10,7 +10,8 @@ namespace Boolean.CSharp.Main.Core
     {
         public bool isCredit { get; private set; } = true;
         private DateTime time;
-        private double amount, balance;
+        private double amount;
+        public double balance { get; private set; }
 
         public Transaction(DateTime time, double amount, double balance)
         {

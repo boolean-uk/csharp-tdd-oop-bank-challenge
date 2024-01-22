@@ -9,44 +9,38 @@ namespace Boolean.CSharp.Main.Core
     public abstract class AAccount
     {
         public List<Transaction> transactions { get; private set; } = new List<Transaction>();
-        public double _savings { get; private set; }
-        
-        public AAccount()
+        public double Savings()
         {
-            _savings = 0;
+            if (transactions.Count == 0) return 0d;
+            return transactions.Last().balance;
         }
-
 
         public bool Deposit(double amount)
         {
-            _savings += amount;
-            Transaction transaction = new Transaction(DateTime.Now, amount, _savings);
+            Transaction transaction = new Transaction(DateTime.Now, amount, Savings() + amount);
             transactions.Add(transaction);
             return true;
         }
 
         public bool Deposit(double amount, DateTime date)
         {
-            _savings += amount;
-            Transaction transaction = new Transaction(date, amount, _savings);
+            Transaction transaction = new Transaction(date, amount, Savings() + amount);
             transactions.Add(transaction);
             return true;
         }
 
         public bool Withdraw(double amount)
         {
-            if (amount > _savings) return false;
-            _savings -= amount;
-            Transaction transaction = new Transaction(DateTime.Now, -amount,  _savings);
+            if (amount > Savings()) return false;
+            Transaction transaction = new Transaction(DateTime.Now, -amount,  Savings() - amount);
             transactions.Add(transaction);
             return true;
         }
 
         public bool Withdraw(double amount, DateTime time)
         {
-            if (amount > _savings) return false;
-            _savings -= amount;
-            Transaction transaction = new Transaction(time, -amount, _savings);
+            if (amount > Savings()) return false;
+            Transaction transaction = new Transaction(time, -amount, Savings() - amount);
             transactions.Add(transaction);
             return true;
         }

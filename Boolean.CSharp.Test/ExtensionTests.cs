@@ -24,11 +24,17 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
+        public void BalanceOfEmptyAccountIs0()
+        {
+            Assert.That(saving.Savings(), Is.EqualTo(0d));
+        }
+
+        [Test]
         public void CumulativeDeposit()
         {
             saving.Deposit(15000);
             saving.Deposit(20000);
-            Assert.That(saving._savings, Is.EqualTo(35000));
+            Assert.That(saving.Savings(), Is.EqualTo(35000));
         }
     }
 }
