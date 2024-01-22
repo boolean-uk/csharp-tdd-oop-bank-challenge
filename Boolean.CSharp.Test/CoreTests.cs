@@ -1,4 +1,5 @@
 ﻿using Boolean.CSharp.Main;
+using Newtonsoft.Json;
 using NUnit.Framework;
 
 namespace Boolean.CSharp.Test
@@ -49,10 +50,12 @@ namespace Boolean.CSharp.Test
         public void transactionsAddToList()
         {
             SavingsAccount savingsAccount = (SavingsAccount)_customer.createAccount(123456, accountType.savings);
-            savingsAccount.deposit(1000f);
-            DateTime now = DateTime.Now;
-            Transaction transaction = new Transaction(1000f, Transaction.transactionType.deposit, now);
-            Assert.That(_bankStatement.Transaction.ElementAt(0).Equals(transaction));
+            var result = savingsAccount.deposit(1000f);
+            DateTime time = DateTime.Now;
+            Transaction transaction = new Transaction(1000f, transactionType.deposit, time);
+            string expectedJson = JsonConvert.SerializeObject(transaction);
+            string resultJson = JsonConvert.SerializeObject(result);
+            Assert.That(resultJson, Is.EqualTo(expectedJson));
         }
     }
 }

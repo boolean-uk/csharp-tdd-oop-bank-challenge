@@ -36,19 +36,29 @@ namespace Boolean.CSharp.Main
     {
         private int _accountNr;
         private float _balance = 0;
+        private List<Transaction> transaction = new List<Transaction>();
+        public List<Transaction> Transaction { get { return transaction; } }
         public int AccountNr { get { return _accountNr; } }
         public float Balance { get { return _balance; } }
         public Account(int accountNr)
         {
             _accountNr = accountNr;
         }
-        public void withdraw(float amount)
+        public Transaction withdraw(float amount)
         {
             _balance -= amount;
+            DateTime time = DateTime.Now;
+            Transaction tempT = new Transaction(amount, transactionType.withdraw, time);
+            Transaction.Add(tempT);
+            return tempT;
         }
-        public void deposit(float amount)
+        public Transaction deposit(float amount)
         {
             _balance += amount;
+            DateTime time = DateTime.Now;
+            Transaction tempT = new Transaction(amount, transactionType.deposit, time);
+            transaction.Add(tempT);
+            return tempT;
         }
     }
     public class CurrentAccount : Account
@@ -65,19 +75,22 @@ namespace Boolean.CSharp.Main
 
         }
     }
+    public enum transactionType
+    {
+        deposit,
+        withdraw
+    }
     public class Transaction
     {
-        public enum transactionType
-        {
-            deposit,
-            withdraw
-        }
+        
         private float _amount;
-        private DateTime _timeStamp;
+        private transactionType _transactionType;
+        private DateTime _time;
         public Transaction(float amount, transactionType type, DateTime timeStamp)
         {
             _amount = amount;
-            _timeStamp = timeStamp;
+            _transactionType = type;
+            _time = timeStamp;
         }
         public Transaction createTransaction()
         {
@@ -86,8 +99,6 @@ namespace Boolean.CSharp.Main
     }
     public class BankStatement
     {
-        private List<Transaction> transaction = new List<Transaction>();
-        public List<Transaction> Transaction { get { return transaction; } }
         public BankStatement()
         {
 
