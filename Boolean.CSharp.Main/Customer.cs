@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Boolean.CSharp.Main
+﻿namespace Boolean.CSharp.Main
 {
     public class Customer
     {
 
         private List<Account> _accounts;
+
+        public List<Account> Accounts { get { return _accounts; } set { _accounts = value; } }
 
         public Customer() { }
 

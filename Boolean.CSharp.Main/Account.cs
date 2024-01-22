@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Boolean.CSharp.Main
+﻿namespace Boolean.CSharp.Main
 {
     public class Account
     {
@@ -12,6 +6,14 @@ namespace Boolean.CSharp.Main
         private decimal _balance;
         private List<Transaction> _transactions;
 
+        public string Name {  get { return _name; } }
+        public decimal Balance { get { return _balance; } }
+        public List<Transaction> Transactions { get { return _transactions; } }
+
+        public Account(string name)
+        {
+            _name = name;
+        }
 
         public decimal GetBalance()
         {
