@@ -45,15 +45,19 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        public void GenerateBankStatements()
+        [TestCase]
+        public void DepositMoney(double deposit, double expected)
         {
-            Assert.IsTrue(false);
-        }
+            //  Arrange - set up test values
+            double result;
+            CurrentAccount testAccount = new CurrentAccount();
+            customer.CreateAccount(testAccount);
+            double amount = 20.0d;
+            result = customer.Deposit(amount, 0);
+            //  Act - use the fucntion we want to test
 
-        [Test]
-        public void DepositMoney()
-        {
-            Assert.IsTrue(false);
+            //  Assert - check the results
+            Assert.That(result, Is.EqualTo(expected));
         }
 
         [Test]
@@ -62,5 +66,10 @@ namespace Boolean.CSharp.Test
             Assert.IsTrue(false);
         }
 
+        [Test]
+        public void GenerateBankStatements()
+        {
+            Assert.IsTrue(false);
+        }
     }
 }

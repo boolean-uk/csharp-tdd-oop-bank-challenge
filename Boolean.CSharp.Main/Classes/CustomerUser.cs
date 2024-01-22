@@ -26,14 +26,14 @@ namespace Boolean.CSharp.Main.Classes
             return "Error, something went wrong and we cant make your account";
         }
 
-        public bool Withdraw(double money, ABankAccount account)
-        {
-            throw new NotImplementedException();
-        }
-
-        public double Deposit(double money, ABankAccount account) 
+        public double Deposit(double money, int account) 
         {
             throw new NotImplementedException(); 
+        }
+
+        public bool Withdraw(double money, int account)
+        {
+            throw new NotImplementedException();
         }
 
         public int GenerateStatement()

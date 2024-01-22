@@ -4,9 +4,9 @@
 | `IUser`			|																						|								|									|																|				|
 | `CustomerUser`	| `List<ABankAccount> _accounts`														|								| `CreateAccount(ABankAccount)`		| User wants to make a current account							| string		|
 |					|																						|								|									| User wants to make a savings account							| string		|
-|					|																						|								| `Withdraw(double, ABankAccount)`	| User attempts to withdraw more than possible					| false			|
+|					|																						|								| `Withdraw(double, int)`	| User attempts to withdraw more than possible					| false			|
 |					|																						|								|									| User attempts to withdraw an acceptable ammount				| true			|
-|					|																						|								| `Deposit(double, ABankAccount)`	|																| double		|
+|					|																						|								| `Deposit(double, int)`	|																| double		|
 |					|																						|								| `GenerateStatement()`				|																| int			|
 |					|																						|								| `RequestOverdraft(double)`		|																| BankStatement	|
 | `ManagerUser`		|																						|								| `ManageRequest(BankStatement)`	|																| bool			|
