@@ -1,0 +1,49 @@
+
+Classes				Properties				Methods					Return Type
+Bank				List<Customer>			AddCustomer(Customer cust)			bool			
+								DepositMoney(CustName, amount, date, accName)	bool
+								WithdrawMoney(CustName, amount, date, accName)	bool
+								PrintStatement(CustName, accName)		List<string>
+
+
+
+
+Customer			List<Account>			CreateAccount(Account acc)			bool
+				string(name)			GetName()					string
+								DepositAccount(accName, amount, date)		bool
+								WithdrawAccount(accName, amount, date)		bool
+								AccountStatement(accName)			List<string>
+
+
+
+Account				Balance(int)			Deposit(string date, int amount)		bool
+				List<Transaction>		Withdraw(string date, int amount)		bool
+				string(name)			Statement()					List<string>
+								GetName()					string
+
+
+
+Transaction			CurrentBalance(int)		GetDate()					string						
+				Date(string)			GetCurrentBalance()				int
+				Change(int)			GetChange()					int
+				Type(string credit/debit)	GetType()					string
+
+
+
+
+
+									
+
+
+
+
+
+
+
+
+
+
+
+
+
+
