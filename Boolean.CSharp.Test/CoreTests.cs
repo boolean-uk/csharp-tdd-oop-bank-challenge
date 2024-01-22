@@ -71,7 +71,7 @@ namespace Boolean.CSharp.Test
             List<string> statement = new List<string>();
             statement = savingsAccount.printStatement();
             DateTime time = DateTime.Now;
-            Assert.That(statement.ElementAt(0), Is.EqualTo($"{time.ToString("D")}  ||  1000     ||  deposit  ||  1000  "));
+            Assert.That(statement.ElementAt(0), Is.EqualTo($"{time.ToString("D")}  ||  1000     ||  deposit  ||  974,01  "));
         }
     }
 }

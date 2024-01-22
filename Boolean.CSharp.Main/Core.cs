@@ -115,7 +115,7 @@ namespace Boolean.CSharp.Main
             List<string> statements = new List<string>();
             foreach(Transaction t in transactions)
             {
-                statements.Add($"{t.Time}  ||  {t.Amount}     ||  {t.Type}  ||  !!!!!!!TOTAL!!!!!!  ");
+                statements.Add($"{t.Time}  ||  {t.Amount}     ||  {t.Type}  ||  {getTotal()}  ");
             }
             foreach(var t in statements)
             {
