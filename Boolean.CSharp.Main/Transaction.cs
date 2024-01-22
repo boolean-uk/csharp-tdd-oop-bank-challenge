@@ -7,28 +7,23 @@ namespace Boolean.CSharp.Main
 {
     public class Transaction
     {
-        public int date
-        {
-            get => default;
-            set
-            {
-            }
-        }
+        public DateTime Date { get; }
+        public double Credit { get; }
+        public double Debit { get; }
+        public double BalanceAtTransactionTime { get; }
 
-        public int credit
+        public Transaction(DateTime date, double amount, TransactionType type, double balanceAtTransactionTime)
         {
-            get => default;
-            set
+            Date = date;
+            if(type == TransactionType.CREDIT)
             {
+                Credit = amount;
             }
-        }
-
-        public int debit
-        {
-            get => default;
-            set
+            else
             {
+                Debit = amount;
             }
-        }
+            BalanceAtTransactionTime = balanceAtTransactionTime;
+        }   
     }
 }

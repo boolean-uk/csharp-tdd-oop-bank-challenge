@@ -53,5 +53,20 @@ namespace Boolean.CSharp.Test
             Assert.IsNotNull(statement);
             Assert.IsNotEmpty(statement);
         }
-    }    
+        [Test]
+        public void PrintBankStatementShouldShowCorrectTransactions()
+        {
+            IAccount account = new Account();
+            account.Deposit(1000, new DateTime(2012, 1, 10));
+            account.Deposit(2000, new DateTime(2012, 1, 13));
+            account.Withdraw(500, new DateTime(2012, 1, 14));
+
+            // Print the statement to the console
+            account.PrintStatement();
+
+        }
+
+
+
+    }
 }
