@@ -11,6 +11,7 @@
     </TypeIdentifier>
     <ShowAsAssociation>
       <Field Name="_owner" />
+      <Field Name="_branch" />
     </ShowAsAssociation>
     <ShowAsCollectionAssociation>
       <Field Name="_transactions" />
@@ -89,5 +90,12 @@
       <FileName>Overdraft.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Enum Name="Boolean.CSharp.Main.Accounts.AccountBranches" Collapsed="true">
+    <Position X="6.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQIAAAAAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Accounts\AccountBranches.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
