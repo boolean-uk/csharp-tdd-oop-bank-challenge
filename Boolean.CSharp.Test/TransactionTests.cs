@@ -9,7 +9,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestTransactionDeposit()
         {
-            Transaction transaction = new Transaction(400, TransactionType.Deposit);
+            Transaction transaction = new Transaction(400, TransactionType.Deposit, 0);
 
             Assert.That(transaction.Amount, Is.EqualTo(400));
             Assert.That(transaction.Type, Is.EqualTo(TransactionType.Deposit));
@@ -19,7 +19,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestTransactionWithdrawal()
         {
-            Transaction transaction = new Transaction(-400, TransactionType.Withdrawal);
+            Transaction transaction = new Transaction(-400, TransactionType.Withdrawal, 0);
 
             Assert.That(transaction.Amount, Is.EqualTo(-400));
             Assert.That(transaction.Type, Is.EqualTo(TransactionType.Withdrawal));

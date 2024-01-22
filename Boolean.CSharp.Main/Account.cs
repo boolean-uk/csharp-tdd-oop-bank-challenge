@@ -33,7 +33,7 @@ namespace Boolean.CSharp.Main
 
         public void Deposit(double amount)
         {
-            Transaction transaction = new Transaction(amount, TransactionType.Deposit);
+            Transaction transaction = new Transaction(amount, TransactionType.Deposit, Balance);
             Balance += transaction.Amount;
             Transactions.Add(transaction);
         }
@@ -46,7 +46,7 @@ namespace Boolean.CSharp.Main
                 return false;
             }
 
-            Transaction transaction = new Transaction(amount, TransactionType.Withdrawal);
+            Transaction transaction = new Transaction(amount, TransactionType.Withdrawal, Balance);
             Balance -= transaction.Amount;
             Transactions.Add(transaction);
 

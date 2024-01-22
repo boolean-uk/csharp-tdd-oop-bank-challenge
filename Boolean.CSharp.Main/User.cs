@@ -42,7 +42,15 @@ namespace Boolean.CSharp.Main
 
         public void GenerateBankStatement(IAccount account)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("{0,10} || {1, 11} || {2,11} || {3,11} ", "Date", "Deposit", "Withdraw", "Balance");
+            foreach (Transaction transaction in account.Transactions.OrderByDescending(t => t.Time))
+            {
+                Console.WriteLine("{0,10} || £{1,10} || £{2,10} || £{3, 10}", 
+                    transaction.Time.Date.ToShortDateString(), 
+                    transaction.Type == TransactionType.Deposit ? Math.Round(transaction.Amount, 2) : 0,
+                    transaction.Type == TransactionType.Withdrawal ? Math.Round(transaction.Amount, 2) : 0,
+                    Math.Round(transaction.NewBalance, 2));
+            }
         }
     }
 }
