@@ -6,12 +6,13 @@ namespace Boolean.CSharp.Test
     public class TransactionTest
     {
         [TestCase(10f, true)]
+        [TestCase(10f, false)]
         public void Transaction(float amount, bool isCredit)
         {
             DateTime date = DateTime.Today;
             Transaction transaction = new Transaction(amount, isCredit);
             Assert.That(transaction.Amount, Is.EqualTo(amount));
-            Assert.That(transaction.IsCredit, Is.True);
+            Assert.That(transaction.IsCredit, Is.EqualTo(isCredit));
             Assert.That(date, Is.EqualTo(transaction.transactionDate));
         }
 

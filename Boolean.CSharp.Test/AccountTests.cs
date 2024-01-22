@@ -12,6 +12,9 @@ namespace Boolean.CSharp.Test
             User user = new User();
             Account current = user.CreateCurrent(0);
             float expetecdAmount = 0;
+
+            Assert.That(current.GetBalance(), Is.EqualTo(expetecdAmount));
+
             Random random = new Random();
             for (int i = 0; i < 10; i++)
             {
@@ -29,39 +32,41 @@ namespace Boolean.CSharp.Test
                     case 1:
                         if (current.WithdrawMoney(rndAmount))
                         {
-                            expetecdAmount -= rndAmount;
+                            if (expetecdAmount - rndAmount >= 0)
+                            {
+                                expetecdAmount -= rndAmount;
+                            }
                         }
-                        break;
-                    default:
-                        Assert.Fail();
                         break;
                 }
             }
             Assert.That(current.GetBalance(), Is.EqualTo(expetecdAmount));
         }
 
-        [TestCase(0f, 0f, false)]
-        [TestCase(-1f, 0f, false)]
-        [TestCase(10f, 10f, true)]
-        public void DepositMoney(float amount, float balanceAmount, bool expectedResult)
+        [TestCase(0f, 0f, 0, false)]
+        [TestCase(-1f, 0f, 0, false)]
+        [TestCase(10f, 10f, 1, true)]
+        public void DepositMoney(float amount, float balanceAmount, int transactionsCount, bool expectedResult)
         {
             User user = new User();
             Account currentAcount = user.CreateCurrent(0);
             Assert.That(currentAcount.DepositMoney(amount), Is.EqualTo(expectedResult));
+            Assert.That(currentAcount.transactions.Count(), Is.EqualTo(transactionsCount));
             Assert.That(currentAcount.GetBalance(), Is.EqualTo(balanceAmount));
         }
 
-        [TestCase(0, 0, false)]
-        [TestCase(-1f, 0, false)]
-        [TestCase(10f, 10f, true)]
-        [TestCase(1000f, 0f, false)]
-        public void WithdrawMoney(float amount, float balanceChange, bool expectedResult)
+        [TestCase(0, 0, 1, false)]
+        [TestCase(-1f, 0, 1, false)]
+        [TestCase(10f, 10f, 2, true)]
+        [TestCase(1000f, 0f, 1, false)]
+        public void WithdrawMoney(float amount, float balanceChange, int transactionsCount, bool expectedResult)
         {
             float startingAmount = 20;
             User user = new User();
             Account currentAcount = user.CreateCurrent(0);
             currentAcount.DepositMoney(startingAmount);
             Assert.That(currentAcount.WithdrawMoney(amount), Is.EqualTo(expectedResult));
+            Assert.That(currentAcount.transactions.Count(), Is.EqualTo(transactionsCount));
             Assert.That(currentAcount.GetBalance(), Is.EqualTo(startingAmount - balanceChange));
         }
 
@@ -75,7 +80,6 @@ namespace Boolean.CSharp.Test
             Assert.That(bankStatement, Is.EqualTo(expectedResult));
         }
 
-        //Hmmm
         [Test]
         public void GenerateBankStatment()
         {
@@ -97,39 +101,45 @@ namespace Boolean.CSharp.Test
             Assert.That(bankStatement, Is.EqualTo(expectedResult));
         }
 
-        [TestCase(1000f, true)]
-        [TestCase(1f, false)]
-        [TestCase(500f, false)]
-        [TestCase(0f, false)]
-        [TestCase(-10f, false)]
-        public void RequestOverdraft(float overdraftAmount, bool expectedResult)
+        [TestCase(1000f, 1, true)]
+        [TestCase(1f, 0, false)]
+        [TestCase(500f, 0, false)]
+        [TestCase(0f, 0, false)]
+        [TestCase(-10f, 0, false)]
+        public void RequestOverdraft(float overdraftAmount, int overdraftCount, bool expectedResult)
         {
             User user = new User();
             Account current = user.CreateCurrent(0);
             current.DepositMoney(500f);
             Assert.That(current.RequestOverdraft(overdraftAmount), Is.EqualTo(expectedResult));
+            Assert.That(current.overdraftRequests.Count(), Is.EqualTo(overdraftCount));
         }
 
         [Test]
-        public void RemoveOverdraft()
+        public void RejectOverdraft()
         {
             User user = new User();
             Account current = user.CreateCurrent(0);
             Assert.That(current.RejectOverdraft(), Is.False);
             current.RequestOverdraft(100f);
+            Assert.That(current.overdraftRequests.Count(), Is.EqualTo(1));
             Assert.That(current.RejectOverdraft(), Is.True);
+            Assert.That(current.overdraftRequests.Count(), Is.EqualTo(0));
             Assert.That(current.RejectOverdraft(), Is.False);
 
         }
 
         [TestCase(100f)]
-        public void AddOverdraft(float amount)
+        public void ApproveOverdraft(float amount)
         {
             CurrentAccount current = new CurrentAccount(0);
             Assert.That(current.ApproveOverdraft(), Is.False);
             current.RequestOverdraft(amount);
+            Assert.That(current.overdraftRequests.Count(), Is.EqualTo(1));
             Assert.That(current.ApproveOverdraft(), Is.True);
+            Assert.That(current.transactions.Count(), Is.EqualTo(1));
             Assert.That(current.GetBalance, Is.EqualTo(-amount));
+            Assert.That(current.overdraftRequests.Count(), Is.EqualTo(0));
             Assert.That(current.ApproveOverdraft(), Is.False);
         }
 
@@ -139,7 +149,10 @@ namespace Boolean.CSharp.Test
             CurrentAccount current = new CurrentAccount(0);
             Assert.That(current.RejectOverdraft(), Is.False);
             current.RequestOverdraft(100f);
+            Assert.That(current.overdraftRequests.Count(), Is.EqualTo(1));
             Assert.That(current.RejectOverdraft(), Is.True);
+            Assert.That(current.overdraftRequests.Count(), Is.EqualTo(0));
+            Assert.That(current.transactions.Count(), Is.EqualTo(0));
             Assert.That(current.RejectOverdraft(), Is.False);
         }
     }

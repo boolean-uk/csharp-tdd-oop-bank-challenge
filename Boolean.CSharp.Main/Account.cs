@@ -6,8 +6,8 @@ namespace Boolean.CSharp.Main
     public abstract class Account
     {
         public BranchCode BranchCode { get; }
-        private List<Transaction> transactions;
-        private Queue<Overdraft> overdraftRequests;
+        public List<Transaction> transactions { get; }
+        public Queue<Overdraft> overdraftRequests { get; }
 
         public Account(BranchCode branchCode)
         {
@@ -119,21 +119,14 @@ namespace Boolean.CSharp.Main
             return true;
         }
 
-        public bool RequestSMSNotification(Account account, string fromTwilioNr, string recivingNr)
+        public void RequestSMSNotification(Account account, string fromTwilioNr, string recivingNr)
         {
-            /*
-            Console.WriteLine("Twilio NR to send from: ");
-            string sendingNr = Console.ReadLine();
-            Console.WriteLine("Who is the reciver: ");
-            string recivingNr = Console.ReadLine();
-            */
-
             // Find your Account SID and Auth Token at twilio.com/console
             // and set the environment variables. See http://twil.io/secure
             string accountSid = Environment.GetEnvironmentVariable("TWILIO_ACCOUNT_SID");
             string authToken = Environment.GetEnvironmentVariable("TWILIO_AUTH_TOKEN");
 
-            if (accountSid == null || authToken == null) { return false; }
+            if (accountSid == null || authToken == null) { return; }
 
             TwilioClient.Init(accountSid, authToken);
 
@@ -142,12 +135,8 @@ namespace Boolean.CSharp.Main
                 from: new Twilio.Types.PhoneNumber(fromTwilioNr),
                 to: new Twilio.Types.PhoneNumber(recivingNr)
             );
-
-            return true;
         }
-
     }
-
     public class CurrentAccount : Account
     {
         public CurrentAccount(BranchCode branchCode) : base(branchCode) { }
@@ -157,14 +146,12 @@ namespace Boolean.CSharp.Main
     {
         public SavingsAccount(BranchCode branchCode) : base(branchCode) { }
     }
+
+    public enum BranchCode
+    {
+        LOND,
+        STOC,
+        NEWY,
+        MADR
+    }
 }
-
-public enum BranchCode
-{
-    LOND,
-    STOC,
-    NEWY,
-    MADR
-}
-
-

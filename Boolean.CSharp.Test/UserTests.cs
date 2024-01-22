@@ -14,6 +14,8 @@ namespace Boolean.CSharp.Test
             Assert.That(currentAcount, Is.TypeOf<CurrentAccount>());
             Assert.That(currentAcount.GetBalance(), Is.EqualTo(0));
             Assert.That(currentAcount.BranchCode, Is.EqualTo(branchCode));
+            Assert.That(currentAcount.transactions.Count(), Is.EqualTo(0));
+            Assert.That(currentAcount.overdraftRequests.Count(), Is.EqualTo(0));
         }
 
         [Test]
@@ -25,6 +27,8 @@ namespace Boolean.CSharp.Test
             Assert.That(savingsAcount, Is.TypeOf<SavingsAccount>());
             Assert.That(savingsAcount.GetBalance(), Is.EqualTo(0));
             Assert.That(savingsAcount.BranchCode, Is.EqualTo(branchCode));
+            Assert.That(savingsAcount.transactions.Count(), Is.EqualTo(0));
+            Assert.That(savingsAcount.overdraftRequests.Count(), Is.EqualTo(0));
         }
     }
 }
