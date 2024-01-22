@@ -38,25 +38,24 @@ I want to approve or reject overdraft requests.
 
 | Classes            | Methods                                     | Scenario                                                       | Outputs             |
 |--------------------|---------------------------------------------|----------------------------------------------------------------|---------------------|
-| `IUser`            | `IAccount CreateAccount(AccountType accountType)` | Create an account based on AccountType                   | `Child class of IAccount` |
-| `Customer : IUser` |                                             |                                                                |                     |
-| `Manager : IUser`  | `List<Overdraft> GetOverdraftRequests()`    | Gets overdraft requests                                        | `List<Overdraft>` |
+| `abstact User`     | `Account CreateAccount(AccountType accountType)` | Create an account based on AccountType                    | `Child class of IAccount` |
+| `Customer : User`  |                                             |                                                                |                     |
+| `Manager : User`   | `List<Overdraft> GetOverdraftRequests()`    | Gets overdraft requests from the bank                          | `List<Overdraft>` |
 | `Bank`             | `double Deposit(double depositAmount)`      | User adds money into the bank based of what they deposited from their account |      |
-|                    | `double Withdrawl(double withdrawlAmount)`  |                                                                |                     |
-|                    | `GetOverdraftRequests()                     |                                                                |                     |
-| `IAccount`         | `IAccount(IUser user, Mobile mobile = mobile)` |                                                             |                     |
-|                    | `double GetBalance()`                       | Compares the accounts balance based of the transaction history.| `value`    |                     |
-|                    | `Statement BankStatement GetBankStatement()`|                                                                |                     |
-|                    | `bool AddMobile(Mobile mobile)`             |                                                                |                     |
-|                    | `double Deposit(Customer, double)`          |                                                                |                     |
-|                    | `double Withdrawl(Customer double)`         |                                                                |                     |
-|                    | `bool RequestOverdraft()`                   |                                                                |                     |
-|                    | `bool SetSendStatementToMobile(bool shouldSendStatement)` |                                                  |                     |
-|                    | `private string SendStatement()`            |                                                                |                     |
-| `AccountSavings : IAccount`   | `AccountSavings(IUser user, Mobile mobile = mobile)` |                                            |                     |
-| `AccountDeposit : IAccount`   | `AccountDeposit(IUser user, Mobile mobile = mobile)` |                                            |                     |
-| `MobilePhone`      |                                             |                                                                |                     |
-
+|                    | `double Withdrawl(double withdrawlAmount)`  | User removes money from the bank based of what they withdrew from their account |                     |
+|                    | `internal List<Overdraft> GetOverdraftRequests() | Returns the overdraft requests sendt to the bank by the user |                     |
+| `abstract Account` | `Account(User user, MobilePhone mobile = mobile)` |                                                             |                     |
+|                    | `double GetBalance()`                       | Compares the accounts balance based of the transaction history.   | `value`    |                     |
+|                    | `Statement GetBankStatement()`              | Returns a statement                                                                |                     |
+|                    | `bool SetMobile(MobilePhone mobile)`        |                                                                   |                     |
+|                    | `double Deposit(Customer customer, double cashAmount)`   | Deposits cash into                                                               |                     |
+|                    | `double Withdrawl(Customer customer, double cashAmount)` |                                                      |                     |
+|                    | `bool RequestOverdraft()`                   |                                                                   |                     |
+|                    | `bool SetSendStatementToMobile(bool shouldSendStatement)`|                                                      |                     |
+|                    | `private string SendStatement()`            |                                                                   |                     |
+| `AccountDeposit : Account` | `AccountDeposit(User user, Mobile mobile = mobile)` |                                                   |                     |
+| `AccountSavings : Account` | `AccountSavings(User user, Mobile mobile = mobile)` |                                                   |                     |
+| `MobilePhone`      |                                             |                                                                   |                     |
 
 | Structs     | Variables                           |
 |-------------|-------------------------------------|
@@ -67,3 +66,8 @@ I want to approve or reject overdraft requests.
 |             | `string` Date                       |
 |             | `string` Time                       |
 |             | `double` balanceAtTimeOfTransaction |
+
+| Enums       | Variables |
+|-------------|-----------|
+| AccountType | Credit    | 
+|             | Debit     |
