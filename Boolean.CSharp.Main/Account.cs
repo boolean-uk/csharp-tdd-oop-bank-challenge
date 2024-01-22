@@ -2,9 +2,19 @@
 {
     public abstract class Account
     {
-        public int Id { get; set; }
-        public Branch Branch { get; set; } //Added for extension
+        private int Id { get; set; }
+        private Branch Branch { get; set; }
         public List<Transaction> Transactions { get; private set; }
+
+        public int GetId()
+        {
+            return Id;
+        }
+
+        public Branch GetBranch()
+        {
+            return Branch;
+        }
 
         protected Account(int id , Branch branch)
         {

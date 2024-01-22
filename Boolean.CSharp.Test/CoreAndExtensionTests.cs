@@ -11,8 +11,8 @@ namespace Boolean.CSharp.Test
             var branch = new Branch(1 , "Branch Name" , "Branch Address" , "Branch SortCode");
             var account = new CurrentAccount(1 , branch);
 
-            Assert.AreEqual(1 , account.Id);
-            Assert.AreEqual(branch , account.Branch);
+            Assert.AreEqual(1 , account.GetId());
+            Assert.AreEqual(branch , account.GetBranch());
             Assert.AreEqual(0 , account.ViewBalance());
             Assert.AreEqual(0 , account.Transactions.Count);
 

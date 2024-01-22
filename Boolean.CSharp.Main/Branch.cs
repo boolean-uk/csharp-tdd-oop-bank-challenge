@@ -27,7 +27,7 @@
 
         public bool RemoveAccount(int accountId)
         {
-            var account = Accounts.Find(a => a.Id == accountId);
+            var account = Accounts.Find(a => a.GetId() == accountId);
             if(account == null) return false;
 
             Accounts.Remove(account);
@@ -36,7 +36,7 @@
 
         public bool ApproveOverdraftRequest(int accountId , float amount)
         {
-            var account = Accounts.Find(a => a.Id == accountId) as CurrentAccount;
+            var account = Accounts.Find(a => a.GetId() == accountId) as CurrentAccount;
             if(account == null) return false;
 
             account.OverdraftLimit = amount;

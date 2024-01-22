@@ -2,16 +2,16 @@
 {
     public class Transaction
     {
-        public DateTime Date { get; set; }
-        public float Credit { get; set; }
-        public float Debit { get; set; }
+        public DateTime Date { get; private set; }
+        public float Credit { get; private set; }
+        public float Debit { get; private set; }
 
 
         public Transaction(DateTime date , float credit , float debit)
         {
             Date = date;
             Credit = credit;
-            Debit = debit; ;
+            Debit = debit;
         }
     }
 }

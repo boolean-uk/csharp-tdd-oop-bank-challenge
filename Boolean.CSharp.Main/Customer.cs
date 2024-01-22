@@ -25,7 +25,7 @@
 
         public BankStatement GenerateBankStatement(int accountId)
         {
-            var account = Accounts.FirstOrDefault(a => a.Id == accountId);
+            var account = Accounts.FirstOrDefault(a => a.GetId() == accountId);
             if(account == null)
             {
                 Console.WriteLine("Account does not exist.");
