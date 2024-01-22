@@ -53,6 +53,53 @@ namespace Boolean.CSharp.Test
 
         }
 
+        [Test]
+        public void TestMakeSavingAcc()
+        {
+            BankApplication bankApp = new BankApplication();
+            Custommer custommer1 = new Custommer()
+            {
+                Name = "Kanthee",
+                Branch = Branches.Bergen,
+                Id = 1111
+            };
+
+            bankApp.Add(custommer1);
+            custommer1.makeAccount(AccountType.Current);
+            custommer1.makeAccount(AccountType.Current);
+            custommer1.makeAccount(AccountType.Saving);
+
+            int result = custommer1.getAccAccounts().Count(account => account is SavingAcc);
+
+            // The result you return 1 since we have 1 SavingAcc.
+            Assert.IsTrue(result == 1);
+
+        }
+
+        [Test]
+        public void TestMake1Current2SavingAcc()
+        {
+            BankApplication bankApp = new BankApplication();
+            Custommer custommer1 = new Custommer()
+            {
+                Name = "Kanthee",
+                Branch = Branches.Bergen,
+                Id = 1111
+            };
+
+            bankApp.Add(custommer1);
+            custommer1.makeAccount(AccountType.Current);
+            custommer1.makeAccount(AccountType.Saving);
+            custommer1.makeAccount(AccountType.Saving);
+
+            int result1 = custommer1.getAccAccounts().Count(account => account is SavingAcc);
+            int result2 = custommer1.getAccAccounts().Count(account => account is NormalAcc);
+
+            // The result you return 1 since we have 1 SavingAcc.
+            Assert.IsTrue(result1 == 2 && result2 == 1);
+
+        }
+
 
 
 
