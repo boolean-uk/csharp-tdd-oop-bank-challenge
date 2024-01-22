@@ -3,5 +3,7 @@
 Customer customer = new Customer();
 var account = customer.createAccount(123, accountType.savings);
 account.deposit(100f);
-account.Transaction.ElementAt(0);
+account.deposit(100f);
+account.withdraw(50f);
+account.printStatement();
 Console.WriteLine("");

@@ -8,12 +8,12 @@ namespace Boolean.CSharp.Test
     public class CoreTests
     {
         private Customer _customer;
-        private BankStatement _bankStatement;
+        //private BankStatement _bankStatement;
 
         public CoreTests()
         {
             _customer = new Customer();
-            _bankStatement = new BankStatement();
+            //_bankStatement = new BankStatement();
         }
 
         [Test]
@@ -52,7 +52,7 @@ namespace Boolean.CSharp.Test
             SavingsAccount savingsAccount = (SavingsAccount)_customer.createAccount(123456, accountType.savings);
             var result = savingsAccount.deposit(1000f);
             DateTime time = DateTime.Now;
-            Transaction transaction = new Transaction(1000f, transactionType.deposit, time);
+            Transaction transaction = new Transaction(1000f, transactionType.deposit, time, savingsAccount.Balance);
             string expectedJson = JsonConvert.SerializeObject(transaction);
             string resultJson = JsonConvert.SerializeObject(result);
             Assert.That(resultJson, Is.EqualTo(expectedJson));

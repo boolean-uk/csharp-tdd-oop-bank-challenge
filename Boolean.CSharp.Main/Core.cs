@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -48,7 +49,7 @@ namespace Boolean.CSharp.Main
         {
             _balance -= amount;
             DateTime time = DateTime.Now;
-            Transaction tempT = new Transaction(amount, transactionType.withdraw, time);
+            Transaction tempT = new Transaction(amount, transactionType.withdraw, time, _balance);
             Transaction.Add(tempT);
             return tempT;
         }
@@ -56,9 +57,18 @@ namespace Boolean.CSharp.Main
         {
             _balance += amount;
             DateTime time = DateTime.Now;
-            Transaction tempT = new Transaction(amount, transactionType.deposit, time);
-            transaction.Add(tempT);
+            Transaction tempT = new Transaction(amount, transactionType.deposit, time, _balance);
+            Transaction.Add(tempT);
             return tempT;
+        }
+        public void printStatement()
+        {
+            Console.WriteLine("       date          || credit   ||   debit   ||  balance  ");
+            foreach(Transaction t in transaction)
+            {
+                //string expectedJson = JsonConvert.SerializeObject(t);
+                Console.WriteLine($"{t.Time}  ||  {t.Amount}     ||  {t.Type}  ||  {t.NewTotal}  ");
+            }
         }
     }
     public class CurrentAccount : Account
@@ -82,23 +92,29 @@ namespace Boolean.CSharp.Main
     }
     public class Transaction
     {
-        
         private float _amount;
+        private float _newTotal;
         private transactionType _transactionType;
         private DateTime _time;
-        public Transaction(float amount, transactionType type, DateTime timeStamp)
+        public float Amount { get { return _amount; } }
+        public float NewTotal { get { return _newTotal; } }
+        public transactionType Type { get { return _transactionType; } }
+        public DateTime Time { get { return _time; } }
+        public Transaction(float amount, transactionType type, DateTime timeStamp, float newtotal)
         {
             _amount = amount;
             _transactionType = type;
             _time = timeStamp;
+            _newTotal = newtotal;
         }
         public Transaction createTransaction()
         {
             return this;
         }
-    }
+    }/*
     public class BankStatement
     {
+        private List<Transaction> _transactions;
         public BankStatement()
         {
 
@@ -107,5 +123,5 @@ namespace Boolean.CSharp.Main
         {
 
         }
-    }
+    }*/
 }
