@@ -11,7 +11,20 @@ namespace Boolean.CSharp.Main.Classes.User
     {
         public string ManageRequest(OverdraftRequest request, eStatus response)
         {
-            throw new NotImplementedException();
+            if (request != null)
+            {
+                if (response == eStatus.Approved)
+                {
+                    request.RequestStatus = eStatus.Approved;
+                    return "Your request has been approved";
+                }
+                else if (response == eStatus.Denied)
+                {
+                    request.RequestStatus = eStatus.Approved;
+                    return "Your request has been denied";
+                }
+            }
+            return "Error, your request can't be handled";
         }
     }
 }
