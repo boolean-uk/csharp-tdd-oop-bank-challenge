@@ -4,6 +4,7 @@ using Boolean.CSharp.Main.Classes.Accounts;
 using Boolean.CSharp.Main.Classes.User;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using NUnit.Framework;
+using NUnit.Framework.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -84,6 +85,25 @@ namespace Boolean.CSharp.Test
 
             //  Assert - check the results
             Assert.That(result, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void OverdraftInPractice()
+        {
+            //  Arrange - set up test values
+            double result;
+            CurrentAccount testAccount = new CurrentAccount();
+            customer.CreateAccount(testAccount);
+            ManagerUser manager = new ManagerUser();
+            manager.ManageRequest(customer.RequestOverdraft(1000, 0), eStatus.Approved);
+
+            //  Act - use the fucntion we want to test
+
+            customer.Withdraw(1000d, 0);
+            result = customer.Deposit(100d, 0);
+
+            //  Assert - check the results
+            Assert.That(Math.Round(result,2), Is.EqualTo(Math.Round(-900d)));
         }
     }
 }
