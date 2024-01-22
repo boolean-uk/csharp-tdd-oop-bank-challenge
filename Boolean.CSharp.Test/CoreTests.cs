@@ -8,11 +8,13 @@ namespace Boolean.CSharp.Test
     public class CoreTests
     {
         private BaseAccount _core;
+        private string _date;
 
         [SetUp]
         public void SetUp()
         {
             _core = new Account();
+            _date = DateTime.Now.ToString("d");
         }
 
         [Test]
@@ -61,35 +63,44 @@ namespace Boolean.CSharp.Test
         {
             LogTransaction logger = new LogTransaction();
             string output = logger.AddLog(500, 1500);
-            Assert.That(output, Is.EqualTo("19/01/2024 ||  500.00 ||         || 1500.00"));
+            Assert.That(output, Is.EqualTo($"{_date} ||  500.00 ||         || 1500.00"));
         }
         [Test]
         public void ShouldWithdrawLog()
         {
             LogTransaction logger = new LogTransaction();
             string output = logger.AddLog(-500, 1500);
-            Assert.That(output, Is.EqualTo("19/01/2024 ||         ||  500.00 || 1500.00"));
+            Assert.That(output, Is.EqualTo($"{_date} ||         ||  500.00 || 1500.00"));
         }
         [Test]
         public void NothingLog()
         {
             LogTransaction logger = new LogTransaction();
             string output = logger.AddLog(0, 1500);
-            Assert.That(output, Is.EqualTo("19/01/2024 ||         ||         || 1500.00"));
+            Assert.That(output, Is.EqualTo($"{_date} ||         ||         || 1500.00"));
         }
         [Test]
         public void BrokeLog()
         {
             LogTransaction logger = new LogTransaction();
             string output = logger.AddLog(-300, 0);
-            Assert.That(output, Is.EqualTo("19/01/2024 ||         ||  300.00 ||    0.00"));
+            Assert.That(output, Is.EqualTo($"{_date} ||         ||  300.00 ||    0.00"));
         }
         [Test]
         public void DebtLog()
         {
             LogTransaction logger = new LogTransaction();
             string output = logger.AddLog(-500, -100);
-            Assert.That(output, Is.EqualTo("19/01/2024 ||         ||  500.00 || -100.00"));
+            Assert.That(output, Is.EqualTo($"{_date} ||         ||  500.00 || -100.00"));
+        }
+        [Test]
+        public void PrintLog()
+        {
+            LogTransaction logger = new LogTransaction();
+            logger.AddLog(-500, 100);
+            logger.AddLog(300, 1000);
+            logger.Print();
+            Assert.Pass();
         }
 
     }
