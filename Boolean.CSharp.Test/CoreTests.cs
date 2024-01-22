@@ -16,7 +16,7 @@ namespace Boolean.CSharp.Test
         private CurrentAccount _currentAccount;
         private Customer _customer;
         private BankStatementBuilder _bankStatementBuilder;
-        
+
         [SetUp]
         public void Setup()
         {
@@ -47,7 +47,7 @@ namespace Boolean.CSharp.Test
             Assert.That(_savingsAccount.Transactions[0].Balance, Is.EqualTo(expectedBalance));
             Assert.That(_savingsAccount.Transactions[0].TypeOfTransaction, Is.EqualTo(Transaction.TransactionType.Credit));
             Assert.That(returnBool, Is.EqualTo(expectedReturn));
-        } 
+        }
 
         [TestCase(100.00f, 100.00f, true)]
         public void TestDepositToCurrentAccount(float input, float expectedBalance, bool expectedReturn)
@@ -56,6 +56,8 @@ namespace Boolean.CSharp.Test
             Assert.That(_currentAccount.Balance, Is.EqualTo(expectedBalance));
             Assert.That(_currentAccount.Transactions.Count(), Is.EqualTo(1));
             Assert.That(_currentAccount.Transactions[0].Amount, Is.EqualTo(input));
+            Assert.That(_currentAccount.Transactions[0].Balance, Is.EqualTo(expectedBalance));
+            Assert.That(_currentAccount.Transactions[0].TypeOfTransaction, Is.EqualTo(Transaction.TransactionType.Credit));
             Assert.That(returnBool, Is.EqualTo(expectedReturn));
         }
 
@@ -65,7 +67,16 @@ namespace Boolean.CSharp.Test
         {
             _currentAccount.Deposit(initialBalance);
             bool returnBool = _currentAccount.Withdraw(withdraw);
-            Assert.That(_currentAccount.Transactions.Count(), Is.EqualTo(transactions));
+            if (returnBool)
+            {
+                Assert.That(_currentAccount.Balance, Is.EqualTo(0));
+                Assert.That(_currentAccount.Transactions.Count(), Is.EqualTo(2));
+                Assert.That(_currentAccount.Transactions[1].Amount, Is.EqualTo(withdraw));
+                Assert.That(_currentAccount.Transactions[1].Balance, Is.EqualTo(0.00f));
+                Assert.That(_currentAccount.Balance, Is.EqualTo(0.00f));
+                Assert.That(_currentAccount.Transactions[1].TypeOfTransaction, Is.EqualTo(Transaction.TransactionType.Debit));
+
+            }
             Assert.That(returnBool, Is.EqualTo(expectedReturn));
         }
 
@@ -75,6 +86,14 @@ namespace Boolean.CSharp.Test
         {
             _savingsAccount.Deposit(initialBalance);
             bool returnBool = _savingsAccount.Withdraw(withdraw);
+            if (returnBool)
+            {
+                Assert.That(_savingsAccount.Transactions.Count(), Is.EqualTo(2));
+                Assert.That(_savingsAccount.Transactions[1].Amount, Is.EqualTo(withdraw));
+                Assert.That(_savingsAccount.Transactions[1].Balance, Is.EqualTo(0.00f));
+                Assert.That(_currentAccount.Balance, Is.EqualTo(0f));
+                Assert.That(_savingsAccount.Transactions[1].TypeOfTransaction, Is.EqualTo(Transaction.TransactionType.Debit));
+            }
             Assert.That(returnBool, Is.EqualTo(expectedReturn));
         }
 
@@ -95,15 +114,15 @@ namespace Boolean.CSharp.Test
 
         }
 
-    static List<string> GetStringLines(string input)
-    {
-        // Split the string based on newline characters
-        string[] linesArray = input.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+        static List<string> GetStringLines(string input)
+        {
+            // Split the string based on newline characters
+            string[] linesArray = input.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
 
-        // Convert the array to a List<string>
-        List<string> linesList = new List<string>(linesArray);
+            // Convert the array to a List<string>
+            List<string> linesList = new List<string>(linesArray);
 
-        return linesList;
-    }
+            return linesList;
+        }
     }
 }

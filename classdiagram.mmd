@@ -7,7 +7,7 @@ class IAccount{
     <<Interface>>
     -float _balance get
     -List<Transaction> _transactions get
-    -BankStatementBuilder _bankStatementBuilder get
+    -String _accountName get
 
     +bool Deposit(float amount)
     +bool Withdraw(float amount)
@@ -18,7 +18,7 @@ class AccountBase {
     -float _balance get
     -List<Transaction> _transactions get
     -string _accountName get
-    -BankStatementBuilder _bankStatementBuilder get
+    -BankStatementBuilder _bankStatementBuilder
 
     +bool Deposit(float amount)
     +bool Withdraw(float amount)
@@ -49,8 +49,6 @@ class Transaction {
 
 class Bank {
     -BankStatementBuilder _bankStatementBuilder
-    -CurrentAccount _currentAccount
-    -SavingsAccount _savingsAccount
 
     +constructor Bank(BankStatementBuilder bankStatementBuilder)
     +CurrentAccount createCurrentAccount(Customer customer, string accountname)
@@ -64,9 +62,7 @@ class Customer {
 }
 
 class BankStatementBuilder {
-    -List<IAccount> _accounts get
-
-    +void AddAccount(IAccount account)
+    +string BuildStatement(List<Transaction> transactions)
 }
 
 CurrentAccount "1" --> "1" BankStatementBuilder

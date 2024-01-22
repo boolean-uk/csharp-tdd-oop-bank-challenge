@@ -24,7 +24,8 @@ I want to !deposit! and !withdraw! "funds".
 
     private float _balance {get; }
     private List<Transaction> _transactions {get; }
-    private BankStatementBuilder _bankStatementBuilder;
+    private string _accountName; {get;}
+
 
     bool Deposit(float ammount)
     bool Withdraw(float ammount)
@@ -102,7 +103,5 @@ I want to !deposit! and !withdraw! "funds".
 
 ### Class BankStatementBuilder
 
-    private List<IAccount> _accounts {get; };
-
-    public void AddAccount(IAccount account)
-        _accounts.Add(account)
+        public string BuildStatement(List<Transaction> transactions)
+            return stringBuilder.ToString();
