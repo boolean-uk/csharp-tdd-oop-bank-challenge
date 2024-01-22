@@ -22,27 +22,35 @@ namespace Boolean.CSharp.Test
             Assert.That(_customer.Accounts.Contains(newSavings));
             Assert.That(_customer.Accounts.Contains(newCurrent));
         }
-        [Test]
-        public void depositWithdrawTest()
+        [TestCase(10f, 3f, 7f)]
+        [TestCase(621f, 21f, 600f)]
+        [TestCase(1000f, 100f, 900f)]
+        public void depositWithdrawChangesBalance(float deposit, float withdraw, float total)
         {
-            SavingsAccount savingsAccount = (SavingsAccount)_customer.createAccount(123456, AccountType.savings);
             CurrentAccount currentAccount = (CurrentAccount)_customer.createAccount(642758, AccountType.current);
-            savingsAccount.deposit(0f);
-            currentAccount.deposit(0f);
-            Assert.That(savingsAccount.Balance, Is.EqualTo(0f));
-            Assert.That(currentAccount.Balance, Is.EqualTo(0f));
-            savingsAccount.deposit(1000f);
-            currentAccount.deposit(50f);
-            Assert.That(savingsAccount.Balance, Is.EqualTo(1000f));
-            Assert.That(currentAccount.Balance, Is.EqualTo(50f));
-            savingsAccount.withdraw(0f);
-            currentAccount.withdraw(0f);
-            Assert.That(savingsAccount.Balance, Is.EqualTo(1000f));
-            Assert.That(currentAccount.Balance, Is.EqualTo(50f));
-            savingsAccount.withdraw(100f);
-            currentAccount.withdraw(10f);
-            Assert.That(savingsAccount.Balance, Is.EqualTo(900f));
-            Assert.That(currentAccount.Balance, Is.EqualTo(40f));
+            currentAccount.deposit(deposit);
+            currentAccount.withdraw(withdraw);
+            Assert.That(currentAccount.Balance, Is.EqualTo(total));
+            Assert.That(currentAccount.Transactions.Count, Is.EqualTo(2));
+        }
+        [TestCase(0f, 1000f)]
+        [TestCase(-5f, -5f)]
+        [TestCase(0f, 101f)]
+        public void failedDepositWithdrawThrowsException(float deposit, float withdraw)
+        {
+            //setup
+            SavingsAccount savingsAccount = (SavingsAccount)_customer.createAccount(123456, AccountType.savings);
+            savingsAccount.deposit(100);
+            //verify
+            Assert.That(() => savingsAccount.deposit(deposit), Throws.Exception);
+            Assert.That(() => savingsAccount.withdraw(withdraw), Throws.Exception);
+        }
+        [Test]
+        public void tooLargeWithdrawTest()
+        {
+            SavingsAccount account = (SavingsAccount)_customer.createAccount(123456, AccountType.savings);
+            account.deposit(1000f);
+            Assert.That(() => account.withdraw(1110f), Throws.Exception);
         }
         [Test]
         public void transactionsAddToList()
@@ -54,6 +62,17 @@ namespace Boolean.CSharp.Test
             string expectedJson = JsonConvert.SerializeObject(transaction);
             string resultJson = JsonConvert.SerializeObject(result);
             Assert.That(resultJson, Is.EqualTo(expectedJson));
+        }
+        [Test]
+        public void printStatementTest()
+        {
+            SavingsAccount savingsAccount = (SavingsAccount)_customer.createAccount(123456, AccountType.savings);
+            savingsAccount.deposit(1000f);
+            savingsAccount.withdraw(25.99f);
+            List<string> statement = new List<string>();
+            statement = savingsAccount.printStatement();
+            DateTime time = DateTime.Now;
+            Assert.That(statement.ElementAt(0), Is.EqualTo($"{time.ToString("D")}  ||  1000     ||  deposit  ||  1000  "));
         }
     }
 }

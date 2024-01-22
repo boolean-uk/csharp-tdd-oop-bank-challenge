@@ -37,9 +37,9 @@ namespace Boolean.CSharp.Main
     {
         private int _accountNr;
         private float _balance = 0;
-        private List<Transaction> transaction = new List<Transaction>();
-        public List<Transaction> Transaction { get { return transaction; } }
-        public int AccountNr { get { return _accountNr; } }
+        private List<Transaction> transactions = new List<Transaction>();
+        public List<Transaction> Transactions { get { return transactions; } }
+        public int AccountNumber { get { return _accountNr; } }
         public float Balance { get { return _balance; } }
         public Account(int accountNr)
         {
@@ -47,28 +47,54 @@ namespace Boolean.CSharp.Main
         }
         public Transaction withdraw(float amount)
         {
-            _balance -= amount;
-            DateTime time = DateTime.Now;
-            Transaction tempT = new Transaction(amount, TransactionType.withdraw, time.ToString("D"), _balance);
-            Transaction.Add(tempT);
-            return tempT;
+            if(Balance-amount >= 0)
+            {
+                if(amount > 0)
+                {
+                    _balance -= amount;
+                    DateTime time = DateTime.Now;
+                    Transaction tempT = new Transaction(amount, TransactionType.withdraw, time.ToString("D"), _balance);
+                    Transactions.Add(tempT);
+                    return tempT;
+                }
+                else
+                {
+                    throw new WithdrawException("Withdrawl amount must be a positive floating point number!");
+                }
+            }
+            else
+            {
+                throw new WithdrawException("You cannot withdraw more money than you have!");
+            }
         }
         public Transaction deposit(float amount)
         {
-            _balance += amount;
-            DateTime time = DateTime.Now;
-            Transaction tempT = new Transaction(amount, TransactionType.deposit, time.ToString("D"), _balance);
-            Transaction.Add(tempT);
-            return tempT;
-        }
-        public void printStatement()
-        {
-            Console.WriteLine(" date                    || credit   || debit     || balance   ");
-            foreach(Transaction t in transaction)
+            if(amount > 0)
             {
-                //string expectedJson = JsonConvert.SerializeObject(t);
-                Console.WriteLine($"{t.Time}  ||  {t.Amount}     ||  {t.Type}  ||  {t.NewTotal}  ");
+                _balance += amount;
+                DateTime time = DateTime.Now;
+                Transaction tempT = new Transaction(amount, TransactionType.deposit, time.ToString("D"), _balance);
+                Transactions.Add(tempT);
+                return tempT;
             }
+            else
+            {
+                throw new DepositException("Deposit amount must be a positive floating point number!");
+            }
+        }
+        public List<string> printStatement()
+        {
+            Console.WriteLine("       date              || credit   ||   debit   ||  balance  ");
+            List<string> statements = new List<string>();
+            foreach(Transaction t in transactions)
+            {
+                statements.Add($"{t.Time}  ||  {t.Amount}     ||  {t.Type}  ||  {t.NewTotalBalance}  ");
+            }
+            foreach(var t in statements)
+            {
+                Console.WriteLine(t);
+            }
+            return statements;
         }
     }
     public class CurrentAccount : Account
@@ -93,19 +119,33 @@ namespace Boolean.CSharp.Main
     public class Transaction
     {
         private float _amount;
-        private float _newTotal;
+        private float _newTotalBalance;
         private TransactionType _transactionType;
         private string _time;
         public float Amount { get { return _amount; } }
-        public float NewTotal { get { return _newTotal; } }
+        public float NewTotalBalance { get { return _newTotalBalance; } }
         public TransactionType Type { get { return _transactionType; } }
         public string Time { get { return _time; } }
-        public Transaction(float amount, TransactionType type, string timeStamp, float newtotal)
+        public Transaction(float amount, TransactionType type, string timeStamp, float newtotalBalance)
         {
             _amount = amount;
             _transactionType = type;
             _time = timeStamp;
-            _newTotal = newtotal;
+            _newTotalBalance = newtotalBalance;
+        }
+    }
+    public class WithdrawException : Exception
+    {
+        public WithdrawException(string message) : base(message)
+        {
+
+        }
+    }
+    public class DepositException : Exception
+    {
+        public DepositException(string message) : base(message)
+        {
+
         }
     }
 }
