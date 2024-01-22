@@ -13,7 +13,9 @@ namespace Boolean.CSharp.Main
 
         public Transaction(double amount)
         {
-            throw new NotImplementedException();
+            _amount = amount;
+            _type = amount > 0 ? "Deposit" : "Withdrawal";
+            _time = DateTime.Now;
         }
 
         public double Balance { get => _amount; }
