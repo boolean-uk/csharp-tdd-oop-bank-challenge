@@ -18,7 +18,7 @@ namespace Boolean.CSharp.Main.Users
         private Branches _branch;
 
 
-        private Dictionary<string, IAccount> accounts = new Dictionary<string, IAccount>();
+        private Dictionary<Guid, IAccount> accounts = new Dictionary<Guid, IAccount>();
 
         public string Name { get { return _name; } set { _name = value; } }
         public int Id { get { return _Id; } set { _Id = value; } }
@@ -56,7 +56,7 @@ namespace Boolean.CSharp.Main.Users
         /// Method to get the list of accounts.
         /// </summary>
         /// <returns>List of the user's accounts.</returns>
-        public Dictionary<string, IAccount> getAccAccounts() => accounts;
+        public Dictionary<Guid, IAccount> getAccAccounts() => accounts;
 
 
         /// <summary>
@@ -65,11 +65,11 @@ namespace Boolean.CSharp.Main.Users
         /// <param name="acc"> Acount to deposit money</param>
         /// <param name="transaction1">Deposit request</param>
         /// <exception cref="Exception"></exception>
-        public void Deposit(string acc, Transaction transaction1)
+        public void Deposit(Guid acc, Transaction transaction)
         {
             if (accounts.ContainsKey(acc))
             {
-                accounts[acc].Deposit(transaction1);
+                accounts[acc].Deposit(transaction);
             }
             else
             {
@@ -84,11 +84,24 @@ namespace Boolean.CSharp.Main.Users
         /// <param name="acc"> ID of the wanted account</param>
         /// <returns>The account's balance</returns>
         /// <exception cref="Exception"></exception>
-        public double getBalance(string acc)
+        public double getBalance(Guid acc)
         {
             if (accounts.ContainsKey(acc))
             {
                 return accounts[acc].getBlance();
+            }
+            else
+            {
+                throw new Exception("No account available");
+
+            }
+        }
+
+        public void Withdraw(Guid acc, Transaction transaction)
+        {
+            if (accounts.ContainsKey(acc))
+            {
+                accounts[acc].Withdraw(transaction);
             }
             else
             {

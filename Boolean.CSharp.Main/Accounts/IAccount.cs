@@ -9,7 +9,7 @@ namespace Boolean.CSharp.Main.Accounts
 {
     public interface IAccount
     {
-        string _AccId { get; set; }
+        Guid _AccId { get; set; }
         bool _IsAccActive { get; set; }
         Branches _Branch { get; }
 

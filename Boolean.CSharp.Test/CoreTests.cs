@@ -11,22 +11,28 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class CoreTests
     {
+        public BankApplication bankApp;
+        public Custommer custommer1;
+
         [SetUp]
         public void Setup()
         {
+             bankApp = new BankApplication();
+
+            custommer1 = new Custommer()
+            {
+                Name = "Kanthee",
+                Branch = Branches.Bergen,
+                Id = 1111
+            };
+
 
         }
 
         [Test]
         public void TestMakeUserAccount()
         {
-            BankApplication bankApp = new BankApplication();
-            Custommer custommer1 = new Custommer()
-            {
-                Name = "Kanthee",
-                Branch = Branches.Bergen,
-                Id = 1111
-            };
+            
 
             bankApp.Add(custommer1);
             custommer1.makeAccount(Enums.Saving);
@@ -41,13 +47,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestMakeCurrentAcc()
         {
-            BankApplication bankApp = new BankApplication();
-            Custommer custommer1 = new Custommer()
-            {
-                Name = "Kanthee",
-                Branch = Branches.Bergen,
-                Id = 1111
-            };
+           
 
             bankApp.Add(custommer1);
             custommer1.makeAccount(Enums.Current);
@@ -62,13 +62,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestMakeSavingAcc()
         {
-            BankApplication bankApp = new BankApplication();
-            Custommer custommer1 = new Custommer()
-            {
-                Name = "Kanthee",
-                Branch = Branches.Bergen,
-                Id = 1111
-            };
+            
 
             bankApp.Add(custommer1);
             custommer1.makeAccount(Enums.Current);
@@ -85,13 +79,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestMake1Current2SavingAcc()
         {
-            BankApplication bankApp = new BankApplication();
-            Custommer custommer1 = new Custommer()
-            {
-                Name = "Kanthee",
-                Branch = Branches.Bergen,
-                Id = 1111
-            };
+          
 
             bankApp.Add(custommer1);
             custommer1.makeAccount(Enums.Current);
@@ -128,20 +116,17 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestDepositFunds()
         {
-            BankApplication bankApp = new BankApplication();
-            Custommer custommer1 = new Custommer()
-            {
-                Name = "Kanthee",
-                Branch = Branches.Bergen,
-                Id = 1111
-            };
+           
             bankApp.Add(custommer1);
             custommer1.makeAccount(Enums.Current);
 
             double amount = 999.0;
             TransactionType type = TransactionType.Deposit;
             String mark = "Saving 01/01/24";
-            string acc = "Bergen-00001";
+
+            //Get the account ID. Only 1 acc...
+            Guid acc = custommer1.getAccAccounts().Keys.First();
+
             Transaction transaction1 = new Transaction() { Amount = amount, Type = type, Mark = mark };
             custommer1.Deposit(acc, transaction1);
             double balance1 = custommer1.getBalance(acc);
@@ -154,13 +139,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestWithdrawFunds1()
         {
-            BankApplication bankApp = new BankApplication();
-            Custommer custommer1 = new Custommer()
-            {
-                Name = "Kanthee",
-                Branch = Branches.Bergen,
-                Id = 1111
-            };
+           
             bankApp.Add(custommer1);
             custommer1.makeAccount(Enums.Current);
             double amount1 = 999.0;
@@ -173,7 +152,7 @@ namespace Boolean.CSharp.Test
 
 
 
-            string acc = "Bergen-00001";
+            Guid acc = custommer1.getAccAccounts().Keys.First();
             Transaction transaction1 = new Transaction() { Amount = amount1, Type = type1, Mark = mark1 };
             custommer1.Deposit(acc, transaction1);
             Transaction transaction2 = new Transaction() { Amount = amount2, Type = type2, Mark = mark2 };
@@ -188,27 +167,26 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestWithdrawFunds2()
         {
-            BankApplication bankApp = new BankApplication();
-            Custommer custommer1 = new Custommer()
-            {
-                Name = "Kanthee",
-                Branch = Branches.Bergen,
-                Id = 1111
-            };
+           
             bankApp.Add(custommer1);
             custommer1.makeAccount(Enums.Current);
-            
+
             double amount2 = 555.0;
             TransactionType type2 = TransactionType.Withdraw;
             String mark2 = "Deposit 01/01/24";
 
-            string acc = "Bergen-00001";
-           
+            
+            Guid acc = custommer1.getAccAccounts().Keys.First();
+
             Transaction transaction2 = new Transaction() { Amount = amount2, Type = type2, Mark = mark2 };
-            custommer1.Withdraw(acc, transaction2);
+            //custommer1.Withdraw(acc, transaction2);
             double balance1 = custommer1.getBalance(acc);
 
-            Assert.AreEqual("No account available", custommer1.Withdraw(acc, transaction2));
+            TestDelegate check0 = () => custommer1.Withdraw(acc, transaction2);
+            var check = Assert.Throws<InvalidOperationException>(check0);
+
+            //The check0 should throw invalidException since not enough funds. 
+            Assert.AreEqual("Insufficient funds for withdraw.", check.Message);
             Assert.IsTrue(balance1 == 0);
 
         }
