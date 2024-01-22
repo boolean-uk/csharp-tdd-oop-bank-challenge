@@ -15,29 +15,78 @@ namespace Boolean.CSharp.Main
             customerList = new List<Customer>();
         }
 
-        public void addCustomer(Customer bob)
+        public bool addCustomer(Customer cust)
         {
-            throw new NotImplementedException();
+            bool result = false;
+            if (customerList.Contains(cust) == false) 
+            {
+                customerList.Add(cust);
+                result = true;
+            }
+            return result;
         }
 
-        public void addAccountToCustomer(string v, Account current)
+        public bool addAccountToCustomer(string custName, Account acc)
         {
-            throw new NotImplementedException();
+            bool result = false;
+            foreach (Customer cust in customerList)
+            {
+                if(cust.getName() == custName)
+                {
+                    result = cust.createAccount(acc);
+                    break;
+                }
+            }
+
+            return result;
         }
 
-        public void depositMoney(string v1, string v2, int v3, string v4)
+        public bool depositMoney(string custName, string accName, float amount, string date)
         {
-            throw new NotImplementedException();
+            bool result = false;
+
+            foreach(Customer cust in customerList)
+            {
+                if(cust.getName() == custName)
+                {
+                    result = cust.depositAccount(accName,amount,date);
+                    break;
+                }
+            }
+
+            return result;
         }
 
-        public void withdrawMoney(string v1, string v2, int v3, string v4)
+        public bool withdrawMoney(string custName, string accName, float amount, string date)
         {
-            throw new NotImplementedException();
+            bool result = false;
+
+            foreach(Customer cust in customerList)
+            {
+                if (cust.getName() == custName)
+                {
+                    result = cust.withdrawAccount(accName, amount, date);
+                    break;
+                }
+            }
+
+            return result;
         }
 
-        public List<string> printStatement(string v1, string v2)
+        public List<string> printStatement(string custName, string accName)
         {
-            throw new NotImplementedException();
+            List<string> result = new List<string>();
+
+            foreach(Customer cust in customerList)
+            {
+                if(cust.getName() == custName)
+                {
+                    result = cust.accountStatement(accName);
+                    break;
+                }
+            }
+
+            return result;
         }
 
     }

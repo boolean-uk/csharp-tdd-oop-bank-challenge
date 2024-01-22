@@ -1,9 +1,10 @@
 
 Classes				Properties				Methods					Return Type
 Bank				List<Customer>			AddCustomer(Customer cust)			bool			
-								DepositMoney(CustName, amount, date, accName)	bool
-								WithdrawMoney(CustName, amount, date, accName)	bool
+								DepositMoney(CustName, accName, amount, date)	bool
+								WithdrawMoney(CustName, accName, amount, date)	bool
 								PrintStatement(CustName, accName)		List<string>
+								AddAccountToCustomer(custName, account)		bool
 
 
 
@@ -16,16 +17,16 @@ Customer			List<Account>			CreateAccount(Account acc)			bool
 
 
 
-Account				Balance(int)			Deposit(string date, int amount)		bool
+Account				Balance(float)			Deposit(string date, int amount)		bool
 				List<Transaction>		Withdraw(string date, int amount)		bool
 				string(name)			Statement()					List<string>
 								GetName()					string
 
 
 
-Transaction			CurrentBalance(int)		GetDate()					string						
-				Date(string)			GetCurrentBalance()				int
-				Change(int)			GetChange()					int
+Transaction			CurrentBalance(float)		GetDate()					string						
+				Date(string)			GetCurrentBalance()				float
+				Change(float)			GetChange()					float
 				Type(string credit/debit)	GetType()					string
 
 
