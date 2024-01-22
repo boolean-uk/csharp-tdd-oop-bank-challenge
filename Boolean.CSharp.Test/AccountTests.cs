@@ -128,11 +128,10 @@ namespace Boolean.CSharp.Test
             //setup
             _account.Withdraw(17.33m);
             _account.Withdraw(12.77m);
-            List<Overdraft> overdrafts = _account.GetOverdraftRequests();
 
             //execute
-            _account.HandleOverdraft(overdrafts[0], false); //Deny the first overdraft request
-            _account.HandleOverdraft(overdrafts[1], true); //Approve the second overdraft request
+            _account.HandleOverdraft(_account.GetOverdraftRequests().First(), false); //Deny the first overdraft request
+            _account.HandleOverdraft(_account.GetOverdraftRequests().First(), true); //Approve the second overdraft request
 
             //verify
             Assert.That(_account.GetBalance(), Is.EqualTo(-12.77m));

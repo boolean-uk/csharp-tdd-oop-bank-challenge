@@ -100,7 +100,17 @@ namespace Boolean.CSharp.Main.Accounts
 
         public void HandleOverdraft(Overdraft overdraft, bool approve)
         {
-            throw new NotImplementedException();
+            if (!_overdrafts.Contains(overdraft)) return;
+            if (approve)
+            {
+                CreateTransaction(0, Math.Abs(overdraft.GetOverdraftAmount()));
+                Console.WriteLine("Overdraft approved");
+            }
+            else
+            {
+                Console.WriteLine("Overdraft denied");
+            }
+            _overdrafts.Remove(overdraft);
         }
     }
 }
