@@ -7,6 +7,7 @@ namespace Boolean.CSharp.Main
     public class Bank
     {
         private readonly List<Account> _accounts = [];
+        private readonly SmsService _msService = new();
 
         public Account? CreateAccount(Customer customer, AccountTypes accountType, AccountBranches ab)
         {
@@ -15,12 +16,12 @@ namespace Boolean.CSharp.Main
             Account account;
             if (accountType == AccountTypes.Current)
             {
-                account = new CurrentAccount(customer, ab);
+                account = new CurrentAccount(customer, ab, _msService);
                 _accounts.Add(account);
             }
             else
             {
-                account = new SavingsAccount(customer, ab);
+                account = new SavingsAccount(customer, ab, _msService);
                 _accounts.Add(account);
             }
             return account;

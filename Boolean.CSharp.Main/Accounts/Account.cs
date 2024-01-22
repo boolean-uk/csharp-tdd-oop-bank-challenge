@@ -1,6 +1,4 @@
-﻿
-
-
+﻿using System.Text;
 
 namespace Boolean.CSharp.Main.Accounts
 {
@@ -10,12 +8,14 @@ namespace Boolean.CSharp.Main.Accounts
         private List<Transaction> _transactions;
         private AccountBranches _branch;
         private List<Overdraft> _overdrafts;
-        public Account(Customer owner, AccountBranches ab)
+        private ISmsService _msService;
+        public Account(Customer owner, AccountBranches ab, ISmsService smsService)
         {
             _owner = owner;
             _transactions = [];
             _overdrafts = [];
             _branch = ab;
+            _msService = smsService;
         }
 
         public Customer GetOwner()
@@ -64,6 +64,7 @@ namespace Boolean.CSharp.Main.Accounts
         {
             Transaction transaction = new(credit, debit, GetBalance());
             _transactions.Add(transaction);
+            SendTransaction(transaction);
         }
 
         public List<Transaction> GenerateBankStatement()
@@ -73,19 +74,26 @@ namespace Boolean.CSharp.Main.Accounts
 
         public void PrintBankStatement()
         {
-            Console.WriteLine("date       || credit  || debit   || balance\n------------------------------------------");
+            Console.WriteLine(GetStringBankStatement());
+        }
+
+        public string GetStringBankStatement()
+        {
+            StringBuilder sb = new();
+            sb.AppendLine("date       || credit  || debit   || balance\n------------------------------------------");
             foreach (Transaction t in _transactions)
             {
                 if (t.GetCredit() == 0)
                 {
-                    Console.WriteLine($"{t.GetDate().ToShortDateString()} ||         || {t.GetDebit()}    || {t.GetBalance()}");
+                    sb.AppendLine($"{t.GetDate().ToShortDateString()} ||         || {t.GetDebit()}    || {t.GetBalance()}");
                 }
                 else
                 {
-                    Console.WriteLine($"{t.GetDate().ToShortDateString()} || {t.GetCredit()}   ||         || {t.GetBalance()}");
+                    sb.AppendLine($"{t.GetDate().ToShortDateString()} || {t.GetCredit()}   ||         || {t.GetBalance()}");
                 }
 
             }
+            return sb.ToString();
         }
 
         public AccountBranches GetBranch()
@@ -111,6 +119,16 @@ namespace Boolean.CSharp.Main.Accounts
                 Console.WriteLine("Overdraft denied");
             }
             _overdrafts.Remove(overdraft);
+        }
+
+        public void SendTransaction(Transaction t)
+        {
+            _msService.Send($"{t.GetDate().ToShortDateString()} ||         || {t.GetDebit()}    || {t.GetBalance()}", GetAccountOwner().GetPhone());
+        }
+
+        public void SendBankStatement()
+        {
+            _msService.Send(GetStringBankStatement(), GetAccountOwner().GetPhone());
         }
     }
 }

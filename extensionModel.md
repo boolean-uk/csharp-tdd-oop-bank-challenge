@@ -46,6 +46,7 @@ I want statements to be sent as messages to my phone.
 ```
 | Classes         | Methods                                     | Scenario               | Outputs                     |
 |-----------------|---------------------------------------------|------------------------|-----------------------------|
-| `Customer`      | `sendStatement(Transaction t)`              | Any                    | void, sends an SMS with the transaction to customer phone |
-| `Customer`      | `sendAllStatements()`                       | Any                    | void, sends an SMS with statements to customer phone |
-| `Account`	      | `withdraw(double amount)`                   | Any                    | void, sends an SMS with the new transaction to customer phone |
+| `Account`       | `sendTransaction(Transaction t)`              | Any                    | void, sends an SMS with the transaction to customer phone |
+| `Account`       | `sendBankStatement()`                       | Any                    | void, sends an SMS with statements to customer phone |
+| `Account`	      | `createTransaction(decimal credit, decimal debit)`| Any              | void, sends an SMS with the new transaction to customer phone |
+| `SmsService`    | `send(string message, string phoneNumber)`  | Any              | void, sends an SMS with message to phoneNumber |

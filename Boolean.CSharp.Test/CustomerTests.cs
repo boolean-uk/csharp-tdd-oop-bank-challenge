@@ -10,13 +10,15 @@ namespace Boolean.CSharp.Test
         public void TestCustomers()
         {
             //Setup
-            Customer customer = new("U");
+            Customer customer = new("U", "+4712345678");
 
             //Execute
             string name = customer.GetName();
+            string phone = customer.GetPhone();
 
             //Verify
             Assert.That(name, Is.EqualTo("U"));
+            Assert.That(phone, Is.EqualTo("+4712345678"));
         }
     }
 }

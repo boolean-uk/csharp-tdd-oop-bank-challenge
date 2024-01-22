@@ -12,7 +12,7 @@ namespace Boolean.CSharp.Test
         {
             //setup
             Bank bank = new();
-            Customer customer = new("I");
+            Customer customer = new("I", "+4712345678");
 
             //execute
             Account? shouldBeCurrentAccount = bank.CreateAccount(customer, AccountTypes.Current, AccountBranches.Bergen);
@@ -31,7 +31,7 @@ namespace Boolean.CSharp.Test
         {
             //setup
             Bank bank = new();
-            Customer customer = new("K");
+            Customer customer = new("K", "+4712345678");
             Account? a1 = bank.CreateAccount(customer, AccountTypes.Current, AccountBranches.Bergen);
             Account? a2 = bank.CreateAccount(customer, AccountTypes.Savings, AccountBranches.Bergen);
 

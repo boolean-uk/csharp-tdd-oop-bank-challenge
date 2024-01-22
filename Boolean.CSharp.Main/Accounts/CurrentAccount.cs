@@ -1,6 +1,6 @@
 ﻿namespace Boolean.CSharp.Main.Accounts
 {
-    public class CurrentAccount(Customer customer, AccountBranches ab) : Account(customer, ab)
+    public class CurrentAccount(Customer customer, AccountBranches ab, ISmsService smsService) : Account(customer, ab, smsService)
     {
         public override AccountTypes GetAccountType()
         {
