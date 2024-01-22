@@ -83,5 +83,18 @@ namespace Boolean.CSharp.Test
             Assert.That(account.Transactions.Count, Is.EqualTo((2)));
             Assert.That(account.Owner, Is.EqualTo(user));
         }
+
+        [Test]
+        public void TestAccountDepositTransaction()
+        {
+            User user = new User(0, "Kristian", "Test@email.com", "password");
+            Account account = new SavingsAccount(user);
+
+            account.Deposit(100);
+
+            Assert.That(account.Balance, Is.EqualTo(100));
+            Assert.That(account.Transactions.Count, Is.EqualTo(1));
+            Assert.That(account.Transactions[0].Amount, Is.EqualTo(100));
+        }
     }
 }

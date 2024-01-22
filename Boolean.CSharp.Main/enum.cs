@@ -17,4 +17,9 @@ namespace Boolean.CSharp.Main
         CurrentAccount,
         SavingsAccount
     }
+
+    public enum BankLocation
+    {
+        Stavanger
+    }
 }
