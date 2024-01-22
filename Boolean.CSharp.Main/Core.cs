@@ -16,9 +16,25 @@ namespace Boolean.CSharp.Main
         {
             _branch = branch;
         }
-        public void approveOverdraft(float overdraft)
+        public float returnOverdraft(float reqOverdraft)
         {
-
+            float overdraft;
+            if (approveOverdraft())
+            {
+                overdraft = reqOverdraft;
+            }
+            else
+            {
+                overdraft = 0;
+#pragma warning disable CS0219 // Variable is assigned but its value is never used
+                string message = "Your request for an overdraft on your account has been denied.";
+#pragma warning restore CS0219 // Variable is assigned but its value is never used
+            }
+            return overdraft;
+        }
+        private bool approveOverdraft()
+        {
+            return true; //This is in place of the option for the bank to approve/reject overdraft request
         }
     }
     public enum AccountType

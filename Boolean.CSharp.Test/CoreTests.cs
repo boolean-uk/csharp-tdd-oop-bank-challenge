@@ -73,5 +73,12 @@ namespace Boolean.CSharp.Test
             DateTime time = DateTime.Now;
             Assert.That(statement.ElementAt(0), Is.EqualTo($"{time.ToString("D")}  ||  1000     ||  deposit  ||  974,01  "));
         }
+        [Test]
+        public void overdraftTest()
+        {
+            CurrentAccount account = (CurrentAccount)_customer.createAccount(221133, AccountType.current);
+            account.withdraw(500f);
+            Assert.That(account.getTotal(), Is.EqualTo(-500f));
+        }
     }
 }
