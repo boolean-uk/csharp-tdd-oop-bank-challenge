@@ -17,6 +17,8 @@ namespace Boolean.CSharp.Test
             Account account = null;
             TestDelegate createAccount = () => account = new CurrentAccount(name, startingBalance, br);
 
+           
+
             if (string.IsNullOrEmpty(name) || startingBalance < 1) {
                 Assert.Throws<Exception>(createAccount);
                 Assert.IsNull(account);
@@ -26,7 +28,8 @@ namespace Boolean.CSharp.Test
 
                 Assert.AreEqual(AccountType.CURRENT, account.GetAccountType());
                 Assert.AreEqual(name, account.AccountName);
-                Assert.AreEqual(startingBalance, account.Balance);
+                Assert.AreEqual(startingBalance, account.CalculateAccountBalance());
+                Assert.AreEqual(br, account.AccountBranch);
             }
            
         }
@@ -40,6 +43,8 @@ namespace Boolean.CSharp.Test
             Branch br = new Branch("LA");
             Account account = null;
             TestDelegate createAccount = () => account = new SavingsAccount(name, startingBalance, br);
+
+            
              
             if (string.IsNullOrEmpty(name) || startingBalance < 1) {
                 Assert.Throws<Exception>(createAccount);
@@ -50,7 +55,8 @@ namespace Boolean.CSharp.Test
 
                 Assert.AreEqual(AccountType.SAVINGS, account.GetAccountType());
                 Assert.AreEqual(name, account.AccountName);
-                Assert.AreEqual(startingBalance, account.Balance);
+                Assert.AreEqual(startingBalance, account.CalculateAccountBalance());
+                Assert.AreEqual(br, account.AccountBranch);
             }
             
            
@@ -67,13 +73,15 @@ namespace Boolean.CSharp.Test
 
             TestDelegate action = () => account.Deposit(depositamount);
 
+            
+
             if (depositamount > 0) {
                 Assert.DoesNotThrow(action);
                 Assert.AreEqual(startingBalance+depositamount, account.CalculateAccountBalance());
                 Assert.IsTrue(account.GetTransactionListCount() > 0);
             } else if (depositamount <= 0) {
                 Assert.Throws<InvalidOperationException>(action);
-                Assert.AreEqual(startingBalance, account.Balance);
+                Assert.AreEqual(startingBalance, account.CalculateAccountBalance());
                 Assert.IsTrue(account.GetTransactionListCount() == 1); // since we add a deposit when we create the account
             }
         }
@@ -83,6 +91,7 @@ namespace Boolean.CSharp.Test
         [TestCase("TestAccount", -100)]
         [TestCase("TestAccount", 0)]
         [TestCase("TestAccount", 600)]
+        [TestCase("TestAccount", 100)]
         public void TestWithdraw(string name, decimal withdrawamount) {
             decimal startingBalance = 500m;
 
@@ -91,17 +100,17 @@ namespace Boolean.CSharp.Test
 
             TestDelegate action = () => account.Withdraw(withdrawamount);
 
-            if (account.Balance > withdrawamount && withdrawamount > 0) {
+            if (account.CalculateAccountBalance() > withdrawamount && withdrawamount > 0) {
                 Assert.DoesNotThrow(action);
                 Assert.AreEqual(startingBalance-withdrawamount, account.CalculateAccountBalance());
                 Assert.IsTrue(account.GetTransactionListCount() > 0);
-            } else if (withdrawamount > account.Balance) {
+            } else if (withdrawamount > account.CalculateAccountBalance()) {
                 Assert.Throws<InvalidOperationException>(action);
-                Assert.AreEqual(startingBalance, account.Balance);
+                Assert.AreEqual(startingBalance, account.CalculateAccountBalance());
                 Assert.IsTrue(account.GetTransactionListCount() == 1); // since we add a deposit when we create the account
             } else if (withdrawamount < 0) {
                 Assert.Throws<InvalidOperationException>(action);
-                Assert.AreEqual(startingBalance, account.Balance);
+                Assert.AreEqual(startingBalance, account.CalculateAccountBalance());
                 Assert.IsTrue(account.GetTransactionListCount() == 1); // since we add a deposit when we create the account
             }
         }

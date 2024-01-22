@@ -14,25 +14,22 @@ namespace Boolean.CSharp.Main
     public abstract class Account : IAccount
     {
         public string AccountName { get; private set;}
-        public decimal Balance { get; private set;}
         public int ID { get; private set; }
         public Branch AccountBranch { get; private set; }
-
         private List<Transactions> _transactions;
-        private List<OverdraftRequest> _overdraftRequests = new List<OverdraftRequest>();
 
         public Account(string accountname, decimal balance, Branch accosiatedBranch) {
             ID = GetRandomID();
+            _transactions = new List<Transactions>();
             if (!string.IsNullOrEmpty(accountname)) {
                 AccountName = accountname;
             } else {
                 throw new Exception("You can not have an empty account name");
             }
-            _transactions = new List<Transactions>();
+            
 
             if (balance > 0) {
                 AddTransaction(balance, TransactionType.DEPOSIT);
-                Balance = balance;
             } else {
                 throw new Exception($"{balance} is not a valid starting balence, the balance must be 0 or greater");
             }
@@ -72,7 +69,7 @@ namespace Boolean.CSharp.Main
                 //Balance -= amount;
                 AddTransaction(amount, TransactionType.WITHDRAW);
             } else {
-                throw new InvalidOperationException($"This account have insufficient funds to make the transation on {amount} since the balance is {Balance}");
+                throw new InvalidOperationException($"This account have insufficient funds to make the transation on {amount} since the balance is {CalculateAccountBalance()}");
             }
             
             
@@ -106,7 +103,7 @@ namespace Boolean.CSharp.Main
         }
 
         private void AddTransaction(decimal amount, TransactionType type) {
-            var transation = new Transactions(amount, type, Balance, this);
+            var transation = new Transactions(amount, type, this);
             _transactions.Add(transation);
         } 
 
@@ -128,21 +125,6 @@ namespace Boolean.CSharp.Main
             }
 
             return accounBalance;
-        }
-
-
-        // Extension
-        public void RequestOverdraft(decimal amount) {
-            OverdraftRequest request = new OverdraftRequest { Amount = amount, IsApproved = false };
-            _overdraftRequests.Add(request);
-        }
-
-        // Extension
-        public void ApproveOverdraft(int _id) {
-            OverdraftRequest res = _overdraftRequests.FirstOrDefault(req => req.IsApproved == false);
-            if (res != null) {
-                res.IsApproved = true;
-            }
         }
         
         // Extension

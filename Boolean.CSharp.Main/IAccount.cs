@@ -8,7 +8,6 @@ namespace Boolean.CSharp.Main
     public interface IAccount
     {
         string AccountName { get; }
-        decimal Balance { get; }
         int ID { get; }
         Branch AccountBranch { get; }
         void Deposit(decimal amount);
