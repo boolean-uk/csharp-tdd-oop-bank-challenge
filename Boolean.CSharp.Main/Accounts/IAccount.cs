@@ -10,5 +10,6 @@
         void CreateTransaction(decimal credit, decimal debit);
         List<Transaction> GenerateBankStatement();
         void PrintBankStatement();
+        List<Overdraft> GetOverdraftRequests();
     }
 }

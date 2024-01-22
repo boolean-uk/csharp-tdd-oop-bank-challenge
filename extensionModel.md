@@ -26,6 +26,8 @@ I want to be able to request an overdraft on my account.
 | `Account`	      | `withdraw(decimal amount)`                  | If account doesn't exist | false, prints "Invalid account" |
 |                 |                                             | If amount > balance      | false, creates a new overdraft request, prints $"Balance too low to withdraw {amount}. Overdraft request created." |
 |                 |                                             | Else	                   | true                            |
+| `Account`	      | `getOverdraftRequests()`                    | If overdrafts            | List<Overdraft>                 |
+|                 |                                             | Else                     | []                              |
 
 ```
 As a bank manager,

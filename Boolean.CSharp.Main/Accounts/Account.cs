@@ -8,10 +8,12 @@ namespace Boolean.CSharp.Main.Accounts
         private Customer _owner;
         private List<Transaction> _transactions;
         private AccountBranches _branch;
+        private List<Overdraft> _overdrafts;
         public Account(Customer owner, AccountBranches ab)
         {
             _owner = owner;
             _transactions = [];
+            _overdrafts = [];
             _branch = ab;
         }
 
@@ -51,6 +53,8 @@ namespace Boolean.CSharp.Main.Accounts
                 CreateTransaction(0, amount);
                 return true;
             };
+            Overdraft o = new(amount - GetBalance());
+            _overdrafts.Add(o);
             return false;
         }
 
@@ -89,7 +93,7 @@ namespace Boolean.CSharp.Main.Accounts
 
         public List<Overdraft> GetOverdraftRequests()
         {
-            throw new NotImplementedException();
+            return _overdrafts;
         }
     }
 }
