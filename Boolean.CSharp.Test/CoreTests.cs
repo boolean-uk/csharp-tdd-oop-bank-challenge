@@ -1,4 +1,5 @@
 ﻿using Boolean.CSharp.Main.Models;
+using Boolean.CSharp.Main.Models.Accounts;
 using NUnit.Framework;
 using System;
 using System.Security.Principal;
@@ -13,7 +14,7 @@ namespace Boolean.CSharp.Test
         [SetUp]
         public void Setup()
         {
-            _account = new Account();
+            _account = new Account(Branch.UK, "123456789");
         }
 
         [Test]

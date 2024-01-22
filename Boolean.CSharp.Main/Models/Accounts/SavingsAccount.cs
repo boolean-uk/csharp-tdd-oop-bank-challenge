@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boolean.CSharp.Main.Models
+namespace Boolean.CSharp.Main.Models.Accounts
 {
     public class SavingsAccount : Account
     {
-        public SavingsAccount() : base()
+        public SavingsAccount(Branch branch, string phoneNumber) : base(branch, phoneNumber)
         {
 
         }

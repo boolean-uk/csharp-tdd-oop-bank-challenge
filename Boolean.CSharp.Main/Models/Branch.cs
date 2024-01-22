@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main.Models
 {
-    public class CurrentAccount : Account
+    public enum Branch
     {
-        public CurrentAccount() : base()
-        {
-
-        }
+        UK,
+        Tronheim
     }
 }
