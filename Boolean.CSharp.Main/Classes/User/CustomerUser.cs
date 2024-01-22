@@ -56,7 +56,7 @@ namespace Boolean.CSharp.Main.Classes.User
 
         public string CheckBranch(int account)
         {
-            throw new NotImplementedException();
+            return _accounts[account].Branch.ToString();
         }
 
         public BankStatement RequestOverdraft(double money)

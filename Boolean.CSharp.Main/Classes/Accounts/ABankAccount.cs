@@ -11,6 +11,7 @@ namespace Boolean.CSharp.Main.Classes.Accounts
     {
         List<BankStatement> _transactions;
         eBranch _branch;
+        public eBranch Branch{ get { return _branch; } }
 
         public ABankAccount(eBranch e = eBranch.Central)
         {
