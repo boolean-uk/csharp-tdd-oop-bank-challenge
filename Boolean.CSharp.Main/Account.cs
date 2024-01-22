@@ -22,7 +22,7 @@ namespace Boolean.CSharp.Main
             this.branch=string.Empty;
         }
 
-        public virtual bool Deposit(decimal amount)
+        public bool Deposit(decimal amount)
         {
             if (amount >= 0)
             {
@@ -55,7 +55,7 @@ namespace Boolean.CSharp.Main
         }
 
 
-        public virtual string GenerateStatement()
+        public string GenerateStatement()
         {
             StringBuilder statementBuilder = new StringBuilder();
             decimal currentBalance = 0;
@@ -75,7 +75,7 @@ namespace Boolean.CSharp.Main
         }
 
 
-        public virtual decimal GetBalance()
+        public decimal GetBalance()
         {
             decimal balance = 0;
 
@@ -90,7 +90,7 @@ namespace Boolean.CSharp.Main
 
 
         //Extension
-        public virtual bool setBranch(string Branch)
+        public bool setBranch(string Branch)
         {
             if (Branch == "")
             {
@@ -129,7 +129,7 @@ namespace Boolean.CSharp.Main
             else { return ""; }
         }
 
-        public virtual void sendToPhone(string phoneNumber)
+        public void sendToPhone(string phoneNumber)
         {
             if (phoneNumber.Length == 8) //length of Danish phone Numbers
             {
