@@ -32,30 +32,28 @@ I want to !deposit! and !withdraw! "funds".
 
 ### AccountBase : IAccount
 
-    private float _balance;
-    private List<Transaction> _transactions = new List<Transaction>();
-    private string _accountName;
+    private float _balance; {get;}
+    private List<Transaction> _transactions = new List<Transaction>(); {get;}
+    private string _accountName; {get;}
 
-    public float Balance => _balance;
-    public List<Transaction> Transactions => _transactions;
-    public string AccountName => _accountName;
-    
     constructor AccountBase(string accountname, BankStatementBuilder bankStatementBuilder)
 
     public bool Deposit(float amount)
         _balance += amount;
+        update transactions
         return true;
 
     public bool Withdraw(float amount)
         if (_balance >= amount)
         {
             _balance -= amount;
+            update transactions
             return true;
         }
         return false;
 
     public string GetBankStatement()
-        return string from ;
+        return string from bankstatement;
 
 ### Class CurrentAccount : AccountBase
 
@@ -77,16 +75,20 @@ I want to !deposit! and !withdraw! "funds".
         Debit
     }
     
-    constructor(DateTime time, string typeOfTransaction, float amount, float balance)
+    constructor(DateTime time, TransactionType typeOfTransaction, float amount, float balance)
 
 ### Class Bank
 
-    public CurrentAccount createCurrentAccount(Customer customer)
+    private BankStatementBuilder _bankStatementBuilder;
+
+    constructor(BankStatementBuilder bankStatementBuilder)
+
+    public CurrentAccount createCurrentAccount(Customer customer, string accountname)
         CurrentAccount newaccount = new CurrentAccount(); 
         customer.AddAccount(newaccount)
         return newaccount
 
-    public SavingsAccount createSavingsAccount(Customer customer)
+    public SavingsAccount createSavingsAccount(Customer customer, string accountname)
         CurrentAccount newaccount = new CurrentAccount(); 
         customer.AddAccount(newaccount)
         return newaccount

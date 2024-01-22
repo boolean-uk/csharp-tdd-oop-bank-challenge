@@ -9,6 +9,7 @@ namespace Boolean.CSharp.Main
     {
         public string BuildStatement(List<Transaction> transactions)
         {
+            transactions.Reverse();
             StringBuilder stringBuilder = new StringBuilder();
 
             stringBuilder.AppendLine("date       || credit  || debit  || balance");
@@ -21,7 +22,6 @@ namespace Boolean.CSharp.Main
 
                 stringBuilder.AppendLine($"{transaction.Time.Day}/{transaction.Time.Month}/{transaction.Time.Year} || {isCredit} || {isDebit} || {FormatAmount(transaction.Balance)}");
             }
-
             return stringBuilder.ToString();
         }
 

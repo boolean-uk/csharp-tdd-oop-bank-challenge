@@ -12,16 +12,16 @@ namespace Boolean.CSharp.Main
         public Bank(BankStatementBuilder bankStatementBuilder){
             _bankStatementBuilder = bankStatementBuilder;
         }
-        public CurrentAccount createCurrentAccount(Customer customer, string accountname)
+        public CurrentAccount CreateCurrentAccount(Customer customer, string accountname)
         {
             CurrentAccount newAccount = new CurrentAccount(accountname, _bankStatementBuilder);
             customer.AddAccount(newAccount);
             return newAccount;
         }
 
-        public SavingsAccount createSavingsAccount(Customer customer, string accountname)
+        public SavingsAccount CreateSavingsAccount(Customer customer, string accountname)
         {
-          SavingsAccount newAccount = new SavingsAccount(accountname, _bankStatementBuilder);
+            SavingsAccount newAccount = new SavingsAccount(accountname, _bankStatementBuilder);
             customer.AddAccount(newAccount);
             return newAccount;
             }

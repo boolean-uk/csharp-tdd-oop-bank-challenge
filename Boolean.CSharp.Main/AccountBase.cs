@@ -10,7 +10,7 @@ namespace Boolean.CSharp.Main
     public abstract class AccountBase : IAccount
     {
         private float _balance;
-        private List<Transaction> _transactions = new List<Transaction>();
+        private List<Transaction> _transactions;
         private string _accountName;
         private BankStatementBuilder _bankStatementBuilder;
         public float Balance => _balance;
@@ -20,6 +20,7 @@ namespace Boolean.CSharp.Main
         public AccountBase(string accountname, BankStatementBuilder bankStatementBuilder){
             _accountName = accountname;
             _bankStatementBuilder = bankStatementBuilder;
+            _transactions = new List<Transaction>();
         }
         public bool Deposit(float amount)
         {
