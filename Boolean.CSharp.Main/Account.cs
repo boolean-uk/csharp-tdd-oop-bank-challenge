@@ -25,13 +25,14 @@ namespace Boolean.CSharp.Main
 
         public double Balance { get => _balance; }
         public User Owner { get => _owner; }
+        public List<Transaction> Transactions { get => _transactions; }
 
         public void Deposit(double amount)
         {
             throw new NotImplementedException();
         }
         
-        public void Withdraw(double amount)
+        public bool Withdraw(double amount)
         {
             throw new NotImplementedException();
         }
