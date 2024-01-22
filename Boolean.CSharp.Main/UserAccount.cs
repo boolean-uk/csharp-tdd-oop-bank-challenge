@@ -14,7 +14,7 @@ public class UserAccount
     public decimal Balance { get; set; }
     public DateTime LastUpdateDate { get; set; }
     public List<Transaction> Transactions { get; set; } = new List<Transaction>();
-    private static int accountCounter = 1;
+    private static int accountNum = 1;
     private static Dictionary<string, UserAccount> accountsDictionary = new Dictionary<string, UserAccount>();
 
     
@@ -33,7 +33,7 @@ public class UserAccount
 
     private static string GenerateAccountNumber()
     {
-        return $"ACCT-{accountCounter++}";
+        return $"ACCT-{accountNum++}";
     }
 
     public void Deposit(string accountName, string accountType, decimal amount)
