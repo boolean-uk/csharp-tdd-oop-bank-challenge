@@ -16,25 +16,34 @@ namespace Boolean.CSharp.Extension
             public Bank()
             {
                 branches = new Dictionary<int, string>();
+            branches.Add(1, "UK");
+            branches.Add(2, "SWE");
+            branches.Add(3, "NOR");
             }
 
             public Dictionary<int, string> GetBranches()
             {
-                throw new NotImplementedException();
+                return branches;
             }
 
             public bool CheckIfBranchExists(int id)
             {
-                throw new NotImplementedException();
+                if (branches.ContainsKey(id)) { return true; }
+                return false;
             }
 
             public bool CheckIfBranchExists(string location)
             {
-                throw new NotImplementedException();
+            if (branches.ContainsValue(location)) { return true; }
+            return false;
             }
 
 
-            public string GetBranchNameById(int id) {  throw new NotImplementedException();}
+            public string GetBranchNameById(int id) {
+                if(branches.TryGetValue(id, out string BranchName)) { return BranchName; };
+                return "BRANCH DOES NOT EXIST."; 
+
+            }
         }
 
         public interface Iaccount
@@ -43,6 +52,12 @@ namespace Boolean.CSharp.Extension
             public bool AddTransaction(float f, DateTime? date);
             public float GetBalance();
             string GenerateTransationsHistory();
+            //EXTENSION
+            bool UpdateBranch(int branch);
+            bool RequestOverdraft(float amt);
+            bool ApproveOverdraftRequest();
+            bool DenyOverdraftRequest();
+            public string BranchName();
         }
         public class Account : Iaccount
         {
@@ -52,36 +67,55 @@ namespace Boolean.CSharp.Extension
 
             private Transaction? OverdraftRequest;
             private int branchId;
-            public string BranchName { get { return bank.GetBranchNameById(branchId); } }
+            public string BranchName() { return bank.GetBranchNameById(branchId); }
 
             public Account(Bank bank, int branch_id)
             {
                 transactions = new List<Transaction>();
 
-                throw new NotImplementedException();
+                this.bank = bank;
+                this.branchId = branch_id;
             }
 
-            public bool UpdateBranch(string branch)
+            public bool UpdateBranch(int branchId)
             {
-                throw new NotImplementedException();
+            if (bank.CheckIfBranchExists(branchId)) 
+                { 
+                this.branchId = branchId;
+                return true;
+                };
+            return false;
             }
 
             public bool RequestOverdraft(float amount)
             {
-                throw new NotImplementedException();
+                if(OverdraftRequest != null) { return false; }
+                
+                OverdraftRequest = new Transaction(DateTime.Now, amount);
+                return true;
             }
             public bool ApproveOverdraftRequest()
             {
-                throw new NotImplementedException();
+            if (OverdraftRequest == null) { return false; }
+
+            transactions.Add(OverdraftRequest.Value);
+            return true;
+            
             }
             public bool DenyOverdraftRequest()
             {
-                throw new NotImplementedException();
+                if (OverdraftRequest == null) { return false; }
+
+                OverdraftRequest = null;
+                return true;
+
             }
 
-            public bool AddTransaction(float transactionAmount, DateTime? date)
+        public bool AddTransaction(float transactionAmount, DateTime? date)
             {
-                if (transactionAmount == 0f) { return false; }
+                if (transactionAmount == 0f ) { return false; }
+
+                if ( GetBalance() + transactionAmount < 0f ) { return false; }
 
                 if (date != null)
                 {
@@ -89,14 +123,13 @@ namespace Boolean.CSharp.Extension
 
                 }
 
-                date = (DateTime?)DateTime.Now;
-                transactions.Add(new Transaction(date.Value, transactionAmount)); return true;
+                transactions.Add(new Transaction(DateTime.Now, transactionAmount)); return true;
             }
 
 
             public float GetBalance()
             {
-                float balance = 3;
+                float balance = 0;
 
                 balance += transactions.Aggregate(0f, (tot, next) => tot + next.Amount);
 

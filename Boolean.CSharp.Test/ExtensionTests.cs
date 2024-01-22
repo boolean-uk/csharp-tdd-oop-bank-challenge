@@ -18,6 +18,7 @@ namespace Boolean.CSharp.ExtensionTest
         [SetUp]
 
         public void setup() { bank = new Bank(); }
+
         [Test]
 
         public void GetBranches() {
@@ -32,12 +33,16 @@ namespace Boolean.CSharp.ExtensionTest
         }
 
 
-        [TestCase(1, true)]
+        [TestCase("1", true)]
         [TestCase("SWE", true)]
         [TestCase("fail", false)]
-        public void CheckIfBranchesExist(string branch, bool ExpectCheck) { 
+        public void CheckIfBranchesExist(string branch, bool ExpectCheck) {
+            bool res;
+            if(int.TryParse(branch, out int integerSearch)) 
+                { res = bank.CheckIfBranchExists(integerSearch); }
+            else {res = bank.CheckIfBranchExists(branch); }
         
-            bool res = bank.CheckIfBranchExists(branch);
+            
             Assert.That(res, Is.EqualTo(ExpectCheck));
         
         
@@ -45,7 +50,7 @@ namespace Boolean.CSharp.ExtensionTest
 
         [TestCase(1, "UK", true)]
         [TestCase(2,"SWE", true)]
-        [TestCase(99,"BRANCH DOES NOT EXCIST.", false)]
+        [TestCase(99,"BRANCH DOES NOT EXIST.", false)]
         public void GetBranchNameById(int branch_id, string expectedString, bool ExpectCheck)
         {
             bool checkRes = bank.CheckIfBranchExists(branch_id);
@@ -65,8 +70,8 @@ namespace Boolean.CSharp.ExtensionTest
     public class AccountExtensionTests
     {
 
-        Bank bank = new Extension.Bank();
-        public IEnumerable<Iaccount> AccountTestCases
+        static Bank bank = new Extension.Bank();
+        static public  IEnumerable<Iaccount> AccountTestCases
         {
             get
             {
@@ -82,40 +87,174 @@ namespace Boolean.CSharp.ExtensionTest
 
 
 
-        [TestCaseSource(nameof(AccountTestCases))]
-        public void AddTransaction(Iaccount account)
+        [TestCase(1, "UK")]
+        [TestCase(2, "SWE")]
+        [TestCase(99, "BRANCH DOES NOT EXIST.")]
+        public void NewAccountHasBranches(int branch_id, string expectedBranchString)
         {
-            Account accountCasted;
+            Account account = new Account(bank, branch_id);
 
-            bool res = account.AddTransaction(100f, null);
+            string branchStringRes = account.BranchName();
 
-            List<Transaction> res2 = account.GetTransactions();
-            try
-            {
+            Assert.That(branchStringRes, Is.EqualTo(expectedBranchString));
+            Assert.That(account.GetBalance(), Is.EqualTo(0));
+            Assert.That(account.GetTransactions().Count, Is.EqualTo(0));
 
-                accountCasted = (Account)account;
-            }
-            catch (Exception ex)
-            {
-                Assert.Fail("Could not cast to Account class");
-                return;
-            }
-
-            Assert.That(res, Is.True);
-            Assert.That(res2.Count, Is.EqualTo(1));
-            Assert.That(accountCasted.Transactions.Count, Is.EqualTo(1));
 
         }
 
+        [TestCase(1, "UK", 3, true, "NOR")]
+        [TestCase(2, "SWE", 99, false, "SWE")]
+        [TestCase(99, "BRANCH DOES NOT EXIST.", 1, true, "UK")]
+        public void AccountBranchChange(int branch_id, string expectedBranchString, int new_branch, bool branchChangeSuccess, string new_branch_name )
+        {
+            Account account = new Account(bank, branch_id);
+
+            string branchStringRes = account.BranchName();
+
+            Assert.That(branchStringRes, Is.EqualTo(expectedBranchString));
+            Assert.That(account.GetBalance(), Is.EqualTo(0));
+            Assert.That(account.GetTransactions().Count, Is.EqualTo(0));
+
+            bool resChangeSuccess = account.UpdateBranch(new_branch);
+            Assert.That(resChangeSuccess, Is.EqualTo(branchChangeSuccess));
+
+            string resNewBranchName = account.BranchName();
+
+
+            Assert.That(resNewBranchName, Is.EqualTo(new_branch_name));
+
+
+
+        }
+
+        [TestCaseSource(nameof(AccountTestCases))]
+        public void CantOverdraft(Iaccount account)
+        {
+
+
+            bool res = account.AddTransaction(-100f, null);
+
+            List<Transaction> res2 = account.GetTransactions();
+
+            Assert.That(res, Is.False);
+            Assert.That(res2.Count, Is.EqualTo(0));
+
+        }
+
+        [TestCaseSource(nameof(AccountTestCases))]
+        public void RequestOverdraft(Iaccount account)
+        {
+
+
+            bool resOverdraft1 = account.RequestOverdraft(-100f);
+            bool resOverdraft2 = account.RequestOverdraft(-200f);
+            bool res2 = account.AddTransaction(100f, null);
+
+            List<Transaction> res3 = account.GetTransactions();
+
+            Assert.That(resOverdraft1, Is.True);
+            Assert.That(resOverdraft2, Is.False);
+            Assert.That(res3.Count, Is.EqualTo(1));
+
+        }
+
+        [TestCaseSource(nameof(AccountTestCases))]
+        public void RequestOverdraftAndApproveRequest(Iaccount account)
+        {
+
+
+            bool resOverdraft1 = account.RequestOverdraft(-100f);
+            bool resOverdraft2 = account.RequestOverdraft(-200f);
+            bool res2 = account.AddTransaction(100f, null);
+
+            account.ApproveOverdraftRequest();
+
+            List<Transaction> res3 = account.GetTransactions();
+            float res4 = account.GetBalance();
+
+            Assert.That(resOverdraft1, Is.True);
+            Assert.That(resOverdraft2, Is.False);
+            Assert.That(res3.Count, Is.EqualTo(2));
+            Assert.That(res4, Is.EqualTo(0f));
+
+
+        }
+
+        [TestCaseSource(nameof(AccountTestCases))]
+        public void RequestOverdraftAndApproveRequest2(Iaccount account)
+        {
+
+
+            bool resOverdraft1 = account.RequestOverdraft(-100f);
+            bool resOverdraft2 = account.RequestOverdraft(-200f);
+
+
+            bool resOverdraftReq = account.ApproveOverdraftRequest();
+
+            List<Transaction> res3 = account.GetTransactions();
+            float res4 = account.GetBalance();
+
+            Assert.That(resOverdraft1, Is.True);
+            Assert.That(resOverdraftReq, Is.True);
+            Assert.That(resOverdraft2, Is.False);
+            Assert.That(res3.Count, Is.EqualTo(1));
+            Assert.That(res4, Is.EqualTo(-100f));
+        }
+
+
+        [TestCaseSource(nameof(AccountTestCases))]
+        public void DenyOverdraftRequest1(Iaccount account)
+        {
+
+
+            bool resOverdraft1 = account.RequestOverdraft(-100f);
+            bool resOverdraft2 = account.RequestOverdraft(-200f);
+            bool res2 = account.AddTransaction(100f, null);
+
+            bool resOverdraftReq = account.DenyOverdraftRequest();
+
+            List<Transaction> res3 = account.GetTransactions();
+            float res4 = account.GetBalance();
+
+            Assert.That(resOverdraft1, Is.True);
+            Assert.That(resOverdraftReq, Is.True);
+            Assert.That(res3.Count, Is.EqualTo(1));
+            Assert.That(res4, Is.EqualTo(100f));
+
+
+        }
+
+        [TestCaseSource(nameof(AccountTestCases))]
+        public void DenyOverdraftRequest2(Iaccount account)
+        {
+
+            
+
+            bool resOverdraft1 = account.RequestOverdraft(-100f);
+            bool resOverdraft2 = account.RequestOverdraft(-200f);
+
+            bool resOverdraftReq = account.DenyOverdraftRequest();
+
+            List<Transaction> res3 = account.GetTransactions();
+            float res4 = account.GetBalance();
+
+            Assert.That(resOverdraft1, Is.True);
+            Assert.That(resOverdraftReq, Is.True);
+            Assert.That(res3.Count, Is.EqualTo(0));
+            Assert.That(res4, Is.EqualTo(0f));
+        }
+
     }
+
 
 
     [TestFixture]
     public class AccountCoreExtensionTests
     {
 
-        Bank bank = new Extension.Bank();
-        public IEnumerable<Iaccount> AccountTestCases
+        static Bank bank = new Extension.Bank();
+        public static IEnumerable<Iaccount> AccountTestCases
         {
             get
             {
@@ -124,11 +263,6 @@ namespace Boolean.CSharp.ExtensionTest
                 yield return new CurrentAccount(bank, 1);
             }
         }
-
-
-
-
-
 
 
         [TestCaseSource(nameof(AccountTestCases))]
@@ -141,7 +275,6 @@ namespace Boolean.CSharp.ExtensionTest
             List<Transaction> res2 = account.GetTransactions();
             try
             {
-
                 accountCasted = (Account)account;
             }
             catch (Exception ex)
@@ -166,8 +299,8 @@ namespace Boolean.CSharp.ExtensionTest
 
             List<Transaction> res2 = account.GetTransactions();
 
-            Assert.That(res, Is.True);
-            Assert.That(res2.Count, Is.EqualTo(1));
+            Assert.That(res, Is.False);
+            Assert.That(res2.Count, Is.EqualTo(0));
 
         }
 

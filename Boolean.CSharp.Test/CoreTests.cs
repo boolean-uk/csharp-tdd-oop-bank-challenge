@@ -45,7 +45,7 @@ namespace Boolean.CSharp.Test
 
             Assert.That(res, Is.True);
             Assert.That(res2.Count, Is.EqualTo(1));
-            Assert.That(accountCasted.Transactions.Count, Is.EqualTo(1));
+            Assert.That(accountCasted.GetTransactions().Count, Is.EqualTo(1));
 
         }
 

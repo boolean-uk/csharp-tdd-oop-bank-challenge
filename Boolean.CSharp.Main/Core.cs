@@ -9,7 +9,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Boolean.CSharp.Main
 {
-    
+
     public interface Iaccount
     {
         public List<Transaction> GetTransactions();
@@ -20,35 +20,27 @@ namespace Boolean.CSharp.Main
     public class Account : Iaccount
     {
         private List<Transaction> transactions;
-        public  List<Transaction> Transactions { get { return transactions; } }
+
     
         public Account() {
-
-
-
             transactions = new List<Transaction>() ;
         }
 
         
-
-
-
         public bool AddTransaction(float transactionAmount, DateTime? date)
         {
             if (transactionAmount == 0f) { return false; }
 
             if (date != null)
-            {
+                {
                 transactions.Add(new Transaction(date.Value, transactionAmount)); return true;
+                }
 
-            }
-
-            date = (DateTime?)DateTime.Now;
-            transactions.Add(new Transaction(date.Value, transactionAmount)); return true;
+            transactions.Add(new Transaction(DateTime.Now, transactionAmount)); return true;
         }
 
 
-            public float GetBalance()
+        public float GetBalance()
         {
             float balance = 0;
 
@@ -56,9 +48,12 @@ namespace Boolean.CSharp.Main
 
             return balance;
 
-            }
+        }
         
-         public List<Transaction> GetTransactions() { return transactions; }
+
+        public List<Transaction> GetTransactions() { return transactions; }
+
+
         public string GenerateTransationsHistory()
         {
             StringBuilder sb = new StringBuilder();
@@ -85,38 +80,15 @@ namespace Boolean.CSharp.Main
 
             
             
-            sb.Append('\n');
-            }
+                sb.Append('\n');
+                }
+
             Console.WriteLine(sb.ToString());
 
             return sb.ToString().Replace(",",".");
 
         }
 
-
     }
-
-    public class SavingsAccount : Account
-    {
-        public SavingsAccount() { }
-    }
-        
-        public class CurrentAccount : Account
-    {
-        public CurrentAccount() { }
-    }
-
-
-    public struct Transaction {
-        public DateTime CreationDate;
-        public float Amount;
-        public Transaction(DateTime creationDate, float amount)
-        {
-            CreationDate = creationDate;
-            Amount = amount;
-        }
-    }
-
-
 
 }
