@@ -51,7 +51,12 @@ namespace Boolean.CSharp.Main.Classes.User
 
         public string GenerateStatement(int account)
         {
-            return _accounts[account].WriteTransactions();
+            return _accounts[account].WriteTransactions().ToString();
+        }
+
+        public string CheckBranch(int account)
+        {
+            throw new NotImplementedException();
         }
 
         public BankStatement RequestOverdraft(double money)

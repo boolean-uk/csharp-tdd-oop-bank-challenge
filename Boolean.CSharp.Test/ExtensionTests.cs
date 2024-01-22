@@ -1,4 +1,6 @@
 ﻿using Boolean.CSharp.Main;
+using Boolean.CSharp.Main.Classes.Accounts;
+using Boolean.CSharp.Main.Classes.User;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -11,20 +13,66 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class ExtensionTests
     {
-        private Extension _extension;
-        public ExtensionTests()
+
+        private CustomerUser customer;
+
+        [SetUp]
+        public void SetUp()
         {
-            _extension = new Extension();
+            customer = new CustomerUser();
         }
+
         [Test]
-        private void TestQuestion1()
+        public void TestTest()
         {
 
-        }
-        [Test]
-        private void TestQuestion2()
-        {
+            //  Arrange - set up test values
 
+            //  Act - use the fucntion we want to test
+
+            //  Assert - check the results
+            Assert.IsTrue(true);
+        }
+
+        [Test]
+        [TestCase(eBranch.North)]
+        [TestCase(eBranch.WestWest)]
+        [TestCase(eBranch.West)]
+        [TestCase(eBranch.East)]
+        public void BranchesAndAccounts(eBranch e)
+        {
+            //  Arrange - set up test values
+            string result;
+            CurrentAccount testAccount = new CurrentAccount(e);
+            customer.CreateAccount(testAccount);
+
+            //  Act - use the fucntion we want to test
+            result = customer.CheckBranch(0);
+
+            //  Assert - check the results
+            Assert.That(result, Is.EqualTo(e.ToString()));
+        }
+
+        [Test]
+        public void RequestingOverdraft()
+        {
+            //  Arrange - set up test values
+
+            //  Act - use the fucntion we want to test
+
+            //  Assert - check the results
+            Assert.IsTrue(false);
+        }
+
+        [Test]
+        public void ManageOverdraft()
+        {
+            //  Arrange - set up test values
+
+            //  Act - use the fucntion we want to test
+
+            //  Assert - check the results
+            Assert.IsTrue(false);
         }
     }
 }

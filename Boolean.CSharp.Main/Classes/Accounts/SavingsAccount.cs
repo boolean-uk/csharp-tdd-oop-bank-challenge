@@ -8,5 +8,6 @@ namespace Boolean.CSharp.Main.Classes.Accounts
 {
     public class SavingsAccount : ABankAccount
     {
+        public SavingsAccount(eBranch e = eBranch.Central) : base(e) { }
     }
 }

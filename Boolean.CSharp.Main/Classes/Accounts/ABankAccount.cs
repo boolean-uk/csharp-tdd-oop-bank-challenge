@@ -10,10 +10,12 @@ namespace Boolean.CSharp.Main.Classes.Accounts
     abstract public class ABankAccount
     {
         List<BankStatement> _transactions;
+        eBranch _branch;
 
-        public ABankAccount()
+        public ABankAccount(eBranch e = eBranch.Central)
         {
             _transactions = new List<BankStatement>();
+            _branch = e;
         }
 
         public double Transaction(BankStatement statement)
@@ -32,7 +34,7 @@ namespace Boolean.CSharp.Main.Classes.Accounts
             return Math.Round(money, 2);
         }
 
-        public string WriteTransactions()
+        public StringBuilder WriteTransactions()
         {
             string test = string.Format("{0,-11} || {1,-10} || {2,-10} || {3,-10} \n", "Date", "Credit", "Debit", "Balance");
             StringBuilder sb = new StringBuilder();
@@ -49,7 +51,7 @@ namespace Boolean.CSharp.Main.Classes.Accounts
                     money);
                 sb.Append(test);
             }
-            return sb.ToString();
+            return sb;
         }
     }
 }

@@ -7,11 +7,11 @@
 |					|																						|								| `Withdraw(double, int)`			| User attempts to withdraw more than possible					| false			|
 |					|																						|								|									| User attempts to withdraw an acceptable ammount				| true			|
 |					|																						|								| `Deposit(double, int)`			|																| double		|
-|					|																						|								| `GenerateStatement()`				|																| int			|
+|					|																						|								| `GenerateStatement(int)`			|																| string		|
 |					|																						|								| `RequestOverdraft(double)`		|																| BankStatement	|
 | `ManagerUser`		|																						|								| `ManageRequest(BankStatement)`	|																| bool			|
 | `ABankAccount`	| `List<BankStatement> _transactions`													|								| `Transaction(BankStatement)`		|																| double		|
-|					| `enum eBranch`																		|								| `WriteTransactions()`				|																| string		|
+|					| `enum eBranch`																		|								| `WriteTransactions()`				|																| StringBuilder	|
 | `CurrentAccount`	|																						|								|									|																|				|
 | `SavingsAccount`	|																						|								|									|																|				|
 | `BankStatement`	| `DateTime _transactionDate`															| `double Transaction{ get;}`	|									|																| double		|

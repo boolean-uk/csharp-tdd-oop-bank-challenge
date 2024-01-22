@@ -11,4 +11,13 @@ namespace Boolean.CSharp.Main
         Debit,  //  Withdraw
         Credit  //  Deposit
     }
+
+    public enum eBranch
+    {
+        Central,
+        West,
+        WestWest,
+        East,
+        North
+    }
 }
