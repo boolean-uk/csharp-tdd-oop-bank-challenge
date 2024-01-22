@@ -6,36 +6,34 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class CoreTests
     {
-        [Test]
-        public void CreateCurrentAccountTest()
+        [TestCase("Current account 1")]
+        public void CreateCurrentAccountTest(string accountName)
         {
             //arrange
             BankManager bankManager = new BankManager();
-            AccountList accountList = new AccountList();
 
             //act
-            bankManager.CreateCurrentAccount();
+            bankManager.CreateCurrentAccount(accountName);
             
 
             //assert
-            Assert.IsTrue(accountList.Accounts.Count > 0);
-            Assert.IsTrue(accountList.Accounts[0].AccountType == "CurrentAccount");
+            Assert.IsTrue(bankManager.Accounts.Count > 0);
+            Assert.IsTrue(bankManager.Accounts[0].AccountType == "CurrentAccount");
         }
 
-        [Test]
-        public void CreateSavingsAccountTest()
+        [TestCase("Savings account 1")]
+        public void CreateSavingsAccountTest(string accountName)
         {
             //arrange
             BankManager bankManager = new BankManager();
-            AccountList accountList = new AccountList();
 
             //act
-            bankManager.CreateSavingsAccount();
+            bankManager.CreateSavingsAccount(accountName);
 
 
             //assert
-            Assert.IsTrue(accountList.Accounts.Count > 0);
-            Assert.IsTrue(accountList.Accounts[0].AccountType == "SavingsAccount");
+            Assert.IsTrue(bankManager.Accounts.Count > 0);
+            Assert.IsTrue(bankManager.Accounts[0].AccountType == "SavingsAccount");
         }
 
         [Test]
@@ -49,29 +47,24 @@ namespace Boolean.CSharp.Test
             Assert.Fail();
         }
 
-        [Test]
-        public void WithdrawTest()
-        {
-            //arrange
-
-            //act
-
-            //assert
-            Assert.Fail();
-        }
-
-        [Test] 
+        [TestCase(300)]
         public void DepositTest()
         {
             //arrange
+            CurrentAccount account = new CurrentAccount("Current account 1");
 
             //act
+            account.Deposit(300);
 
             //assert
-            Assert.Fail();
+            Assert.AreEqual(300, account.Balance);
         }
 
-        
-
+        [TestCase(500)]
+        public void WithdrawTest(int amount)
+        {
+            
+            
+        }
     }
 }

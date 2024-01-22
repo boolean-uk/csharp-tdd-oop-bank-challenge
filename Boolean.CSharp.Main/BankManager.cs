@@ -8,16 +8,20 @@ namespace Boolean.CSharp.Main
 {
     public class BankManager
     {
-        AccountList accountList = new AccountList();
+        public List<Account> Accounts {  get; set; } = new List<Account>();
+
+        public BankManager()
+        {
+
+        }
 
 
-        public void CreateCurrentAccount()
+        public void CreateCurrentAccount(string accountName)
         {
             Console.WriteLine("Input name of current account");
-            string accountName = Console.ReadLine();
             CurrentAccount newCurrentAccount = new CurrentAccount(accountName);
-            if (!accountList.Accounts.Contains(newCurrentAccount)){
-                accountList.Accounts.Add(newCurrentAccount);
+            if (!Accounts.Contains(newCurrentAccount)){
+                Accounts.Add(newCurrentAccount);
                 Console.WriteLine($"{accountName} has been added to accounts");
             } else
             {
@@ -26,14 +30,13 @@ namespace Boolean.CSharp.Main
                 
         }
 
-        public void CreateSavingsAccount()
+        public void CreateSavingsAccount(string accountName)
         {
             Console.WriteLine("Input name of savings account");
-            string accountName = Console.ReadLine();
             SavingsAccount newSavingsAccount = new SavingsAccount(accountName);
-            if (!accountList.Accounts.Contains(newSavingsAccount))
+            if (!Accounts.Contains(newSavingsAccount))
             {
-                accountList.Accounts.Add(newSavingsAccount);
+                Accounts.Add(newSavingsAccount);
                 Console.WriteLine($"{accountName} has been added to accounts");
             } else
             {

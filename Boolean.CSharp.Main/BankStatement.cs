@@ -19,7 +19,11 @@ namespace Boolean.CSharp.Main
 
         public void PrintBankStatement()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("date     || credit  || debit  || balance");
+            foreach( var transaction in _transactions)
+            {
+                Console.WriteLine($"{transaction.TransactionDate} || {transaction.Amount} || {transaction.Balance}");
+            }
         }
 
     }

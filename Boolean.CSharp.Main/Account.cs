@@ -22,18 +22,16 @@ namespace Boolean.CSharp.Main
         public string AccountType { get { return _accountType; } set { _accountType = value; } }
         public double Balance { get { return _balance;} set { _balance = value; } }
 
-        public void Deposit()
+        public void Deposit(int amount)
         {
-            Console.WriteLine("Input amount you want to deposit");
-            double depositAmount = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("You have deposited " + amount);
             
 
         }
 
-        public void Withdraw()
+        public void Withdraw(int amount)
         {
-            Console.WriteLine("Input amount you want to withdraw");
-            double withdrawAmount = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("You have withdrawn " + amount);
         }
     }
 }
