@@ -15,10 +15,24 @@ namespace Boolean.CSharp.Main
             UniqueId = 0;
         }
 
-        public int GenerateId() { 
+        public int GenerateAccountId() { 
             
             UniqueId++;
-            return UniqueId; 
+            return UniqueId+100; 
+        }
+        public int GenerateTransactionId()
+        {
+
+            UniqueId++;
+
+            return UniqueId+1000;
+        }
+        public int GenerateUserId()
+        {
+
+            UniqueId++;
+
+            return UniqueId;
         }
     }
 }

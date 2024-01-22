@@ -45,4 +45,5 @@ BankTransaction | Id, Date, Amount, TransactionType |
                 | int Id
                 | userTypes              | "Manager","Customer","Engineer", 
 
-
+Bank            | GenerateUserId()                      | uniqueID ++                                                                       | int
+                
