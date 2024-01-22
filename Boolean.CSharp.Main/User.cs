@@ -15,7 +15,7 @@ namespace Boolean.CSharp.Main
         private SavingsAccount _savingsAccount;
         private List<Account> _accounts;
 
-        public User(int iD, string name, string email, string password)
+        public User(int ID, string name, string email, string password)
         {
             throw new NotImplementedException();
         }
@@ -26,6 +26,16 @@ namespace Boolean.CSharp.Main
         public CurrentAccount Account { get => _account; }
         public SavingsAccount SavingsAccount { get => _savingsAccount; }
         public List<Account> Accounts { get => _accounts; }
+
+        public void Deposit(double balance, AccountType account)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Withdraw(double balance, AccountType account)
+        {
+            throw new NotImplementedException();
+        }
 
     }
 }

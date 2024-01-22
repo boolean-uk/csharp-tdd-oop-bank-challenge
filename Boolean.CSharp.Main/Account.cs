@@ -27,28 +27,28 @@ namespace Boolean.CSharp.Main
             _transactions = new List<Transaction>();
         }
 
-        public double Balance { get => _balance; }
+        public double Balance { get => _balance; set => _balance = value; }
         public User Owner { get => _owner; }
         public List<Transaction> Transactions { get => _transactions; }
 
         public void Deposit(double amount)
         {
-            Transaction transaction = new Transaction(amount);
-            _balance += transaction.Amount;
-            _transactions.Add(transaction);
+            Transaction transaction = new Transaction(amount, TransactionType.Deposit);
+            Balance += transaction.Amount;
+            Transactions.Add(transaction);
         }
         
         public bool Withdraw(double amount)
         {
-            if (amount < 0 || _balance-amount < 0)
+            if (amount < 0 || Balance-amount < 0)
             {
                 Console.WriteLine("Not enough balance for withdrawal");
                 return false;
             }
 
-            Transaction transaction = new Transaction(amount);
-            _balance -= transaction.Amount;
-            _transactions.Add(transaction);
+            Transaction transaction = new Transaction(amount, TransactionType.Withdrawal);
+            Balance -= transaction.Amount;
+            Transactions.Add(transaction);
 
             return true;
         }

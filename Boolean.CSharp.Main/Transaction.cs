@@ -8,18 +8,18 @@ namespace Boolean.CSharp.Main
     public class Transaction
     {
         private double _amount;
-        private string _type;
+        private TransactionType _type;
         private DateTime _time;
 
-        public Transaction(double amount)
+        public Transaction(double amount, TransactionType type)
         {
             _amount = amount;
-            _type = amount > 0 ? "Deposit" : "Withdrawal";
+            _type = type;
             _time = DateTime.Now;
         }
 
         public double Amount { get => _amount; }
-        public string Type { get => _type; }
+        public TransactionType Type { get => _type; }
         public DateTime Time { get => _time; }
     }
 }
