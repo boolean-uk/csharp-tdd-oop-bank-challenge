@@ -33,11 +33,11 @@ namespace Boolean.CSharp.Main
             return balance;
         }
 
-        public bool DepositMoney(float amount)
+        public bool DepositMoney(float amount, string description)
         {
             if (amount > 0)
             {
-                Transaction newTrans = new Transaction(amount, true);
+                Transaction newTrans = new Transaction(amount, description, true);
                 transactions.Add(newTrans);
                 return true;
             }
@@ -47,11 +47,11 @@ namespace Boolean.CSharp.Main
             }
         }
 
-        public bool WithdrawMoney(float amount)
+        public bool WithdrawMoney(float amount, string description)
         {
             if (amount <= GetBalance() && amount > 0)
             {
-                Transaction newTrans = new Transaction(amount, false);
+                Transaction newTrans = new Transaction(amount, description, false);
                 transactions.Add(newTrans);
                 return true;
             }
@@ -95,12 +95,12 @@ namespace Boolean.CSharp.Main
             return transactionOutput;
         }
 
-        public bool RequestOverdraft(float amount)
+        public bool RequestOverdraft(float amount, string description)
         {
             float balance = GetBalance();
             if (amount <= 0) { return false; }
             if (amount - balance <= 0) { return false; }
-            overdraftRequests.Enqueue(new Overdraft(amount));
+            overdraftRequests.Enqueue(new Overdraft(amount, description));
             return true;
         }
 
