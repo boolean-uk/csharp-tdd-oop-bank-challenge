@@ -12,13 +12,41 @@ namespace Boolean.CSharp.Main.Classes
 {
     public class Transaction : ITransaction
     {
-        public Guid Id { get; set; }
-        public TransactionType Type { get; set; }
-        public TransactionStatus Status { get; set; }
-        public DateTime Date { get; set; }
-        public decimal Amount { get; set; }
-        public decimal NewBalance { get; set; }
-        public decimal OldBalance { get; set; }
+        private Guid _id;
+        private TransactionType _type;
+        private TransactionStatus _status;
+        private DateTime _date;
+        private decimal _amount;
+        private decimal _newBalance;
+        private decimal _oldBalance;
 
+        public Guid Id { get => _id;  }
+        public TransactionType Type { get => _type; }
+        public TransactionStatus Status { get => _status; set => _status = value; }
+        public DateTime Date { get => _date;  }
+        public decimal Amount { get => _amount; set => _amount = value; }
+        public decimal NewBalance { get => _newBalance; set => _newBalance = value; }
+        public decimal OldBalance { get => _oldBalance; set => _oldBalance = value; }
+
+        public Transaction(decimal amount, decimal oldBalance, TransactionType type)
+        {
+            _id = Guid.NewGuid();
+            _type = type;
+            Status = TransactionStatus.Approved;
+            _date = DateTime.Now;
+            Amount = amount;
+            OldBalance = oldBalance;
+            if(type == TransactionType.Debit)
+            {
+                NewBalance = OldBalance - Amount;
+            }
+            else
+            {
+                NewBalance = OldBalance + Amount;
+            }
+
+
+
+        }
     }
 }

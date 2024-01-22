@@ -2,6 +2,8 @@
 using Boolean.CSharp.Main.Accounts;
 using Boolean.CSharp.Main.Classes;
 using NUnit.Framework;
+using System.Text;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Boolean.CSharp.Test
 {
@@ -15,11 +17,11 @@ namespace Boolean.CSharp.Test
             //Arrange
             Customer customer = new Customer("Andreas Lauvhjell");
             AccountSavings currentAccount = new AccountSavings(customer);
-            currentAccount.Deposit(1000d);
+            currentAccount.Deposit(1000);
 
             //Act
-            double expectedResult = currentAccount.Withdraw(500d);
-            double actualResult = 500d;
+            decimal expectedResult = currentAccount.Withdraw(500);
+            decimal actualResult = 500;
             //Assert
             Assert.That(expectedResult, Is.EqualTo(actualResult));
 
@@ -31,11 +33,11 @@ namespace Boolean.CSharp.Test
             //Arrange
             Customer customer = new Customer("Andreas Lauvhjell");
             AccountCurrent currentAccount = new AccountCurrent(customer);
-            currentAccount.Deposit(1000d);
+            currentAccount.Deposit(1000);
 
             //Act
-            double expectedResult = currentAccount.Withdraw(500d);
-            double actualResult = 500d;
+            decimal expectedResult = currentAccount.Withdraw(500);
+            decimal actualResult = 500;
             //Assert
             Assert.That(expectedResult, Is.EqualTo(actualResult));
 
@@ -47,23 +49,29 @@ namespace Boolean.CSharp.Test
             //Arrange
             Customer customer = new Customer("Andreas Lauvhjell");
             AccountCurrent currentAccount = new AccountCurrent(customer);
-            currentAccount.Deposit(1000d);
-            currentAccount.Deposit(2000d);
-            currentAccount.Withdraw(500d);
+            currentAccount.Deposit(1000);
+            currentAccount.Deposit(2000);
+            currentAccount.Withdraw(500);
+            DateTime currentDate = DateTime.Now; 
 
             //Act
-            double expectedResultDouble = currentAccount.Balance;
-            double actualResultDouble = 2500d;
+            decimal expectedResultDouble = currentAccount.Balance;
+            decimal actualResultDouble = 2500;
 
             string expectedResultString = currentAccount.GenerateBankStatement();
-            string actualResultString = 
-                "date       || credit  || debit  || balance " +
-                "14/01/2012 ||         || 500.00 || 2500.00 " +
-                "13/01/2012 || 2000.00 ||        || 3000.00 " +
-                "10/01/2012 || 1000.00 ||        || 1000.00"; //Unsure how to check this atm, but probably something like this? This would probably need some adjustment.
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("      Date ||     Credit ||      Debit ||    Balance");
+            sb.AppendLine($"{currentDate.ToString("dd/MM/yyyy")} ||          0 ||        500 ||       2500 ");
+            sb.AppendLine($"{currentDate.ToString("dd/MM/yyyy")} ||       2000 ||          0 ||       3000 ");
+            sb.AppendLine($"{currentDate.ToString("dd/MM/yyyy")} ||       1000 ||          0 ||       1000 ");
 
-            //Arrange
+            string actualResultString = sb.ToString(); //Unsure how to check this atm, but probably something like this? This would probably need some adjustment.
+            Console.WriteLine("WANTED OUTPUT (TEST)");
+            Console.WriteLine(actualResultString);
+            
+            //Assert
             Assert.That(expectedResultDouble, Is.EqualTo(actualResultDouble));
+            Assert.That(expectedResultString, Is.EqualTo(actualResultString));
         }
     }
 }
