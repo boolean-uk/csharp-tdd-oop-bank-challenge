@@ -21,6 +21,8 @@ namespace Boolean.CSharp.Main
 
         public string Type {  get { return _type; } }
         public decimal Amount { get { return _amount; } }
+
+        public DateTime TransactionDate { get { return _transactionDate; } }
     }
 
 }

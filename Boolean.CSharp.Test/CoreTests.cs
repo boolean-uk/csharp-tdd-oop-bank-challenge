@@ -30,6 +30,17 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
+        public void TestWithdrawFundsError() 
+        {
+            User user = new User("Øystein", "Bjørkeng");
+            SavingsAccount savingsAccount = new SavingsAccount("My savings account", user, 2000.0m);
+            Main.Transaction transaction = new Main.Transaction(2200.0m, "Debit");
+
+
+            Assert.Throws<ArgumentException>(() => savingsAccount.Withdraw(transaction));
+        }
+
+        [Test]
         public void TestDepositFunds()
         {
             User user = new User("Øystein", "Bjørkeng");
