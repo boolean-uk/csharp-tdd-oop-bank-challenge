@@ -31,7 +31,7 @@ public class Core
         {
             if (!_accounts.Exists(x => x.AccountNumber == accountNumber))
             {
-                _accounts.Add(new SavingsAccount(accountNumber owner));
+                _accounts.Add(new SavingsAccount(accountNumber, owner));
                 Console.WriteLine("SavingsAccount created");
                 return true;
             }

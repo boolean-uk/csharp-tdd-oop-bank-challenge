@@ -38,9 +38,17 @@ public class BankAccount
     {
         if (amount > 0)
         {
-            _transactions.Add(new Tuple<DateOnly, double>(DateOnly.FromDateTime(DateTime.Now), -amount));
-            Console.WriteLine($"{amount} withdrawn");
-            return true;
+            if (amount > checkBalance())
+            {
+                Console.WriteLine("Can't afford to withdraw that much. If you want to take out an overdraft you have to submit a request");
+                return false;
+            }
+            else
+            {
+                _transactions.Add(new Tuple<DateOnly, double>(DateOnly.FromDateTime(DateTime.Now), -amount));
+                Console.WriteLine($"{amount} withdrawn");
+                return true;
+            }
         }
         Console.WriteLine("Amount has to be more than 0");
         return false;

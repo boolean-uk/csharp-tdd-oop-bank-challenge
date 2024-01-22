@@ -1,7 +1,7 @@
 ﻿using Boolean.CSharp.Main;
 
 Core _core = new Core();
-_core.createSavingsAccount("12345678901");
+_core.createSavingsAccount("12345678901", new Customer());
 
 BankAccount? account = _core.getAccountByNumber("12345678901");
 if (account != null )
