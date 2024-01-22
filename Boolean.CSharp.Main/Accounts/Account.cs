@@ -1,4 +1,5 @@
 ﻿
+
 namespace Boolean.CSharp.Main.Accounts
 {
     public abstract class Account : IAccount
@@ -76,6 +77,11 @@ namespace Boolean.CSharp.Main.Accounts
                 }
 
             }
+        }
+
+        public AccountBranches GetBranch()
+        {
+            throw new NotImplementedException();
         }
     }
 }

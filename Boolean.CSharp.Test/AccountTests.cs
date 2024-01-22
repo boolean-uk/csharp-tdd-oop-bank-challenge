@@ -97,5 +97,16 @@ namespace Boolean.CSharp.Test
             Assert.That(statement[1].GetCredit(), Is.EqualTo(0m));
             Assert.That(statement[1].GetBalance(), Is.EqualTo(14.44m - 4.39m));
         }
+
+        [Test]
+        public void TestAccountIsAssociatedWithBranch()
+        {
+
+            //execute
+            AccountBranches b = _account.GetBranch();
+
+            //assert
+            Assert.That(b, Is.EqualTo(AccountBranches.Bergen));
+        }
     }
 }
