@@ -87,9 +87,9 @@ namespace Boolean.CSharp.Test
             BankAccount bankAccount = new BankAccount();
 
             //Expected outputs
-            string expectedString1000 = "\nDate: 22-01-2024|| TransactionType: Deposit: 1000|| Balance: 1000";
+            string expectedString1000 = "\nDate: 22/01/2024|| TransactionType: Deposit: 1000|| Balance: 1000";
 
-            string expectedString500 = "\nDate: 22-01-2024|| TransactionType: Withdraw: -500|| Balance: 500";
+            string expectedString500 = "\nDate: 22/01/2024|| TransactionType: Withdraw: -500|| Balance: 500";
 
             
             bankAccount.MakeTransaction(1000.0f); // Deposit
