@@ -1,4 +1,5 @@
 ﻿using Boolean.CSharp.Main;
+using Boolean.CSharp.Main.Core;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -11,20 +12,23 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class ExtensionTests
     {
-        private Extension _extension;
-        public ExtensionTests()
+        private CurrentAccount current;
+        private SavingsAccount saving;
+
+        [SetUp]
+        public void SetUp()
         {
-            _extension = new Extension();
-        }
-        [Test]
-        private void TestQuestion1()
-        {
+            current = new CurrentAccount();
+            saving = new SavingsAccount();
 
         }
-        [Test]
-        private void TestQuestion2()
-        {
 
+        [Test]
+        public void CumulativeDeposit()
+        {
+            saving.Deposit(15000);
+            saving.Deposit(20000);
+            Assert.That(saving._savings, Is.EqualTo(35000));
         }
     }
 }

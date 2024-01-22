@@ -56,9 +56,10 @@ namespace Boolean.CSharp.Test
         {
             saving.Deposit(15.10d);
             Transaction transaction = saving.transactions[0];
-            Assert.That(transaction.Time, Is.EqualTo(DateTime.Now.ToString("dd/mm/yyyy")));
-            Assert.That(transaction.Balance, Is.EqualTo(15.10d.ToString("C2")));
-            Assert.That(transaction.Amount, Is.EqualTo(15.10d.ToString("C2")));
+            Assert.That(transaction.Time, Is.EqualTo(DateTime.Now.ToString("dd/MM/yyyy")));
+            Assert.That(transaction.Balance, Is.EqualTo(15.10d.ToString("0.00")));
+            Assert.That(transaction.Amount, Is.EqualTo(15.10d.ToString("0.00")));
+            Assert.That(transaction.isCredit, Is.True);
         }
 
         [Test]
@@ -67,9 +68,10 @@ namespace Boolean.CSharp.Test
             saving.Deposit(15.10d);
             saving.Withdraw(15.10d);
             Transaction transaction = saving.transactions[1];
-            Assert.That(transaction.Time, Is.EqualTo(DateTime.Now.ToString("dd/mm/yyyy")));
-            Assert.That(transaction.Balance, Is.EqualTo(0d.ToString("C2")));
-            Assert.That(transaction.Amount, Is.EqualTo((-15.10d).ToString("C2")));
+            Assert.That(transaction.Time, Is.EqualTo(DateTime.Now.ToString("dd/MM/yyyy")));
+            Assert.That(transaction.Balance, Is.EqualTo(0d.ToString("0.00")));
+            Assert.That(transaction.Amount, Is.EqualTo((15.10d).ToString("0.00")));
+            Assert.That(transaction.isCredit, Is.False);
         }
 
 
