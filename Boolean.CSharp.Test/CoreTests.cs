@@ -48,7 +48,7 @@ namespace Boolean.CSharp.Test
         }
 
         [TestCase(300)]
-        public void DepositTest(int amount)
+        public void DepositTest(double amount)
         {
             //arrange
             CurrentAccount account = new CurrentAccount("Current account 1");
@@ -61,7 +61,7 @@ namespace Boolean.CSharp.Test
         }
 
         [TestCase(500)]
-        public void WithdrawTest(int amount)
+        public void WithdrawTest(double amount)
         {
             //arrange
             CurrentAccount account = new CurrentAccount("Current account 1");

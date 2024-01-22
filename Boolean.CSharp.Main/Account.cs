@@ -22,17 +22,25 @@ namespace Boolean.CSharp.Main
         public string AccountType { get { return _accountType; } set { _accountType = value; } }
         public double Balance { get { return _balance;} set { _balance = value; } }
 
-        public void Deposit(int amount)
+
+        public void Deposit(double amount)
         {
             Console.WriteLine("You have deposited " + amount);
-            Balance += amount;
-            
-
+            Balance += amount;      
         }
 
-        public void Withdraw(int amount)
+
+        public void Withdraw(double amount)
         {
-           throw new NotImplementedException();
+            if (Balance > amount)
+            {
+                Console.WriteLine("You have withdrawn " + amount);
+                Balance -= amount;
+                Console.WriteLine("You now have " + Balance + " left in your balance");
+            } else
+            {
+                Console.Write("You do not have enough in your balance to withdraw " + amount);
+            }
         }
     }
 }
