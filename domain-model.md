@@ -1,6 +1,7 @@
-| Classes       	| Methods             	| Scenarios                                            	| Outputs                                     	|
-|---------------	|---------------------	|------------------------------------------------------	|---------------------------------------------	|
-| Account       	| Withdraw(amount)    	| User wants to withdraw money from her/his account    	| True/False                                  	|
-|               	| Deposit(amount)     	| User wants to deposit money to her/his account       	| True/False                                  	|
-| Savings       	| AddInterest()       	| User wants to add interest to the savings account    	| True/False                                  	|
-| BankStatement 	| GenerateStatement() 	| User wants to generate a statement with transcations 	| Formatted string representing the statement 	|
+| Classes                              	| Attributes                                                                   	| Methods                                                               	| Outputs  	|
+|--------------------------------------	|------------------------------------------------------------------------------	|-----------------------------------------------------------------------	|----------	|
+| IAccount                             	|                                                                              	| deposit(double, DateTime) withdraw(double, DateTime) printStatement() 	|   string 	|
+| Account (implements IAccount)        	| balance: double transactionList : List Transaction                           	| deposit(double, DateTime) withdraw(double, Datetime) printStatement() 	|   string 	|
+| CurrentAccount (implements IAccount) 	|                                                                              	| User wants to add interest to the savings account                     	|          	|
+| SavingsAccount (implements IAccount) 	|                                                                              	| User wants to generate a statement with transcations                  	|          	|
+| Transaction                          	| date: DateTime credit: double debit: double balanceAtTransactionTime: double 	|                                                                       	|          	|
