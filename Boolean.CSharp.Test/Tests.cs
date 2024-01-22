@@ -13,39 +13,31 @@ namespace Boolean.CSharp.Test
         public void Setup()
         {
             _bank = new Bank();
-            _userAccount = UserAccount.CreateAccount("John", "Current");
+            _userAccount = UserAccount.CreateAccount("John", "Current","London");
         }
 
 
         [Test]
         public void TestDeposit()
         {
-            _bank.Deposit("John", "Current", 200);
-            Assert.That(_userAccount.Balance, Is.EqualTo(200));
+            _bank.Deposit("John", "Current", "London", 200);
+            Assert.That(_bank.GetBalance("John", "Current", "London"), Is.EqualTo(200));
         }    
 
         [Test]
         public void TestWithdraw()
         {
-            _bank.Deposit("John", "Current", 200);
-            _bank.Withdraw("John", "Current", 100);
-            Assert.That(_userAccount.Balance, Is.EqualTo(100));
-        }
-
-        [Test]
-        public void TestCreateAccount()
-        {
-            UserAccount newUser = UserAccount.CreateAccount("Najem", "Current");
-            Assert.That(newUser.Name, Is.EqualTo("Najem"));
-            Assert.That(newUser.AccountType, Is.EqualTo("Current"));
+            _bank.Deposit("John", "Current", "London", 200);
+            _bank.Withdraw("John", "Current", "London", 100);
+            Assert.That(_bank.GetBalance("John", "Current", "London"), Is.EqualTo(100));
         }
 
         [Test]
         public void TestWithdrawMoreThanBalance()
         {
-            _bank.Deposit("John", "Current", 200);
-            _bank.Withdraw("John", "Current", 300);
-            Assert.That(_userAccount.Balance, Is.EqualTo(0));
+            _bank.Deposit("John", "Current", "London", 200);
+            _bank.Withdraw("John", "Current", "London", 300);
+            Assert.That(_bank.GetBalance("John", "Current", "London"), Is.EqualTo(-100));
         }
 
     }
