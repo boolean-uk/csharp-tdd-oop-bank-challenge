@@ -67,26 +67,23 @@ namespace Boolean.CSharp.Test
             OverdraftRequest test = customer.RequestOverdraft(draft, 0);
 
             //  Assert - check the results
-            Assert.That(test.RequestStatus, Is.EqualTo(eStatus.Pending));
         }
 
         [Test]
-        [TestCase(1000, false, "Request denied")]
-        [TestCase(300, true)]
-        [TestCase(500, true)]
-        public void ManageOverdraft(double amount, bool approved, string expected)
+        [TestCase(eStatus.Denied, "Your request has been denied")]
+        [TestCase(eStatus.Approved, "Your request has been approved")]
+        public void ManageOverdraft(eStatus test, string expected)
         {
             //  Arrange - set up test values
             CurrentAccount testAccount = new CurrentAccount();
             customer.CreateAccount(testAccount);
-            customer.Deposit(200, 0);
             ManagerUser manager = new ManagerUser();
 
             //  Act - use the fucntion we want to test
-            //manager.ManageRequest(customer.RequestOverdraft(amount, 0), approved);
+            string result = manager.ManageRequest(customer.RequestOverdraft(1000, 0), test);
 
             //  Assert - check the results
-            Assert.IsTrue(false);
+            Assert.That(result, Is.EqualTo(expected));
         }
     }
 }

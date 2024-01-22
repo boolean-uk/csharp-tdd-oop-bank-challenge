@@ -9,7 +9,7 @@ namespace Boolean.CSharp.Main.Classes.User
 {
     public class ManagerUser : IUser
     {
-        public bool ManageRequest(BankStatement request)
+        public string ManageRequest(OverdraftRequest request, eStatus response)
         {
             throw new NotImplementedException();
         }
