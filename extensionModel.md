@@ -36,8 +36,8 @@ I want to approve or reject overdraft requests.
 ```
 | Classes         | Methods                                     | Scenario               | Outputs                     |
 |-----------------|---------------------------------------------|------------------------|-----------------------------|
-| `Manage`	      | `handleOverdraft(Overdraft o, bool approve)`| If approve             | true, prints "Overdraft approved" |
-|                 |                                             | Else	                 | fals,e prints "Overdraft denied"  |
+| `Account`	      | `handleOverdraft(Overdraft o, bool approve)`| If approve             | void, prints "Overdraft approved" |
+|                 |                                             | Else	                 | void, prints "Overdraft denied"  |
 
 ```
 As a customer,

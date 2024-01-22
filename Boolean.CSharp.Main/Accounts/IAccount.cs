@@ -11,5 +11,6 @@
         List<Transaction> GenerateBankStatement();
         void PrintBankStatement();
         List<Overdraft> GetOverdraftRequests();
+        void HandleOverdraft(Overdraft overdraft, bool approve);
     }
 }

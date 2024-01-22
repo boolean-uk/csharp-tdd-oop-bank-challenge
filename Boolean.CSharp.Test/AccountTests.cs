@@ -121,5 +121,22 @@ namespace Boolean.CSharp.Test
             Assert.That(overdrafts, Is.Not.Null);
             Assert.That(overdrafts.Count, Is.EqualTo(1));
         }
+
+        [Test]
+        public void TestCanApproveAndDenyOverdraftRequests()
+        {
+            //setup
+            _account.Withdraw(17.33m);
+            _account.Withdraw(12.77m);
+            List<Overdraft> overdrafts = _account.GetOverdraftRequests();
+
+            //execute
+            _account.HandleOverdraft(overdrafts[0], false); //Deny the first overdraft request
+            _account.HandleOverdraft(overdrafts[1], true); //Approve the second overdraft request
+
+            //verify
+            Assert.That(_account.GetBalance(), Is.EqualTo(-12.77m));
+            Assert.That(_account.GetOverdraftRequests().Count, Is.EqualTo(0));
+        }
     }
 }

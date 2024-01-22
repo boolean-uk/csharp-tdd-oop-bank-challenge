@@ -1,6 +1,7 @@
 ﻿
 
 
+
 namespace Boolean.CSharp.Main.Accounts
 {
     public abstract class Account : IAccount
@@ -95,6 +96,11 @@ namespace Boolean.CSharp.Main.Accounts
         public List<Overdraft> GetOverdraftRequests()
         {
             return _overdrafts;
+        }
+
+        public void HandleOverdraft(Overdraft overdraft, bool approve)
+        {
+            throw new NotImplementedException();
         }
     }
 }
