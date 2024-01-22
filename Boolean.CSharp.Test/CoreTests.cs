@@ -43,8 +43,11 @@ namespace Boolean.CSharp.Test
             bool returnBool = _savingsAccount.Deposit(input);
             Assert.That(_savingsAccount.Balance, Is.EqualTo(expectedBalance));
             Assert.That(_savingsAccount.Transactions.Count(), Is.EqualTo(1));
+            Assert.That(_savingsAccount.Transactions[0].Amount, Is.EqualTo(input));
+            Assert.That(_savingsAccount.Transactions[0].Balance, Is.EqualTo(expectedBalance));
+            Assert.That(_savingsAccount.Transactions[0].TypeOfTransaction, Is.EqualTo(Transaction.TransactionType.Credit));
             Assert.That(returnBool, Is.EqualTo(expectedReturn));
-        }
+        } 
 
         [TestCase(100.00f, 100.00f, true)]
         public void TestDepositToCurrentAccount(float input, float expectedBalance, bool expectedReturn)
@@ -52,6 +55,7 @@ namespace Boolean.CSharp.Test
             bool returnBool = _currentAccount.Deposit(input);
             Assert.That(_currentAccount.Balance, Is.EqualTo(expectedBalance));
             Assert.That(_currentAccount.Transactions.Count(), Is.EqualTo(1));
+            Assert.That(_currentAccount.Transactions[0].Amount, Is.EqualTo(input));
             Assert.That(returnBool, Is.EqualTo(expectedReturn));
         }
 
