@@ -55,8 +55,7 @@ namespace Boolean.CSharp.Test
             double result;
             CurrentAccount testAccount = new CurrentAccount();
             customer.CreateAccount(testAccount);
-            double amount = 20.0d;
-            customer.Deposit(amount, 0);
+            customer.Deposit(20.0d, 0);
             //  Act - use the fucntion we want to test
 
             Math.Round(result = customer.Deposit(deposit, 0),2);
@@ -65,9 +64,22 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        public void WithdrawMoney()
+        [TestCase(1000d, true)]
+        [TestCase(3000d, false)]
+        [TestCase(800d, true)]
+        [TestCase(20000d, false)]
+        public void WithdrawMoney(double withdrawl, bool expected)
         {
-            Assert.IsTrue(false);
+            //  Arrange - set up test values
+            bool result;
+            CurrentAccount testAccount = new CurrentAccount();
+            customer.CreateAccount(testAccount);
+            customer.Deposit(2500.0d, 0);
+            //  Act - use the fucntion we want to test
+
+            result = customer.Withdraw(withdrawl, 0);
+            //  Assert - check the results
+            Assert.That(result, Is.EqualTo(expected));
         }
 
         [Test]
