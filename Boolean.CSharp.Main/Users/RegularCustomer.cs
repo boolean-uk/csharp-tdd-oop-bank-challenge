@@ -8,6 +8,8 @@ namespace Boolean.CSharp.Main.Users
 {
     public class RegularCustomer : Customer, IUser
     {
-
+        public RegularCustomer(string name) : base(name)
+        {
+        }
     }
 }

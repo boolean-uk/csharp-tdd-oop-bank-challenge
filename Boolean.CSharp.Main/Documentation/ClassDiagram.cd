@@ -3,7 +3,7 @@
   <Class Name="Boolean.CSharp.Main.Accounts.GeneralAccount">
     <Position X="1" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EACAAABAAAAAAAAAAAAAAAJEAAAAAAIAAAAAAAAAAAI=</HashCode>
+      <HashCode>EACAAABAAAACAAAAAAAAAAJEAAAAAAIAAAAAEAAAAAI=</HashCode>
       <FileName>Accounts\GeneralAccount.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -19,15 +19,14 @@
   <Class Name="Boolean.CSharp.Main.Users.Customer">
     <Position X="7" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAACAAAAAAAAAAAAAABAA=</HashCode>
+      <HashCode>AAAAIAAAAAAAAAAAAIAAAAAAACAAAAAAAIAAAAAABAA=</HashCode>
       <FileName>Users\Customer.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Boolean.CSharp.Main.Users.Manager">
     <Position X="8.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <HashCode>AAAAIAAAAAAAQAAAAIAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
       <FileName>Users\Manager.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -46,6 +45,7 @@
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAgCAAAgAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Transactions\TransactionManager.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Interface Name="Boolean.CSharp.Main.Users.IUser">
     <Position X="7.75" Y="0.75" Width="1.5" />

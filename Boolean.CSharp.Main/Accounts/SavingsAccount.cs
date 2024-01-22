@@ -16,27 +16,49 @@ namespace Boolean.CSharp.Main.Accounts
 
         public bool AddUserToAccount(IUser user)
         {
-            throw new NotImplementedException();
+            int val1 = authorizedUsers.Count;
+            authorizedUsers.Add(user);
+            int val2 = authorizedUsers.Count;
+            return val2 > val1;
         }
 
         public bool Deposit(decimal amount)
         {
-            throw new NotImplementedException();
+            _transactions.AddDepositTransaction(amount);
+            decimal oldBalance = _balance;
+            _balance += amount;
+            if (_balance == (oldBalance + amount))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public decimal GetBalance()
         {
-            throw new NotImplementedException();
+            return _balance;
         }
 
         public void PrintBankStatement(DateTime start, DateTime end)
         {
-            throw new NotImplementedException();
+            _transactions.PrintTransactions(start, end);
         }
 
         public decimal Withdraw(decimal amount)
         {
-            throw new NotImplementedException();
+            if (_balance > amount)
+            {
+                _transactions.AddWithdrawTransaction(amount);
+                _balance -= amount;
+                return amount;
+            }
+            else
+            {
+                return 0m;
+            }
         }
     }
 }

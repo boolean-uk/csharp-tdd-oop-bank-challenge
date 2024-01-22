@@ -1,5 +1,6 @@
 ﻿using Boolean.CSharp.Main;
 using Boolean.CSharp.Main.Accounts;
+using Boolean.CSharp.Main.enums;
 using Boolean.CSharp.Main.Users;
 using NUnit.Framework;
 
@@ -12,12 +13,12 @@ namespace Boolean.CSharp.Test
         public void TestCreateGeneralAccount()
         {
             // Arrange
-            IUser user1 = new RegularCustomer();
-            IUser user2 = new Manager();
+            IUser user1 = new RegularCustomer("Bob");
+            IUser user2 = new Manager("Jim");
 
             // Act
-            bool? res1 = (user1 as RegularCustomer).OpenNewAccount("general");
-            bool? res2 = (user2 as RegularCustomer).OpenNewAccount("general");
+            bool? res1 = (user1 as RegularCustomer)?.OpenNewAccount(AccountType.General);
+            bool? res2 = (user2 as RegularCustomer)?.OpenNewAccount(AccountType.General);
 
             // Assert
             Assert.That(res1, Is.True);
@@ -31,12 +32,12 @@ namespace Boolean.CSharp.Test
         public void TestCreateSavingsAccount()
         {
             // Arrange
-            IUser user1 = new RegularCustomer();
-            IUser user2 = new Manager();
+            IUser user1 = new RegularCustomer("Bob");
+            IUser user2 = new Manager("Jim");
 
             // Act
-            bool? res1 = (user1 as RegularCustomer).OpenNewAccount("saving");
-            bool? res2 = (user2 as RegularCustomer).OpenNewAccount("saving");
+            bool? res1 = (user1 as Customer)?.OpenNewAccount(AccountType.Savings); // Implemented Customer
+            bool? res2 = (user2 as Customer)?.OpenNewAccount(AccountType.Savings); // Does not implement Customer
 
             // Assert
             Assert.That(res1, Is.True);
@@ -50,8 +51,8 @@ namespace Boolean.CSharp.Test
         public void TestDepositFunds()
         {
             // Arrange
-            Customer user = new RegularCustomer();
-            user.OpenNewAccount("general");
+            Customer user = new RegularCustomer("Bob");
+            user.OpenNewAccount(AccountType.General);
             IAccount account = user.GetAccounts()[0];
 
             // Act
@@ -70,8 +71,8 @@ namespace Boolean.CSharp.Test
         public void TestWithdrawFunds()
         {
             // Arrange
-            Customer user = new RegularCustomer();
-            user.OpenNewAccount("general");
+            Customer user = new RegularCustomer("Bob");
+            user.OpenNewAccount(AccountType.General);
             IAccount account = user.GetAccounts()[0];
             account.Deposit(5000m);
 
@@ -89,8 +90,8 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestAcceptanceCriteria() 
         {
-            Customer user = new RegularCustomer();
-            user.OpenNewAccount("general");
+            Customer user = new RegularCustomer("Bob");
+            user.OpenNewAccount(AccountType.General);
             IAccount account = user.GetAccounts()[0];
             DateTime now = DateTime.Now;
             DateTime tomorrow = DateTime.Now.AddDays(1);
