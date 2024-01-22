@@ -12,6 +12,28 @@ namespace Boolean.CSharp.Main.Transactions
     {
         private List<Tuple<DateTime, decimal, TransactionType, decimal>> _history = new List<Tuple<DateTime, decimal, TransactionType, decimal>>();
 
+        public decimal CalculateAccountBalance() 
+        {
+            decimal res = 0;
+            foreach (Tuple<DateTime, decimal, TransactionType, decimal> tuple in _history)
+            {
+                if (tuple.Item3 == TransactionType.Withdraw)
+                {
+                    res -= tuple.Item2;
+                } 
+                else if (tuple.Item3 == TransactionType.Deposit) 
+                {
+                    res += tuple.Item2;
+                }
+            }
+            return res;
+        }
+
+        /// <summary>
+        /// Add an item to the transaction history marked as a deposit
+        /// </summary>
+        /// <param name="amount">The amount of money to be deposit into the account</param>
+        /// <returns>A boolean if the transaction was succesfully recorded</returns>
         public bool AddDepositTransaction(decimal amount)
         {
             int val1 = _history.Count;
@@ -26,13 +48,17 @@ namespace Boolean.CSharp.Main.Transactions
             }
             int val2 = _history.Count;
             return val2 > val1;
-
         }
 
+        /// <summary>
+        /// Add an item to the transaction history marked as a withdrawal
+        /// </summary>
+        /// <param name="amount">The amount of money to be withdrawn from the account</param>
+        /// <returns>A boolean if the transaction was succesfully recorded</returns>
         public bool AddWithdrawTransaction(decimal amount)
         {
             int val1 = _history.Count;
-            Tuple<DateTime, decimal, TransactionType, decimal> lastEntry = _history.OrderBy(t => t.Item1).Last();
+            Tuple<DateTime, decimal, TransactionType, decimal>? lastEntry = _history.OrderBy(t => t.Item1).LastOrDefault();
             if (lastEntry == null)
             {
                 _history.Add(new Tuple<DateTime, decimal, TransactionType, decimal>(DateTime.Now, amount, TransactionType.Withdraw, amount));
@@ -45,6 +71,11 @@ namespace Boolean.CSharp.Main.Transactions
             return val2 > val1;
         }
 
+        /// <summary>
+        /// Print all transactions that occured between the provided start time and end time
+        /// </summary>
+        /// <param name="start"> The minimum date for transaction to be printed </param>
+        /// <param name="end"> The maximum date for transaction to be printed </param>
         public void PrintTransactions(DateTime start, DateTime end)
         {
             int _padLeft = 10;

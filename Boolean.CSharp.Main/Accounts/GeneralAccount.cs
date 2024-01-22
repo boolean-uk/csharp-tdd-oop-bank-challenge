@@ -55,7 +55,9 @@ namespace Boolean.CSharp.Main.Accounts
 
         public decimal GetBalance()
         {
-            return _balance;
+            decimal balance = _transactions.CalculateAccountBalance();
+            _balance = balance;
+            return balance;
         }
 
         public void PrintBankStatement(DateTime start, DateTime end)

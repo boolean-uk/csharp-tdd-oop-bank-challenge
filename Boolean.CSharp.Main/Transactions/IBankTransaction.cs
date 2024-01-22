@@ -13,5 +13,7 @@ namespace Boolean.CSharp.Main.Transactions
         bool AddDepositTransaction(decimal amount);
 
         bool AddWithdrawTransaction(decimal amount);
+
+        decimal CalculateAccountBalance();
     }
 }
