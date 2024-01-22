@@ -11,4 +11,11 @@ namespace Boolean.CSharp.Main
         Current,
         Saving
     }
+
+    public enum TransactionType
+    {
+        Credit,
+        Debit,
+     
+    }
 }

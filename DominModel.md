@@ -5,9 +5,9 @@ As a customer,
 So I can safely store use my money,
 I want to create a current account.
 
-| Class | Properties | Methods         | Scenario                                | Outputs                        |
-|-------|------------|-----------------|-----------------------------------------|--------------------------------|
-| Core  |            | createUserAcc() | Create account with username & password | Account stored in Account list |
+| Class | Properties | Methods          | Scenario                                | Outputs                        |
+|-------|------------|------------------|-----------------------------------------|--------------------------------|
+| Core  |            | createUserAcc()  | Create account with username & password | Account stored in Account list |
 |       |            | creatCurrentAcc()|	
 
 
