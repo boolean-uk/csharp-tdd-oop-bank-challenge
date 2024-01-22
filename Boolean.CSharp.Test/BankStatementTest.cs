@@ -1,4 +1,4 @@
-﻿using Boolean.CSharp.Main;
+﻿using Boolean.CSharp.Main.Models;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;

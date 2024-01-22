@@ -1,4 +1,5 @@
 ﻿using Boolean.CSharp.Main.Branches;
+using Boolean.CSharp.Main.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,22 +8,16 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main.Accounts
 {
-    public abstract class Account : IAccount
+    public abstract class Account(IBranch branch, string name) : IAccount
     {
-        public string Name { get; }
+        public string Name { get; } = name;
         public double Balance { get { return _bankStatements.Last().Balance; } }
 
         public List<BankStatement> BankStatements { get { return _bankStatements; } }
 
-        public IBranch Branch { get; }
+        public IBranch Branch { get; } = branch;
 
         private readonly List<BankStatement> _bankStatements = [];
-
-        public Account(IBranch branch, string name)
-        {
-            Branch = branch;
-            Name = name;
-        }
 
         public void Deposit(double amount)
         {

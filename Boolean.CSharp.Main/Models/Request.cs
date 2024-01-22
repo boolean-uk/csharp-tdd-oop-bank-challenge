@@ -1,6 +1,6 @@
 ﻿using Boolean.CSharp.Main.Accounts;
 
-namespace Boolean.CSharp.Main.Branches
+namespace Boolean.CSharp.Main.Models
 {
     public class Request(string reason, double amount, IAccount account)
     {

@@ -1,15 +1,14 @@
 ﻿using Boolean.CSharp.Main.Accounts;
-using Boolean.CSharp.Main.Branches;
 using Microsoft.Extensions.Configuration;
 using System.Text;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
 
-namespace Boolean.CSharp.Main
+namespace Boolean.CSharp.Main.Models
 {
     public class Customer
     {
-        private List<IAccount> _accounts = [];
+        private readonly List<IAccount> _accounts = [];
         public void CreateAccount(IAccount account)
         {
             _accounts.Add(account);
@@ -25,12 +24,12 @@ namespace Boolean.CSharp.Main
             return _accounts.Count;
         }
 
-        public void RequestOverdraft(Request request)
+        public static void RequestOverdraft(Request request)
         {
             request.Account.Branch.Requests.Add(request);
         }
 
-        public void MessageStatements(IAccount account)
+        public static void MessageStatements(IAccount account)
         {
             var config = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
             string accountSid = config["Twilio:Sid"]!;

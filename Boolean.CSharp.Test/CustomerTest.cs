@@ -1,6 +1,6 @@
-﻿using Boolean.CSharp.Main;
-using Boolean.CSharp.Main.Accounts;
+﻿using Boolean.CSharp.Main.Accounts;
 using Boolean.CSharp.Main.Branches;
+using Boolean.CSharp.Main.Models;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -37,7 +37,7 @@ namespace Boolean.CSharp.Test
             string accountName = "First account";
             CurrentAccount account = new CurrentAccount(_branch, accountName);
             Request request = new("I need funds", 120d, account);
-            _customer.RequestOverdraft(request);
+            Customer.RequestOverdraft(request);
             Assert.That(_branch.Requests.Count, Is.EqualTo(1));
         }
     }
