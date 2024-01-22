@@ -124,6 +124,7 @@ namespace Boolean.CSharp.Test
         }
 
 
+
         [Test]
         public void TestDepositFunds()
         {
@@ -134,13 +135,20 @@ namespace Boolean.CSharp.Test
                 Branch = Branches.Bergen,
                 Id = 1111
             };
-
             bankApp.Add(custommer1);
             custommer1.makeAccount(AccountType.Current);
+
+            double amount = 999.0;
+            TransactionType type = TransactionType.Deposit;
+            String mark = "Saving 01/01/24";
+            string acc = "Bergen-00001";
+            Transaction transaction1 = new Transaction() { Amount = amount, Type = type, Mark = mark };
+            custommer1.Deposit(acc, transaction1);
+            double balance1 = custommer1.getBalance(acc);
             
 
-            // The result you return 1 since we have 1 SavingAcc.
-            //Assert.IsTrue(result1 == 2 && result2 == 1);
+           
+            Assert.IsTrue(balance1 == amount);
 
         }
 

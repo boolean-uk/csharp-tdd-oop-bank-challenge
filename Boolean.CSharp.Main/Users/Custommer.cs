@@ -15,8 +15,9 @@ namespace Boolean.CSharp.Main.Users
         private int _Id;
         private bool _IsActive = true;
         private Branches _branch;
+        
 
-        private List<IAccount> accounts = new List<IAccount>();
+        private Dictionary<string,IAccount> accounts = new Dictionary<string,IAccount>();
 
         public string Name { get { return _name; } set { _name = value; } }
         public int Id { get { return _Id; } set { _Id = value; } }
@@ -34,11 +35,14 @@ namespace Boolean.CSharp.Main.Users
             switch (accType)
             {
                 case AccountType.Current:
-                    accounts.Add(new NormalAcc(_branch));
+                    NormalAcc newAcc1 = new NormalAcc(_branch);
+
+                    accounts.Add(newAcc1._AccId,new NormalAcc(_branch));
                     Console.WriteLine("Current account created ");
                     break;
                 case AccountType.Saving:
-                    accounts.Add(new SavingAcc(_branch));
+                    SavingAcc newAcc2 = new SavingAcc(_branch);
+                    accounts.Add(newAcc2._AccId, new SavingAcc(_branch));
                     Console.WriteLine("Saving account created");
                     break;
                 default:
@@ -51,7 +55,7 @@ namespace Boolean.CSharp.Main.Users
         /// Method to get the list of accounts.
         /// </summary>
         /// <returns>List of the user's accounts.</returns>
-        public List<IAccount> getAccAccounts() => accounts;
+        public Dictionary<string, IAccount> getAccAccounts() => accounts;
 
     }
 }
