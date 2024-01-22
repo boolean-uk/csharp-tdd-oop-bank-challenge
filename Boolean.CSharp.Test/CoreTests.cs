@@ -84,6 +84,24 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
+        public void ComplexTransaction()
+        {
+            //  Arrange - set up test values
+            CurrentAccount testAccount = new CurrentAccount();
+            customer.CreateAccount(testAccount);
+            //  Act - use the fucntion we want to test
+            customer.Deposit(2500.0d, 0);
+            customer.Deposit(500.0d, 0);
+            customer.Withdraw(2000, 0);
+            customer.Withdraw(1000, 0);
+            double result = customer.Deposit(100d, 0);
+
+
+            //  Assert - check the results
+            Assert.That(result, Is.EqualTo(Math.Round(100d,2)));
+        }
+
+        [Test]
         public void GenerateBankStatements()
         {
             Assert.IsTrue(false);
