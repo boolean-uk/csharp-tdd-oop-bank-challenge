@@ -25,8 +25,7 @@ namespace Boolean.CSharp.Main.Customer
         public void CreateSpendingAccount(string name, Branch branch)
         {
            if ( name == "" ) { return; }
-          _accounts.Add(new SpendingAccount(branch,name));
-            
+            _accounts.Add(new SpendingAccount(branch, name));
         }
         public void CreateSavingsAccount(string name, Branch branch)
         {
