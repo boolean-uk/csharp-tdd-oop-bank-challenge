@@ -191,9 +191,9 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TransactionPropertiesTest()
         {
-            Main.Transaction transaction = new Main.Transaction(DateTime.Now, 500m, 0m);
+            Main.Transaction transaction = new Main.Transaction(DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss"), 500m, 0m);
 
-            Assert.That(transaction.Date, Is.EqualTo(DateTime.Now).Within(1).Seconds); // Allow a small time difference
+            Assert.That(transaction.Date, Is.EqualTo(DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss")).Within(1).Seconds); // Allow a small time difference
             Assert.That(transaction.Credit, Is.EqualTo(500m));
             Assert.That(transaction.Debit, Is.EqualTo(0m));
         }
@@ -202,7 +202,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TransactionInvalidPropertiesTest()
         {
-            Assert.Throws<ArgumentException>(() => new Main.Transaction(DateTime.Now, 500m, 10m));
+            Assert.Throws<ArgumentException>(() => new Main.Transaction(DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss"), 500m, 10m));
             // The transaction can only have deposit or credit, not both at the same time.
         }
 

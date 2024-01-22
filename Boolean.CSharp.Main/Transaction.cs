@@ -12,11 +12,11 @@ namespace Boolean.CSharp.Main
 {
     public class Transaction
     {
-        public DateTime Date { get; }
+        public string Date { get; }
         public decimal Credit { get; }
         public decimal Debit { get; }
 
-        public Transaction(DateTime date, decimal credit, decimal debit)
+        public Transaction(string date, decimal credit, decimal debit)
         {
             if ((credit >= 0 && debit == 0) || (credit == 0 && debit >= 0))
             {

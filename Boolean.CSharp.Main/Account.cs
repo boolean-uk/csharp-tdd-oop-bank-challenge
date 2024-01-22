@@ -26,7 +26,7 @@ namespace Boolean.CSharp.Main
         {
             if (amount >= 0)
             {
-                Transactions.Add(new Transaction(DateTime.Today.Date, amount, 0));
+                Transactions.Add(new Transaction(DateTime.Today.Date.ToString("dd-MM-yyyy HH:mm:ss"), amount, 0));
                 return true;
             }
             else { return false; }
@@ -39,12 +39,12 @@ namespace Boolean.CSharp.Main
 
                 {
 
-                    Transactions.Add(new Transaction(DateTime.Today.Date, 0, amount));
+                    Transactions.Add(new Transaction(DateTime.Today.Date.ToString("dd-MM-yyyy HH:mm:ss"), 0, amount));
                     return true;
                 }
                 else if (this.overdraft == true)
                 {
-                    Transactions.Add(new Transaction(DateTime.Today.Date, 0, amount));
+                    Transactions.Add(new Transaction(DateTime.Today.Date.ToString("dd-MM-yyyy HH:mm:ss"), 0, amount));
                     return true;
                 }
                 else
@@ -123,7 +123,7 @@ namespace Boolean.CSharp.Main
         {
             if (this.requestOverdraft(amount) == true)
             {
-                Transactions.Add(new Transaction(DateTime.Today.Date, 0, amount));
+                Transactions.Add(new Transaction(DateTime.Today.Date.ToString("dd-MM-yyyy HH:mm:ss"), 0, amount));
                 return "approved";
             }
             else { return ""; }
