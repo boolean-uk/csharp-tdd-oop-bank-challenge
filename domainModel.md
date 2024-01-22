@@ -47,7 +47,7 @@ I want statements to be sent as messages to my phone.
 |--------------------------|--------------------|-----------------------------------------------------------------------------------|--------|
 | SavingsAccount : Account |                    |                                                                                   |        |
 | CurrentAcount : Account  |                    |                                                                                   |        |
-| Account                  | Savings()          | Returns total value on the Account, a cumulative sum over previous transactions  | double |
+| Account                  | Savings()          | Returns total value on the Account, a cumulative sum over previous transactions   | double |
 |                          | Branch()           | Returns the branch that the account is associated with                            | enum   |
 |                          | RequestOverdraft() | Request access to overdrafting an account                                         | void   |
 |                          | AcceptOverdraft()  | If overdraft requested, accept it and return true,  if not requested return false | bool   |

@@ -19,7 +19,7 @@ namespace Boolean.CSharp.Test
         public void SetUp()
         {
             current = new CurrentAccount();
-            saving = new SavingsAccount();
+            saving = new SavingsAccount(Banks.Lancashire);
 
         }
 
@@ -35,6 +35,12 @@ namespace Boolean.CSharp.Test
             saving.Deposit(15000);
             saving.Deposit(20000);
             Assert.That(saving.Savings(), Is.EqualTo(35000));
+        }
+
+        [Test]
+        public void BankBranchTest()
+        {
+            Assert.That(saving.getBranch(), Is.EqualTo(Banks.Lancashire));
         }
     }
 }
