@@ -49,7 +49,7 @@ namespace Boolean.CSharp.Main.Accounts
         public void PrintBankStatements()
         {
             var statements = _bankStatements;
-            statements.Sort((a, b) => a.Date.CompareTo(b.Date));
+            statements.Sort((a, b) => b.Date.CompareTo(a.Date));
             Console.WriteLine("{0,10}{1,10}{2,10}{3,10}",
                 "Date", "Credit", "Debit", "Balance");
             foreach (var statement in statements)
