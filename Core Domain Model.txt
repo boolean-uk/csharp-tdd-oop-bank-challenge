@@ -1,0 +1,51 @@
+User Stories
+
+As a customer,
+I want to create a current account,
+So I can safely store use my money.
+
+As a customer,
+I want to create a savings account,
+So I can save for a rainy day.
+
+As a customer,
+I want to generate bank statements with transaction dates, amounts, and balance at the time of transaction,
+So I can keep a record of my finances.
+
+As a customer,
+I want to deposit and withdraw funds,
+So I can use my account.
+
+
+Domain Model
+
+*** Class UserAccount ***
+public string Name
+public string AccountNumber
+public string AccountType // "Current" or "Savings"
+public decimal Balance
+public DateTime LastUpdateDate
+private static int accountNum  // static variable to generate unique account numbers
+
+Methods:
+public static UserAccount CreateAccount(string name, string accountType) // static method to create a new account
+private static string GenerateAccountNumber() // static method to generate a unique account number
+public static UserAccount GetAccount(string accountName, string accountType) // static method to get an account by name and type
+
+*** Class Transaction ***
+public DateTime Date
+public decimal Amount
+public string TransactionType // "Deposit" or "Withdrawal"
+
+Methods:
+public Transaction(DateTime date, decimal amount, string transactionType)
+
+*** Class Bank ***
+private List<Transaction> Transactions
+
+Methods:
+public void Withdraw(string, accountName, string accountType, decimal amount) // method to withdraw funds
+public void Deposit(string, accountName, string accountType, decimal amount) // method to deposit funds
+public static void GenerateStatement(UserAccount account) // static method to generate a statement for the given account
+
+
