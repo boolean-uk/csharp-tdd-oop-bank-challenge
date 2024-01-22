@@ -7,19 +7,17 @@ namespace Boolean.CSharp.Main
 {
     public class Transaction
     {
-        private double _balance;
-        private double _originalBalance;
+        private double _amount;
         private string _type;
         private DateTime _time;
 
-        public Transaction()
+        public Transaction(double amount)
         {
             throw new NotImplementedException();
         }
 
-        public double Balance { get => _balance; }
-        public double OriginalBalance { get => _originalBalance; }
+        public double Balance { get => _amount; }
         public string Type { get => _type; }
-        private DateTime Time { get => _time; }
+        public DateTime Time { get => _time; }
     }
 }
