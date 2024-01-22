@@ -1,8 +1,13 @@
 ```C#
 Core
-enum TransactionsType {
+public enum TransactionsType {
     DEPOSIT,
     WITHDRAW,
+}
+
+public enum AccountType {
+    CURRENT = 1,
+    SAVINGS = 2,
 }
 
 public interface IAccount {
@@ -27,16 +32,16 @@ public abstarct class Account : IAccount{
         public void Deposit(decimal amount); // Add decimal value to balance if greater than 0
         public void Withdraw(decimal amount); // Removes decimal value from balance if it is lerr or equal to balance
         public string GenerateStatement(); // generate a bank statement based on deposits and withdraws
-        private AddTransaction(decimal, TransactionType type); 
-        public abstract AccountTypes GetAccountType();
+        private void AddTransaction(decimal, TransactionType type); 
+        public abstract AccountType GetAccountType();
 }
 
 public class SavingsAccount : Account {
-    public override AccountTypes GetAccountType();
+    public override AccountType GetAccountType();
 }
 
 public class CurrentAccount : Account {
-    public override AccountTypes GetAccountType();
+    public override AccountType GetAccountType();
 }
 
 public class Transactions {

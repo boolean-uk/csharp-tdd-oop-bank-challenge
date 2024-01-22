@@ -12,7 +12,7 @@ namespace Boolean.CSharp.Main
         }
 
         public override AccountType GetAccountType() {
-             throw new NotImplementedException();
+            return AccountType.SAVINGS;
         }
     }
 }

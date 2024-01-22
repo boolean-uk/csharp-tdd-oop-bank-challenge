@@ -24,7 +24,7 @@ namespace Boolean.CSharp.Main
             Type = type;
             Balance = balance;
             _Account = account;
-            DateOfTransaction = DateTime.Now.ToString("hr-HR");
+            DateOfTransaction = DateTime.Now.ToString("dd/MM/yyyy");
         }
     }
 }
