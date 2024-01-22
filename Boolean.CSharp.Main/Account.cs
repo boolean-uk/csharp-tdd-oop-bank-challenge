@@ -25,6 +25,7 @@ namespace Boolean.CSharp.Main
         public void Deposit(int amount)
         {
             Console.WriteLine("You have deposited " + amount);
+            Balance += amount;
             
 
         }

@@ -48,13 +48,13 @@ namespace Boolean.CSharp.Test
         }
 
         [TestCase(300)]
-        public void DepositTest()
+        public void DepositTest(int amount)
         {
             //arrange
             CurrentAccount account = new CurrentAccount("Current account 1");
 
             //act
-            account.Deposit(300);
+            account.Deposit(amount);
 
             //assert
             Assert.AreEqual(300, account.Balance);
