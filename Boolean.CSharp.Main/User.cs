@@ -17,7 +17,16 @@ namespace Boolean.CSharp.Main
 
         public User(int ID, string name, string email, string password)
         {
-            throw new NotImplementedException();
+            _ID = ID;
+            _name = name;
+            _email = email;
+            _password = password;
+            _account = new CurrentAccount(this);
+            _savingsAccount = new SavingsAccount(this);
+            _accounts = new List<Account>()
+            {
+                _account, _savingsAccount
+            };
         }
 
         public int ID { get => _ID; }
@@ -29,12 +38,28 @@ namespace Boolean.CSharp.Main
 
         public void Deposit(double balance, AccountType account)
         {
-            throw new NotImplementedException();
+            if (account == AccountType.CurrentAccount)
+            {
+                _account.Deposit(balance);
+            }
+            else if (account == AccountType.SavingsAccount)
+            {
+                _savingsAccount.Deposit(balance);
+            }
         }
 
         public bool Withdraw(double balance, AccountType account)
         {
-            throw new NotImplementedException();
+            if(account == AccountType.CurrentAccount)
+            {
+                return _account.Withdraw(balance);
+            }
+            else if (account == AccountType.SavingsAccount)
+            {
+                return _savingsAccount.Withdraw(balance);
+            }
+
+            return false;
         }
 
     }
