@@ -9,35 +9,33 @@ namespace Boolean.CSharp.Main.Accounts
     public abstract class Account(string name) : IAccount
     {
         public string Name { get {  return name; } }
-        public double Balance { get { return _balance; } }
+        public double Balance { get { return _bankStatements.Last().Balance; } }
 
         public List<BankStatement> BankStatements { get { return _bankStatements; } }
 
-        private double _balance = 100d;
         private readonly List<BankStatement> _bankStatements = [];
 
         public void Deposit(double amount)
         {
             ArgumentOutOfRangeException.ThrowIfNegative(amount);
-            _balance += amount;
             GenerateBankStatements(amount);
         }
 
         public double Withdraw(double amount)
         {
             ArgumentOutOfRangeException.ThrowIfNegative(amount);
-            if (amount > _balance)
+            if (amount > Balance)
             {
                 throw new Exception("Can't withdraw more than the current balance!");
             }
-            _balance -= amount;
             GenerateBankStatements(-amount);
             return amount;
         }
 
         public void GenerateBankStatements(double amount)
         {
-            BankStatement bankStatement = new(_balance, amount);
+            double balance = _bankStatements.Count == 0 ? 0 : Balance;
+            BankStatement bankStatement = new(balance, amount);
             _bankStatements.Add(bankStatement);
         }
 

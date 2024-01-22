@@ -25,6 +25,7 @@ namespace Boolean.CSharp.Test
         [TestCase(23.23, 100-23.23)]
         public void WithdrawMoneyTest(double amount, double fact)
         {
+            _account.Deposit(100);
             _account.Withdraw(amount);
             Assert.That(Math.Round(_account.Balance), Is.EqualTo(Math.Round(fact)));
         }
@@ -35,6 +36,7 @@ namespace Boolean.CSharp.Test
         [TestCase(10.45, 110.45)]
         public void DepositMoneyTest(double amount, double fact)
         {
+            _account.Deposit(100);
             _account.Deposit(amount);
             Assert.That(Math.Round(_account.Balance), Is.EqualTo(Math.Round(fact)));
         }
@@ -42,9 +44,10 @@ namespace Boolean.CSharp.Test
         [Test]
         public void GenerateBankStatementTest()
         {
-            _account.Deposit(23);
+            _account.Deposit(46);
             _account.Withdraw(45);
             Assert.That(_account.BankStatements.Count, Is.EqualTo(2));
+            Assert.That(_account.Balance, Is.EqualTo(1));
         }
 
         [Test]

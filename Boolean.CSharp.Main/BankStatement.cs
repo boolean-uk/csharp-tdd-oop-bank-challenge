@@ -11,10 +11,12 @@ namespace Boolean.CSharp.Main
         public DateTime Date { get; } = DateTime.Now;
         public double? Credit { get; }
         public double? Debit { get; }
-        public double Balance { get; }
+        public double Balance { get { return _balance;  } }
+        private double _balance;
 
         public BankStatement(double balance, double amount)
         {
+            balance += amount;
             if (Math.Round(amount) > 0)
             {
                 Credit = amount;
@@ -22,7 +24,7 @@ namespace Boolean.CSharp.Main
             {
                 Debit = Math.Abs(amount);
             }
-            Balance = balance;
+            _balance = balance;
         }
     }
 }
