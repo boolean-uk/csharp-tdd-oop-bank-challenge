@@ -8,27 +8,25 @@ namespace Boolean.CSharp.Test
     public class CoreTests
     {
         private Customer _customer;
-        //private BankStatement _bankStatement;
 
         public CoreTests()
         {
             _customer = new Customer();
-            //_bankStatement = new BankStatement();
         }
 
         [Test]
         public void addAccountTest()
         {
-            SavingsAccount newSavings = (SavingsAccount)_customer.createAccount(762308, accountType.savings);
-            CurrentAccount newCurrent = (CurrentAccount)_customer.createAccount(556223, accountType.current);
+            SavingsAccount newSavings = (SavingsAccount)_customer.createAccount(762308, AccountType.savings);
+            CurrentAccount newCurrent = (CurrentAccount)_customer.createAccount(556223, AccountType.current);
             Assert.That(_customer.Accounts.Contains(newSavings));
             Assert.That(_customer.Accounts.Contains(newCurrent));
         }
         [Test]
         public void depositWithdrawTest()
         {
-            SavingsAccount savingsAccount = (SavingsAccount)_customer.createAccount(123456, accountType.savings);
-            CurrentAccount currentAccount = (CurrentAccount)_customer.createAccount(642758, accountType.current);
+            SavingsAccount savingsAccount = (SavingsAccount)_customer.createAccount(123456, AccountType.savings);
+            CurrentAccount currentAccount = (CurrentAccount)_customer.createAccount(642758, AccountType.current);
             savingsAccount.deposit(0f);
             currentAccount.deposit(0f);
             Assert.That(savingsAccount.Balance, Is.EqualTo(0f));
@@ -49,10 +47,10 @@ namespace Boolean.CSharp.Test
         [Test]
         public void transactionsAddToList()
         {
-            SavingsAccount savingsAccount = (SavingsAccount)_customer.createAccount(123456, accountType.savings);
+            SavingsAccount savingsAccount = (SavingsAccount)_customer.createAccount(123456, AccountType.savings);
             var result = savingsAccount.deposit(1000f);
             DateTime time = DateTime.Now;
-            Transaction transaction = new Transaction(1000f, transactionType.deposit, time, savingsAccount.Balance);
+            Transaction transaction = new Transaction(1000f, TransactionType.deposit, time.ToString("D"), savingsAccount.Balance);
             string expectedJson = JsonConvert.SerializeObject(transaction);
             string resultJson = JsonConvert.SerializeObject(result);
             Assert.That(resultJson, Is.EqualTo(expectedJson));

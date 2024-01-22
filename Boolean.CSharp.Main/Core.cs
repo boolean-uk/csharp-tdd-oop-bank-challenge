@@ -8,7 +8,7 @@ using System.Transactions;
 
 namespace Boolean.CSharp.Main
 {
-    public enum accountType
+    public enum AccountType
     {
         current,
         savings
@@ -17,9 +17,9 @@ namespace Boolean.CSharp.Main
     {
         private List<Account> accounts = new List<Account>();
         public List<Account> Accounts { get { return accounts; } }
-        public Account createAccount(int accountNr, accountType type)
+        public Account createAccount(int accountNr, AccountType type)
         {
-            if(type == accountType.current)
+            if(type == AccountType.current)
             {
                 CurrentAccount account = new CurrentAccount(accountNr);
                 accounts.Add(account);
@@ -49,7 +49,7 @@ namespace Boolean.CSharp.Main
         {
             _balance -= amount;
             DateTime time = DateTime.Now;
-            Transaction tempT = new Transaction(amount, transactionType.withdraw, time, _balance);
+            Transaction tempT = new Transaction(amount, TransactionType.withdraw, time.ToString("D"), _balance);
             Transaction.Add(tempT);
             return tempT;
         }
@@ -57,13 +57,13 @@ namespace Boolean.CSharp.Main
         {
             _balance += amount;
             DateTime time = DateTime.Now;
-            Transaction tempT = new Transaction(amount, transactionType.deposit, time, _balance);
+            Transaction tempT = new Transaction(amount, TransactionType.deposit, time.ToString("D"), _balance);
             Transaction.Add(tempT);
             return tempT;
         }
         public void printStatement()
         {
-            Console.WriteLine("       date          || credit   ||   debit   ||  balance  ");
+            Console.WriteLine(" date                    || credit   || debit     || balance   ");
             foreach(Transaction t in transaction)
             {
                 //string expectedJson = JsonConvert.SerializeObject(t);
@@ -85,7 +85,7 @@ namespace Boolean.CSharp.Main
 
         }
     }
-    public enum transactionType
+    public enum TransactionType
     {
         deposit,
         withdraw
@@ -94,30 +94,18 @@ namespace Boolean.CSharp.Main
     {
         private float _amount;
         private float _newTotal;
-        private transactionType _transactionType;
-        private DateTime _time;
+        private TransactionType _transactionType;
+        private string _time;
         public float Amount { get { return _amount; } }
         public float NewTotal { get { return _newTotal; } }
-        public transactionType Type { get { return _transactionType; } }
-        public DateTime Time { get { return _time; } }
-        public Transaction(float amount, transactionType type, DateTime timeStamp, float newtotal)
+        public TransactionType Type { get { return _transactionType; } }
+        public string Time { get { return _time; } }
+        public Transaction(float amount, TransactionType type, string timeStamp, float newtotal)
         {
             _amount = amount;
             _transactionType = type;
             _time = timeStamp;
             _newTotal = newtotal;
         }
-    }/*
-    public class BankStatement
-    {
-        private List<Transaction> _transactions;
-        public BankStatement()
-        {
-
-        }
-        public void printStatement()
-        {
-
-        }
-    }*/
+    }
 }
