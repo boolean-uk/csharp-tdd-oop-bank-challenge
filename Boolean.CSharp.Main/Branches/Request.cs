@@ -7,5 +7,6 @@ namespace Boolean.CSharp.Main.Branches
         public string Reason => reason;
         public double Amount => amount;
         public IAccount Account => account;
+        public bool Approved { get; set; }
     }
 }

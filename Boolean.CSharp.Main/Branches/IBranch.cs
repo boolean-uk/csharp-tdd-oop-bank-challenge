@@ -5,5 +5,6 @@
         public string Name { get; }
         public string Description { get; }
         public List<Request> Requests { get; }
+        public void ReviewRequests();
     }
 }
