@@ -6,9 +6,25 @@ using System.Text;
 
 namespace Boolean.CSharp.Main
 {
-    public class Core
+    
+    public class Transaction
     {
 
 
+    }
+
+    public class BankAccount
+    {
+
+    }
+
+    public class CurrentAccount : BankAccount 
+    {
+        
+    }
+
+    public class  SavingsAccount : BankAccount
+    {
+        
     }
 }
