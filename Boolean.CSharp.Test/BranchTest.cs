@@ -17,6 +17,7 @@ namespace Boolean.CSharp.Test
         }
         [TestCase ("Stockholm", 35314)]
         [TestCase ("GothenBorg", 35314)]
+        [TestCase ("", 0)]
         public void CanCreateBranch(string name, int code)
         { 
             Branch branch = new Branch(name, code);

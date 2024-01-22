@@ -18,8 +18,3 @@ bank.ApproveOverdraft(s,t);
 p.Withdrawl(600);
 
 Console.WriteLine(p.PrintReceipt());
-
-
-Guid d = Guid.NewGuid();
-
-Console.WriteLine(d.ToString());

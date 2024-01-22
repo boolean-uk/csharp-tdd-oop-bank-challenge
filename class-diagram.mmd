@@ -3,9 +3,9 @@ title: OOP Bank Challange
 ---
 classDiagram
     
-    IAccount<|--PersonalAccount : implements
-    IAccount<|--SavingsAccount : implements
-    IAccount<|--CreditAccount : implements
+    Account<|--PersonalAccount : implements
+    Account<|--SavingsAccount : implements
+    Account<|--CreditAccount : implements
 
     IAccount..>Transaction
     IAccount..>Branch
@@ -23,6 +23,16 @@ classDiagram
     IAccount : Deposit(int amount)
     IAccount : Withdrawl(int amount)
     IAccount : PrintTransaction()
+    }
+    class Account {
+    <<abstract>>
+        List<Transaction> Transactions
+    Branch Branch
+    Guid id
+    Signature Signature
+    Deposit(int amount)
+    Withdrawl(int amount)
+    PrintTransaction()
     }
     class PersonalAccount{
     }
