@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
+using System.Timers;
 using System.Transactions;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -21,6 +22,7 @@ namespace Boolean.CSharp.Main
         private string _ID;
         private AccountType _type;
         private string _branch;
+        private float _overdraft = 0.0F;
         private List<Transaction> _transactions = new List<Transaction>();
 
         
@@ -28,7 +30,7 @@ namespace Boolean.CSharp.Main
         public AccountType ACCTYPE { get { return _type; } }
 
         public string BRANCH { get { return _branch; } }
-        public List<Transaction> transactions { get { return _transactions; } }
+        public List<Transaction> TRANSACTIONS { get { return _transactions; } }
 
         public Account(AccountType type, string branch)
         {
@@ -37,6 +39,10 @@ namespace Boolean.CSharp.Main
             _branch = branch;
         }
 
+        public void setOverdraft(float amount)
+        {
+            _overdraft = amount;
+        }
         public static Account createAccount(AccountType type, string branch)
         {
             List<string> _branches = new List<string> { "ITALY", "SPAIN", "FRANCE" };
@@ -64,16 +70,15 @@ namespace Boolean.CSharp.Main
             return deposits - withdraws;
         }
 
-        public bool MakeTransaction(float amount, TransactionType type, string date)
+        private bool MakeTransaction(float amount, TransactionType type, string date)
         {
             float currentBalance = (type == TransactionType.DEPOSIT) ? getBalance() + amount : getBalance() - amount;
 
             Transaction transaction = new Transaction(date, amount, type, currentBalance);
 
-            if (type == TransactionType.WITHDRAW & getBalance() - transaction.Amount < 0)
+            if (type == TransactionType.WITHDRAW & getBalance() - transaction.Amount < _overdraft )
             {
-                Console.WriteLine("WITHDRAW DENIED!");
-                return false;
+                throw new Exception("WITHDRAW DENIED!");
 
             }
 
@@ -81,17 +86,41 @@ namespace Boolean.CSharp.Main
             return true;
 
         }
-        public bool MakeTransaction(float amount, TransactionType type)
+
+        public bool Withdraw(float amount)
+        {
+            return MakeTransaction(amount, TransactionType.WITHDRAW);
+
+        }
+
+        public bool Deposit(float amount)
+        {
+            return MakeTransaction(amount, TransactionType.DEPOSIT);
+
+        }
+
+        public bool Withdraw(float amount, string date)
+        {
+            return MakeTransaction(amount, TransactionType.WITHDRAW, date);
+
+        }
+
+        public bool Deposit(float amount, string date)
+        {
+            return MakeTransaction(amount, TransactionType.DEPOSIT, date);
+
+        }
+
+        private bool MakeTransaction(float amount, TransactionType type)
         {
             
             float currentBalance = (type == TransactionType.DEPOSIT) ? getBalance() + amount : getBalance() - amount;
 
             Transaction transaction = new Transaction(amount, type, currentBalance);
 
-            if (transaction.TransactionType == TransactionType.WITHDRAW & getBalance() - transaction.Amount < 0)
+            if (transaction.TransactionType == TransactionType.WITHDRAW & getBalance() - transaction.Amount < _overdraft)
             {
-                Console.WriteLine("WITHDRAW DENIED!");
-                return false;
+                throw new Exception("WITHDRAW DENIED!");
 
             }
 
@@ -100,14 +129,20 @@ namespace Boolean.CSharp.Main
 
         }
 
-        public void ListBankStatement()
+        public List<string> ListBankStatement()
         {
+            var stringWriter = new StringWriter();
+            Console.SetOut(stringWriter);
+
+            List<string> res = new List<string>();
+
             Console.WriteLine("    date    ||  credit ||  debit  || balance");
 
             foreach (Transaction t in _transactions.OrderByDescending(x => x.DateTime))
             {
                 if (t.TransactionType is TransactionType.DEPOSIT)
                 {
+                    
                     Console.WriteLine("{0,12}||{1,9:0.00}||{2,9:0.00}||{3,9:0.00}", DateOnly.FromDateTime(t.DateTime), t.Amount, "", t.Balance);
                    
                 }
@@ -116,6 +151,14 @@ namespace Boolean.CSharp.Main
                     Console.WriteLine("{0,12}||{1,9:0.00}||{2,9:0.00}||{3,9:0.00}", DateOnly.FromDateTime(t.DateTime), "", t.Amount, t.Balance);
                 }
             }
+            var outputLines = stringWriter.ToString().Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
+
+            for (int i = 0; i < outputLines.Length; i++)
+            {
+                res.Add(outputLines[i]);
+            }
+
+            return res;
 
         }
 

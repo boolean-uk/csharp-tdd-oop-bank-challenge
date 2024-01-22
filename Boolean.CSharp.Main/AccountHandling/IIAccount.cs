@@ -14,13 +14,18 @@ namespace Boolean.CSharp.Main
 
         public string ID { get; }
 
+        public List<Transaction> TRANSACTIONS { get; }
         public float getBalance();
 
-        public bool MakeTransaction( float amount, TransactionType type, string date);
+        public bool Withdraw(float amount, string date);
 
-        public bool MakeTransaction(float amount, TransactionType type);
+        public bool Withdraw(float amount);
 
-        public void ListBankStatement();
+        public bool Deposit(float amount, string date);
+
+        public bool Deposit(float amount);
+
+        public List<string> ListBankStatement();
 
     }
 }

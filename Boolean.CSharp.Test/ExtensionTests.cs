@@ -51,7 +51,7 @@ namespace Boolean.CSharp.Test
             _manager.registerCustomer(_user);
             var acc = _user.addAccount(AccountType.GENERAL, "ITALY") as GeneralAccount;
 
-            acc.MakeTransaction(500.0F, TransactionType.DEPOSIT);
+            acc.Deposit(500.0F);
 
             var reader = new StringReader(str);
             var writer = new StringWriter();
@@ -76,7 +76,7 @@ namespace Boolean.CSharp.Test
             _manager.registerCustomer(_user);
             var acc = _user.addAccount(AccountType.GENERAL, "ITALY") as GeneralAccount;
 
-            acc.MakeTransaction(500.0F, TransactionType.DEPOSIT);
+            acc.Deposit(500.0F);
 
             bool accepted = _user.requestOvedraft(acc.ID, 100.0F);
 
@@ -93,7 +93,7 @@ namespace Boolean.CSharp.Test
             _manager.registerCustomer(_user);
             var acc = _user.addAccount(AccountType.SAVINGS, "ITALY") as SavingsAccount;
 
-            acc.MakeTransaction(500.0F, TransactionType.DEPOSIT);
+            acc.Deposit(500.0F);
 
             bool accepted = _user.requestOvedraft(acc.ID, 600.0F);
 

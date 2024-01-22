@@ -23,16 +23,46 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        public void userCanCreateSavingsAndGeneralAccount()
+        public void userCanCreateGeneralAccount()
+        {
+            IAccount acc = _user.addAccount(AccountType.GENERAL, "SPAIN");
+
+            Assert.IsNotNull(acc);
+   
+            Assert.True(acc is GeneralAccount);
+
+            List<IAccount> res = _user.ListAccounts();
+
+            GeneralAccount ga = (GeneralAccount)res[0];
+
+            Assert.AreEqual(ga.ACCTYPE, AccountType.GENERAL);
+            Assert.AreEqual(ga.BRANCH, "SPAIN");
+
+        }
+
+        [Test]
+        public void userCanCreateSavingsAccount()
+        {
+            IAccount acc2 = _user.addAccount(AccountType.SAVINGS, "SPAIN");
+
+            Assert.IsNotNull(acc2);
+
+            Assert.True(acc2 is SavingsAccount);
+
+            List<IAccount> res = _user.ListAccounts();
+
+            SavingsAccount sa = (SavingsAccount)res[0];
+
+            Assert.AreEqual(sa.ACCTYPE, AccountType.SAVINGS);
+            Assert.AreEqual(sa.BRANCH, "SPAIN");
+
+        }
+
+        [Test]
+        public void userCanCreateMultipleAccounts()
         {
             IAccount acc = _user.addAccount(AccountType.GENERAL, "SPAIN");
             IAccount acc2 = _user.addAccount(AccountType.SAVINGS, "SPAIN");
-
-            Assert.IsNotNull(acc);
-            Assert.IsNotNull(acc2);
-
-            Assert.True(acc is GeneralAccount);
-            Assert.True(acc2 is SavingsAccount);
 
             List<IAccount> res = _user.ListAccounts();
 
@@ -40,21 +70,20 @@ namespace Boolean.CSharp.Test
 
         }
 
-        [TestCase(1000.0F, TransactionType.DEPOSIT, 1000.0F)]
-        [TestCase(0.0F, TransactionType.DEPOSIT, 0.0F)]
-        [TestCase(200.0F, TransactionType.DEPOSIT, 200.0F)]
-        public void UserCanDepositMoney(float amount, TransactionType type, float newBalance)
+        [TestCase(1000.0F, 1000.0F)]
+        [TestCase(0.0F, 0.0F)]
+        [TestCase(200.0F, 200.0F)]
+        public void UserCanDepositMoney(float amount, float newBalance)
         {
             IAccount acc = _user.addAccount(AccountType.GENERAL, "SPAIN");
-            bool isSuccess = acc.MakeTransaction( amount , type , DateTime.Now.ToString());
+            bool isSuccess = acc.Deposit(amount);
 
             float balance = acc.getBalance();
             Assert.IsTrue(isSuccess);
             Assert.AreEqual(newBalance, balance);
-            
 
             IAccount acc2 = _user.addAccount(AccountType.SAVINGS, "SPAIN");
-            bool isSuccess2 = acc2.MakeTransaction(amount, type, DateTime.Now.ToString());
+            bool isSuccess2 = acc2.Deposit(amount);
 
             float balance2 = acc2.getBalance();
             Assert.AreEqual(newBalance, balance2);
@@ -63,16 +92,34 @@ namespace Boolean.CSharp.Test
 
         }
 
-        [TestCase(1000.0F, TransactionType.WITHDRAW, 0.0F)]
-        [TestCase(100.0F, TransactionType.WITHDRAW, 900.0F)]
-        public void UserCanWithdrawMoney(float amount, TransactionType type, float newBalance)
+        [TestCase(1000.0F, 1000.0F)]
+        [TestCase(0.0F, 0.0F)]
+        [TestCase(200.0F, 200.0F)]
+        public void transactionInfoIsCorrect(float amount, float newBalance)
         {
             IAccount acc = _user.addAccount(AccountType.GENERAL, "SPAIN");
-            bool initSuccess = acc.MakeTransaction(1000.0F, TransactionType.DEPOSIT, DateTime.Now.ToString());
+            acc.Deposit(amount);
+
+            List<IAccount> res = _user.ListAccounts();
+            List<Transaction> tr = res[0].TRANSACTIONS;
+            Assert.AreEqual(1, tr.Count);
+            Assert.AreEqual(tr[0].Amount, amount);
+            Assert.AreEqual(tr[0].TransactionType, TransactionType.DEPOSIT);
+            Assert.AreEqual(tr[0].Balance, newBalance);
+            Assert.AreEqual(DateOnly.FromDateTime(tr[0].DateTime).ToString(), DateOnly.FromDateTime(DateTime.Now).ToString());
+
+        }
+
+        [TestCase(1000.0F, 0.0F)]
+        [TestCase(100.0F, 900.0F)]
+        public void UserCanWithdrawMoney(float amount, float newBalance)
+        {
+            IAccount acc = _user.addAccount(AccountType.GENERAL, "SPAIN");
+            bool initSuccess = acc.Deposit(1000.0F);
 
             Assert.IsTrue(initSuccess);
 
-            bool isSuccess = acc.MakeTransaction(amount, type, DateTime.Now.ToString());
+            bool isSuccess = acc.Withdraw(amount);
             float balance = acc.getBalance();
 
             Assert.AreEqual(newBalance, balance);
@@ -81,9 +128,9 @@ namespace Boolean.CSharp.Test
 
 
             IAccount acc2 = _user.addAccount(AccountType.SAVINGS, "SPAIN");
-            bool isSuccess3 = acc2.MakeTransaction(1000.0F, TransactionType.DEPOSIT, DateTime.Now.ToString());
+            bool isSuccess3 = acc2.Deposit(1000.0F);
 
-            bool isSuccess4 = acc2.MakeTransaction(amount, type, DateTime.Now.ToString());
+            bool isSuccess4 = acc2.Withdraw(amount);
             float balance2 = acc2.getBalance();
 
             Assert.IsTrue(isSuccess3);
@@ -92,22 +139,18 @@ namespace Boolean.CSharp.Test
 
         }
 
-        [TestCase(1200.0F, TransactionType.WITHDRAW, 1000.0F)]
-        public void userCantWithdrawIfBalanceGoesToNegative(float amount, TransactionType type, float newBalance)
+        [TestCase(1200.0F, 1000.0F)]
+        public void userCantWithdrawIfBalanceGoesToNegative(float amount, float newBalance)
         {
-            var stringWriter = new StringWriter();
-            Console.SetOut(stringWriter);
-
+   
             IAccount acc = _user.addAccount(AccountType.GENERAL, "SPAIN");
             
-            acc.MakeTransaction(1000.0F, TransactionType.DEPOSIT, DateTime.Now.ToString());
-            bool isSuccess = acc.MakeTransaction(amount, type, DateTime.Now.ToString());
+            acc.Deposit(1000.0F);
+           
+            Exception ex = Assert.Throws<System.Exception>(() => acc.Withdraw(amount));
+            Assert.That(ex.Message, Is.EqualTo("WITHDRAW DENIED!"));
+
             float sum = acc.getBalance();
-
-            var outputLines = stringWriter.ToString().Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
-            Assert.That("WITHDRAW DENIED!", Is.EqualTo(outputLines[0]));
-
-            Assert.False(isSuccess);
             Assert.AreEqual(sum, newBalance);
         }
 
@@ -115,25 +158,20 @@ namespace Boolean.CSharp.Test
         public void BankStatements()
         {
 
-            var stringWriter = new StringWriter();
-            Console.SetOut(stringWriter);
-
-
             // here
             IAccount acc = _user.addAccount(AccountType.GENERAL, "SPAIN");
            
-            acc.MakeTransaction( 1000.0F, TransactionType.DEPOSIT, "10/01/2012");
-            acc.MakeTransaction( 2000.0F, TransactionType.DEPOSIT, "13/01/2012");
-            acc.MakeTransaction( 500.0F, TransactionType.WITHDRAW, "14/01/2012");
+            acc.Deposit( 1000.0F, "10/01/2012");
+            acc.Deposit( 2000.0F, "13/01/2012");
+            acc.Withdraw( 500.0F, "14/01/2012");
 
-            acc.ListBankStatement();
+            List<string> res = acc.ListBankStatement();
 
-            var outputLines = stringWriter.ToString().Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
-
-            Assert.That("    date    ||  credit ||  debit  || balance", Is.EqualTo(outputLines[0]));
-            Assert.That("  14/01/2012||         ||   500,00||  2500,00", Is.EqualTo(outputLines[1]));
-            Assert.That("  13/01/2012||  2000,00||         ||  3000,00", Is.EqualTo(outputLines[2]));
-            Assert.That("  10/01/2012||  1000,00||         ||  1000,00", Is.EqualTo(outputLines[3]));
+            
+            Assert.That("    date    ||  credit ||  debit  || balance", Is.EqualTo(res[0]));
+            Assert.That("  14/01/2012||         ||   500,00||  2500,00", Is.EqualTo(res[1]));
+            Assert.That("  13/01/2012||  2000,00||         ||  3000,00", Is.EqualTo(res[2]));
+            Assert.That("  10/01/2012||  1000,00||         ||  1000,00", Is.EqualTo(res[3]));
 
         }
 
@@ -141,33 +179,28 @@ namespace Boolean.CSharp.Test
         public void BankStatementsNoSetDates()
         {
 
-            var stringWriter = new StringWriter();
-            Console.SetOut(stringWriter);
-
-
             // here
             IAccount acc = _user.addAccount(AccountType.GENERAL, "SPAIN");
 
-            acc.MakeTransaction(100.0F, TransactionType.DEPOSIT);
-            acc.MakeTransaction(2000.0F, TransactionType.DEPOSIT);
-            acc.MakeTransaction(500.0F, TransactionType.WITHDRAW);
+            acc.Deposit(100.0F);
+            acc.Deposit(2000.0F);
+            acc.Withdraw(500.0F);
 
             Manager.acceptOverdraft((GeneralAccount)acc, 2000.0F);
 
+            acc.Withdraw(2000.0F);
 
-            acc.MakeTransaction(3000.0F, TransactionType.DEPOSIT);
+            acc.Deposit(3000.0F);
 
-            acc.ListBankStatement();
-
-            var outputLines = stringWriter.ToString().Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
+            List<string> res = acc.ListBankStatement();
 
 
-            Assert.That("    date    ||  credit ||  debit  || balance", Is.EqualTo(outputLines[0]));
-            Assert.That($"  {DateOnly.FromDateTime(DateTime.Now)}||  3000,00||         ||  2600,00", Is.EqualTo(outputLines[1]));
-            Assert.That($"  {DateOnly.FromDateTime(DateTime.Now)}||         ||  2000,00||  -400,00", Is.EqualTo(outputLines[2]));
-            Assert.That($"  {DateOnly.FromDateTime(DateTime.Now)}||         ||   500,00||  1600,00", Is.EqualTo(outputLines[3]));
-            Assert.That($"  {DateOnly.FromDateTime(DateTime.Now)}||  2000,00||         ||  2100,00", Is.EqualTo(outputLines[4]));
-            Assert.That($"  {DateOnly.FromDateTime(DateTime.Now)}||   100,00||         ||   100,00", Is.EqualTo(outputLines[5]));
+            Assert.That("    date    ||  credit ||  debit  || balance", Is.EqualTo(res[0]));
+            Assert.That($"  {DateOnly.FromDateTime(DateTime.Now)}||  3000,00||         ||  2600,00", Is.EqualTo(res[1]));
+            Assert.That($"  {DateOnly.FromDateTime(DateTime.Now)}||         ||  2000,00||  -400,00", Is.EqualTo(res[2]));
+            Assert.That($"  {DateOnly.FromDateTime(DateTime.Now)}||         ||   500,00||  1600,00", Is.EqualTo(res[3]));
+            Assert.That($"  {DateOnly.FromDateTime(DateTime.Now)}||  2000,00||         ||  2100,00", Is.EqualTo(res[4]));
+            Assert.That($"  {DateOnly.FromDateTime(DateTime.Now)}||   100,00||         ||   100,00", Is.EqualTo(res[5]));
 
         }
 

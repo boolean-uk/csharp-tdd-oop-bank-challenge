@@ -25,10 +25,10 @@ namespace Boolean.CSharp.Main
 
         public static void acceptOverdraft(GeneralAccount account, float amount)
         {
-           
+                                    // 500 - 600 = 100 
             float currentBalance = account.getBalance() - amount;
-            Transaction transaction = new Transaction(amount, TransactionType.WITHDRAW, currentBalance);
-            account.transactions.Add(transaction);
+            // Transaction transaction = new Transaction(amount, TransactionType.WITHDRAW, currentBalance);
+            account.setOverdraft(currentBalance);
         }
 
         public static bool handleOverdraftRequest(string ID, GeneralAccount account, float amount)
