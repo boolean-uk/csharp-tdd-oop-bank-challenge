@@ -15,7 +15,31 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        public void TestQuestion1()
+        public void CreatingACurrentAccount()
+        {
+
+        }
+
+        [Test]
+        public void CreatingASavingsAccount()
+        {
+
+        }
+
+        [Test]
+        public void GenerateBankStatements()
+        {
+
+        }
+
+        [Test]
+        public void DepositMoney()
+        {
+
+        }
+
+        [Test]
+        public void WithdrawMoney()
         {
 
         }

@@ -9,5 +9,9 @@ namespace Boolean.CSharp.Main.Classes
 {
     public class ManagerUser : IUser
     {
+        public bool ManageRequest(BankStatement request)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
