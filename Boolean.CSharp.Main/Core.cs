@@ -36,6 +36,7 @@ namespace Boolean.CSharp.Main
         public bool AddTransaction(float transactionAmount, DateTime? date)
         {
             if (transactionAmount == 0f) { return false; }
+
             if (date != null)
             {
                 transactions.Add(new Transaction(date.Value, transactionAmount)); return true;
