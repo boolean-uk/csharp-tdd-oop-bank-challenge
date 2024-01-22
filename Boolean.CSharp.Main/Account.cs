@@ -47,7 +47,7 @@ namespace Boolean.CSharp.Main
         {
             StringBuilder sb = new();
             sb.AppendFormat("|{0,-10}| {1,-7}| {2,-7}| {3,-7}|\n", "date", "credit", "debit", "balance");
-            foreach(Transaction transaction in _transactions)
+            foreach(Transaction transaction in _transactions.OrderByDescending(t => t.Date))
             {
                 if (transaction.Type == TransactionType.Credit)
                 {
