@@ -8,10 +8,10 @@ namespace Boolean.CSharp.Main.Branches
 {
     public class Branch(string name, string description) : IBranch
     {
-        public string Name => throw new NotImplementedException();
+        public string Name => name;
 
-        public string Description => throw new NotImplementedException();
+        public string Description => description;
 
-        public List<Request> Requests { get; set; } = new();
+        public List<Request> Requests { get; set; } = [];
     }
 }

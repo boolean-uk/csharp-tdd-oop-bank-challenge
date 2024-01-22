@@ -1,4 +1,5 @@
 ﻿using Boolean.CSharp.Main.Accounts;
+using Boolean.CSharp.Main.Branches;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,9 +26,9 @@ namespace Boolean.CSharp.Main
             return _accounts.Count;
         }
 
-        public void RequestOverdraft(IAccount account, double requestAmount)
+        public void RequestOverdraft(Request request)
         {
-            throw new NotImplementedException();
+            request.Account.Branch.Requests.Add(request);
         }
     }
 }

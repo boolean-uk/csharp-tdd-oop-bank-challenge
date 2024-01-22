@@ -36,7 +36,8 @@ namespace Boolean.CSharp.Test
         {
             string accountName = "First account";
             CurrentAccount account = new CurrentAccount(_branch, accountName);
-            _customer.RequestOverdraft(account, 100);
+            Request request = new("I need funds", 120d, account);
+            _customer.RequestOverdraft(request);
             Assert.That(_branch.Requests.Count, Is.EqualTo(1));
         }
     }
