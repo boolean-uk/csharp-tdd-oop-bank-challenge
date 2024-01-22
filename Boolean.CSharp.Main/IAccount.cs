@@ -9,6 +9,8 @@ namespace Boolean.CSharp.Main
     {
         string AccountName { get; }
         decimal Balance { get; }
+        int ID { get; }
+        Branch AccountBranch { get; }
         void Deposit(decimal amount);
         void Withdraw(decimal amount);
         string GenerateStatement();
