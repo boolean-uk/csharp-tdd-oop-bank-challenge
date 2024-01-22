@@ -48,7 +48,7 @@ namespace Boolean.CSharp.Test
 
             account.Deposit(100);
 
-            Assert.That(account.Balance, Is.EqualTo(1));
+            Assert.That(account.Balance, Is.EqualTo(100));
             Assert.That(account.Transactions.Count, Is.EqualTo(1));
         }
 

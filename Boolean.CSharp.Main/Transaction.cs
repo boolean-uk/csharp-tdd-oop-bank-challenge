@@ -18,7 +18,7 @@ namespace Boolean.CSharp.Main
             _time = DateTime.Now;
         }
 
-        public double Balance { get => _amount; }
+        public double Amount { get => _amount; }
         public string Type { get => _type; }
         public DateTime Time { get => _time; }
     }

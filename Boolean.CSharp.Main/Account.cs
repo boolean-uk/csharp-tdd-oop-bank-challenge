@@ -15,12 +15,16 @@ namespace Boolean.CSharp.Main
 
         public Account(User user)
         {
-            throw new NotImplementedException();
+            _balance = 0;
+            _owner = user;
+            _transactions = new List<Transaction>();
         }
 
         public Account(User user, double balance)
         {
-            throw new NotImplementedException();
+            _balance = balance;
+            _owner = user;
+            _transactions = new List<Transaction>();
         }
 
         public double Balance { get => _balance; }
@@ -29,12 +33,24 @@ namespace Boolean.CSharp.Main
 
         public void Deposit(double amount)
         {
-            throw new NotImplementedException();
+            Transaction transaction = new Transaction(amount);
+            _balance += transaction.Amount;
+            _transactions.Add(transaction);
         }
         
         public bool Withdraw(double amount)
         {
-            throw new NotImplementedException();
+            if (amount < 0 || _balance-amount < 0)
+            {
+                Console.WriteLine("Not enough balance for withdrawal");
+                return false;
+            }
+
+            Transaction transaction = new Transaction(amount);
+            _balance -= transaction.Amount;
+            _transactions.Add(transaction);
+
+            return true;
         }
 
     }
