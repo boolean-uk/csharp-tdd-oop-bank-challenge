@@ -6,7 +6,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Boolean.CSharp.Test
 {
-    [TestFixture]
+
     public class CoreTests
     {
 
@@ -16,8 +16,7 @@ namespace Boolean.CSharp.Test
 
         }
 
-        [Test]
-        public void f() { }
+
         public static IEnumerable<Iaccount> AccountTestCases
         {
             get
@@ -51,7 +50,7 @@ namespace Boolean.CSharp.Test
         }
 
         [TestCaseSource(nameof(AccountTestCases))]
-        [TestCase]
+
         public void NegativeTransaction(Iaccount account)
         {
 
@@ -64,19 +63,38 @@ namespace Boolean.CSharp.Test
             Assert.That(res2.Count, Is.EqualTo(1));
 
         } 
+
+        [TestCaseSource(nameof(AccountTestCases))]
+
+        public void EmptyTransaction(Iaccount account)
+        {
+
+
+            bool res = account.AddTransaction(0f, null);
+
+            List<Transaction> res2 = account.GetTransactions();
+
+            Assert.That(res, Is.False);
+            Assert.That(res2.Count, Is.EqualTo(0));
+
+        } 
         
         [TestCaseSource(nameof(AccountTestCases))]
-        [TestCase]
+
         public void GetBalance(Iaccount account)
         {
 
 
             bool res = account.AddTransaction(100f, null);
+            bool res2 = account.AddTransaction(350f, null);
+            bool res3 = account.AddTransaction(400f, null);
 
-           float res2 = account.GetBalance();
+           float res4 = account.GetBalance();
 
             Assert.That(res, Is.True);
-            Assert.That(res2, Is.EqualTo(100f));
+            Assert.That(res2, Is.True);
+            Assert.That(res3, Is.True);
+            Assert.That(res4, Is.EqualTo(850f));
 
 
         }
@@ -85,7 +103,7 @@ namespace Boolean.CSharp.Test
 
 
         [TestCaseSource(nameof(AccountTestCases))]
-        [TestCase]
+
         public void PrintTransationHistory(Iaccount account)
         {
 
@@ -96,17 +114,19 @@ namespace Boolean.CSharp.Test
             bool transaction2 = account.AddTransaction(2000f, date2);
 
             DateTime date3 = new DateTime(year:2012, month:01, day:14);
-            bool transaction3 = account.AddTransaction(-500f, date2);
+            bool transaction3 = account.AddTransaction(-500f, date3);
 
 
             string res2 = account.GenerateTransationsHistory();
-            string ExpectedResult =
-                    @"date || credit || debit || balance\n
-                    14 / 01 / 2012 ||         || 500.00 || 2500.00\n
-                    13 / 01 / 2012 || 2000.00 ||        || 3000.00\n
-                    10 / 01 / 2012 || 1000.00 ||        || 1000.00\n";
+            string ExpectedResult = string.Format(
+                    "date || credit || debit || balance\n"+
+                    "14 / 01 / 2012 ||         || 500.00 || 2500.00\n"+
+                    "13 / 01 / 2012 || 2000.00 ||        || 3000.00\n"+
+                    "10 / 01 / 2012 || 1000.00 ||        || 1000.00\n");
 
-            Assert.That(res2, Is.EqualTo(ExpectedResult));
+            ExpectedResult = ExpectedResult.Replace(" ", "");
+            res2 = res2.Replace(" ", "");
+            Assert.That(res2.Trim(), Is.EqualTo(ExpectedResult.Trim()));
 
 
         }
