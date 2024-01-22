@@ -3,21 +3,21 @@
   <Class Name="Boolean.CSharp.Main.Bank">
     <Position X="0.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAEAACAAAAAAAAAAAAAAAAAAAAAAAIAgAAAAAAAAAAA=</HashCode>
+      <HashCode>AAEAACAAAAAAAAAAAAIAAAAAAAAAAIAgACAAAAAAAAA=</HashCode>
       <FileName>Bank.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Boolean.CSharp.Main.User">
     <Position X="3" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAIAAAAGAAwAAAAAAAAAQAAAAAAACAAAAAAAAEAEE=</HashCode>
+      <HashCode>AAQAIAAAAGAAwAAAAAAAAAREAAAAAAAAAAAAAAAEAEM=</HashCode>
       <FileName>User.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Boolean.CSharp.Main.Transaction">
     <Position X="7.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAgAAQAAAgAAAAAAAAAAAAAAQBAAAAAAQA=</HashCode>
+      <HashCode>AAAAAAAAAAAgAAQAAAAAAACAAAAAAAAAAQBAAAAAAQA=</HashCode>
       <FileName>Transaction.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -38,9 +38,10 @@
   <Class Name="Boolean.CSharp.Main.Account">
     <Position X="5.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EAAAgACAAAAAAAAAAAgAAAIEAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <HashCode>EACAgACAAAAAAAAAAAgAAAIEAAAAAAAAAAAAAAAAAAI=</HashCode>
       <FileName>Account.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

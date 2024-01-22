@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Boolean.CSharp.Main
 {
-    public abstract class Account
+    public abstract class Account : IAccount
     {
         private double _balance;
         private User _owner;
