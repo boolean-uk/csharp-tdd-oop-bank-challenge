@@ -23,7 +23,13 @@ namespace Boolean.CSharp.Main.Accounts
             user.RegisterAccount(this);
         }
 
-        public decimal setOverdrawLimit(decimal limit, IUser user) 
+        /// <summary>
+        /// Attempt to change the overdraw limit on the account
+        /// </summary>
+        /// <param name="limit"> Desired new limit </param>
+        /// <param name="user"> The user attempting to set the new limit </param>
+        /// <returns> The overdraw limit of the account after (potentially) changing </returns>
+        public decimal SetOverdrawLimit(decimal limit, IUser user) 
         {
             if (user is Manager) 
             {
@@ -75,7 +81,7 @@ namespace Boolean.CSharp.Main.Accounts
         /// <returns> The amount withdrawn. If 0m is returned the withdraw failed. </returns>
         public decimal Withdraw(decimal amount)
         {
-            if ((_balance - amount) > _overdrawLimit)
+            if ((_balance - amount) > -_overdrawLimit)
             {
                 _transactions.AddWithdrawTransaction(amount);
                 _balance -= amount;

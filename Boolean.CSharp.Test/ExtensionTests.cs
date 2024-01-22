@@ -79,5 +79,67 @@ namespace Boolean.CSharp.Test
             Assert.That(countRes3, Is.EqualTo(2));
 
         }
+
+        [Test]
+        public void TestOverdraftGeneralAccount() 
+        {
+            // Arrange
+            IBankBranch branch = new LocalBank("123 Bank Road, 987 City");
+            DateTime dob = new DateTime(1996, 8, 20);
+            Customer user = new RegularCustomer("Bob", dob);
+            IEmployee manager = new Manager("Jim");
+            user.RegisterWithBankBranch(branch);
+            user.OpenNewAccount(AccountType.General);
+            IAccount acc = user.GetAccounts()[0];
+            branch.AddAccountToBranch(acc);
+            acc.Deposit(1000m);
+
+            // Act
+            decimal res1 = (acc as GeneralAccount).SetOverdrawLimit(500, user);
+            decimal draw1 = acc.Withdraw(1250m);
+
+            decimal res2 = (acc as GeneralAccount).SetOverdrawLimit(750, manager);
+            decimal draw2 = acc.Withdraw(1250m);
+
+            // Assert
+            Assert.That(res1, Is.EqualTo(0));
+            Assert.That(draw1, Is.EqualTo(0m));
+
+            Assert.That(res2, Is.EqualTo(750m));
+            Assert.That(draw2, Is.EqualTo(1250m));
+        }
+
+        [Test]
+        public void TestOverdraftSavingsAccount() 
+        {
+            // Arrange
+            IBankBranch branch = new LocalBank("123 Bank Road, 987 City");
+            DateTime dob = new DateTime(1996, 8, 20);
+            Customer user = new RegularCustomer("Bob", dob);
+            IEmployee manager = new Manager("Jim");
+            user.RegisterWithBankBranch(branch);
+            user.OpenNewAccount(AccountType.Savings);
+            IAccount acc = user.GetAccounts()[0];
+            branch.AddAccountToBranch(acc);
+            acc.Deposit(1000m);
+
+            // Act
+            decimal? res1 = (acc as GeneralAccount)?.SetOverdrawLimit(500, user);
+            decimal draw1 = acc.Withdraw(1250m);
+
+            decimal? res2 = (acc as GeneralAccount)?.SetOverdrawLimit(750, manager);
+            decimal draw2 = acc.Withdraw(1250m);
+
+            decimal draw3 = acc.Withdraw(750m);
+
+            // Assert
+            Assert.That(res1, Is.Null);
+            Assert.That(draw1, Is.EqualTo(0m));
+
+            Assert.That(res2, Is.Null);
+            Assert.That(draw2, Is.EqualTo(0m));
+
+            Assert.That(draw3, Is.EqualTo(750m));
+        }
     }
 }
