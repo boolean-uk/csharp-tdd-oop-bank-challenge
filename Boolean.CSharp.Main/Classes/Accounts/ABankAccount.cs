@@ -34,23 +34,22 @@ namespace Boolean.CSharp.Main.Classes.Accounts
 
         public string WriteTransactions()
         {
-            throw new NotImplementedException();
             string test = string.Format("{0,-11} || {1,-10} || {2,-10} || {3,-10} \n", "Date", "Credit", "Debit", "Balance");
             StringBuilder sb = new StringBuilder();
             sb.Append(test);
             double money = 0d;
 
-            foreach (BankStatement transaction in _transactions.OrderByDescending(t => t.Date).Where(t => t.Status == true))
+            foreach (BankStatement transaction in _transactions.OrderBy(t => t.Date).Where(t => t.Status == true))
             {
                 money = money + transaction.Transaction;
-                test = string.Format("{0,10} || {1,10} || {2,10} || {3,10} ",
+                test = string.Format("{0,11} || {1,10} || {2,10} || {3,10} \n",
                     transaction.Date.ToShortDateString(),
                     transaction.Type == eType.Credit ? transaction.Transaction : 0,
                     transaction.Type == eType.Debit ? transaction.Transaction : 0,
                     money);
                 sb.Append(test);
             }
-
+            return sb.ToString();
         }
     }
 }
