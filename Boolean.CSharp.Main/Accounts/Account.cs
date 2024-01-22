@@ -17,7 +17,7 @@ namespace Boolean.CSharp.Main.Accounts
         //Encapsulated values
         private string _name;
         private double _balance = 0d;
-        public Branch _branch;
+        private Branch _branch;
         private readonly List<ITransaction> _transactions = [];
 
         public Account(Branch branch, string name)
@@ -26,14 +26,9 @@ namespace Boolean.CSharp.Main.Accounts
             _name = name;
         }
 
-        public double getBalance()
-        {
-            throw new NotImplementedException();
-        }
-
         public bool makeTransaction(TransactionType type, double amount)
         {
-            if (type == TransactionType.Debit && amount > _balance)
+            if (type == TransactionType.Debit && amount > _balance || amount <0)
             {
                 return false;
             }

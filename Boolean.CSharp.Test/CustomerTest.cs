@@ -14,9 +14,9 @@ namespace Boolean.CSharp.Test
         [Test]
         public void CreateAccount()
         {
-            Customer customer = new Customer();
-            customer.CreateSpendingAccount("testSaving", Main.Branch.First);
-            customer.CreateSavingsAccount("testCurrent", Main.Branch.First);
+            Customer customer = new Customer("testName",Main.Branch.First);
+            customer.CreateSpendingAccount("testSaving", customer.Branch);
+            customer.CreateSavingsAccount("testCurrent", customer.Branch);
             Assert.That(customer.GetAccounts().Count, Is.EqualTo(2));
         }
     }
