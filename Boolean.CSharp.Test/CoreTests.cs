@@ -151,6 +151,68 @@ namespace Boolean.CSharp.Test
 
         }
 
+        [Test]
+        public void TestWithdrawFunds1()
+        {
+            BankApplication bankApp = new BankApplication();
+            Custommer custommer1 = new Custommer()
+            {
+                Name = "Kanthee",
+                Branch = Branches.Bergen,
+                Id = 1111
+            };
+            bankApp.Add(custommer1);
+            custommer1.makeAccount(Enums.Current);
+            double amount1 = 999.0;
+            TransactionType type1 = TransactionType.Deposit;
+            String mark1 = "Saving 01/01/24";
+
+            double amount2 = 555.0;
+            TransactionType type2 = TransactionType.Withdraw;
+            String mark2 = "Deposit 01/01/24";
+
+
+
+            string acc = "Bergen-00001";
+            Transaction transaction1 = new Transaction() { Amount = amount1, Type = type1, Mark = mark1 };
+            custommer1.Deposit(acc, transaction1);
+            Transaction transaction2 = new Transaction() { Amount = amount2, Type = type2, Mark = mark2 };
+            custommer1.Withdraw(acc, transaction2);
+            double balance1 = custommer1.getBalance(acc);
+
+
+            Assert.IsTrue(balance1 == amount1-amount2);
+
+        }
+
+        [Test]
+        public void TestWithdrawFunds2()
+        {
+            BankApplication bankApp = new BankApplication();
+            Custommer custommer1 = new Custommer()
+            {
+                Name = "Kanthee",
+                Branch = Branches.Bergen,
+                Id = 1111
+            };
+            bankApp.Add(custommer1);
+            custommer1.makeAccount(Enums.Current);
+            
+            double amount2 = 555.0;
+            TransactionType type2 = TransactionType.Withdraw;
+            String mark2 = "Deposit 01/01/24";
+
+            string acc = "Bergen-00001";
+           
+            Transaction transaction2 = new Transaction() { Amount = amount2, Type = type2, Mark = mark2 };
+            custommer1.Withdraw(acc, transaction2);
+            double balance1 = custommer1.getBalance(acc);
+
+            Assert.AreEqual("No account available", custommer1.Withdraw(acc, transaction2));
+            Assert.IsTrue(balance1 == 0);
+
+        }
+
 
 
 
