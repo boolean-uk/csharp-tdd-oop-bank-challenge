@@ -11,5 +11,7 @@ namespace Boolean.CSharp.Main.Branches
         public string Name => throw new NotImplementedException();
 
         public string Description => throw new NotImplementedException();
+
+        public List<Request> Requests { get; set; } = new();
     }
 }

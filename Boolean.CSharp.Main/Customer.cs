@@ -24,5 +24,10 @@ namespace Boolean.CSharp.Main
         {
             return _accounts.Count;
         }
+
+        public void RequestOverdraft(IAccount account, double requestAmount)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
