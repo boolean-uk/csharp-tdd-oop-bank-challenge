@@ -1,4 +1,5 @@
 ﻿using Boolean.CSharp.Main.Accounts.Constants;
+using Boolean.CSharp.Main.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,7 +54,7 @@ namespace Boolean.CSharp.Main.Accounts
         /// A method to send overdraft request
         /// </summary>
         /// <param name="request"></param>
-        void RequestOverdraft(Transaction request);
+        void RequestOverdraft(Transaction request, Manager custommerAdvisor);
         public List<Transaction> getRequest();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Boolean.CSharp.Main.Accounts.Constants;
+using Boolean.CSharp.Main.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace Boolean.CSharp.Main.Accounts
         private double _Balance = 0;
         private List<Transaction> _transactions = new List<Transaction>();
         private List<Transaction> _request = new List<Transaction>();
+        public Manager _accountManager;
 
 
         public Guid _AccId { get; set; }
@@ -90,15 +92,17 @@ namespace Boolean.CSharp.Main.Accounts
             return (sb.ToString());
         }
 
-        public void RequestOverdraft(Transaction request)
+        public void RequestOverdraft(Transaction request, Manager custommerAdviser)
         {
+            _accountManager = custommerAdviser; 
+            
             _request.Add(request);
             if (request.TransectionStatus == true)
             {
                 _transactions.Add(request);
             }
-            else { 
-                
+            else {
+                _accountManager.AddRequest(request);
             }
         }
 

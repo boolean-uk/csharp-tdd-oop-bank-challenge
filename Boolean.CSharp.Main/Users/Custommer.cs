@@ -21,6 +21,7 @@ namespace Boolean.CSharp.Main.Users
         private int _Id;
         private bool _IsActive = true;
         private Branches _branch;
+        private Manager _accManager = new Manager();    
 
 
         private Dictionary<Guid, IAccount> accounts = new Dictionary<Guid, IAccount>();
@@ -121,7 +122,7 @@ namespace Boolean.CSharp.Main.Users
         {
            if(accounts.ContainsKey(acc))
             {
-                accounts[acc].RequestOverdraft(request);
+                accounts[acc].RequestOverdraft(request, _accManager);
             }
             else
             {

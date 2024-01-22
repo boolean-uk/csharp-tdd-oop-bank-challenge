@@ -1,4 +1,5 @@
 ﻿using Boolean.CSharp.Main;
+using Boolean.CSharp.Main.Accounts;
 using Boolean.CSharp.Main.Accounts.Constants;
 using Boolean.CSharp.Main.Users;
 using NUnit.Framework;
@@ -156,6 +157,48 @@ namespace Boolean.CSharp.Test
 
             //Should be 1 overdraft request in the list.
             Assert.IsTrue(custommer1.getRequest(acc1).Count == 1);
+
+        }
+
+        [Test]
+        public void TestRequestReview()
+        {
+            double amount1 = 100000.00;
+            TransactionType type1 = TransactionType.Overdraft;
+            String mark1 = "Request some money for my son! PLEASE!";
+            Transaction request1 = new Transaction() { Amount = amount1, Mark = mark1, Type = type1 };
+
+
+            Guid acc1 = custommer1.getAccAccounts().Keys.First();
+            custommer1.RequestOverdraft(acc1, request1);
+            Account account1 = (Account)custommer1.getAccAccounts()[acc1];
+
+            //Should be 1 request waiting for the account manager to review.
+            Assert.IsTrue(account1._accountManager.getRequests().Count == 1);
+
+        }
+
+        [Test]
+        public void TestRequestReview2()
+        {
+            double amount1 = 100000.00;
+            TransactionType type1 = TransactionType.Overdraft;
+            String mark1 = "Request some money for my son! PLEASE!";
+            Transaction request1 = new Transaction() { Amount = amount1, Mark = mark1, Type = type1 };
+
+            double amount2 = 100000.00;
+            TransactionType type2 = TransactionType.Overdraft;
+            String mark2 = "Request some money for my MOM! PLEASE!";
+            Transaction request2 = new Transaction() { Amount = amount2, Mark = mark2, Type = type2 };
+
+
+            Guid acc1 = custommer1.getAccAccounts().Keys.First();
+            custommer1.RequestOverdraft(acc1, request1);
+            custommer1.RequestOverdraft(acc1, request2);
+            Account account1 = (Account)custommer1.getAccAccounts()[acc1];
+
+            //Should be 2 requests waiting for the account manager to review.
+            Assert.IsTrue(account1._accountManager.getRequests().Count == 2);
 
         }
 
