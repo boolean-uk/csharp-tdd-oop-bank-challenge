@@ -67,13 +67,31 @@ namespace Boolean.CSharp.Test
         {
             // Arrange
             BankStatement bankStatement;
-            bankStatement = new BankStatement(_account.AccountNumber);
+            bankStatement = new BankStatement(_account);
 
             // Act
-            string statement = bankStatement.DisplayStatment();
+            string statement = bankStatement.GetStatement();
 
             // Assert
             Assert.IsNotNull(statement);
+        }
+
+        [Test]
+        public void GetBalanceAfterTransaction()
+        {
+            // Arrange
+            _account.Deposit(1000);
+            _account.Deposit(500);
+            _account.Withdraw(200);
+
+            var deposit1 = _account.Transactions[0];
+            var deposit2 = _account.Transactions[1];
+            var withdrawal = _account.Transactions[2];
+
+            // Act & Assert
+            Assert.AreEqual(1000, _account.GetBalanceAfterTransaction(deposit1));
+            Assert.AreEqual(1500, _account.GetBalanceAfterTransaction(deposit2));
+            Assert.AreEqual(1300, _account.GetBalanceAfterTransaction(withdrawal));
         }
     }
 }

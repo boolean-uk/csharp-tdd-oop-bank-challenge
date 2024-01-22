@@ -8,16 +8,29 @@ namespace Boolean.CSharp.Main.Models
 {
     public class BankStatement
     {
-        public int AccountNumber { get; set; }
+        public Account Account { get; set; }
 
-        public BankStatement(int accountNumber)
+        public BankStatement(Account account)
         {
-            AccountNumber = accountNumber;
+            Account = account;
         }
 
-        public string GetStatment()
+        public string GetStatement()
         {
-            throw new NotImplementedException();
+            StringBuilder statementText = new StringBuilder();
+
+            statementText.AppendFormat("{0,10} || {1,10} || {2,10} || {3,10}\n", "Date", "Credit", "Debit", "Balance");
+            foreach (Transaction transaction in Account.Transactions)
+            {
+                statementText.AppendFormat("{0,10} || {1,10} || {2,10} || {3,10}\n",
+                    transaction.Date.ToString("dd/MM/yyyy"),
+                    transaction.Type == TransactionType.Credit ? transaction.Amount.ToString("0.00") : "",
+                    transaction.Type == TransactionType.Debit ? transaction.Amount.ToString("0.00") : "",
+                    Account.GetBalanceAfterTransaction(transaction).ToString("0.00")
+                );
+            }
+
+            return statementText.ToString();
         }
     }
 }

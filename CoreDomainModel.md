@@ -19,7 +19,7 @@
 | Account | `int AccountNumber`, `double Balance`, `List<Transaction> Transactions`|
 | CurrentAccount : Account | |
 | SavingsAccount : Account| |
-| BankStatement | `int AccountNumber` |
+| BankStatement | `Account account` |
 
 ## Functionality
 | User story | Class | Method | Scenario | Output |
