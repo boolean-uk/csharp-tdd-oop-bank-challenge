@@ -12,5 +12,6 @@ customer.CreateAccount(account);
 
 Request request = new("I need money", 120, account);
 customer.RequestOverdraft(request);
+customer.MessageStatements(account);
 
 account.Branch.ReviewRequests();
