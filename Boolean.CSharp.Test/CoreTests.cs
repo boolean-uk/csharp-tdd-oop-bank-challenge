@@ -104,7 +104,20 @@ namespace Boolean.CSharp.Test
         [Test]
         public void GenerateBankStatements()
         {
-            Assert.IsTrue(false);
+            //  Arrange - set up test values
+            CurrentAccount testAccount = new CurrentAccount();
+            customer.CreateAccount(testAccount);
+            int expected = 4;
+
+            //  Act - use the fucntion we want to test
+            customer.Deposit(2500.0d, 0);
+            customer.Deposit(500.0d, 0);
+            customer.Withdraw(2000, 0);
+            customer.Withdraw(1000, 0);
+            int result = customer.GenerateStatement();
+
+            //  Assert - check the results
+            Assert.That(result, Is.EqualTo(expected));
         }
     }
 }
