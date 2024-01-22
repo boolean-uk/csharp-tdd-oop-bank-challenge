@@ -62,43 +62,43 @@ namespace Boolean.CSharp.Test
         public void ShouldAddDepositLog()
         {
             LogTransaction logger = new LogTransaction();
-            string output = logger.AddLog(500, 1500);
-            Assert.That(output, Is.EqualTo($"{_date} ||  500.00 ||         || 1500.00"));
+            Transaction output = logger.AddLog(500);
+            Assert.That(output.ToString(), Is.EqualTo($"{_date} ||  500.00 ||         ||  500.00"));
         }
         [Test]
         public void ShouldWithdrawLog()
         {
             LogTransaction logger = new LogTransaction();
-            string output = logger.AddLog(-500, 1500);
-            Assert.That(output, Is.EqualTo($"{_date} ||         ||  500.00 || 1500.00"));
+            Transaction output = logger.AddLog(-500);
+            Assert.That(output.ToString(), Is.EqualTo($"{_date} ||         ||  500.00 || -500.00"));
         }
         [Test]
         public void NothingLog()
         {
             LogTransaction logger = new LogTransaction();
-            string output = logger.AddLog(0, 1500);
-            Assert.That(output, Is.EqualTo($"{_date} ||         ||         || 1500.00"));
+            Transaction output = logger.AddLog(0);
+            Assert.That(output.ToString(), Is.EqualTo($"{_date} ||         ||         ||    0.00"));
         }
         [Test]
         public void BrokeLog()
         {
             LogTransaction logger = new LogTransaction();
-            string output = logger.AddLog(-300, 0);
-            Assert.That(output, Is.EqualTo($"{_date} ||         ||  300.00 ||    0.00"));
+            Transaction output = logger.AddLog(-300);
+            Assert.That(output.ToString(), Is.EqualTo($"{_date} ||         ||  300.00 || -300.00"));
         }
         [Test]
         public void DebtLog()
         {
             LogTransaction logger = new LogTransaction();
-            string output = logger.AddLog(-500, -100);
-            Assert.That(output, Is.EqualTo($"{_date} ||         ||  500.00 || -100.00"));
+            Transaction output = logger.AddLog(-500);
+            Assert.That(output.ToString(), Is.EqualTo($"{_date} ||         ||  500.00 || -500.00"));
         }
         [Test]
         public void PrintLog()
         {
             LogTransaction logger = new LogTransaction();
-            logger.AddLog(-500, 100);
-            logger.AddLog(300, 1000);
+            logger.AddLog(-500);
+            logger.AddLog(300);
             logger.Print();
             Assert.Pass();
         }

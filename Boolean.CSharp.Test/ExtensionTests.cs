@@ -12,17 +12,22 @@ namespace Boolean.CSharp.Test
     public class ExtensionTests
     {
         private Extension _extension;
+        private LogTransaction _logger;
         public ExtensionTests()
         {
+            _logger = new LogTransaction();
             _extension = new Extension();
         }
         [Test]
-        private void TestQuestion1()
+        public void TestQuestion1()
         {
-
+            _logger.AddLog(300);
+            _logger.AddLog(500);
+            _logger.Print();
+            Assert.That(_logger.CurrentBalance, Is.EqualTo(800));
         }
         [Test]
-        private void TestQuestion2()
+        public void TestQuestion2()
         {
 
         }

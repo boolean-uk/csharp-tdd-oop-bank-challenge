@@ -11,21 +11,18 @@ namespace Boolean.CSharp.Main
 {
     public class BaseAccount
     {
-        private float _money;
-        public float Money { get { return _money; } }
+        public float Money { get { return _logger.CurrentBalance(); } }
         private LogTransaction _logger = new LogTransaction();
         public bool Deposit(float amount)
         {
             if (amount < 0) return false;
-            _money += amount;
-            _logger.AddLog(amount, _money);
+            _logger.AddLog(amount);
             return true;
         }
         public bool Withdraw(float amount)
         {
-            if (amount < 0 || _money < amount) return false;
-            _money -= amount;
-            _logger.AddLog(-amount, _money);
+            if (amount < 0 || _logger.CurrentBalance() < amount) return false;
+            _logger.AddLog(-amount);
             return true;
         }
 
