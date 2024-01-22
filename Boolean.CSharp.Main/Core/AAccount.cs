@@ -15,7 +15,8 @@ namespace Boolean.CSharp.Main.Core
         private IMessenger messenger = new ConsoleMessenger();
         public List<Transaction> transactions { get; private set; } = new List<Transaction>();
 
-        public OverdraftStatus Overdraft { get; private set; } = OverdraftStatus.Default;
+        public double Overdraft { get; private set; } = 0d;
+        private (OverdraftStatus status, double amount) pendingOverdraft = (OverdraftStatus.Default, 0d);
 
         public Branch Branch { get; private set; }
 
@@ -50,7 +51,7 @@ namespace Boolean.CSharp.Main.Core
 
         public bool Withdraw(double amount)
         {
-            if (amount > Savings() & Overdraft != OverdraftStatus.Accepted) return false;
+            if (amount > Savings() + Overdraft) return false;
             Transaction transaction = new Transaction(DateTime.Now, -amount,  Savings() - amount);
             transactions.Add(transaction);
             return true;
@@ -58,7 +59,7 @@ namespace Boolean.CSharp.Main.Core
 
         public bool Withdraw(double amount, DateTime time)
         {
-            if (amount > Savings()) return false;
+            if (amount > Savings() + Overdraft) return false;
             Transaction transaction = new Transaction(time, -amount, Savings() - amount);
             transactions.Add(transaction);
             return true;
@@ -84,11 +85,12 @@ namespace Boolean.CSharp.Main.Core
             messenger.send(statement);
         }
 
-        public bool RequestOverdraft()
+        public bool RequestOverdraft(double amount)
         {
-            if ( Overdraft == OverdraftStatus.Default)
+            if (pendingOverdraft.status == OverdraftStatus.Default)
             {
-                Overdraft = OverdraftStatus.Requested;
+                pendingOverdraft.status = OverdraftStatus.Requested;
+                pendingOverdraft.amount = amount;
                 return true;
             }
             return false;
@@ -97,9 +99,10 @@ namespace Boolean.CSharp.Main.Core
 
         public bool AcceptOverdraft()
         {
-            if ( Overdraft == OverdraftStatus.Requested)
+            if (pendingOverdraft.status == OverdraftStatus.Requested)
             {
-                Overdraft = OverdraftStatus.Accepted;
+                Overdraft = pendingOverdraft.amount;
+                pendingOverdraft.status = OverdraftStatus.Default;
                 return true;
             }
             return false;
@@ -107,9 +110,10 @@ namespace Boolean.CSharp.Main.Core
 
         public bool RejectOverdraft()
         {
-            if (Overdraft == OverdraftStatus.Requested)
+            if (pendingOverdraft.status == OverdraftStatus.Requested)
             {
-                Overdraft = OverdraftStatus.Rejected;
+                pendingOverdraft.status = OverdraftStatus.Default;
+                pendingOverdraft.amount = 0;
                 return true;
             }
             return false;

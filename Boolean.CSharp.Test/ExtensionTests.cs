@@ -48,21 +48,20 @@ namespace Boolean.CSharp.Test
         [Test]
         public void OverdraftRequest()
         {
-            Assert.That(saving.RequestOverdraft(), Is.True);
-            Assert.That(saving.Overdraft, Is.EqualTo(OverdraftStatus.Requested));
+            Assert.That(saving.RequestOverdraft(1500d), Is.True);
         }
 
         [Test]
         public void AcceptOverdraft()
         {
-            current.RequestOverdraft();
+            current.RequestOverdraft(1500d);
             Assert.That(current.AcceptOverdraft(), Is.True);
             Assert.That(current.Withdraw(50d), Is.True);
         }
 
         [Test]
         public void RejectOverdraft() {
-            current.RequestOverdraft();
+            current.RequestOverdraft(1500d);
             Assert.That(current.RejectOverdraft(), Is.True);
             Assert.That(current.Withdraw(50d), Is.False);
         }
@@ -70,8 +69,16 @@ namespace Boolean.CSharp.Test
         [Test]
         public void RejectWrongAccount()
         {
-            current.RequestOverdraft();
+            current.RequestOverdraft(1500d);
             Assert.That(saving.RejectOverdraft(), Is.False);
+        }
+
+        [Test]
+        public void BorrowingAboveOverdraft()
+        {
+            current.RequestOverdraft(1500d);
+            current.AcceptOverdraft();
+            Assert.That(current.Withdraw(1501d), Is.False);
         }
     }
 }
