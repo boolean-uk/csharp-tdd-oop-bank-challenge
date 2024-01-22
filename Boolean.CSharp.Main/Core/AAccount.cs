@@ -48,7 +48,7 @@ namespace Boolean.CSharp.Main.Core
 
         public bool Withdraw(double amount)
         {
-            if (amount > Savings()) return false;
+            if (amount > Savings() & Overdraft != OverdraftStatus.Accepted) return false;
             Transaction transaction = new Transaction(DateTime.Now, -amount,  Savings() - amount);
             transactions.Add(transaction);
             return true;
@@ -87,12 +87,22 @@ namespace Boolean.CSharp.Main.Core
 
         public bool AcceptOverdraft()
         {
-            throw new NotImplementedException();
+            if ( Overdraft == OverdraftStatus.Requested)
+            {
+                Overdraft = OverdraftStatus.Accepted;
+                return true;
+            }
+            return false;
         }
 
         public bool RejectOverdraft()
         {
-            throw new NotImplementedException();
+            if (Overdraft == OverdraftStatus.Requested)
+            {
+                Overdraft = OverdraftStatus.Rejected;
+                return true;
+            }
+            return false;
         }
     }
 }

@@ -14,5 +14,5 @@ namespace Boolean.CSharp.Main.Enums
         Northamptonshire
     }
 
-    public enum OverdraftStatus { Default = 0, Requested = 1, Denied = 2, Accepted = 3 }
+    public enum OverdraftStatus { Default = 0, Requested = 1, Rejected = 2, Accepted = 3 }
 }
