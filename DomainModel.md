@@ -38,13 +38,13 @@ I want to approve or reject overdraft requests.
 
 | Classes            | Methods                                     | Scenario                                                       | Outputs             |
 |--------------------|---------------------------------------------|----------------------------------------------------------------|---------------------|
-| `IUser`            | `Account CreateAccount(AccountType)`        | Creates an account                                                               |                     |
+| `IUser`            | `IAccount CreateAccount(AccountType accountType)` | Create an account based on AccountType                   | `Child class of IAccount` |
 | `Customer : IUser` |                                             |                                                                |                     |
-| `Manager : IUser`  | `List<Overdraft> GetOverdraftRequests()`    |                                                                |                     |
-| `Bank`             | `double AddCash(double depositAmount)`      |                                                                |                     |
-|                    | `double RemoveCash(double withdrawlAmount)` |                                                                |                     |
+| `Manager : IUser`  | `List<Overdraft> GetOverdraftRequests()`    | Gets overdraft requests                                        | `List<Overdraft>` |
+| `Bank`             | `double Deposit(double depositAmount)`      | User adds money into the bank based of what they deposited from their account |      |
+|                    | `double Withdrawl(double withdrawlAmount)`  |                                                                |                     |
 |                    | `GetOverdraftRequests()                     |                                                                |                     |
-| `Account`          | `Account(Mobile mobile = mobile)`           |                                                                |                     |
+| `IAccount`         | `IAccount(IUser user, Mobile mobile = mobile)` |                                                             |                     |
 |                    | `double GetBalance()`                       | Compares the accounts balance based of the transaction history.| `value`    |                     |
 |                    | `Statement BankStatement GetBankStatement()`|                                                                |                     |
 |                    | `bool AddMobile(Mobile mobile)`             |                                                                |                     |
@@ -53,6 +53,8 @@ I want to approve or reject overdraft requests.
 |                    | `bool RequestOverdraft()`                   |                                                                |                     |
 |                    | `bool SetSendStatementToMobile(bool shouldSendStatement)` |                                                  |                     |
 |                    | `private string SendStatement()`            |                                                                |                     |
+| `AccountSavings : IAccount`   | `AccountSavings(IUser user, Mobile mobile = mobile)` |                                            |                     |
+| `AccountDeposit : IAccount`   | `AccountDeposit(IUser user, Mobile mobile = mobile)` |                                            |                     |
 | `MobilePhone`      |                                             |                                                                |                     |
 
 
