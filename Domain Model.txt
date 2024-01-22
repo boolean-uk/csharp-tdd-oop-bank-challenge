@@ -25,15 +25,12 @@ public string AccountNumber
 public string AccountType // "Current" or "Savings"
 public decimal Balance
 public DateTime LastUpdateDate
-public List<Transaction> Transactions
-private static int accountCounter = 1 // static variable to generate unique account numbers
+private static int accountNum  // static variable to generate unique account numbers
 
 Methods:
 public static UserAccount CreateAccount(string name, string accountType) // static method to create a new account
 private static string GenerateAccountNumber() // static method to generate a unique account number
-public void Deposit(decimal amount) // method to deposit funds
-public void Withdraw(decimal amount) // method to withdraw funds
-
+public static UserAccount GetAccount(string accountName, string accountType) // static method to get an account by name and type
 
 *** Class Transaction ***
 public DateTime Date
@@ -44,9 +41,11 @@ Methods:
 public Transaction(DateTime date, decimal amount, string transactionType)
 
 *** Class Bank ***
+private List<Transaction> Transactions
 
 Methods:
-public static UserAccount GetAccountByNumber(string accountNumber) // static method to retrieve an account by account number
+public void Withdraw(string, accountName, string accountType, decimal amount) // method to withdraw funds
+public void Deposit(string, accountName, string accountType, decimal amount) // method to deposit funds
 public static void GenerateStatement(UserAccount account) // static method to generate a statement for the given account
 
 

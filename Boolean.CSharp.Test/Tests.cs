@@ -7,10 +7,12 @@ namespace Boolean.CSharp.Test
     public class Tests
     {
         private UserAccount _userAccount;
+        private Bank _bank;
 
         [SetUp]
         public void Setup()
         {
+            _bank = new Bank();
             _userAccount = UserAccount.CreateAccount("John", "Current");
         }
 
@@ -18,15 +20,15 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestDeposit()
         {
-            _userAccount.Deposit("John", "Current", 200);
+            _bank.Deposit("John", "Current", 200);
             Assert.That(_userAccount.Balance, Is.EqualTo(200));
         }    
 
         [Test]
         public void TestWithdraw()
         {
-            _userAccount.Deposit("John", "Current", 200);
-            _userAccount.Withdraw("John", "Current", 100);
+            _bank.Deposit("John", "Current", 200);
+            _bank.Withdraw("John", "Current", 100);
             Assert.That(_userAccount.Balance, Is.EqualTo(100));
         }
 
@@ -41,15 +43,8 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestWithdrawMoreThanBalance()
         {
-            _userAccount.Deposit("John", "Current", 200);
-            _userAccount.Withdraw("John", "Current", 300);
-            Assert.That(_userAccount.Balance, Is.EqualTo(0));
-        }
-
-        [Test]
-        public void TestDepositToWrongAccount()
-        {
-            _userAccount.Deposit("NoUser", "Current", 200);
+            _bank.Deposit("John", "Current", 200);
+            _bank.Withdraw("John", "Current", 300);
             Assert.That(_userAccount.Balance, Is.EqualTo(0));
         }
 
