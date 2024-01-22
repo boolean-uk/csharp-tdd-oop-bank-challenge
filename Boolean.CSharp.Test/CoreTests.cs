@@ -15,6 +15,7 @@ namespace Boolean.CSharp.Test
 
             //act
             bankManager.CreateCurrentAccount();
+            
 
             //assert
             Assert.IsTrue(accountList.Accounts.Count > 0);

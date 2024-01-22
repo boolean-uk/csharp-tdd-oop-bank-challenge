@@ -13,7 +13,17 @@ namespace Boolean.CSharp.Main
 
         public void CreateCurrentAccount()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Input name of current account");
+            string accountName = Console.ReadLine();
+            CurrentAccount newCurrentAccount = new CurrentAccount(accountName);
+            if (!accountList.Accounts.Contains(newCurrentAccount)){
+                accountList.Accounts.Add(newCurrentAccount);
+                Console.WriteLine($"{accountName} has been added to accounts");
+            } else
+            {
+                Console.WriteLine($"{accountName} already exists");
+            }
+                
         }
 
         public void CreateSavingsAccount()

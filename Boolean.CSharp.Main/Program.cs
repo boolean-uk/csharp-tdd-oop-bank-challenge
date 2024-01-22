@@ -1,2 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+using Boolean.CSharp.Main;
+
+Console.WriteLine("Welcome to your bank management application");
+
+BankManager bankManager = new BankManager();
+
+bankManager.CreateCurrentAccount();
