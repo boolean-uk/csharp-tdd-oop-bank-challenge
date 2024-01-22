@@ -3,10 +3,10 @@
 Class:
 	BankAccount
 Properties:
-	public readonly int: currentBallance
+	public readonly float: currentBalance
 	public readonly list<int>: balanceList
-	private list<Transaction>: TransactionsList
-	public readonly string: AccountID
+	private list<Transaction>: transactionsList
+	public readonly string: accountID
 Methods:
 	MakeTransaction(Transaction, transaction);
 		//Creates a transaction object

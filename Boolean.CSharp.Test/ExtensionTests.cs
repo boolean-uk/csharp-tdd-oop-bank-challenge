@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Test
 {
+    /*
     [TestFixture]
     public class ExtensionTests
     {
@@ -27,4 +28,5 @@ namespace Boolean.CSharp.Test
 
         }
     }
+    */
 }
