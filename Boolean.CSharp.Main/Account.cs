@@ -70,7 +70,6 @@ namespace Boolean.CSharp.Main
                 statementBuilder.AppendLine($"Balance at the time of transaction: {currentBalance}");
                 statementBuilder.AppendLine();
             }
-
             return statementBuilder.ToString();
         }
 
@@ -106,7 +105,7 @@ namespace Boolean.CSharp.Main
 
         public bool requestOverdraft(decimal amount)
         {
-            return this.overdraft = true;
+            return true;
         }
 
         public string denieOverdraft(decimal amount)
@@ -123,6 +122,7 @@ namespace Boolean.CSharp.Main
         {
             if (this.requestOverdraft(amount) == true)
             {
+                this.overdraft = true;
                 Transactions.Add(new Transaction(DateTime.Today.Date.ToString("dd-MM-yyyy HH:mm:ss"), 0, amount));
                 return "approved";
             }
