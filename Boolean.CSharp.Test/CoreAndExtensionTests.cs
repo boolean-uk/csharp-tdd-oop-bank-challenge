@@ -10,6 +10,7 @@ namespace Boolean.CSharp.Test
         {
             var branch = new Branch(1 , "Branch Name" , "Branch Address" , "Branch SortCode");
             var account = new CurrentAccount(1 , branch);
+            account.OverdraftLimit = 500; // Set an overdraft limit
 
             Assert.AreEqual(1 , account.GetId());
             Assert.AreEqual(branch , account.GetBranch());
@@ -19,17 +20,16 @@ namespace Boolean.CSharp.Test
             Assert.IsTrue(account.Deposit(100));
             Assert.AreEqual(100 , account.ViewBalance());
 
-            Assert.IsFalse(account.Deposit(-50));
+            Assert.Throws<ArgumentException>(() => account.Deposit(-50));
             Assert.AreEqual(100 , account.ViewBalance());
 
             Assert.IsTrue(account.Withdraw(50));
             Assert.AreEqual(50 , account.ViewBalance());
 
-            Assert.IsFalse(account.Withdraw(60));
-            Assert.AreEqual(50 , account.ViewBalance());
+            Assert.DoesNotThrow(() => account.Withdraw(500));
+            Assert.AreEqual(-450 , account.ViewBalance());
 
-            Assert.IsFalse(account.Withdraw(-10));
-            Assert.AreEqual(50 , account.ViewBalance());
+            Assert.Throws<ArgumentException>(() => account.Withdraw(5000));
         }
 
         [Test]
@@ -118,6 +118,11 @@ namespace Boolean.CSharp.Test
             branch.AddAccount(account);
             Assert.IsTrue(branch.ApproveOverdraftRequest(1 , 500));
             Assert.AreEqual(500 , account.OverdraftLimit);
+
+            Assert.IsTrue(account.Withdraw(500));
+            Assert.AreEqual(-500 , account.ViewBalance());
+
+            Assert.Throws<ArgumentException>(() => account.Withdraw(1));
         }
     }
 }

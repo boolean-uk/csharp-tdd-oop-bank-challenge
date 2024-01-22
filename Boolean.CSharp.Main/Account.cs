@@ -2,7 +2,7 @@
 {
     public abstract class Account
     {
-        private int Id { get; set; }
+        public int Id { get; private set; }
         private Branch Branch { get; set; }
         public List<Transaction> Transactions { get; private set; }
 
@@ -27,26 +27,23 @@
         {
             if(amount <= 0)
             {
-                Console.WriteLine("Deposit amount must be greater than zero.");
-                return false;
+                throw new ArgumentException("Deposit amount must be greater than zero.");
             }
 
             Transactions.Add(new Transaction(DateTime.Now , amount , 0));
             return true;
         }
 
-        public bool Withdraw(float amount)
+        public virtual bool Withdraw(float amount)
         {
             float balance = ViewBalance();
             if(amount <= 0)
             {
-                Console.WriteLine("Withdrawal amount must be greater than zero.");
-                return false;
+                throw new ArgumentException("Withdrawal amount must be greater than zero.");
             }
             if(amount > balance)
             {
-                Console.WriteLine("Insufficient balance for withdrawal.");
-                return false;
+                throw new ArgumentException("Insufficient balance for withdrawal.");
             }
 
             Transactions.Add(new Transaction(DateTime.Now , 0 , amount));

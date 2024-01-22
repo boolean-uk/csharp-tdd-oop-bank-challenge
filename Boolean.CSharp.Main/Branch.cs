@@ -2,10 +2,10 @@
 {
     public class Branch
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Address { get; set; }
-        public string SortCode { get; set; }
+        public int Id { get; private set; }
+        public string Name { get; private set; }
+        public string Address { get; private set; }
+        public string SortCode { get; private set; }
         public List<Account> Accounts { get; private set; }
 
         public Branch(int id , string name , string address , string sortCode)
