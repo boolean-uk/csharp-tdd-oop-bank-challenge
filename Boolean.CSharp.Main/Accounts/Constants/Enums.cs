@@ -25,6 +25,7 @@ namespace Boolean.CSharp.Main.Accounts.Constants
     {
         Deposit,
         Withdraw,
-        Loan
+        Loan,
+        Overdraft
     }
 }

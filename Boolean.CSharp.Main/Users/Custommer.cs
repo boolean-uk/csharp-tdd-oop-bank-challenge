@@ -2,6 +2,7 @@
 using Boolean.CSharp.Main.Accounts.Constants;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,7 @@ namespace Boolean.CSharp.Main.Users
 
 
         private Dictionary<Guid, IAccount> accounts = new Dictionary<Guid, IAccount>();
+       // private List<Transaction> overdraftRequest = new List<Transaction>();
 
         public string Name { get { return _name; } set { _name = value; } }
         public int Id { get { return _Id; } set { _Id = value; } }
@@ -113,5 +115,25 @@ namespace Boolean.CSharp.Main.Users
 
             }
         }
+
+
+        public void RequestOverdraft(Guid acc, Transaction request)
+        {
+           if(accounts.ContainsKey(acc))
+            {
+                accounts[acc].RequestOverdraft(request);
+            }
+            else
+            {
+                throw new Exception("No account available");
+
+            }
+        }
+
+        public List<Transaction> getRequest(Guid acc)
+        {
+            return accounts[acc].getRequest();
+        }
+
     }
 }

@@ -155,7 +155,7 @@ namespace Boolean.CSharp.Test
             custommer1.RequestOverdraft(acc1, request1);
 
             //Should be 1 overdraft request in the list.
-            Assert.IsTrue(custommer1.getRequest().Count == 1);
+            Assert.IsTrue(custommer1.getRequest(acc1).Count == 1);
 
         }
 

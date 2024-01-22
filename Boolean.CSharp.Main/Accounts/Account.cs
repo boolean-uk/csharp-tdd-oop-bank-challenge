@@ -13,6 +13,7 @@ namespace Boolean.CSharp.Main.Accounts
         protected Enums _Type;
         private double _Balance = 0;
         private List<Transaction> _transactions = new List<Transaction>();
+        private List<Transaction> _request = new List<Transaction>();
 
 
         public Guid _AccId { get; set; }
@@ -87,6 +88,22 @@ namespace Boolean.CSharp.Main.Accounts
             }
             Console.WriteLine(sb.ToString());
             return (sb.ToString());
+        }
+
+        public void RequestOverdraft(Transaction request)
+        {
+            _request.Add(request);
+            if (request.TransectionStatus == true)
+            {
+                _transactions.Add(request);
+            }
+            else { 
+                
+            }
+        }
+
+        public List<Transaction> getRequest() { 
+            return _request;
         }
     }
 }

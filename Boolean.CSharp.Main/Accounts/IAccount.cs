@@ -49,5 +49,11 @@ namespace Boolean.CSharp.Main.Accounts
         /// </summary>
         string writeStatement();
 
+        /// <summary>
+        /// A method to send overdraft request
+        /// </summary>
+        /// <param name="request"></param>
+        void RequestOverdraft(Transaction request);
+        public List<Transaction> getRequest();
     }
 }
