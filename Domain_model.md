@@ -24,6 +24,13 @@ Then she would see:
 	13/01/2012 || 2000.00 ||        || 3000.00
 	10/01/2012 || 1000.00 ||        || 1000.00
 
+Class: Bank
+string branch
+
+Methods:
+public float approveOverdraft
+return: the approved overdraft
+
 enum accountType: currentAccount, savingsAccount
 
 Class: Customer
@@ -33,15 +40,24 @@ Methods:
 public Account createAccount(int accountNr, string type)
 return: createdAccount
 
+
 Abstract Class: Account
 public list<Transaction> transactions
 private int accountNr
-private float balance
+private float overdraft
 
 Methods:
-public Transaction withdraw(float amount)
+public float total(List<Transaction> transactions(from account))
+returns: combined "amounts" from all transaction entries for the account
+
+public Transaction withdraw(float amount) take overdraft into consideration
+
 public Transaction deposit(float amount)
+
+public void requestOverdraft()
+
 public void printStatement()
+
 
 Class: SavingsAccount : Account
 
@@ -51,9 +67,10 @@ enum transactionType: deposit, withdraw
 
 Class: Transaction
 private float amount
-private float newBalance
 private string transactionType
 private DateTime timeStamp
+
+Methods:
 
 Extension:
 As an engineer,

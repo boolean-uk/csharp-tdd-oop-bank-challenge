@@ -8,6 +8,19 @@ using System.Transactions;
 
 namespace Boolean.CSharp.Main
 {
+    public class Bank
+    {
+        private string _branch;
+
+        public Bank(string branch)
+        {
+            _branch = branch;
+        }
+        public void approveOverdraft(float overdraft)
+        {
+
+        }
+    }
     public enum AccountType
     {
         current,
@@ -36,44 +49,47 @@ namespace Boolean.CSharp.Main
     public abstract class Account
     {
         private int _accountNr;
-        private float _balance = 0;
+        private float _overdraft = 0;
         private List<Transaction> transactions = new List<Transaction>();
         public List<Transaction> Transactions { get { return transactions; } }
         public int AccountNumber { get { return _accountNr; } }
-        public float Balance { get { return _balance; } }
+        public float Overdraft { get { return _overdraft; }}
         public Account(int accountNr)
         {
             _accountNr = accountNr;
         }
+        public float getTotal()
+        {
+            float total = 0;
+            return total;
+        }
         public Transaction withdraw(float amount)
         {
-            if(Balance-amount >= 0)
+            if (amount > 0)
             {
-                if(amount > 0)
+                if(amount <= getTotal())
                 {
-                    _balance -= amount;
                     DateTime time = DateTime.Now;
-                    Transaction tempT = new Transaction(amount, TransactionType.withdraw, time.ToString("D"), _balance);
+                    Transaction tempT = new Transaction(amount, TransactionType.withdraw, time.ToString("D"));
                     Transactions.Add(tempT);
                     return tempT;
                 }
                 else
                 {
-                    throw new WithdrawException("Withdrawl amount must be a positive floating point number!");
+                    throw new WithdrawException("You cannot withdraw more money than you have!");
                 }
             }
             else
             {
-                throw new WithdrawException("You cannot withdraw more money than you have!");
+                throw new WithdrawException("Withdrawl amount must be a positive floating point number!");
             }
         }
         public Transaction deposit(float amount)
         {
             if(amount > 0)
             {
-                _balance += amount;
                 DateTime time = DateTime.Now;
-                Transaction tempT = new Transaction(amount, TransactionType.deposit, time.ToString("D"), _balance);
+                Transaction tempT = new Transaction(amount, TransactionType.deposit, time.ToString("D"));
                 Transactions.Add(tempT);
                 return tempT;
             }
@@ -88,7 +104,7 @@ namespace Boolean.CSharp.Main
             List<string> statements = new List<string>();
             foreach(Transaction t in transactions)
             {
-                statements.Add($"{t.Time}  ||  {t.Amount}     ||  {t.Type}  ||  {t.NewTotalBalance}  ");
+                statements.Add($"{t.Time}  ||  {t.Amount}     ||  {t.Type}  ||  !!!!!!!TOTAL!!!!!!  ");
             }
             foreach(var t in statements)
             {
@@ -119,19 +135,16 @@ namespace Boolean.CSharp.Main
     public class Transaction
     {
         private float _amount;
-        private float _newTotalBalance;
         private TransactionType _transactionType;
         private string _time;
         public float Amount { get { return _amount; } }
-        public float NewTotalBalance { get { return _newTotalBalance; } }
         public TransactionType Type { get { return _transactionType; } }
         public string Time { get { return _time; } }
-        public Transaction(float amount, TransactionType type, string timeStamp, float newtotalBalance)
+        public Transaction(float amount, TransactionType type, string timeStamp)
         {
             _amount = amount;
             _transactionType = type;
             _time = timeStamp;
-            _newTotalBalance = newtotalBalance;
         }
     }
     public class WithdrawException : Exception

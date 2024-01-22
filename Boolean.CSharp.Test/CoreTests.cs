@@ -8,7 +8,6 @@ namespace Boolean.CSharp.Test
     public class CoreTests
     {
         private Customer _customer;
-
         public CoreTests()
         {
             _customer = new Customer();
@@ -30,7 +29,7 @@ namespace Boolean.CSharp.Test
             CurrentAccount currentAccount = (CurrentAccount)_customer.createAccount(642758, AccountType.current);
             currentAccount.deposit(deposit);
             currentAccount.withdraw(withdraw);
-            Assert.That(currentAccount.Balance, Is.EqualTo(total));
+            Assert.That(currentAccount.getTotal(), Is.EqualTo(total));
             Assert.That(currentAccount.Transactions.Count, Is.EqualTo(2));
         }
         [TestCase(0f, 1000f)]
@@ -58,7 +57,7 @@ namespace Boolean.CSharp.Test
             SavingsAccount savingsAccount = (SavingsAccount)_customer.createAccount(123456, AccountType.savings);
             var result = savingsAccount.deposit(1000f);
             DateTime time = DateTime.Now;
-            Transaction transaction = new Transaction(1000f, TransactionType.deposit, time.ToString("D"), savingsAccount.Balance);
+            Transaction transaction = new Transaction(1000f, TransactionType.deposit, time.ToString("D"));
             string expectedJson = JsonConvert.SerializeObject(transaction);
             string resultJson = JsonConvert.SerializeObject(result);
             Assert.That(resultJson, Is.EqualTo(expectedJson));
