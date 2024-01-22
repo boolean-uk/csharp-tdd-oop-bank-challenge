@@ -1,7 +1,7 @@
-| Classes                              	| Attributes                                                                   	| Methods                                                               	| Outputs  	|
-|--------------------------------------	|------------------------------------------------------------------------------	|-----------------------------------------------------------------------	|----------	|
-| IAccount                             	|                                                                              	| deposit(double, DateTime) withdraw(double, DateTime) printStatement() 	|   string 	|
-| Account (implements IAccount)        	| balance: double transactionList : List Transaction                           	| deposit(double, DateTime) withdraw(double, Datetime) printStatement() 	|   string 	|
-| CurrentAccount (implements IAccount) 	|                                                                              	| User wants to add interest to the savings account                     	|          	|
-| SavingsAccount (implements IAccount) 	|                                                                              	| User wants to generate a statement with transcations                  	|          	|
-| Transaction                          	| date: DateTime credit: double debit: double balanceAtTransactionTime: double 	|                                                                       	|          	|
+| Classes                              	| Attributes                                     	| Methods                                                                               	| Outputs          	|
+|--------------------------------------	|------------------------------------------------	|---------------------------------------------------------------------------------------	|------------------	|
+| IAccount                             	|                                                	| Deposit(double, DateTime), Withdraw(double, DateTime), PrintStatement(), GetBalance() 	|   String, double 	|
+| Account (implements IAccount)        	| transactionList : List Transaction             	| Deposit(double, DateTime), Withdraw(double, Datetime), PrintStatement(), GetBalance() 	|   String, double 	|
+| CurrentAccount (implements IAccount) 	| inherits attributes and methods from Account   	| All methods are inherited                                                             	|                  	|
+| SavingsAccount (implements IAccount) 	| inherits attributes and methods from¨ Account  	| All methods are inherited                                                             	|                  	|
+| Transaction                          	| date: DateTime, credit: double, debit: double, 	|                                                                                       	|                  	|
