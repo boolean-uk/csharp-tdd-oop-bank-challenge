@@ -1,5 +1,6 @@
 ﻿using Boolean.CSharp.Main;
-using Boolean.CSharp.Main.Classes;
+using Boolean.CSharp.Main.Classes.Accounts;
+using Boolean.CSharp.Main.Classes.User;
 using NUnit.Framework;
 
 namespace Boolean.CSharp.Test

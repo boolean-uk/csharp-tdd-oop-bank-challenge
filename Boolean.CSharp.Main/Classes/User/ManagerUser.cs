@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boolean.CSharp.Main.Classes
+namespace Boolean.CSharp.Main.Classes.User
 {
     public class ManagerUser : IUser
     {

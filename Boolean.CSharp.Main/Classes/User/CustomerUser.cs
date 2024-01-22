@@ -1,17 +1,18 @@
-﻿using Boolean.CSharp.Main.Interfaces;
+﻿using Boolean.CSharp.Main.Classes.Accounts;
+using Boolean.CSharp.Main.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boolean.CSharp.Main.Classes
+namespace Boolean.CSharp.Main.Classes.User
 {
     public class CustomerUser : IUser
     {
         List<ABankAccount> _accounts;
 
-        public CustomerUser() 
+        public CustomerUser()
         {
             _accounts = new List<ABankAccount>();
         }
@@ -26,7 +27,7 @@ namespace Boolean.CSharp.Main.Classes
             return "Error, something went wrong and we cant make your account";
         }
 
-        public double Deposit(double money, int account) 
+        public double Deposit(double money, int account)
         {
             if (_accounts.Count >= account)
             {
@@ -35,9 +36,17 @@ namespace Boolean.CSharp.Main.Classes
             return -1d;
         }
 
-        public bool Withdraw(double money, int account)
+        public bool Withdraw(double withdrawl, int account)
         {
-            throw new NotImplementedException();
+            if (_accounts.Count >= account)
+            {
+                if (withdrawl < _accounts[account].Money())
+                {
+                    _accounts[account].Transaction(new BankStatement(withdrawl, true, eType.Withdraw, DateTime.Now));
+                    return true;
+                }
+            }
+            return false;
         }
 
         public int GenerateStatement()
@@ -45,7 +54,7 @@ namespace Boolean.CSharp.Main.Classes
             throw new NotImplementedException();
         }
 
-        public BankStatement RequestOverdraft(double money) 
+        public BankStatement RequestOverdraft(double money)
         {
             throw new NotImplementedException();
         }
