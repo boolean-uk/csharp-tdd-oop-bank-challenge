@@ -7,25 +7,21 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main.Accounts
 {
-    public class Account : IAccount
+    public abstract class Account
     {
         //Public values
         public string Name { get { return _name; } }
         public double Balance { get { return _balance; } }
-        public List<Transaction> Transactions { get { return _transactions; } }
-        public AccountType AType { get { return _type; } }
         public Branch Branch { get { return _branch; } }
 
         //Encapsulated values
         private string _name;
         private double _balance = 0d;
-        public AccountType _type;
         public Branch _branch;
-        private readonly List<Transaction> _transactions = [];
+        private readonly List<ITransaction> _transactions = [];
 
-        public Account(AccountType type, Branch branch, string name)
+        public Account(Branch branch, string name)
         {
-            _type = type;
             _branch = branch;
             _name = name;
         }
@@ -35,14 +31,21 @@ namespace Boolean.CSharp.Main.Accounts
             throw new NotImplementedException();
         }
 
-        public bool makeTransaction()
+        public bool makeTransaction(TransactionType type, double amount)
         {
-            throw new NotImplementedException();
+            if (type == TransactionType.Debit && amount > _balance)
+            {
+                return false;
+            }
+            Transaction transaction = new Transaction(type, _balance, amount);
+            _transactions.Add(transaction);
+            _balance = transaction.NewBalance;
+            return true;
         }
 
-        public void PrintStatements()
+        public List<ITransaction> GetTransactions()
         {
-            throw new NotImplementedException();
+            return _transactions;
         }
     }
 }

@@ -11,7 +11,6 @@ namespace Boolean.CSharp.Main.Transactions
     {
         public Guid Id { get; }
         public TransactionType Type { get; }
-        public TransactionStatus Status { get; }
         public DateTime Date { get; }
         public double Amount { get; }
         public double NewBalance { get; }

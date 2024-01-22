@@ -12,12 +12,7 @@ namespace Boolean.CSharp.Main
         Second,
         Third
     }
-    public enum AccountType
-    {
-        Savings,
-        Current
-
-    }
+    
     public enum TransactionType
     {
         Credit,

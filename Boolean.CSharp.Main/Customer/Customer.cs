@@ -10,19 +10,25 @@ namespace Boolean.CSharp.Main.Customer
     public class Customer
     {
         private Guid _id;
-        private List<IAccount> _accounts = [];
+        private List<Account> _accounts = [];
         public Customer()
         {
             _id = Guid.NewGuid();
         }
         
-        public void CreateAccount(string name, AccountType accountType, Branch branch)
+        public void CreateSpendingAccount(string name, Branch branch)
         {
            if ( name == "" ) { return; }
-          _accounts.Add(new Account(accountType, branch, name));
+          _accounts.Add(new SpendingAccount(branch, name));
             
         }
-        public List<IAccount> GetAccounts()
+        public void CreateSavingsAccount(string name, Branch branch)
+        {
+            if (name == "") { return; }
+            _accounts.Add(new SavingsAccount(branch, name));
+
+        }
+        public List<Account> GetAccounts()
         {
             return _accounts;
         }

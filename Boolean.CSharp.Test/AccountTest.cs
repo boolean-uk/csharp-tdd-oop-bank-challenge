@@ -1,4 +1,5 @@
-﻿using Boolean.CSharp.Main.Accounts;
+﻿using Boolean.CSharp.Main;
+using Boolean.CSharp.Main.Accounts;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -11,19 +12,42 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class AccountTest
     {
-        private IAccount account;
+        private Account account;
         [SetUp]
         public void SetUp()
         {
-            account = new Account(Main.AccountType.Current,Main.Branch.First,"test");
+            account = new SpendingAccount(Main.Branch.First,"test");
         }
         [Test]
-        public void CreateSavingsAccount() { }
+        public void Deposit()
+        {
+            Assert.IsTrue(account.makeTransaction(TransactionType.Credit,500d));
+            Assert.AreEqual(account.Balance, 500d);
+            account.makeTransaction(TransactionType.Credit, 200d);
+            Assert.AreEqual(account.Balance, 700d);
+
+        }
         [Test]
-        public void GetStatements() { }
+        public void Withdraw()
+        {
+            account.makeTransaction(TransactionType.Credit, 500d);
+
+            Assert.IsTrue(account.makeTransaction(TransactionType.Debit, 200d));
+            Assert.AreEqual(account.Balance, 300d);
+
+        }
         [Test]
-        public void Deposit() { }
-        [Test]
-        public void Withdraw() { }
+        public void GetStatements() 
+        {
+            account.makeTransaction(TransactionType.Credit, 500d);
+            account.makeTransaction(TransactionType.Debit, 300d);
+
+
+            var result = account.GetTransactions();
+
+            Assert.AreEqual(2, result.Count);
+        }
+        
+        
     }
 }
