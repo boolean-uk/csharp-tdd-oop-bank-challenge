@@ -36,12 +36,16 @@ namespace Boolean.CSharp.Test
             Assert.That(current.Balance, Is.EqualTo(-200d));
         }
         [Test]
-        public void ShouldReturnZero() 
+        public void ShouldReturnZero()
         {
             Customer c = new Customer(1, "Elsa");
             Current current = new Current();
             c.AddAccount(current);
             Assert.That(current.Balance, Is.EqualTo(0));
+        }
+        [Test]
+        public void test(){
+
         }
     }
 }

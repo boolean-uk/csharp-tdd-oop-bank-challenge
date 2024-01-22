@@ -8,7 +8,7 @@ Savings savings = new Savings();
 customer.AddAccount(current);
 customer.AddAccount(savings);
 
-Console.WriteLine($"--------- DnB ---------");
+Console.WriteLine($"--------- Barclays ---------");
 Console.WriteLine($"\nHello, {customer.Name}\n*Deposit £50 to your Savings account*\n");
 savings.Deposit(50);
 customer.DisplayTransactions(savings);

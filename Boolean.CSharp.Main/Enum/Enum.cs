@@ -10,4 +10,9 @@ namespace Boolean.CSharp.Main.Enum
     {
         Credit, Debit
     }
+
+    public enum Branch
+    {
+        Liverpool, Edinburgh, Cardiff, Belfast, Bristol, Manchester, Oxford, Glasgow, Cambridge, Newcastle, York, Durham
+    }
 }
