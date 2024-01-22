@@ -92,13 +92,15 @@ namespace Boolean.CSharp.Test
             Customer user = new RegularCustomer();
             user.OpenNewAccount("general");
             IAccount account = user.GetAccounts()[0];
+            DateTime now = DateTime.Now;
+            DateTime tomorrow = DateTime.Now.AddDays(1);
 
             // TODO: Look into mocking the DateTime that will be generated
             account.Deposit(1000m);  // 2012-01-10
             account.Deposit(2000m);  // 2012-01-13
             account.Withdraw(500m);  // 2012-01-14
 
-            account.PrintBankStatement();
+            account.PrintBankStatement(now, tomorrow);
         }
     }
 }
