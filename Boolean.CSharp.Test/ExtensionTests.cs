@@ -19,7 +19,7 @@ namespace Boolean.CSharp.Test
         public void SetUp()
         {
             current = new CurrentAccount();
-            saving = new SavingsAccount(Banks.Lancashire);
+            saving = new SavingsAccount(Branch.Lancashire);
 
         }
 
@@ -40,7 +40,15 @@ namespace Boolean.CSharp.Test
         [Test]
         public void BankBranchTest()
         {
-            Assert.That(saving.getBranch(), Is.EqualTo(Banks.Lancashire));
+            Assert.That(saving.Branch, Is.EqualTo(Branch.Lancashire));
+            Assert.That(current.Branch, Is.EqualTo(Branch.Yorkshire));
+        }
+
+        [Test]
+        public void OverdraftRequest()
+        {
+            saving.RequestOverdraft();
+            Assert.That(saving.Overdraft, Is.EqualTo(Overdraft.Requested));
         }
     }
 }

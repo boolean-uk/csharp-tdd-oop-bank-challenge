@@ -8,9 +8,13 @@ namespace Boolean.CSharp.Main.Core
 {
     public class SavingsAccount : AAccount
     {
-        public SavingsAccount() : base()
-        {
+        
+        public SavingsAccount() : base() { }
+        public SavingsAccount(Branch branch) : base(branch) { }
 
+        public bool getBranch()
+        {
+            throw new NotImplementedException();
         }
     }
 }

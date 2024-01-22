@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main.Core
 {
-    public enum Banks { Yorkshire, Berkshire, Lincolnshire, Worcestershire, 
+    public enum Branch { Yorkshire, Berkshire, Lincolnshire, Worcestershire, 
         Shropshire, Oxforshire, Warwickshire, Cambridgeshire, Derbyshire, Gloucestershire, 
         Lancashire, Nottinghamshire, Staffordshire, Buckinghamshire, Wiltshire, Bedfordshire, 
         Northamptonshire}
@@ -14,6 +14,17 @@ namespace Boolean.CSharp.Main.Core
     public abstract class AAccount
     {
         public List<Transaction> transactions { get; private set; } = new List<Transaction>();
+        public Branch Branch { get; private set; }
+
+        public AAccount() {
+            Branch = Branch.Yorkshire;
+        }
+
+        public AAccount(Branch bank)
+        {
+            this.Branch = bank;
+        }
+
         public double Savings()
         {
             if (transactions.Count == 0) return 0d;
