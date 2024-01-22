@@ -11,10 +11,11 @@ namespace Boolean.CSharp.Main
     {
         private Dictionary<int, IUsers> _listUsers = new Dictionary<int, IUsers>();
 
-        public void Add(Custommer custommer1)
+        public void Add(IUsers user)
         {
-            _listUsers.Add(custommer1.Id, custommer1);
+            _listUsers.Add(user.Id, user);
         }
+
 
         public Dictionary<int,IUsers> seeUsers()
         {

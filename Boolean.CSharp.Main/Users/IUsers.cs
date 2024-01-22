@@ -14,7 +14,7 @@ namespace Boolean.CSharp.Main.Users
         int Id { get; set; }
         bool IsActive { get; }
 
-        public void makeAccount(Enums accType);
+        //public void makeAccount(Enums accType);
 
     }
 }

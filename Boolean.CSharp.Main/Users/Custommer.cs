@@ -9,6 +9,10 @@ using System.Transactions;
 
 namespace Boolean.CSharp.Main.Users
 {
+    /// <summary>
+    /// Class Custommer inheritates from the interface IUser.
+    /// The ID of the engineer should b 1XXX
+    /// </summary>
     public class Custommer : IUsers
     {
         //Define fields:
