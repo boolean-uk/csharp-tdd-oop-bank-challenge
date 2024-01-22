@@ -2,11 +2,10 @@
 As a customer,
 So I can safely store use my money,
 I want to create a current account.
-
 ```
 
-| Classes       | Members                         | Methods                  | Scenario  | Outputs     |
-|---------------|---------------------------------|--------------------------|-----------|-------------|
+| Classes       | Members                         | Methods                  | Scenario  | Outputs        |
+|---------------|---------------------------------|--------------------------|-----------|----------------|
 | `BankManager` | `CurrentAccount currentAccount` | `CreateCurrentAccount()` |           | CurrentAccount |  
 
 
@@ -16,9 +15,9 @@ So I can save for a rainy day,
 I want to create a savings account.
 ```
 
-| Classes   | Members         | Methods          | Scenario  | Outputs     |
-|-----------|-----------------|------------------|-----------|-------------|
-| `BankManager` | `SavingsAccount savingsAccount` | `` |           | Savingsaccount |  
+| Classes       | Members                         | Methods                  | Scenario  | Outputs        |
+|---------------|---------------------------------|--------------------------|-----------|----------------|
+| `BankManager` | `SavingsAccount savingsAccount` | `CreateSavingsAccount()` |           | Savingsaccount |  
 
 
 ```

@@ -6,3 +6,5 @@ Console.WriteLine("Welcome to your bank management application");
 BankManager bankManager = new BankManager();
 
 bankManager.CreateCurrentAccount();
+
+bankManager.CreateSavingsAccount();

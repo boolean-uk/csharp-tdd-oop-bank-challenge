@@ -28,7 +28,17 @@ namespace Boolean.CSharp.Main
 
         public void CreateSavingsAccount()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Input name of savings account");
+            string accountName = Console.ReadLine();
+            SavingsAccount newSavingsAccount = new SavingsAccount(accountName);
+            if (!accountList.Accounts.Contains(newSavingsAccount))
+            {
+                accountList.Accounts.Add(newSavingsAccount);
+                Console.WriteLine($"{accountName} has been added to accounts");
+            } else
+            {
+                Console.WriteLine($"{accountName} already exists");
+            }
             
         }
 
