@@ -28,12 +28,12 @@ namespace Boolean.CSharp.Main
             throw new NotImplementedException();
         }
 
-        public string Deposit(string account, double amount) 
+        public string Deposit(string account, decimal amount) 
         { 
             throw new NotImplementedException(); 
         }
 
-        public string Withdraw(string account, double amount) 
+        public string Withdraw(string account, decimal amount) 
         {  
             throw new NotImplementedException(); 
         }

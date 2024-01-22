@@ -9,20 +9,21 @@ namespace Boolean.CSharp.Main
     public class Account
     {
         private string _name;
-        private double _balance;
+        private decimal _balance;
+        private List<Transaction> _transactions;
 
 
-        public double GetBalance()
+        public decimal GetBalance()
         {
             throw new NotImplementedException();
         }
 
-        public string Deposit(double amount)
+        public string Deposit(decimal amount)
         {
             throw new NotImplementedException();
         }
 
-        public string Withdraw(double amount)
+        public string Withdraw(decimal amount)
         {
             throw new NotImplementedException();
         }
