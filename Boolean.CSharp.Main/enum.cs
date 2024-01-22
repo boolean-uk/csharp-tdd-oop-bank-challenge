@@ -25,4 +25,11 @@ namespace Boolean.CSharp.Main
         Bergen,
         Kristiansand
     }
+
+    public enum OverdraftStatus
+    {
+        Approved,
+        Rejected,
+        Pending
+    }
 }
