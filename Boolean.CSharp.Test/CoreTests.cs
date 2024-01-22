@@ -63,8 +63,16 @@ namespace Boolean.CSharp.Test
         [TestCase(500)]
         public void WithdrawTest(int amount)
         {
-            
-            
+            //arrange
+            CurrentAccount account = new CurrentAccount("Current account 1");
+            account.Deposit(700);
+
+            //act
+            account.Withdraw(500);
+
+            //assert
+            Assert.AreEqual(200, account.Balance);
+
         }
     }
 }

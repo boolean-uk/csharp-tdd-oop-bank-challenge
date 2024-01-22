@@ -32,7 +32,7 @@ namespace Boolean.CSharp.Main
 
         public void Withdraw(int amount)
         {
-            Console.WriteLine("You have withdrawn " + amount);
+           throw new NotImplementedException();
         }
     }
 }
