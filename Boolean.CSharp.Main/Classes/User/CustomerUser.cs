@@ -59,15 +59,16 @@ namespace Boolean.CSharp.Main.Classes.User
             return _accounts[account].Branch.ToString();
         }
 
-        public BankStatement RequestOverdraft(double money, int account)
+        public OverdraftRequest RequestOverdraft(double money, int account)
         {
-            double draft = _accounts[account].Money() - money;
-            if (draft < 0)
-            {
-                BankStatement test = new BankStatement(draft, false, eType.OverDraft, DateTime.Now);
-                return test;
-            }
-            return null;
+            throw new NotImplementedException();
+            //double draft = _accounts[account].Money() - money;
+            //if (draft < 0)
+            //{
+            //    BankStatement test = new BankStatement(draft, false, eType.OverDraft, DateTime.Now);
+            //    return test;
+            //}
+            //return null;
         }
     }
 }

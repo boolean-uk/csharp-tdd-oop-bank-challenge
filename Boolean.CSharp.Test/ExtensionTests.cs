@@ -56,20 +56,18 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        [TestCase(100, 200)]
-        [TestCase(100, 500)]
-        public void RequestingOverdraft(double deposit, double draft)
+        [TestCase(1000)]
+        public void RequestingOverdraft(double draft)
         {
             //  Arrange - set up test values
             CurrentAccount testAccount = new CurrentAccount();
             customer.CreateAccount(testAccount);
-            customer.Deposit(deposit, 0);
 
             //  Act - use the fucntion we want to test
-            BankStatement test = customer.RequestOverdraft(draft, 0);
+            OverdraftRequest test = customer.RequestOverdraft(draft, 0);
 
             //  Assert - check the results
-            Assert.That(Math.Round(test.Transaction,2), Is.EqualTo(Math.Round((deposit-draft)*-1,2)));
+            Assert.That(test.RequestStatus, Is.EqualTo(eStatus.Pending));
         }
 
         [Test]

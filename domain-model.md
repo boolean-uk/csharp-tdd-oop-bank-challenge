@@ -21,7 +21,7 @@
 |					| `bool valid`																			|										|									|																|				|
 |					| `enum eType`																			|										|									|																|				|
 | `OverDraftRequest`| 																						| `double Amount{get; set}`				|									|																|				|
-|					| 																						| `double RequestDate{get; set}`		|									|																|				|
+|					| 																						| `DateTime RequestDate{get; set}`		|									|																|				|
 |					| 																						| `enum Stauts RequestStatus{get; set}`	|									|																|				|
 |					|																						|										|									|																|				|
 | *					|																						|										|									|																|				|

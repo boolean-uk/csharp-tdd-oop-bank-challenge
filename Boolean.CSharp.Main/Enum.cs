@@ -21,4 +21,11 @@ namespace Boolean.CSharp.Main
         East,
         North
     }
+
+    public enum eStatus
+    {
+        Pending,
+        Approved,
+        Denied
+    }
 }
