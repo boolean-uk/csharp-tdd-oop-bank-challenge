@@ -9,7 +9,8 @@ namespace Boolean.CSharp.Main
     public enum eType
     {
         Debit,  //  Withdraw
-        Credit  //  Deposit
+        Credit,  //  Deposit
+        OverDraft  //  Deposit
     }
 
     public enum eBranch
