@@ -108,5 +108,18 @@ namespace Boolean.CSharp.Test
             //assert
             Assert.That(b, Is.EqualTo(AccountBranches.Bergen));
         }
+
+        [Test]
+        public void TestRequestOverdraft()
+        {
+            //execute
+            bool withdrew = _account.Withdraw(14.39m); //Withdraw more than we can
+            List<Overdraft> overdrafts = _account.GetOverdraftRequests();
+
+            //verify
+            Assert.That(withdrew, Is.False);
+            Assert.That(overdrafts, Is.Not.Null);
+            Assert.That(overdrafts.Count, Is.EqualTo(1));
+        }
     }
 }

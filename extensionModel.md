@@ -14,7 +14,7 @@ I want accounts to be associated with specific branches.
 ```
 | Classes         | Methods                                     | Scenario               | Outputs                     |
 |-----------------|---------------------------------------------|------------------------|-----------------------------|
-| `Account`       | `Account(Branch bankBranch)`                | any                    | void                        |
+| `Account`       | `Account(..., AccountBranches ab)`                | any                    | void                        |
 
 ```
 As a customer,
@@ -23,7 +23,7 @@ I want to be able to request an overdraft on my account.
 ```
 | Classes         | Methods                                     | Scenario               | Outputs                     |
 |-----------------|---------------------------------------------|------------------------|-----------------------------|
-| `Account`	      | `withdraw(decimal amount)`                   | If account doesn't exist | false, prints "Invalid account" |
+| `Account`	      | `withdraw(decimal amount)`                  | If account doesn't exist | false, prints "Invalid account" |
 |                 |                                             | If amount > balance      | false, creates a new overdraft request, prints $"Balance too low to withdraw {amount}. Overdraft request created." |
 |                 |                                             | Else	                   | true                            |
 
