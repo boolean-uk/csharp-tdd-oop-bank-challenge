@@ -2,21 +2,21 @@
 {
     public class Transaction
     {
-        private DateTime _date = DateTime.Now;
-        private double _credit;
-        private double _debit;
-        private double _balance;
+        private readonly DateTime _date = DateTime.Now;
+        private readonly decimal _credit;
+        private readonly decimal _debit;
+        private readonly decimal _balance;
 
-        public Transaction(double credit, double debit, double balance)
+        public Transaction(decimal credit, decimal debit, decimal balance)
         {
-            _credit = Math.Round(credit, 2);
-            _debit = Math.Round(debit, 2);
-            _balance = Math.Round(balance, 2);
+            _credit = credit;
+            _debit = debit;
+            _balance = balance + credit - debit;
         }
 
         public DateTime GetDate() { return _date; }
-        public double GetCredit() { return _credit; }
-        public double GetDebit() { return _debit; }
-        public double GetBalance() { return _balance; }
+        public decimal GetCredit() { return _credit; }
+        public decimal GetDebit() { return _debit; }
+        public decimal GetBalance() { return _balance; }
     }
 }

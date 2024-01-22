@@ -3,11 +3,11 @@
     public interface IAccount
     {
         AccountTypes GetAccountType();
-        double GetBalance();
+        decimal GetBalance();
         Customer GetAccountOwner();
-        bool Deposit(double amount);
-        bool Withdraw(double amount);
-        void CreateTransaction(double credit, double debit);
+        bool Deposit(decimal amount);
+        bool Withdraw(decimal amount);
+        void CreateTransaction(decimal credit, decimal debit);
         List<Transaction> GenerateBankStatement();
         void PrintBankStatement();
     }

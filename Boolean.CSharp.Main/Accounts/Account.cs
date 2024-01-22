@@ -4,12 +4,10 @@ namespace Boolean.CSharp.Main.Accounts
     public abstract class Account : IAccount
     {
         private Customer _owner;
-        private double _balance;
         private List<Transaction> _transactions;
         public Account(Customer owner)
         {
             _owner = owner;
-            _balance = 0;
             _transactions = [];
         }
 
@@ -18,9 +16,11 @@ namespace Boolean.CSharp.Main.Accounts
             return _owner;
         }
 
-        public double GetBalance()
+        public decimal GetBalance()
         {
-            return Math.Round(_balance, 2);
+            return _transactions.Count > 0 ? _transactions.Last().GetBalance() : 0;
+            // Alternative method of calculating that does not rely on storing balance in Transaction:
+            // return Math.Round(_transactions.Sum(x => x.GetCredit() - x.GetDebit()), 2); 
         }
 
         public abstract AccountTypes GetAccountType();
@@ -30,31 +30,29 @@ namespace Boolean.CSharp.Main.Accounts
             return _owner;
         }
 
-        public bool Deposit(double amount)
+        public bool Deposit(decimal amount)
         {
             if (amount > 0)
             {
-                _balance += amount;
                 CreateTransaction(amount, 0);
                 return true;
             };
             return false;
         }
 
-        public bool Withdraw(double amount)
+        public bool Withdraw(decimal amount)
         {
             if (amount <= GetBalance())
             {
-                _balance -= amount;
                 CreateTransaction(0, amount);
                 return true;
             };
             return false;
         }
 
-        public void CreateTransaction(double credit, double debit)
+        public void CreateTransaction(decimal credit, decimal debit)
         {
-            Transaction transaction = new(credit, debit, _balance);
+            Transaction transaction = new(credit, debit, GetBalance());
             _transactions.Add(transaction);
         }
 

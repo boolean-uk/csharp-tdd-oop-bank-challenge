@@ -5,7 +5,7 @@ I want account balances to be calculated based on transaction history instead of
 ```
 | Classes         | Methods                                     | Scenario               | Outputs                     |
 |-----------------|---------------------------------------------|------------------------|-----------------------------|
-| `Account`       | `getBalance()`                              | any                    | double balance, now generated based on transaction history instead of getting balance value. |
+| `Account`       | `getBalance()`                              | any                    | decimal balance, now generated based on transaction history instead of getting balance value. |
 
 ```
 As a bank manager,
@@ -23,7 +23,7 @@ I want to be able to request an overdraft on my account.
 ```
 | Classes         | Methods                                     | Scenario               | Outputs                     |
 |-----------------|---------------------------------------------|------------------------|-----------------------------|
-| `Account`	      | `withdraw(double amount)`                   | If account doesn't exist | false, prints "Invalid account" |
+| `Account`	      | `withdraw(decimal amount)`                   | If account doesn't exist | false, prints "Invalid account" |
 |                 |                                             | If amount > balance      | false, creates a new overdraft request, prints $"Balance too low to withdraw {amount}. Overdraft request created." |
 |                 |                                             | Else	                   | true                            |
 

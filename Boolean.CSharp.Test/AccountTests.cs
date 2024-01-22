@@ -34,7 +34,7 @@ namespace Boolean.CSharp.Test
         public void TestAccountBalanceIsZeroByDefault()
         {
             //execute
-            double balance = _account.GetBalance();
+            decimal balance = _account.GetBalance();
 
             //verify
             Assert.That(balance, Is.Not.Null);
@@ -45,9 +45,9 @@ namespace Boolean.CSharp.Test
         public void TestAccountBalanceIncreasesWhenDeposit()
         {
             //execute
-            bool shouldNotDeposit = _account.Deposit(-3.39);
-            bool didDeposit = _account.Deposit(39.39);
-            double balance = _account.GetBalance();
+            bool shouldNotDeposit = _account.Deposit(-3.39m);
+            bool didDeposit = _account.Deposit(39.39m);
+            decimal balance = _account.GetBalance();
 
             //verify
             Assert.That(shouldNotDeposit, Is.False);
@@ -61,16 +61,16 @@ namespace Boolean.CSharp.Test
         {
             //execute
             bool shouldNotWithdraw = _account.Withdraw(39);
-            _account.Deposit(1039.14); //Set some value
+            _account.Deposit(1039.14m); //Set some value
             bool shouldWithdraw = _account.Withdraw(39);
-            double balance = _account.GetBalance();
+            decimal balance = _account.GetBalance();
 
 
             //verify
             Assert.That(shouldNotWithdraw, Is.False);
             Assert.That(shouldWithdraw, Is.True);
             Assert.That(balance, Is.Not.Null);
-            Assert.That(balance, Is.EqualTo(1000.14));
+            Assert.That(balance, Is.EqualTo(1000.14m));
         }
 
         [Test]
@@ -78,8 +78,8 @@ namespace Boolean.CSharp.Test
         {
             //setup
             DateTime before = DateTime.Now;
-            _account.Deposit(14.44);
-            _account.Withdraw(4.39);
+            _account.Deposit(14.44m);
+            _account.Withdraw(4.39m);
 
             //execute
             List<Transaction> statement = _account.GenerateBankStatement();
@@ -90,12 +90,12 @@ namespace Boolean.CSharp.Test
             Assert.That(statement, Is.Not.Null);
             Assert.That(statement[0].GetDate(), Is.GreaterThan(before));
             Assert.That(statement[0].GetDate(), Is.LessThan(DateTime.Now));
-            Assert.That(statement[0].GetCredit(), Is.EqualTo(14.44));
-            Assert.That(statement[0].GetDebit(), Is.EqualTo(0));
-            Assert.That(statement[0].GetBalance(), Is.EqualTo(14.44));
-            Assert.That(statement[1].GetDebit(), Is.EqualTo(4.39));
-            Assert.That(statement[1].GetCredit(), Is.EqualTo(0));
-            Assert.That(statement[1].GetBalance(), Is.EqualTo(14.44 - 4.39));
+            Assert.That(statement[0].GetCredit(), Is.EqualTo(14.44m));
+            Assert.That(statement[0].GetDebit(), Is.EqualTo(0m));
+            Assert.That(statement[0].GetBalance(), Is.EqualTo(14.44m));
+            Assert.That(statement[1].GetDebit(), Is.EqualTo(4.39m));
+            Assert.That(statement[1].GetCredit(), Is.EqualTo(0m));
+            Assert.That(statement[1].GetBalance(), Is.EqualTo(14.44m - 4.39m));
         }
     }
 }
