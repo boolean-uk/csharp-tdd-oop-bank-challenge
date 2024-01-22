@@ -4,12 +4,12 @@ using Boolean.CSharp.Main;
 Console.WriteLine("Hello, World!");
 
 User user = new User("Øystein", "Bjørkeng");
-SavingsAccount savingsAccount = new SavingsAccount("My savings account", user, 2000.0m);
+SavingsAccount savingsAccount = new SavingsAccount(user);
 
-Transaction transaction = new Transaction(200.0m, "Credit");
-Transaction transaction1 = new Transaction(200.0m, "Credit");
-Transaction transaction2 = new Transaction(200.0m, "Debit");
-Transaction transaction3 = new Transaction(200.0m, "Debit");
+BankTransaction transaction = new BankTransaction(200.0m, "Credit");
+BankTransaction transaction1 = new BankTransaction(200.0m, "Credit");
+BankTransaction transaction2 = new BankTransaction(200.0m, "Debit");
+BankTransaction transaction3 = new BankTransaction(200.0m, "Debit");
 
 savingsAccount.Deposit(transaction);
 savingsAccount.Deposit(transaction1);

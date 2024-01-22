@@ -16,14 +16,13 @@ So I can use my account,
 I want to deposit and withdraw funds.
 ```
 
-| Classes         | Methods                                     | Scenario               | Outputs	|
-|-----------------|---------------------------------------------|------------------------|----------|
-| `CurrentAccount`| `CurrentAccount(): IAccount`				|						 |void		|
-|                 |	`Deposit(Transaction transaction)`			|						 |void		|
-|                 |	`Withdraw(Transaction transaction)`			|						 |void		|
-|                 |	`PrintStatement()`							|						 |string	|
-| `SavingsAccount`| `SavingsAccount(): IAccount`				|						 |void		|
-|                 |	`Deposit(Transaction transaction)`			|						 |void		|
-|                 |	`Withdraw(Transaction transaction)`			|						 |void		|
-|                 | `PrintStatement()`							|						 |string	|
-| `Transaction`   | `Transaction(string type, decimal amount)`	|					     |void		|
+| Classes			| Methods                                       | Scenario               | Outputs  |
+|-------------------|-----------------------------------------------|------------------------|----------|
+| `abstract Account`| `Account(): Account`						    |						 |void	    |
+|					| `Deposit(Transaction transaction)`		    |						 |void		|
+|					| `Withdraw(Transaction transaction)`			|						 |void		|
+|					| `PrintStatement()`							|						 |string	|
+| `CurrentAccount`	| `CurrentAccount(): Account`				    |						 |void	    |
+| `SavingsAccount`	| `SavingsAccount(): Account`				    |						 |void		|
+| `BankTransaction`	| `BankTransaction(string type, decimal amount)`	|					     |void		|
+

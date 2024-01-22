@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main
 {
-    public class Transaction
+    public class BankTransaction
     {
         private decimal _amount;
         private string _type;
         private DateTime _transactionDate;
 
-        public Transaction(decimal amount, string type) 
+        public BankTransaction(decimal amount, string type) 
         {
             _amount = amount;
             _type = type;
