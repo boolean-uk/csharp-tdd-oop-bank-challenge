@@ -17,5 +17,25 @@ namespace Boolean.CSharp.Main
         {
             throw new NotImplementedException();
         }
+
+        public string CreateCurrentAccount(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GenerateStatement()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string Deposit(string account, double amount) 
+        { 
+            throw new NotImplementedException(); 
+        }
+
+        public string Withdraw(string account, double amount) 
+        {  
+            throw new NotImplementedException(); 
+        }
     }
 }
