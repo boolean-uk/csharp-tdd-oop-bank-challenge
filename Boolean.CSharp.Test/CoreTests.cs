@@ -1,6 +1,5 @@
 ﻿using Boolean.CSharp.Main;
 using NUnit.Framework;
-using System.Diagnostics;
 
 namespace Boolean.CSharp.Test;
 
@@ -18,11 +17,12 @@ public class CoreTests
     [Test]
     public void createCurrentAccountTest()
     {
-        bool result = _core.createCurrentAccount("123456789");
-        bool result1 = _core.createCurrentAccount("12345678901");
-        bool result2 = _core.createCurrentAccount("12345678901");
-        bool result3 = _core.createCurrentAccount("12345678902");
-        bool result4 = _core.createCurrentAccount("1234567890112");
+        Customer customer = new Customer();
+        bool result = _core.createCurrentAccount("123456789", customer);
+        bool result1 = _core.createCurrentAccount("12345678901", customer);
+        bool result2 = _core.createCurrentAccount("12345678901", customer);
+        bool result3 = _core.createCurrentAccount("12345678902", customer);
+        bool result4 = _core.createCurrentAccount("1234567890112", customer);
 
         Assert.IsFalse(result); // to short (valid length = 11)
         Assert.IsTrue(result1); // valid
@@ -34,11 +34,12 @@ public class CoreTests
     [Test]
     public void createSavingsAccountTest()
     {
-        bool result = _core.createSavingsAccount("223456789");
-        bool result1 = _core.createSavingsAccount("22345678901");
-        bool result2 = _core.createSavingsAccount("22345678901");
-        bool result3 = _core.createSavingsAccount("22345678902");
-        bool result4 = _core.createSavingsAccount("2234567890112");
+        Customer customer = new Customer();
+        bool result = _core.createSavingsAccount("223456789", customer);
+        bool result1 = _core.createSavingsAccount("22345678901", customer);
+        bool result2 = _core.createSavingsAccount("22345678901", customer);
+        bool result3 = _core.createSavingsAccount("22345678902", customer);
+        bool result4 = _core.createSavingsAccount("2234567890112", customer);
 
         Assert.IsFalse(result); // to short (valid length = 11)
         Assert.IsTrue(result1); // valid
@@ -50,7 +51,7 @@ public class CoreTests
     [Test]
     public void checkBalanceTest()
     {
-        SavingsAccount account = new SavingsAccount("32345678901");
+        SavingsAccount account = new SavingsAccount("32345678901", new Customer());
         
         double result = account.checkBalance();
         Assert.That(result, Is.EqualTo(0));
@@ -73,7 +74,7 @@ public class CoreTests
     [Test]
     public void generateBankStatementTest()
     {
-        BankAccount account = new BankAccount("42345678901");
+        BankAccount account = new BankAccount("42345678901", new Customer());
         DateOnly date = DateOnly.FromDateTime(DateTime.Now);
         string expected = string.Format("{0,-10} {1,-10} {2, -10} {3, -10}\n", "date", "credit", "debit", "balance");
         expected += string.Format("{0,-10} {1,-10} {2, -10} {3, -10}\n", date, 10000.00, "", 10000.00);

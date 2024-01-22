@@ -1,31 +1,32 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Diagnostics;
-
-namespace Boolean.CSharp.Main;
+﻿namespace Boolean.CSharp.Main;
 
 public class BankAccount
 {
     private string _accountNumber;
-    private double _balance;
     private List<Tuple<DateOnly, double>> _transactions;
+    private string _overdraftStatus = "Not_Allowed";
 
-    public BankAccount(string accountNumber)
+    public BankAccount(string accountNumber, Customer customer)
     {
         _accountNumber = accountNumber;
-        _balance = 0;
         _transactions = new List<Tuple<DateOnly, double>>();
+        customer.addAccount(this);
     }
 
     public string AccountNumber { get { return _accountNumber; } }
     public double checkBalance()
     {
-        return _balance;
+        double balance = 0;
+        foreach (var transaction in _transactions)
+        {
+            balance += transaction.Item2;
+        }
+        return balance;
     }
     public bool deposit(double amount)
     {
         if (amount > 0)
         {
-            _balance += amount;
             _transactions.Add(new Tuple<DateOnly, double>(DateOnly.FromDateTime(DateTime.Now), amount));
             Console.WriteLine($"{amount} deposited");
             return true;
@@ -37,7 +38,6 @@ public class BankAccount
     {
         if (amount > 0)
         {
-            _balance -= amount;
             _transactions.Add(new Tuple<DateOnly, double>(DateOnly.FromDateTime(DateTime.Now), -amount));
             Console.WriteLine($"{amount} withdrawn");
             return true;

@@ -2,9 +2,13 @@
 
 public class Extension
 {
+    Dictionary<string, Customer> _customers;
     private Core _core;
     public Extension()
     {
-        Core? core = new Core();
-    }                      
+        _core = new Core();
+        _customers = new Dictionary<string, Customer>();
+    }
+    
+    
 }

@@ -2,7 +2,7 @@
 
 public class SavingsAccount : BankAccount
 {
-    public SavingsAccount(string accountNumber) : base(accountNumber)
+    public SavingsAccount(string accountNumber, Customer owner) : base(accountNumber, owner)
     {
     }
 }
