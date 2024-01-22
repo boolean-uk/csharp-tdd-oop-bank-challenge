@@ -1,7 +1,7 @@
 ﻿using Boolean.CSharp.Main;
 
 Core _core = new Core();
-_core.createSavingsAccount("12345678901", new Customer());
+_core.createSavingsAccount("12345678901");
 
 BankAccount? account = _core.getAccountByNumber("12345678901");
 if (account != null )
@@ -12,3 +12,12 @@ if (account != null )
     Console.WriteLine(account.generateBankStatement());
     Console.WriteLine($"Balance: {account.checkBalance()}");
 }
+
+Extension extension = new Extension();
+
+Manager manager = new Manager();
+extension.createBank("DNB", "1234", manager);
+extension.Bank.createBankBranch("Innlandet");
+extension.Bank.GetBankBranch("Innlandet").createCustomer("Gudbrand", "123456");
+extension.Bank.GetBankBranch("Innlandet").GetCustomerByNr("123456").createCurrentAccount("1");
+extension.Bank.GetBankBranch("Innlandet").GetCustomerByNr("123456").getAccountByNumber("12341234561").deposit(10000);

@@ -4,16 +4,27 @@ public class BankAccount
 {
     private string _accountNumber;
     private List<Tuple<DateOnly, double>> _transactions;
-    private string _overdraftStatus = "Not_Allowed";
+    private double _overdraftAmount;
 
-    public BankAccount(string accountNumber, Customer customer)
+    public BankAccount(string accountNumber)
     {
         _accountNumber = accountNumber;
         _transactions = new List<Tuple<DateOnly, double>>();
-        customer.addAccount(this);
+        _overdraftAmount = 0;
     }
 
     public string AccountNumber { get { return _accountNumber; } }
+
+    public double OverdraftAmount {  get { return _overdraftAmount; } }
+
+    public void setOverdraftAmount(double amount)
+    {
+        if (amount > 0)
+        {
+            if(checkBalance() + amount > 0) _overdraftAmount += amount;
+        }
+    }
+
     public double checkBalance()
     {
         double balance = 0;
@@ -38,7 +49,7 @@ public class BankAccount
     {
         if (amount > 0)
         {
-            if (amount > checkBalance())
+            if (amount > checkBalance() + _overdraftAmount)
             {
                 Console.WriteLine("Can't afford to withdraw that much. If you want to take out an overdraft you have to submit a request");
                 return false;
