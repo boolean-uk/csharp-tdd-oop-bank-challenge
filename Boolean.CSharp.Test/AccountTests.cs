@@ -23,14 +23,14 @@ namespace Boolean.CSharp.Test
         [Test]
         public void Deposit()
         {
-            Assert.That(account.Deposit(500), Is.EqualTo("500 deposited to test new balance is 500"));
+            Assert.That(account.Deposit(500), Is.EqualTo("500 deposited to test, new balance is 500"));
         }
 
         [Test]
         public void Withdraw()
         {
             account.Deposit(1000);
-            Assert.That(account.Withdraw(250), Is.EqualTo("250 withdrawn from test new balance is 750"));
+            Assert.That(account.Withdraw(250), Is.EqualTo("250 withdrawn from test, new balance is 750"));
         }
 
         [Test]
