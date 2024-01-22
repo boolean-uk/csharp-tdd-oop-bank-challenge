@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main
 {
-    internal class SavingsAccount : BaseAccount
+    public class SavingsAccount : BaseAccount
     {
+        public SavingsAccount(Branch branch) : base(branch)
+        {
+        }
     }
 }

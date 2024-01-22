@@ -9,11 +9,12 @@ namespace Boolean.CSharp.Test
     {
         private BaseAccount _core;
         private string _date;
+        private Branch branch = new Branch("Treasury London", "059900");
 
         [SetUp]
         public void SetUp()
         {
-            _core = new Account();
+            _core = new Account(branch);
             _date = DateTime.Now.ToString("d");
         }
 
@@ -22,7 +23,7 @@ namespace Boolean.CSharp.Test
         {
             bool result = _core.Deposit(500);
             Assert.IsTrue(result);
-            Assert.That(_core.Money, Is.EqualTo(500));
+            Assert.That(_core.Logger.CurrentBalance(), Is.EqualTo(500));
         }
 
         [Test]
@@ -30,7 +31,7 @@ namespace Boolean.CSharp.Test
         {
             bool result = _core.Deposit(-500);
             Assert.IsFalse(result);
-            Assert.That(_core.Money, Is.EqualTo(0));
+            Assert.That(_core.Logger.CurrentBalance(), Is.EqualTo(0));
         }
 
         [Test]
@@ -38,7 +39,7 @@ namespace Boolean.CSharp.Test
         {
             bool result = _core.Withdraw(500);
             Assert.IsFalse(result);
-            Assert.That(_core.Money, Is.EqualTo(0));
+            Assert.That(_core.Logger.CurrentBalance(), Is.EqualTo(0));
         }
 
         [Test]
@@ -47,7 +48,7 @@ namespace Boolean.CSharp.Test
             _core.Deposit(1500);
             bool result = _core.Withdraw(500);
             Assert.IsTrue(result);
-            Assert.That(_core.Money, Is.EqualTo(1000));
+            Assert.That(_core.Logger.CurrentBalance(), Is.EqualTo(1000));
         }
         [Test]
         public void ShouldNotWithdrawNegativeNumber()
@@ -55,7 +56,7 @@ namespace Boolean.CSharp.Test
             _core.Deposit(1500);
             bool result = _core.Withdraw(-500);
             Assert.IsFalse(result);
-            Assert.That(_core.Money, Is.EqualTo(1500));
+            Assert.That(_core.Logger.CurrentBalance(), Is.EqualTo(1500));
         }
 
         [Test]
