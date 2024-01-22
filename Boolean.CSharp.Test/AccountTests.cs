@@ -33,6 +33,15 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
+        public void TestInitialBalanceCreation()
+        {
+            Account account = new SavingsAccount(null, 200);
+
+            Assert.That(account.Balance, Is.EqualTo(200));
+            Assert.That(account.Transactions.Count, Is.EqualTo(0));
+        }
+
+        [Test]
         public void TestAccountDeposit()
         {
             Account account = new SavingsAccount(null);
