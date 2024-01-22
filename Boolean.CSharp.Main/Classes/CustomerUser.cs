@@ -28,7 +28,11 @@ namespace Boolean.CSharp.Main.Classes
 
         public double Deposit(double money, int account) 
         {
-            throw new NotImplementedException(); 
+            if (_accounts.Count >= account)
+            {
+                return _accounts[account].Transaction(new BankStatement(money, true, eType.Deposit, DateTime.Now));
+            }
+            return -1d;
         }
 
         public bool Withdraw(double money, int account)

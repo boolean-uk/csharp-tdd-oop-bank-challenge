@@ -45,7 +45,10 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        [TestCase]
+        [TestCase(1d,21d)]
+        [TestCase(30d,50d)]
+        [TestCase(80d,100d)]
+        [TestCase(20d,40d)]
         public void DepositMoney(double deposit, double expected)
         {
             //  Arrange - set up test values
@@ -53,9 +56,10 @@ namespace Boolean.CSharp.Test
             CurrentAccount testAccount = new CurrentAccount();
             customer.CreateAccount(testAccount);
             double amount = 20.0d;
-            result = customer.Deposit(amount, 0);
+            customer.Deposit(amount, 0);
             //  Act - use the fucntion we want to test
 
+            Math.Round(result = customer.Deposit(deposit, 0),2);
             //  Assert - check the results
             Assert.That(result, Is.EqualTo(expected));
         }
