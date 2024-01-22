@@ -48,7 +48,7 @@ namespace Boolean.CSharp.Test
             Bank bank = new Bank(BankLocation.Stavanger);
             User user = new User(0, "Kristian", "Test@email.com", "password");
 
-            bank.RemoveUser(user);
+            bank.AddUser(user);
 
             Assert.That(bank.RemoveUser(user), Is.True);
             Assert.That(bank.Users.Count, Is.EqualTo(0));

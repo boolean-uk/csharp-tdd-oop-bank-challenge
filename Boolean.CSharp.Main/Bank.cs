@@ -12,7 +12,8 @@ namespace Boolean.CSharp.Main
 
         public Bank(BankLocation location)
         {
-            throw new NotImplementedException();
+            _users = new List<User>();
+            _location = location;
         }
 
         public List<User> Users { get =>  _users; }
@@ -20,17 +21,34 @@ namespace Boolean.CSharp.Main
 
         public void AddUser(User user)
         {
-            throw new NotImplementedException();
+            Users.Add(user);
         }
 
         public bool RemoveUser(User user)
         {
-            throw new NotImplementedException();
+            if (!Users.Contains(user))
+            {
+                Console.WriteLine("User does not exist");
+                return false;
+            }
+
+            _users.Remove(user);
+            return true;
         }
 
         public bool RemoveUser(int ID)
         {
-            throw new NotImplementedException();
+            foreach (User user in Users)
+            {
+                if (user.ID == ID)
+                {
+                    _users.Remove(user);
+                    return true;
+                }
+            }
+
+            Console.WriteLine($"User with ID {ID} does not exist");
+            return false;
         }
     }
 }
