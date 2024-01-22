@@ -11,11 +11,13 @@ namespace Boolean.CSharp.Main.Classes.Accounts
     {
         List<BankStatement> _transactions;
         eBranch _branch;
+        List<OverdraftRequest> _overdrafts;
         public eBranch Branch{ get { return _branch; } }
 
         public ABankAccount(eBranch e = eBranch.Central)
         {
             _transactions = new List<BankStatement>();
+            _overdrafts = new List<OverdraftRequest>();
             _branch = e;
         }
 
@@ -53,6 +55,11 @@ namespace Boolean.CSharp.Main.Classes.Accounts
                 sb.Append(test);
             }
             return sb;
+        }
+
+        public void Overdraft(OverdraftRequest a)
+        {
+            _overdrafts.Add(a);
         }
     }
 }
