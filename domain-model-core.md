@@ -16,15 +16,15 @@ So I can use my account,
 I want to deposit and withdraw funds.
 ```
 
-| Classes    | Members                  | Methods                                                      | Scenario                                                    | Outputs |
-|------------|--------------------------|--------------------------------------------------------------|-------------------------------------------------------------|---------|
-| `core`     | List<IAccount> _accounts | `createCurrentAccount(string accountNumber, double balance)` | Account number is unique and balance is positive            | true    |
-|            |                          |                                                              | Account number is not unique and/or balance is not positive | false   |
-|            | List<IAccount> _accounts | `createSavingsAccount(string accountNumber, double balance)` | Account number is unique and balance is positive            | true    |
-|            |                          |                                                              | Account number is not unique and/or balance is not positive | false   |
-| `IAccount` | double balance           | `deposit(double amount)`                                     | amount is more than 0                                       | true    |
-|            |                          |                                                              | amount is less than 0                                       | false   |
-|            | double balance           | `withdraw(double amount)`                                    | amount is more than 0 and the balance is high enough        | true    |
-|            |                          |                                                              | amount is less than 0 and/or the balance is to low          | false   |
-|            |                          | `checkBalance()`                                             |                                                             | double  |
-|            |                          | `generateBankStatement()`                                    |                                                             | string  |
+| Classes    | Members                     | Methods                                      | Scenario                                             | Outputs |
+|------------|-----------------------------|----------------------------------------------|------------------------------------------------------|---------|
+| `core`     | List<BankAccount> _accounts | `createCurrentAccount(string accountNumber)` | Account number is unique and valid                   | true    |
+|            |                             |                                              | Account number is not unique or invalid              | false   |
+|            | List<BankAccount> _accounts | `createSavingsAccount(string accountNumber)` | Account number is unique and valid                   | true    |
+|            |                             |                                              | Account number is not unique or invalid              | false   |
+| `IAccount` | double balance              | `deposit(double amount)`                     | amount is more than 0                                | true    |
+|            |                             |                                              | amount is less than 0                                | false   |
+|            | double balance              | `withdraw(double amount)`                    | amount is more than 0 and the balance is high enough | true    |
+|            |                             |                                              | amount is less than 0 and/or the balance is to low   | false   |
+|            |                             | `checkBalance()`                             |                                                      | double  |
+|            |                             | `generateBankStatement()`                    |                                                      | string  |
