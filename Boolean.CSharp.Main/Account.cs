@@ -26,7 +26,11 @@ namespace Boolean.CSharp.Main
         public void Deposit(double amount)
         {
             Console.WriteLine("You have deposited " + amount);
-            Balance += amount;      
+            Balance += amount;
+            Console.WriteLine("You now have " + Balance + " in your account");
+            Transaction transcation = new Transaction(amount, Balance);
+            BankStatement bankStatement = new BankStatement();
+            bankStatement.Transactions.Add(transcation);
         }
 
 
@@ -36,7 +40,10 @@ namespace Boolean.CSharp.Main
             {
                 Console.WriteLine("You have withdrawn " + amount);
                 Balance -= amount;
-                Console.WriteLine("You now have " + Balance + " left in your balance");
+                Console.WriteLine("You now have " + Balance + " left in your account");
+                Transaction transaction = new Transaction(amount, Balance);
+                BankStatement bankStatement = new BankStatement();
+                bankStatement.Transactions.Add(transaction);
             } else
             {
                 Console.Write("You do not have enough in your balance to withdraw " + amount);

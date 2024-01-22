@@ -10,9 +10,8 @@ namespace Boolean.CSharp.Main
     {
         private List<Transaction> _transactions;
 
-        public BankStatement(List<Transaction> transactions)
+        public BankStatement()
         {
-            _transactions = transactions;
         }   
 
         public List<Transaction> Transactions { get { return _transactions; } set { _transactions = value; } }
