@@ -1,0 +1,34 @@
+﻿@page "/login"
+
+@using Boolean.CSharp.Main
+@inject UserManager UserManager
+@inject NavigationManager NavigationManager
+
+<h3>Login, please</h3>
+
+<EditForm Model="LoginModel" OnValidSubmit="HandleLogin">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <InputText @bind-Value="LoginModel.Username" placeholder="Username" /><br />
+    <InputText @bind-Value="LoginModel.Password" placeholder="Password" type="password" /><br />
+    <button type="submit">Login</button>
+</EditForm>
+
+<div>@Message</div>
+
+@code {
+    private LoginRequest LoginModel { get; set; } = new LoginRequest();
+    private string Message = "";
+
+    private void HandleLogin()
+    {
+        Message = UserManager.Login(LoginModel.Username, LoginModel.Password);
+
+        // Navigate to dashboard if login successfull
+        if (Message.Contains("Welcome back"))
+        {
+            NavigationManager.NavigateTo("/dashboard");
+        }
+    }
+}

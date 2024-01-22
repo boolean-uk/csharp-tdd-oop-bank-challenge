@@ -1,0 +1,50 @@
+﻿@page "/register"
+
+@using Boolean.CSharp.Main;
+@inject UserManager UserManager
+
+<h3>Enter credentials for registration</h3>
+
+<EditForm Model="NewUser" OnValidSubmit="HandleRegister">
+    <InputText @bind-Value="NewUser.Username" placeholder="Username" /><br />
+    <InputText @bind-Value="NewUser.Password" placeholder="Password" type="password" /><br />
+    <InputText @bind-Value="NewUser.Street" placeholder="Street" /><br />
+    <InputText @bind-Value="NewUser.Postcode" placeholder="Postcode" /><br />
+    <InputText @bind-Value="NewUser.Email" placeholder="Email" type="email" /><br />
+
+    <!-- Branch selection -->
+    <label for="branchSelection">Choose a branch:</label>
+    <select id="branchSelection" @bind="selectedBranch">
+        @foreach (var branch in Enum.GetValues(typeof(AllEnums.Branches)))
+        {
+            <option value="@branch">@branch</option>
+        }
+    </select><br />
+
+    <button type="submit">Register</button>
+</EditForm>
+
+<div>@Message</div>
+
+@if (ShowPostRegistrationOptions)
+{
+    <div>
+        <p>Thank you for registering!</p>
+        <a href="/">Go back to home</a><br>
+        <a href="/login">Login now</a>
+    </div>
+}
+
+@code {
+    private User NewUser { get; set; } = new User();
+    private string Message = "";
+    private AllEnums.Branches selectedBranch;  //  capturing the selected branch
+
+    private void HandleRegister()
+    {
+        Message = UserManager.Register(NewUser.Username, NewUser.Password, NewUser.Street, NewUser.Postcode, NewUser.Email, selectedBranch); // pass the selected branch
+        ShowPostRegistrationOptions = true;
+    }
+
+    private bool ShowPostRegistrationOptions { get; set; } = false;
+}
