@@ -15,7 +15,11 @@ namespace Boolean.CSharp.Main
 
         public OverdraftRequest(int Id, double amount)
         {
-            throw new NotImplementedException();
+            _id = Id;
+            _requestTime = DateTime.Now;
+            _amount = amount;
+            if (amount <= 0) { _status = OverdraftStatus.Approved; }
+            else { _status = OverdraftStatus.Pending; }
         }
 
         public int Id { get => _id; }

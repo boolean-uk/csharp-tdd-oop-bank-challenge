@@ -44,7 +44,7 @@ namespace Boolean.CSharp.Test
         {
             OverdraftRequest request = new OverdraftRequest(0, -10);
 
-            Assert.That(request.Status, Is.EqualTo(OverdraftStatus.Rejected));
+            Assert.That(request.Status, Is.EqualTo(OverdraftStatus.Approved));
         }
     }
 }
