@@ -13,10 +13,12 @@ namespace Boolean.CSharp.Main
         private string accountSid, authToken;
         public Twillo() 
         {
-            accountSid = "AC89efc7377e74a2cda9dde441ed88bc73";
-            authToken = "d5c7357eed86c4a8bb92612da02dabca";
+            accountSid = "Cannot edit environment variables";
+            authToken = "Some random text";
 
-            TwilioClient.Init(accountSid, authToken);
+            try { TwilioClient.Init(accountSid, authToken); }
+            catch (Twilio.Exceptions.ApiException e) { Console.WriteLine(e.Message); }
+            
         }
 
         public void send(string message)
@@ -26,8 +28,14 @@ namespace Boolean.CSharp.Main
             messageOptions.From = new PhoneNumber("+15022204634");
             messageOptions.Body = message;
 
-
-            var SMS = MessageResource.Create(messageOptions);
+            try
+            {
+                var SMS = MessageResource.Create(messageOptions);
+            }
+            catch (Twilio.Exceptions.ApiException e)
+            {
+                { Console.WriteLine(e.Message); }
+            }
             Console.WriteLine(SMS.Body);
         }
     }
