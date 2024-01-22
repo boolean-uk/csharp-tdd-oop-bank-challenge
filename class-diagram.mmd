@@ -1,0 +1,67 @@
+---
+title: OOP Bank Challange
+---
+classDiagram
+    
+    Account<|--PersonalAccount : implements
+    Account<|--SavingsAccount : implements
+    Account<|--CreditAccount : implements
+
+    IAccount..>Transaction
+    IAccount..>Branch
+    IAccount..>Signature
+
+    Bank..>IAccount
+    Bank..>Transaction
+
+    class IAccount {
+    <<interface>>
+    IAccount : List<Transaction> Transactions
+    IAccount : Branch Branch
+    IAccount : Guid id
+    IAccount : Signature Signature
+    IAccount : Deposit(int amount)
+    IAccount : Withdrawl(int amount)
+    IAccount : PrintTransaction()
+    }
+    class Account {
+    <<abstract>>
+        List<Transaction> Transactions
+    Branch Branch
+    Guid id
+    Signature Signature
+    Deposit(int amount)
+    Withdrawl(int amount)
+    PrintTransaction()
+    }
+    class PersonalAccount{
+    }
+    class SavingsAccount{
+    }
+    class CreditAccount{
+    + OverDraft(Signature signature, int amount)
+    }
+    class Transaction {
+    - DateTime _date
+    - int amount
+    - int balance
+    - Signature _signature 
+    }
+    class Signature {
+    - Guid _signature
+    - bool isManager()
+    }
+    class Branch {
+    - int _softCode
+    - string _address
+    }
+    class Bank{
+    - List<IAccount> Accounts
+    - List<Transaction> Overdrafts
+    + AddAccount(IAccount account)
+    + List overdrafts	CreateAccount(IAccount account)
+    + RemoveAccount(IAccount account)
+    + RequestOverdraft(IAccount account)
+    + ApproveOverdraft(Signature signature, Transaction tranaction)	
+    + DeclineOverdraft(Signature signature, Transaction transaction)
+    }
