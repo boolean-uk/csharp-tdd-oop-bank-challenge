@@ -1,0 +1,76 @@
+---
+title: Bank
+---
+classDiagram
+
+class IAccount{
+    <<Interface>>
+    -float _balance get
+    -List<Transaction> _transactions get
+    -String _accountName get
+
+    +bool Deposit(float amount)
+    +bool Withdraw(float amount)
+    +string GetBankStatement()
+}
+
+class AccountBase {
+    -float _balance get
+    -List<Transaction> _transactions get
+    -string _accountName get
+    -BankStatementBuilder _bankStatementBuilder
+
+    +bool Deposit(float amount)
+    +bool Withdraw(float amount)
+    +string GetBankStatement()
+    +constructor AccountBase(string accountname, BankStatementBuilder bankStatementBuilder)
+}
+
+class CurrentAccount {
+    +bool Deposit(float amount)
+    +bool Withdraw(float amount)
+    +string GetBankStatement()
+}
+
+class SavingsAccount {
+    +bool Deposit(float amount)
+    +bool Withdraw(float amount)
+    +string GetBankStatement()
+}
+
+class Transaction {
+    -DateTime _time get
+    -TransactionType _typeOfTransaction get
+    -float _amount get
+    -float _balance get
+
+    +constructor Transaction(DateTime time, TransactionType typeOfTransaction, float amount, float balance)
+}
+
+class Bank {
+    -BankStatementBuilder _bankStatementBuilder
+
+    +constructor Bank(BankStatementBuilder bankStatementBuilder)
+    +CurrentAccount createCurrentAccount(Customer customer, string accountname)
+    +SavingsAccount createSavingsAccount(Customer customer, string accountname)
+}
+
+class Customer {
+    -List<IAccount> _accounts get
+
+    +void AddAccount(IAccount account)
+}
+
+class BankStatementBuilder {
+    +string BuildStatement(List<Transaction> transactions)
+}
+
+CurrentAccount "1" --> "1" BankStatementBuilder
+SavingsAccount "1" --> "1" BankStatementBuilder
+AccountBase "1" --> "1" BankStatementBuilder
+Bank "1" --> "1" CurrentAccount
+Bank "1" --> "1" SavingsAccount
+Bank "1" --> "1" BankStatementBuilder
+AccountBase <|-- CurrentAccount : inhertis
+AccountBase <|-- SavingsAccount : inhertis
+IAccount <|-- AccountBase : implements
