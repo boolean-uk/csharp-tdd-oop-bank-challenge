@@ -55,7 +55,7 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="Boolean.CSharp.Main.Customer">
-    <Position X="1.25" Y="5.25" Width="1.5" />
+    <Position X="7.75" Y="4.5" Width="1.5" />
     <Compartments>
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
