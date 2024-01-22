@@ -1,22 +1,27 @@
-| Classes			| Members																				| Properties					| Methods							| Scenario														| Outputs		|
-|-------------------|---------------------------------------------------------------------------------------|-------------------------------|-----------------------------------|---------------------------------------------------------------|---------------|
-| `BankSystem`		| `List<IUser> users`																	|								|									|																|				|
-| `IUser`			|																						|								|									|																|				|
-| `CustomerUser`	| `List<ABankAccount> _accounts`														|								| `CreateAccount(ABankAccount)`		| User wants to make a current account							| string		|
-|					|																						|								|									| User wants to make a savings account							| string		|
-|					|																						|								| `Withdraw(double, int)`			| User attempts to withdraw more than possible					| false			|
-|					|																						|								|									| User attempts to withdraw an acceptable ammount				| true			|
-|					|																						|								| `Deposit(double, int)`			|																| double		|
-|					|																						|								| `GenerateStatement(int)`			|																| string		|
-| 					|																						|								| `CheckBranch(int)`				|																| string		|
-|					|																						|								| `RequestOverdraft(double)`		|																| BankStatement	|
-| `ManagerUser`		|																						|								| `ManageRequest(BankStatement)`	|																| bool			|
-| `ABankAccount`	| `List<BankStatement> _transactions`													|								| `Transaction(BankStatement)`		|																| double		|
-|					| `enum eBranch`																		|								| `WriteTransactions()`				|																| StringBuilder	|
-| `CurrentAccount`	|																						|								|									|																|				|
-| `SavingsAccount`	|																						|								|									|																|				|
-| `BankStatement`	| `DateTime _transactionDate`															| `double Transaction{ get;}`	|									|																| double		|
-|					| `double creditDebit`																	|								|									|																|				|
-|					| `bool valid`																			|								|									|																|				|
-|					| `enum eType`																			|								|									|																|				|
-| *					|																						|								|									|																|				|
+| Classes			| Members																				| Properties							| Methods							| Scenario														| Outputs		|
+|-------------------|---------------------------------------------------------------------------------------|---------------------------------------|-----------------------------------|---------------------------------------------------------------|---------------|
+| `BankSystem`		| `List<IUser> users`																	|										|									|																|				|
+| `IUser`			|																						|										|									|																|				|
+| `CustomerUser`	| `List<ABankAccount> _accounts`														|										| `CreateAccount(ABankAccount)`		| User wants to make a current account							| string		|
+|					|																						|										|									| User wants to make a savings account							| string		|
+|					|																						|										| `Withdraw(double, int)`			| User attempts to withdraw more than possible					| false			|
+|					|																						|										|									| User attempts to withdraw an acceptable ammount				| true			|
+|					|																						|										| `Deposit(double, int)`			|																| double		|
+|					|																						|										| `GenerateStatement(int)`			|																| string		|
+| 					|																						|										| `CheckBranch(int)`				|																| string		|
+|					|																						|										| `RequestOverdraft(double)`		|																| BankStatement	|
+| `ManagerUser`		|																						|										| `ManageRequest(BankStatement)`	|																| bool			|
+| `ABankAccount`	| `List<BankStatement> _transactions`													|										| `Transaction(BankStatement)`		|																| double		|
+|					| `enum eBranch`																		|										| `WriteTransactions()`				|																| StringBuilder	|
+| 					| `List<OverDraftRequest> _overdrafts`													|										|									|																|				|
+| `CurrentAccount`	|																						|										|									|																|				|
+| `SavingsAccount`	|																						|										|									|																|				|
+| `BankStatement`	| `DateTime _transactionDate`															| `double Transaction{ get;}`			|									|																| double		|
+|					| `double creditDebit`																	|										|									|																|				|
+|					| `bool valid`																			|										|									|																|				|
+|					| `enum eType`																			|										|									|																|				|
+| `OverDraftRequest`| 																						| `double Amount{get; set}`				|									|																|				|
+|					| 																						| `double RequestDate{get; set}`		|									|																|				|
+|					| 																						| `enum Stauts RequestStatus{get; set}`	|									|																|				|
+|					|																						|										|									|																|				|
+| *					|																						|										|									|																|				|

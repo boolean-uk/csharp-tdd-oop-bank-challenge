@@ -2,6 +2,7 @@
 using Boolean.CSharp.Main.Classes;
 using Boolean.CSharp.Main.Classes.Accounts;
 using Boolean.CSharp.Main.Classes.User;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -60,7 +61,6 @@ namespace Boolean.CSharp.Test
         public void RequestingOverdraft(double deposit, double draft)
         {
             //  Arrange - set up test values
-            string result;
             CurrentAccount testAccount = new CurrentAccount();
             customer.CreateAccount(testAccount);
             customer.Deposit(deposit, 0);
@@ -73,11 +73,19 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        public void ManageOverdraft()
+        [TestCase(1000, false, "Request denied")]
+        [TestCase(300, true)]
+        [TestCase(500, true)]
+        public void ManageOverdraft(double amount, bool approved, string expected)
         {
             //  Arrange - set up test values
+            CurrentAccount testAccount = new CurrentAccount();
+            customer.CreateAccount(testAccount);
+            customer.Deposit(200, 0);
+            ManagerUser manager = new ManagerUser();
 
             //  Act - use the fucntion we want to test
+            //manager.ManageRequest(customer.RequestOverdraft(amount, 0), approved);
 
             //  Assert - check the results
             Assert.IsTrue(false);
