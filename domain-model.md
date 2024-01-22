@@ -8,6 +8,7 @@
 |					|																						|								|									| User attempts to withdraw an acceptable ammount				| true			|
 |					|																						|								| `Deposit(double, int)`			|																| double		|
 |					|																						|								| `GenerateStatement(int)`			|																| string		|
+| 					|																						|								| `CheckBranch(int)`				|																| string		|
 |					|																						|								| `RequestOverdraft(double)`		|																| BankStatement	|
 | `ManagerUser`		|																						|								| `ManageRequest(BankStatement)`	|																| bool			|
 | `ABankAccount`	| `List<BankStatement> _transactions`													|								| `Transaction(BankStatement)`		|																| double		|
