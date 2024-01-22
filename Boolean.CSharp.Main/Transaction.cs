@@ -30,6 +30,4 @@ namespace Boolean.CSharp.Main
     }
 
 
-
-
 }

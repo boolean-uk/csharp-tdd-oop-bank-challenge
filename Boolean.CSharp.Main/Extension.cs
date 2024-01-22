@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace Boolean.CSharp.Main
 {
@@ -12,6 +14,7 @@ namespace Boolean.CSharp.Main
         private BankUser _bankuser;
         private SavingsAccount _savingsaccount;
         private string branch;
+        public List<Transaction> Transactions { get; } = new List<Transaction>();
         public Manager()
         {
             _bankuser = new BankUser();
@@ -20,32 +23,9 @@ namespace Boolean.CSharp.Main
     }
 
 
-        public string denieOverdraft(BankUser bankuser)
-        {
-            return "";
-        }
 
-        public string approveOverdraft(BankUser bankuser)
-        {
-            return "";
-        }
-
-        public void sendToPhone()
-        { 
-          
-        }
+      
 
 
     }
 }
-
-
-/*
-
-request an overdraft - customer
-        
-approve or reject overdraft requests - manager
-
-send bank statements as message to phone - customer  
-  
- */

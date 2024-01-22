@@ -30,13 +30,7 @@ namespace Boolean.CSharp.Main
             return true;
         }
 
-
-        //Extension
-
-        public bool requestOverdraft(Account account, decimal amount)
-        {
-            return true;
-        }
+     
 
     }
 }

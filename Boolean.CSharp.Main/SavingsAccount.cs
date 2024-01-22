@@ -44,6 +44,11 @@ namespace Boolean.CSharp.Main
         {
             return base.setBranch(Branch);
         }
+
+        public override void sendToPhone(string phoneNumber)
+        {
+            base.sendToPhone(phoneNumber);
+        }
     }
 
 

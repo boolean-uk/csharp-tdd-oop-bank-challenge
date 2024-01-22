@@ -22,6 +22,7 @@ namespace Boolean.CSharp.Test
             _bankuser = new BankUser();
             _savingsAccount = new SavingsAccount();
             _manager = new Manager();
+            _currentAccount = new CurrentAccount();
         }
 
 
@@ -52,7 +53,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void RequestOverdraft()
         {
-            bool overdraft = _bankuser.requestOverdraft(_currentAccount, 100m);
+            bool overdraft = _savingsAccount.requestOverdraft(100m);
             Assert.True(overdraft);
         }
 
@@ -62,14 +63,14 @@ namespace Boolean.CSharp.Test
         public void OverdraftRequestDenied()
         {
 
-            
+            _bankuser.CreateCurrentAccount();
             Account account = _bankuser.Accounts[0];
             account.Deposit(100m);
             decimal balance = account.GetBalance();
             Assert.That(balance, Is.EqualTo(100m));
 
-            _bankuser.requestOverdraft(account, 100m);
-            string denied = _manager.denieOverdraft(_bankuser);
+            account.requestOverdraft(100m);
+            string denied = account.denieOverdraft(100m);
             Assert.That(denied, Is.EqualTo("denied"));
 
             decimal balance1 = account.GetBalance();
@@ -84,26 +85,65 @@ namespace Boolean.CSharp.Test
         [Test]
         public void OverdraftRequestApproved()
         {
+            _bankuser.CreateCurrentAccount();
             Account accountnew = _bankuser.Accounts[0];
             accountnew.Deposit(100m);
             decimal balancenew = accountnew.GetBalance();
             Assert.That(balancenew, Is.EqualTo(100m));
 
-            _bankuser.requestOverdraft(accountnew, 200m);
-            string approved = _manager.approveOverdraft(_bankuser);
-            Assert.That(approved, Is.EqualTo("denied"));
+            accountnew.requestOverdraft(200m);
+            string approved = accountnew.approveOverdraft(200m);
+            Assert.That(approved, Is.EqualTo("approved"));
 
             decimal balancenew1 = accountnew.GetBalance();
             Assert.That(balancenew1, Is.EqualTo(-100m));
         }
 
 
+        [Test]
+        public void sendToPhone()
+        {
+            SavingsAccount account = new SavingsAccount();
+
+            // Mock transactions
+            account.Deposit(100m);
+            account.Withdraw(50m);
+            account.Deposit(200m);
+
+            // Expected statement
+            string expectedStatement =
+                "Transaction Date: " + DateTime.Today.Date.ToString("dd-MM-yyyy HH:mm:ss") + Environment.NewLine +
+                "Credit: 100" + Environment.NewLine +
+                "Debit: 0" + Environment.NewLine +
+                "Balance at the time of transaction: 100" + Environment.NewLine +
+                Environment.NewLine +
+                "Transaction Date: " + DateTime.Today.Date.ToString("dd-MM-yyyy HH:mm:ss") + Environment.NewLine +
+                "Credit: 0" + Environment.NewLine +
+                "Debit: 50" + Environment.NewLine +
+                "Balance at the time of transaction: 50" + Environment.NewLine +
+                Environment.NewLine +
+                "Transaction Date: " + DateTime.Today.Date.ToString("dd-MM-yyyy HH:mm:ss") + Environment.NewLine +
+                "Credit: 200" + Environment.NewLine +
+                "Debit: 0" + Environment.NewLine +
+                "Balance at the time of transaction: 250" + Environment.NewLine + Environment.NewLine + Environment.NewLine;
+
+            // Act
+            StringWriter sw = new StringWriter();
+            Console.SetOut(sw);
+
+            // Call the method that contains Console.WriteLine
+             account.sendToPhone("12345678");
+
+            string result = sw.ToString();
+
+            // Assert the output
+            Assert.AreEqual(expectedStatement, result);
+
+
+        }
+
 
     }
 }
 
-
-/*
-send bank statements as message to phone - customer  
- */
 
