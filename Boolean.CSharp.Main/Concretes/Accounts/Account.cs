@@ -16,6 +16,11 @@ namespace Boolean.CSharp.Main.Accounts
             _transactions.Add(transaction);
         }
 
+        public string GenerateBankStatement()
+        {
+            throw new NotImplementedException();
+        }
+
         public double GetBalance()
         {
             double balance = 0;

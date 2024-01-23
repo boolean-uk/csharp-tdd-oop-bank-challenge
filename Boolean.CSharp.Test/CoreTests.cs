@@ -55,5 +55,28 @@ namespace Boolean.CSharp.Test
             
         }
 
+        [Test]
+        public void GenerateBankStatementTest()
+        {
+            // Arrange
+            ITransaction deposit1 = new Transaction(1000.00d, _currentAccount.GetBalance());
+            _currentAccount.AddTransaction(deposit1);
+            ITransaction deposit2 = new Transaction(2000.00d, _currentAccount.GetBalance());
+            _currentAccount.AddTransaction(deposit2);
+            ITransaction withdrawal = new Transaction(-500, _currentAccount.GetBalance());
+            _currentAccount.AddTransaction(withdrawal);
+
+            string expectedStatement = "date       || amount || balance\n" +
+                                       $"{withdrawal.GetDetails().Item1} || -500.00 || 2500.00\n" +
+                                       $"{deposit2.GetDetails().Item1} || 2000.00 || 3000.00\n" +
+                                       $"{deposit1.GetDetails().Item1} || 1000.00 || 1000.00";
+
+            // Act
+            string actualStatement = _currentAccount.GenerateBankStatement();
+
+            // Assert
+            Assert.That(expectedStatement, Is.EqualTo(actualStatement));
+        }
+
     }
 }

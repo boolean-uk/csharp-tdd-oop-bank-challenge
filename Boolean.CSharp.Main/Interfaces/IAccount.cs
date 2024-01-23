@@ -10,5 +10,7 @@ namespace Boolean.CSharp.Main.Interfaces
     {
         void AddTransaction(ITransaction transaction);
         double GetBalance();
+
+        string GenerateBankStatement();
     }
 }
