@@ -48,6 +48,5 @@
 ### IBankStatement (Interface)
 #### Properties
 * **`Account: BankAccount`** - The account of the bank statement.
-* **`TimeFrame: Tuple<DateTime, DateTime>`** - The range of time for which the statement should generate records.
 #### Methods
 * **`GenerateStatement(): string`** - Returns a receipt of all transactions between two points in time.
