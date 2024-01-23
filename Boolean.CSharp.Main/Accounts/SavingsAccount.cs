@@ -4,16 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boolean.CSharp.Main
+namespace Boolean.CSharp.Main.Accounts
 {
-    public class CurrentAccount
+    public class SavingsAccount : BankAccount
     {
-        public void Deposit(int v)
-        {
-            throw new NotImplementedException();
-        }
-
-        public object? GetBalance()
+        public override string GenerateStatemenr()
         {
             throw new NotImplementedException();
         }
