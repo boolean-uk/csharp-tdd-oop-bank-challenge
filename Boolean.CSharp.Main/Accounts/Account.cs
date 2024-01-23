@@ -11,10 +11,8 @@ namespace Boolean.CSharp.Main.Accounts
 {
     public abstract class Account
     {
-        private decimal _balance = 0;
         private ICustomer _customer;
 
-        public decimal Balance { get => _balance; set => _balance = value; }
 
         private List<ITransaction> _transactions = new List<ITransaction>();
         public List<ITransaction> Transactions { get => _transactions; set => _transactions = value; }
@@ -22,27 +20,29 @@ namespace Boolean.CSharp.Main.Accounts
         public Account(ICustomer customer)
         {
             this._customer = customer;
+  
         }
 
         public decimal Deposit(decimal amount)
         {
-
-            ITransaction newTransaction = new Transaction(amount, Balance, TransactionType.Credit);
-            Balance += amount;
+            ITransaction newTransaction = new Transaction(amount, GetBalance(), TransactionType.Credit);
             Transactions.Add(newTransaction);
             
-            return Balance;
+            return newTransaction.NewBalance;
         }
 
         public decimal Withdraw(decimal amount)
         {
-            ITransaction newTransaction = new Transaction(amount, Balance,TransactionType.Debit);
-            Balance -= amount;
+            ITransaction newTransaction = new Transaction(amount, GetBalance(), TransactionType.Debit);
             Transactions.Add(newTransaction);
 
-            return Balance;
+            return newTransaction.NewBalance;
         }
 
+        public decimal GetBalance() 
+        {
+             return (Transactions.Count > 0 ? Transactions.Last().NewBalance : 0);
+        }
 
         public string GenerateBankStatement()
         {

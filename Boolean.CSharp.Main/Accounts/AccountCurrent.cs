@@ -1,4 +1,5 @@
 ﻿using Boolean.CSharp.Main.Classes;
+using Boolean.CSharp.Main.enums;
 using Boolean.CSharp.Main.Interfaces;
 using System;
 using System.Collections.Generic;
