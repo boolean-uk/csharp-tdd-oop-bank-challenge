@@ -3,6 +3,7 @@ using Boolean.CSharp.Main.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -69,6 +70,15 @@ namespace Boolean.CSharp.Main.Classes.User
             };
             _accounts[account].Overdraft(test);
             return test;
+        }
+
+        public void SendAccountText(int account)
+        {
+            if (_accounts.Count >= account)
+            {
+                TwilioMessageProvider sender = new TwilioMessageProvider();
+                _accounts[account].SendTextMessage(sender);
+            }
         }
     }
 }

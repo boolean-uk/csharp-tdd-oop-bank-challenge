@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Boolean.CSharp.Main.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -70,6 +71,11 @@ namespace Boolean.CSharp.Main.Classes.Accounts
                 amount += ov.Amount;
             }
             return amount;
+        }
+
+        public void SendTextMessage(ITextMessageSender sender)
+        {
+            sender.SendMessage(WriteTransactions().ToString());
         }
     }
 }
