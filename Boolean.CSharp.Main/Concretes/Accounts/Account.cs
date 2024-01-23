@@ -15,6 +15,8 @@ namespace Boolean.CSharp.Main.Accounts
         public void AddTransaction(ITransaction transaction)
         {
             _transactions.Add(transaction);
+            transaction.SetBalance(GetBalance());
+
         }
 
         public string GenerateBankStatement()
@@ -44,6 +46,7 @@ namespace Boolean.CSharp.Main.Accounts
         public double GetBalance()
         {
             double balance = 0;
+
             balance += (_transactions.Sum(t => t.GetDetails().Item2));
 
             return balance;

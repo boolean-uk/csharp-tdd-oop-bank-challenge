@@ -42,11 +42,11 @@ namespace Boolean.CSharp.Test
         {
             double amount = 10.00d;
             double amount2 = -10.00d;
-            ITransaction transaction = new Transaction(amount, _currentAccount.GetBalance());
+            ITransaction transaction = new Transaction(amount);
             _currentAccount.AddTransaction(transaction);
-            ITransaction transaction2 = new Transaction(amount, _currentAccount.GetBalance());
+            ITransaction transaction2 = new Transaction(amount);
             _currentAccount.AddTransaction(transaction2);
-            ITransaction transaction3 = new Transaction(amount2, _currentAccount.GetBalance());
+            ITransaction transaction3 = new Transaction(amount2);
             _currentAccount.AddTransaction(transaction3);
 
             double actualBalance = _currentAccount.GetBalance();
@@ -58,18 +58,19 @@ namespace Boolean.CSharp.Test
         [Test]
         public void GenerateBankStatementTest()
         {
+            _currentAccount = new CurrentAccount();
             // Arrange
-            ITransaction deposit1 = new Transaction(1000.00d, _currentAccount.GetBalance());
+            ITransaction deposit1 = new Transaction(1000.00d);
             _currentAccount.AddTransaction(deposit1);
-            ITransaction deposit2 = new Transaction(2000.00d, _currentAccount.GetBalance());
+            ITransaction deposit2 = new Transaction(2000.00d);
             _currentAccount.AddTransaction(deposit2);
-            ITransaction withdrawal = new Transaction(-500, _currentAccount.GetBalance());
+            ITransaction withdrawal = new Transaction(-500);
             _currentAccount.AddTransaction(withdrawal);
 
             string expectedStatement = $"date       || amount || balance{Environment.NewLine}" +
                                        $"{withdrawal.GetDetails().Item1} || -500,00 || 2500,00{Environment.NewLine}" +
-                                       $"{deposit2.GetDetails().Item1} || 2000,00 || 3000,00{Environment.NewLine}" +
-                                       $"{deposit1.GetDetails().Item1} || 1000,00 || 1000,00";
+                                       $"{deposit2.GetDetails().Item1} ||   2000,00 || 3000,00{Environment.NewLine}" +
+                                       $"{deposit1.GetDetails().Item1} ||   1000,00 || 1000,00";
 
             // Act
             string actualStatement = _currentAccount.GenerateBankStatement();
