@@ -73,18 +73,22 @@ namespace Boolean.CSharp.Test
             DateTime time = DateTime.Now;
             Assert.That(statement.ElementAt(0), Is.EqualTo($"{time.ToString("D")}  ||  1000     ||  deposit  ||  1000  "));
         }
-        [Test]
-        public void overdraftTest()
+        [TestCase(500f, 500f, -500f)]
+        [TestCase(500f, 250f, -250f)]
+        [TestCase(100f, 50f, -50f)]
+        [TestCase(-100f, 1f, 9f)]
+        public void overdraftTest(float over, float with, float it)
         {
             //setup
             CurrentAccount account = (CurrentAccount)_customer.createAccount(221133, AccountType.current, "London");
-            account.requestOverdraft(500f);
-
+            account.requestOverdraft(over);
+            if (over < 0)
+                account.deposit(10f);
             //execution
-            account.withdraw(500f);
+            account.withdraw(with);
             
             //evaluation
-            Assert.That(account.getTotal(), Is.EqualTo(-500f));
+            Assert.That(account.getTotal(), Is.EqualTo(it));
         }
     }
 }

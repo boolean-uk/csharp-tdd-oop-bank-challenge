@@ -21,7 +21,14 @@ namespace Boolean.CSharp.Main
             float overdraft;
             if (approveOverdraft())
             {
-                overdraft = reqOverdraft;
+                if(reqOverdraft > 0)
+                {
+                    overdraft = reqOverdraft;
+                }
+                else 
+                { 
+                    overdraft = 0; 
+                }
             }
             else
             {
