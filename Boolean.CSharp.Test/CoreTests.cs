@@ -13,9 +13,10 @@ namespace Boolean.CSharp.Test
         {
             //arrange
             BankManager bankManager = new BankManager();
+            Branch branch = new Branch("Bergen", "Bergen");
 
             //act
-            bankManager.CreateCurrentAccount(accountName);
+            bankManager.CreateCurrentAccount(accountName, branch);
             
 
             //assert
@@ -28,9 +29,11 @@ namespace Boolean.CSharp.Test
         {
             //arrange
             BankManager bankManager = new BankManager();
+            Branch branch = new Branch("Bergen", "Bergen");
+
 
             //act
-            bankManager.CreateSavingsAccount(accountName);
+            bankManager.CreateSavingsAccount(accountName, branch);
 
 
             //assert
@@ -43,8 +46,8 @@ namespace Boolean.CSharp.Test
         {
             //arrange
             BankStatement bankStatement = new BankStatement();
-
-            CurrentAccount account = new CurrentAccount("Current account 1");
+            Branch branch = new Branch("Bergen", "Bergen");
+            CurrentAccount account = new CurrentAccount("Current account 1", branch);
             account.Deposit(depositAmount);
             account.Withdraw(withdrawAmount);
 
@@ -61,7 +64,8 @@ namespace Boolean.CSharp.Test
         public void DepositTest(double amount)
         {
             //arrange
-            CurrentAccount account = new CurrentAccount("Current account 1");
+            Branch branch = new Branch("Bergen", "Bergen");
+            CurrentAccount account = new CurrentAccount("Current account 1", branch);
 
             //act
             account.Deposit(amount);
@@ -74,7 +78,8 @@ namespace Boolean.CSharp.Test
         public void WithdrawTest(double amount)
         {
             //arrange
-            CurrentAccount account = new CurrentAccount("Current account 1");
+            Branch branch = new Branch("Bergen", "Bergen");
+            CurrentAccount account = new CurrentAccount("Current account 1", branch);
             account.Deposit(700);
 
             //act

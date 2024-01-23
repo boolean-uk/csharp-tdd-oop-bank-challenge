@@ -13,12 +13,14 @@ namespace Boolean.CSharp.Main.Objects
         private string _accountName;
         private string _accountType;
         private double _balance;
+        private Branch _accountBranch;
         private BankStatement _accountStatement = new BankStatement();
 
-        public Account(string accountName)
+        public Account(string accountName, Branch accountBranch)
         {
             _id += 1;
             _accountName = accountName;
+            _accountBranch = accountBranch;
             _balance = 0;
             _accountType = "";
         }
@@ -28,6 +30,7 @@ namespace Boolean.CSharp.Main.Objects
         public string AccountName { get { return _accountName; } set { _accountName = value; } }
         public string AccountType { get { return _accountType; } set { _accountType = value; } }
         public double Balance { get { return _balance; } set { _balance = value; } }
+        public Branch AccountBranch { get { return _accountBranch; } set { _accountBranch = value; } }
         public BankStatement AccountStatement { get { return _accountStatement; } set { _accountStatement = value; } }
 
         public void Deposit(double amount)
@@ -43,7 +46,7 @@ namespace Boolean.CSharp.Main.Objects
 
         public void Withdraw(double amount)
         {
-            if (Balance > amount)
+            if (Balance >= amount)
             {
                 double oldBalance = Balance;
                 Console.WriteLine("You have withdrawn " + amount);
@@ -54,8 +57,27 @@ namespace Boolean.CSharp.Main.Objects
             }
             else
             {
-                Console.Write("You do not have enough in your balance to withdraw " + amount);
+                Console.Write("Requests over draft for " + amount);
+                if (RequestOverDraft())
+                {
+                    Console.WriteLine("Your over draft request has been accepted");
+                    double oldBalance = Balance;
+                    Console.WriteLine("You have withdrawn " + amount);
+                    Balance -= amount;
+                    Console.WriteLine("You now have " + Balance + " left in your account");
+                }
+                else
+                {
+                     
+                }
             }
+        }
+
+        public bool RequestOverDraft()
+        {
+            bool result = false;
+
+            return result;
         }
 
         public void PrintBankStatement()

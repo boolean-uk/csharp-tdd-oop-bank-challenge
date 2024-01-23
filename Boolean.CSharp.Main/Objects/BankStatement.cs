@@ -19,5 +19,25 @@ namespace Boolean.CSharp.Main.Objects
         public int Id { get { return _id; } set { _id = value; } }
         public List<ITransaction> Transactions { get { return _transactions; } set { _transactions = value; } }
 
+        public double CalculateBalance()
+        {
+            double balance = 0;
+            foreach(var transaction in Transactions)
+            {
+                if(transaction.Type == Enums.TransactionType.Deposit)
+                {
+                    balance += transaction.Amount;
+                } else if (transaction.Type == Enums.TransactionType.Withdraw)
+                {
+                    balance -= transaction.Amount;
+                } else
+                {
+                    balance += 0;
+                }
+            }
+
+            return balance;
+        }
+
     }
 }

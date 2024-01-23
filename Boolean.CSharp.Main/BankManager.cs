@@ -12,10 +12,10 @@ namespace Boolean.CSharp.Main
         public List<Account> Accounts {  get; set; } = new List<Account>();
 
 
-        public void CreateCurrentAccount(string accountName)
+        public void CreateCurrentAccount(string accountName, Branch branch)
         {
-            Console.WriteLine("Input name of current account");
-            CurrentAccount newCurrentAccount = new CurrentAccount(accountName);
+            Console.WriteLine("Creating current account");
+            CurrentAccount newCurrentAccount = new CurrentAccount(accountName, branch);
             if (!Accounts.Contains(newCurrentAccount)){
                 Accounts.Add(newCurrentAccount);
                 Console.WriteLine($"{accountName} has been added to accounts");
@@ -26,10 +26,10 @@ namespace Boolean.CSharp.Main
                 
         }
 
-        public void CreateSavingsAccount(string accountName)
+        public void CreateSavingsAccount(string accountName, Branch branch)
         {
-            Console.WriteLine("Input name of savings account");
-            SavingsAccount newSavingsAccount = new SavingsAccount(accountName);
+            Console.WriteLine("Creating savings account");
+            SavingsAccount newSavingsAccount = new SavingsAccount(accountName, branch);
             if (!Accounts.Contains(newSavingsAccount))
             {
                 Accounts.Add(newSavingsAccount);
