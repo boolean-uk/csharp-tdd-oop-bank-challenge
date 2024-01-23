@@ -1,6 +1,6 @@
 ﻿namespace Boolean.CSharp.Main
 {
-    public enum TransactionType { Credit, Debit }
+    public enum TransactionType { Credit, Debit, Overdraft }
 
     public class Transaction
     {

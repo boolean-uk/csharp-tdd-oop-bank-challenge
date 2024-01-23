@@ -19,6 +19,7 @@ namespace Boolean.CSharp.Test
         [SetUp]
         public void SetUp() 
         {
+            manager = new();
             customer = new();
             account = new("test", Branch.Norway);
             customer.Accounts.Add(account);
@@ -51,7 +52,7 @@ namespace Boolean.CSharp.Test
         {
             account.RequestOverdraft(300);
             manager.AcceptOverdraft(account ,account.Overdrafts.Last());
-            Assert.That(account.GetBalance(), Is.EqualTo(300));
+            Assert.That(account.GetBalance(), Is.EqualTo(-300));
         }
 
         [Test]

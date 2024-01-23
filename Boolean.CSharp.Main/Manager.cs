@@ -16,12 +16,12 @@ namespace Boolean.CSharp.Main
 
         public string AcceptOverdraft(Account account, Overdraft overdraft)
         {
-            throw new NotImplementedException();
+            return account.AcceptOverdraft(overdraft);
         }
 
         public string RejectOverdraft(Account account, Overdraft overdraft)
         {
-            throw new NotImplementedException();
+            return account.RejectOverdraft(overdraft);
         }
         
     }

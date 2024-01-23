@@ -24,11 +24,24 @@ namespace Boolean.CSharp.Main
             //_balance = 0;
             _transactions = new();
             _branch = branch;
+            _overdrafts = new();
         }
 
         public decimal GetBalance()
         {
-            throw new NotImplementedException();
+            decimal balance = 0;
+            foreach (Transaction transaction in _transactions)
+            {
+                if (transaction.Type == TransactionType.Credit)
+                {
+                    balance += transaction.Amount;
+                }
+                else
+                {
+                    balance -= transaction.Amount;
+                }
+            }
+            return balance;
         }
 
         public string Deposit(decimal amount)
@@ -69,17 +82,20 @@ namespace Boolean.CSharp.Main
 
         public void RequestOverdraft(decimal amount)
         {
-            throw new NotImplementedException();
+            _overdrafts.Add(new(amount));
         }
 
-        public string Overdraft(Overdraft overdraft)
+        public string AcceptOverdraft(Overdraft overdraft)
         {
-            throw new NotImplementedException();
+            _transactions.Add(new(TransactionType.Overdraft, overdraft.Amount, GetBalance()));
+            _overdrafts.Remove(overdraft);
+            return $"overdraft has been accepted, new balance is {GetBalance()}";
         }
 
         public string RejectOverdraft(Overdraft overdraft) 
-        { 
-            throw new NotImplementedException(); 
+        {
+            _overdrafts.Remove(overdraft);
+            return "overdraft has been rejected";
         }
 
     }
