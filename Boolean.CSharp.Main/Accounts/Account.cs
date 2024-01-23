@@ -87,6 +87,22 @@ namespace Boolean.CSharp.Main.Accounts
                         transaction.NewBalance);
             };
         }
+        public string GenerateStatementMessage()
+        {
+            StringBuilder statement = new StringBuilder();
+            statement.AppendLine(string.Format("{0,10} || {1,10} || {2,10} || {3,10}", "Date", "Credit", "Debit", "Balance"));
+
+            foreach (ITransaction transaction in _transactions.OrderByDescending(t => t.Date))
+            {
+                statement.AppendLine(string.Format("{0,10} || {1,10} || {2,10} || {3,10}",
+                    transaction.Date.ToShortDateString(),
+                    transaction.Type == TransactionType.Credit ? transaction.Amount.ToString() : "0",
+                    transaction.Type == TransactionType.Debit ? transaction.Amount.ToString() : "0",
+                    transaction.NewBalance.ToString()));
+            }
+
+            return statement.ToString();
+        }
 
     }
 }
