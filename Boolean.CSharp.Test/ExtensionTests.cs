@@ -20,7 +20,7 @@ namespace Boolean.CSharp.Test
         {
             //Arrange
             Customer customer = new Customer("Andreas Lauvhjell");
-            AccountCurrent currentAccount = new AccountCurrent(customer);
+            AccountCurrent currentAccount = new AccountCurrent(customer, Branch.Retail);
             for (int i = 0; i < 20; i++) //10x each
             {
                 if (!(i % 2 == 0))
@@ -42,7 +42,7 @@ namespace Boolean.CSharp.Test
             Assert.That(expectedResult, Is.EqualTo(actualResult));
         }
 
-        /*
+
         [Test]
         public void Test_02_BranchTest()
         {
@@ -61,13 +61,15 @@ namespace Boolean.CSharp.Test
             AccountSavings retail5 = new AccountSavings(customer5, Branch.Pension);
             AccountSavings retail6 = new AccountSavings(customer6, Branch.Pension);
 
-            List<Account> accounts = new List<Account>();
-            accounts.Add(retail1);
-            accounts.Add(retail2);
-            accounts.Add(retail3);
-            accounts.Add(retail4);
-            accounts.Add(retail5);
-            accounts.Add(retail6);
+            List<Account> accounts =
+            [
+                retail1,
+                retail2,
+                retail3,
+                retail4,
+                retail5,
+                retail6,
+            ];
 
             //Act
             int expectedRetail = accounts.Count(account => account.Branch == Branch.Retail);
@@ -87,6 +89,22 @@ namespace Boolean.CSharp.Test
             Assert.That(expectedPrivate, Is.EqualTo(actualPrivate));
             Assert.That(expectedPension, Is.EqualTo(actualPension));
         }
-                */
+
+        [Test]
+        public void Test_03_OverdraftRequest()
+        {
+            //Arrange
+            Customer customer = new Customer("Andreas Lauvhjell");
+            AccountCurrent currentAccount = new AccountCurrent(customer, Branch.Retail);
+            currentAccount.Deposit(1000);
+
+            //Act
+            currentAccount.RequestOverdraft(2000);
+            decimal expectedResult = currentAccount.GetBalance();
+            decimal actualResult = -1000;
+
+            //Assert
+            Assert.That(expectedResult, Is.EqualTo(actualResult));
+        }
     }
 }

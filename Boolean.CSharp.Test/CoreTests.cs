@@ -17,7 +17,7 @@ namespace Boolean.CSharp.Test
         {
             //Arrange
             Customer customer = new Customer("Andreas Lauvhjell");
-            AccountSavings currentAccount = new AccountSavings(customer);
+            AccountSavings currentAccount = new AccountSavings(customer, Branch.Retail);
             currentAccount.Deposit(1000);
 
             //Act
@@ -33,7 +33,7 @@ namespace Boolean.CSharp.Test
         {
             //Arrange
             Customer customer = new Customer("Andreas Lauvhjell");
-            AccountCurrent currentAccount = new AccountCurrent(customer);
+            AccountCurrent currentAccount = new AccountCurrent(customer, Branch.Retail);
             currentAccount.Deposit(1000);
 
             //Act
@@ -49,7 +49,7 @@ namespace Boolean.CSharp.Test
         {
             //Arrange
             Customer customer = new Customer("Andreas Lauvhjell");
-            AccountCurrent currentAccount = new AccountCurrent(customer);
+            AccountCurrent currentAccount = new AccountCurrent(customer, Branch.Retail);
             currentAccount.Deposit(1000);
             currentAccount.Deposit(2000);
             currentAccount.Withdraw(500);

@@ -12,15 +12,17 @@ namespace Boolean.CSharp.Main.Accounts
     public abstract class Account
     {
         private ICustomer _customer;
+        private Branch _branch;
 
+        public Branch Branch { get => _branch; }
 
         private List<ITransaction> _transactions = new List<ITransaction>();
         public List<ITransaction> Transactions { get => _transactions; set => _transactions = value; }
 
-        public Account(ICustomer customer)
+        public Account(ICustomer customer, Branch branch)
         {
             this._customer = customer;
-  
+            this._branch = branch;
         }
 
         public decimal Deposit(decimal amount)
