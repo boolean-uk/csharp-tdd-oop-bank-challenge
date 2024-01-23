@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main.Interfaces
 {
+    
     public interface ICustomer
     {
+        public string Number { get; }
     }
 }

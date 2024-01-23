@@ -15,8 +15,11 @@ namespace Boolean.CSharp.Main.Accounts
         private Branch _branch;
         public Branch Branch { get => _branch; }
 
+
         private List<ITransaction> _transactions = new List<ITransaction>();
         private List<ITransaction> _overdraftRequests = new List<ITransaction>();
+
+        public ICustomer Customer { get => _customer; }
         public List<ITransaction> Transactions { get => _transactions; set => _transactions = value; }
         public List<ITransaction> OverdraftRequests { get => _overdraftRequests; set => _overdraftRequests = value; }
 
@@ -27,12 +30,16 @@ namespace Boolean.CSharp.Main.Accounts
             this._branch = branch;
         }
 
-        public decimal Deposit(decimal amount)
+        public decimal Deposit(decimal amount, bool sendMessage = false)
         {
             if(amount > 0)
             {
                 ITransaction newTransaction = new Transaction(amount, GetBalance(), TransactionStatus.Approved, TransactionType.Credit);
                 Transactions.Add(newTransaction);
+                if (sendMessage)
+                {
+                    TwilioHelper.SendSMS(Customer.Number, $"You have withdrawn {amount}£.");
+                }
                 return newTransaction.NewBalance;
             }
             else
@@ -42,12 +49,16 @@ namespace Boolean.CSharp.Main.Accounts
 
         }
 
-        public decimal Withdraw(decimal amount)
+        public decimal Withdraw(decimal amount, bool sendMessage = false)
         {
             if(amount > 0)
             {
                 ITransaction newTransaction = new Transaction(amount, GetBalance(), TransactionStatus.Approved, TransactionType.Debit);
                 Transactions.Add(newTransaction);
+                if (sendMessage)
+                {
+                    TwilioHelper.SendSMS(Customer.Number, $"You have withdrawn {amount}£.");
+                }
                 return newTransaction.NewBalance;
             }
             else

@@ -11,6 +11,7 @@ using System.Reflection;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using Twilio.Types;
 
 namespace Boolean.CSharp.Test
 {
@@ -168,6 +169,26 @@ namespace Boolean.CSharp.Test
             Assert.That(expectedResultAmount, Is.EqualTo(actualResultAmount));
             Assert.That(expectedResultString, Is.EqualTo(actualResultString));
             Assert.That(expectedStatus, Is.EqualTo(actualStatus));
+        }
+
+        [Test]
+        public void Test_06_SMS_sender()
+        {
+            //Arrange
+            Customer customer = new Customer("Andreas Lauvhjell", "YOURNUMBERHERE");
+            AccountCurrent currentAccount = new AccountCurrent(customer, Branch.Retail);
+
+            //
+            decimal amount = 1000;
+            currentAccount.Deposit(amount, true); //Sends the message with the true bool
+
+            /* Sends it once more to easily assert that the Twilio SMS sender works.
+             * I won't rewrite the tests and methods to return string to get it to only send SMS once in this test. Right now this sends it once more to show TwilioHelper sends the message and works" */
+            string expectedResult = TwilioHelper.SendSMS(customer.Number, $"You have withdrawn {amount}£.");
+            string actualResult = $"Message should have been sent to {customer.Number}, bro";
+
+            //Assert
+            Assert.That(expectedResult, Is.EqualTo(actualResult));
         }
     }
 }

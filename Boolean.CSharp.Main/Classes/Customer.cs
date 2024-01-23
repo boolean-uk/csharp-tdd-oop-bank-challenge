@@ -11,10 +11,14 @@ namespace Boolean.CSharp.Main.Classes
     public class Customer : ICustomer
     {
         private string _name;
+        private string number = null;
 
-        public Customer(string v)
+        public string Number { get => number; }
+
+        public Customer(string v, string? number = null)
         {
             this._name = v;
+            this.number = number;
         }
     }
 }
