@@ -11,11 +11,27 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class ExtensionTests
     {
-        private Extension _extension;
-        public ExtensionTests()
+
+        [Test]
+            public void ExtensionAccountTypeSavingsTest()
+            {
+            
+           Branch mainBranch = new Branch("Main Branch");
+            BankAccountExtension userAccount = new SavingsAccountExtension("1234", mainBranch);
+
+           
+            Assert.AreEqual(AccountTypeExtension.Savings, userAccount.Type);
+            }
+        [Test]
+        public void CorrectBranchTest()
         {
-            _extension = new Extension();
+            
+            Branch mainBranch = new Branch("Main Branch");
+            BankAccountExtension userAccount = new CurrentAccountExtension("123", mainBranch);
+
+          
+            Assert.AreEqual(mainBranch, userAccount.AssociatedBranch);
         }
- 
+
     }
 }

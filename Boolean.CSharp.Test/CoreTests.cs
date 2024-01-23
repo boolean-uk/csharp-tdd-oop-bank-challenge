@@ -18,7 +18,7 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        public void withdraw()
+        public void WithdrawTest()
         {
             BankAccount userAccount = new CurrentAccount("1");
             userAccount.Deposit(3000);
@@ -27,7 +27,7 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        public void InvalidWithdraw()
+        public void InvalidWithdrawTest()
         {
             BankAccount userAccount = new CurrentAccount("1");
             userAccount.Deposit(1000);
@@ -35,12 +35,12 @@ namespace Boolean.CSharp.Test
             Assert.AreEqual(1000, userAccount.Balance);
         }
 
-        public void AccountType_ShouldBeSavings()
+        public void AccountTypeShouldBeSavingsTest()
         {
-            // Arrange
+            
             BankAccount userAccount = new SavingsAccount("2");
 
-            // Act & Assert
+           
             Assert.AreEqual(AccountType.Savings, userAccount.Type);
         }
 

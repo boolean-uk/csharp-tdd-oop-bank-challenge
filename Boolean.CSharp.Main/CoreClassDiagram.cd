@@ -1,38 +1,53 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
   <Class Name="Boolean.CSharp.Main.BankAccount" Collapsed="true">
-    <Position X="2.25" Y="1.5" Width="1.5" />
+    <Position X="2.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAggAAAEAAgAAAAAAQABAAAAAAI=</HashCode>
       <FileName>Core.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Boolean.CSharp.Main.CurrentAccount">
-    <Position X="3.25" Y="2.75" Width="1.5" />
+  <Class Name="Boolean.CSharp.Main.CurrentAccount" Collapsed="true">
+    <Position X="1.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Core.cs</FileName>
+      <FileName>CurrentAccount.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Boolean.CSharp.Main.SavingsAccount">
-    <Position X="1" Y="2.75" Width="1.5" />
+  <Class Name="Boolean.CSharp.Main.BankAccountExtension" Collapsed="true">
+    <Position X="6" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgAAAEAAgAAAIAAQABAAAAAAI=</HashCode>
+      <FileName>Extension.cs</FileName>
+      <NewMemberFileName>Core.cs</NewMemberFileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Boolean.CSharp.Main.SavingsAccount" Collapsed="true">
+    <Position X="3.5" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Core.cs</FileName>
+      <FileName>SavingsAccount.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Boolean.CSharp.Main.Transaction">
-    <Position X="5" Y="1.5" Width="1.5" />
+  <Class Name="Boolean.CSharp.Main.Transaction" Collapsed="true">
+    <Position X="7.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAgAAACAAAAAAAABAAAAAAAAAAA=</HashCode>
       <FileName>Transaction.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Enum Name="Boolean.CSharp.Main.AccountType">
-    <Position X="5" Y="3.25" Width="1.5" />
+  <Enum Name="Boolean.CSharp.Main.AccountType" Collapsed="true">
+    <Position X="2.5" Y="0.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Core.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Boolean.CSharp.Main.AccountTypeExtension" Collapsed="true">
+    <Position X="6" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extension.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />

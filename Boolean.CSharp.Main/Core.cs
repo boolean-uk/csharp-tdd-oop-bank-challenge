@@ -19,8 +19,6 @@ namespace Boolean.CSharp.Main
         public decimal Balance { get; protected set; }
         private List<Transaction> transactionHistory;
 
-
-
         public BankAccount(string accountNumber, AccountType type)
         {
             AccountNumber = accountNumber;
@@ -56,14 +54,14 @@ namespace Boolean.CSharp.Main
 
         public void PrintStatement()
         {
-            Console.WriteLine($"{"Date",-12}||{"Credit",-12}||{"Debit",-12}||{"Balance",-12}");
+            Console.WriteLine($"{"Date",-11}||{"Credit",-12}||{"Debit",-12}||{"Balance",-12}");
 
             foreach (var transaction in transactionHistory)
             {
                 string credit = transaction.Amount > 0 ? $"{transaction.Amount:C}" : "";
                 string debit = transaction.Amount < 0 ? $"{-transaction.Amount:C}" : "";
 
-                Console.WriteLine($"{transaction.Date:dd/MM/yyyy} || {credit,-12} || {debit,-12} || {transaction.Balance:C}");
+                Console.WriteLine($"{transaction.Date:dd/MM/yyyy} || {credit,-10} || {debit,-10} || {transaction.Balance:C}");
             }
         }
 
@@ -79,15 +77,5 @@ namespace Boolean.CSharp.Main
             transactionHistory.Add(transaction);
         }
 
-
-    }
-    public class CurrentAccount : BankAccount
-    {
-        public CurrentAccount(string accountNumber) : base(accountNumber, AccountType.Current) { }
-    }
-
-    public class SavingsAccount : BankAccount
-    {
-        public SavingsAccount(string accountNumber) : base(accountNumber, AccountType.Savings) { }
     }
 }
