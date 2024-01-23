@@ -73,14 +73,17 @@ namespace Boolean.CSharp.Main
     {
         Bank _bankConnection;
         private int _accountNr;
+        private string _branch;
         private float _overdraft;
         private List<Transaction> transactions = new List<Transaction>();
         public List<Transaction> Transactions { get { return transactions; } }
         public int AccountNumber { get { return _accountNr; } }
+        public string Branch { get { return _branch; } }
         public float Overdraft { get { return _overdraft; }}
         public Account(int accountNr, string branchName)
         {
             _accountNr = accountNr;
+            _branch = branchName;
             _bankConnection = new Bank(branchName);
         }
         public float getTotal()

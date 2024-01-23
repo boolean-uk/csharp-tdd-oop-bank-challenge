@@ -38,7 +38,7 @@ namespace Boolean.CSharp.Test
         public void failedDepositWithdrawThrowsException(float deposit, float withdraw)
         {
             //setup
-            SavingsAccount savingsAccount = (SavingsAccount)_customer.createAccount(123456, AccountType.savings, "Derry");
+            SavingsAccount savingsAccount = (SavingsAccount)_customer.createAccount(123456, AccountType.savings, "Manchester");
             savingsAccount.deposit(100);
             //verify
             Assert.That(() => savingsAccount.deposit(deposit), Throws.Exception);
@@ -54,7 +54,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void transactionsAddToList()
         {
-            SavingsAccount savingsAccount = (SavingsAccount)_customer.createAccount(123456, AccountType.savings, "Slough");
+            SavingsAccount savingsAccount = (SavingsAccount)_customer.createAccount(123456, AccountType.savings, "Birmingham");
             var result = savingsAccount.deposit(1000f);
             DateTime time = DateTime.Now;
             Transaction transaction = new Transaction(1000f, TransactionType.deposit, time.ToString("D"), savingsAccount.getTotal());
@@ -65,7 +65,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void printStatementTest()
         {
-            SavingsAccount savingsAccount = (SavingsAccount)_customer.createAccount(123456, AccountType.savings, "London");
+            SavingsAccount savingsAccount = (SavingsAccount)_customer.createAccount(123456, AccountType.savings, "Brighton");
             savingsAccount.deposit(1000f);
             savingsAccount.withdraw(25.99f);
             List<string> statement = new List<string>();
@@ -94,7 +94,7 @@ namespace Boolean.CSharp.Test
         public void branchTest()
         {
             CurrentAccount account = (CurrentAccount)_customer.createAccount(221133, AccountType.current, "Slough");
-            string branch = account.branch;
+            string branch = account.Branch;
             Assert.That(branch, Is.EqualTo("Slough"));
         }
     }
