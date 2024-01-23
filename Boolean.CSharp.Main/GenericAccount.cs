@@ -8,7 +8,7 @@ namespace Boolean.CSharp.Main
 {
     public class GenericAccount : Account
     {
-        public GenericAccount(string ID) : base(ID) 
+        public GenericAccount(string ID, BankBranch bank) : base(ID, bank) 
         { }
 
     }

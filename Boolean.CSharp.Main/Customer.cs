@@ -18,9 +18,9 @@ namespace Boolean.CSharp.Main
         public IDictionary<string, Account> MyBankAccounts { get { return _myBankAccounts; } }
 
 
-        public void CreateAccount(string accountID)
+        public void CreateAccount(string accountID, BankBranch bankBranch)
         {
-            Account account = new Account(accountID);
+            Account account = new Account(accountID, bankBranch);
 
             _myBankAccounts.Add(accountID, account);
         }

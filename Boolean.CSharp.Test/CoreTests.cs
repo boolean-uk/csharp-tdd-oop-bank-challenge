@@ -13,7 +13,7 @@ namespace Boolean.CSharp.Test
         [SetUp]
         public void SetUp() 
         {
-            account = new Account("12321");
+            account = new Account("12321", BankBranch.Stockholm);
             customer = new Customer();
         }
 
@@ -25,9 +25,11 @@ namespace Boolean.CSharp.Test
         public void Test1(string AccountID)
         {
             // Customer CreateAcount()
-            customer.CreateAccount(AccountID);
+            customer.CreateAccount(AccountID, BankBranch.Stockholm);
 
             Assert.That(customer.MyBankAccounts.ContainsKey(AccountID), Is.EqualTo(true));
+
+            Assert.That(account.BankBranch, Is.EqualTo(BankBranch.Stockholm));
 
             Assert.That(customer.MyBankAccounts.Count, Is.EqualTo(1));
 
@@ -45,10 +47,11 @@ namespace Boolean.CSharp.Test
         public void Test2(string ID) 
         {
 
-            account = new Account(ID);
+            account = new Account(ID,BankBranch.Stockholm);
 
-            Assert.That(account.Balance, Is.EqualTo(0));
+            Assert.That(account.GetAcountBalance(), Is.EqualTo(0));
             Assert.That(account.AccountID, Is.EqualTo(ID));
+            Assert.That(account.BankBranch, Is.EqualTo(BankBranch.Stockholm));
 
             
         }
@@ -59,12 +62,12 @@ namespace Boolean.CSharp.Test
         [TestCase(500d, 500d)]
         public void GetAccountBalanceTest(double amountIn, double balance)
         {
-            customer.CreateAccount("123");
+            customer.CreateAccount("123", BankBranch.Stockholm);
             account = customer.MyBankAccounts["123"];
             account.DepositMoney(amountIn);
-            string testString = account.GetAcountBalance();
+            double test = account.GetAcountBalance();
 
-            Assert.That(testString, Is.EqualTo(balance.ToString()));
+            Assert.That(test, Is.EqualTo(balance));
         }
 
         [Test]
@@ -73,16 +76,16 @@ namespace Boolean.CSharp.Test
         [TestCase(75d, 25d)]
         public void DepostiMoneyTest(double amountIn, double secondAmountIn)
         {
-            customer.CreateAccount("123");
+            customer.CreateAccount("123", BankBranch.Stockholm);
             account = customer.MyBankAccounts["123"];
             string test = account.DepositMoney(amountIn);
 
             Assert.That(test, Is.EqualTo(new string($"{amountIn} was added to the Account({account.AccountID})")));
 
-            Assert.That(account.Balance, Is.EqualTo(amountIn));
+            Assert.That(account.GetAcountBalance(), Is.EqualTo(amountIn));
             test =account.DepositMoney(secondAmountIn);
 
-            Assert.That(account.Balance, Is.EqualTo(amountIn + secondAmountIn));
+            Assert.That(account.GetAcountBalance(), Is.EqualTo(amountIn + secondAmountIn));
 
             Assert.That(test, Is.EqualTo(new string($"{secondAmountIn} was added to the Account({account.AccountID})")));
 
@@ -92,7 +95,7 @@ namespace Boolean.CSharp.Test
         [TestCase(-50d)]
         public void DepostiMoneyTest(double amountIn)
         {
-            customer.CreateAccount("123");
+            customer.CreateAccount("123", BankBranch.Stockholm);
             account = customer.MyBankAccounts["123"];
            
 
@@ -106,19 +109,19 @@ namespace Boolean.CSharp.Test
         [TestCase(75d, 25d)]
         public void WithdrawMoneyTest(double amountOut, double secondAmountOut)
         {
-            customer.CreateAccount("123");
+            customer.CreateAccount("123", BankBranch.Stockholm);
             account = customer.MyBankAccounts["123"];
             account.DepositMoney(1000d);
 
             string test = account.WithdrawMoney(amountOut);
-            Assert.That(account.Balance, Is.EqualTo(1000d - amountOut));
+            Assert.That(account.GetAcountBalance(), Is.EqualTo(1000d - amountOut));
 
             Assert.That(test, Is.EqualTo(new string($"{amountOut} was removed from the Account({account.AccountID})")));
 
             test = account.WithdrawMoney(secondAmountOut);
 
 
-            Assert.That(account.Balance, Is.EqualTo(1000d - (amountOut + secondAmountOut)));
+            Assert.That(account.GetAcountBalance(), Is.EqualTo(1000d - (amountOut + secondAmountOut)));
 
             Assert.That(test, Is.EqualTo(new string($"{secondAmountOut} was removed from the Account({account.AccountID})")));
         }
@@ -127,7 +130,7 @@ namespace Boolean.CSharp.Test
         [TestCase(1200)]
         public void WithdrawMoneyTest2(double amountOut)
         {
-            customer.CreateAccount("123");
+            customer.CreateAccount("123", BankBranch.Stockholm);
             account = customer.MyBankAccounts["123"];
             account.DepositMoney(1000d);
 
@@ -143,7 +146,7 @@ namespace Boolean.CSharp.Test
         {
             List<string> history = new List<string>();
 
-            customer.CreateAccount("123");
+            customer.CreateAccount("123", BankBranch.Stockholm);
             account = customer.MyBankAccounts["123"];
             account.DepositMoney(moneyIn1);
 
@@ -156,9 +159,9 @@ namespace Boolean.CSharp.Test
 
 
             Assert.That(history.Count, Is.EqualTo(4));
-            Assert.That(history[1], Is.EqualTo($"2024-01-22 || +{moneyIn1} || -0 || {moneyIn1}"));
-            Assert.That(history[2], Is.EqualTo($"2024-01-22 || +0 || -{moneyOut} || {moneyIn1 - moneyOut}"));
-            Assert.That(history[3], Is.EqualTo($"2024-01-22 || +{moneyIn2} || -0 || {moneyIn1 + moneyIn2 - moneyOut}"));
+            Assert.That(history[1], Is.EqualTo($"2024-01-23 || +{moneyIn1} || -0 || {moneyIn1}"));
+            Assert.That(history[2], Is.EqualTo($"2024-01-23 || +0 || -{moneyOut} || {moneyIn1 - moneyOut}"));
+            Assert.That(history[3], Is.EqualTo($"2024-01-23 || +{moneyIn2} || -0 || {moneyIn1 + moneyIn2 - moneyOut}"));
         }
 
         
