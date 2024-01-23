@@ -33,7 +33,7 @@ namespace Boolean.CSharp.Test
 
             List<IAccount> accounts = customer.GetAccounts();
 
-            Assert.That(accounts.Count,Is.EqualTo(2));
+            Assert.That(accounts.Count, Is.EqualTo(2));
         }
 
 
@@ -50,9 +50,9 @@ namespace Boolean.CSharp.Test
             _currentAccount.AddTransaction(transaction3);
 
             double actualBalance = _currentAccount.GetBalance();
-            
+
             Assert.That(amount, Is.EqualTo(actualBalance));
-            
+
         }
 
         [Test]
@@ -64,13 +64,22 @@ namespace Boolean.CSharp.Test
             _currentAccount.AddTransaction(deposit1);
             ITransaction deposit2 = new Transaction(2000.00d);
             _currentAccount.AddTransaction(deposit2);
-            ITransaction withdrawal = new Transaction(-500);
+            ITransaction withdrawal = new Transaction(-500.00d);
             _currentAccount.AddTransaction(withdrawal);
 
-            string expectedStatement = $"date       || amount || balance{Environment.NewLine}" +
-                                       $"{withdrawal.GetDetails().Item1} || -500,00 || 2500,00{Environment.NewLine}" +
-                                       $"{deposit2.GetDetails().Item1} ||   2000,00 || 3000,00{Environment.NewLine}" +
-                                       $"{deposit1.GetDetails().Item1} ||   1000,00 || 1000,00";
+
+
+            var (date1, amount1, balance1) = withdrawal.GetDetails();
+            var (date2, amount2, balance2) = deposit2.GetDetails();
+            var (date3, amount3, balance3) = deposit1.GetDetails();
+
+            string expectedStatement =
+     "date                || amount        || balance" + Environment.NewLine +
+    $"{date1} ||   {amount1:F2}     || {balance1:F2}" + Environment.NewLine +
+    $"{date2} || {amount2:F2}       || {balance2:F2}" + Environment.NewLine +
+    $"{date3} || {amount3:F2}       || {balance3:F2}";
+
+
 
             // Act
             string actualStatement = _currentAccount.GenerateBankStatement();

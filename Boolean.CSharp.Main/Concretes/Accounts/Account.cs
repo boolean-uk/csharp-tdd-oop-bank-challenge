@@ -21,27 +21,45 @@ namespace Boolean.CSharp.Main.Accounts
 
         public string GenerateBankStatement()
         {
+            if (_transactions == null || !_transactions.Any())
+                return "No transactions available.";
+
             StringBuilder statement = new StringBuilder();
             var orderedTransactions = _transactions.OrderByDescending(t => t.GetDetails().Item1).ToList();
 
-            // Adding the header
-            statement.AppendLine("date       || amount || balance");
+            // Placeholder for maximum column widths
+            int maxDateLen = "date".Length, maxAmountLen = "amount".Length, maxBalanceLen = "balance".Length;
+
+            // Calculate maximum lengths
+            foreach (var transaction in orderedTransactions)
+            {
+                var (date, amount, balance) = transaction.GetDetails();
+                maxDateLen = Math.Max(maxDateLen, date.ToString().Length);
+                maxAmountLen = Math.Max(maxAmountLen, $"{amount:0.00}".Length)+2;
+                maxBalanceLen = Math.Max(maxBalanceLen, $"{balance:0.00}".Length);
+            }
+
+            // Dynamic format string based on max lengths
+            string format = $"{{0,-{maxDateLen}}} || {{1,-{maxAmountLen}}} || {{2,-{maxBalanceLen}}}";
+
+            // Adding the header with dynamic spacing
+            statement.AppendLine(string.Format(format, "date", "amount", "balance"));
 
             foreach (var transaction in orderedTransactions)
             {
                 var (date, amount, balance) = transaction.GetDetails();
 
-                // Formatting the date and amount as per requirements
                 string dateString = date.ToString();
-                string amountString = amount >= 0 ? $"  {amount:0.00}" : $"{amount:0.00}";
+                string amountString = amount >= 0 ? $"{amount:0.00}  " : $"  {amount:0.00}";
                 string balanceString = $"{balance:0.00}";
 
                 // Adding the transaction line to the statement
-                statement.AppendLine($"{dateString} || {amountString} || {balanceString}");
+                statement.AppendLine(string.Format(format, dateString, amountString, balanceString));
             }
 
             return statement.ToString().TrimEnd(); // To remove the last new line
         }
+
 
         public double GetBalance()
         {
