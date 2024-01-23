@@ -3,6 +3,7 @@ using Boolean.CSharp.Main.Models.Accounts;
 using NUnit.Framework;
 using System;
 using System.Linq;
+using System.Security.Principal;
 
 namespace Boolean.CSharp.Test
 {
@@ -16,7 +17,7 @@ namespace Boolean.CSharp.Test
         public void Setup()
         {
             _accountManager = new AccountManager();
-            _overdraftManager = new OverdraftManager();
+            _overdraftManager = new OverdraftManager(_accountManager);
         }
 
         [Test]
@@ -58,9 +59,11 @@ namespace Boolean.CSharp.Test
             account.RequestOverdraft(amount, _overdraftManager);
 
             // Assert
-            Assert.Contains(account.AccountNumber, _overdraftManager.Requests.Keys);
-            Assert.AreEqual(amount, _overdraftManager.Requests[account.AccountNumber].Amount);
+            var request = _overdraftManager.Requests.FirstOrDefault(r => r.AccountNumber == account.AccountNumber);
+            Assert.IsNotNull(request);
+            Assert.AreEqual(amount, request.Amount);
         }
+
 
         [Test]
         public void ApproveOverdraft()
@@ -74,6 +77,40 @@ namespace Boolean.CSharp.Test
 
             // Assert
             Assert.AreEqual(500, ((CurrentAccount)_accountManager.Accounts[accountNumber]).OverdraftLimit);
+        }
+
+        [Test]
+        public void WithdrawWithinOverdraftLimit()
+        {
+            // Arrange
+            CurrentAccount account = new CurrentAccount(Branch.UK, "123456789");
+            account.OverdraftLimit = 500;
+
+            double depositAmount = 200;
+            account.Deposit(depositAmount);
+            double withdrawAmount = 400; // Within the overdraft limit
+
+            // Act
+            Assert.DoesNotThrow(() => account.Withdraw(withdrawAmount));
+
+            // Assert
+            Assert.AreEqual(-200, account.Balance); // Balance should be negative but within overdraft limit
+        }
+
+        [Test]
+        public void WithdrawExceedingOverdraftLimit()
+        {
+            // Arrange
+            CurrentAccount account = new CurrentAccount(Branch.UK, "123456789");
+            account.OverdraftLimit = 500;
+
+            double depositAmount = 200;
+            account.Deposit(depositAmount);
+            double withdrawAmount = 800; // Exceeds the overdraft limit
+
+            // Act & Assert
+            var ex = Assert.Throws<InvalidOperationException>(() => account.Withdraw(withdrawAmount));
+            Assert.That(ex.Message, Is.EqualTo("Cannot withdraw this amount, because it would exceed overdraft limit."));
         }
     }
 }

@@ -34,12 +34,7 @@ namespace Boolean.CSharp.Main.Models.Accounts
 
         public virtual void Withdraw(double amount)
         {
-            Transaction latestTransaction = Transactions.OrderBy(t => t.Date).FirstOrDefault();
-
-            if (latestTransaction != null)
-                throw new InvalidOperationException();
-
-            if (amount > GetBalanceAfterTransaction(latestTransaction))
+            if (amount > Balance)
                 throw new InvalidOperationException("Insufficient funds for withdrawal.");
 
             Transaction transaction = new Transaction(amount, TransactionType.Debit);
@@ -48,18 +43,12 @@ namespace Boolean.CSharp.Main.Models.Accounts
 
         public double GetBalanceAfterTransaction(Transaction transaction)
         {
-            return Transactions.Where(t => t.Date >= transaction.Date).Sum(t => t.Type == TransactionType.Credit ? t.Amount : -t.Amount);
+            return Transactions
+                .Where(t => t.Date <= transaction.Date)
+                .Sum(t => t.Type == TransactionType.Credit ? t.Amount : -t.Amount);
         }
 
-        private string GenereateStatment()
-        {
-            throw new NotImplementedException();
-        }
 
-        public void sendStatmentMessage(string statment)
-        {
-            throw new NotImplementedException();
-        }
     }
 
     public class AccountNumberGenerator

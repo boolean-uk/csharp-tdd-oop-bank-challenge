@@ -5,7 +5,7 @@ namespace Boolean.CSharp.Main.Models.Accounts
 {
     public class CurrentAccount : Account
     {
-        public double OverdraftLimit { get; private set; }
+        public double OverdraftLimit { get; set; }
 
         public CurrentAccount(Branch branch, string phoneNumber) : base(branch, phoneNumber)
         {
@@ -16,5 +16,15 @@ namespace Boolean.CSharp.Main.Models.Accounts
         {
             overdraftManager.CreateRequest(AccountNumber, amount);
         }
+
+        public override void Withdraw(double amount)
+        {
+            if (amount > Balance + OverdraftLimit)
+                throw new InvalidOperationException("Cannot withdraw this amount, because it would exceed overdraft limit.");
+
+            Transaction transaction = new Transaction(amount, TransactionType.Debit);
+            Transactions.Add(transaction);
+        }
+
     }
 }

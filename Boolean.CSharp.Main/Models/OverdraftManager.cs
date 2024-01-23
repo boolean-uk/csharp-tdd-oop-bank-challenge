@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Boolean.CSharp.Main.Models.Accounts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,37 +9,60 @@ namespace Boolean.CSharp.Main.Models
 {
     public class OverdraftRequest
     {
-        public int AccountID { get; set; }
+        public int AccountNumber { get; set; }
         public double Amount { get; set; }
 
-        public OverdraftRequest(int accountID, double amount)
+        public OverdraftRequest(int accountNumber, double amount)
         {
-            AccountID = accountID;
+            AccountNumber = accountNumber;
             Amount = amount;
         }
     }
 
     public class OverdraftManager
     {
-        public Dictionary<int, OverdraftRequest> Requests { get; set; }
+        public List<OverdraftRequest> Requests { get; set; }
+        private AccountManager _accountManager { get; set; }
 
-        public OverdraftManager()
+        public OverdraftManager(AccountManager accountManager)
         {
-            Requests = new Dictionary<int, OverdraftRequest>();
+            Requests = new List<OverdraftRequest>();
+            _accountManager = accountManager;
         }
 
-        public void CreateRequest(int accountID, double amount)
+        public void CreateRequest(int accountNumber, double amount)
         {
-            throw new NotImplementedException();
+            Requests.Add(new OverdraftRequest(accountNumber, amount));
         }
 
-        public void ApproveRequest(int accountID, double amount)
+        public void ApproveRequest(int accountNumber, double amount)
         {
-            throw new NotImplementedException();
+            OverdraftRequest request = Requests.FirstOrDefault(r => r.AccountNumber == accountNumber);
+            if (request == null)
+                throw new Exception("Account number not found in requests");
+
+            Accounts.Account account = _accountManager.Accounts.FirstOrDefault(a => a.Key == accountNumber).Value;
+            if (account == null)
+                throw new Exception("Account number not found in accounts");
+
+            if (account is CurrentAccount currentAccount)
+            {
+                currentAccount.OverdraftLimit = amount;
+                Requests.Remove(request);
+            }
+            else
+            {
+                throw new InvalidOperationException("Only current accounts can have overdrafts.");
+            }
         }
-        public void RejectRequest(int accountID)
+
+        public void RejectRequest(int accountNumber)
         {
-            throw new NotImplementedException();
+            OverdraftRequest request = Requests.FirstOrDefault(r => r.AccountNumber == accountNumber);
+            if (request == null)
+                throw new Exception("Account number not found in requests");
+
+            Requests.Remove(request);
         }
     }
 }
