@@ -8,7 +8,7 @@ namespace Boolean.CSharp.Main.Transactions
 {
     public interface IBankTransaction
     {
-        void PrintTransactions(DateTime start, DateTime end);
+        string PrintTransactions(DateTime start, DateTime end);
 
         bool AddDepositTransaction(decimal amount);
 

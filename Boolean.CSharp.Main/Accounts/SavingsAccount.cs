@@ -1,4 +1,5 @@
 ﻿using Boolean.CSharp.Main.Branch;
+using Boolean.CSharp.Main.MessageProvider;
 using Boolean.CSharp.Main.Transactions;
 using Boolean.CSharp.Main.Users;
 using System;
@@ -60,9 +61,13 @@ namespace Boolean.CSharp.Main.Accounts
             throw new NotImplementedException();
         }
 
-        public void PrintBankStatement(DateTime start, DateTime end)
+        public void PrintBankStatement(DateTime start, DateTime end, bool sendSMS = false)
         {
-            _transactions.PrintTransactions(start, end);
+            string statement = _transactions.PrintTransactions(start, end);
+            if (sendSMS)
+            {
+                SendStatementToCustomer(statement);
+            }
         }
 
         /// <summary>
@@ -88,6 +93,12 @@ namespace Boolean.CSharp.Main.Accounts
             {
                 return 0m;
             }
+        }
+
+        private void SendStatementToCustomer(string msg)
+        {
+            ITextSender provider = new TwilioSMSSender();
+            provider.SendMessage(msg);
         }
     }
 }

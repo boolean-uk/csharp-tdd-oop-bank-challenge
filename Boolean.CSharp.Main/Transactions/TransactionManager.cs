@@ -1,4 +1,5 @@
 ﻿using Boolean.CSharp.Main.enums;
+using Boolean.CSharp.Main.MessageProvider;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -76,7 +77,7 @@ namespace Boolean.CSharp.Main.Transactions
         /// </summary>
         /// <param name="start"> The minimum date for transaction to be printed </param>
         /// <param name="end"> The maximum date for transaction to be printed </param>
-        public void PrintTransactions(DateTime start, DateTime end)
+        public string PrintTransactions(DateTime start, DateTime end)
         {
             int _padLeft = 10;
             int _padMiddleLeft = 8;
@@ -89,32 +90,38 @@ namespace Boolean.CSharp.Main.Transactions
             // Gather the items matching the start/end intervall and order by descending based on DateTime
             List<Tuple<DateTime, decimal, TransactionType, decimal>> historySegment = _history.Where(t => (start < t.Item1) && (t.Item1 < end)).OrderByDescending(t => t.Item1).ToList();
             
-            Console.Write($"date".PadRight(_padLeft) + " || " + $"credit".PadRight(_padMiddleLeft) + " || ");
-            Console.Write($"debit".PadRight(_padMiddleRight) + " || " + $"balance".PadRight(_padRight) +"\n");
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append($"date".PadRight(_padLeft) + " || " + $"credit".PadRight(_padMiddleLeft) + " || ");
+            sb.Append($"debit".PadRight(_padMiddleRight) + " || " + $"balance".PadRight(_padRight) +"\n");
             foreach (Tuple<DateTime, decimal, TransactionType, decimal> tuple in historySegment) 
             {
                 if (tuple.Item3 == TransactionType.Deposit)
                 {
                     creditValue = tuple.Item2;
                     debitValue = 0m;
-                    Console.WriteLine($"{DateTime.Now.ToString("dd/MM/yyyy", culture)}".PadRight(_padLeft) + " || " + $"{creditValue:F2}".PadRight(_padMiddleLeft) + " || " +
+                    sb.AppendLine($"{DateTime.Now.ToString("dd/MM/yyyy", culture)}".PadRight(_padLeft) + " || " + $"{creditValue:F2}".PadRight(_padMiddleLeft) + " || " +
                         $"".PadRight(_padMiddleRight) + " || " + $"{tuple.Item4:F2}".PadRight(_padRight));
                 }
                 else if (tuple.Item3 == TransactionType.Withdraw)
                 {
                     creditValue = 0m;
                     debitValue = tuple.Item2;
-                    Console.WriteLine($"{DateTime.Now.ToString("dd/MM/yyyy", culture)}".PadRight(_padLeft) + " || " + $"".PadRight(_padMiddleLeft) + " || " +
+                    sb.AppendLine($"{DateTime.Now.ToString("dd/MM/yyyy", culture)}".PadRight(_padLeft) + " || " + $"".PadRight(_padMiddleLeft) + " || " +
                     $"{debitValue:F2}".PadRight(_padMiddleRight) + " || " + $"{tuple.Item4:F2}".PadRight(_padRight));
                 }
                 else 
                 {
                     creditValue = 0m;
                     debitValue = 0m;
-                    Console.WriteLine($"{DateTime.Now.ToString("dd/MM/yyyy", culture)}".PadRight(_padLeft) + " || " + $"".PadRight(_padMiddleLeft) + " || " +
+                    sb.AppendLine($"{DateTime.Now.ToString("dd/MM/yyyy", culture)}".PadRight(_padLeft) + " || " + $"".PadRight(_padMiddleLeft) + " || " +
                         $"".PadRight(_padMiddleRight) + " || " + $"{tuple.Item4:F2}".PadRight(_padRight));
                 }
             }
+            string res = sb.ToString();
+            Console.WriteLine(res);
+            return res;
         }
+
     }
 }

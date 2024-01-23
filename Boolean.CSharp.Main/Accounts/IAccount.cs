@@ -17,7 +17,7 @@ namespace Boolean.CSharp.Main.Accounts
 
         decimal GetBalance();
 
-        void PrintBankStatement(DateTime start, DateTime end);
+        void PrintBankStatement(DateTime start, DateTime end, bool sendSMS = false);
 
         bool AddUserToAccount(IUser user);
 
