@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main
 {
-    public class Core
-    {
-        
+    public class OverdraftRequest {
+        public decimal Amount { get; set; }
+        public bool IsApproved { get; set; }
     }
 }
