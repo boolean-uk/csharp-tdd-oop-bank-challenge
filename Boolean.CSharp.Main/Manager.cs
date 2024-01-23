@@ -3,22 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Boolean.CSharp.Main
 {
-    public class Manager
+    public class Manager(string name)
     {
-        private string _name;
-        private List<OverdraftRequest> _overdraftRequests;
-
-        public Manager(string name)
-        {
-            _name = name;
-            _overdraftRequests = new List<OverdraftRequest>();
-        }
-
-        public string Name { get => _name; }
-        public List<OverdraftRequest> OverdraftRequests { get => _overdraftRequests; set => _overdraftRequests = value; }
+        public string Name { get; set; } = name;
+        public List<OverdraftRequest> OverdraftRequests { get; set; } = new List<OverdraftRequest>();
 
         public void AddOverdraftRequest(OverdraftRequest overdraft)
         {

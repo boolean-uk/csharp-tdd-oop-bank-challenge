@@ -5,27 +5,12 @@ using System.Text;
 
 namespace Boolean.CSharp.Main
 {
-    public class Transaction
+    public class Transaction(double amount, TransactionType type, double balance)
     {
-        private double _originalBalance;
-        private double _amount;
-        private double _newBalance;
-        private TransactionType _type;
-        private DateTime _time;
-
-        public Transaction(double amount, TransactionType type, double balance)
-        {
-            _originalBalance = balance;
-            _amount = amount;
-            _newBalance = type == TransactionType.Deposit ? balance + amount : balance - amount;
-            _type = type;
-            _time = DateTime.Now;
-        }
-
-        public double OriginalBalance { get => _originalBalance; }
-        public double Amount { get => _amount; }
-        public double NewBalance { get => _newBalance; }
-        public TransactionType Type { get => _type; }
-        public DateTime Time { get => _time; }
+        public double OriginalBalance { get; set; } = balance;
+        public double Amount { get; set; } = amount;
+        public double NewBalance { get; set; } = (type == TransactionType.Deposit) ? balance + amount : balance - amount;
+        public TransactionType Type { get; set; } = type;
+        public DateTime Time { get; set; } = DateTime.Now;
     }
 }

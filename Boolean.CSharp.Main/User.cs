@@ -1,35 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Security.Principal;
 using System.Text;
+using System.Xml.Linq;
 
 namespace Boolean.CSharp.Main
 {
     public class User
     {
-        private int _Id;
-        private string _name;
-        private double _overdraftAmount;
-        private BankLocation _location;
-        private IAccount _account;
-        private IAccount _savingsAccount;
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public BankLocation Location { get; set; }
+        public double OverdraftAmount { get; set; }
+        public IAccount Account { get; set; }
+        public IAccount SavingsAccount { get; set; }
 
-        public User(int Id, string name, BankLocation location)
+        public User(int id, string name, BankLocation location)
         {
-            _Id = Id;
-            _name = name;
-            _location = location;
-            _overdraftAmount = 0;
-            _account = new CurrentAccount(this);
-            _savingsAccount = new SavingsAccount(this);
+            Id = id;
+            Name = name;
+            Location = location;
+            OverdraftAmount = 0;
+            Account = new CurrentAccount(this);
+            SavingsAccount = new SavingsAccount(this);
         }
-
-        public int Id { get => _Id; }
-        public string Name { get => _name; }
-        public BankLocation Location { get => _location; set => _location = value; }
-        public double OverdraftAmount { get => _overdraftAmount; set => _overdraftAmount = value; }
-        public IAccount Account { get => _account; }
-        public IAccount SavingsAccount { get => _savingsAccount; }
 
         public void Deposit(double balance, IAccount account)
         {

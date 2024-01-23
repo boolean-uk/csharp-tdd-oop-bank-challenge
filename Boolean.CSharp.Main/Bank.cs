@@ -7,37 +7,33 @@ namespace Boolean.CSharp.Main
 {
     public class Bank
     {
-        private List<User> _users;
-        private BankLocation _location;
-        Manager _manager;
+        public List<User> Users { get; set; }
+        public BankLocation Location { get; set; }
+        public Manager Manager { get; set; }
 
         public Bank(BankLocation location)
         {
-            _users = new List<User>();
-            _location = location;
-            _manager = new Manager("Default");
+            Users = new List<User>();
+            Location = location;
+            Manager = new Manager("Default");
         }
 
         public Bank(BankLocation location, Manager manager)
         {
-            _users = new List<User>();
-            _location = location;
-            _manager = manager;
+            Users = new List<User>();
+            Location = location;
+            Manager = manager;
         }
-
-        public List<User> Users { get =>  _users; }
-        public BankLocation Location { get => _location; }
-        public Manager Manager { get => _manager; }
 
         public void AddUser(User user)
         {
-            user.Location = _location;
+            user.Location = Location;
             Users.Add(user);
         }
 
         public User CreateUser(int id, string name)
         {
-            User user = new User(id, name, _location);
+            User user = new User(id, name, Location);
             AddUser(user);
             return user;
         }
@@ -50,7 +46,7 @@ namespace Boolean.CSharp.Main
                 return false;
             }
 
-            _users.Remove(user);
+            Users.Remove(user);
             return true;
         }
 
@@ -58,7 +54,7 @@ namespace Boolean.CSharp.Main
         {
              if (Users.Where(u => u.Id == Id).Count() > 0)
             {       
-                _users.Remove(GetUserById(Id));
+                Users.Remove(GetUserById(Id));
                 return true;
             }
 

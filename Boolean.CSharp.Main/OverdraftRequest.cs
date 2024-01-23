@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,23 +10,18 @@ namespace Boolean.CSharp.Main
 {
     public class OverdraftRequest
     {
-        public int _id;
-        public DateTime _requestTime;
-        public OverdraftStatus _status;
-        public double _amount;
+        public int Id { get; set; }
+        public DateTime RequestTime { get; set; }
+        public OverdraftStatus Status { get; set; }
+        public double Amount { get; set; }
 
-        public OverdraftRequest(int Id, double amount)
+        public OverdraftRequest(int id, double amount)
         {
-            _id = Id;
-            _requestTime = DateTime.Now;
-            _amount = amount;
-            if (amount <= 0) { _status = OverdraftStatus.Approved; }
-            else { _status = OverdraftStatus.Pending; }
+            Id = id;
+            RequestTime = DateTime.Now;
+            Amount = amount;
+            if (amount <= 0) { Status = OverdraftStatus.Approved; }
+            else { Status = OverdraftStatus.Pending; }
         }
-
-        public int Id { get => _id; }
-        public DateTime RequestTime { get => _requestTime; }
-        public OverdraftStatus Status { get => _status; set => _status = value; }
-        public double Amount { get => _amount; }
     }
 }

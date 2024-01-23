@@ -4,22 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Transactions;
 
 namespace Boolean.CSharp.Main
 {
-    public abstract class Account : IAccount
+    public abstract class Account(User user) : IAccount
     {
-        private User _owner;
-        private List<Transaction> _transactions;
-
-        public Account(User user)
-        {
-            _owner = user;
-            _transactions = new List<Transaction>();
-        }
-
-        public User Owner { get => _owner; }
-        public List<Transaction> Transactions { get => _transactions; }
+        public User Owner { get; set; } = user;
+        public List<Transaction> Transactions { get; set; } = new List<Transaction>();
 
         public void Deposit(double amount)
         {
