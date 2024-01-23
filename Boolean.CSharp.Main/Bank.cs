@@ -73,6 +73,14 @@ namespace Boolean.CSharp.Main
             Manager.AddOverdraftRequest(request);
         }
 
+        public void UpdateOverdraftRequests(List<OverdraftRequest> requests)
+        {
+            foreach (OverdraftRequest request in requests)
+            {
+                GetUserById(request.Id).OverdraftAmount = request.Amount;
+            }
+        }
+
         public void ApproveAllOverdraftRequests()
         {
             List<OverdraftRequest> approved = Manager.ApproveAllOverdraftRequests();
@@ -104,14 +112,6 @@ namespace Boolean.CSharp.Main
         public void RejectOverdraftRequestsId(int id)
         {
             Manager.RejectOverdraftRequestsId(id);
-        }
-
-        public void UpdateOverdraftRequests(List<OverdraftRequest> requests)
-        {
-            foreach (OverdraftRequest request in requests)
-            {
-                GetUserById(request.Id).OverdraftAmount = request.Amount;
-            }
         }
     }
 }

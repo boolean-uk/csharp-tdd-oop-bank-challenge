@@ -17,67 +17,58 @@ namespace Boolean.CSharp.Main
             OverdraftRequests.Add(overdraft);
         }
 
-        public List<OverdraftRequest> ApproveAllOverdraftRequests()
+        private List<OverdraftRequest> ApproveRequests(IEnumerable<OverdraftRequest> requests)
         {
             List<OverdraftRequest> newlyApproved = new List<OverdraftRequest>();
-            foreach (var overdraft in OverdraftRequests.Where(o => o.Status == OverdraftStatus.Pending))
+            foreach (var request in requests)
             {
-                overdraft.Status = OverdraftStatus.Approved;
-                newlyApproved.Add(overdraft);
+                request.Status = OverdraftStatus.Approved;
+                newlyApproved.Add(request);
             }
             return newlyApproved;
+        }
+
+        public List<OverdraftRequest> ApproveAllOverdraftRequests()
+        {
+            return ApproveRequests(OverdraftRequests.Where(o => o.Status == OverdraftStatus.Pending));
         }
 
         public List<OverdraftRequest> ApproveOverdraftRequestsAmount(double amount)
         {
-            List<OverdraftRequest> newlyApproved = new List<OverdraftRequest>();
-            var pendingOverdrafts = OverdraftRequests.Where(o => o.Status == OverdraftStatus.Pending);
-            foreach (var overdraft in pendingOverdrafts.Where(o => o.Amount <= amount))
-            {
-                overdraft.Status = OverdraftStatus.Approved;
-                newlyApproved.Add(overdraft);
-            }
-            return newlyApproved;
+            var pendingRequests = OverdraftRequests.Where(o => o.Status == OverdraftStatus.Pending);
+            return ApproveRequests(pendingRequests.Where(o => o.Amount <= amount));
         }
 
         public List<OverdraftRequest> ApproveOverdraftRequestsId(int id)
         {
-            List<OverdraftRequest> newlyApproved = new List<OverdraftRequest>();
-            var pendingOverdrafts = OverdraftRequests.Where(o => o.Status == OverdraftStatus.Pending);
-            foreach (var overdraft in pendingOverdrafts.Where(o => o.Id == id))
-            {
-                overdraft.Status = OverdraftStatus.Approved;
-                newlyApproved.Add(overdraft);
-            }
-            return newlyApproved;
+            var pendingRequests = OverdraftRequests.Where(o => o.Status == OverdraftStatus.Pending);
+            return ApproveRequests(pendingRequests.Where(o => o.Id == id));
+        }
 
+        private void RejectRequests(IEnumerable<OverdraftRequest> requests)
+        {
+            foreach (var request in requests)
+            {
+                request.Status = OverdraftStatus.Rejected;
+            }
         }
 
         public void RejectAllOverdraftRequests()
         {
-            foreach (var overdraft in OverdraftRequests.Where(o => o.Status == OverdraftStatus.Pending))
-            {
-                overdraft.Status = OverdraftStatus.Rejected;
-            }
+            RejectRequests(OverdraftRequests.Where(o => o.Status == OverdraftStatus.Pending));
         }
 
         public void RejectOverdraftRequestsAmount(double amount)
         {
-            var pendingOverdrafts = OverdraftRequests.Where(o => o.Status == OverdraftStatus.Pending);
-            foreach (var overdraft in pendingOverdrafts.Where(o => o.Amount >= amount))
-            {
-                overdraft.Status = OverdraftStatus.Rejected;
-            }
+            var pendingRequests = OverdraftRequests.Where(o => o.Status == OverdraftStatus.Pending);
+            RejectRequests(pendingRequests.Where(o => o.Amount >= amount));
 
         }
 
         public void RejectOverdraftRequestsId(int id)
         {
-            var pendingOverdrafts = OverdraftRequests.Where(o => o.Status == OverdraftStatus.Pending);
-            foreach (var overdraft in pendingOverdrafts.Where(o => o.Id == id))
-            {
-                overdraft.Status = OverdraftStatus.Rejected;
-            }
+            var pendingRequests = OverdraftRequests.Where(o => o.Status == OverdraftStatus.Pending);
+            RejectRequests(pendingRequests.Where(o => o.Id == id));
         }
     }
 }
