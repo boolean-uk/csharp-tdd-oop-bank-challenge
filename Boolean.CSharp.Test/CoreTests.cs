@@ -16,8 +16,8 @@ namespace Boolean.CSharp.Test
         [Test]
         public void addAccountTest()
         {
-            SavingsAccount newSavings = (SavingsAccount)_customer.createAccount(762308, AccountType.savings, "London");
-            CurrentAccount newCurrent = (CurrentAccount)_customer.createAccount(556223, AccountType.current, "London");
+            SavingsAccount newSavings = (SavingsAccount)_customer.createAccount(762308, AccountType.savings, "Belfast");
+            CurrentAccount newCurrent = (CurrentAccount)_customer.createAccount(556223, AccountType.current, "Slough");
             Assert.That(_customer.Accounts.Contains(newSavings));
             Assert.That(_customer.Accounts.Contains(newCurrent));
         }
@@ -26,7 +26,7 @@ namespace Boolean.CSharp.Test
         [TestCase(1000f, 100f, 900f)]
         public void depositWithdrawChangesBalance(float deposit, float withdraw, float total)
         {
-            CurrentAccount currentAccount = (CurrentAccount)_customer.createAccount(642758, AccountType.current, "London");
+            CurrentAccount currentAccount = (CurrentAccount)_customer.createAccount(642758, AccountType.current, "Middlesburough");
             currentAccount.deposit(deposit);
             currentAccount.withdraw(withdraw);
             Assert.That(currentAccount.getTotal(), Is.EqualTo(total));
@@ -38,7 +38,7 @@ namespace Boolean.CSharp.Test
         public void failedDepositWithdrawThrowsException(float deposit, float withdraw)
         {
             //setup
-            SavingsAccount savingsAccount = (SavingsAccount)_customer.createAccount(123456, AccountType.savings, "London");
+            SavingsAccount savingsAccount = (SavingsAccount)_customer.createAccount(123456, AccountType.savings, "Derry");
             savingsAccount.deposit(100);
             //verify
             Assert.That(() => savingsAccount.deposit(deposit), Throws.Exception);
@@ -47,14 +47,14 @@ namespace Boolean.CSharp.Test
         [Test]
         public void tooLargeWithdrawTest()
         {
-            SavingsAccount account = (SavingsAccount)_customer.createAccount(123456, AccountType.savings, "London");
+            SavingsAccount account = (SavingsAccount)_customer.createAccount(123456, AccountType.savings, "New Castle");
             account.deposit(1000f);
             Assert.That(() => account.withdraw(1110f), Throws.Exception);
         }
         [Test]
         public void transactionsAddToList()
         {
-            SavingsAccount savingsAccount = (SavingsAccount)_customer.createAccount(123456, AccountType.savings, "London");
+            SavingsAccount savingsAccount = (SavingsAccount)_customer.createAccount(123456, AccountType.savings, "Slough");
             var result = savingsAccount.deposit(1000f);
             DateTime time = DateTime.Now;
             Transaction transaction = new Transaction(1000f, TransactionType.deposit, time.ToString("D"), savingsAccount.getTotal());
@@ -89,6 +89,13 @@ namespace Boolean.CSharp.Test
             
             //evaluation
             Assert.That(account.getTotal(), Is.EqualTo(it));
+        }
+        [Test]
+        public void branchTest()
+        {
+            CurrentAccount account = (CurrentAccount)_customer.createAccount(221133, AccountType.current, "Slough");
+            string branch = account.branch;
+            Assert.That(branch, Is.EqualTo("Slough"));
         }
     }
 }

@@ -51,7 +51,6 @@ namespace Boolean.CSharp.Main
     }
     public class Customer
     {
-        private string _branch;
         private List<Account> accounts = new List<Account>();
         public List<Account> Accounts { get { return accounts; } }
         public Account createAccount(int accountNr, AccountType type, string branchName)
