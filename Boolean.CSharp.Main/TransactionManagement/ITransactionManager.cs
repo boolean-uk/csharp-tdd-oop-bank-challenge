@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main.TransactionManagement
 {
-    internal interface ITransactionManager
+    public interface ITransactionManager
     {
         public void AddTransaction(ITransaction transaction);
         public void GetTransactions(DateTime start, DateTime end);

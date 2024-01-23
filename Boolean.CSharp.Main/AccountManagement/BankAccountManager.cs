@@ -19,12 +19,14 @@ namespace Boolean.CSharp.Main.AccountManagement
 
         public void LinkAccountToCustomer(Customer customer, BankAccount account)
         {
-            throw new NotImplementedException();
+            if (customerAccounts.TryGetValue(customer, out List<BankAccount>? accounts)) accounts.Add(account);
+            else customerAccounts[customer] = new List<BankAccount> { account };
         }
 
         public List<BankAccount> GetCustomerAccounts(Customer customer)
         {
-            throw new NotImplementedException();
+            if (customerAccounts.TryGetValue(customer, out List<BankAccount>? accounts)) return accounts;
+            else return new List<BankAccount>();
         }
     }
 }

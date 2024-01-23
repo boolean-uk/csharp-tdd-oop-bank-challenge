@@ -13,9 +13,10 @@ namespace Boolean.CSharp.Main.Accounts
         private decimal balance;
         private ITransactionManager transactions;
 
-        public BankAccount()
+        public BankAccount(ITransactionManager transactionManager)
         {
-            throw new NotImplementedException();
+            this.balance = 0m;
+            this.transactions = transactionManager;
         }
 
         public void ApplyTransaction(ITransaction transaction)
