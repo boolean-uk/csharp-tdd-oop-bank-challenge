@@ -12,12 +12,15 @@ namespace Boolean.CSharp.Main
     {
 
         private User _user;
+        private Branch _branch;
 
-        public SavingsAccount(User user)
+        public SavingsAccount(User user, Branch branch = Branch.Oslo)
         {
             _user = user;
+            _branch = branch;
         }
 
         public User User { get { return _user; } }
+        public Branch Branch { get { return _branch; } }   
     }
 }

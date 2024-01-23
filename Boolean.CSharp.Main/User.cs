@@ -10,11 +10,15 @@ namespace Boolean.CSharp.Main
     {
         private string _firstName;
         private string _lastName;
+        private string _address;
+        private Guid _id;
 
-        public User(string firstName, string lastName)
+        public User(string firstName, string lastName, string address)
         {
             _firstName = firstName;
             _lastName = lastName;
+            _address = address;
+            _id = Guid.NewGuid();
         }
 
         public override string ToString()
@@ -24,5 +28,9 @@ namespace Boolean.CSharp.Main
 
         public string FirstName { get; }
         public string LastName { get; }
+
+        public Guid Id { get { return _id; } set { _id = value; } }
+
+        public string Address { get { return _address;} set { _address = value; } } 
     }
 }

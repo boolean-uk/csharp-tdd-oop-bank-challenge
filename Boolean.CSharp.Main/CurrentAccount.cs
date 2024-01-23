@@ -11,10 +11,12 @@ namespace Boolean.CSharp.Main
     public class CurrentAccount : Account
     {
         private User _user;
+        private Branch _branch;
 
-        public CurrentAccount(string accountName, User user)
+        public CurrentAccount(User user, Branch branch = Branch.Oslo)
         {
             _user = user;
+            _branch = branch;
         }
 
         public User User { get { return _user; } }
