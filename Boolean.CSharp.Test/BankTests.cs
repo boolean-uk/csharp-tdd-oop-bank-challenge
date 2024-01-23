@@ -94,6 +94,23 @@ namespace Boolean.CSharp.Test
             Assert.That(user.Location, Is.EqualTo(bank.Location));
         }
 
+        [Test]
+        public void TestEmptyUser()
+        {
+            Bank bank = new Bank(BankLocation.Stavanger);
+
+            Assert.Throws<Exception>(() => bank.GetUserById(0));
+        }
+
+        [Test]
+        public void TestNonExistantUser()
+        {
+            Bank bank = new Bank(BankLocation.Stavanger);
+            User user = bank.CreateUser(0, "Kristian");
+
+            Assert.Throws<Exception>(() => bank.GetUserById(1));
+        }
+
         public void TestOverdraftRequest()
         {
             Bank bank = new Bank(BankLocation.Stavanger);

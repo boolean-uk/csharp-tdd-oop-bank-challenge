@@ -52,8 +52,8 @@ namespace Boolean.CSharp.Main
 
         public bool RemoveUser(int Id)
         {
-             if (Users.Where(u => u.Id == Id).Count() > 0)
-            {       
+            if (Users.Where(u => u.Id == Id).Count() > 0)
+            {
                 Users.Remove(GetUserById(Id));
                 return true;
             }
@@ -64,7 +64,11 @@ namespace Boolean.CSharp.Main
 
         public User GetUserById(int id)
         {
-            return Users.Where(user => user.Id == id).First();
+            var users = Users.Where(user => user.Id == id);
+
+            if (users.Count() == 0) throw new Exception($"User with id {id} does not exist");
+
+            return users.First();
         }
 
         public void GenerateOverdraftRequest(User user, double amount)
@@ -73,7 +77,7 @@ namespace Boolean.CSharp.Main
             Manager.AddOverdraftRequest(request);
         }
 
-        public void UpdateOverdraftRequests(List<OverdraftRequest> requests)
+                public void UpdateOverdraftRequests(List<OverdraftRequest> requests)
         {
             foreach (OverdraftRequest request in requests)
             {
