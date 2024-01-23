@@ -97,5 +97,25 @@ namespace Boolean.CSharp.Main.Accounts
             }
         }
 
+        public string TransactionsTwilio()
+        {
+            StringBuilder result = new StringBuilder();
+           result.AppendLine("Date  ||  credit  ||  debit   ||  balance ");
+            foreach (var t in transactions)
+            {
+                result.AppendLine($"{t._date.ToString("f")}");
+                if (t.transactionType == Enums.TransactionType.Deposit)
+                {
+                   result.AppendLine($"          {t._amount}                             ");
+                }
+                else if (t.transactionType == Enums.TransactionType.Withdrawal)
+                {
+                    result.AppendLine($"                              {t._amount}          ");
+                }
+                result.AppendLine($"       {t._balance}\n");
+            }
+
+            return result.ToString();
+        }
     }
 }
