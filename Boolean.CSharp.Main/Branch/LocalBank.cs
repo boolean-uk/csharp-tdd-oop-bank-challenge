@@ -13,7 +13,7 @@ namespace Boolean.CSharp.Main.Branch
     {
         private List<IAccount> _accounts = new List<IAccount>();
         private List<Customer> _customers = new List<Customer>();
-        private List<IUser> _employees = new List<IUser>();
+        private List<IEmployee> _employees = new List<IEmployee>();
         private string _location;
 
         public LocalBank(string location)
@@ -49,7 +49,10 @@ namespace Boolean.CSharp.Main.Branch
 
         public void AssignOverdraftRequest(IOverdraftRequest request)
         {
-            throw new NotImplementedException();
+            int randomValue = new Random().Next(0, _employees.Count);
+            IEmployee employee = _employees[randomValue];
+            employee.AddOverdraftRequest(request);
+
         }
 
         public List<IAccount> GetAccounts()

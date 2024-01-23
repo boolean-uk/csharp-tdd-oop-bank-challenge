@@ -12,6 +12,8 @@
 | `Manager` (implements IUser) | `List<Customer> customers` `string Name` `IBankBranch _branch` `List<IOverdraftRequest> _overdraftRequests` | 
 | `IBankBranch` (*interface*) |  |
 | `LocalBank`  (implements IBankBranch) | `List<IAccount> _accounts` `List<Customer> _customers` `List<IUser> _employees` `string _location` |
+| `IOverdraftRequest` (*interface*) | | 
+| `OverdraftRequestFixedAmount` (implements IOverdraftRequest) | `Customer _customer` `decimal _desiredOverdraftLimit` `DateTime time` `IAccount _account` | 
 
 | Classes | Method | Scenario | Outputs | 
 |-|-|-|-|
@@ -22,7 +24,8 @@
 | | `GetBalance()` | Retrieve the current balance of the account | decimal | 
 | | `AddUserToAccount(IUser user)` | Add a new user to the account | true | 
 | | | Failed to add new user to the account | false | 
-| `GeneralAccount`  | `setOverdrawLimit(decimal limit, IUser user)` | Attempt to change overdraw limit, only allowed for managers | decimal |
+| | `setOverdrawLimit(decimal limit, IUser user)` | Attempt to change overdraw limit, only allowed for managers | decimal |
+| `GeneralAccount`  | | |
 | `SavingsAccount` | | |
 | `IUser` | `GetName()` | Retrieve the name of the user | string |
 | | `GetAccounts()` | Retrieve a list of all accounts associated with the user | List<Account> |
@@ -32,7 +35,7 @@
 | | `OpenNewAccount(AccountType accountType)` | Generate a new account associated with the user | True |
 | | | Failed to generate a new account | False | 
 | | `LogIn()` | Log the customer into their account | - |
-| | `RequestOverdraft(decimal amount)` | Send a request to the bank branch to set their overdraft limit to the provided value | void |
+| | `RequestOverdraft(Customer customer, decimal amount, IAccount account)` | Send a request to the bank branch to set their overdraft limit to the provided value | void |
 | `IEmployee` | `EvaluateOverdraftRequests(bool approved)` | Review the oldest overdraft request associated with the manager | void | 
 | | `ShowOldestOverdraftRequest()` | Retrieve the oldest overdraft request so the manager can review | string | 
 | | `AddOverdraftRequest()` | Add an overdraft request to the employees list of requests | void | 
@@ -54,6 +57,11 @@
 | | `AddEmployeeToBranch(IUser employee)` | Associate the provided employee with the branch | bool |
 | | `AssignOverdraftRequest(IOverdraftRequest request)` | Assign a overdraft request from a customer to one of the branch's employees | void | 
 | `LocalBank()` | | |
+| `IOverdraftRequest` | `GetRequester()` | Retrieve the Customer object that requested the overdraft | Customer | 
+| | `GetRequestOverdraftLimit()` | Retrieve the requested new overdraft limit | decimal | 
+| | `GetRequestDate()` | Retrieve the date that the overdraft request was made | DateTime | 
+| | `GetOverdraftRequestAccount()` | Retrieve the account that the customer wish to be able to overdraft on | IAccount |
+| `OverdraftRequestFixedAmount` | | | 
 
 ## Note on overdraft request approval
 In my model the overdraft request is made from the user (Customer object) to the assocaited branch. The branch then have some distribution among its own managers, that it then redirects the overdraft request to. 
@@ -61,3 +69,6 @@ In my model the overdraft request is made from the user (Customer object) to the
 Each manager gets a queue of overdraft requests, which they can review and approve/disapprove which then sets the overdraft value in the Customer object associated. 
 
 The branch distribution of overdraft requests in this implementation will be simple (just picking one) but could easily be expanded to have all managers report their queues, then select the one with the smallest queue or something like that.
+
+### IOverdraftRequest
+The interface for overdraft request is made to have a common implementation, in theory someone could when implement fancier overdraft models instead of a fixed amount like % of income, % of assets, % increase of current fixed asset etc.

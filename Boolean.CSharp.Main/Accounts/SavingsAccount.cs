@@ -65,6 +65,17 @@ namespace Boolean.CSharp.Main.Accounts
             _transactions.PrintTransactions(start, end);
         }
 
+        /// <summary>
+        /// Attempt to set overdraft limit on a savingsaccount object. Which is not allowed
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public decimal SetOverdrawLimit(decimal limit, IUser user)
+        {
+            return 0m;
+        }
+
         public decimal Withdraw(decimal amount)
         {
             if (_balance > amount)

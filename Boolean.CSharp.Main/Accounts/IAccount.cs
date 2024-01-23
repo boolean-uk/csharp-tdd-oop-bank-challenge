@@ -20,5 +20,7 @@ namespace Boolean.CSharp.Main.Accounts
         void PrintBankStatement(DateTime start, DateTime end);
 
         bool AddUserToAccount(IUser user);
+
+        decimal SetOverdrawLimit(decimal limit, IUser user);
     }
 }

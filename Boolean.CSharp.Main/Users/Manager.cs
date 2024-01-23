@@ -21,14 +21,25 @@ namespace Boolean.CSharp.Main.Users
             _name = name;
         }
 
-        public void AddOverdraftRequest()
+        public void AddOverdraftRequest(IOverdraftRequest request)
         {
-            throw new NotImplementedException();
+            _overdraftRequests.Add(request);
         }
 
         public void EvaluateOverdraftRequests(bool approval)
         {
-            throw new NotImplementedException();
+            IOverdraftRequest? request = _overdraftRequests.OrderByDescending(req => req.GetRequestDate()).LastOrDefault();
+            if (request == null)
+            {
+                return;
+            }
+
+            if (approval) 
+            {
+                decimal desiredValue = request.GetRequestOverdraftLimit();
+                IAccount account = request.GetOverdraftRequestAccount();
+                account.SetOverdrawLimit(desiredValue, this);
+            }
         }
 
         public List<IAccount> GetAccounts()
@@ -49,7 +60,22 @@ namespace Boolean.CSharp.Main.Users
 
         public string ShowOldestOverdraftRequest()
         {
-            throw new NotImplementedException();
+            IOverdraftRequest? request = _overdraftRequests.OrderByDescending(req => req.GetRequestDate()).LastOrDefault();
+            if (request == null)
+            {
+                return "";
+            }
+            else 
+            {
+                StringBuilder sb = new StringBuilder();
+                
+                sb.Append($"Requester: { request.GetRequester().GetName()}, ");
+                sb.Append($"amount: {request.GetRequestOverdraftLimit()}, ");
+                sb.Append($"account type: {request.GetOverdraftRequestAccount().GetType().Name}, ");
+                sb.Append($"submitted: {request.GetRequestDate().ToString("yyyy-MM-dd HH:mm:ss")}");
+
+                return sb.ToString();
+            }
         }
     }
 }

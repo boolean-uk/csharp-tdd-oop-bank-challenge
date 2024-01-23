@@ -1,4 +1,5 @@
-﻿using Boolean.CSharp.Main.Users;
+﻿using Boolean.CSharp.Main.Accounts;
+using Boolean.CSharp.Main.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,9 @@ namespace Boolean.CSharp.Main.Transactions
         Customer GetRequester();
 
         decimal GetRequestOverdraftLimit();
+
+        DateTime GetRequestDate();
+
+        IAccount GetOverdraftRequestAccount();
     }
 }

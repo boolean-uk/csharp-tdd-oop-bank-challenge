@@ -150,25 +150,36 @@ namespace Boolean.CSharp.Test
             DateTime dob = new DateTime(1996, 8, 20);
             Customer user = new RegularCustomer("Bob", dob);
             IEmployee manager = new Manager("Jim");
+            branch.AddEmployeeToBranch(manager);
+
             user.RegisterWithBankBranch(branch);
-            user.OpenNewAccount(AccountType.Savings);
+            user.OpenNewAccount(AccountType.General);
             IAccount acc = user.GetAccounts()[0];
             branch.AddAccountToBranch(acc);
             acc.Deposit(1000m);
+            string expectedRequestString = 
+                $"Requester: Bob, " +
+                $"amount: 500, " +
+                $"account type: GeneralAccount, " +
+                $"submitted: {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}";
+            // Cant expect exact second to match, we just remove the time of day
+            expectedRequestString = expectedRequestString.Substring(0, expectedRequestString.Length - 9);
 
             // Act
             decimal res1 = acc.Withdraw(1250m);
-            user.RequestOverdraft(500m);
             string overdraftRequestBefore = manager.ShowOldestOverdraftRequest();
+            user.RequestOverdraft(500m, acc);
             manager.EvaluateOverdraftRequests(true);
             string overdraftRequestAfter = manager.ShowOldestOverdraftRequest();
+            string overdraftRequestAfterWithoutTime = overdraftRequestAfter.Substring(0, overdraftRequestAfter.Length - 9);
             decimal res2 = acc.Withdraw(1250m);
 
 
             // Assert
             Assert.That(res1, Is.EqualTo(0));
-            Assert.That(overdraftRequestBefore, Is.Not.EqualTo(""));
             Assert.That(overdraftRequestBefore, Is.EqualTo(""));
+            Assert.That(overdraftRequestAfter, Is.Not.EqualTo(""));
+            Assert.That(overdraftRequestAfterWithoutTime, Is.EqualTo(expectedRequestString));
             Assert.That(res2, Is.EqualTo(1250m));
 
         }

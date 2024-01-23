@@ -1,6 +1,7 @@
 ﻿using Boolean.CSharp.Main.Accounts;
 using Boolean.CSharp.Main.Branch;
 using Boolean.CSharp.Main.enums;
+using Boolean.CSharp.Main.Transactions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,9 +67,17 @@ namespace Boolean.CSharp.Main.Users
             return branch.AddUserToBranch(this);
         }
 
-        public void RequestOverdraft(decimal amount) 
+        public void RequestOverdraft(decimal amount, IAccount account) 
         {
-            throw new NotImplementedException();
+            if (_branch == null)
+            {
+                Console.WriteLine("This customer is not associated with any branch, and can thus not ask for new overdraft limit");
+            }
+            else 
+            {
+                IOverdraftRequest request = new OverdraftRequestFixedAmount(this, amount, account);
+                _branch.AssignOverdraftRequest(request);
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Boolean.CSharp.Main.Transactions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,6 @@ namespace Boolean.CSharp.Main.Users
 
         string ShowOldestOverdraftRequest();
 
-        void AddOverdraftRequest();
+        void AddOverdraftRequest(IOverdraftRequest request);
     }
 }
