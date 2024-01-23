@@ -23,21 +23,25 @@ namespace Boolean.CSharp.Main.Transactions
             _account = account;
         }
 
+        /// <inheritdoc />
         public IAccount GetOverdraftRequestAccount()
         {
             return _account;
         }
 
+        /// <inheritdoc />
         public DateTime GetRequestDate()
         {
             return _time;
         }
 
+        /// <inheritdoc />
         public Customer GetRequester()
         {
             return _customer;
         }
 
+        /// <inheritdoc />
         public decimal GetRequestOverdraftLimit()
         {
             return _desiredOverdraftLimit;

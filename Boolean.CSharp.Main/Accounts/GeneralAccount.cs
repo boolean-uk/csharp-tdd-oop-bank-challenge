@@ -24,12 +24,8 @@ namespace Boolean.CSharp.Main.Accounts
             user.RegisterAccount(this);
         }
 
-        /// <summary>
-        /// Attempt to change the overdraw limit on the account
-        /// </summary>
-        /// <param name="limit"> Desired new limit </param>
-        /// <param name="user"> The user attempting to set the new limit </param>
-        /// <returns> The overdraw limit of the account after (potentially) changing </returns>
+        /// <inheritdoc />
+        /// <remarks> Requires the provided user to be a Manager object to actually change the overdraw limit </remarks>
         public decimal SetOverdrawLimit(decimal limit, IUser user) 
         {
             if (user is Manager) 
@@ -39,6 +35,7 @@ namespace Boolean.CSharp.Main.Accounts
             return _overdrawLimit;
         }
 
+        /// <inheritdoc />
         public bool AddUserToAccount(IUser user)
         {
             int val1 = authorizedUsers.Count;

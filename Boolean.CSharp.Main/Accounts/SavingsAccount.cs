@@ -15,6 +15,7 @@ namespace Boolean.CSharp.Main.Accounts
         IBankTransaction _transactions;
         List<IUser> authorizedUsers;
         private decimal _balance = 0m;
+        IBankBranch _branch;
 
         public SavingsAccount(Customer user)
         {
@@ -23,11 +24,14 @@ namespace Boolean.CSharp.Main.Accounts
             user.RegisterAccount(this);
         }
 
+        /// <inheritdoc />
         public bool AddAccountToBankBranch(IBankBranch branch)
         {
+            _branch = branch;
             return branch.AddAccountToBranch(this);
         }
 
+        /// <inheritdoc />
         public bool AddUserToAccount(IUser user)
         {
             int val1 = authorizedUsers.Count;
@@ -36,6 +40,7 @@ namespace Boolean.CSharp.Main.Accounts
             return val2 > val1;
         }
 
+        /// <inheritdoc />
         public bool Deposit(decimal amount)
         {
             _transactions.AddDepositTransaction(amount);
@@ -51,16 +56,20 @@ namespace Boolean.CSharp.Main.Accounts
             }
         }
 
+        /// <inheritdoc />
         public decimal GetBalance()
         {
             return _balance;
         }
 
+        /// <inheritdoc />
         public IBankBranch GetBankBranch()
         {
-            throw new NotImplementedException();
+            return _branch;
         }
 
+
+        /// <inheritdoc />
         public void PrintBankStatement(DateTime start, DateTime end, bool sendSMS = false)
         {
             string statement = _transactions.PrintTransactions(start, end);
@@ -70,17 +79,15 @@ namespace Boolean.CSharp.Main.Accounts
             }
         }
 
-        /// <summary>
-        /// Attempt to set overdraft limit on a savingsaccount object. Which is not allowed
-        /// </summary>
-        /// <param name="limit"></param>
-        /// <param name="user"></param>
-        /// <returns></returns>
+        /// <inheritdoc />
+        /// <remarks> Will always return 0 as the SavingsAccount does not allow for overdrafting of the account  </remarks>
         public decimal SetOverdrawLimit(decimal limit, IUser user)
         {
             return 0m;
         }
 
+        /// <inheritdoc />
+        /// <remarks> SavingsAccount does not allow for overdrafting the account balance</remarks>
         public decimal Withdraw(decimal amount)
         {
             if (_balance > amount)

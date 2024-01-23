@@ -18,21 +18,32 @@ namespace Boolean.CSharp.Main.Users
         private DateTime _birthDate = DoB;
         private DateTime _lastLogin = DateTime.Now;
 
+        /// <inheritdoc />
         public List<IAccount> GetAccounts()
         {
             return new List<IAccount>(this._associatedAccounts);
         }
 
+        /// <summary>
+        /// Add a provided account to the list of IAccount's associated with this Customer object
+        /// </summary>
+        /// <param name="account"> IAccount - The account to associate with the Customer</param>
         public void RegisterAccount(IAccount account) 
         {
             _associatedAccounts.Add(account);
         }
 
+        /// <inheritdoc />
         public string GetName()
         {
             return _name;
         }
 
+        /// <summary>
+        /// Attempt to open a new account
+        /// </summary>
+        /// <param name="accountType">AccountType - a enum value contained within the AccountType category</param>
+        /// <returns>bool - True if the new account was successfully created, false otherwise</returns>
         public bool OpenNewAccount(AccountType accountType) 
         {
             IAccount newAcc;
@@ -51,17 +62,26 @@ namespace Boolean.CSharp.Main.Users
             return val1 < val2;
         }
 
+        /// <summary>
+        /// Log into the Customer account, resets the _lastLogin flag.
+        /// </summary>
         public void LogIn() 
         {
             _lastLogin = DateTime.Now;
         }
 
+        /// <inheritdoc />
         public bool RegisterWithBankBranch(IBankBranch branch)
         {
             _branch = branch;
             return branch.AddUserToBranch(this);
         }
 
+        /// <summary>
+        /// Submit a request to change the overdraft limit on a specified and provided IAccount object
+        /// </summary>
+        /// <param name="amount"> decimal - the desired new overdraft limit </param>
+        /// <param name="account"> IAccount - the account that the Customer wishes to change the overdraft limit for </param>
         public void RequestOverdraft(decimal amount, IAccount account) 
         {
             if (_branch == null)

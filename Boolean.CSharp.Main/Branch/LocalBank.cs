@@ -23,6 +23,7 @@ namespace Boolean.CSharp.Main.Branch
 
         }
 
+        /// <inheritdoc />
         public bool AddAccountToBranch(IAccount account)
         {
             int val1 = _accounts.Count;
@@ -31,6 +32,7 @@ namespace Boolean.CSharp.Main.Branch
             return val2 > val1;
         }
 
+        /// <inheritdoc />
         public bool AddEmployeeToBranch(IEmployee employee)
         {
             int val1 = _employees.Count;
@@ -39,6 +41,7 @@ namespace Boolean.CSharp.Main.Branch
             return val2 > val1;
         }
 
+        /// <inheritdoc />
         public bool AddUserToBranch(Customer user)
         {
             int val1 = _customers.Count;
@@ -47,6 +50,7 @@ namespace Boolean.CSharp.Main.Branch
             return val2 > val1;
         }
 
+        /// <inheritdoc />
         public void AssignOverdraftRequest(IOverdraftRequest request)
         {
             int randomValue = new Random().Next(0, _employees.Count);
@@ -55,21 +59,25 @@ namespace Boolean.CSharp.Main.Branch
 
         }
 
+        /// <inheritdoc />
         public List<IAccount> GetAccounts()
         {
             return new List<IAccount>(this._accounts);
         }
 
+        /// <inheritdoc />
         public List<Customer> GetCustomers()
         {
             return new List<Customer>(_customers);
         }
 
+        /// <inheritdoc />
         public List<IUser> GetEmployees()
         {
             return new List<IUser>(_employees);
         }
 
+        /// <inheritdoc />
         public string GetLocation()
         {
             return _location;

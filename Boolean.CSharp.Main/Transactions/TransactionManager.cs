@@ -13,6 +13,7 @@ namespace Boolean.CSharp.Main.Transactions
     {
         private List<Tuple<DateTime, decimal, TransactionType, decimal>> _history = new List<Tuple<DateTime, decimal, TransactionType, decimal>>();
 
+        /// <inheritdoc />
         public decimal CalculateAccountBalance() 
         {
             decimal res = 0;
@@ -30,11 +31,7 @@ namespace Boolean.CSharp.Main.Transactions
             return res;
         }
 
-        /// <summary>
-        /// Add an item to the transaction history marked as a deposit
-        /// </summary>
-        /// <param name="amount">The amount of money to be deposit into the account</param>
-        /// <returns>A boolean if the transaction was succesfully recorded</returns>
+        /// <inheritdoc />
         public bool AddDepositTransaction(decimal amount)
         {
             int val1 = _history.Count;
@@ -51,11 +48,7 @@ namespace Boolean.CSharp.Main.Transactions
             return val2 > val1;
         }
 
-        /// <summary>
-        /// Add an item to the transaction history marked as a withdrawal
-        /// </summary>
-        /// <param name="amount">The amount of money to be withdrawn from the account</param>
-        /// <returns>A boolean if the transaction was succesfully recorded</returns>
+        /// <inheritdoc />
         public bool AddWithdrawTransaction(decimal amount)
         {
             int val1 = _history.Count;
@@ -72,11 +65,7 @@ namespace Boolean.CSharp.Main.Transactions
             return val2 > val1;
         }
 
-        /// <summary>
-        /// Print all transactions that occured between the provided start time and end time
-        /// </summary>
-        /// <param name="start"> The minimum date for transaction to be printed </param>
-        /// <param name="end"> The maximum date for transaction to be printed </param>
+        /// <inheritdoc />
         public string PrintTransactions(DateTime start, DateTime end)
         {
             int _padLeft = 10;

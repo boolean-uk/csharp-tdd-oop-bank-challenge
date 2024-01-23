@@ -21,11 +21,14 @@ namespace Boolean.CSharp.Main.Users
             _name = name;
         }
 
+        /// <inheritdoc />
+        /// <remarks> For Manager objects the request is placed within a List until the Manager object clear the object at a later time, see <see cref="EvaluateOverdraftRequests"> and <see cref="ShowOldestOverdraftRequest"/></remarks>
         public void AddOverdraftRequest(IOverdraftRequest request)
         {
             _overdraftRequests.Add(request);
         }
 
+        /// <inheritdoc />
         public void EvaluateOverdraftRequests(bool approval)
         {
             IOverdraftRequest? request = _overdraftRequests.OrderByDescending(req => req.GetRequestDate()).LastOrDefault();
@@ -42,22 +45,26 @@ namespace Boolean.CSharp.Main.Users
             }
         }
 
+        /// <inheritdoc />
         public List<IAccount> GetAccounts()
         {
             return new List<IAccount>(_accounts);
         }
 
+        /// <inheritdoc />
         public string GetName()
         {
             return _name;
         }
 
+        /// <inheritdoc />
         public bool RegisterWithBankBranch(IBankBranch branch)
         {
             _branch = branch;
             return branch.AddEmployeeToBranch(this);
         }
 
+        /// <inheritdoc />
         public string ShowOldestOverdraftRequest()
         {
             IOverdraftRequest? request = _overdraftRequests.OrderByDescending(req => req.GetRequestDate()).LastOrDefault();

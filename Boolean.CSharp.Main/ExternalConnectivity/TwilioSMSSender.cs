@@ -12,6 +12,7 @@ namespace Boolean.CSharp.Main.MessageProvider
     public class TwilioSMSSender : ITextSender
     {
 
+        /// <inheritdoc />
         public void SendMessage(string message)
         {
             DotEnv.Load();
