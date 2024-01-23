@@ -18,8 +18,17 @@ namespace Boolean.CSharp.Main
         {
             if (transaction.Type == TransactionType.Credit)
             {
-                Transactions.Add(transaction);
-                Transactions.Last().Balance = Transactions.Last().Balance + transaction.Amount;
+                if (Transactions.Count() > 0)
+                {
+                    transaction.Balance = Transactions.Last().Balance + transaction.Amount;
+                    Transactions.Add(transaction);
+                }else
+                {
+                    transaction.Balance = transaction.Amount;
+                    Transactions.Add(transaction);
+                }
+
+
 
             }
         }
@@ -31,8 +40,12 @@ namespace Boolean.CSharp.Main
                 
                 if (transaction.Amount <= (GetBalance() + GetOverdraftBalance()))
                 {
+                    if(Transactions.Count() > 0)
+                    {
+                        transaction.Balance = Transactions.Last().Balance - transaction.Amount;
+                        Transactions.Add(transaction);
+                    }
                     Transactions.Add(transaction);
-                    Transactions.Last().Balance -= transaction.Amount;
                 }
                 
             }
