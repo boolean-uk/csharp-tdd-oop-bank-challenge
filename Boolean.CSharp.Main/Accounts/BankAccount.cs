@@ -48,7 +48,38 @@ namespace Boolean.CSharp.Main.Accounts
             return 0; // Return 0 if no transactions yet
         }
 
-        public abstract string GenerateStatement();
+        public void GenerateStatement()
+        {
+            Console.WriteLine("{0,10} || {1,10} || {2,10} || {3,10} ", "Date", "Credit", "Debit", "Balance");
+            transactions = transactions.OrderByDescending(t => t.Date).ToList();
+            foreach (Transaction transaction in transactions)
+            {
+                Console.WriteLine("{0,10} || {1,10} || {2,10} || {3,10} ",
+                    transaction.Date.ToShortDateString(),
+                    transaction.Type == TransactionType.Deposit ? transaction.Amount.ToString() : 0,
+                    transaction.Type == TransactionType.Withdraw ? transaction.Amount.ToString() : 0,
+                    transaction.Balance.ToString());
+            }
+        }
     }
 
 }
+
+/*
+  /// <summary>
+ /// Method outputs a statement to the console
+ /// </summary>
+ public void WriteStatement()
+ {
+     Console.WriteLine("{0,10} || {1,10} || {2,10} || {3,10} ", "Date", "Credit", "Debit", "Balance");
+     foreach (IBankTransaction transaction in _transactions.OrderByDescending(t => t.Date).Where(t => t.Status == TransactionStatus.Approved))
+     {
+
+         Console.WriteLine("{0,10} || {1,10} || {2,10} || {3,10} ",
+                 transaction.Date.ToShortDateString(),
+                 transaction.Type == TransactionType.Credit ? transaction.Amount : 0,
+                 transaction.Type == TransactionType.Debit ? transaction.Amount : 0,
+                 transaction.NewBalance);
+     };
+ }
+ */

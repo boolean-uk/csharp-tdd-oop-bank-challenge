@@ -13,6 +13,7 @@ namespace Boolean.CSharp.Main
         public TransactionType Type { get; }
         public double Balance { get; }
 
+
         public Transaction(double amount, TransactionType type, double balance)
         {
             Date = DateTime.Now;
