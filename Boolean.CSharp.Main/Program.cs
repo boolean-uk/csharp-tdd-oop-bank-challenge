@@ -28,8 +28,8 @@ TwilioClient.Init(accountSid, authToken);
 
 var message = MessageResource.Create(
     body: messageBody,
-    from: new Twilio.Types.PhoneNumber("+18392225653"),
-    to: new Twilio.Types.PhoneNumber("+4746412397")
+    from: new Twilio.Types.PhoneNumber(Environment.GetEnvironmentVariable("SEND_FROM_NUMBER")),
+    to: new Twilio.Types.PhoneNumber(Environment.GetEnvironmentVariable("SEND_TO_NUMBER"))
     );
 
 
