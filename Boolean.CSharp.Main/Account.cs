@@ -1,22 +1,29 @@
-﻿using System.Text;
+﻿using System.Text;  
 
 namespace Boolean.CSharp.Main
 {
+    public enum Branch { Norway, Sweden, Denmark}
     public class Account
     {
         private string _name;
-        private decimal _balance;
+        //private decimal _balance;
         private List<Transaction> _transactions;
+        private List<Overdraft> _overdrafts;
+        private Branch _branch;
 
         public string Name {  get { return _name; } }
-        public decimal Balance { get { return _balance; } }
+        //public decimal Balance { get { return _balance; } }
         public List<Transaction> Transactions { get { return _transactions; } }
+        public List<Overdraft> Overdrafts {  get { return _overdrafts; } }
+        public Branch Branch { get { return _branch; } }
 
-        public Account(string name)
+
+        public Account(string name, Branch branch)
         {
             _name = name;
-            _balance = 0;
+            //_balance = 0;
             _transactions = new();
+            _branch = branch;
         }
 
         public decimal GetBalance()
@@ -26,21 +33,19 @@ namespace Boolean.CSharp.Main
 
         public string Deposit(decimal amount)
         {
-            _transactions.Add(new(TransactionType.Credit, amount, _balance));
-            _balance += amount;
-            return $"{amount} deposited to {_name}, new balance is {_balance}";
+            _transactions.Add(new(TransactionType.Credit, amount, GetBalance()));
+            return $"{amount} deposited to {_name}, new balance is {GetBalance()}";
         }
 
         public string Withdraw(decimal amount)
         {
-            Transaction withdrawal = new(TransactionType.Debit, amount, _balance);
+            Transaction withdrawal = new(TransactionType.Debit, amount, GetBalance());
             if (withdrawal.NewValue < 0) 
             {
                 return $"Cannot withdraw from {_name}, balance is less than withdrawal amount";
             }
             _transactions.Add(withdrawal);
-            _balance -= amount;
-            return $"{amount} withdrawn from {_name}, new balance is {_balance}";
+            return $"{amount} withdrawn from {_name}, new balance is {GetBalance()}";
         }
 
         public string GenerateStatement()
@@ -61,5 +66,21 @@ namespace Boolean.CSharp.Main
 
             return sb.ToString();
         }
+
+        public void RequestOverdraft(decimal amount)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string Overdraft(Overdraft overdraft)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string RejectOverdraft(Overdraft overdraft) 
+        { 
+            throw new NotImplementedException(); 
+        }
+
     }
 }

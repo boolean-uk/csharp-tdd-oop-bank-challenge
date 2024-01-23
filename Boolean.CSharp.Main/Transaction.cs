@@ -4,7 +4,7 @@
 
     public class Transaction
     {
-        private string _id;
+        private Guid _id;
         private TransactionType _type;
         private DateTime _date;
         private decimal _amount;
@@ -20,11 +20,7 @@
 
         public Transaction(TransactionType type, decimal amount, decimal previousValue) 
         {
-            //generate id 
-            Random random = new();
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            _id = new string(Enumerable.Range(1, 10).Select(_ => chars[random.Next(chars.Length)]).ToArray());
-
+            _id = Guid.NewGuid();
             _type = type;
             _date = DateTime.Now;
             _amount = amount;

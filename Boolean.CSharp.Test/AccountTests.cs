@@ -11,13 +11,13 @@ namespace Boolean.CSharp.Test
         [SetUp]
         public void SetUp()
         {
-            account = new("test");
+            account = new("test", Branch.Norway);
         }
 
         [Test]
         public void GetBalance()
         {
-            Assert.That(account.Balance, Is.EqualTo(0));
+            Assert.That(account.GetBalance(), Is.EqualTo(0));
         }
 
         [Test]

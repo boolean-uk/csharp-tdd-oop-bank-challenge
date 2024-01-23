@@ -11,20 +11,55 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class ExtensionTests
     {
-        private Extension _extension;
-        public ExtensionTests()
-        {
-            _extension = new Extension();
-        }
-        [Test]
-        private void TestQuestion1()
-        {
+        Manager manager;
+        Account account;
+        Customer customer;
+        
 
-        }
-        [Test]
-        private void TestQuestion2()
+        [SetUp]
+        public void SetUp() 
         {
+            customer = new();
+            account = new("test", Branch.Norway);
+            customer.Accounts.Add(account);
+        }
 
+        [Test]
+        public void CalculateBalance()
+        {
+            customer.Deposit("test", 500);
+            customer.Deposit("test", 400);
+            customer.Withdraw("test", 300);
+            Assert.That(account.GetBalance(), Is.EqualTo(600));
+        }
+
+        [Test]
+        public void GetBranch()
+        {
+            Assert.That(account.Branch, Is.EqualTo(Branch.Norway));
+        }
+
+        [Test]
+        public void CreateOverdraft() 
+        {
+            account.RequestOverdraft(300);
+            Assert.That(account.Overdrafts.Last().Amount, Is.EqualTo(300));
+        }
+
+        [Test]
+        public void ApproveOverdraft()
+        {
+            account.RequestOverdraft(300);
+            manager.AcceptOverdraft(account ,account.Overdrafts.Last());
+            Assert.That(account.GetBalance(), Is.EqualTo(300));
+        }
+
+        [Test]
+        public void RejectOverdraft()
+        {
+            account.RequestOverdraft(300);
+            manager.RejectOverdraft(account, account.Overdrafts.Last());
+            Assert.That(account.GetBalance(), Is.EqualTo(0));
         }
     }
 }

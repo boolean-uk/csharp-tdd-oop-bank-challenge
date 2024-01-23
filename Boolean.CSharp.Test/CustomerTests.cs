@@ -13,7 +13,7 @@ namespace Boolean.CSharp.Test
         public void SetUp()
         {
             customer = new();
-            account = new("test");
+            account = new("test", Branch.Norway);
             customer.Accounts.Add(account);
         }
 
@@ -47,7 +47,7 @@ namespace Boolean.CSharp.Test
         public void Deposit() 
         {
             Assert.That(customer.Deposit("test",500), Is.EqualTo("500 deposited to test, new balance is 500"));
-            Assert.That(customer.Accounts.Last().Balance, Is.EqualTo(500));
+            Assert.That(customer.Accounts.Last().GetBalance(), Is.EqualTo(500));
         }
 
         [Test]
@@ -55,14 +55,14 @@ namespace Boolean.CSharp.Test
         {
             customer.Deposit("test",500);
             Assert.That(customer.Withdraw("test",250), Is.EqualTo("250 withdrawn from test, new balance is 250"));
-            Assert.That(customer.Accounts.Last().Balance, Is.EqualTo(250));
+            Assert.That(customer.Accounts.Last().GetBalance(), Is.EqualTo(250));
         }
 
         public void CantWithdrawLackingFunds()
         {
             customer.Deposit("test", 500);
             Assert.That(customer.Withdraw("test", 750), Is.EqualTo("Cannot withdraw from test, balance is less than withdrawal amount"));
-            Assert.That(customer.Accounts.Last().Balance, Is.EqualTo(500));
+            Assert.That(customer.Accounts.Last().GetBalance(), Is.EqualTo(500));
         }
     }
 }

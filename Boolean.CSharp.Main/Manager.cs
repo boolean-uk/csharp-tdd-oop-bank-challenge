@@ -14,12 +14,12 @@ namespace Boolean.CSharp.Main
             
         }
 
-        public string AcceptOverdraft(Customer customer, Overdraft overdraft)
+        public string AcceptOverdraft(Account account, Overdraft overdraft)
         {
             throw new NotImplementedException();
         }
 
-        public string RejectOverdraft(Customer customer, Overdraft overdraft)
+        public string RejectOverdraft(Account account, Overdraft overdraft)
         {
             throw new NotImplementedException();
         }

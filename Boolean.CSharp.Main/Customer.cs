@@ -18,7 +18,7 @@ namespace Boolean.CSharp.Main
         {
             if (Accounts.Where(n => n.Name == name).Count() == 0)
             {
-                SavingsAccount savingsAccount = new(name);
+                SavingsAccount savingsAccount = new(name, Branch.Norway);
                 _accounts.Add(savingsAccount);
                 return $"Savings account {name} has been created";
             }
@@ -29,7 +29,7 @@ namespace Boolean.CSharp.Main
         {
             if (Accounts.Where(n => n.Name == name).Count() == 0)
             {
-                CurrentAccount currentAccount = new(name);
+                CurrentAccount currentAccount = new(name, Branch.Norway);
                 _accounts.Add(currentAccount);
                 return $"Current account {name} has been created";
             }
@@ -60,14 +60,5 @@ namespace Boolean.CSharp.Main
             return withdrawAccount.Withdraw(amount);
         }
 
-        public void RequestOverdraft(decimal amount)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string Overdraft(Overdraft overdraft)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
