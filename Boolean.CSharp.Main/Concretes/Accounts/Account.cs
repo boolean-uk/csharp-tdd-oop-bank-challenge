@@ -19,14 +19,14 @@ namespace Boolean.CSharp.Main.Accounts
 
         public void AddTransaction(ITransaction transaction)
         {
-            if (transaction.GetDetails().Item2<0 && !this.OverdraftApproved)
+            if ((this.GetBalance()+transaction.GetDetails().Item2)<0 && !this.OverdraftApproved)
             { 
                 Console.WriteLine("You do not have overdraft permission"); 
             }
             else
             {
                 _transactions.Add(transaction);
-                transaction.SetBalance(GetBalance());
+                transaction.SetBalance(this.GetBalance());
             }
         }
 
