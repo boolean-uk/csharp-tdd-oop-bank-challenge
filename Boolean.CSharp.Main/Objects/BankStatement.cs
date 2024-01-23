@@ -11,6 +11,7 @@ namespace Boolean.CSharp.Main.Objects
     {
         private int _id;
         private List<ITransaction> _transactions = new List<ITransaction>();
+        private int _overdraftCount = 0;
 
         public BankStatement()
         {
@@ -18,6 +19,7 @@ namespace Boolean.CSharp.Main.Objects
         }
         public int Id { get { return _id; } set { _id = value; } }
         public List<ITransaction> Transactions { get { return _transactions; } set { _transactions = value; } }
+        public int OverdraftCount { get { return _overdraftCount; } set { _overdraftCount += value; } }
 
         public double CalculateBalance()
         {

@@ -27,6 +27,50 @@ namespace Boolean.CSharp.Test
             //assert
             Assert.AreEqual(400, result);
         }
-        
+
+        [Test]
+        public void BranchTest()
+        {
+            //arrange
+            Branch branch= new Branch("Bergen", "Bergen");
+
+            //act
+            branch.Location = "Oslo";
+            branch.Name = "Oslo";
+
+            //assert
+            Assert.AreEqual("Oslo", branch.Name);
+
+        }
+
+        [Test]
+        public void OverdraftTest()
+        {
+            //arrange
+            Branch branch = new Branch("Bergen", "Bergen");
+            CurrentAccount account = new CurrentAccount("Current account 1", branch);
+
+            //act
+            account.Withdraw(500);
+            account.Withdraw(500);
+            //assert
+            Assert.AreEqual(-1000, account.Balance);
+        }
+        [Test]
+        public void OverdraftRequestTest()
+        {
+            //arrange
+            Branch branch = new Branch("Bergen", "Bergen");
+            CurrentAccount account = new CurrentAccount("Current account 1", branch);
+
+            //act
+            account.Withdraw(500);
+            account.Withdraw(500);
+            account.Withdraw(500);
+            account.Withdraw(500);
+            //assert
+            Assert.IsFalse(account.RequestOverDraft());
+        }
+
     }
 }

@@ -25,11 +25,18 @@ So I can use my account,
 I want to deposit and withdraw funds.
 ```
 
-| Classes   | Members                          | Methods    | Scenario                          | Outputs     |
-|-----------|----------------------------------|------------|-----------------------------------|-------------|
-| `Account` | `List<Transaction> Transactions` | `Deposit`  |                                   | Transaction | 
-|           |                                  | `Withdraw` | Amount *is* more than balance     | Console.out |
-|           |                                  |            | Amount *is not* more than balance | Transaction |
+```
+As a customer,
+So I have an emergency fund,
+I want to be able to request an overdraft on my account.
+```
+
+| Classes   | Members                          | Methods    | Scenario                                                   | Outputs     |
+|-----------|----------------------------------|------------|------------------------------------------------------------|-------------|
+| `Account` | `List<Transaction> Transactions` | `Deposit`  |                                                            | Transaction | 
+|           |                                  | `Withdraw` | Amount *is* more than balance and overdraft *is* valid     | Transaction |
+|           |                                  |            | Amount *is* more than balance and overdraft *is not* valid | Console.out |
+|           |                                  |            | Amount *is not* more than balance                          | Transaction |
 
 
 ```
@@ -64,19 +71,17 @@ I want accounts to be associated with specific branches.
 | `BankStatement` | `Branch AccountBranch` | `Get()`   |           | Branch  | 
 |                 |                        | `Set()`   |           | Branch  |
 
-      
-```
-As a customer,
-So I have an emergency fund,
-I want to be able to request an overdraft on my account.
-```
-
 
 ```
 As a bank manager,
 So I can safeguard our funds,
 I want to approve or reject overdraft requests.
 ```
+
+| Classes   | Members                          | Methods           | Scenario           | Outputs |
+|-----------|----------------------------------|-------------------|--------------------|---------|
+| `Account` | `AccountStatment.OverdraftCount` |`RequestOverDraft` | OverdraftCount > 2 | false   |
+|           |                                  |                   |                    | true    |
 
 ```
 As a customer,

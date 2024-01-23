@@ -12,6 +12,7 @@ namespace Boolean.CSharp.Main.Objects
         private int _id;
         private string _accountName;
         private string _accountType;
+        //Balance parameter is not needed, but is still here for running tests more simply
         private double _balance;
         private Branch _accountBranch;
         private BankStatement _accountStatement = new BankStatement();
@@ -57,27 +58,22 @@ namespace Boolean.CSharp.Main.Objects
             }
             else
             {
-                Console.Write("Requests over draft for " + amount);
+                Console.WriteLine("Requests over draft for " + amount);
                 if (RequestOverDraft())
                 {
-                    Console.WriteLine("Your over draft request has been accepted");
+                    Console.WriteLine("Request for over draft has been accepted");
                     double oldBalance = Balance;
                     Console.WriteLine("You have withdrawn " + amount);
                     Balance -= amount;
                     Console.WriteLine("You now have " + Balance + " left in your account");
+                    Overdraft transaction = new Overdraft(TransactionStatus.Success, amount, Balance, oldBalance);
+                    AccountStatement.Transactions.Add(transaction);
+                    AccountStatement.OverdraftCount++;
                 }
-                else
-                {
-                     
+                else if(!RequestOverDraft()){
+                    Console.WriteLine("Request for overdraft has been rejected");                    
                 }
             }
-        }
-
-        public bool RequestOverDraft()
-        {
-            bool result = false;
-
-            return result;
         }
 
         public void PrintBankStatement()
@@ -95,6 +91,20 @@ namespace Boolean.CSharp.Main.Objects
                 }
             }
 
+        }
+
+        public bool RequestOverDraft()
+        {
+            bool result = false;
+            if (AccountStatement.OverdraftCount > 2)
+            {
+                result = false;
+            }
+            else
+            {
+                result = true;
+            }
+            return result;
         }
     }
 }
