@@ -67,13 +67,13 @@ namespace Boolean.CSharp.Test
         {
             user.CreateCurrentAccount();
             user.CurrentAccount.Deposit(deposit);
-            string[] Result = user.CurrentAccount.BankTransactions[0];
+            List<Transaction> Result = user.CurrentAccount.BankTransactions;
            
             
 
-            Assert.IsNotNull(user.CurrentAccount);
-            Assert.That(Result.Length > 0);
-            Assert.That(Result.Contains(deposit.ToString()));
+          Assert.IsNotNull(user.CurrentAccount);
+          Assert.That(Result.Count > 0);
+          Assert.That(Result.First(x => x.TransactionAmount >0).Balance, Is.EqualTo(deposit));
            
         }
 

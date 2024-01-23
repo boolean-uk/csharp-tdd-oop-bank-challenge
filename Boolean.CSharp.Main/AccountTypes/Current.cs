@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main.AccountTypes
 {
-    public class Current:Account
+    public class Current:Account,IAccount
     {
         public Current() 
         {

@@ -9,5 +9,8 @@ namespace Boolean.CSharp.Main
     public interface IAccount
     {
         string Type { get; set; }
+
+        public List<Transaction> OverdraftRequests { get; }
+        public void SortTransactionList(List<Transaction> list) { }
     }
 }

@@ -31,7 +31,9 @@ abstract Account|   List<BankTransactions> BankTransaction| includes instances o
                 |    Deposit(amount)                      |new BankTransaction => AvailableAmount + amount                                |Account.BankTransactionList.Add( BankTransaction )                         
                 |   Withdraw(amount)                      |if amount < AvailableAmount => new BankTransaction => AvailableAmount - amount |Account.BankTransactionList.Add( BankTransaction )  
                 | CalculateBalance()                      | loops through BankTransactions adds amount based on credt/debit to sum        | decimal balanse
-                
+                | RequestOverdraft() 
+                | _overdraftRequest                        |sort bankTransaction to sort pending or denied transactcions to own register in Account
+                | GenerateBankStatement()                  | sort by Date, print data to rows
 
 Saving:Account  |
 Current:Account |
@@ -43,10 +45,12 @@ BankTransaction | Id, Date, Amount, TransactionType |
                 |  double Amount { get; set; }
                 |  double NewBalance { get; set; }
                 |  double OldBalance { get; set; }
+                |TransactionStatus in BankTransaction (pending, approved, denied)
                    
 	        User| Abstract? //divide in userclasses?(Extensions) 
                 | int Id
                 | userTypes              | "Manager","Customer","Engineer", 
+                | Manager.GetOverdraftRequests() | gets list - sets requests to approved or rejected, set new Date | returns Transaction to correct List<Transaction>
 
 Bank            | GenerateUserId()                      | uniqueID ++                                                                       | int
             
@@ -68,11 +72,19 @@ I want accounts to be associated with specific branches.
 As a customer,
 So I have an emergency fund,
 I want to be able to request an overdraft on my account.
+=> RequestOverdraft() 
+=> TransactionStatus in BankTransaction (pending, approved, denied)
+=> sort bankTransaction to sort pending or denied transactcions to own register in Account
 
 As a bank manager,
 So I can safeguard our funds,
 I want to approve or reject overdraft requests.
+==> account.OverdraftRequests{get;}
+==> set status to rejected or Approved - if Approved => set new date and send to _bankTransaction
+==> sort print by date
 
 As a customer,
 So I can stay up to date,
 I want statements to be sent as messages to my phone.
+==> Message class
+==> Telio

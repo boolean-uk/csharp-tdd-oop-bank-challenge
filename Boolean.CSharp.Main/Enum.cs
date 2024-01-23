@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main
 {
-    public enum EBranches
+    public enum Location
     {
         Vanderbijlpark = 10012,
         Oslo = 32142,
@@ -16,4 +16,6 @@ namespace Boolean.CSharp.Main
         Johannesburg = 77854
        
     }
+    public enum Status { pending, approved, rejected };
+    public enum Type { credit, debit };
 }

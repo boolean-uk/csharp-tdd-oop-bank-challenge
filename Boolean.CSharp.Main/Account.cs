@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
+using System.Data.Common;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace Boolean.CSharp.Main
 {
@@ -12,40 +15,79 @@ namespace Boolean.CSharp.Main
         private int _id;
         private string _type;
         private decimal _availableAmount;
-        private List<string[]> _bankTransactions;
+        private List<Transaction> _bankTransactions = new List<Transaction>();
         private HeadQuarters _bank = new HeadQuarters();
         private int _uniqueId = 0;
+        private List<Transaction> _overdraftRequestsList = new List<Transaction>();
 
         public Account()
         {
-            _bankTransactions = new List<string[]>();
             _id = _bank.GenerateAccountId();
             _type = "current";
             _availableAmount = 0;
         }
         public void Deposit(decimal amount)
         {
-            BankTransaction transaction = new BankTransaction(id:_uniqueId, amount, oldAmount:_availableAmount);
+            BankTransaction BankTransaction = new BankTransaction(id:_uniqueId, amount, oldAmount:_availableAmount);
             _availableAmount += amount;
-            Console.WriteLine("deposited amount: {0}",amount);
-
-            _bankTransactions.Add(transaction.GetTransactionString());
+            _bankTransactions.Add(BankTransaction.GetTransaction());
             _uniqueId++;
 
         }
-        public bool Withdraw(decimal amount)
+        public string Withdraw(decimal amount)
+        {
+            string message = string.Empty;
+            if(_availableAmount > amount)
+            {
+                BankTransaction BankTransaction = new BankTransaction(id: _uniqueId, -amount, oldAmount: _availableAmount);
+                _availableAmount -= amount;
+                message = $"withdrawn amount: {amount}";
+                _bankTransactions.Add(BankTransaction.GetTransaction());
+                _uniqueId++;
+                
+            }
+            else { message = RequestOverdraft(amount).Value; }
+            
+            return message;
+        }
+
+        public KeyValuePair<int,string> RequestOverdraft(decimal amount)
         {
             if(_availableAmount > amount)
             {
-                BankTransaction transaction = new BankTransaction(id: _uniqueId, -amount, oldAmount: _availableAmount);
-                _availableAmount -= amount;
-                Console.WriteLine("withdrawn amount: {0}", amount);
-                _bankTransactions.Add(transaction.GetTransactionString());
-                _uniqueId++;
-                return true;
+                return new KeyValuePair<int, string>(0,"Request approved - no overdraft needed");
             }
-            return false;
+            else
+            {
+                BankTransaction transaction = new BankTransaction(id: _uniqueId, -amount, oldAmount: _availableAmount);
+                _overdraftRequestsList.Add(transaction.GetTransaction());
+                _uniqueId++;
+                return new KeyValuePair<int, string>(transaction.Id, "Request is pending");
+            }
+            
         }
+        public string CheckTransactionStatus(int id)
+        {
+            List<Transaction> transactions = new List<Transaction>();
+            foreach(Transaction t in _bankTransactions) { if(t.TransactionId == id) { 
+                return ($"TransactionId: {id}, Transaction status: {t.TransactionStatus}. New Balance: {t.Balance}");
+                }
+            }
+           
+                
+             if(transactions.Count == 0)
+            {
+                foreach (Transaction t in _overdraftRequestsList) { if (t.TransactionId == id) { return ($"TransactionId:{id}, Overdraftrequest Status: {t.TransactionStatus}"); } }
+                if (transactions.Count != 0)
+                {
+                    
+                }
+            }
+             return "Id not found"; 
+
+        }
+        
+
 
         protected void SetType(string type) { _type = type; }
 
@@ -54,15 +96,14 @@ namespace Boolean.CSharp.Main
 
             if (_bankTransactions.Count > 0)
             {
-                foreach(string[] transaction in _bankTransactions)
+                foreach(Transaction transaction in _bankTransactions)
                 {
-                    if (transaction[2] == "credit")
+                    if (transaction.TransactionType == "credit")
                     {
-                        newBalance += decimal.Parse(transaction[3]);
-                    }
-                    if (transaction[2] == "debit")
+                        newBalance += transaction.TransactionAmount;
+                    }else if(transaction.TransactionType == "debit")
                     {
-                        newBalance -= decimal.Parse(transaction[3]);
+                        newBalance -= transaction.TransactionAmount;
                     }
                 }
             }
@@ -71,37 +112,59 @@ namespace Boolean.CSharp.Main
         }
         public bool GenerateBankStatement()
         {
-            _bankTransactions.Reverse();
-                string TransactionId = "\nId";
+            
+            _bankTransactions.Sort((a, b) => DateTime.Compare(a.Date, b.Date));
+
+            string TransactionId = "Id";
                 string Date = "Date";
                 string Credit = "Credit";
                 string Debit = "Debit";
                 string Balance = "Balance";
 
-                Console.WriteLine("{0,-5}\t|| {1,-10} || {2,-6}\t|| {3,-6} || {4}", TransactionId,Date,Credit,Debit,Balance);
-                foreach(string[] transaction in _bankTransactions)
+                Console.WriteLine("\n{0,-5}\t|| {1,-10} || {2,-6}\t|| {3,-6} || {4}", TransactionId,Date,Credit,Debit,Balance);
+                foreach(Transaction transaction in _bankTransactions)
                 {
-                    TransactionId = transaction[0];
-                    Date = transaction[1];
-                    if (transaction[2] == "credit")
+                    TransactionId = transaction.TransactionId.ToString();
+                    Date = transaction.Date.ToString().Substring(0,10);
+                    if (transaction.TransactionType == "credit")
                     {
-                        Credit = transaction[3];
+                        Credit = transaction.TransactionAmount.ToString();
                         Debit = " ";
-                    }else if (transaction[2] == "debit")
+                    }else if (transaction.TransactionType == "debit")
                     {
-                        Debit = transaction[3];
+                        Debit = transaction.TransactionAmount.ToString();
                         Credit = " ";
                     }
-                    Balance = transaction[4];
+                    Balance = transaction.Balance.ToString();
                 Console.WriteLine("{0,-5}\t|| {1,-10} || {2,-6}\t|| {3,-6} || {4}", TransactionId, Date, Credit, Debit, Balance);
 
             }
             return true;
         }
-       
-        public string Type { get => _type; }
+
+        public void SortTransactionList(List<Transaction> list)
+        {
+            foreach(Transaction transaction in list)
+            {
+                if(transaction.TransactionStatus == Status.approved.ToString())
+                {
+                    
+                        _availableAmount -= transaction.TransactionAmount;
+                                     
+                    _bankTransactions.Add(transaction);
+                    _overdraftRequestsList.Remove(transaction);
+                }
+                
+            }
+        }
+
+        public string Type { get => _type; set => _type = value; }
         public decimal Balance { get => _availableAmount; set => _availableAmount=value; }
         public int Id { get =>  _id; set => _id = value;}
-        public List<string[]> BankTransactions { get => _bankTransactions; }
+        public List<Transaction> BankTransactions { get => _bankTransactions; }
+        public List<Transaction> OverdraftRequests { get => _overdraftRequestsList; }
+        
+
+       
     }
 }

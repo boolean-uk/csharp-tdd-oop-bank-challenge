@@ -39,11 +39,11 @@ namespace Boolean.CSharp.Main
             return UniqueId;
         }
 
-        public bool AddNewLocation(Enum name)
+        public bool AddNewLocation(Enum location)
         {
-            if(Enum.IsDefined(typeof(EBranches),name)) { 
-            Branch branch = new Branch(name);
-            AllBranches.Add(branch);
+            if(Enum.IsDefined(typeof(Location), location)) {
+                Branch branch = new Branch(location);
+                AllBranches.Add(branch);
                 
                 return true;
            }

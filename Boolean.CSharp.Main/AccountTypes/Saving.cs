@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main.AccountTypes
 {
-    public class Saving : Account
+    public class Saving : Account,IAccount
     {
         public Saving()
         {
             SetType("saving");
         }
+
     }
 }
