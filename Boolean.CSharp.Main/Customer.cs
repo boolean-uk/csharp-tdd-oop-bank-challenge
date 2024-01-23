@@ -41,7 +41,6 @@ namespace Boolean.CSharp.Main
                 }
             });
         }
-      
 
         public List<Account> Accounts { get { return _accounts;  } }
         public string Name { get { return _name;} }

@@ -8,7 +8,7 @@ using Boolean.CSharp.Main.Interfaces;
 
 namespace Boolean.CSharp.Main
 {
-    public abstract class Account
+    public abstract class Account 
     {
         private double _balance = 0;
         private Branch _branch;
@@ -25,7 +25,7 @@ namespace Boolean.CSharp.Main
             _balance = transaction?.Balance ?? 0;
             return _balance;
         }
-        
+
         public void Deposit(double amount)
         {
             double oldBalance = _balance;
@@ -40,6 +40,11 @@ namespace Boolean.CSharp.Main
             _balance = _balance - amount;
             Transaction Transaction = new Transaction(_balance, amount, oldBalance, TransactionType.Debit);
             _transactions.Add(Transaction);
+        }
+
+        public bool RequestOverdraft(double balance)
+        {
+            throw new NotImplementedException();
         }
 
         public double Balance => GetBalance();

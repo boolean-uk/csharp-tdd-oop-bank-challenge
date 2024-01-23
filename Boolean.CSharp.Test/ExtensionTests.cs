@@ -25,17 +25,6 @@ namespace Boolean.CSharp.Test
             Assert.That(current.Balance, Is.EqualTo(200d));
         }
         [Test]
-        public void ShouldReturnNegativeValue()
-        {
-            Customer c = new Customer(1, "Elsa");
-            Current current = new Current();
-            c.AddAccount(current);
-            current.WithDraw(100);
-            current.WithDraw(100);
-
-            Assert.That(current.Balance, Is.EqualTo(-200d));
-        }
-        [Test]
         public void ShouldReturnZero()
         {
             Customer c = new Customer(1, "Elsa");
@@ -43,9 +32,22 @@ namespace Boolean.CSharp.Test
             c.AddAccount(current);
             Assert.That(current.Balance, Is.EqualTo(0));
         }
-        [Test]
-        public void test(){
 
+        // Req for overdraft.
+        // - Connected to the current account which i believe is the one that gets the salary
+        // - Should have a maximum limit
+        // - Limit be based on monthly salary
+        // - Should be activated or deactivated
+        [Test]
+        public void ShouldRequestOverdraft()
+        {
+            Customer c = new Customer(1, "Elsa");
+            Current current = new Current();
+            c.AddAccount(current);
+            bool accepted = current.RequestOverdraft(current.Balance);
+
+
+            Assert.That(accepted, Is.True);
         }
     }
 }
