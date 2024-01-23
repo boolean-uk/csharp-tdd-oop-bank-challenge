@@ -13,21 +13,21 @@ namespace Boolean.CSharp.Main
     {
         //Properties
         public readonly string date;
-        public readonly float ammount;
+        public readonly float amount;
         public readonly string transactionType;
         public readonly string transactionId;
 
         //Constructor
-        public Transaction(float ammount) 
+        public Transaction(float amount) 
         {
-            //Set date, ammount & ID
+            //Set date, amount & ID
             this.date = DateTime.Now.ToString("dd/MM/yyyy");
-            this.ammount = ammount;
+            this.amount = amount;
             this.transactionId = Guid.NewGuid().ToString();
 
             //transactionType is set automatically, in regards to which
             //amount you want to deposit/withdraw
-            if (ammount >= 0)
+            if (amount >= 0)
             {
                 this.transactionType = "Deposit";
             }
@@ -44,9 +44,9 @@ namespace Boolean.CSharp.Main
     {
         //Properties
         public float currentBalance { get; private set; }
-        public readonly List<float> balanceList;
+        public List<float> balanceList { get; private set; }
         public List<Transaction> transactionsList { get; private set; }
-        public readonly string AccountID;
+        public string AccountID { get; private set; }
 
         //Constructor, by default balance is 0.0,
         //transactionslists are empty
@@ -60,42 +60,38 @@ namespace Boolean.CSharp.Main
         }
 
         //MakeTransactionfunction
-        public void MakeTransaction(float ammount)
+        public void MakeTransaction(float amount)
         {
-            //check if there is enough money, and ammount in transaction is'nt zero
-            //Probably there is much easier way to design this lol
+            //check if there is enough money, and amount in transaction is'nt zero
+            //Created a more simple if statement here
 
-            //Check ammount != 0.0
-            if (ammount != 0.0f) 
+            //Check amount != 0.0
+            if (amount == 0.0f)
             {
-                //if ammount is negative and you want to make withdraw
-                if (ammount < 0.0f) 
-                {
-                    //check if it's possible to withdraw given ammount
-                    if (currentBalance + ammount >= 0)
-                    {
-                        //Register transaction
-                        Transaction currentTransaction = new Transaction(ammount);
-                        transactionsList.Add(currentTransaction);
-                        currentBalance += ammount;
-                        balanceList.Add(currentBalance);
-                    }
-                }
-                //if you make deposit
-                else
-                {
-                    //Register transaction
-                    Transaction currentTransaction = new Transaction(ammount);
-                    transactionsList.Add(currentTransaction);
-                    currentBalance += ammount;
-                    balanceList.Add(currentBalance);
+                return;
+            }
 
-                }
+            //Withdrawal, check if there is enough money to withdraw given amount
+            if (amount < 0.0f && currentBalance + amount >= 0.0f) 
+            {
+                Transaction currentTransaction = new Transaction(amount);
+                transactionsList.Add(currentTransaction);
+                currentBalance += amount;
+                balanceList.Add(currentBalance);
+            }
+
+            //Deposit
+            else if (amount > 0.0f) 
+            {
+                Transaction currentTransaction = new Transaction(amount);
+                transactionsList.Add(currentTransaction);
+                currentBalance += amount;
+                balanceList.Add(currentBalance);
             }
         }
 
-        //getBankStatement
-        public string getBankStatement() 
+        //GetBankStatement
+        public string GetBankStatement() 
         {
             //Empty string to begin with
             string bankStatement = string.Empty;
@@ -107,10 +103,10 @@ namespace Boolean.CSharp.Main
                 //Add all info to the string (bankStatement)
                 string date = transactionsList[i].date;
                 string transactionType = transactionsList[i].transactionType;
-                string ammount = transactionsList[i].ammount.ToString();
+                string amount = transactionsList[i].amount.ToString();
                 string balance = balanceList[i].ToString();
 
-                bankStatement = bankStatement + "\nDate: " + date + "|| TransactionType: " + transactionType + ": " + ammount + "|| Balance: " + balance;
+                bankStatement = bankStatement + "\nDate: " + date + "|| TransactionType: " + transactionType + ": " + amount + "|| Balance: " + balance;
             }
             return bankStatement;
         }

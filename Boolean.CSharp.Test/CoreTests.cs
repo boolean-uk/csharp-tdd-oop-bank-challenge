@@ -11,14 +11,14 @@ namespace Boolean.CSharp.Test
         private CurrentAccount CurrentAccount;
         private SavingsAccount SavingsAccount;
 
-        //trying to create deposit transactions with different ammounts
+        //trying to create deposit transactions with different amounts
         [TestCase(0.1f)]
         [TestCase(100.34f)]
         [TestCase(0.0f)]
-        public void CanCreateTransactions(float ammount)
+        public void CanCreateTransactions(float amount)
         {
-            Transaction transaction = new Transaction(ammount);
-            Assert.AreEqual(ammount, transaction.ammount);
+            Transaction transaction = new Transaction(amount);
+            Assert.AreEqual(amount, transaction.amount);
             Assert.AreEqual("Deposit", transaction.transactionType);
             Assert.AreEqual(DateTime.Now.ToString("dd/MM/yyyy"), transaction.date);
         }
@@ -26,10 +26,10 @@ namespace Boolean.CSharp.Test
         //trying to create withdrawal transactions
         [TestCase(-5.0f)]
         [TestCase(-500.05f)]
-        public void CanCreateWithdrawTransactions(float ammount)
+        public void CanCreateWithdrawTransactions(float amount)
         {
-            Transaction transaction = new Transaction(ammount);
-            Assert.AreEqual(ammount, transaction.ammount);
+            Transaction transaction = new Transaction(amount);
+            Assert.AreEqual(amount, transaction.amount);
             Assert.AreEqual("Withdraw", transaction.transactionType);
             Assert.AreEqual(DateTime.Now.ToString("dd/MM/yyyy"), transaction.date);
 
@@ -49,12 +49,12 @@ namespace Boolean.CSharp.Test
             Assert.IsNotNull(bankAccount.AccountID);
 
             
-            //Make transaction with zero ammount
+            //Make transaction with zero amount
             bankAccount.MakeTransaction(0.0f);
 
             //Make sure the settings are still default
             //nothing should happen when try to make transaction with 
-            // ammount of 0.0
+            // amount of 0.0
             Assert.AreEqual(bankAccount.currentBalance, 0.0f);
             Assert.AreEqual(bankAccount.balanceList.Count, 0);
             Assert.AreEqual(bankAccount.transactionsList.Count, 0);
@@ -87,23 +87,23 @@ namespace Boolean.CSharp.Test
             BankAccount bankAccount = new BankAccount();
 
             //Expected outputs
-            string expectedString1000 = "\nDate: 22/01/2024|| TransactionType: Deposit: 1000|| Balance: 1000";
+            string expectedString1000 = "\nDate: 23/01/2024|| TransactionType: Deposit: 1000|| Balance: 1000";
 
-            string expectedString500 = "\nDate: 22/01/2024|| TransactionType: Withdraw: -500|| Balance: 500";
+            string expectedString500 = "\nDate: 23/01/2024|| TransactionType: Withdraw: -500|| Balance: 500";
 
             
             bankAccount.MakeTransaction(1000.0f); // Deposit
 
-            Assert.AreEqual(expectedString1000, bankAccount.getBankStatement());
+            Assert.AreEqual(expectedString1000, bankAccount.GetBankStatement());
 
             bankAccount.MakeTransaction(-500.0f); // Withdrawal
 
-            Assert.AreEqual((expectedString1000 + expectedString500), bankAccount.getBankStatement());
+            Assert.AreEqual((expectedString1000 + expectedString500), bankAccount.GetBankStatement());
 
             bankAccount.MakeTransaction(-1000.0f); // Withdrawal over limit
 
             //should stay the same
-            Assert.AreEqual((expectedString1000 + expectedString500), bankAccount.getBankStatement());
+            Assert.AreEqual((expectedString1000 + expectedString500), bankAccount.GetBankStatement());
         }
 
         //Not to much functionality to test on the classes currentAccount
