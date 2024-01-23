@@ -6,18 +6,42 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class CoreTests
     {
-        private Core _core;
 
-        public CoreTests()
+
+        [Test]
+        public void DepositTest()
         {
-            _core = new Core();
+            BankAccount userAccount = new CurrentAccount("1");
+            userAccount.Deposit(1000);
+            Assert.AreEqual(1000, userAccount.Balance);
 
         }
 
         [Test]
-        public void TestQuestion1()
+        public void WithdrawTest()
         {
+            BankAccount userAccount = new CurrentAccount("1");
+            userAccount.Deposit(3000);
+            userAccount.Withdraw(1000);
+            Assert.AreEqual(2000, userAccount.Balance);
+        }
 
+        [Test]
+        public void InvalidWithdrawTest()
+        {
+            BankAccount userAccount = new CurrentAccount("1");
+            userAccount.Deposit(1000);
+            userAccount.Withdraw(2000);
+            Assert.AreEqual(1000, userAccount.Balance);
+        }
+
+        public void AccountTypeShouldBeSavingsTest()
+        {
+            
+            BankAccount userAccount = new SavingsAccount("2");
+
+           
+            Assert.AreEqual(AccountType.Savings, userAccount.Type);
         }
 
     }
