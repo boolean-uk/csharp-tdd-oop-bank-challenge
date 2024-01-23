@@ -14,6 +14,5 @@ namespace Boolean.CSharp.Main.Accounts
         public AccountCurrent(ICustomer customer, Branch branch) : base(customer, branch)
         {
         }
-
     }
 }

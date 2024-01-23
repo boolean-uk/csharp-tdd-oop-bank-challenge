@@ -28,11 +28,11 @@ namespace Boolean.CSharp.Main.Classes
         public decimal NewBalance { get => _newBalance; set => _newBalance = value; }
         public decimal OldBalance { get => _oldBalance; set => _oldBalance = value; }
 
-        public Transaction(decimal amount, decimal oldBalance, TransactionType type)
+        public Transaction(decimal amount, decimal oldBalance, TransactionStatus status, TransactionType type)
         {
             _id = Guid.NewGuid();
             _type = type;
-            Status = TransactionStatus.Approved;
+            Status = status;
             _date = DateTime.Now;
             Amount = amount;
             OldBalance = oldBalance;

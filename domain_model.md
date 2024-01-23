@@ -24,7 +24,7 @@ I want to deposit and withdraw funds.
 |                      | Customer _customer                  |                                                        | 						                           |           |
 |                      |                                     | decimal Deposit(double amount)                         | 						                           | double    |
 |                      |                                     | decimal Withdraw(double amount)                        | 						                           | double    |
-| `AccountCurrent`	   |                                     |                                                        | 						                           |           |
+| `AccountCurrent`	   |                                     | void RequestOverdraft(double amount)                   | 						                           |           |
 | `AccountSavings`     |                                     |                                                        | 						                           |           |
 | `Customer`	       |                                     |                                                        | 						                           |           |
 | `ITransaction`	   |  Guid.Id                            |                                                        | 						                           |           |

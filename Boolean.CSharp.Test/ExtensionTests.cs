@@ -99,12 +99,54 @@ namespace Boolean.CSharp.Test
             currentAccount.Deposit(1000);
 
             //Act
-            currentAccount.RequestOverdraft(2000);
-            decimal expectedResult = currentAccount.GetBalance();
-            decimal actualResult = -1000;
+            currentAccount.RequestOverdraft(2000); //testbool approved the request. Prolly bad programming habit, but I like to live dangerously
+            int expectedResult = currentAccount.OverdraftRequests.Count;
+            int actualResult = 1;
 
             //Assert
             Assert.That(expectedResult, Is.EqualTo(actualResult));
+        }
+
+        [Test]
+        public void Test_05_Approve_OverdraftRequest()
+        {
+            //Arrange
+            Customer customer = new Customer("Andreas Lauvhjell");
+            BankManager manager = new BankManager("Scrooge McDuck");
+            AccountCurrent currentAccount = new AccountCurrent(customer, Branch.Retail);
+            currentAccount.Deposit(1000);
+            currentAccount.RequestOverdraft(-2000);
+
+            //
+            string expectedResultString = manager.ManageOverdraftRequest(currentAccount, true);
+            string actualResultString = "The overdraft was approved.";
+            decimal expectedResultAmount = currentAccount.GetBalance();
+            decimal actualResultAmount = -1000;
+
+            //Assert
+            Assert.That(expectedResultAmount, Is.EqualTo(actualResultAmount));
+            Assert.That(expectedResultString, Is.EqualTo(actualResultString));
+        }
+
+        [Test]
+        public void Test_05_Reject_OverdraftRequest()
+        {
+            //Arrange
+            Customer customer = new Customer("Andreas Lauvhjell");
+            BankManager manager = new BankManager("Scrooge McDuck");
+            AccountCurrent currentAccount = new AccountCurrent(customer, Branch.Retail);
+            currentAccount.Deposit(1000);
+            currentAccount.RequestOverdraft(-2000);
+
+            //
+            string expectedResultString = manager.ManageOverdraftRequest(currentAccount, false);
+            string actualResultString = "The overdraft was rejected.";
+            decimal expectedResultAmount = currentAccount.GetBalance();
+            decimal actualResultAmount = 1000;
+
+            //Assert
+            Assert.That(expectedResultAmount, Is.EqualTo(actualResultAmount));
+            Assert.That(expectedResultString, Is.EqualTo(actualResultString));
         }
     }
 }
