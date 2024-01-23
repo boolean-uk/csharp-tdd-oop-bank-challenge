@@ -1,0 +1,8 @@
+| Superclass  | Subclass       | members                                                     | method                                                                   | scenario                              | output |
+|-------------|----------------|-------------------------------------------------------------|--------------------------------------------------------------------------|---------------------------------------|--------|
+| Transaction |                | double Amount, TransactionType type, double oldBalance      | Transaction(double Amount, TransactionType type, double oldBalance)      | Can be only be positive               |        |
+| Account     | Current/Saving | string Name, double Balance, List<ITransaction> Transactions | CreateAccount(name, branch)                                              | name is longer than 0                 |        |
+|             |                |                                                             | PrintTransactions()                                                      | TransactionList is printed            |        |
+|             |                |                                                             | MakeTransactions(double amount, TransactionType type, double oldBalance) | Positive number is input              | TRUE   |
+|             |                |                                                             |                                                                          | Negative number is input              | FALSE  |
+|             |                |                                                             |                                                                          | Amount is bigger than balance (debit) | FALSE  |
