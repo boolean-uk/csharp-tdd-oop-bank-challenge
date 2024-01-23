@@ -14,9 +14,8 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestManagerValues()
         {
-            Manager manager = new Manager(0, "Kristian");
+            Manager manager = new Manager("Kristian");
 
-            Assert.That(manager.Id, Is.EqualTo(0));
             Assert.That(manager.Name, Is.EqualTo("Kristian"));
         }
 
@@ -31,8 +30,8 @@ namespace Boolean.CSharp.Test
                 overdraft, overdraft1
             };
 
-            Manager manager = new Manager(0, "Kristian");
-            manager.UpdateOverdraftRequests(requests);
+            Manager manager = new Manager("Kristian");
+            manager.OverdraftRequests = requests;
 
             Assert.That(manager.OverdraftRequests.Count, Is.EqualTo(2));
         }
@@ -48,8 +47,8 @@ namespace Boolean.CSharp.Test
                 overdraft, overdraft1
             };
 
-            Manager manager = new Manager(0, "Kristian");
-            manager.UpdateOverdraftRequests(requests);
+            Manager manager = new Manager("Kristian");
+            manager.OverdraftRequests = requests;
             manager.ApproveAllOverdraftRequests();
 
             Assert.That(manager.OverdraftRequests[0].Status, Is.EqualTo(OverdraftStatus.Approved));
@@ -67,8 +66,8 @@ namespace Boolean.CSharp.Test
                 overdraft, overdraft1
             };
 
-            Manager manager = new Manager(0, "Kristian");
-            manager.UpdateOverdraftRequests(requests);
+            Manager manager = new Manager("Kristian");
+            manager.OverdraftRequests = requests;
             manager.ApproveOverdraftRequestsAmount(100);
 
             Assert.That(manager.OverdraftRequests[0].Status, Is.EqualTo(OverdraftStatus.Approved));
@@ -86,8 +85,8 @@ namespace Boolean.CSharp.Test
                 overdraft, overdraft1
             };
 
-            Manager manager = new Manager(0, "Kristian");
-            manager.UpdateOverdraftRequests(requests);
+            Manager manager = new Manager("Kristian");
+            manager.OverdraftRequests = requests;
             manager.ApproveOverdraftRequestsId(1);
 
             Assert.That(manager.OverdraftRequests[0].Status, Is.EqualTo(OverdraftStatus.Pending));
@@ -105,8 +104,8 @@ namespace Boolean.CSharp.Test
                 overdraft, overdraft1
             };
 
-            Manager manager = new Manager(0, "Kristian");
-            manager.UpdateOverdraftRequests(requests);
+            Manager manager = new Manager("Kristian");
+            manager.OverdraftRequests = requests;
             manager.RejectAllOverdraftRequests();
 
             Assert.That(manager.OverdraftRequests[0].Status, Is.EqualTo(OverdraftStatus.Rejected));
@@ -124,9 +123,9 @@ namespace Boolean.CSharp.Test
                 overdraft, overdraft1
             };
 
-            Manager manager = new Manager(0, "Kristian");
-            manager.UpdateOverdraftRequests(requests);
-            manager.RejectOverdraftRequestsAmount(100);
+            Manager manager = new Manager("Kristian");
+            manager.OverdraftRequests = requests;
+            manager.RejectOverdraftRequestsAmount(101);
 
             Assert.That(manager.OverdraftRequests[0].Status, Is.EqualTo(OverdraftStatus.Pending));
             Assert.That(manager.OverdraftRequests[1].Status, Is.EqualTo(OverdraftStatus.Rejected));
@@ -143,12 +142,22 @@ namespace Boolean.CSharp.Test
                 overdraft, overdraft1
             };
 
-            Manager manager = new Manager(0, "Kristian");
-            manager.UpdateOverdraftRequests(requests);
+            Manager manager = new Manager("Kristian");
+            manager.OverdraftRequests = requests;
             manager.RejectOverdraftRequestsId(1);
 
             Assert.That(manager.OverdraftRequests[0].Status, Is.EqualTo(OverdraftStatus.Pending));
             Assert.That(manager.OverdraftRequests[1].Status, Is.EqualTo(OverdraftStatus.Rejected));
+        }
+
+        [Test]
+        public void AddOverdraftRequest()
+        {
+            OverdraftRequest overdraft = new OverdraftRequest(0, 100);
+            Manager manager = new Manager("Kristian");
+            manager.AddOverdraftRequest(overdraft);
+
+            Assert.That(manager.OverdraftRequests.Count, Is.EqualTo(1));
         }
     }
 }

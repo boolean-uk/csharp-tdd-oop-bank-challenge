@@ -23,21 +23,19 @@ namespace Boolean.CSharp.Main
 
         public void Deposit(double amount)
         {
-            Transaction transaction = new Transaction(amount, TransactionType.Deposit, GetBalance());
-            Transactions.Add(transaction);
+            Transactions.Add(new Transaction(amount, TransactionType.Deposit, GetBalance()));
         }
         
-        public bool Withdraw(double amount)
+        public bool Withdraw(double amount, double overdraftAmount)
         {
             Transaction transaction = new Transaction(amount, TransactionType.Withdrawal, GetBalance());
-            if (transaction.NewBalance < 0)
+            if (transaction.NewBalance < 0 && transaction.NewBalance < 0-overdraftAmount)
             {
                 Console.WriteLine("The balance is too low for the withdrawal");
                 return false;
             }
 
             Transactions.Add(transaction);
-
             return true;
         }
 

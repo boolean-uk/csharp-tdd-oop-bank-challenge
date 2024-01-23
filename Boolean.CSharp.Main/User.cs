@@ -9,6 +9,7 @@ namespace Boolean.CSharp.Main
     {
         private int _Id;
         private string _name;
+        private double _overdraftAmount;
         private BankLocation _location;
         private IAccount _account;
         private IAccount _savingsAccount;
@@ -18,6 +19,7 @@ namespace Boolean.CSharp.Main
             _Id = Id;
             _name = name;
             _location = location;
+            _overdraftAmount = 0;
             _account = new CurrentAccount(this);
             _savingsAccount = new SavingsAccount(this);
         }
@@ -25,6 +27,7 @@ namespace Boolean.CSharp.Main
         public int Id { get => _Id; }
         public string Name { get => _name; }
         public BankLocation Location { get => _location; set => _location = value; }
+        public double OverdraftAmount { get => _overdraftAmount; set => _overdraftAmount = value; }
         public IAccount Account { get => _account; }
         public IAccount SavingsAccount { get => _savingsAccount; }
 
@@ -35,7 +38,7 @@ namespace Boolean.CSharp.Main
 
         public bool Withdraw(double balance, IAccount account)
         {
-            return account.Withdraw(balance);
+            return account.Withdraw(balance, OverdraftAmount);
         }
 
         public double GetBalance(IAccount account)

@@ -8,52 +8,84 @@ namespace Boolean.CSharp.Main
 {
     public class Manager
     {
-        private int _id;
         private string _name;
         private List<OverdraftRequest> _overdraftRequests;
 
-        public Manager(int id, string name) 
+        public Manager(string name)
         {
-            throw new NotImplementedException();
+            _name = name;
+            _overdraftRequests = new List<OverdraftRequest>();
         }
 
-        public int Id { get => _id; }
         public string Name { get => _name; }
-        public List<OverdraftRequest> OverdraftRequests { get => _overdraftRequests; }
+        public List<OverdraftRequest> OverdraftRequests { get => _overdraftRequests; set => _overdraftRequests = value; }
 
-        public void UpdateOverdraftRequests(List<OverdraftRequest> overdraftRequests)
+        public void AddOverdraftRequest(OverdraftRequest overdraft)
         {
-            throw new NotImplementedException();
+            OverdraftRequests.Add(overdraft);
         }
 
-        public void ApproveAllOverdraftRequests()
+        public List<OverdraftRequest> ApproveAllOverdraftRequests()
         {
-            throw new NotImplementedException();
+            List<OverdraftRequest> newlyApproved = new List<OverdraftRequest>();
+            foreach (var overdraft in OverdraftRequests.Where(o => o.Status == OverdraftStatus.Pending))
+            {
+                overdraft.Status = OverdraftStatus.Approved;
+                newlyApproved.Add(overdraft);
+            }
+            return newlyApproved;
         }
 
-        public void ApproveOverdraftRequestsAmount(double amount)
+        public List<OverdraftRequest> ApproveOverdraftRequestsAmount(double amount)
         {
-            throw new NotImplementedException();
+            List<OverdraftRequest> newlyApproved = new List<OverdraftRequest>();
+            var pendingOverdrafts = OverdraftRequests.Where(o => o.Status == OverdraftStatus.Pending);
+            foreach (var overdraft in pendingOverdrafts.Where(o => o.Amount <= amount))
+            {
+                overdraft.Status = OverdraftStatus.Approved;
+                newlyApproved.Add(overdraft);
+            }
+            return newlyApproved;
         }
 
-        public void ApproveOverdraftRequestsId(int id)
+        public List<OverdraftRequest> ApproveOverdraftRequestsId(int id)
         {
-            throw new NotImplementedException();
+            List<OverdraftRequest> newlyApproved = new List<OverdraftRequest>();
+            var pendingOverdrafts = OverdraftRequests.Where(o => o.Status == OverdraftStatus.Pending);
+            foreach (var overdraft in pendingOverdrafts.Where(o => o.Id == id))
+            {
+                overdraft.Status = OverdraftStatus.Approved;
+                newlyApproved.Add(overdraft);
+            }
+            return newlyApproved;
+
         }
 
         public void RejectAllOverdraftRequests()
         {
-            throw new NotImplementedException();
+            foreach (var overdraft in OverdraftRequests.Where(o => o.Status == OverdraftStatus.Pending))
+            {
+                overdraft.Status = OverdraftStatus.Rejected;
+            }
         }
 
         public void RejectOverdraftRequestsAmount(double amount)
         {
-            throw new NotImplementedException();
+            var pendingOverdrafts = OverdraftRequests.Where(o => o.Status == OverdraftStatus.Pending);
+            foreach (var overdraft in pendingOverdrafts.Where(o => o.Amount >= amount))
+            {
+                overdraft.Status = OverdraftStatus.Rejected;
+            }
+
         }
 
         public void RejectOverdraftRequestsId(int id)
         {
-            throw new NotImplementedException();
+            var pendingOverdrafts = OverdraftRequests.Where(o => o.Status == OverdraftStatus.Pending);
+            foreach (var overdraft in pendingOverdrafts.Where(o => o.Id == id))
+            {
+                overdraft.Status = OverdraftStatus.Rejected;
+            }
         }
     }
 }

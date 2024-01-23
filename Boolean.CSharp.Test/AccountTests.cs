@@ -53,7 +53,7 @@ namespace Boolean.CSharp.Test
             User user = new User(0, "Kristian", BankLocation.Stavanger);
             Account account = new SavingsAccount(user);
 
-            Assert.That(account.Withdraw(100), Is.False);
+            Assert.That(account.Withdraw(100, 0), Is.False);
             Assert.That(account.GetBalance(), Is.EqualTo(0));
             Assert.That(account.Transactions.Count, Is.EqualTo(0));
             Assert.That(account.Owner, Is.EqualTo(user));
@@ -67,7 +67,7 @@ namespace Boolean.CSharp.Test
 
             account.Deposit(200);
 
-            Assert.That(account.Withdraw(100), Is.True);
+            Assert.That(account.Withdraw(100, 0), Is.True);
             Assert.That(account.GetBalance(), Is.EqualTo(100));
             Assert.That(account.Transactions.Count, Is.EqualTo((2)));
             Assert.That(account.Owner, Is.EqualTo(user));
@@ -84,6 +84,21 @@ namespace Boolean.CSharp.Test
             Assert.That(account.GetBalance(), Is.EqualTo(100));
             Assert.That(account.Transactions.Count, Is.EqualTo(1));
             Assert.That(account.Transactions[0].Amount, Is.EqualTo(100));
+        }
+
+        [Test]
+        public void TestOverdraft()
+        {
+            Bank bank = new Bank(BankLocation.Stavanger);
+            User user = bank.CreateUser(0, "Kristian");
+
+            bank.GenerateOverdraftRequest(user, 100);
+            bank.ApproveAllOverdraftRequests();
+
+            user.Withdraw(100, user.Account);
+
+            Assert.That(user.OverdraftAmount, Is.EqualTo(100));
+            Assert.That(user.Account.GetBalance(), Is.EqualTo(-100));
         }
     }
 }

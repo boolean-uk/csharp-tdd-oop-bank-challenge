@@ -47,7 +47,7 @@ namespace Boolean.CSharp.Test
             User user = new User(0, "Kristian", BankLocation.Stavanger);
 
             user.Deposit(100, user.Account);
-            
+
             Assert.That(user.Withdraw(50, user.Account), Is.True);
             Assert.That(user.Account.GetBalance(), Is.EqualTo(50));
 

@@ -13,7 +13,7 @@ namespace Boolean.CSharp.Main
 
         void Deposit(double amount);
 
-        bool Withdraw(double amount);
+        bool Withdraw(double amount, double overdraftAmount);
 
         double GetBalance();
     }
