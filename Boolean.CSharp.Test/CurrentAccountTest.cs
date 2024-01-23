@@ -40,5 +40,20 @@ namespace Boolean.CSharp.Test
 
         }
 
+        [Test]
+        public void GenerateCurrentAccountStatement()
+        {
+            //Arrange
+            CurrentAccount currentAccount = new CurrentAccount();
+            currentAccount.Deposit(1000);
+            currentAccount.Withdraw(500);
+
+            //Act
+            string statement = currentAccount.GenerateStatement();
+
+            // Assert
+            Assert.AreEqual("CurrentAccount Statement", statement);
+
+        }
     }
 }
