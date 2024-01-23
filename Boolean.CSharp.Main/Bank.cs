@@ -6,12 +6,15 @@ public class Bank
     private string _regNr;
     private List<BankBranch> _banks;
     private Manager _manager;
-    public Bank(string name, string regNr, Manager manager)
+    private IMessage _messenger;
+
+    public Bank(string name, string regNr, Manager manager, IMessage messenger)
     {
         _name = name;
         _regNr = regNr;
         _banks = new List<BankBranch>();
         _manager = manager;
+        _messenger = messenger;
     }
 
     public string Name { get { return _name; } }
@@ -32,7 +35,7 @@ public class Bank
         {
             return false;
         }
-        _banks.Add(new BankBranch(branchName.Trim(), _regNr, _manager));
+        _banks.Add(new BankBranch(branchName.Trim(), _regNr, _manager, _messenger));
         return true;
     }
 }

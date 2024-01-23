@@ -37,3 +37,4 @@ I want statements to be sent as messages to my phone.
 | `OverdraftRequest` | string _status                            | `grantRequest()`                                                  |                              |         |
 |                    | string _status                            | `denyRequest()`                                                   |                              |         |
 | `Manager`          | List<OverdraftRequest> _overdraftRequests | `addOverdraftRequest(OverdraftRequest request)`                   |                              |         |
+| `IMessage`         |                                           | `SendMessage(string message)`                                     |                              |         |

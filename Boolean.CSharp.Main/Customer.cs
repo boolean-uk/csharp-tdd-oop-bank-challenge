@@ -6,15 +6,17 @@ public class Customer
     private string _customerNr;
     private string _bankNr;
     private Manager _manager;
+    private IMessage _messenger;
 
     private List<BankAccount> _accounts;
-    public Customer(string name, string customerNr, string bankNr, Manager manager)
+    public Customer(string name, string customerNr, string bankNr, Manager manager, IMessage messenger)
     {
         _name = name;
         _customerNr = customerNr;
         _bankNr = bankNr;
         _accounts = new List<BankAccount>();
         _manager = manager;
+        _messenger = messenger;
     }
 
     public string Name { get { return _name; } }
