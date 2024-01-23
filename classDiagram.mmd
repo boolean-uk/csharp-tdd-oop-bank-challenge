@@ -1,0 +1,41 @@
+classDiagram
+
+    Customer <--> Account
+    Account <--> Transaction
+    Bank <--> Account
+    Account <|-- SavingsAccount :inherits
+    Account <|-- CurrentAccount : inherits
+
+    class Customer {
+        -List<Account> accounts
+        +Account createAccount(int accountNr)
+    }
+    class Bank{
+        -string branch
+        +float returnOverdraft()
+        +bool approveOverdraft()
+    }
+    class Account{
+        <<Abstract>>
+        -int accountNr
+        -float balance
+        -float overdraft
+        -List<Transaction> transactions
+        +float getTotal(List<Transaction> transactions)
+        +withdraw(int accountNr, float amount)
+        +deposit(int accountNr,float amount)
+        +float requestOverdraft(float reqOverdraft)
+        +printStatement(int accountNr)
+    }
+    class CurrentAccount{
+        
+    }
+    class SavingsAccount{
+        
+    }
+    class Transaction{
+        -float amount
+        -float newBalance
+        -string type
+        -DateTime timeStamp
+    }
