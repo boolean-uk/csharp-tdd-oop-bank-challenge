@@ -6,7 +6,7 @@ public class Extension
     private IMessage _messenger;
     public Extension()
     {
-        _messenger = new SmsSender();
+        _messenger = new ConsoleMessage();
         _bank = new Bank("", "1111", new Manager(), _messenger);
     }
     

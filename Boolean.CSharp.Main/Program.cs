@@ -21,3 +21,6 @@ extension.Bank.createBankBranch("Innlandet");
 extension.Bank.GetBankBranch("Innlandet").createCustomer("Gudbrand", "123456");
 extension.Bank.GetBankBranch("Innlandet").GetCustomerByNr("123456").createCurrentAccount("1");
 extension.Bank.GetBankBranch("Innlandet").GetCustomerByNr("123456").getAccountByNumber("12341234561").deposit(10000);
+
+IMessage sender = new SmsMessage();
+sender.sendMessage("This is a test");

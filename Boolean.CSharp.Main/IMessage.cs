@@ -2,5 +2,5 @@
 
 public interface IMessage
 {
-    public void SendMessage(string message);
+    public void sendMessage(string message);
 }

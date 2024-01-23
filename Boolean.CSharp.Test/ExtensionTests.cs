@@ -41,7 +41,7 @@ public class ExtensionTests
     public void createOverdraftRequestTest()
     {
         Manager manager = new Manager();
-        IMessage messenger = new SmsSender();
+        IMessage messenger = new SmsMessage();
         Customer customer = new Customer("Gudbrand", "123456", "1234", manager, messenger);
 
         customer.createCurrentAccount("1");
@@ -54,7 +54,7 @@ public class ExtensionTests
     public void grantRequestTest()
     {
         Manager manager = new Manager();
-        IMessage messenger = new SmsSender();
+        IMessage messenger = new SmsMessage();
         Customer customer = new Customer("Gudbrand", "123456", "1234", manager, messenger);
         customer.createCurrentAccount("1");
         BankAccount account = customer.getAccountByNumber("12341234561");
@@ -73,7 +73,7 @@ public class ExtensionTests
     public void denyRequestTest()
     {
         Manager manager = new Manager();
-        IMessage messenger = new SmsSender();
+        IMessage messenger = new SmsMessage();
         Customer customer = new Customer("Gudbrand", "123456", "1234", manager, messenger);
         customer.createCurrentAccount("2");
         BankAccount account = customer.getAccountByNumber("12341234562");

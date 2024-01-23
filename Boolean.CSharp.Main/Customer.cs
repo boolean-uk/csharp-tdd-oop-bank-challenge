@@ -72,4 +72,11 @@ public class Customer
             _manager.addOverdraftRequest(request);
         }
     }
+
+    public void sendBankStatementToMessage(string accountNumber)
+    {
+        BankAccount account = getAccountByNumber(accountNumber);
+
+        _messenger.sendMessage(account.generateBankStatement());
+    }
 }
