@@ -40,14 +40,18 @@ namespace Boolean.CSharp.Test
         [Test]
         public void AddTransaction()
         {
-            double amount = 10.99d;
+            double amount = 10.00d;
+            double amount2 = -10.00d;
             ITransaction transaction = new Transaction(amount, _currentAccount.GetBalance());
             _currentAccount.AddTransaction(transaction);
+            ITransaction transaction2 = new Transaction(amount, _currentAccount.GetBalance());
+            _currentAccount.AddTransaction(transaction2);
+            ITransaction transaction3 = new Transaction(amount2, _currentAccount.GetBalance());
+            _currentAccount.AddTransaction(transaction3);
 
             double actualBalance = _currentAccount.GetBalance();
-
+            
             Assert.That(amount, Is.EqualTo(actualBalance));
-
             
         }
 
