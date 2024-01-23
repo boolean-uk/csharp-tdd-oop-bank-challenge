@@ -23,5 +23,22 @@ namespace Boolean.CSharp.Test
             Assert.AreEqual(1000, currentAccount.GetBalance());
 
         }
+
+        [Test]
+        public void ClientMakesWithdrawal()
+        {
+            //Arrange
+            CurrentAccount currentAccount = new CurrentAccount();
+            currentAccount.Deposit(1000);
+
+            // Act
+            bool withdrawalResult = currentAccount.Withdraw(500);
+
+            // Assert
+            Assert.IsTrue(withdrawalResult);
+            Assert.AreEqual(500, currentAccount.GetBalance());
+
+        }
+
     }
 }

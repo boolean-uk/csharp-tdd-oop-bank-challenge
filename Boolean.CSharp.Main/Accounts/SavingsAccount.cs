@@ -8,7 +8,7 @@ namespace Boolean.CSharp.Main.Accounts
 {
     public class SavingsAccount : BankAccount
     {
-        public override string GenerateStatemenr()
+        public override string GenerateStatement()
         {
             throw new NotImplementedException();
         }

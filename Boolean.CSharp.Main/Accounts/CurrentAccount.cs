@@ -12,7 +12,7 @@ namespace Boolean.CSharp.Main.Accounts
 
         public CurrentAccount() : base() { }
 
-        public override string GenerateStatemenr()
+        public override string GenerateStatement()
         {
             throw new NotImplementedException();
         }

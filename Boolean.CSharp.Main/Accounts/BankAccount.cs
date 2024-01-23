@@ -43,7 +43,7 @@ namespace Boolean.CSharp.Main.Accounts
             return 0; // Return 0 if no transactions yet
         }
 
-        public abstract string GenerateStatemenr();
+        public abstract string GenerateStatement();
     }
 
 }
