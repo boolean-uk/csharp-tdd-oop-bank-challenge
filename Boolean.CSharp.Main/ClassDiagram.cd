@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Boolean.CSharp.Main.src.account.Account">
+    <Position X="9.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAEAAAgIEAAAAAAoAAAoEAAEAAAI=</HashCode>
+      <FileName>src\account\Account.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_branch" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="_overdrafts" />
+      <Field Name="_transactions" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Boolean.CSharp.Main.src.account.SavingsAccount" Collapsed="true">
+    <Position X="7" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\account\SavingsAccount.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Boolean.CSharp.Main.src.account.CurrentAccount" Collapsed="true">
+    <Position X="7" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\account\CurrentAccount.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Boolean.CSharp.Main.src.transaction.Overdraft">
+    <Position X="12.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEgAAAAEAAAgAAAAAAAAAACAAAAAAAAAAABAAAAAAIA=</HashCode>
+      <FileName>src\transaction\Overdraft.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_status" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Boolean.CSharp.Main.src.transaction.BankTransaction">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEBAAAAEAAAgAAQECAAAAACEAAAAAAAAAQFIAAAAQAA=</HashCode>
+      <FileName>src\transaction\BankTransaction.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_type" />
+      <Field Name="_status" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Boolean.CSharp.Main.src.sms.SmsProvider">
+    <Position X="17" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\sms\SmsProvider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Boolean.CSharp.Main.src.account.IAccount">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAIAAAAEAAAAAAI=</HashCode>
+      <FileName>src\account\IAccount.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Boolean.CSharp.Main.src.transaction.ITransaction">
+    <Position X="4.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAACAAAAAAAAAAQEAAAAAQAA=</HashCode>
+      <FileName>src\transaction\ITransaction.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Boolean.CSharp.Main.extra.TransactionType" Collapsed="true">
+    <Position X="13.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAI=</HashCode>
+      <FileName>src\Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Boolean.CSharp.Main.extra.Branch" Collapsed="true">
+    <Position X="11.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQIAAAIAAAAAAAAAAAAQAGAAAAAAABAAA=</HashCode>
+      <FileName>src\Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Boolean.CSharp.Main.extra.Status" Collapsed="true">
+    <Position X="15.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAIAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>src\Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

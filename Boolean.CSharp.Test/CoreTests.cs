@@ -1,6 +1,7 @@
 ﻿using Boolean.CSharp.Main;
 using NUnit.Framework;
 using Boolean.CSharp.Main.extra;
+using Boolean.CSharp.Main.src.account;
 
 namespace Boolean.CSharp.Test
 {
@@ -13,8 +14,8 @@ namespace Boolean.CSharp.Test
         [SetUp]
         public void SetUp()
         {
-            current = new CurrentAccount();
-            savings = new SavingsAccount();
+            current = new CurrentAccount(Branch.Copenhagen);
+            savings = new SavingsAccount(Branch.Oslo);
         }
 
         [Test]
