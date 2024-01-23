@@ -28,11 +28,6 @@ namespace Boolean.CSharp.Main.Users
             _associatedAccounts.Add(account);
         }
 
-        public List<IAccount> GetAssociatedAccounts() 
-        {
-            return new List<IAccount>(_associatedAccounts);
-        }
-
         public string GetName()
         {
             return _name;

@@ -25,7 +25,7 @@ namespace Boolean.CSharp.Main.Accounts
 
         public bool AddAccountToBankBranch(IBankBranch branch)
         {
-            throw new NotImplementedException();
+            return branch.AddAccountToBranch(this);
         }
 
         public bool AddUserToAccount(IUser user)

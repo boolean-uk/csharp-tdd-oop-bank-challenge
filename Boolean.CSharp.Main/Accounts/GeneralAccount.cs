@@ -12,8 +12,8 @@ namespace Boolean.CSharp.Main.Accounts
 {
     public class GeneralAccount : IAccount
     {
-        IBankTransaction _transactions;
-        List<IUser> authorizedUsers;
+        private IBankTransaction _transactions;
+        private List<IUser> authorizedUsers;
         private decimal _balance = 0m;
         private decimal _overdrawLimit = 0m;
 
