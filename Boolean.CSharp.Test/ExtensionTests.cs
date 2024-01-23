@@ -1,5 +1,11 @@
 ﻿using Boolean.CSharp.Main;
+using Boolean.CSharp.Main.Accounts;
+using Boolean.CSharp.Main.Enums;
+using Boolean.CSharp.Main.Concretes;
+using Boolean.CSharp.Main.Interfaces;
 using NUnit.Framework;
+using System.Transactions;
+using Transaction = Boolean.CSharp.Main.Concretes.Transaction;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,16 +17,34 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class ExtensionTests
     {
-        private Extension _extension;
-        public ExtensionTests()
-        {
-            _extension = new Extension();
-        }
-        [Test]
-        public void TestQuestion1()
-        {
-            Assert.Pass();
-        }
         
+        [Test]
+        public void AddBranchTest()
+        {
+            SavingsAccount account = new SavingsAccount();
+
+            account.Branch = Branch.Norwary;
+
+            Assert.That(account.Branch, Is.EqualTo(Branch.Norwary));
+        }
+
+
+        [Test]
+        public void OverDraftDeniedTest()
+        {
+            ITransaction transaction = new Transaction(-50);
+            IAdminestrator admin = new Adminestrator();
+            IAccount account = new SavingsAccount();
+            ICustomer customer = new Customer();
+            customer.AddAccount(account);
+            
+            customer.CreditScore = 0;
+            admin.RequestOverdraft(account);
+            admin.ApproveOverdraft(customer, account);
+            account.AddTransaction(transaction);
+
+            Assert.That(account.GetBalance(), Is.EqualTo(0));
+        }
+
     }
 }

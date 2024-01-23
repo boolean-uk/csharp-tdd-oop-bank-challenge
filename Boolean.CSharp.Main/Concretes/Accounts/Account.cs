@@ -1,4 +1,5 @@
-﻿using Boolean.CSharp.Main.Interfaces;
+﻿using Boolean.CSharp.Main.Enums;
+using Boolean.CSharp.Main.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -10,6 +11,9 @@ namespace Boolean.CSharp.Main.Accounts
 {
     public abstract class Account : IAccount
     {
+        public Branch Branch { get; set; }
+        public CreditScore CreditScore { get; set; } = CreditScore.Nutral;
+
         private List<ITransaction> _transactions = new List<ITransaction>();
 
         public void AddTransaction(ITransaction transaction)
@@ -30,7 +34,6 @@ namespace Boolean.CSharp.Main.Accounts
             // Placeholder for maximum column widths
             int maxDateLen = "date".Length, maxAmountLen = "amount".Length, maxBalanceLen = "balance".Length;
 
-            // Calculate maximum lengths
             foreach (var transaction in orderedTransactions)
             {
                 var (date, amount, balance) = transaction.GetDetails();
@@ -39,10 +42,8 @@ namespace Boolean.CSharp.Main.Accounts
                 maxBalanceLen = Math.Max(maxBalanceLen, $"{balance:0.00}".Length);
             }
 
-            // Dynamic format string based on max lengths
             string format = $"{{0,-{maxDateLen}}} || {{1,-{maxAmountLen}}} || {{2,-{maxBalanceLen}}}";
 
-            // Adding the header with dynamic spacing
             statement.AppendLine(string.Format(format, "date", "amount", "balance"));
 
             foreach (var transaction in orderedTransactions)
@@ -53,11 +54,10 @@ namespace Boolean.CSharp.Main.Accounts
                 string amountString = amount >= 0 ? $"{amount:0.00}  " : $"  {amount:0.00}";
                 string balanceString = $"{balance:0.00}";
 
-                // Adding the transaction line to the statement
                 statement.AppendLine(string.Format(format, dateString, amountString, balanceString));
             }
 
-            return statement.ToString().TrimEnd(); // To remove the last new line
+            return statement.ToString().TrimEnd();
         }
 
 

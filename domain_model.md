@@ -41,3 +41,24 @@ date       ||   amount  || balance
 13/01/2012 ||   2000.00 || 3000.00
 10/01/2012 ||   1000.00 || 1000.00
 ```
+
+## Extensions
+
+```
+
+As a bank manager,
+So I can expand,
+I want accounts to be associated with specific branches.
+
+As a customer,
+So I have an emergency fund,
+I want to be able to request an overdraft on my account.
+
+As a bank manager,
+So I can safeguard our funds,
+I want to approve or reject overdraft requests.
+
+As a customer,
+So I can stay up to date,
+I want statements to be sent as messages to my phone.
+```

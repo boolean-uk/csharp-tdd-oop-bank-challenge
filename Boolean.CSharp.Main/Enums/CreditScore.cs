@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main.Enums
 {
-    public enum AccountTypes
+    public enum CreditScore
     {
+        VeryBad = 0,
+        Bad,
+        Nutral,
+        Good,
+        VeryGood
     }
 }
