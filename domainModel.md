@@ -1,5 +1,5 @@
-# Domain Model: Bank Challenge
-## Classes
+# Bank Challenge Domain Model
+## Classes/Interfaces
 
 ### Customer
 #### Fields
@@ -32,9 +32,9 @@
 * **`ApplyToAccount(BankAccount): void`** - Applies the transaction to the specified BankAccount.
 * **`EffectOnBalance(): decimal`** - A signed version of the amount being applied to the bank account.
 
-### WithdrawalTransaction : ITransaction
+### DebitTransaction : ITransaction
 
-### DepositTransaction : ITransaction
+### CreditTransaction : ITransaction
 
 ### ITransactionManager (Interface)
 #### Methods
