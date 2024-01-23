@@ -66,16 +66,16 @@ namespace Boolean.CSharp.Test
             ITransaction withdrawal = new Transaction(-500, _currentAccount.GetBalance());
             _currentAccount.AddTransaction(withdrawal);
 
-            string expectedStatement = "date       || amount || balance\n" +
-                                       $"{withdrawal.GetDetails().Item1} || -500.00 || 2500.00\n" +
-                                       $"{deposit2.GetDetails().Item1} || 2000.00 || 3000.00\n" +
-                                       $"{deposit1.GetDetails().Item1} || 1000.00 || 1000.00";
+            string expectedStatement = $"date       || amount || balance{Environment.NewLine}" +
+                                       $"{withdrawal.GetDetails().Item1} || -500,00 || 2500,00{Environment.NewLine}" +
+                                       $"{deposit2.GetDetails().Item1} || 2000,00 || 3000,00{Environment.NewLine}" +
+                                       $"{deposit1.GetDetails().Item1} || 1000,00 || 1000,00";
 
             // Act
             string actualStatement = _currentAccount.GenerateBankStatement();
 
             // Assert
-            Assert.That(expectedStatement, Is.EqualTo(actualStatement));
+            Assert.That(actualStatement, Is.EqualTo(expectedStatement));
         }
 
     }
