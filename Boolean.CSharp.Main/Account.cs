@@ -29,7 +29,7 @@ namespace Boolean.CSharp.Main
             if (transaction.Type == TransactionType.Debit)
             {
                 
-                if (transaction.Amount >= (GetBalance() + GetOverdraftBalance()))
+                if (transaction.Amount <= (GetBalance() + GetOverdraftBalance()))
                 {
                     Transactions.Add(transaction);
                     Transactions.Last().Balance -= transaction.Amount;
@@ -51,6 +51,25 @@ namespace Boolean.CSharp.Main
                     Console.WriteLine($"{item.TransactionDate.Date.ToString("dd/MM/yy")}||          ||{item.Amount}     ||{item.Balance}");
                 }
             }
+        }
+
+        public string SMSStatement() { 
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"Date    ||Credit    ||Debit     ||Balance");
+            foreach (var item in Transactions)
+            {
+               if(item.Type == TransactionType.Credit)
+                {
+                    sb.AppendLine($"{item.TransactionDate.Date.ToString("dd/MM/yy")}||{item.Amount}     ||          ||{item.Balance}");
+                }
+               if(item.Type == TransactionType.Debit)
+                {
+                    sb.AppendLine($"{item.TransactionDate.Date.ToString("dd/MM/yy")}||          ||{item.Amount}     ||{item.Balance}");
+                }
+            }
+            string sbString = sb.ToString();
+            return sbString;
+
         }
 
         public decimal GetBalance()
