@@ -1,0 +1,85 @@
+classDiagram
+
+Customer o-- Account : contains accounts
+Account o-- Transaction : internal class Transactions
+
+GenericAccount --|> Account : inherits
+SavingsAccount --|> Account : inherits
+
+TransactionNotPossible --> Account : used in Account
+
+OverdraftRequest --> Account : Account creates overdraftRequests
+
+BankManager --> OverdraftRequest : gets overdraftrequests from Account
+
+BankManager --> Account : returns overdraftRequest to Account
+
+Account --> BankManager : creates instance of BankManager
+
+class Customer{
+    -IDictionary<string, Account> _myBankAccounts
+    +IDictionary<string, Account> MyBankAccounts
+
+    +CreateAccount(string, accountType)
+
+    
+
+}
+
+class Transaction{
+    -string _transactionDate
+    -string _creditIn
+    -string _debitOut
+    -string _ballance
+    +string transactionDate readonly
+    +string creditIn readonly
+    +string debitOut readonly
+    +string ballance readonly
+
+
+
+}
+
+class Account{
+    
+    -string _accountID
+    -List<Transaction> _transactionHistory
+    +List<Transation> TransactionHistory
+    +string AccountID
+    -bool _makeAnOverdraftRequests
+    +bool makeAnOverdraftRequests
+    -OverdraftRequest overdraftRequest
+    -BankBranch _bankBranch
+    +BankBranch bankBranch
+
+    + string GetAcountBalance()
+    + string DepositMoney(double)
+    + string WithdrawalMoney(double)
+    + List<string> GetTransactionHistory()
+
+    -bool IsTransactionPossible()
+    -void SendMessageToPhone(string)
+}
+
+class GenericAccount
+
+class SavingsAccount
+
+class OverdraftRequest{
+    -double _amountRequested
+    +double amountRequested
+
+    -private RequestStatus _status
+ 
+    +public RequestStatus status readonly
+
+    +SetStatus(RequestStatus status)
+}
+class TransactionNotPossible{
+    
+}
+class BankManager{
+    -OverdraftRequest overdraftRequest
+
+    +OverdraftRequest LookAtRequest()
+}

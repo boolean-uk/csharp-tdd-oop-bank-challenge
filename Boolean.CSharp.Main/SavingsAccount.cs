@@ -6,9 +6,10 @@ using System.Text;
 
 namespace Boolean.CSharp.Main
 {
-    public class Core
+    public class SavingsAccount : Account
     {
-
+        public SavingsAccount(string ID, BankBranch bank) : base(ID, bank) 
+        { }
 
     }
 }
