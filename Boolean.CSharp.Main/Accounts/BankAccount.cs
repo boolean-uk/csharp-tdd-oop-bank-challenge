@@ -28,6 +28,11 @@ namespace Boolean.CSharp.Main.Accounts
         }
         public bool Withdraw(double amount)
         {
+            if (amount > 0 && GetBalance() >= amount)
+            {
+                transactions.Add(new Transaction(amount, TransactionType.Withdraw, GetBalance() - amount));
+                return true;
+            }
             return false;
         }
 
