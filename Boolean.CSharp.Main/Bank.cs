@@ -17,7 +17,7 @@ namespace Boolean.CSharp.Main
                 OverdraftRequest request = new OverdraftRequest { Amount = amount, IsApproved = false };
                 _overdraftRequests.Add(request);
             } else {
-                throw new Exception("You must enter an the account you want to file the overdraft amount of!");
+                throw new Exception("You must enter the account you want to file the overdraft amount of!");
             }
 
             
@@ -25,10 +25,10 @@ namespace Boolean.CSharp.Main
 
         // Extension
         public void ApproveOverdraft(int _id) {
-            OverdraftRequest res = _overdraftRequests.FirstOrDefault(req => req._id);
+           /* OverdraftRequest res = _overdraftRequests.FirstOrDefault(req => req.);
             if (res != null) {
                 res.IsApproved = true;
-            }
+            }*/
         }
     }
 }

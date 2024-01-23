@@ -16,11 +16,12 @@ namespace Boolean.CSharp.Main
         public string AccountName { get; private set;}
         public int ID { get; private set; }
         public Branch AccountBranch { get; private set; }
-        private List<Transactions> _transactions;
+        private List<Transaction> _transactions;
+        private int lastUsedID = 0;
 
         public Account(string accountname, decimal balance, Branch accosiatedBranch) {
-            ID = GetRandomID();
-            _transactions = new List<Transactions>();
+            ID = GetId();
+            _transactions = new List<Transaction>();
             if (!string.IsNullOrEmpty(accountname)) {
                 AccountName = accountname;
             } else {
@@ -43,11 +44,9 @@ namespace Boolean.CSharp.Main
             
         }
 
-
-        // Extension
-        private int GetRandomID() {
-            Random rd = new Random();
-            return rd.Next(1000000, 9999999);            
+        private int GetId()
+        {
+            return ++lastUsedID;
         }
 
         public void Deposit(decimal amount) {
@@ -82,7 +81,7 @@ namespace Boolean.CSharp.Main
             }
             statement += "\nDate    ||    Withdraw    ||    Deposit   || Balance";
             decimal currentBalance = 0m;
-            foreach (Transactions transation in _transactions) {
+            foreach (Transaction transation in _transactions) {
                 if (transation.Type == TransactionType.DEPOSIT) { // Extension
                     currentBalance += transation.Amount; // Extension
                 } else if (transation.Type == TransactionType.WITHDRAW) { // Extension
@@ -95,15 +94,11 @@ namespace Boolean.CSharp.Main
                 statement += $"\n{date}    ||   {withdraw}    ||    {deposit}     ||    {currentBalance}"; 
 
             }
-            for (int i = 0; i < _transactions.Count; i++) {
-
-            }
-
             return statement; 
         }
 
         private void AddTransaction(decimal amount, TransactionType type) {
-            var transation = new Transactions(amount, type, this);
+            var transation = new Transaction(amount, type, this);
             _transactions.Add(transation);
         } 
 
@@ -116,7 +111,7 @@ namespace Boolean.CSharp.Main
         // Extension
         public decimal CalculateAccountBalance() {
             decimal accounBalance = 0m;
-            foreach (Transactions transaction in _transactions) {
+            foreach (Transaction transaction in _transactions) {
                 if (transaction.Type == TransactionType.DEPOSIT) {
                     accounBalance += transaction.Amount;
                 } else { // We know it to be a withdraw

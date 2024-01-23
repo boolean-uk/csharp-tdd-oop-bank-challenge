@@ -11,14 +11,14 @@ namespace Boolean.CSharp.Main
         WITHDRAW,
     }
 
-    public class Transactions {
+    public class Transaction {
         public decimal Amount { get; }
         public TransactionType Type { get; }
         public string DateOfTransaction { get; }
         public Account _Account { get; }
 
 
-        public Transactions(decimal amount, TransactionType type, Account account) {
+        public Transaction(decimal amount, TransactionType type, Account account) {
             Amount = amount;
             Type = type;
             _Account = account;
