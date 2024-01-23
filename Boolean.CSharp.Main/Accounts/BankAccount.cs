@@ -7,7 +7,7 @@ using System.Transactions;
 
 namespace Boolean.CSharp.Main.Accounts
 {
-    public abstract class BankAccount
+    public abstract class BankAccount : ITransactionable
     {
         protected List<Transaction> transactions;
 
@@ -61,25 +61,12 @@ namespace Boolean.CSharp.Main.Accounts
                     transaction.Balance.ToString());
             }
         }
+
+        string ITransactionable.GenerateStatement()
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }
 
-/*
-  /// <summary>
- /// Method outputs a statement to the console
- /// </summary>
- public void WriteStatement()
- {
-     Console.WriteLine("{0,10} || {1,10} || {2,10} || {3,10} ", "Date", "Credit", "Debit", "Balance");
-     foreach (IBankTransaction transaction in _transactions.OrderByDescending(t => t.Date).Where(t => t.Status == TransactionStatus.Approved))
-     {
-
-         Console.WriteLine("{0,10} || {1,10} || {2,10} || {3,10} ",
-                 transaction.Date.ToShortDateString(),
-                 transaction.Type == TransactionType.Credit ? transaction.Amount : 0,
-                 transaction.Type == TransactionType.Debit ? transaction.Amount : 0,
-                 transaction.NewBalance);
-     };
- }
- */

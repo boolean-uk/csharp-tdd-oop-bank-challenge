@@ -10,7 +10,5 @@ namespace Boolean.CSharp.Main.Accounts
     public class CurrentAccount : BankAccount
     {
 
-        public CurrentAccount() : base() { }
-
     }
 }

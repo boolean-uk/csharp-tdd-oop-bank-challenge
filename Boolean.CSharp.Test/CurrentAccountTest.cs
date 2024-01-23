@@ -37,7 +37,6 @@ namespace Boolean.CSharp.Test
             // Assert
             Assert.IsTrue(withdrawalResult);
             Assert.AreEqual(500, currentAccount.GetBalance());
-
         }
 
         [Test]
@@ -50,9 +49,6 @@ namespace Boolean.CSharp.Test
 
             //Act
             currentAccount.GenerateStatement();
-
-            
-
         }
     }
 }

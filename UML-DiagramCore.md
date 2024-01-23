@@ -51,9 +51,9 @@ BankAccount Class Diagram
 |                                   |
 | + Withdraw(amount: double): bool  |
 |                                   |  
-|                                   | 
+| + GetBalance(): double            | 
 |                                   |   
-|                                   |
+| + GenerateStatement(): void       |
 -------------------------------------
 
 Transaction Class Diagram
@@ -70,9 +70,33 @@ Transaction Class Diagram
 |                                   |
 | + GetTransactionAmount(): double  |
 |                                   |  
-| + GetTransactionBalance(): decimal| 
+| + GetTransactionBalance(): double | 
 |                                   |   
 |                                   |
 -------------------------------------
 
+ITransactionable Interface Diagram
 
+|-----------------------------------|
+|        ITransactionable           |
+|-----------------------------------|
+|                                   |
+| + Deposit(amount: double): bool   |
+| + Withdraw(amount: double): bool  |
+| + GenerateStatement(): void       |
+|                                   |
+|               ...                 |
+-------------------------------------
+
+TransactionType Enum Diagram
+
+
+|-----------------------------------|
+|        TransactionType            |
+|-----------------------------------|
+|                                   |
+| + Deposit                         |
+| + Withdraw                        |
+|                                   |
+|               ...                 |
+-------------------------------------
