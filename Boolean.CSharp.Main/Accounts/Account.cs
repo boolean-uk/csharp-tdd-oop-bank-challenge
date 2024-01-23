@@ -123,7 +123,15 @@ namespace Boolean.CSharp.Main.Accounts
 
         public void SendTransaction(Transaction t)
         {
-            _msService.Send($"{t.GetDate().ToShortDateString()} ||         || {t.GetDebit()}    || {t.GetBalance()}", GetAccountOwner().GetPhone());
+            if (t.GetCredit() == 0)
+            {
+                _msService.Send($"{t.GetDate().ToShortDateString()} ||         || {t.GetDebit()}    || {t.GetBalance()}", GetAccountOwner().GetPhone());
+            }
+            else
+            {
+                _msService.Send($"{t.GetDate().ToShortDateString()} || {t.GetCredit()}   ||         || {t.GetBalance()}", GetAccountOwner().GetPhone());
+            }
+
         }
 
         public void SendBankStatement()
