@@ -32,9 +32,11 @@ namespace Boolean.CSharp.Main.Users
 
         private void ApprovedRequest(Transaction request) {
             request.TransectionStatus = true;
+            Console.WriteLine("\nThis request have been approved.");
         }
         private void DeniedRequest(Transaction request) {
             request.TransectionStatus = false;
+            Console.WriteLine("\nThis request have been denied.");
         }
 
         public void reviewRequest() {
@@ -47,8 +49,8 @@ namespace Boolean.CSharp.Main.Users
             {
                 foreach (Transaction request in _request)
                 {
-                    Console.WriteLine($"A request: {{0,10}} || {{1,10}} || {{2,10}} ", "Date", "Amount", "Note");
-                    Console.WriteLine("{0,10} || {1,10} || {2,10} || {3,10} "
+                    Console.WriteLine($"A request:\n{{0,10}} || {{1,10}} || {{2,10}} ", "Date", "Amount", "Note");
+                    Console.WriteLine("{0,10} || {1,10} || {2,10}   "
                     , request.DateInfo.ToShortDateString()
                     , request.Amount
                     , request.Mark
