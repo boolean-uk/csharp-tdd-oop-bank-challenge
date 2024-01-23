@@ -13,8 +13,8 @@ namespace Boolean.CSharp.Main
         private string accountSid, authToken;
         public Twillo() 
         {
-            accountSid = "Cannot edit environment variables";
-            authToken = "Some random text";
+            accountSid = "ID";
+            authToken = "Password";
 
             try { TwilioClient.Init(accountSid, authToken); }
             catch (Twilio.Exceptions.ApiException e) { Console.WriteLine(e.Message); }
