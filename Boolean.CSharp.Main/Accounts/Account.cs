@@ -29,16 +29,31 @@ namespace Boolean.CSharp.Main.Accounts
 
         public decimal Deposit(decimal amount)
         {
-            ITransaction newTransaction = new Transaction(amount, GetBalance(), TransactionStatus.Approved, TransactionType.Credit);
-            Transactions.Add(newTransaction);
-            return newTransaction.NewBalance;
+            if(amount > 0)
+            {
+                ITransaction newTransaction = new Transaction(amount, GetBalance(), TransactionStatus.Approved, TransactionType.Credit);
+                Transactions.Add(newTransaction);
+                return newTransaction.NewBalance;
+            }
+            else
+            {
+                return 0;
+            }
+
         }
 
         public decimal Withdraw(decimal amount)
         {
-            ITransaction newTransaction = new Transaction(amount, GetBalance(), TransactionStatus.Approved, TransactionType.Debit);
-            Transactions.Add(newTransaction);
-            return newTransaction.NewBalance;
+            if(amount > 0)
+            {
+                ITransaction newTransaction = new Transaction(amount, GetBalance(), TransactionStatus.Approved, TransactionType.Debit);
+                Transactions.Add(newTransaction);
+                return newTransaction.NewBalance;
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         public decimal GetBalance() 

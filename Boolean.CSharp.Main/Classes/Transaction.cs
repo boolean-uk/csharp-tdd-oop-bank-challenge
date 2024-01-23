@@ -44,9 +44,6 @@ namespace Boolean.CSharp.Main.Classes
             {
                 NewBalance = OldBalance + Amount;
             }
-
-
-
         }
     }
 }

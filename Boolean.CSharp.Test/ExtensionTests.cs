@@ -7,6 +7,8 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -115,7 +117,7 @@ namespace Boolean.CSharp.Test
             BankManager manager = new BankManager("Scrooge McDuck");
             AccountCurrent currentAccount = new AccountCurrent(customer, Branch.Retail);
             currentAccount.Deposit(1000);
-            currentAccount.RequestOverdraft(-2000);
+            currentAccount.RequestOverdraft(2000);
 
             //
             string expectedResultString = manager.ManageOverdraftRequest(currentAccount, true);
@@ -123,9 +125,18 @@ namespace Boolean.CSharp.Test
             decimal expectedResultAmount = currentAccount.GetBalance();
             decimal actualResultAmount = -1000;
 
+            ITransaction? overdraftRequest = currentAccount.OverdraftRequests
+                .OrderByDescending(t => t.Date)
+                .Where(t => t.Type == TransactionType.Debit)
+                .FirstOrDefault();
+
+            TransactionStatus expectedStatus = overdraftRequest.Status;
+            TransactionStatus actualStatus = TransactionStatus.Approved;
+
             //Assert
             Assert.That(expectedResultAmount, Is.EqualTo(actualResultAmount));
             Assert.That(expectedResultString, Is.EqualTo(actualResultString));
+            Assert.That(expectedStatus, Is.EqualTo(actualStatus));
         }
 
         [Test]
@@ -144,9 +155,19 @@ namespace Boolean.CSharp.Test
             decimal expectedResultAmount = currentAccount.GetBalance();
             decimal actualResultAmount = 1000;
 
+
+            ITransaction? overdraftRequest = currentAccount.OverdraftRequests
+                .OrderByDescending(t => t.Date)
+                .Where(t => t.Type == TransactionType.Debit)
+                .FirstOrDefault();
+
+            TransactionStatus expectedStatus = overdraftRequest.Status;
+            TransactionStatus actualStatus = TransactionStatus.Refused;
+
             //Assert
             Assert.That(expectedResultAmount, Is.EqualTo(actualResultAmount));
             Assert.That(expectedResultString, Is.EqualTo(actualResultString));
+            Assert.That(expectedStatus, Is.EqualTo(actualStatus));
         }
     }
 }
