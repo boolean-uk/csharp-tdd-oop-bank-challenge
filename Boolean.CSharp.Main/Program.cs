@@ -39,11 +39,11 @@ Guid acc = custommer1.getAccAccounts().Keys.First();
 
 //Adding the transactions:
 Transaction transaction1 = new Transaction() { Amount = amount1, Type = type1, Mark = mark1 };
-custommer1.Deposit(acc, transaction1);
+custommer1.PerformTransaction(acc, transaction1);
 Transaction transaction2 = new Transaction() { Amount = amount2, Type = type2, Mark = mark2 };
-custommer1.Withdraw(acc, transaction2);
+custommer1.PerformTransaction(acc, transaction2);
 Transaction transaction3 = new Transaction() { Amount = amount3, Type = type3, Mark = mark3 };
-custommer1.Deposit(acc, transaction3);
+custommer1.PerformTransaction(acc, transaction3);
 
 
 
@@ -65,8 +65,8 @@ Transaction request5 = new Transaction() { Amount = amount5, Mark = mark5, Type 
 
 
 Guid acc1 = custommer1.getAccAccounts().Keys.First();
-custommer1.RequestOverdraft(acc1, request4);
-custommer1.RequestOverdraft(acc1, request5);
+custommer1.PerformTransaction(acc1, request4);
+custommer1.PerformTransaction(acc1, request5);
 Account account1 = (Account)custommer1.getAccAccounts()[acc1];
 
 // Testing review request:

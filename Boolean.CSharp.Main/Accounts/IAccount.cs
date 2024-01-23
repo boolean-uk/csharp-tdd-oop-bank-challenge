@@ -55,6 +55,11 @@ namespace Boolean.CSharp.Main.Accounts
         /// </summary>
         /// <param name="request"></param>
         void RequestOverdraft(Transaction request, Manager custommerAdvisor);
+
+        /// <summary>
+        /// This method returns the list of the requests.
+        /// </summary>
+        /// <returns></returns>
         public List<Transaction> getRequest();
     }
 }

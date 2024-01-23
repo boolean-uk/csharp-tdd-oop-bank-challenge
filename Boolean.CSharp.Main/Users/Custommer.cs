@@ -21,17 +21,17 @@ namespace Boolean.CSharp.Main.Users
         private int _Id;
         private bool _IsActive = true;
         private Branches _branch;
-        private Manager _accManager = new Manager();    
+        private Manager _accManager = new Manager();
 
 
         private Dictionary<Guid, IAccount> accounts = new Dictionary<Guid, IAccount>();
-       // private List<Transaction> overdraftRequest = new List<Transaction>();
+        // private List<Transaction> overdraftRequest = new List<Transaction>();
 
         public string Name { get { return _name; } set { _name = value; } }
         public int Id { get { return _Id; } set { _Id = value; } }
         public bool IsActive { get { return _IsActive; } }
-
         public Branches Branch { get { return _branch; } set { _branch = value; } }
+
 
         /// <summary>
         /// Create new instace of class Account based on the AccountType and store it in accounts.
@@ -66,24 +66,6 @@ namespace Boolean.CSharp.Main.Users
         public Dictionary<Guid, IAccount> getAccAccounts() => accounts;
 
 
-        /// <summary>
-        /// Method to deposite the money in the specified account.
-        /// </summary>
-        /// <param name="acc"> Acount to deposit money</param>
-        /// <param name="transaction1">Deposit request</param>
-        /// <exception cref="Exception"></exception>
-        public void Deposit(Guid acc, Transaction transaction)
-        {
-            if (accounts.ContainsKey(acc))
-            {
-                accounts[acc].Deposit(transaction);
-            }
-            else
-            {
-                throw new Exception("No account available");
-
-            }
-        }
 
         /// <summary>
         /// The method is used to return the balance of user's specificed account.
@@ -104,11 +86,34 @@ namespace Boolean.CSharp.Main.Users
             }
         }
 
-        public void Withdraw(Guid acc, Transaction transaction)
+        /// <summary>
+        /// Method to perform transaction based on the type of request. Can either deposit, withdraw or send an overdraft request
+        /// </summary>
+        /// <param name="acc"> Acount to deposit money</param>
+        /// <param name="transaction1">Deposit request</param>
+        /// <exception cref="Exception"></exception>
+
+
+        public void PerformTransaction(Guid acc, Transaction request)
         {
             if (accounts.ContainsKey(acc))
             {
-                accounts[acc].Withdraw(transaction);
+                switch (request.Type)
+                {
+                    case TransactionType.Deposit:
+                        accounts[acc].Deposit(request);
+                        break;
+
+                    case TransactionType.Withdraw:
+                        accounts[acc].Withdraw(request);
+                        break;
+
+                    case TransactionType.Overdraft:
+                        accounts[acc].RequestOverdraft(request, _accManager);
+                        break;
+
+
+                }
             }
             else
             {
@@ -117,20 +122,11 @@ namespace Boolean.CSharp.Main.Users
             }
         }
 
-
-        public void RequestOverdraft(Guid acc, Transaction request)
-        {
-           if(accounts.ContainsKey(acc))
-            {
-                accounts[acc].RequestOverdraft(request, _accManager);
-            }
-            else
-            {
-                throw new Exception("No account available");
-
-            }
-        }
-
+        /// <summary>
+        /// This method the a list of all overdraft requests in the specific account.
+        /// </summary>
+        /// <param name="acc"> Account of interest</param>
+        /// <returns></returns>
         public List<Transaction> getRequest(Guid acc)
         {
             return accounts[acc].getRequest();

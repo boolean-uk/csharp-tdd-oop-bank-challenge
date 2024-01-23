@@ -109,7 +109,7 @@ namespace Boolean.CSharp.Test
             String mark1 = "Saving 01/01/24";
             Transaction transaction1 = new Transaction() { Amount = amount1, Type = type1, Mark = mark1 };
 
-            custommer1.Deposit(acc1, transaction1);
+            custommer1.PerformTransaction(acc1, transaction1);
 
             // As an ennigneer, I want to check the balance of the 1. acc on the custommer1.
 
@@ -153,7 +153,7 @@ namespace Boolean.CSharp.Test
 
 
             Guid acc1 = custommer1.getAccAccounts().Keys.First();
-            custommer1.RequestOverdraft(acc1, request1);
+            custommer1.PerformTransaction(acc1, request1);
 
             //Should be 1 overdraft request in the list.
             Assert.IsTrue(custommer1.getRequest(acc1).Count == 1);
@@ -170,7 +170,7 @@ namespace Boolean.CSharp.Test
 
 
             Guid acc1 = custommer1.getAccAccounts().Keys.First();
-            custommer1.RequestOverdraft(acc1, request1);
+            custommer1.PerformTransaction(acc1, request1);
             Account account1 = (Account)custommer1.getAccAccounts()[acc1];
 
             //Should be 1 request waiting for the account manager to review.
@@ -193,8 +193,8 @@ namespace Boolean.CSharp.Test
 
 
             Guid acc1 = custommer1.getAccAccounts().Keys.First();
-            custommer1.RequestOverdraft(acc1, request1);
-            custommer1.RequestOverdraft(acc1, request2);
+            custommer1.PerformTransaction(acc1, request1);
+            custommer1.PerformTransaction(acc1, request2);
             Account account1 = (Account)custommer1.getAccAccounts()[acc1];
 
             //Should be 2 requests waiting for the account manager to review.

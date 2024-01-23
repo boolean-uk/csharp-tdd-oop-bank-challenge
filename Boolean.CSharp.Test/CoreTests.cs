@@ -128,7 +128,7 @@ namespace Boolean.CSharp.Test
             Guid acc = custommer1.getAccAccounts().Keys.First();
 
             Transaction transaction1 = new Transaction() { Amount = amount, Type = type, Mark = mark };
-            custommer1.Deposit(acc, transaction1);
+            custommer1.PerformTransaction(acc, transaction1);
             double balance1 = custommer1.getBalance(acc);
             
 
@@ -154,9 +154,9 @@ namespace Boolean.CSharp.Test
 
             Guid acc = custommer1.getAccAccounts().Keys.First();
             Transaction transaction1 = new Transaction() { Amount = amount1, Type = type1, Mark = mark1 };
-            custommer1.Deposit(acc, transaction1);
+            custommer1.PerformTransaction(acc, transaction1);
             Transaction transaction2 = new Transaction() { Amount = amount2, Type = type2, Mark = mark2 };
-            custommer1.Withdraw(acc, transaction2);
+            custommer1.PerformTransaction(acc, transaction2);
             double balance1 = custommer1.getBalance(acc);
 
 
@@ -182,7 +182,7 @@ namespace Boolean.CSharp.Test
             //custommer1.Withdraw(acc, transaction2);
             double balance1 = custommer1.getBalance(acc);
 
-            TestDelegate check0 = () => custommer1.Withdraw(acc, transaction2);
+            TestDelegate check0 = () => custommer1.PerformTransaction(acc, transaction2);
             var check = Assert.Throws<InvalidOperationException>(check0);
 
             //The check0 should throw invalidException since not enough funds. 
