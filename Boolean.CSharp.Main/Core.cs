@@ -110,7 +110,7 @@ namespace Boolean.CSharp.Main
                         if(y == account)
                         {
                             if (y.Transactions.Count == 0) { 
-                                int balance = -amount;
+                                int balance =- amount;
                                 account.Transactions.Add(new Transaction(TransactionType.Debit, DateTime.Now, amount, balance));
                             }
                             else if (y.Transactions.Count != 0)
@@ -120,7 +120,8 @@ namespace Boolean.CSharp.Main
                                     int balance = account.Transactions.Last().Balance - amount;
                                     account.Transactions.Add(new Transaction(TransactionType.Debit, DateTime.Now, amount, balance));
                                 }
-                                
+                              
+
                             }
                         }
                     }

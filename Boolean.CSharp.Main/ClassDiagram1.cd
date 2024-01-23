@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Boolean.CSharp.Main.Core">
-    <Position X="6.5" Y="1.25" Width="1.75" />
+    <Position X="6.5" Y="1.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAEAAgAQAAAAAAAAAAAQAAAAAAEAAAABAFAQAAgBA=</HashCode>
       <FileName>Core.cs</FileName>
@@ -23,10 +23,10 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Boolean.CSharp.Main.Customer">
-    <Position X="8.75" Y="6.5" Width="1.5" />
+    <Position X="8.25" Y="6.75" Width="1.5" />
     <AssociationLine Name="AccountList" Type="System.Collections.Generic.List&lt;T&gt;">
       <MemberNameLabel ManuallyPlaced="true">
-        <Position X="-0.126" Y="0.623" />
+        <Position X="0.623" Y="-0.126" />
       </MemberNameLabel>
     </AssociationLine>
     <TypeIdentifier>
@@ -39,7 +39,7 @@
     <Lollipop Position="0.228" />
   </Class>
   <Class Name="Boolean.CSharp.Main.SavingAcc">
-    <Position X="2" Y="6.75" Width="1.5" />
+    <Position X="1.5" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>SavingAcc.cs</FileName>
@@ -61,7 +61,7 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="System.Collections.Generic.List&lt;T&gt;" Collapsed="true">
-    <Position X="6" Y="5.25" Width="1.5" />
+    <Position X="5.25" Y="5.25" Width="1.5" />
     <TypeIdentifier />
     <Lollipop Position="0.987" Collapsed="true" />
   </Class>
@@ -69,7 +69,7 @@
     <Position X="4" Y="2.75" Width="1.5" />
     <AssociationLine Name="Transactions" Type="System.Collections.Generic.List&lt;T&gt;">
       <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
-        <Position X="0.52" Y="0.039" Height="0.162" Width="1.146" />
+        <Position X="0.039" Y="0.52" Height="0.162" Width="1.146" />
       </MemberNameLabel>
     </AssociationLine>
     <TypeIdentifier>
@@ -81,7 +81,7 @@
     </ShowAsAssociation>
   </Interface>
   <Interface Name="Boolean.CSharp.Main.Interfaces.IUser">
-    <Position X="9" Y="4.5" Width="1.5" />
+    <Position X="9" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAACQAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
       <FileName>Interfaces\IUser.cs</FileName>
@@ -91,7 +91,7 @@
     </ShowAsAssociation>
   </Interface>
   <Enum Name="Boolean.CSharp.Main.AccountType">
-    <Position X="3.75" Y="8" Width="1.5" />
+    <Position X="3.5" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAACAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Enums.cs</FileName>
