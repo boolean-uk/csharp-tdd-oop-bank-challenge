@@ -13,14 +13,21 @@ namespace Boolean.CSharp.Main.Accounts
     {
         public Branch Branch { get; set; }
         public CreditScore CreditScore { get; set; } = CreditScore.Nutral;
+        public bool OverdraftApproved { get; set; } = false;
 
         private List<ITransaction> _transactions = new List<ITransaction>();
 
         public void AddTransaction(ITransaction transaction)
         {
-            _transactions.Add(transaction);
-            transaction.SetBalance(GetBalance());
-
+            if (transaction.GetDetails().Item2<0 && !this.OverdraftApproved)
+            { 
+                Console.WriteLine("You do not have overdraft permission"); 
+            }
+            else
+            {
+                _transactions.Add(transaction);
+                transaction.SetBalance(GetBalance());
+            }
         }
 
         public string GenerateBankStatement()

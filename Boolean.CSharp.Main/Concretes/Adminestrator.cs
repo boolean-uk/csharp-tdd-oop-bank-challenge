@@ -31,7 +31,11 @@ namespace Boolean.CSharp.Main.Concretes
         public void ApproveOverdraft(ICustomer user, IAccount account)
         {
             if (!_requested.Contains(account)) { Console.WriteLine("The customer has not requested overdraft"); }
-            else if (verifyUser(user)) { _approved.Add(account); }
+            else if (verifyUser(user)) 
+            { 
+                _approved.Add(account); 
+                account.OverdraftApproved = true;
+            }
         }
 
         public int GetApprovedCount()
