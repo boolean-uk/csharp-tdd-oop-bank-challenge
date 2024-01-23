@@ -1,4 +1,5 @@
 ﻿using Boolean.CSharp.Main;
+using Boolean.CSharp.Main.AccountTypes;
 using NUnit.Framework;
 
 namespace Boolean.CSharp.Test
@@ -6,18 +7,20 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class CoreTests
     {
-        private Core _core;
+        private HeadQuarters bank;
+        private Private user;
 
         public CoreTests()
         {
-            _core = new Core();
+            bank = new HeadQuarters();
+            int id = bank.GenerateUserId();
+            user = new Private(id);
 
         }
 
         [Test]
         public void createCurrentAccount()
         {
-            User user = new User();
             user.CreateCurrentAccount();
             
             Assert.IsNotNull(user.CurrentAccount);
@@ -27,7 +30,6 @@ namespace Boolean.CSharp.Test
         [Test]
         public void createSavingAccount()
         {
-            User user = new User();
             user.CreateSavingAccount();
 
             Assert.IsNotNull(user.SavingAccount);
@@ -38,7 +40,6 @@ namespace Boolean.CSharp.Test
         [TestCase(10)]
         public void depositAmount(decimal deposit)
         {
-            User user = new User();
             user.CreateCurrentAccount();
             user.CurrentAccount.Deposit(deposit);
             
@@ -50,7 +51,6 @@ namespace Boolean.CSharp.Test
         [TestCase(10, 6)]
         public void WithdrawAmount(decimal deposit, decimal withdraw)
         {
-            User user = new User();
             user.CreateCurrentAccount();
             user.CurrentAccount.Deposit(deposit);
             user.CurrentAccount.Withdraw(withdraw);
@@ -65,7 +65,6 @@ namespace Boolean.CSharp.Test
         [TestCase(10 )]
         public void GenerateSingleBankTransaction(decimal deposit)
         {
-            User user = new User();
             user.CreateCurrentAccount();
             user.CurrentAccount.Deposit(deposit);
             string[] Result = user.CurrentAccount.BankTransactions[0];
@@ -83,7 +82,6 @@ namespace Boolean.CSharp.Test
         [TestCase(10, 6)]
         public void generateBankstatement(decimal deposit, decimal withdraw)
         {
-            User user = new User();
             user.CreateCurrentAccount();
             user.CurrentAccount.Deposit(deposit);
             user.CurrentAccount.Withdraw(withdraw);

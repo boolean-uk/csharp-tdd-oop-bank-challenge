@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace Boolean.CSharp.Main
         private string _type;
         private decimal _availableAmount;
         private List<string[]> _bankTransactions;
-        private Bank _bank = new Bank();
+        private HeadQuarters _bank = new HeadQuarters();
         private int _uniqueId = 0;
 
         public Account()
@@ -48,6 +49,26 @@ namespace Boolean.CSharp.Main
 
         protected void SetType(string type) { _type = type; }
 
+        public decimal CalculateBalance() {
+            decimal newBalance = 0;
+
+            if (_bankTransactions.Count > 0)
+            {
+                foreach(string[] transaction in _bankTransactions)
+                {
+                    if (transaction[2] == "credit")
+                    {
+                        newBalance += decimal.Parse(transaction[3]);
+                    }
+                    if (transaction[2] == "debit")
+                    {
+                        newBalance -= decimal.Parse(transaction[3]);
+                    }
+                }
+            }
+
+            return newBalance;
+        }
         public bool GenerateBankStatement()
         {
             _bankTransactions.Reverse();

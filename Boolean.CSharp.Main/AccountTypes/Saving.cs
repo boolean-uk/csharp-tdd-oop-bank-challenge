@@ -12,7 +12,6 @@ namespace Boolean.CSharp.Main.AccountTypes
         public Saving()
         {
             SetType("saving");
-
         }
     }
 }
