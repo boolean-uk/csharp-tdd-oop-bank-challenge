@@ -1,6 +1,6 @@
 Class:	Customer		Method: AddAccount(AccountType CurrentAccount)			Case: Customer wants to create a current account to store money
 Class:	Customer		Method: AddAccount(AccountType SavingsAccount)			Case: Customer wants to create a savings account to save money
-Enum:	AccountType		Memebers: {CurrentAccount, SavingsAccount}				Case: Ensure only offered account types are made
+Enum:	AccountType		Members: {CurrentAccount, SavingsAccount}				Case: Ensure only offered account types are made
 Class	Account		Method: Deposit(double funds)								Case: Customer wants to put money in account
 Class	Account			Method: Withdraw(double funds)							Case: Customer wants to take money out of the account
 Class	Transaction		Method: GetDetails()									Case: Customer wants to get dates, amounts, and balance at the time of transaction

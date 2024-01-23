@@ -8,8 +8,7 @@ namespace Boolean.CSharp.Main.Interfaces
 {
     public interface ICustomer
     {
-        void AddCurrentAccount();
-        void AddSavingsAccount();
+        void AddAccount(IAccount account);
         List<IAccount> GetAccounts();
     }
 }

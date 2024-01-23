@@ -9,19 +9,16 @@ namespace Boolean.CSharp.Main.Concretes
 {
     public class Customer : ICustomer
     {
-        public void AddCurrentAccount()
+        private List<IAccount> _accounts = new();
+        public void AddAccount(IAccount account)
         {
-            throw new NotImplementedException();
-        }
 
-        public void AddSavingsAccount()
-        {
-            throw new NotImplementedException();
+            _accounts.Add(account);
         }
 
         public List<IAccount> GetAccounts()
         {
-            throw new NotImplementedException();
+            return _accounts;
         }
     }
 }

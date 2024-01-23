@@ -8,5 +8,7 @@ namespace Boolean.CSharp.Main.Interfaces
 {
     public interface IAccount
     {
+        void AddTransaction(ITransaction transaction);
+        double GetBalance();
     }
 }

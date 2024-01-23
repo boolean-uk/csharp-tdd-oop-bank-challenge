@@ -8,5 +8,7 @@ namespace Boolean.CSharp.Main.Interfaces
 {
     public interface ITransaction
     {
+
+        Tuple<DateTime, double, double> GetDetails();
     }
 }
