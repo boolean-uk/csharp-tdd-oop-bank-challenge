@@ -1,5 +1,6 @@
 ﻿using Boolean.CSharp.Main.Accounts;
 using Boolean.CSharp.Main.Branch;
+using Boolean.CSharp.Main.Transactions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +14,21 @@ namespace Boolean.CSharp.Main.Users
         private string _name;
         private List<IAccount> _accounts = new List<IAccount>();
         private IBankBranch _branch;
+        private List<IOverdraftRequest> _overdraftRequests = new List<IOverdraftRequest>();
 
         public Manager(string name)
         {
             _name = name;
+        }
+
+        public void AddOverdraftRequest()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EvaluateOverdraftRequests(bool approval)
+        {
+            throw new NotImplementedException();
         }
 
         public List<IAccount> GetAccounts()
@@ -33,6 +45,11 @@ namespace Boolean.CSharp.Main.Users
         {
             _branch = branch;
             return branch.AddEmployeeToBranch(this);
+        }
+
+        public string ShowOldestOverdraftRequest()
+        {
+            throw new NotImplementedException();
         }
     }
 }

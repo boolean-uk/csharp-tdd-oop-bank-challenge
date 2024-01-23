@@ -8,5 +8,10 @@ namespace Boolean.CSharp.Main.Users
 {
     public interface IEmployee : IUser
     {
+        void EvaluateOverdraftRequests(bool approval);
+
+        string ShowOldestOverdraftRequest();
+
+        void AddOverdraftRequest();
     }
 }

@@ -141,5 +141,37 @@ namespace Boolean.CSharp.Test
 
             Assert.That(draw3, Is.EqualTo(750m));
         }
+
+        [Test]
+        public void TestOverdraftRequests() 
+        {
+            // Arrange
+            IBankBranch branch = new LocalBank("123 Bank Road, 987 City");
+            DateTime dob = new DateTime(1996, 8, 20);
+            Customer user = new RegularCustomer("Bob", dob);
+            IEmployee manager = new Manager("Jim");
+            user.RegisterWithBankBranch(branch);
+            user.OpenNewAccount(AccountType.Savings);
+            IAccount acc = user.GetAccounts()[0];
+            branch.AddAccountToBranch(acc);
+            acc.Deposit(1000m);
+
+            // Act
+            decimal res1 = acc.Withdraw(1250m);
+            user.RequestOverdraft(500m);
+            string overdraftRequestBefore = manager.ShowOldestOverdraftRequest();
+            manager.EvaluateOverdraftRequests(true);
+            string overdraftRequestAfter = manager.ShowOldestOverdraftRequest();
+            decimal res2 = acc.Withdraw(1250m);
+
+
+            // Assert
+            Assert.That(res1, Is.EqualTo(0));
+            Assert.That(overdraftRequestBefore, Is.Not.EqualTo(""));
+            Assert.That(overdraftRequestBefore, Is.EqualTo(""));
+            Assert.That(res2, Is.EqualTo(1250m));
+
+        }
+
     }
 }

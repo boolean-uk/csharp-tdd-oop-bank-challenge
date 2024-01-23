@@ -1,4 +1,5 @@
 ﻿using Boolean.CSharp.Main.Accounts;
+using Boolean.CSharp.Main.Transactions;
 using Boolean.CSharp.Main.Users;
 using System;
 using System.Collections.Generic;
@@ -44,6 +45,11 @@ namespace Boolean.CSharp.Main.Branch
             _customers.Add(user);
             int val2 = _customers.Count;
             return val2 > val1;
+        }
+
+        public void AssignOverdraftRequest(IOverdraftRequest request)
+        {
+            throw new NotImplementedException();
         }
 
         public List<IAccount> GetAccounts()

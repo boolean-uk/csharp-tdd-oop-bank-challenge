@@ -65,5 +65,10 @@ namespace Boolean.CSharp.Main.Users
             _branch = branch;
             return branch.AddUserToBranch(this);
         }
+
+        public void RequestOverdraft(decimal amount) 
+        {
+            throw new NotImplementedException();
+        }
     }
 }

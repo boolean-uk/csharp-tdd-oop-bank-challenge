@@ -1,4 +1,5 @@
 ﻿using Boolean.CSharp.Main.Accounts;
+using Boolean.CSharp.Main.Transactions;
 using Boolean.CSharp.Main.Users;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,8 @@ namespace Boolean.CSharp.Main.Branch
         bool AddUserToBranch(Customer user);
 
         bool AddAccountToBranch(IAccount account);
+
+        void AssignOverdraftRequest(IOverdraftRequest request);
 
         bool AddEmployeeToBranch(IEmployee employee);
     }

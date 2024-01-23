@@ -9,7 +9,7 @@
 | `TransactionManager` (implementes IBankTransaction) | `List<Tuple<DateTime, decimal, TransactionType, decimal>> _history` |
 | `IUser` (*interface*) | | 
 | `Customer` (*abstract*)(implements IUser) | `List<IAccount> accounts` `string Name` `DateTime birthDate` `DateTime lastLogin` `IBankBranch _branch`|
-| `Manager` (implements IUser) | `List<Customer> customers` `string Name` `IBankBranch _branch` | 
+| `Manager` (implements IUser) | `List<Customer> customers` `string Name` `IBankBranch _branch` `List<IOverdraftRequest> _overdraftRequests` | 
 | `IBankBranch` (*interface*) |  |
 | `LocalBank`  (implements IBankBranch) | `List<IAccount> _accounts` `List<Customer> _customers` `List<IUser> _employees` `string _location` |
 
@@ -32,6 +32,10 @@
 | | `OpenNewAccount(AccountType accountType)` | Generate a new account associated with the user | True |
 | | | Failed to generate a new account | False | 
 | | `LogIn()` | Log the customer into their account | - |
+| | `RequestOverdraft(decimal amount)` | Send a request to the bank branch to set their overdraft limit to the provided value | void |
+| `IEmployee` | `EvaluateOverdraftRequests(bool approved)` | Review the oldest overdraft request associated with the manager | void | 
+| | `ShowOldestOverdraftRequest()` | Retrieve the oldest overdraft request so the manager can review | string | 
+| | `AddOverdraftRequest()` | Add an overdraft request to the employees list of requests | void | 
 | `Manager`  | `GetCustomers()` | Retrieve a list of customers associated with this manager | List<Customer> | 
 | `IBankTransaction` (*interface*)| | |  
 |  | `PrintTransactions(DateTime start, DateTime end)` | Print the transaction record between the provided DateTimes | Out/Console | 
@@ -48,4 +52,12 @@
 | | `AddAccountToBranch(IAccount account)` | Associate the provided account with the branch | bool |
 | | `AddUserToBranch(Customer user)` | Associate the provided Customer with the branch | bool | 
 | | `AddEmployeeToBranch(IUser employee)` | Associate the provided employee with the branch | bool |
+| | `AssignOverdraftRequest(IOverdraftRequest request)` | Assign a overdraft request from a customer to one of the branch's employees | void | 
 | `LocalBank()` | | |
+
+## Note on overdraft request approval
+In my model the overdraft request is made from the user (Customer object) to the assocaited branch. The branch then have some distribution among its own managers, that it then redirects the overdraft request to. 
+
+Each manager gets a queue of overdraft requests, which they can review and approve/disapprove which then sets the overdraft value in the Customer object associated. 
+
+The branch distribution of overdraft requests in this implementation will be simple (just picking one) but could easily be expanded to have all managers report their queues, then select the one with the smallest queue or something like that.
