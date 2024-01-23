@@ -6,7 +6,7 @@ Domain model include both core and extension
 |CurrentAccount             |                                                                                                                  |        |
 |SavingsAccount             |                                                                                                                  |        |
 |                           | `Deposit(Guid guid, double amount, Customer customer), Withdraw(Guid guid, double amount, Customer customer)`    |        |
-|Bank 			            | `GenerateBankStatement(?)`																					   |        |
+|Bank 			            | `GenerateBankStatement()`																					   |        |
 |                           | `TransactionStatement()`																						   |        |
 |                           | `GetBalance()`																								   |        |
 |                           | `RequestOverdraft(Customer customer, Guid guid, double amount)`												   |        |
