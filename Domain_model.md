@@ -28,8 +28,11 @@ Class: Bank
 string branch
 
 Methods:
-public float approveOverdraft
-return: the approved overdraft
+public float returnOverdraft
+return: the approved overdraft if approved
+
+public bool approveOverdraft
+return: true if approved
 
 enum accountType: currentAccount, savingsAccount
 
@@ -54,7 +57,8 @@ public Transaction withdraw(float amount) take overdraft into consideration
 
 public Transaction deposit(float amount)
 
-public void requestOverdraft()
+public float requestOverdraft(float reqOverdraft)
+return: reqOverdraft if approved
 
 public void printStatement()
 

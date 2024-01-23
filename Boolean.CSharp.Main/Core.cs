@@ -44,19 +44,20 @@ namespace Boolean.CSharp.Main
     }
     public class Customer
     {
+        private string _branch;
         private List<Account> accounts = new List<Account>();
         public List<Account> Accounts { get { return accounts; } }
-        public Account createAccount(int accountNr, AccountType type)
+        public Account createAccount(int accountNr, AccountType type, string branchName)
         {
             if(type == AccountType.current)
             {
-                CurrentAccount account = new CurrentAccount(accountNr);
+                CurrentAccount account = new CurrentAccount(accountNr, branchName);
                 accounts.Add(account);
                 return account;
             }
             else
             {
-                SavingsAccount account = new SavingsAccount(accountNr);
+                SavingsAccount account = new SavingsAccount(accountNr, branchName);
                 accounts.Add(account);
                 return account;
             }
@@ -64,15 +65,17 @@ namespace Boolean.CSharp.Main
     }
     public abstract class Account
     {
+        Bank _bankConnection;
         private int _accountNr;
-        private float _overdraft = 0;
+        private float _overdraft;
         private List<Transaction> transactions = new List<Transaction>();
         public List<Transaction> Transactions { get { return transactions; } }
         public int AccountNumber { get { return _accountNr; } }
         public float Overdraft { get { return _overdraft; }}
-        public Account(int accountNr)
+        public Account(int accountNr, string branchName)
         {
             _accountNr = accountNr;
+            _bankConnection = new Bank(branchName);
         }
         public float getTotal()
         {
@@ -94,10 +97,10 @@ namespace Boolean.CSharp.Main
         {
             if (amount > 0)
             {
-                if(amount <= getTotal())
+                if(amount <= getTotal() + Overdraft)
                 {
                     DateTime time = DateTime.Now;
-                    Transaction tempT = new Transaction(amount, TransactionType.withdraw, time.ToString("D"));
+                    Transaction tempT = new Transaction(amount, TransactionType.withdraw, time.ToString("D"), getTotal()-amount);
                     Transactions.Add(tempT);
                     return tempT;
                 }
@@ -116,7 +119,7 @@ namespace Boolean.CSharp.Main
             if(amount > 0)
             {
                 DateTime time = DateTime.Now;
-                Transaction tempT = new Transaction(amount, TransactionType.deposit, time.ToString("D"));
+                Transaction tempT = new Transaction(amount, TransactionType.deposit, time.ToString("D"), getTotal() + amount);
                 Transactions.Add(tempT);
                 return tempT;
             }
@@ -125,13 +128,17 @@ namespace Boolean.CSharp.Main
                 throw new DepositException("Deposit amount must be a positive floating point number!");
             }
         }
+        public float requestOverdraft(float reqOverdraft)
+        {
+            return _overdraft = _bankConnection.returnOverdraft(reqOverdraft);
+        }
         public List<string> printStatement()
         {
-            Console.WriteLine("       date              || credit   ||   debit   ||  balance  ");
+            Console.WriteLine("       date               || credit   ||   debit   ||  balance  ");
             List<string> statements = new List<string>();
             foreach(Transaction t in transactions)
             {
-                statements.Add($"{t.Time}  ||  {t.Amount}     ||  {t.Type}  ||  {getTotal()}  ");
+                statements.Add($"{t.Time}  ||  {t.Amount}     ||  {t.Type}  ||  {t.NewTotal}  ");
             }
             foreach(var t in statements)
             {
@@ -142,14 +149,14 @@ namespace Boolean.CSharp.Main
     }
     public class CurrentAccount : Account
     {
-        public CurrentAccount(int accountNr) : base(accountNr)
+        public CurrentAccount(int accountNr, string branchName) : base(accountNr, branchName)
         {
 
         }
     }
     public class SavingsAccount : Account
     {
-        public SavingsAccount(int accountNr) : base(accountNr)
+        public SavingsAccount(int accountNr, string branchName) : base(accountNr, branchName)
         {
 
         }
@@ -164,14 +171,17 @@ namespace Boolean.CSharp.Main
         private float _amount;
         private TransactionType _transactionType;
         private string _time;
+        private float _newTotal;
         public float Amount { get { return _amount; } }
         public TransactionType Type { get { return _transactionType; } }
         public string Time { get { return _time; } }
-        public Transaction(float amount, TransactionType type, string timeStamp)
+        public float NewTotal { get { return _newTotal; } }
+        public Transaction(float amount, TransactionType type, string timeStamp, float newTotal)
         {
             _amount = amount;
             _transactionType = type;
             _time = timeStamp;
+            _newTotal = newTotal;
         }
     }
     public class WithdrawException : Exception
