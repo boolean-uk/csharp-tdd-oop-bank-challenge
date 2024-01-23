@@ -18,4 +18,10 @@ namespace Boolean.CSharp.Main
         Credit,
         Debit
     }
+    public enum OverdraftStatus
+    {
+        Pending,
+        Denied,
+        Approved
+    }
 }

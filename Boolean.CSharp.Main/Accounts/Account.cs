@@ -1,4 +1,5 @@
-﻿using Boolean.CSharp.Main.Transactions;
+﻿using Boolean.CSharp.Main.Overdraft;
+using Boolean.CSharp.Main.Transactions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace Boolean.CSharp.Main.Accounts
         private double _balance = 0d;
         private Branch _branch;
         private readonly List<ITransaction> _transactions = [];
+        private readonly List<OverdraftObj> _overdraftRequests = [];
 
         public Account(Branch branch, string name)
         {
@@ -27,9 +29,20 @@ namespace Boolean.CSharp.Main.Accounts
             _name = name;
         }
 
-        public bool makeTransaction(TransactionType type, double amount)
+        public bool MakeTransaction(TransactionType type, double amount)
         {
-            if (type == TransactionType.Debit && amount > _balance || amount <0)
+            double overDraft;
+            if (_overdraftRequests.OrderByDescending(r => r.DateTime).Any(r => r.OverdraftStatus == OverdraftStatus.Approved))
+            {
+                overDraft = (double)_overdraftRequests.OrderByDescending(r => r.DateTime).FirstOrDefault(r => r.OverdraftStatus == OverdraftStatus.Approved).Amount;
+            }
+            else
+            {
+                overDraft = 0;
+            }
+
+            if (type == TransactionType.Debit
+                 && amount > _balance + overDraft || amount < 0)
             {
                 return false;
             }
@@ -42,6 +55,20 @@ namespace Boolean.CSharp.Main.Accounts
         public List<ITransaction> GetTransactions()
         {
             return _transactions;
+        }
+
+        public double GetBalance() 
+        {
+            if (_transactions.Count == 0) return 0d;
+            return _transactions.OrderByDescending(t=>t.Date).FirstOrDefault().NewBalance; 
+        }
+
+        public OverdraftObj CreateOverdraftRequest(double amount)
+        {
+            if (amount < 0){ return null; }
+            OverdraftObj result = new OverdraftObj(_name,amount);
+            _overdraftRequests.Add(result);
+            return result;
         }
 
         /// <summary>
@@ -60,5 +87,6 @@ namespace Boolean.CSharp.Main.Accounts
                         transaction.NewBalance);
             };
         }
+
     }
 }
