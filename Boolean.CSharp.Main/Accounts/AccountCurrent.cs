@@ -10,11 +10,8 @@ namespace Boolean.CSharp.Main.Accounts
 {
     public class AccountCurrent : Account
     {
-        private ICustomer _customer;
-
-        public AccountCurrent(ICustomer customer)
+        public AccountCurrent(ICustomer customer) : base(customer)
         {
-            this._customer = customer;
         }
 
     }

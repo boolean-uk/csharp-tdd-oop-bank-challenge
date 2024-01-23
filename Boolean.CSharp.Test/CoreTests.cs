@@ -55,7 +55,7 @@ namespace Boolean.CSharp.Test
             DateTime currentDate = DateTime.Now; 
 
             //Act
-            decimal expectedResultDouble = currentAccount.Balance;
+            decimal expectedResultDouble = currentAccount.GetBalance();
             decimal actualResultDouble = 2500;
 
             string expectedResultString = currentAccount.GenerateBankStatement();
@@ -72,6 +72,33 @@ namespace Boolean.CSharp.Test
             //Assert
             Assert.That(expectedResultDouble, Is.EqualTo(actualResultDouble));
             Assert.That(expectedResultString, Is.EqualTo(actualResultString));
+        }
+
+        [Test]
+        public void Test_04_GetBalance_BasedOnTransactionHistory_LotsaTransactions()
+        {
+            //Arrange
+            Customer customer = new Customer("Andreas Lauvhjell");
+            AccountCurrent currentAccount = new AccountCurrent(customer);
+            for(int i = 0; i < 20; i++) //10x each
+            {
+                if(!(i%2 == 0))
+                {
+                    currentAccount.Deposit(1900);
+                }
+                else
+                {
+                    currentAccount.Withdraw(1000);
+                }
+            }
+            currentAccount.Deposit(1);
+
+            //Act
+            decimal expectedResult = currentAccount.GetBalance();
+            decimal actualResult = 9001;
+
+            //Assert
+            Assert.That(expectedResult, Is.EqualTo(actualResult));
         }
     }
 }

@@ -24,4 +24,12 @@ namespace Boolean.CSharp.Main.enums
         Approved,
         Refused
     }
+
+    public enum Branch
+    {
+        Retail,
+        Commercial,
+        Private,
+        Pension
+    }
 }
