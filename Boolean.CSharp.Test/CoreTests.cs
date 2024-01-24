@@ -85,11 +85,11 @@ namespace Boolean.CSharp.Test
             user.CreateCurrentAccount();
             user.CurrentAccount.Deposit(deposit);
             user.CurrentAccount.Withdraw(withdraw);
-            bool Result = user.CurrentAccount.GenerateBankStatement();
+            string Result = user.CurrentAccount.GenerateBankStatement();
             decimal sum = deposit - withdraw;
 
             Assert.IsNotNull(user.CurrentAccount);
-            Assert.That(Result == true);
+            Assert.That(Result.Length >= 20);
             Assert.That(user.CurrentAccount.Balance == sum);
         }
 

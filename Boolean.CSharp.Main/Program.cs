@@ -7,7 +7,7 @@ using System.Reflection;
 
 
 
-        HeadQuarters bank = new HeadQuarters();
+HeadQuarters bank = new HeadQuarters();
         Private user = new Private(bank.GenerateUserId());
         Manager BankManager = new Manager(bank.GenerateUserId());
         user.CreateCurrentAccount();
@@ -31,3 +31,4 @@ using System.Reflection;
         Console.WriteLine("Engineer Customer - balance Calculated by transaction history: {0}", Engineer.CurrentAccount.CalculateBalance());
         Engineer.CurrentAccount.Withdraw(500);
         Console.WriteLine("Engineer Customer - balance Calculated by transaction history: {0}", Engineer.CurrentAccount.CalculateBalance());
+

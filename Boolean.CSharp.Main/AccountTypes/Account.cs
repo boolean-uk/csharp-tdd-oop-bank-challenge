@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
+using Boolean.CSharp.Main;
+
 
 namespace Boolean.CSharp.Main
 {
@@ -110,9 +112,9 @@ namespace Boolean.CSharp.Main
 
             return newBalance;
         }
-        public bool GenerateBankStatement()
+        public string GenerateBankStatement()
         {
-            
+            StringBuilder sb = new StringBuilder();
             _bankTransactions.Sort((a, b) => DateTime.Compare(a.Date, b.Date));
 
             string TransactionId = "Id";
@@ -120,8 +122,9 @@ namespace Boolean.CSharp.Main
                 string Credit = "Credit";
                 string Debit = "Debit";
                 string Balance = "Balance";
-
-                Console.WriteLine("\n{0,-5}\t|| {1,-10} || {2,-6}\t|| {3,-6} || {4}", TransactionId,Date,Credit,Debit,Balance);
+            sb.Append("New Bankstatement\n");
+            Console.WriteLine($"\n{TransactionId,-5}\t|| {Date,-10} || {Credit,-6}\t|| {Debit,-6} || {Balance}");
+            sb.Append($"\n{TransactionId,-5}\t|| {Date,-10} || {Credit,-6}\t|| {Debit,-6} || {Balance}");
                 foreach(Transaction transaction in _bankTransactions)
                 {
                     TransactionId = transaction.TransactionId.ToString();
@@ -137,9 +140,11 @@ namespace Boolean.CSharp.Main
                     }
                     Balance = transaction.Balance.ToString();
                 Console.WriteLine("{0,-5}\t|| {1,-10} || {2,-6}\t|| {3,-6} || {4}", TransactionId, Date, Credit, Debit, Balance);
-
+                sb.Append($"\n{TransactionId,-5}\t|| {Date,-10} || {Credit,-6}\t|| {Debit,-6} || {Balance}");
             }
-            return true;
+            
+            
+            return sb.ToString();
         }
 
         public void SortTransactionList(List<Transaction> list)

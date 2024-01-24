@@ -1,0 +1,1183 @@
+{
+  "version": "5.17.0",
+  "commands": {
+    "feedback": {
+      "id": "feedback",
+      "description": "provide feedback to the CLI team",
+      "strict": true,
+      "pluginName": "twilio-cli",
+      "pluginAlias": "twilio-cli",
+      "pluginType": "core",
+      "aliases": [],
+      "flags": {},
+      "args": {}
+    },
+    "login": {
+      "id": "login",
+      "description": "create a new profile to store Twilio Account credentials and configuration",
+      "strict": true,
+      "pluginName": "twilio-cli",
+      "pluginAlias": "twilio-cli",
+      "pluginType": "core",
+      "aliases": [
+        "profiles:create",
+        "profiles:add"
+      ],
+      "flags": {
+        "cli-log-level": {
+          "name": "cli-log-level",
+          "type": "option",
+          "char": "l",
+          "description": "Level of logging messages.",
+          "helpLabel": "-l",
+          "helpValue": "(debug|info|warn|error|none)",
+          "multiple": false,
+          "options": [
+            "debug",
+            "info",
+            "warn",
+            "error",
+            "none"
+          ],
+          "default": "info"
+        },
+        "cli-output-format": {
+          "name": "cli-output-format",
+          "type": "option",
+          "char": "o",
+          "description": "Format of command output.",
+          "helpLabel": "-o",
+          "helpValue": "(columns|json|tsv|none)",
+          "multiple": false,
+          "options": [
+            "columns",
+            "json",
+            "tsv",
+            "none"
+          ],
+          "default": "columns"
+        },
+        "silent": {
+          "name": "silent",
+          "type": "boolean",
+          "description": "Suppress  output and logs. This is a shorthand for \"-l none -o none\".",
+          "allowNo": false
+        },
+        "auth-token": {
+          "name": "auth-token",
+          "type": "option",
+          "description": "Your Twilio Auth Token for your Twilio Account or Subaccount.",
+          "multiple": false
+        },
+        "force": {
+          "name": "force",
+          "type": "boolean",
+          "char": "f",
+          "description": "Force overwriting existing profile credentials.",
+          "allowNo": false
+        },
+        "skip-parameter-validation": {
+          "name": "skip-parameter-validation",
+          "type": "boolean",
+          "hidden": true,
+          "allowNo": false
+        },
+        "region": {
+          "name": "region",
+          "type": "option",
+          "description": "Twilio region to use.",
+          "multiple": false
+        },
+        "profile": {
+          "name": "profile",
+          "type": "option",
+          "char": "p",
+          "description": "Shorthand identifier for your profile.",
+          "multiple": false
+        }
+      },
+      "args": {
+        "account-sid": {
+          "name": "account-sid",
+          "description": "The Account SID for your Twilio Account or Subaccount."
+        }
+      }
+    },
+    "zork": {
+      "id": "zork",
+      "description": "what could this be?",
+      "strict": true,
+      "pluginName": "twilio-cli",
+      "pluginAlias": "twilio-cli",
+      "pluginType": "core",
+      "hidden": true,
+      "aliases": [],
+      "flags": {
+        "cli-log-level": {
+          "name": "cli-log-level",
+          "type": "option",
+          "char": "l",
+          "description": "Level of logging messages.",
+          "helpLabel": "-l",
+          "helpValue": "(debug|info|warn|error|none)",
+          "multiple": false,
+          "options": [
+            "debug",
+            "info",
+            "warn",
+            "error",
+            "none"
+          ],
+          "default": "info"
+        },
+        "cli-output-format": {
+          "name": "cli-output-format",
+          "type": "option",
+          "char": "o",
+          "description": "Format of command output.",
+          "helpLabel": "-o",
+          "helpValue": "(columns|json|tsv|none)",
+          "multiple": false,
+          "options": [
+            "columns",
+            "json",
+            "tsv",
+            "none"
+          ],
+          "default": "columns"
+        },
+        "silent": {
+          "name": "silent",
+          "type": "boolean",
+          "description": "Suppress  output and logs. This is a shorthand for \"-l none -o none\".",
+          "allowNo": false
+        }
+      },
+      "args": {}
+    },
+    "config:list": {
+      "id": "config:list",
+      "description": "list Twilio CLI configurations.",
+      "strict": true,
+      "pluginName": "twilio-cli",
+      "pluginAlias": "twilio-cli",
+      "pluginType": "core",
+      "aliases": [],
+      "flags": {
+        "cli-log-level": {
+          "name": "cli-log-level",
+          "type": "option",
+          "char": "l",
+          "description": "Level of logging messages.",
+          "helpLabel": "-l",
+          "helpValue": "(debug|info|warn|error|none)",
+          "multiple": false,
+          "options": [
+            "debug",
+            "info",
+            "warn",
+            "error",
+            "none"
+          ],
+          "default": "info"
+        },
+        "cli-output-format": {
+          "name": "cli-output-format",
+          "type": "option",
+          "char": "o",
+          "description": "Format of command output.",
+          "helpLabel": "-o",
+          "helpValue": "(columns|json|tsv|none)",
+          "multiple": false,
+          "options": [
+            "columns",
+            "json",
+            "tsv",
+            "none"
+          ],
+          "default": "columns"
+        },
+        "silent": {
+          "name": "silent",
+          "type": "boolean",
+          "description": "Suppress  output and logs. This is a shorthand for \"-l none -o none\".",
+          "allowNo": false
+        }
+      },
+      "args": {}
+    },
+    "config:set": {
+      "id": "config:set",
+      "description": "update Twilio CLI configurations.",
+      "strict": true,
+      "pluginName": "twilio-cli",
+      "pluginAlias": "twilio-cli",
+      "pluginType": "core",
+      "aliases": [],
+      "flags": {
+        "cli-log-level": {
+          "name": "cli-log-level",
+          "type": "option",
+          "char": "l",
+          "description": "Level of logging messages.",
+          "helpLabel": "-l",
+          "helpValue": "(debug|info|warn|error|none)",
+          "multiple": false,
+          "options": [
+            "debug",
+            "info",
+            "warn",
+            "error",
+            "none"
+          ],
+          "default": "info"
+        },
+        "cli-output-format": {
+          "name": "cli-output-format",
+          "type": "option",
+          "char": "o",
+          "description": "Format of command output.",
+          "helpLabel": "-o",
+          "helpValue": "(columns|json|tsv|none)",
+          "multiple": false,
+          "options": [
+            "columns",
+            "json",
+            "tsv",
+            "none"
+          ],
+          "default": "columns"
+        },
+        "silent": {
+          "name": "silent",
+          "type": "boolean",
+          "description": "Suppress  output and logs. This is a shorthand for \"-l none -o none\".",
+          "allowNo": false
+        },
+        "edge": {
+          "name": "edge",
+          "type": "option",
+          "char": "e",
+          "description": "Sets an Edge configuration.",
+          "multiple": false
+        },
+        "require-profile-input": {
+          "name": "require-profile-input",
+          "type": "boolean",
+          "description": "Whether the profile flag for Twilio CLI commands is required or not.",
+          "allowNo": true
+        }
+      },
+      "args": {}
+    },
+    "email:send": {
+      "id": "email:send",
+      "description": "sends emails to single or multiple recipients using Twilio SendGrid",
+      "strict": true,
+      "pluginName": "twilio-cli",
+      "pluginAlias": "twilio-cli",
+      "pluginType": "core",
+      "aliases": [],
+      "flags": {
+        "cli-log-level": {
+          "name": "cli-log-level",
+          "type": "option",
+          "char": "l",
+          "description": "Level of logging messages.",
+          "helpLabel": "-l",
+          "helpValue": "(debug|info|warn|error|none)",
+          "multiple": false,
+          "options": [
+            "debug",
+            "info",
+            "warn",
+            "error",
+            "none"
+          ],
+          "default": "info"
+        },
+        "cli-output-format": {
+          "name": "cli-output-format",
+          "type": "option",
+          "char": "o",
+          "description": "Format of command output.",
+          "helpLabel": "-o",
+          "helpValue": "(columns|json|tsv|none)",
+          "multiple": false,
+          "options": [
+            "columns",
+            "json",
+            "tsv",
+            "none"
+          ],
+          "default": "columns"
+        },
+        "silent": {
+          "name": "silent",
+          "type": "boolean",
+          "description": "Suppress  output and logs. This is a shorthand for \"-l none -o none\".",
+          "allowNo": false
+        },
+        "to": {
+          "name": "to",
+          "type": "option",
+          "description": "Email address of recipient (for multiple email addresses separate each email with a comma).",
+          "multiple": false
+        },
+        "from": {
+          "name": "from",
+          "type": "option",
+          "description": "Email address of the sender.",
+          "multiple": false
+        },
+        "subject": {
+          "name": "subject",
+          "type": "option",
+          "description": "The subject line for an email.",
+          "multiple": false
+        },
+        "text": {
+          "name": "text",
+          "type": "option",
+          "description": "Text to send within the email body.",
+          "multiple": false
+        },
+        "attachment": {
+          "name": "attachment",
+          "type": "option",
+          "description": "Path for the file that you want to attach.",
+          "multiple": false,
+          "exclusive": [
+            "no-attachment"
+          ]
+        },
+        "no-attachment": {
+          "name": "no-attachment",
+          "type": "boolean",
+          "description": "Do not include or prompt for an attachment.",
+          "allowNo": false,
+          "exclusive": [
+            "attachment"
+          ]
+        }
+      },
+      "args": {}
+    },
+    "email:set": {
+      "id": "email:set",
+      "description": "sets a default sending email address and subject line",
+      "strict": true,
+      "pluginName": "twilio-cli",
+      "pluginAlias": "twilio-cli",
+      "pluginType": "core",
+      "aliases": [],
+      "flags": {
+        "cli-log-level": {
+          "name": "cli-log-level",
+          "type": "option",
+          "char": "l",
+          "description": "Level of logging messages.",
+          "helpLabel": "-l",
+          "helpValue": "(debug|info|warn|error|none)",
+          "multiple": false,
+          "options": [
+            "debug",
+            "info",
+            "warn",
+            "error",
+            "none"
+          ],
+          "default": "info"
+        },
+        "cli-output-format": {
+          "name": "cli-output-format",
+          "type": "option",
+          "char": "o",
+          "description": "Format of command output.",
+          "helpLabel": "-o",
+          "helpValue": "(columns|json|tsv|none)",
+          "multiple": false,
+          "options": [
+            "columns",
+            "json",
+            "tsv",
+            "none"
+          ],
+          "default": "columns"
+        },
+        "silent": {
+          "name": "silent",
+          "type": "boolean",
+          "description": "Suppress  output and logs. This is a shorthand for \"-l none -o none\".",
+          "allowNo": false
+        },
+        "from": {
+          "name": "from",
+          "type": "option",
+          "description": "Default email address of the sender",
+          "multiple": false
+        },
+        "subject": {
+          "name": "subject",
+          "type": "option",
+          "description": "Default subject line for all emails",
+          "multiple": false
+        }
+      },
+      "args": {}
+    },
+    "phone-numbers:list": {
+      "id": "phone-numbers:list",
+      "description": "show what Twilio phone numbers you have configured",
+      "strict": true,
+      "pluginName": "twilio-cli",
+      "pluginAlias": "twilio-cli",
+      "pluginType": "core",
+      "aliases": [],
+      "flags": {
+        "cli-log-level": {
+          "name": "cli-log-level",
+          "type": "option",
+          "char": "l",
+          "description": "Level of logging messages.",
+          "helpLabel": "-l",
+          "helpValue": "(debug|info|warn|error|none)",
+          "multiple": false,
+          "options": [
+            "debug",
+            "info",
+            "warn",
+            "error",
+            "none"
+          ],
+          "default": "info"
+        },
+        "cli-output-format": {
+          "name": "cli-output-format",
+          "type": "option",
+          "char": "o",
+          "description": "Format of command output.",
+          "helpLabel": "-o",
+          "helpValue": "(columns|json|tsv|none)",
+          "multiple": false,
+          "options": [
+            "columns",
+            "json",
+            "tsv",
+            "none"
+          ],
+          "default": "columns"
+        },
+        "silent": {
+          "name": "silent",
+          "type": "boolean",
+          "description": "Suppress  output and logs. This is a shorthand for \"-l none -o none\".",
+          "allowNo": false
+        },
+        "profile": {
+          "name": "profile",
+          "type": "option",
+          "char": "p",
+          "description": "Shorthand identifier for your profile.",
+          "multiple": false
+        },
+        "properties": {
+          "name": "properties",
+          "type": "option",
+          "description": "The incomingPhoneNumber object properties you would like to display (JSON output always shows all properties).",
+          "multiple": false,
+          "default": "sid, phoneNumber, friendlyName"
+        },
+        "account-sid": {
+          "name": "account-sid",
+          "type": "option",
+          "description": "Access resources for the specified account.",
+          "multiple": false
+        },
+        "no-header": {
+          "name": "no-header",
+          "type": "boolean",
+          "description": "Skip including of headers while listing the data.",
+          "allowNo": false
+        }
+      },
+      "args": {}
+    },
+    "phone-numbers:update": {
+      "id": "phone-numbers:update",
+      "description": "update the properties of a Twilio phone number",
+      "strict": true,
+      "pluginName": "twilio-cli",
+      "pluginAlias": "twilio-cli",
+      "pluginType": "core",
+      "aliases": [],
+      "flags": {
+        "cli-log-level": {
+          "name": "cli-log-level",
+          "type": "option",
+          "char": "l",
+          "description": "Level of logging messages.",
+          "helpLabel": "-l",
+          "helpValue": "(debug|info|warn|error|none)",
+          "multiple": false,
+          "options": [
+            "debug",
+            "info",
+            "warn",
+            "error",
+            "none"
+          ],
+          "default": "info"
+        },
+        "cli-output-format": {
+          "name": "cli-output-format",
+          "type": "option",
+          "char": "o",
+          "description": "Format of command output.",
+          "helpLabel": "-o",
+          "helpValue": "(columns|json|tsv|none)",
+          "multiple": false,
+          "options": [
+            "columns",
+            "json",
+            "tsv",
+            "none"
+          ],
+          "default": "columns"
+        },
+        "silent": {
+          "name": "silent",
+          "type": "boolean",
+          "description": "Suppress  output and logs. This is a shorthand for \"-l none -o none\".",
+          "allowNo": false
+        },
+        "profile": {
+          "name": "profile",
+          "type": "option",
+          "char": "p",
+          "description": "Shorthand identifier for your profile.",
+          "multiple": false
+        },
+        "friendly-name": {
+          "name": "friendly-name",
+          "type": "option",
+          "description": "A human readable descriptive text for this resource, up to 64 characters long.",
+          "multiple": false
+        },
+        "sms-url": {
+          "name": "sms-url",
+          "type": "option",
+          "description": "The URL that Twilio should request when somebody sends an SMS to the new phone number.",
+          "multiple": false
+        },
+        "sms-method": {
+          "name": "sms-method",
+          "type": "option",
+          "description": "The HTTP method Twilio will use when making requests to the SmsUrl.",
+          "helpValue": "(GET|POST)",
+          "multiple": false,
+          "options": [
+            "GET",
+            "POST"
+          ]
+        },
+        "sms-fallback-url": {
+          "name": "sms-fallback-url",
+          "type": "option",
+          "description": "A URL that Twilio will request if an error occurs requesting or executing the TwiML defined by SmsUrl.",
+          "multiple": false
+        },
+        "sms-fallback-method": {
+          "name": "sms-fallback-method",
+          "type": "option",
+          "description": "The HTTP method that should be used to request the SmsFallbackUrl.",
+          "helpValue": "(GET|POST)",
+          "multiple": false,
+          "options": [
+            "GET",
+            "POST"
+          ]
+        },
+        "voice-url": {
+          "name": "voice-url",
+          "type": "option",
+          "description": "The URL that Twilio should request when somebody dials the phone number.",
+          "multiple": false
+        },
+        "voice-method": {
+          "name": "voice-method",
+          "type": "option",
+          "description": "The HTTP method Twilio will use when making requests to the VoiceUrl.",
+          "helpValue": "(GET|POST)",
+          "multiple": false,
+          "options": [
+            "GET",
+            "POST"
+          ]
+        },
+        "voice-fallback-url": {
+          "name": "voice-fallback-url",
+          "type": "option",
+          "description": "A URL that Twilio will request if an error occurs requesting or executing the TwiML defined by VoiceUrl.",
+          "multiple": false
+        },
+        "voice-fallback-method": {
+          "name": "voice-fallback-method",
+          "type": "option",
+          "description": "The HTTP method Twilio will use when requesting the VoiceFallbackUrl.",
+          "helpValue": "(GET|POST)",
+          "multiple": false,
+          "options": [
+            "GET",
+            "POST"
+          ]
+        },
+        "account-sid": {
+          "name": "account-sid",
+          "type": "option",
+          "description": "Access resources for the specified account.",
+          "multiple": false
+        }
+      },
+      "args": {
+        "phone-number": {
+          "name": "phone-number",
+          "description": "The SID or E.164 formatted phone number you wish to update.",
+          "required": true
+        }
+      },
+      "PropertyFlags": {
+        "friendly-name": {
+          "description": "A human readable descriptive text for this resource, up to 64 characters long.",
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        },
+        "sms-url": {
+          "description": "The URL that Twilio should request when somebody sends an SMS to the new phone number.",
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        },
+        "sms-method": {
+          "helpValue": "(GET|POST)",
+          "options": [
+            "GET",
+            "POST"
+          ],
+          "description": "The HTTP method Twilio will use when making requests to the SmsUrl.",
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        },
+        "sms-fallback-url": {
+          "description": "A URL that Twilio will request if an error occurs requesting or executing the TwiML defined by SmsUrl.",
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        },
+        "sms-fallback-method": {
+          "helpValue": "(GET|POST)",
+          "options": [
+            "GET",
+            "POST"
+          ],
+          "description": "The HTTP method that should be used to request the SmsFallbackUrl.",
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        },
+        "voice-url": {
+          "description": "The URL that Twilio should request when somebody dials the phone number.",
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        },
+        "voice-method": {
+          "helpValue": "(GET|POST)",
+          "options": [
+            "GET",
+            "POST"
+          ],
+          "description": "The HTTP method Twilio will use when making requests to the VoiceUrl.",
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        },
+        "voice-fallback-url": {
+          "description": "A URL that Twilio will request if an error occurs requesting or executing the TwiML defined by VoiceUrl.",
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        },
+        "voice-fallback-method": {
+          "helpValue": "(GET|POST)",
+          "options": [
+            "GET",
+            "POST"
+          ],
+          "description": "The HTTP method Twilio will use when requesting the VoiceFallbackUrl.",
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "UrlFlags": [
+        "smsUrl",
+        "smsFallbackUrl",
+        "voiceUrl",
+        "voiceFallbackUrl"
+      ]
+    },
+    "plugins:available": {
+      "id": "plugins:available",
+      "description": "list available plugins for installation",
+      "strict": true,
+      "pluginName": "twilio-cli",
+      "pluginAlias": "twilio-cli",
+      "pluginType": "core",
+      "aliases": [],
+      "flags": {
+        "cli-log-level": {
+          "name": "cli-log-level",
+          "type": "option",
+          "char": "l",
+          "description": "Level of logging messages.",
+          "helpLabel": "-l",
+          "helpValue": "(debug|info|warn|error|none)",
+          "multiple": false,
+          "options": [
+            "debug",
+            "info",
+            "warn",
+            "error",
+            "none"
+          ],
+          "default": "info"
+        },
+        "cli-output-format": {
+          "name": "cli-output-format",
+          "type": "option",
+          "char": "o",
+          "description": "Format of command output.",
+          "helpLabel": "-o",
+          "helpValue": "(columns|json|tsv|none)",
+          "multiple": false,
+          "options": [
+            "columns",
+            "json",
+            "tsv",
+            "none"
+          ],
+          "default": "columns"
+        },
+        "silent": {
+          "name": "silent",
+          "type": "boolean",
+          "description": "Suppress  output and logs. This is a shorthand for \"-l none -o none\".",
+          "allowNo": false
+        }
+      },
+      "args": {}
+    },
+    "profiles:create": {
+      "id": "profiles:create",
+      "description": "create a new profile to store Twilio Account credentials and configuration",
+      "strict": true,
+      "pluginName": "twilio-cli",
+      "pluginAlias": "twilio-cli",
+      "pluginType": "core",
+      "aliases": [
+        "profiles:add",
+        "login"
+      ],
+      "flags": {
+        "cli-log-level": {
+          "name": "cli-log-level",
+          "type": "option",
+          "char": "l",
+          "description": "Level of logging messages.",
+          "helpLabel": "-l",
+          "helpValue": "(debug|info|warn|error|none)",
+          "multiple": false,
+          "options": [
+            "debug",
+            "info",
+            "warn",
+            "error",
+            "none"
+          ],
+          "default": "info"
+        },
+        "cli-output-format": {
+          "name": "cli-output-format",
+          "type": "option",
+          "char": "o",
+          "description": "Format of command output.",
+          "helpLabel": "-o",
+          "helpValue": "(columns|json|tsv|none)",
+          "multiple": false,
+          "options": [
+            "columns",
+            "json",
+            "tsv",
+            "none"
+          ],
+          "default": "columns"
+        },
+        "silent": {
+          "name": "silent",
+          "type": "boolean",
+          "description": "Suppress  output and logs. This is a shorthand for \"-l none -o none\".",
+          "allowNo": false
+        },
+        "auth-token": {
+          "name": "auth-token",
+          "type": "option",
+          "description": "Your Twilio Auth Token for your Twilio Account or Subaccount.",
+          "multiple": false
+        },
+        "force": {
+          "name": "force",
+          "type": "boolean",
+          "char": "f",
+          "description": "Force overwriting existing profile credentials.",
+          "allowNo": false
+        },
+        "skip-parameter-validation": {
+          "name": "skip-parameter-validation",
+          "type": "boolean",
+          "hidden": true,
+          "allowNo": false
+        },
+        "region": {
+          "name": "region",
+          "type": "option",
+          "description": "Twilio region to use.",
+          "multiple": false
+        },
+        "profile": {
+          "name": "profile",
+          "type": "option",
+          "char": "p",
+          "description": "Shorthand identifier for your profile.",
+          "multiple": false
+        }
+      },
+      "args": {
+        "account-sid": {
+          "name": "account-sid",
+          "description": "The Account SID for your Twilio Account or Subaccount."
+        }
+      }
+    },
+    "profiles:list": {
+      "id": "profiles:list",
+      "description": "show what profiles you have configured",
+      "strict": true,
+      "pluginName": "twilio-cli",
+      "pluginAlias": "twilio-cli",
+      "pluginType": "core",
+      "aliases": [],
+      "flags": {
+        "cli-log-level": {
+          "name": "cli-log-level",
+          "type": "option",
+          "char": "l",
+          "description": "Level of logging messages.",
+          "helpLabel": "-l",
+          "helpValue": "(debug|info|warn|error|none)",
+          "multiple": false,
+          "options": [
+            "debug",
+            "info",
+            "warn",
+            "error",
+            "none"
+          ],
+          "default": "info"
+        },
+        "cli-output-format": {
+          "name": "cli-output-format",
+          "type": "option",
+          "char": "o",
+          "description": "Format of command output.",
+          "helpLabel": "-o",
+          "helpValue": "(columns|json|tsv|none)",
+          "multiple": false,
+          "options": [
+            "columns",
+            "json",
+            "tsv",
+            "none"
+          ],
+          "default": "columns"
+        },
+        "silent": {
+          "name": "silent",
+          "type": "boolean",
+          "description": "Suppress  output and logs. This is a shorthand for \"-l none -o none\".",
+          "allowNo": false
+        },
+        "no-header": {
+          "name": "no-header",
+          "type": "boolean",
+          "description": "Skip including of headers while listing the data.",
+          "allowNo": false
+        }
+      },
+      "args": {}
+    },
+    "profiles:remove": {
+      "id": "profiles:remove",
+      "description": "select which profile to remove",
+      "strict": true,
+      "pluginName": "twilio-cli",
+      "pluginAlias": "twilio-cli",
+      "pluginType": "core",
+      "aliases": [],
+      "flags": {
+        "cli-log-level": {
+          "name": "cli-log-level",
+          "type": "option",
+          "char": "l",
+          "description": "Level of logging messages.",
+          "helpLabel": "-l",
+          "helpValue": "(debug|info|warn|error|none)",
+          "multiple": false,
+          "options": [
+            "debug",
+            "info",
+            "warn",
+            "error",
+            "none"
+          ],
+          "default": "info"
+        },
+        "cli-output-format": {
+          "name": "cli-output-format",
+          "type": "option",
+          "char": "o",
+          "description": "Format of command output.",
+          "helpLabel": "-o",
+          "helpValue": "(columns|json|tsv|none)",
+          "multiple": false,
+          "options": [
+            "columns",
+            "json",
+            "tsv",
+            "none"
+          ],
+          "default": "columns"
+        },
+        "silent": {
+          "name": "silent",
+          "type": "boolean",
+          "description": "Suppress  output and logs. This is a shorthand for \"-l none -o none\".",
+          "allowNo": false
+        },
+        "profile": {
+          "name": "profile",
+          "type": "option",
+          "char": "p",
+          "description": "Shorthand identifier for your profile.",
+          "multiple": false
+        }
+      },
+      "args": {
+        "profile": {
+          "name": "profile",
+          "description": "Shorthand identifier for your profile",
+          "required": true
+        }
+      }
+    },
+    "profiles:use": {
+      "id": "profiles:use",
+      "description": "select which profile to use",
+      "strict": true,
+      "pluginName": "twilio-cli",
+      "pluginAlias": "twilio-cli",
+      "pluginType": "core",
+      "aliases": [],
+      "flags": {
+        "cli-log-level": {
+          "name": "cli-log-level",
+          "type": "option",
+          "char": "l",
+          "description": "Level of logging messages.",
+          "helpLabel": "-l",
+          "helpValue": "(debug|info|warn|error|none)",
+          "multiple": false,
+          "options": [
+            "debug",
+            "info",
+            "warn",
+            "error",
+            "none"
+          ],
+          "default": "info"
+        },
+        "cli-output-format": {
+          "name": "cli-output-format",
+          "type": "option",
+          "char": "o",
+          "description": "Format of command output.",
+          "helpLabel": "-o",
+          "helpValue": "(columns|json|tsv|none)",
+          "multiple": false,
+          "options": [
+            "columns",
+            "json",
+            "tsv",
+            "none"
+          ],
+          "default": "columns"
+        },
+        "silent": {
+          "name": "silent",
+          "type": "boolean",
+          "description": "Suppress  output and logs. This is a shorthand for \"-l none -o none\".",
+          "allowNo": false
+        }
+      },
+      "args": {
+        "profile": {
+          "name": "profile",
+          "description": "Shorthand identifier for your profile",
+          "required": true
+        }
+      }
+    },
+    "debugger:logs:list": {
+      "id": "debugger:logs:list",
+      "description": "Show a list of log events generated for the account\n\nArgg, this is only a subset of the log events and live tailing isn't quite ready! Think this is a killer feature? Let us know here: https://airtable.com/shrcFDU1gmKWOqZXe",
+      "strict": true,
+      "pluginName": "twilio-cli",
+      "pluginAlias": "twilio-cli",
+      "pluginType": "core",
+      "aliases": [],
+      "flags": {
+        "cli-log-level": {
+          "name": "cli-log-level",
+          "type": "option",
+          "char": "l",
+          "description": "Level of logging messages.",
+          "helpLabel": "-l",
+          "helpValue": "(debug|info|warn|error|none)",
+          "multiple": false,
+          "options": [
+            "debug",
+            "info",
+            "warn",
+            "error",
+            "none"
+          ],
+          "default": "info"
+        },
+        "cli-output-format": {
+          "name": "cli-output-format",
+          "type": "option",
+          "char": "o",
+          "description": "Format of command output.",
+          "helpLabel": "-o",
+          "helpValue": "(columns|json|tsv|none)",
+          "multiple": false,
+          "options": [
+            "columns",
+            "json",
+            "tsv",
+            "none"
+          ],
+          "default": "columns"
+        },
+        "silent": {
+          "name": "silent",
+          "type": "boolean",
+          "description": "Suppress  output and logs. This is a shorthand for \"-l none -o none\".",
+          "allowNo": false
+        },
+        "profile": {
+          "name": "profile",
+          "type": "option",
+          "char": "p",
+          "description": "Shorthand identifier for your profile.",
+          "multiple": false
+        },
+        "properties": {
+          "name": "properties",
+          "type": "option",
+          "description": "The event properties you would like to display (JSON output always shows all properties)",
+          "multiple": false,
+          "default": "dateCreated, logLevel, errorCode, alertText"
+        },
+        "streaming": {
+          "name": "streaming",
+          "type": "boolean",
+          "char": "s",
+          "description": "Continuously stream incoming log events",
+          "allowNo": false
+        },
+        "log-level": {
+          "name": "log-level",
+          "type": "option",
+          "description": "Only show log events for this log level",
+          "helpValue": "(error|warning|notice|debug)",
+          "multiple": false,
+          "options": [
+            "error",
+            "warning",
+            "notice",
+            "debug"
+          ]
+        },
+        "start-date": {
+          "name": "start-date",
+          "type": "option",
+          "description": "Only show log events on or after this date",
+          "multiple": false
+        },
+        "end-date": {
+          "name": "end-date",
+          "type": "option",
+          "description": "Only show log events on or before this date",
+          "multiple": false
+        },
+        "no-header": {
+          "name": "no-header",
+          "type": "boolean",
+          "description": "Skip including of headers while listing the data.",
+          "allowNo": false
+        }
+      },
+      "args": {},
+      "PropertyFlags": {
+        "log-level": {
+          "helpValue": "(error|warning|notice|debug)",
+          "options": [
+            "error",
+            "warning",
+            "notice",
+            "debug"
+          ],
+          "description": "Only show log events for this log level",
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        },
+        "start-date": {
+          "description": "Only show log events on or after this date",
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        },
+        "end-date": {
+          "description": "Only show log events on or before this date",
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        }
+      }
+    }
+  }
+}
