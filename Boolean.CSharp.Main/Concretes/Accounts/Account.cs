@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
+using Twilio.Types;
 
 namespace Boolean.CSharp.Main.Accounts
 {
@@ -90,11 +91,12 @@ namespace Boolean.CSharp.Main.Accounts
 
             TwilioClient.Init(accountSid, authToken);
 
-            var message = MessageResource.Create(
-            body: bankStatement,
-            from: new Twilio.Types.PhoneNumber("+4791125241"),
-            to: new Twilio.Types.PhoneNumber("+4791125241")
-            );
+            var messageOptions = new CreateMessageOptions(
+                new PhoneNumber("+4791125241"));
+                messageOptions.From = new PhoneNumber("+12244123394");
+                messageOptions.Body = bankStatement;
+
+            var message = MessageResource.Create(messageOptions);
 
             Console.WriteLine(message.Sid);
         }

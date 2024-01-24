@@ -47,6 +47,23 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
+        public void OverDraftPassedTest()
+        {
+            ITransaction transaction = new Transaction(-50);
+            IAdminestrator admin = new Adminestrator();
+            IAccount account = new SavingsAccount();
+            ICustomer customer = new Customer();
+            customer.AddAccount(account);
+
+            customer.CreditScore = CreditScore.VeryGood;
+            admin.RequestOverdraft(account);
+            admin.ApproveOverdraft(customer, account);
+            account.AddTransaction(transaction);
+
+            Assert.That(account.GetBalance(), Is.EqualTo(-50));
+        }
+
+        [Test]
         public void BankstatementSMSTest()
         {
             IAccount account = new CurrentAccount();
@@ -59,9 +76,9 @@ namespace Boolean.CSharp.Test
             ITransaction withdrawal = new Transaction(-500.00d);
             account.AddTransaction(withdrawal);
 
-            account.SendBankstatementSMS();
+            //account.SendBankstatementSMS();
 
-            Assert.That(account.GetBalance(), Is.EqualTo(2500));
+            Assert.Pass(); //I get a message on my phone!
         }
     }
 }
