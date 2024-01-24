@@ -4,21 +4,38 @@ using NUnit.Framework;
 namespace Boolean.CSharp.Test
 {
     [TestFixture]
-    public class CoreTests
+    public class CoreBankTests
     {
-        private Core _core;
-
-        public CoreTests()
+        [Test]
+        public void createSavingsAccount()
         {
-            _core = new Core();
 
         }
 
         [Test]
-        public void TestQuestion1()
+
+        public void createCurrentAccount() 
         {
 
         }
+
+        [Test]
+
+        public void testDeposit()
+        {
+
+        }
+
+        [Test]
+
+        public void testWithdraw() 
+        {
+
+        }
+
+
+        
+        
 
     }
 }
