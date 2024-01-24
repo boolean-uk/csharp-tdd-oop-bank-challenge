@@ -11,6 +11,14 @@ namespace Boolean.CSharp.Main.Accounts
     {
         protected List<Transaction> transactions;
 
+        public bool IsOverdraftRequested { get; private set; }
+
+        public bool RequestOverdraft()
+        {
+            IsOverdraftRequested = true;
+            return true;
+        }
+
         public BankAccount()
         {
             transactions = new List<Transaction>();

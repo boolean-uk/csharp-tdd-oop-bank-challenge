@@ -11,7 +11,7 @@ namespace Boolean.CSharp.Test
 {
     public class BranchTest
     {
-        //User story 2: Branch Association
+        //User story 2: Branch Association (Extension)
         //This test checks if a BankAccount can be associated with a Branch
         [Test]
         public void BankAccountCanBeAssociatedWithBranch()
@@ -65,5 +65,23 @@ namespace Boolean.CSharp.Test
             Assert.IsFalse(branch.accounts.Contains(savingsAccount));
             Assert.AreEqual(0, branch.accounts.Count);
         }
+
+        //User Story 3: Overdraft Request (Extension)
+        //This test checks if a customer can request an overdraft on their account.
+        [Test]
+        public void CustomerCanRequestOverdraft()
+        {
+            //Arrange
+            SavingsAccount savingsAccount = new SavingsAccount();
+            Branch branch = new Branch();
+            branch.AddAccount(savingsAccount);
+
+            //Act
+            bool overdraftRequested = savingsAccount.RequestOverdraft();
+
+            //Assert
+            Assert.IsTrue(overdraftRequested);
+        }
+
     }
 }

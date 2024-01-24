@@ -18,5 +18,10 @@ namespace Boolean.CSharp.Main.Accounts
         {
             throw new NotImplementedException();
         }
+
+        public bool RequestOverdraft()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
