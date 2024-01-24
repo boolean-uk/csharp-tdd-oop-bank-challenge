@@ -26,21 +26,49 @@ Your task is to use everything you've learned to build a small banking applicati
 
 ```
 As a customer,
-So I can safely store use my money,
-I want to create a current account.
+So I can manage my bankaccount,
+I want to create a user account.
+```
+| Classes         | Methods            | Scenario                                   | Outputs                       |
+|-----------------|--------------------|--------------------------------------------|-------------------------------|
+| `Core`		  | `CreateUser()`	   | Create account with username and password  | Account stored in AccountList |
 
+```
+As a customer,
+So I can safely store use my money,
+I want to create a bank account.
+```
+| Classes         | Methods                  | Scenario                                                   | Outputs                       |
+|-----------------|--------------------------|------------------------------------------------------------|-------------------------------|
+| `Core`		  | `CreateCurrentAccount()` | Create currentaccount that contains a transaction list     | Currentaccount stored in User |
+
+```
 As a customer,
 So I can save for a rainy day,
 I want to create a savings account.
+```
+| Classes         | Methods                  | Scenario                                                | Outputs                       |
+|-----------------|--------------------------|---------------------------------------------------------|-------------------------------|
+| `Core`		  | `CreateSavingsAccount()` | Create savingsaccount that contains a transaction list  | Savingsaccount stored in User |
 
-As a customer,
-So I can keep a record of my finances,
-I want to generate bank statements with transaction dates, amounts, and balance at the time of transaction.
-
+```
 As a customer,
 So I can use my account,
 I want to deposit and withdraw funds.
 ```
+| Classes         | Methods            | Scenario                            | Outputs                  |
+|-----------------|--------------------|-------------------------------------|--------------------------|
+| `Core`		  | `DepositAmount()`  | Customer is able to deposit money   | Transaction log			|
+| `Core`		  | `WithdrawAmount()` | Customer is able to withdraw money  | Transaction log			|
+
+```
+As a customer,
+So I can keep a record of my finances,
+I want to generate bank statements with transaction dates, amounts, and balance at the time of transaction.
+```
+| Classes         | Methods            | Scenario                            | Outputs                  |
+|-----------------|--------------------|-------------------------------------|--------------------------|
+| `Core`		  | `BankStatement()`  | Collect bankdata 					 | Generated bankstatements |
 
 ## Acceptance Criteria
 
@@ -63,19 +91,40 @@ date       || credit  || debit  || balance
 As an engineer,
 So I don't need to keep track of state,
 I want account balances to be calculated based on transaction history instead of stored in memory.
+```
+| Classes         | Methods            | Scenario                                         | Outputs         |
+|-----------------|--------------------|--------------------------------------------------|-----------------|
+| `Core`		  | `DepositAmount()`  | Balance is calculated based on last transaction  | Transaction log	|
+| `Core`		  | `WithdrawAmount()` | Balance is calculated based on last transaction  | Transaction log	|
 
+```
 As a bank manager,
 So I can expand,
 I want accounts to be associated with specific branches.
+```
+| Classes         | Methods               | Scenario                                  | Outputs                 |
+|-----------------|-----------------------|-------------------------------------------|-------------------------|
+| `Core`		  | `CreateBankAccount()` | Upon creation of bankaccount, add branch  | Bankaccount with branch	|
 
+```
 As a customer,
 So I have an emergency fund,
 I want to be able to request an overdraft on my account.
+```
+| Classes         | Methods               | Scenario                                    | Outputs                                |
+|-----------------|-----------------------|---------------------------------------------|----------------------------------------|
+| `Core`		  | `RequestOverdraft()`  | If balance goes below 0, request overdraft  | Overdraft request gets send to manager |
 
+```
 As a bank manager,
 So I can safeguard our funds,
 I want to approve or reject overdraft requests.
+```
+| Classes         | Methods               | Scenario                              | Outputs                                |
+|-----------------|-----------------------|---------------------------------------|-------------------|
+| `Core`		  | `ApproveOverdraft()`  | Accept or decline OverdraftRequest()  | Withdraw complete |
 
+```
 As a customer,
 So I can stay up to date,
 I want statements to be sent as messages to my phone.
