@@ -21,7 +21,10 @@ namespace Boolean.CSharp.Main.Accounts
 
         public bool RequestOverdraft()
         {
-            throw new NotImplementedException();
+            Overdraft overdraft = new Overdraft(this);
+            return overdraft.Approve();
         }
     }
 }
+
+
