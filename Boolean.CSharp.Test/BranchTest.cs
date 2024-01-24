@@ -83,5 +83,23 @@ namespace Boolean.CSharp.Test
             Assert.IsTrue(overdraftRequested);
         }
 
+        //
+        [Test]
+        public void CustomerCannotRequestOverdraftTwice()
+        {
+            //Arrange
+            SavingsAccount savingsAccount = new SavingsAccount();
+            Branch branch = new Branch();
+            branch.AddAccount(savingsAccount);
+
+            //Act
+            bool firstOverdraftRequested = savingsAccount.RequestOverdraft();
+            bool secondOverdraftRequested = savingsAccount.RequestOverdraft(); // Attempt to request overdraft again
+
+            //Assert
+            Assert.IsTrue(firstOverdraftRequested);
+            Assert.IsFalse(secondOverdraftRequested);
+        }
+       
     }
 }
