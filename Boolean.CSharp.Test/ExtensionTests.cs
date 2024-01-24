@@ -12,9 +12,11 @@ namespace Boolean.CSharp.Test
     public class ExtensionTests
     {
         private Extension _extension;
+        //private OverdraftManager _overdraftManager;
         public ExtensionTests()
         {
             _extension = new Extension();
+           // _overdraftManager = new OverdraftManager();
         }
         [Test]
         public void GetBalanceBasedOnTransactionHistory()
@@ -47,7 +49,27 @@ namespace Boolean.CSharp.Test
             Assert.IsNotNull(associatedBranch);
             Assert.AreEqual("NorwegianBranch", associatedBranch.BranchName);
             Console.WriteLine($"{associatedBranch.BranchName}");
-
         }
+
+       /* [Test]
+        public void AccountShouldOverdraft()
+        {
+            //Arrange
+            Branch mainBranch = new Branch("NorwegianBranch");
+            OverdraftManager overdraftManager = new OverdraftManager();
+            IAccount account = new Account(mainBranch, overdraftManager);
+            double initialBalance = account.GetBalance();
+            double overdraftAmount = 200;
+
+            //Act
+            account.RequestOverdraft(overdraftAmount);
+
+            //Assert
+            Assert.IsTrue((account as Account)?.OverdraftApproved == true, "Overdraft should be approved");
+            Assert.AreEqual(initialBalance, account.GetBalance(), "User's full amount should be adjusted");
+
+            // Output user's full amount to the console
+            Console.WriteLine($"User's full amount after overdraft approval: {account.GetBalance()}");
+        }*/
     }
 }

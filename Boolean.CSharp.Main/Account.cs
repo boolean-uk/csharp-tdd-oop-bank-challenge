@@ -7,15 +7,40 @@ namespace Boolean.CSharp.Main
 {
     public class Account : IAccount
     {
+        //private bool overdraftRequestPending;
         private double balance;
         private List<Transaction> transactionList;
+        //private OverdraftManager overdraftManager;
+
+        //public bool OverdraftApproved { get; set; }
+        //private const double MaxOverdraftAmount = 500.0;
         public Branch AssociatedBranch { get; }
 
-        public Account(Branch associatedBranch)
+       /* public bool GetOverdraftApproved()
+        {
+            return OverdraftApproved;
+        }*/
+
+        /*public void RequestOverdraft(double amount)
+        {
+            if (overdraftManager.ApproveOverdraftRequest(amount))
+            {
+                overdraftRequestPending = true;
+                Console.WriteLine($"Your account has requested overdraft. Requested amount: {amount}");
+            }
+            else
+            {
+                Console.WriteLine("Overdraft request was not approved.");
+            }
+        }*/
+
+        public Account(Branch associatedBranch)//, OverdraftManager manager)
         {
             balance = 0.0;
             transactionList = new List<Transaction>();
             AssociatedBranch = associatedBranch;
+            //OverdraftApproved = false;
+            //overdraftManager = manager;
         }
 
         public void Deposit(double amount, DateTime date)
@@ -43,7 +68,6 @@ namespace Boolean.CSharp.Main
             return calculatedBalance;
         }
 
-
         public string PrintStatement()
         {
             StringBuilder statement = new StringBuilder();
@@ -59,23 +83,37 @@ namespace Boolean.CSharp.Main
             return statement.ToString();
         }
 
-
-
-
-
-
-
         public void Withdraw(double amount, DateTime date)
         {
-            if(amount <= balance)
+            double availableFunds = balance;//+ (OverdraftApproved ? MaxOverdraftAmount : 0);
+
+            Console.WriteLine($"Balance: {balance}, Available Funds: {availableFunds}"); //OverdraftApproved:{OverdraftApproved}, MaxOverdraftAmount: {MaxOverdraftAmount},
+
+            if (amount <= availableFunds)
             {
-                balance -= amount;
+                if (amount <= balance)
+                {
+                    balance -= amount;
+                }
+                /*else if (OverdraftApproved)
+                {
+                    overdraftRequestPending = false; // Used overdraft!
+                    balance = 0;
+                }*/
+                else
+                {
+                    Console.WriteLine("Insufficient funds for withdrawal.");
+                    return; // Stop processing if there are insufficient funds.
+                }
+
                 transactionList.Add(new Transaction(date, amount, TransactionType.DEBIT, balance));
             }
             else
             {
-                Console.WriteLine("Insuffienct funds for withdrawal.");
+                Console.WriteLine("Insufficient funds for withdrawal.");
             }
+
+            Console.WriteLine($"New Balance: {balance}");
         }
     }
 }

@@ -9,8 +9,11 @@ namespace Boolean.CSharp.Main
             // Create a Branch
             Branch branch = new Branch("Main Branch");
 
-            // Create an Account associated with the Branch
-            IAccount account = new Account(branch);
+            // Create an OverdraftManager
+            //OverdraftManager overdraftManager = new OverdraftManager();
+
+            // Create an Account associated with the Branch and OverdraftManager
+            IAccount account = new Account(branch);//, overdraftManager);
 
             // Depositing and withdrawing to console
             account.Deposit(1000, new DateTime(2012, 1, 10));
