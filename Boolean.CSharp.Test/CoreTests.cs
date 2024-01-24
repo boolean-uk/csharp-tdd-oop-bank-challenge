@@ -1,6 +1,7 @@
 ﻿using Boolean.CSharp.Main;
 using Boolean.CSharp.Main.AccountManagement;
 using Boolean.CSharp.Main.Accounts;
+using Boolean.CSharp.Main.BankStatements;
 using Boolean.CSharp.Main.Customers;
 using Boolean.CSharp.Main.Transactions;
 using NUnit.Framework;
@@ -49,6 +50,25 @@ namespace Boolean.CSharp.Test
             Assert.That(account.Balance == 1500m);
             Console.WriteLine(account.Transactions.GetTransactions().Count);
             Assert.That(account.Transactions.GetTransactions().Count == 3);
+        }
+
+        [Test]
+        public void BankStatementTest()
+        {
+            BankAccount account = bank.GetCustomerAccounts(jane)[0];
+            ITransaction workPayment = new CreditTransaction(6000m);
+            ITransaction clothingPurchase = new DebitTransaction(150m);
+            ITransaction groceryPurchase = new DebitTransaction(25m);
+            ITransaction giftFrromJohn = new CreditTransaction(200m);
+            ITransaction concertPurchase = new DebitTransaction(350m);
+            account.ApplyTransaction(workPayment);
+            account.ApplyTransaction(clothingPurchase);
+            account.ApplyTransaction(groceryPurchase);
+            account.ApplyTransaction(giftFrromJohn);
+            account.ApplyTransaction(concertPurchase);
+            IBankStatement statement = new SimpleBankStatement(account);
+            Assert.That(statement.GenerateStatement().Contains("5275"));
+            Console.WriteLine(statement.GenerateStatement());
         }
 
     }
