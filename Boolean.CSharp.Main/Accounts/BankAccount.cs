@@ -18,10 +18,12 @@ namespace Boolean.CSharp.Main.Accounts
             this.balance = 0m;
             this.transactions = transactionManager;
         }
-
         public void ApplyTransaction(ITransaction transaction)
         {
-            throw new NotImplementedException();
+            balance += transaction.EffectOnBalance();
+            transactions.AddTransaction(transaction);
         }
+        public decimal Balance { get => balance; }
+        public ITransactionManager Transactions { get => transactions; }
     }
 }

@@ -9,18 +9,21 @@ namespace Boolean.CSharp.Main.Transactions
 {
     public class CreditTransaction : ITransaction
     {
-        public decimal Amount => throw new NotImplementedException();
+        private decimal amount;
+        private DateTime date;
 
-        public DateTime Date => throw new NotImplementedException();
-
-        public void ApplyToAccount(BankAccount account)
+        public CreditTransaction(decimal amount)
         {
-            throw new NotImplementedException();
+            this.date = DateTime.Now;
+            this.amount = amount;
         }
 
         public decimal EffectOnBalance()
         {
-            throw new NotImplementedException();
+            return amount;
         }
+
+        public decimal Amount { get => amount; }
+        public DateTime Date { get => date; }
     }
 }

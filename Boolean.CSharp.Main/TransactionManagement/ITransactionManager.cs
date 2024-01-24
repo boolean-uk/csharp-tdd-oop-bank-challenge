@@ -10,6 +10,6 @@ namespace Boolean.CSharp.Main.TransactionManagement
     public interface ITransactionManager
     {
         public void AddTransaction(ITransaction transaction);
-        public void GetTransactions(DateTime start, DateTime end);
+        public List<ITransaction> GetTransactions();
     }
 }

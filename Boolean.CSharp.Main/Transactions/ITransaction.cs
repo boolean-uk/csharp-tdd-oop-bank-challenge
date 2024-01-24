@@ -11,7 +11,6 @@ namespace Boolean.CSharp.Main.Transactions
     {
         public decimal Amount { get; }
         public DateTime Date { get; }
-        public void ApplyToAccount(BankAccount account);
         public decimal EffectOnBalance();
     }
 }
