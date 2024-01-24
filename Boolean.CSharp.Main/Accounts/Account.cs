@@ -95,7 +95,7 @@ namespace Boolean.CSharp.Main.Accounts
             foreach (ITransaction transaction in _transactions.OrderByDescending(t => t.Date).Where(t => t.Status == TransactionStatus.Approved))
             {
                 stringBuilder.AppendLine(
-                    $"{transaction.Date.ToShortDateString(),10}" +
+                    $"{transaction.Date.ToString("dd/MM/yyyy"),10}" +
                     $" || {(transaction.Type == TransactionType.Credit ? transaction.Amount : 0),10} " +
                     $"|| {(transaction.Type == TransactionType.Debit ? transaction.Amount : 0),10} || " +
                     $"{transaction.NewBalance,10} ");
