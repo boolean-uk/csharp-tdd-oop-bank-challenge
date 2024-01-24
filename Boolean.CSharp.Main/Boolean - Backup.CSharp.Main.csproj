@@ -5,15 +5,13 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <UserSecretsId>4ef9f135-240d-47aa-bad1-db0c45789430</UserSecretsId>
+    <UserSecretsId>0a0eff1f-e70d-462c-ace6-1d5bbaff5c8f</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
     <PackageReference Include="microsoft.net.test.Sdk" Version="17.5.0" />
     <PackageReference Include="nunit" Version="3.13.3" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.4.2" />
-    <PackageReference Include="Twilio" Version="6.16.1" />
   </ItemGroup>
 
 </Project>
