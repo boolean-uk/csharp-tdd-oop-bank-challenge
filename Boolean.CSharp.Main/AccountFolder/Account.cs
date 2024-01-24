@@ -8,12 +8,24 @@ namespace Boolean.CSharp.Main.AccountFolder
 {
     public abstract class Account
     {
-
+        
         private List<Transactions> _transactions = new List<Transactions>();
 
         public void Deposit(Transactions transaction)
         {
-            throw new NotImplementedException();
+            if (transaction.Type == TransactionTypes.Credit)
+            {
+                if(_transactions.Count > 0)
+                {
+                    transaction.Balance = _transactions.Last().Balance + transaction.Amount;
+                    _transactions.Add(transaction);
+                }
+                else
+                {
+                    transaction.Balance = transaction.Amount;
+                    _transactions.Add(transaction);
+                }
+            }
         }
 
         public void Withdraw(Transactions transaction)
@@ -26,9 +38,13 @@ namespace Boolean.CSharp.Main.AccountFolder
             throw new NotImplementedException();
         }
 
-        public int GetBalance()
+        public decimal GetBalance()
         {
-            throw new NotImplementedException();
+            if(_transactions.Count == 0 )
+            {
+                return 0;
+            }
+            return _transactions.Last().Balance;
         }
     }
 }

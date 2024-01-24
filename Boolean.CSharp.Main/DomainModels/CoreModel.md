@@ -46,18 +46,18 @@ printTransactions - prints out an iterated list of all transactions that have be
 
 
 -----------------------------------------------------------------------------------------------
-|Classes:				| Methods:
-|						|
-|						|
-|`Accounts`(Parent)		|`Deposit(Transactions transaction)`
-|`CurrentAccount`(Child)|`Withdraw(Transactions transaction)`
-|`SavingsAccount`(Child)|`getBalance()`
-|						|`printStatement()`
-|						|
-|`Transaction`			|
-|						|
-|						|
-|						|
-|						|
-|						|
-|						|
+|Classes:				| Methods:									| Scenario		| Output	|
+|						|											|				|			|
+|						|											|				|			|
+|`Accounts`(Parent)		|`Deposit(Transactions transaction)`		|				|void		|
+|`CurrentAccount`(Child)|`Withdraw(Transactions transaction)`		|				|void		|
+|`SavingsAccount`(Child)|`getBalance()`								|				|int		|
+|						|`printStatement()`							|				|void		|
+|						|											|				|			|
+|`Transaction`			|											|				|			|
+|						|											|				|			|
+|						|											|				|			|
+|						|											|				|			|
+|						|											|				|			|
+|						|											|				|			|
+|						|											|				|			|

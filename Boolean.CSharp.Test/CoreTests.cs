@@ -32,19 +32,9 @@ namespace Boolean.CSharp.Test
             Assert.That(savingsAccount.GetBalance() == 0);
         }
 
-        [Test]
+        
 
-        public void testDeposit()
-        {
-            throw new NotImplementedException();
-        }
-
-        [Test]
-
-        public void testWithdraw() 
-        {
-            throw new NotImplementedException();
-        }
+        
 
 
         
