@@ -13,4 +13,9 @@
     <PackageReference Include="NUnit3TestAdapter" Version="4.4.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DomainModels\" />
+    <Folder Include="ClassDiagrams\" />
+  </ItemGroup>
+
 </Project>

@@ -8,5 +8,6 @@ namespace Boolean.CSharp.Main.AccountFolder
 {
     public class SavingsAccount : Account
     {
+
     }
 }
