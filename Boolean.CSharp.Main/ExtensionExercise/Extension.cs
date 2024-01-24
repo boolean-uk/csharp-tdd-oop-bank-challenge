@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boolean.CSharp.Main
+namespace Boolean.CSharp.Main.ExtensionExercise
 {
     public class Extension
     {
@@ -13,6 +13,6 @@ namespace Boolean.CSharp.Main
         public Extension()
         {
             Core? core = new Core();
-        }                      
+        }
     }
 }
