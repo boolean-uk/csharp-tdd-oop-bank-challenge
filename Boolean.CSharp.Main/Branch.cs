@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Boolean.CSharp.Main.Accounts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,11 @@ namespace Boolean.CSharp.Main
 {
     public class Branch
     {
-        public Branch() { }
+        public List<BankAccount> accounts { get; internal set; } = new List<BankAccount>();
+
+        public void AddAccount(BankAccount bankAccount)
+        {
+            accounts.Add(bankAccount);
+        }
     }
 }
