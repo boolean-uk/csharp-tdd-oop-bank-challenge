@@ -41,9 +41,9 @@ namespace Boolean.CSharp.Test
             Customer c = new Customer(1, "Elsa");
             Current account = new Current();
             c.AddAccount(account);
-
+            account.Deposit(20d);
             account.WithDraw(20d);
-            Assert.That(account.Balance, Is.EqualTo(-20d));
+            Assert.That(account.Balance, Is.EqualTo(0d));
         }
 
     }

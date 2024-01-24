@@ -12,11 +12,13 @@ namespace Boolean.CSharp.Main
     {
         private double _balance = 0;
         private Branch _branch;
-        List<Transaction> _transactions;
+        List<ITransaction> _transactions;
+        List<IOverdraft> _overdraftRequests;
 
         public Account()
         {
-            _transactions = new List<Transaction>();
+            _transactions = new List<ITransaction>();
+            _overdraftRequests = new List<IOverdraft>();
         }
 
         public double GetBalance()
@@ -30,26 +32,39 @@ namespace Boolean.CSharp.Main
         {
             double oldBalance = _balance;
             _balance = _balance + amount;
-            // Should use interface instead.
-            Transaction Transaction = new Transaction(_balance, amount, oldBalance, TransactionType.Credit);
-            _transactions.Add(Transaction);
-        }
-        public void WithDraw(double amount)
-        {
-            double oldBalance = _balance;
-            _balance = _balance - amount;
-            Transaction Transaction = new Transaction(_balance, amount, oldBalance, TransactionType.Debit);
-            _transactions.Add(Transaction);
+            ITransaction transaction = new Transaction(_balance, amount, oldBalance, TransactionType.Credit);
+            _transactions.Add(transaction);
         }
 
-        public bool RequestOverdraft(double balance)
+
+        public void WithDraw(double amount)
         {
-            throw new NotImplementedException();
+            if (amount > _balance) {
+                IOverdraft overdraft = new Overdraft(amount);
+                _overdraftRequests.Add(overdraft);
+            
+            } else {
+                double oldBalance = _balance;
+                _balance = _balance - amount;
+                ITransaction transaction = new Transaction(_balance, amount, oldBalance, TransactionType.Debit);
+                _transactions.Add(transaction);
+            }
+        }
+
+        public void WithDraw(IOverdraft overdraft)
+        {
+            if (overdraft.overdraftStatus == OverdraftStatus.Approved)
+            {
+                double oldBalance = _balance;
+                ITransaction transaction = new Transaction(_balance, overdraft.amount, oldBalance, TransactionType.Debit);
+                _transactions.Add(transaction);
+            }
         }
 
         public double Balance => GetBalance();
-        public List<Transaction> Transactions { get { return _transactions; } }
+        public List<ITransaction> Transactions { get { return _transactions; } }
         public Branch Branch { get { return _branch; } set { _branch = value; } }
+        public List<IOverdraft> OverdraftRequests { get { return _overdraftRequests; } }
 
     }
 }

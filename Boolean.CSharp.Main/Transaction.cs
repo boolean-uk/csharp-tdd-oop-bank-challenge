@@ -16,6 +16,10 @@ namespace Boolean.CSharp.Main
         private double _oldBalance;
         private TransactionType _transactionType;
 
+        public Transaction()
+        {
+
+        }
         public Transaction(double balance, double amount, double oldBalance, TransactionType transactionType)
         {
             _balance = balance;

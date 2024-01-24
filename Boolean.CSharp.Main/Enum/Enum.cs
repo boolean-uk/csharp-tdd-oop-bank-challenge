@@ -15,4 +15,10 @@ namespace Boolean.CSharp.Main.Enum
     {
         Liverpool, Edinburgh, Cardiff, Belfast, Bristol, Manchester, Oxford, Glasgow, Cambridge, Newcastle, York, Durham
     }
+
+    public enum OverdraftStatus
+    {
+        Approved, Pending, Rejected
+    }
 }
+

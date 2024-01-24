@@ -1,5 +1,6 @@
 ﻿using Boolean.CSharp.Main;
 using Boolean.CSharp.Main.Accounts;
+using Boolean.CSharp.Main.Enum;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -35,19 +36,30 @@ namespace Boolean.CSharp.Test
 
         // Req for overdraft.
         // - Connected to the current account which i believe is the one that gets the salary
-        // - Should have a maximum limit
-        // - Limit be based on monthly salary
         // - Should be activated or deactivated
+
         [Test]
         public void ShouldRequestOverdraft()
         {
             Customer c = new Customer(1, "Elsa");
             Current current = new Current();
             c.AddAccount(current);
-            bool accepted = current.RequestOverdraft(current.Balance);
+            current.WithDraw(50d);
+            
+            Assert.That(current.OverdraftRequests.Count, Is.EqualTo(1));
+        }
+        [Test]
+        public void ShouldApproveOverdraftRequest()
+        {
+            Current current = new Current();
+            current.WithDraw(30);
+            var overdraft = current.OverdraftRequests[0];
+            overdraft.Approve();
 
+            current.WithDraw(overdraft);
 
-            Assert.That(accepted, Is.True);
+            Assert.That(current.Transactions.Count, Is.EqualTo(1));
+            Assert.That(current.GetBalance(), Is.EqualTo(0));
         }
     }
 }

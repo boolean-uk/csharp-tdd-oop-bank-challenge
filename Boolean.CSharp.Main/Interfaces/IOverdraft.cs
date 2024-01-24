@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Boolean.CSharp.Main.Enum;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,11 @@ namespace Boolean.CSharp.Main.Interfaces
 {
     public interface IOverdraft
     {
-        double odBalance { get; }
-        double maxOd { get; }
+        double amount { get; set; }
+        DateTime requestDateTime { get; set; }
+        OverdraftStatus overdraftStatus { get; set; }
+
+        void Approve();
+        void Reject();
     }
 }

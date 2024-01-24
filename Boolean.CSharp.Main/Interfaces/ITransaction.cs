@@ -14,5 +14,6 @@ namespace Boolean.CSharp.Main.Interfaces
         DateTime DateTime { get; }
         double OldBalance { get; }
         TransactionType TransactionType { get; }
+
     }
 }
