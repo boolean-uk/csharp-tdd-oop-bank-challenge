@@ -95,10 +95,10 @@ namespace Boolean.CSharp.Test
             acc.Deposit(1000m);
 
             // Act
-            decimal res1 = (acc as PersonalAccount).SetOverdrawLimit(500, user);
+            decimal? res1 = (acc as PersonalAccount)?.SetOverdrawLimit(500, user);
             decimal draw1 = acc.Withdraw(1250m);
 
-            decimal res2 = (acc as PersonalAccount).SetOverdrawLimit(750, manager);
+            decimal? res2 = (acc as PersonalAccount)?.SetOverdrawLimit(750, manager);
             decimal draw2 = acc.Withdraw(1250m);
 
             // Assert

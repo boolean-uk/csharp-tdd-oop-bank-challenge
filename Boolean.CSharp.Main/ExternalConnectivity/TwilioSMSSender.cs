@@ -16,8 +16,8 @@ namespace Boolean.CSharp.Main.MessageProvider
         public void SendMessage(string message)
         {
             DotEnv.Load();
-            string _accountSID = Environment.GetEnvironmentVariable("TestAccountSID");
-            string _authToken = Environment.GetEnvironmentVariable("TestAuthToken");
+            string? _accountSID = Environment.GetEnvironmentVariable("TestAccountSID");
+            string? _authToken = Environment.GetEnvironmentVariable("TestAuthToken");
             TwilioClient.Init(_accountSID, _authToken);
 
             var msg = MessageResource.Create(

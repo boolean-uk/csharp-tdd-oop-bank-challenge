@@ -13,7 +13,7 @@ namespace Boolean.CSharp.Main.Users
     {
         private string _name;
         private List<IAccount> _accounts = new List<IAccount>();
-        private IBankBranch _branch;
+        private IBankBranch? _branch;
         private List<IOverdraftRequest> _overdraftRequests = new List<IOverdraftRequest>();
 
         public Manager(string name)
