@@ -15,25 +15,8 @@ namespace Boolean.CSharp.Main.CoreFiles
         public List<Account> accounts = new List<Account>();
         protected MobilePhone _mobilePhone = new MobilePhone();
 
-        public Account CreateAccount(AccountType accountType)
-        {
-            Account newAccount;
+        public string PhoneNumber { get { return _mobilePhone.PhoneNumber; } }
 
-            switch (accountType)
-            {
-                case AccountType.Current:
-                    newAccount = new AccountCurrent(this, (_mobilePhone != null) ? _mobilePhone : null);
-                    accounts.Add(newAccount);
-                    return newAccount;
-                case AccountType.Savings:
-                    newAccount = new AccountSavings(this, (_mobilePhone != null) ? _mobilePhone : null);
-                    accounts.Add(newAccount);
-                    return newAccount;
-
-                default:
-                    return null;
-            }
-        }
 
         public bool AddPhone(MobilePhone mobilePhone)
         {
@@ -41,6 +24,17 @@ namespace Boolean.CSharp.Main.CoreFiles
 
             _mobilePhone = mobilePhone;
             return true;
+        }
+
+        public Account CreateAccount(Bank bank, AccountType accountType)
+        {
+            Account acc = bank.CreateAccount(this, accountType, _mobilePhone);
+            if (acc == null || acc == default(Account))
+                return null;
+
+
+            accounts.Add(acc);
+            return acc;
         }
     }
 }

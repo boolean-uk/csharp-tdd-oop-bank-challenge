@@ -17,24 +17,31 @@ namespace Boolean.CSharp.Main.CoreFiles
         Deposit,
         Withdraw,
     }
-
-    public struct Overdraft(Account account, double amount)
+    public enum OverdraftState
     {
-        Guid AccountID { get; } = account.ID;
-        public double RequestedAmount { get; } = amount;
-        public bool IsAccepted { get; set; } = false;
+        Pending,
+        Accepted,
+        Rejected
     }
 
-    public struct Transaction(AccountType accountType, double amount, double accountBalance)
+    public class Overdraft(Guid accountID, double amount)
     {
-        public double Amount { get;  } = amount;
-        public AccountType AccountType { get; } = accountType;
+        Guid AccountID { get; } = accountID;
+        public double RequestedAmount { get; } = amount;
+        public OverdraftState OverdraftState { get; set; } = OverdraftState.Pending;
+        public DateTime DateTime { get; } = DateTime.Now;
+    }
+
+    public struct Transaction(StatementType statementType, double amount, double accountBalance)
+    {
+        Guid ID = Guid.NewGuid();
+        public double Amount { get; } = amount;
+        public StatementType StatementType { get; } = statementType;
         /// <summary>
         /// The past balance of the users account at the time of the creation of the statement.
         /// </summary>
         public double balanceAtTransaction { get; } = accountBalance;
 
-        public string Date { get; } = DateTime.Now.ToString("dd:mm:yyyy");
-        public string Time { get; } = DateTime.Now.ToString("h:mm");
+        public DateTime dateTime { get; } = DateTime.Now;
     }
 }

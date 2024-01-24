@@ -10,7 +10,7 @@ namespace Boolean.CSharp.Main.Accounts
 {
     public class AccountSavings : Account
     {
-        public AccountSavings(User user, MobilePhone mobile = null) : base(user, mobile)
+        public AccountSavings(Bank bank, User user, MobilePhone mobile = null) : base(bank, user, mobile)
         {
 
         }

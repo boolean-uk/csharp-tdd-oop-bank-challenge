@@ -9,6 +9,14 @@ namespace Boolean.CSharp.Main.Users
 {
     public class Manager : User
     {
+        public Manager(double startingMoney)
+        {
+            Money = startingMoney;
+        }
 
+        public List<Overdraft> GetOverdraftRequests(Bank bank)
+        {
+            return bank.GetOverdraftRequests();
+        }
     }
 }

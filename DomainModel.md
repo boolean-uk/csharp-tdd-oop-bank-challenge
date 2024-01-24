@@ -46,13 +46,12 @@ I want to approve or reject overdraft requests.
 |                    | `internal List<Overdraft> GetOverdraftRequests() | Returns the overdraft requests sendt to the bank by the user |                     |
 | `abstract Account` | `Account(User user, MobilePhone mobile = mobile)` |                                                             |                     |
 |                    | `double GetBalance()`                       | Compares the accounts balance based of the transaction history.   | `value`    |                     |
-|                    | `Statement GetBankStatement()`              | Returns a statement                                                                |                     |
+|                    | `Statement GetBankStatement()`              | Returns a statement                                               |                     |
 |                    | `bool SetMobile(MobilePhone mobile)`        |                                                                   |                     |
-|                    | `double Deposit(Customer customer, double cashAmount)`   | Deposits cash into                                                               |                     |
+|                    | `double Deposit(Customer customer, double cashAmount)`   | Deposits cash into                                   |                     |
 |                    | `double Withdrawl(Customer customer, double cashAmount)` |                                                      |                     |
 |                    | `bool RequestOverdraft()`                   |                                                                   |                     |
-|                    | `bool SetSendStatementToMobile(bool shouldSendStatement)`|                                                      |                     |
-|                    | `private string SendStatement()`            |                                                                   |                     |
+|                    | `bool SendTransactionSMS(Transaction transaction)`|                                                      |                     |
 | `AccountDeposit : Account` | `AccountDeposit(User user, Mobile mobile = mobile)` |                                                   |                     |
 | `AccountSavings : Account` | `AccountSavings(User user, Mobile mobile = mobile)` |                                                   |                     |
 | `MobilePhone`      |                                             |                                                                   |                     |
