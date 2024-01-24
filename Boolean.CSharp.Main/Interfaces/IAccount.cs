@@ -11,7 +11,6 @@ namespace Boolean.CSharp.Main.Interfaces
     {
         public bool OverdraftApproved { get; set; }
         Branch Branch { get;set; }
-        CreditScore CreditScore { get; set; }
         void AddTransaction(ITransaction transaction);
         double GetBalance();
 

@@ -78,7 +78,7 @@ namespace Boolean.CSharp.Test
 
             //account.SendBankstatementSMS();
 
-            Assert.Pass(); //I get a message on my phone!
+            Assert.Pass(); //I get a bank statement sendt to my phone!
         }
     }
 }

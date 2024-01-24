@@ -1,64 +1,22 @@
-Class:	Customer		Method: AddAccount(AccountType CurrentAccount)			Case: Customer wants to create a current account to store money
-Class:	Customer		Method: AddAccount(AccountType SavingsAccount)			Case: Customer wants to create a savings account to save money
-Enum:	AccountType		Members: {CurrentAccount, SavingsAccount}				Case: Ensure only offered account types are made
-Class	Account		Method: Deposit(double funds)								Case: Customer wants to put money in account
-Class	Account			Method: Withdraw(double funds)							Case: Customer wants to take money out of the account
-Class	Transaction		Method: GetDetails()									Case: Customer wants to get dates, amounts, and balance at the time of transaction
-Class	Account			Method: GenerateBankStatement()							Case: Customer wants to get the details of each transaction of an account
-Class	SavingsAccount implements Account
-Class	CurrentAccount implements Account
-
-
 ```
-As a customer,
-So I can safely store use my money,
-I want to create a current account.
+INFO: The acutal implementations use interfaces for each concrete class below, for extensibility.
 
-As a customer,
-So I can save for a rainy day,
-I want to create a savings account.
-
-As a customer,
-So I can keep a record of my finances,
-I want to generate bank statements with transaction dates, amounts, and balance at the time of transaction.
-
-As a customer,
-So I can use my account,
-I want to deposit and withdraw funds.
-```
-
-## Acceptance Criteria
-
-**Given** a client makes a deposit of 1000 on 10-01-2012  
-**And** a deposit of 2000 on 13-01-2012  
-**And** a withdrawal of 500 on 14-01-2012  
-**When** she prints her bank statement  
-**Then** she would see:
-
-```
-date       ||   amount  || balance
-14/01/2012 || - 500.00  || 2500.00
-13/01/2012 ||   2000.00 || 3000.00
-10/01/2012 ||   1000.00 || 1000.00
-```
-
-## Extensions
-
-```
-
-As a bank manager,
-So I can expand,
-I want accounts to be associated with specific branches.
-
-As a customer,
-So I have an emergency fund,
-I want to be able to request an overdraft on my account.
-
-As a bank manager,
-So I can safeguard our funds,
-I want to approve or reject overdraft requests.
-
-As a customer,
-So I can stay up to date,
-I want statements to be sent as messages to my phone.
+Class:	Customer			Method: void AddAccount(Account)						Case: Customer wants to create a current account or a savings account to store money
+Class:  Customer			Method: List<Account> GetAccounts()						Case: The customer wants to know all the accounts they have
+Class:	Customer			Property: CreditScore           						Case: The bank manager wants to approve accounts, and must know the customers credit score
+Enum:	CreditScore			Members: {VeryBad,Bad, Neutral, Good, VeryGood}			Case: The bank manager wants to approve accounts, and must know the customers credit score
+Class:	SavingsAccount implements Account											Case: implemets the abstract Account class
+Class:	CurrentAccount implements Account											Case: implemets the abstract Account class
+Class:	Account				Method: void AddTransaction(Transaction)				Case: Customer wants to put money in account
+Class:  Account				Method: double GetBalance()                             Case: Customer wants to know the balance of their account
+Class:  Account				Method: bool OverdraftApproved()						Case: The bank manager wants to approve accounts, and must know the customers credit score
+Class:	Account				Method: sting GenerateBankStatement()					Case: Customer wants to get the details of each transaction of an account
+Class:  Account				Method: void SendBankstatementSMS()						Case: Customer wants bank statement sendt to their phone
+Class:  Account				Property: Branch										Case: Bank manager want accounts associated with branches, for expansion
+Enum:	Branch				Members: {Norway,Sweden, England}						Case: Bank manager want accounts associated with branches, for expansion
+Class:	Transaction			Method: Tuple<DateTime, double, double> GetDetails()	Case: Customer wants to get dates, amounts, and balance at the time of transaction
+Class:	Transaction			Method: void SetBalance(double)							Case: The balance of an account after transaction should be stored in the transaction object
+Class:  Administrator		Method: void RequestOverdraft(Account)					Case: An account can request of admin to have overdraft enabled
+Class:  Administrator		Method: void ApproveOverdraft(Customer, Account)		Case: The admin wants to approve accounts, and must know the customers credit score
+Class:  Administrator		Method: void DisableOverdraft(Account)					Case: The admin wants the ability to disable overdrafts for an account 
 ```

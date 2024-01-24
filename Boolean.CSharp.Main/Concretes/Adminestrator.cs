@@ -38,16 +38,6 @@ namespace Boolean.CSharp.Main.Concretes
             }
         }
 
-        public int GetApprovedCount()
-        {
-            return _approved.Count;
-        }
-
-        public int GetRequestedCount()
-        {
-            return _requested.Count;
-        }
-
         public void DisableOverdraft(IAccount account)
         {
             if (!_approved.Contains(account)) { Console.WriteLine("No such account to disable"); }

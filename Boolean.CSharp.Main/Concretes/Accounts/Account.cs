@@ -15,7 +15,6 @@ namespace Boolean.CSharp.Main.Accounts
     public abstract class Account : IAccount
     {
         public Branch Branch { get; set; }
-        public CreditScore CreditScore { get; set; } = CreditScore.Nutral;
         public bool OverdraftApproved { get; set; } = false;
 
         private List<ITransaction> _transactions = new List<ITransaction>();

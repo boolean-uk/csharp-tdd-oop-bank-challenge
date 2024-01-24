@@ -13,9 +13,5 @@ namespace Boolean.CSharp.Main.Interfaces
         public void ApproveOverdraft(ICustomer user, IAccount account);
 
         public void DisableOverdraft(IAccount account);
-
-        public int GetRequestedCount();
-
-        public int GetApprovedCount();
     }
 }
