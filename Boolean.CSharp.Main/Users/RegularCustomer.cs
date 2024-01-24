@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Boolean.CSharp.Main.Branch;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace Boolean.CSharp.Main.Users
 {
     public class RegularCustomer : Customer, IUser
     {
-        public RegularCustomer(string name, DateTime dateOfBirth) : base(name, dateOfBirth)
+        public RegularCustomer(string name, DateTime DoB, IBankBranch branch) : base(name, DoB, branch)
         {
         }
     }

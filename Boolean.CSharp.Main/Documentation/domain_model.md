@@ -3,8 +3,9 @@
 | Classes | Fields | 
 |-|-|
 | `IAccount` (*interface*) | `TransactionManager _transactions` `List<User> authorizedUsers` `decimal _balance` |
-| `GeneralAccount` (implementes IAccount) | `IBankTransaction _transactions` `List<IUser> authorizedUsers` `decimal _balance` `decimal _overdrawLimit` |
-| `SavingsAccount` (implementes IAccount) | `IBankTransaction _transactions` `List<IUser> authorizedUsers` `decimal _balance`  |
+| `PersonalAccount` (implementes IAccount)| `IBankTransaction _transactions` `List<IUser> authorizedUsers` `decimal _balance` `decimal _overdrawLimit` |
+| `GeneralAccount` (implementes PersonalAccount) | |
+| `SavingsAccount` (implementes PersonalAccount) | |
 | `IBankTransaction` (*interface*) | |
 | `TransactionManager` (implementes IBankTransaction) | `List<Tuple<DateTime, decimal, TransactionType, decimal>> _history` |
 | `IUser` (*interface*) | | 
@@ -25,6 +26,7 @@
 | | `AddUserToAccount(IUser user)` | Add a new user to the account | true | 
 | | | Failed to add new user to the account | false | 
 | | `setOverdrawLimit(decimal limit, IUser user)` | Attempt to change overdraw limit, only allowed for managers | decimal |
+| `PersonalAccount` | `GetTransactionManager()` | Retrieve the PersonalAccount transaction manager | IBankTransaction | 
 | `GeneralAccount`  | | |
 | `SavingsAccount` | | |
 | `IUser` | `GetName()` | Retrieve the name of the user | string |

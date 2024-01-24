@@ -10,7 +10,7 @@ using Boolean.CSharp.Main.Users;
 DateTime dob = new DateTime(1996, 8, 20);
 IBankBranch branch = new LocalBank("123 Bank Road, 987 City");
 
-Customer user = new RegularCustomer("Bob", dob);
+Customer user = new RegularCustomer("Bob", dob, branch);
 user.OpenNewAccount(AccountType.General);
 IAccount account = user.GetAccounts()[0];
 DateTime now = DateTime.Now;

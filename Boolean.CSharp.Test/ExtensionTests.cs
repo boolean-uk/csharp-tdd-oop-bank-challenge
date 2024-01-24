@@ -23,7 +23,7 @@ namespace Boolean.CSharp.Test
             IBankBranch branch = new LocalBank("123 Bank Road, 987 City");
             // Genereate a customer
             DateTime dob = new DateTime(1996, 8, 20);
-            Customer user = new RegularCustomer("Bob", dob);
+            Customer user = new RegularCustomer("Bob", dob, branch);
             // Register customer and make a bank account
             user.RegisterWithBankBranch(branch);
             user.OpenNewAccount(AccountType.General);
@@ -48,9 +48,9 @@ namespace Boolean.CSharp.Test
             // Arrange
             IBankBranch branch = new LocalBank("123 Bank Road, 987 City");
             DateTime dob = new DateTime(1996, 8, 20);
-            Customer user1 = new RegularCustomer("Bob", dob);
-            Customer user2 = new RegularCustomer("Bill", dob);
-            Customer user3 = new RegularCustomer("Billy", dob);
+            Customer user1 = new RegularCustomer("Bob", dob, branch);
+            Customer user2 = new RegularCustomer("Bill", dob, branch);
+            Customer user3 = new RegularCustomer("Billy", dob, branch);
 
             IEmployee emp1 = new Manager("Jim");
             IEmployee emp2 = new Manager("Jimmy");
@@ -86,7 +86,7 @@ namespace Boolean.CSharp.Test
             // Arrange
             IBankBranch branch = new LocalBank("123 Bank Road, 987 City");
             DateTime dob = new DateTime(1996, 8, 20);
-            Customer user = new RegularCustomer("Bob", dob);
+            Customer user = new RegularCustomer("Bob", dob, branch);
             IEmployee manager = new Manager("Jim");
             user.RegisterWithBankBranch(branch);
             user.OpenNewAccount(AccountType.General);
@@ -95,10 +95,10 @@ namespace Boolean.CSharp.Test
             acc.Deposit(1000m);
 
             // Act
-            decimal res1 = (acc as GeneralAccount).SetOverdrawLimit(500, user);
+            decimal res1 = (acc as PersonalAccount).SetOverdrawLimit(500, user);
             decimal draw1 = acc.Withdraw(1250m);
 
-            decimal res2 = (acc as GeneralAccount).SetOverdrawLimit(750, manager);
+            decimal res2 = (acc as PersonalAccount).SetOverdrawLimit(750, manager);
             decimal draw2 = acc.Withdraw(1250m);
 
             // Assert
@@ -115,7 +115,7 @@ namespace Boolean.CSharp.Test
             // Arrange
             IBankBranch branch = new LocalBank("123 Bank Road, 987 City");
             DateTime dob = new DateTime(1996, 8, 20);
-            Customer user = new RegularCustomer("Bob", dob);
+            Customer user = new RegularCustomer("Bob", dob, branch);
             IEmployee manager = new Manager("Jim");
             user.RegisterWithBankBranch(branch);
             user.OpenNewAccount(AccountType.Savings);
@@ -124,19 +124,19 @@ namespace Boolean.CSharp.Test
             acc.Deposit(1000m);
 
             // Act
-            decimal? res1 = (acc as GeneralAccount)?.SetOverdrawLimit(500, user);
+            decimal? res1 = (acc as SavingsAccount)?.SetOverdrawLimit(500, user);
             decimal draw1 = acc.Withdraw(1250m);
 
-            decimal? res2 = (acc as GeneralAccount)?.SetOverdrawLimit(750, manager);
+            decimal? res2 = (acc as SavingsAccount)?.SetOverdrawLimit(750, manager);
             decimal draw2 = acc.Withdraw(1250m);
 
             decimal draw3 = acc.Withdraw(750m);
 
             // Assert
-            Assert.That(res1, Is.Null);
+            Assert.That(res1, Is.EqualTo(0));
             Assert.That(draw1, Is.EqualTo(0m));
 
-            Assert.That(res2, Is.Null);
+            Assert.That(res2, Is.EqualTo(0));
             Assert.That(draw2, Is.EqualTo(0m));
 
             Assert.That(draw3, Is.EqualTo(750m));
@@ -148,7 +148,7 @@ namespace Boolean.CSharp.Test
             // Arrange
             IBankBranch branch = new LocalBank("123 Bank Road, 987 City");
             DateTime dob = new DateTime(1996, 8, 20);
-            Customer user = new RegularCustomer("Bob", dob);
+            Customer user = new RegularCustomer("Bob", dob, branch);
             IEmployee manager = new Manager("Jim");
             branch.AddEmployeeToBranch(manager);
 

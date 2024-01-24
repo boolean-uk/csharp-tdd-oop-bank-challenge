@@ -1,5 +1,6 @@
 ﻿using Boolean.CSharp.Main;
 using Boolean.CSharp.Main.Accounts;
+using Boolean.CSharp.Main.Branch;
 using Boolean.CSharp.Main.enums;
 using Boolean.CSharp.Main.Users;
 using NUnit.Framework;
@@ -10,12 +11,20 @@ namespace Boolean.CSharp.Test
     public class CoreTests
     {
         DateTime dob = new DateTime(1996, 8, 20);
+        IBankBranch branch = new LocalBank("The street, 123 City");
+
+        [SetUp]
+        public void SetUp() 
+        {
+            dob = new DateTime(1996, 8, 20);
+            branch = new LocalBank("The street, 123 City");
+        }
 
         [Test]
         public void TestCreateGeneralAccount()
         {
             // Arrange
-            IUser user1 = new RegularCustomer("Bob", dob);
+            IUser user1 = new RegularCustomer("Bob", dob, branch);
             IUser user2 = new Manager("Jim");
 
             // Act
@@ -34,7 +43,7 @@ namespace Boolean.CSharp.Test
         public void TestCreateSavingsAccount()
         {
             // Arrange
-            IUser user1 = new RegularCustomer("Bob", dob);
+            IUser user1 = new RegularCustomer("Bob", dob, branch);
             IUser user2 = new Manager("Jim");
 
             // Act
@@ -53,7 +62,7 @@ namespace Boolean.CSharp.Test
         public void TestDepositFunds()
         {
             // Arrange
-            Customer user = new RegularCustomer("Bob", dob);
+            Customer user = new RegularCustomer("Bob", dob, branch);
             user.OpenNewAccount(AccountType.General);
             IAccount account = user.GetAccounts()[0];
 
@@ -73,7 +82,7 @@ namespace Boolean.CSharp.Test
         public void TestWithdrawFunds()
         {
             // Arrange
-            Customer user = new RegularCustomer("Bob", dob);
+            Customer user = new RegularCustomer("Bob", dob, branch);
             user.OpenNewAccount(AccountType.General);
             IAccount account = user.GetAccounts()[0];
             account.Deposit(5000m);
@@ -92,7 +101,8 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestAcceptanceCriteria() 
         {
-            Customer user = new RegularCustomer("Bob", dob);
+
+            Customer user = new RegularCustomer("Bob", dob, branch);
             user.OpenNewAccount(AccountType.General);
             IAccount account = user.GetAccounts()[0];
             DateTime now = DateTime.Now;

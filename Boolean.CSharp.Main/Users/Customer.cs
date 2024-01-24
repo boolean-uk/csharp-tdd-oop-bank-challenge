@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main.Users
 {
-    public abstract class Customer(string name, DateTime DoB) : IUser
+    public abstract class Customer(string name, DateTime DoB, IBankBranch branch) : IUser
     {
         private List<IAccount> _associatedAccounts = new List<IAccount>();
         private string _name = name;
-        private IBankBranch _branch;
+        private IBankBranch _branch = branch;
         private DateTime _birthDate = DoB;
         private DateTime _lastLogin = DateTime.Now;
 
