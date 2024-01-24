@@ -1,6 +1,6 @@
 ﻿using Boolean.CSharp.Main;
 using Boolean.CSharp.Main.Accounts;
-using Boolean.CSharp.Main.Transations;
+using Boolean.CSharp.Main.Transactions;
 using Boolean.CSharp.Main.Users;
 using NUnit.Framework;
 
@@ -20,7 +20,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void createCurrentAccount()
         {
-            Customer customer = new Customer("Sebastian");
+            Customer customer = new Customer("Sebastian", "Oslo");
             SavingsAccount account = new SavingsAccount(customer);
 
             var id = customer.CustomerId;
@@ -30,7 +30,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void createSavingsAccount()
         {
-            Customer customer = new Customer("Sebastian");
+            Customer customer = new Customer("Sebastian", "Oslo");
             SavingsAccount account = new SavingsAccount(customer);
 
             var id = customer.CustomerId;
@@ -39,38 +39,79 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        public void depositFromCurrentAccount() 
+        public void depositFromCurrentAccount()
         {
-            Customer customer = new Customer("Sebastian");
+            Customer customer = new Customer("Sebastian", "Oslo");
             CurrentAccount currentAccount = new CurrentAccount(customer);
             currentAccount.deposit(1000);
+            double b = currentAccount.getBalance();
 
-            Assert.That(currentAccount.Balance, Is.EqualTo(1000));
+            Assert.That(b, Is.EqualTo(1000));
         }
 
         [Test]
         public void withdrawFromCurrentAccount()
         {
-            Customer customer = new Customer("Sebastian");
+            Customer customer = new Customer("Sebastian", "Oslo");
             CurrentAccount currentAccount = new CurrentAccount(customer);
+            currentAccount.deposit(1000);
             currentAccount.withdraw(1000);
+            double b = currentAccount.getBalance();
 
-            Assert.That(currentAccount.Balance, Is.EqualTo(1000));
+            Assert.That(b, Is.EqualTo(1000));
         }
 
         [Test]
-        public void getBankStatement()
+        public void depositFromSavingsAccount()
         {
-            Customer customer = new Customer("Sebastian");
+            Customer customer = new Customer("Sebastian", "Oslo");
+            SavingsAccount sa = new SavingsAccount(customer);
+            sa.deposit(1000);
+            double b = sa.getBalance();
+
+            Assert.That(b, Is.EqualTo(1000));
+        }
+
+        [Test]
+        public void withdrawFromSavingsAccount()
+        {
+            Customer customer = new Customer("Sebastian", "Oslo");
+            SavingsAccount sa = new SavingsAccount(customer);
+            sa.deposit(1000);
+            sa.withdraw(1000);
+            double b = sa.getBalance();
+
+            Assert.That(b, Is.EqualTo(1000));
+        }
+
+        [Test]
+        public void PrintBankStatement()
+        {
+            Customer customer = new Customer("Sebastian", "Oslo");
             CurrentAccount currentAccount = new CurrentAccount(customer);
-            BankTransaction bt = new BankTransaction();
-            string s = bt.getTransations();
-            string bs = "bankstatement";
+            currentAccount.deposit(1000);
+            currentAccount.withdraw(500);
 
-            Assert.That(s, Is.EqualTo(bs));
 
+            Assert.IsNotNull(currentAccount.printTransactions);
+        }
+
+        [Test]
+
+        public void makeTransaction()
+        {
+            Customer customer = new Customer("Sebastian", "Oslo");
+            CurrentAccount currentAccount = new CurrentAccount(customer);
+            currentAccount.makeTransaction("deposit", 1000);
+            currentAccount.makeTransaction("deposit", 500);
+
+            
+
+            Assert.That(b, Is.EqualTo(1000));
 
         }
+
+
 
 
 

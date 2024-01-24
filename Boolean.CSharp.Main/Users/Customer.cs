@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Boolean.CSharp.Main.Accounts;
-using Boolean.CSharp.Main.Transations;
+using Boolean.CSharp.Main.Transactions;
 
 namespace Boolean.CSharp.Main.Users
 {
@@ -13,14 +13,17 @@ namespace Boolean.CSharp.Main.Users
 
         public Guid CustomerId { get; set; }
         public string name { get; set; }
+        public string branch { get; set; }
 
-        public List<BankTransaction> CustomerTransactionHistories;
 
-        public Customer(string Name) 
+        public Customer(string Name, string Branch) 
         {
             this.CustomerId = Guid.NewGuid();
             this.name = Name;
-        }   
+            this.branch = Branch;
+        }
+
+        
 
     }
 }
