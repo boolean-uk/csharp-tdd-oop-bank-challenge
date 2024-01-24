@@ -9,6 +9,8 @@ namespace Boolean.CSharp.Main.Accounts
 {
     public class SavingsAccount : BankAccount
     {
+        public bool? IsOverdraftPending { get; set; }
+
         // No need to implement here, as it is inherited from BankAccount
         public void GenerateInterest()
         {
