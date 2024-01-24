@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Boolean.CSharp.Main;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,8 +22,20 @@ namespace Boolean.CSharp.Main.Accounts
 
         public bool RequestOverdraft()
         {
+            // Check if overdraft has already been requested
+            if (IsOverdraftRequested)
+            {
+                return false;
+            }
+            // Create an overdraft instance and approve it
             Overdraft overdraft = new Overdraft(this);
-            return overdraft.Approve();
+            overdraft.Approve();
+
+            // Set the overdraft requested flag
+            IsOverdraftRequested = true;
+
+            return true;
+
         }
     }
 }

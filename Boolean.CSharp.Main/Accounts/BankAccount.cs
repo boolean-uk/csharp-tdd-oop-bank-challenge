@@ -10,6 +10,7 @@ namespace Boolean.CSharp.Main.Accounts
     public abstract class BankAccount : ITransactionable
     {
         protected List<Transaction> transactions;
+        public bool IsOverdraftRequested { get; protected set; }
 
         public BankAccount()
         {
