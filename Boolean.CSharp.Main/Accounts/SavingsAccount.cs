@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,18 +10,8 @@ namespace Boolean.CSharp.Main.Accounts
 {
     public class SavingsAccount : BankAccount
     {
+        // Additional property to track overdraft status
         public bool? IsOverdraftPending { get; set; }
-
-        // No need to implement here, as it is inherited from BankAccount
-        public void GenerateInterest()
-        {
-            throw new NotImplementedException();
-        }
-
-        public object? GetBalanceWithInterest()
-        {
-            throw new NotImplementedException();
-        }
 
         public bool RequestOverdraft()
         {
@@ -29,16 +20,22 @@ namespace Boolean.CSharp.Main.Accounts
             {
                 return false;
             }
-            // Create an overdraft instance and approve it
+
+            // Create an overdraft instance and request it
             Overdraft overdraft = new Overdraft(this);
-            overdraft.Approve();
+            if (overdraft.RequestOverdraft())
+            {
+                // Set the overdraft requested 
+                IsOverdraftRequested = true;
 
-            // Set the overdraft requested flag
-            IsOverdraftRequested = true;
+                IsOverdraftPending = true;
 
-            return true;
+                return true;
+            }
 
+            return false;
         }
+
     }
 }
 

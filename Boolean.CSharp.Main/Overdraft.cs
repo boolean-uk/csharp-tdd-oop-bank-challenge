@@ -10,9 +10,21 @@ namespace Boolean.CSharp.Main
     public class Overdraft
     {
         public BankAccount Requesting { get; }
+        public bool IsOverdraftRequested { get; private set; }
         public Overdraft(BankAccount requesting) 
         {  
             Requesting = requesting; 
+        }
+
+        public bool RequestOverdraft()
+        {
+            if (!IsOverdraftRequested)
+            {
+                IsOverdraftRequested = true;
+                return true;
+            }
+
+            return false;
         }
 
         public bool Approve()
