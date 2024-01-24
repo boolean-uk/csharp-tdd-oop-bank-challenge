@@ -74,7 +74,7 @@ namespace Boolean.CSharp.Test
             var (date3, amount3, balance3) = deposit1.GetDetails();
 
             string expectedStatement =
-                                          "date               || amount        || balance" + Environment.NewLine +
+                                          "date                 || amount        || balance" + Environment.NewLine +
                                          $"{date1} ||   {amount1:F2}     || {balance1:F2}" + Environment.NewLine +
                                          $"{date2} || {amount2:F2}       || {balance2:F2}" + Environment.NewLine +
                                          $"{date3} || {amount3:F2}       || {balance3:F2}";
