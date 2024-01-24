@@ -16,5 +16,7 @@ namespace Boolean.CSharp.Main.Interfaces
         double GetBalance();
 
         string GenerateBankStatement();
+
+        void SendBankstatementSMS();
     }
 }

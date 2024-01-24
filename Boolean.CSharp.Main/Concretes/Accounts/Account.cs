@@ -6,6 +6,8 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
 
 namespace Boolean.CSharp.Main.Accounts
 {
@@ -63,8 +65,9 @@ namespace Boolean.CSharp.Main.Accounts
 
                 statement.AppendLine(string.Format(format, dateString, amountString, balanceString));
             }
+            string result = statement.ToString().TrimEnd();
 
-            return statement.ToString().TrimEnd();
+            return result;
         }
 
 
@@ -75,6 +78,25 @@ namespace Boolean.CSharp.Main.Accounts
             balance += (_transactions.Sum(t => t.GetDetails().Item2));
 
             return balance;
+        }
+
+        public void SendBankstatementSMS()
+        {
+            string bankStatement = this.GenerateBankStatement();
+
+            string accountSid = Environment.GetEnvironmentVariable("TWILIO_ACCOUNT_SID");
+            string authToken = Environment.GetEnvironmentVariable("TWILIO_AUTH_TOKEN");
+
+
+            TwilioClient.Init(accountSid, authToken);
+
+            var message = MessageResource.Create(
+            body: bankStatement,
+            from: new Twilio.Types.PhoneNumber("+4791125241"),
+            to: new Twilio.Types.PhoneNumber("+4791125241")
+            );
+
+            Console.WriteLine(message.Sid);
         }
     }
 }
