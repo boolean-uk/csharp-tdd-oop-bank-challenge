@@ -1,4 +1,6 @@
 ﻿using Boolean.CSharp.Main.Accounts;
+using Boolean.CSharp.Main.Miscellaneous;
+using Boolean.CSharp.Main.Transactions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,16 +11,30 @@ namespace Boolean.CSharp.Main.BankStatements
 {
     public class SimpleBankStatement : IBankStatement
     {
-        public BankAccount Account { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        private BankAccount account;
+        private int receiptColumnWidth;
 
         public SimpleBankStatement(BankAccount account)
         {
-            throw new NotImplementedException();
+            this.account = account;
+            this.receiptColumnWidth = 20;
         }
 
         public string GenerateStatement()
         {
-            throw new NotImplementedException();
+            ReceiptBuilder receipt = new ReceiptBuilder();
+            receipt.Columns = ["date", "credit", "debit", "balance"];
+            decimal balance = 0;
+            foreach(ITransaction t in this.account.Transactions.GetTransactions())
+            {
+                string credit = (t.EffectOnBalance() > 0) ? t.Amount.ToString() : "";
+                string debit = (t.EffectOnBalance() <= 0) ? t.Amount.ToString() : "";
+                receipt.AddLine(t.Date.ToString("d"), credit, debit, balance.ToString());
+                balance += t.EffectOnBalance();
+            }
+            return receipt.GenerateReceipt();
         }
+
+        public BankAccount Account { get => this.account; set => this.account = value; }
     }
 }

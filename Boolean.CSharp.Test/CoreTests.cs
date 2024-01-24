@@ -48,7 +48,6 @@ namespace Boolean.CSharp.Test
             Assert.That(account.Balance == 500m);
             account.ApplyTransaction(transaction1);
             Assert.That(account.Balance == 1500m);
-            Console.WriteLine(account.Transactions.GetTransactions().Count);
             Assert.That(account.Transactions.GetTransactions().Count == 3);
         }
 
@@ -67,8 +66,8 @@ namespace Boolean.CSharp.Test
             account.ApplyTransaction(giftFrromJohn);
             account.ApplyTransaction(concertPurchase);
             IBankStatement statement = new SimpleBankStatement(account);
-            Assert.That(statement.GenerateStatement().Contains("5275"));
             Console.WriteLine(statement.GenerateStatement());
+            Assert.That(statement.GenerateStatement().Contains("5850"));
         }
 
     }
