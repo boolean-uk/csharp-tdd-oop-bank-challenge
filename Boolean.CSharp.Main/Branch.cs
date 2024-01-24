@@ -15,5 +15,10 @@ namespace Boolean.CSharp.Main
         {
             accounts.Add(bankAccount);
         }
+
+        public void RemoveAccount(SavingsAccount savingsAccount)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

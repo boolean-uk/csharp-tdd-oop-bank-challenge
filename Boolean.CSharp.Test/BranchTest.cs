@@ -49,5 +49,21 @@ namespace Boolean.CSharp.Test
             Assert.AreEqual(2, branch.accounts.Count);
         }
 
+        //Testing if the Branch can remove Account
+        [Test]
+        public void BranchCanRemoveAccount()
+        {
+            // Arrange
+            Branch branch = new Branch();
+            SavingsAccount savingsAccount = new SavingsAccount();
+            branch.AddAccount(savingsAccount);
+
+            // Act
+            branch.RemoveAccount(savingsAccount);
+
+            // Assert
+            Assert.IsFalse(branch.accounts.Contains(savingsAccount));
+            Assert.AreEqual(0, branch.accounts.Count);
+        }
     }
 }
