@@ -18,9 +18,8 @@ namespace Boolean.CSharp.Main.Accounts
         public Manager _accountManager;
 
 
-        public Guid _AccId { get; set; }
-
-        public bool _IsAccActive { get; set; } = true;
+        public Guid _AccId { get; set; }    //Account ID
+        public bool _IsAccActive { get; set; } = true;  //The status of the account, set to true bu default. (NOT IN USE, for future)
         public Branches _Branch { get; }
 
 
