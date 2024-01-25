@@ -29,7 +29,7 @@ namespace Boolean.CSharp.Main.BankStatements
             {
                 string credit = (t.EffectOnBalance() > 0) ? t.Amount.ToString() : "";
                 string debit = (t.EffectOnBalance() <= 0) ? t.Amount.ToString() : "";
-                receipt.AddLine(t.Date.ToString("d"), credit, debit, balance.ToString());
+                receipt.AddRow(t.Date.ToString("d"), credit, debit, balance.ToString());
                 balance += t.EffectOnBalance();
             }
             return receipt.GenerateReceipt();

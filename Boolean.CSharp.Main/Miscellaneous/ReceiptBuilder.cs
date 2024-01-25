@@ -8,29 +8,30 @@ namespace Boolean.CSharp.Main.Miscellaneous
 {
     public class ReceiptBuilder
     {
-        private List<string> lines;
+        private List<string> rows;
         private int minColumnWidth;
         private string[] columns;
 
         public ReceiptBuilder(int columnWidth = 20)
         {
+            minColumnWidth = 2;
             if (columnWidth > 0) ColumnWidth = columnWidth;
-            else columnWidth = minColumnWidth;
-            lines = new List<string>();
+            else ColumnWidth = minColumnWidth;
+            rows = new List<string>();
             Seperator = "||";
             columns = new string[]{};
         }
 
-        public void AddLine(params string[] inputs)
+        public void AddRow(params string[] inputs)
         {
-            lines.Add(BuildReceiptLine(inputs));
+            rows.Add(BuildReceiptLine(inputs));
         }
 
         public string GenerateReceipt()
         {
-            lines.Insert(0, BuildReceiptLine(columns));
+            rows.Insert(0, BuildReceiptLine(columns));
             StringBuilder receipt = new StringBuilder();
-            foreach (string line in lines) receipt.AppendLine(line);
+            foreach (string line in rows) receipt.AppendLine(line);
             return receipt.ToString();
         }
 
