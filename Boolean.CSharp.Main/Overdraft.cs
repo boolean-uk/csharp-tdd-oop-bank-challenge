@@ -31,7 +31,6 @@ namespace Boolean.CSharp.Main
         {
             if (!IsOverdraftRequested)
             {
-                // Some logic to approve the overdraft request
                 IsOverdraftRequested = true;
 
                 // Set a property in the associated BankAccount
@@ -43,11 +42,19 @@ namespace Boolean.CSharp.Main
             return false;
         }
 
-
         public bool Reject()
         {
-            return false;
+            if (IsOverdraftRequested)
+            {
+                IsOverdraftRequested = false;
 
+                // Set a property in the associated BankAccount 
+                Requesting.IsOverdraftApproved = false;
+
+                return true;
+            }
+
+            return false;
         }
     }
 }

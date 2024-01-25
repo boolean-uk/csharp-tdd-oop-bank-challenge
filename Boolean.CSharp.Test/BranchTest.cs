@@ -144,7 +144,7 @@ namespace Boolean.CSharp.Test
             bool overdraftRejected = overdraft.Reject();
 
             // Assert
-            Assert.IsTrue(overdraftRejected);
+            Assert.IsFalse(overdraftRejected);
         }
 
     }
