@@ -30,17 +30,37 @@ namespace Boolean.CSharp.Main.AccountFolder
 
         public void Withdraw(Transactions transaction)
         { 
-            throw new NotImplementedException();
+            if(transaction.Type == TransactionTypes.Debit) 
+            {
+                if (transaction.Amount <= GetBalance())
+                {
+                    if (_transactions.Count > 0)
+                    {
+                        transaction.Balance = _transactions.Last().Balance - transaction.Amount;
+                        _transactions.Add(transaction);
+                    }
+                   
+                }
+            }
         }
 
         public void printStatement()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("{0,10} || {1,10} || {2,10} || {3,10} ", "Date", "Credit", "Debit", "Balance");
+            foreach (Transactions transaction in _transactions.OrderByDescending(t => t.TransactionDate))
+            {
+
+                Console.WriteLine("{0,10} || {1,10} || {2,10} || {3,10} ",
+                        transaction.TransactionDate.ToShortDateString(),
+                        transaction.Type == TransactionTypes.Credit ? transaction.Amount : 0,
+                        transaction.Type == TransactionTypes.Debit ? transaction.Amount : 0,
+                        transaction.Balance);
+            };
         }
 
         public decimal GetBalance()
         {
-            if(_transactions.Count == 0 )
+            if(_transactions.Count == 0)
             {
                 return 0;
             }

@@ -18,6 +18,7 @@ namespace Boolean.CSharp.Main
         private TransactionTypes _type;
         private DateTime _datetime;
         private decimal _balance;
+        
 
         public Transactions(decimal amount, TransactionTypes type, decimal balance = 0)
         {
