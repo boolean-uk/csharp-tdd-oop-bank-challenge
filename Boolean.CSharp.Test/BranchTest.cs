@@ -116,5 +116,36 @@ namespace Boolean.CSharp.Test
             Assert.IsTrue(overdraftRequested);
             Assert.IsTrue(savingsAccount.IsOverdraftPending); // Assuming you have a property to track the overdraft status
         }
+
+        //User story 4
+        [Test]
+        public void BankManagerCanApproveOverdraftRequest()
+        {
+            //creating a SavingsAccount and an Overdraft instance, then calling the Approve method
+            // Arrange
+            SavingsAccount savingsAccount = new SavingsAccount();
+            Overdraft overdraft = new Overdraft(savingsAccount);
+
+            // Act
+            bool overdraftApproved = overdraft.Approve();
+
+            // Assert
+            Assert.IsTrue(overdraftApproved);
+        }
+
+        [Test]
+        public void BankManagerCanRejectOverdraftRequest()
+        {
+            // Arrange
+            SavingsAccount savingsAccount = new SavingsAccount();
+            Overdraft overdraft = new Overdraft(savingsAccount);
+
+            // Act
+            bool overdraftRejected = overdraft.Reject();
+
+            // Assert
+            Assert.IsTrue(overdraftRejected);
+        }
+
     }
 }

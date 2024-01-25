@@ -29,9 +29,20 @@ namespace Boolean.CSharp.Main
 
         public bool Approve()
         {
-            return true;
+            if (!IsOverdraftRequested)
+            {
+                // Some logic to approve the overdraft request
+                IsOverdraftRequested = true;
 
+                // Set a property in the associated BankAccount
+                Requesting.IsOverdraftApproved = true;
+
+                return true;
+            }
+
+            return false;
         }
+
 
         public bool Reject()
         {
