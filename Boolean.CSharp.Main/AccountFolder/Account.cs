@@ -1,7 +1,7 @@
-﻿using Boolean.CSharp.Main.Overdrafts;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using static Boolean.CSharp.Main.AccountFolder.Enums;
@@ -70,14 +70,17 @@ namespace Boolean.CSharp.Main.AccountFolder
             return _transactions.Last().Balance;
         }
 
-        public void RequestOverdraft()
+        public void RequestOverdraft(decimal amount)
         {
-
+            OverdraftRequest request = new OverdraftRequest(1, amount, this);
+            _ODrequests.Add(request);
         }
 
-        public void FixODrequest()
+        public void FixODrequest(int id, OverdraftRequests status)
         {
-
+            OverdraftRequest request = _ODrequests.Find(x => x.Id == id);
+            
+            request.Status = status;
         }
 
         public List<OverdraftRequest> OverDraftRequests { get { return _ODrequests; } set { _ODrequests = value; } }

@@ -21,11 +21,9 @@ namespace Boolean.CSharp.Test
         public void TestODRequest()
         {
             SavingsAccount savings = new SavingsAccount(Enums.Branches.Rohan);
-            var request = savings.RequestOverdraft(50000);
+            savings.RequestOverdraft(50000);
 
             Assert.That(savings.OverDraftRequests.Count() > 0);
-            Assert.That(request == true);
-
         }
 
         [Test]
@@ -34,7 +32,7 @@ namespace Boolean.CSharp.Test
             SavingsAccount savings = new SavingsAccount(Enums.Branches.Rohan);
             savings.RequestOverdraft(50000);
 
-            savings.FixODrequest(OverdraftRequests.Approved);
+            savings.FixODrequest(1, OverdraftRequests.Approved);
 
             var filterApproved = savings.OverDraftRequests.Where(x => x.Status == OverdraftRequests.Approved);
             Assert.That(filterApproved.Count() > 0);
@@ -46,9 +44,9 @@ namespace Boolean.CSharp.Test
             SavingsAccount savings = new SavingsAccount(Enums.Branches.Rohan);
             savings.RequestOverdraft(50000);
 
-            savings.FixODrequest(OverdraftRequests.Denied);
+            savings.FixODrequest(1, OverdraftRequests.Denied);
 
-            var filterDenied = savings.OverDraftRequests.Where(x => x.Status == OverdraftRequests.Approved);
+            var filterDenied = savings.OverDraftRequests.Where(x => x.Status == OverdraftRequests.Denied);
             Assert.That(filterDenied.Count() > 0);
 
         }

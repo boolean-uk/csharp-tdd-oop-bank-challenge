@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static Boolean.CSharp.Main.AccountFolder.Enums;
 
-namespace Boolean.CSharp.Main.Overdrafts
+namespace Boolean.CSharp.Main
 {
     public class OverdraftRequest
     {
