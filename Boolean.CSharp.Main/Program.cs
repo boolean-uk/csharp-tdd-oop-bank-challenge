@@ -3,6 +3,7 @@
 
 using Boolean.CSharp.Main;
 using Boolean.CSharp.Main.AccountFolder;
+using static Boolean.CSharp.Main.AccountFolder.Enums;
 
 SavingsAccount savingsAccount = new SavingsAccount();
 Transactions transaction = new Transactions(4000, TransactionTypes.Credit);

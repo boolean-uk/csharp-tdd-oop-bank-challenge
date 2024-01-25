@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Boolean.CSharp.Main.AccountFolder.Enums;
 
 namespace Boolean.CSharp.Main
 {
 
-    public enum TransactionTypes
-    {
-        Credit,
-        Debit
-    }
+    
     public class Transactions
     {
         private decimal _amount;

@@ -1,6 +1,7 @@
 ﻿using Boolean.CSharp.Main;
 using Boolean.CSharp.Main.AccountFolder;
 using NUnit.Framework;
+using static Boolean.CSharp.Main.AccountFolder.Enums;
 
 namespace Boolean.CSharp.Test
 {
@@ -10,7 +11,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestDeposit()
         {
-            Account savingsAccount = new SavingsAccount();
+            Account savingsAccount = new SavingsAccount(Branches.Numenor);
             Transactions transaction = new Transactions(200, TransactionTypes.Credit); 
 
             savingsAccount.Deposit(transaction);
@@ -22,7 +23,7 @@ namespace Boolean.CSharp.Test
 
         public void TestWithdraw() 
         {
-            Account savingsAccount = new SavingsAccount();
+            Account savingsAccount = new SavingsAccount(Branches.Rivendell);
             Transactions transaction = new Transactions(300, TransactionTypes.Credit);
             Transactions transaction2 = new Transactions(300, TransactionTypes.Debit);
 
@@ -36,7 +37,7 @@ namespace Boolean.CSharp.Test
 
         public void TestPrintStatement()
         {
-            Account savingsAccount = new SavingsAccount();
+            Account savingsAccount = new SavingsAccount(Branches.Rohan);
             Transactions transaction = new Transactions(4000, TransactionTypes.Credit);
             Transactions transaction2 = new Transactions(2000, TransactionTypes.Debit);
             Transactions transaction3 = new Transactions(1000, TransactionTypes.Credit);
