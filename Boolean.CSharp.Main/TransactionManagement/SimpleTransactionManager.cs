@@ -18,7 +18,8 @@ namespace Boolean.CSharp.Main.TransactionManagement
         }
         public void AddTransaction(ITransaction transaction)
         {
-            transactions.Add(transaction);
+            if (HasSufficientFunds(transaction)) transactions.Add(transaction);
+            else throw new InvalidOperationException("Insufficient funds for transaction.");
         }
 
         public decimal CalculateBalance()
@@ -35,6 +36,12 @@ namespace Boolean.CSharp.Main.TransactionManagement
         {
             if (this.transactions.Count == 0) return new List<ITransaction>();
             return transactions.Where(t => t.Date >= startTime && t.Date <= endTime).ToList();
+        }
+
+        private bool HasSufficientFunds(ITransaction transaction)
+        {
+            decimal balanceAfterTransaction = CalculateBalance() + transaction.EffectOnBalance();
+            return balanceAfterTransaction >= 0m;
         }
 
     }
