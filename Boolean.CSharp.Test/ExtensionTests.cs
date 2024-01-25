@@ -54,5 +54,27 @@ namespace Boolean.CSharp.Test
             Assert.That(bank.GetBranchAccounts(coastBranch).Count == 1);
         }
 
+        [Test]
+        public void OverdraftDisallowedByDefaultTest()
+        {
+            BankAccount account = bank.GetCustomerAccounts(jane)[0];
+            ITransaction disallowedPurchase = new DebitTransaction(20m);
+            Assert.Throws<InvalidOperationException>(() => account.ApplyTransaction(disallowedPurchase));
+        }
+
+        [Test]
+        public void OverdraftRequestTest()
+        {
+            CurrentBankAccount account = (CurrentBankAccount)bank.GetCustomerAccounts(jane)[0];
+            decimal balanceBeforeTransaction = account.Balance;
+            ITransaction purchase = new DebitTransaction(20);
+            account.ApplyOverdraftTransaction(purchase);
+            Assert.That(account.Transactions.GetTransactions().Last() is OverdraftTransaction);
+            Assert.That(account.Balance == balanceBeforeTransaction);
+            OverdraftTransaction transactionToBeApproved = (OverdraftTransaction)account.Transactions.GetTransactions().Last();
+            transactionToBeApproved.Approve();
+            Assert.That(account.Balance == balanceBeforeTransaction - purchase.Amount);
+        }
+
     }
 }

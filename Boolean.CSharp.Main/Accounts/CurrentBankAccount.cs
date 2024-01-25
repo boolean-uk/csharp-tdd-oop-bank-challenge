@@ -1,4 +1,5 @@
 ﻿using Boolean.CSharp.Main.TransactionManagement;
+using Boolean.CSharp.Main.Transactions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,11 @@ namespace Boolean.CSharp.Main.Accounts
     {
         public CurrentBankAccount() : base(new SimpleTransactionManager())
         {
+        }
+
+        public void ApplyOverdraftTransaction(ITransaction transaction)
+        {
+            throw new NotImplementedException();
         }
     }
 }

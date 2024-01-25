@@ -1,53 +1,87 @@
+
 # Bank Challenge Domain Model
-## Classes/Interfaces
 
-### Customer
-#### Fields
-* **`name: string`** - Full name of the customer.
+## Customer
+| Field          | Type   | Description          |
+| -------------- | ------ | -------------------- |
+| `name`         | string | Full name of the customer. |
 
-### BankAccount (Abstract Class)
-#### Fields
-* **`transactions: ITransactionManager`** - Contains a record of transactions on this account.
-#### Properties
-* **`Balance: decimal`** - Calculated from ITransactionManager
+## BankAccount (Abstract Class)
+| Field          | Type                | Description |
+| -------------- | ------------------- | ----------- |
+| `transactions` | ITransactionManager | Contains a record of transactions on this account. |
 
-#### Methods
-* **`ApplyTransaction(ITransaction): void`** - Applies a transaction to the account.
+| Property       | Type    | Description |
+| -------------- | ------- | ----------- |
+| `Balance`      | decimal | Calculated from ITransactionManager |
 
-### CurrentBankAccount : BankAccount
+| Method                 | Return Type | Parameters          | Description |
+| ---------------------- | ----------- | ------------------- | ----------- |
+| `ApplyTransaction`     | void        | `ITransaction`      | Applies a transaction to the account. |
 
-### SavingsBankAccount : BankAccount
+## CurrentBankAccount : BankAccount
+In current bank accounts, overdraft transactions are allowed.
 
-### BankAccountManager
-#### Fields:
-* **`customerAccounts: Dictionary<Customer, List<<BankAccount>>`** - Associates BankAccounts with Customers.
-#### Methods:
-* **`LinkAccountToCustomer(Customer, BankAccount): void`** - Adds the given BankAccount to the given Customer in customerAccounts.
-* **`GetCustomerAccounts(Customer): List<BankAccount>`** - Returns a list of BankAccounts associated with a the given Customer.
+| Method                    | Return Type | Parameters          | Description |
+| ------------------------- | ----------- | ------------------- | ----------- |
+| `ApplyOverdraftTransaction`| void        | `ITransaction`      | Applies a transaction as an overdraft transaction, which has to be approved before it goes through. |
 
+## SavingsBankAccount : BankAccount
+Savings accounts do not allow overdraft transactions.
 
-### ITransaction (Interface)
-#### Properties
-* **`Amount: decimal`** - The amount being transferred.
-* **`Date: DateTime`** - Timestamp of when the transaction was made.
-#### Methods
-* **`EffectOnBalance(): decimal`** - A signed version of the amount being applied to the bank account.
+## BankAccountManager
+| Field               | Type                                    | Description |
+| ------------------- | --------------------------------------- | ----------- |
+| `customerAccounts`  | Dictionary<Customer, List<BankAccount>> | Associates BankAccounts with Customers. |
 
-### DebitTransaction : ITransaction
+| Method                | Return Type         | Parameters                  | Description |
+| --------------------- | ------------------- | --------------------------- | ----------- |
+| `LinkAccountToCustomer`| void               | `Customer, BankAccount`     | Adds the given BankAccount to the given Customer in customerAccounts. |
+| `GetCustomerAccounts`  | List<BankAccount>  | `Customer`                  | Returns a list of BankAccounts associated with a the given Customer. |
 
-### CreditTransaction : ITransaction
+## ITransaction (Interface)
+| Property       | Type    | Description |
+| -------------- | ------- | ----------- |
+| `Amount`       | decimal | The amount being transferred. |
+| `Date`         | DateTime| Timestamp of when the transaction was made. |
 
-### ITransactionManager (Interface)
-#### Methods
-* **`AddTransaction(ITransaction): void`** - Adds an ITransaction to the transaction manager.
-* **`GetTransactions(DateTime, DateTime): List<ITransaction>`** - Retrieves a list of transactions between two points in time.
-* **`CalculateBalance(): decimal`** -Returns the sum of all the transactions.
-### TransactionManager : ITransactionManager
-#### Fields
-* **`transactions: List<ITransaction>`** - Holds a list of transactions.
+| Method             | Return Type | Description |
+| ------------------ | ----------- | ----------- |
+| `EffectOnBalance`  | decimal     | A signed version of the amount being applied to the bank account. |
 
-### IBankStatement (Interface)
-#### Properties
-* **`Account: BankAccount`** - The account of the bank statement.
-#### Methods
-* **`GenerateStatement(): string`** - Returns a receipt of all transactions between two points in time.
+## DebitTransaction : ITransaction
+Amount is subtracted from balance.
+
+## CreditTransaction : ITransaction
+Amount is added to balance.
+
+## OverdraftTransaction : ITransaction
+| Field                | Type         | Description |
+| -------------------- | ------------ | ----------- |
+| `underlyingTransaction` | ITransaction | The transaction waiting to be approved. |
+| `isApproved`            | bool         | The current status of the overdraft transaction request. |
+
+| Method        | Return Type | Description |
+| ------------- | ----------- | ----------- |
+| `Approve`     | void        | Approves the request, and changes amount to that of the underlying transaction. |
+
+## ITransactionManager (Interface)
+| Method            | Return Type | Parameters               | Description |
+| ----------------- | ----------- | ------------------------ | ----------- |
+| `AddTransaction`  | void        | `ITransaction`           | Adds an ITransaction to the transaction manager. |
+| `GetTransactions` | List<ITransaction> | `DateTime, DateTime` | Retrieves a list of transactions between two points in time. |
+| `CalculateBalance`| decimal     |                          | Returns the sum of all the transactions. |
+
+## TransactionManager : ITransactionManager
+| Field           | Type               | Description |
+| --------------- | ------------------ | ----------- |
+| `transactions`  | List<ITransaction> | Holds a list of transactions. |
+
+## IBankStatement (Interface)
+| Property        | Type         | Description |
+| --------------- | ------------ | ----------- |
+| `Account`       | BankAccount  | The account of the bank statement. |
+
+| Method            | Return Type | Description |
+| ----------------- | ----------- | ----------- |
+| `GenerateStatement` | string    | Returns a receipt of all transactions between two points in time. |
