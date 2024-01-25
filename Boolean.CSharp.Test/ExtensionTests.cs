@@ -2,6 +2,7 @@
 using Boolean.CSharp.Main.Accounts;
 using Boolean.CSharp.Main.Branch;
 using Boolean.CSharp.Main.enums;
+using Boolean.CSharp.Main.Transactions;
 using Boolean.CSharp.Main.Users;
 using NUnit.Framework;
 using System;
@@ -15,14 +16,19 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class ExtensionTests
     {
+        IBankBranch branch = new LocalBank("123 Bank Road, 987 City");
+        DateTime dob = new DateTime(1996, 8, 20);
+
+        [SetUp]
+        public void SetUp()
+        {
+            branch = new LocalBank("123 Bank Road, 987 City");
+            dob = new DateTime(1996, 8, 20);
+        }
 
         [Test]
         public void TestBranchAssociation()
         {
-            // Generate branch
-            IBankBranch branch = new LocalBank("123 Bank Road, 987 City");
-            // Genereate a customer
-            DateTime dob = new DateTime(1996, 8, 20);
             Customer user = new RegularCustomer("Bob", dob, branch);
             // Register customer and make a bank account
             user.RegisterWithBankBranch(branch);
@@ -43,11 +49,42 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
+        public void TestTransactionManagerBalanceCalculation()
+        {
+            // Arrange
+            Customer user = new RegularCustomer("Tim", dob, branch);
+            user.RegisterWithBankBranch(branch);
+            user.OpenNewAccount(AccountType.General);
+            IAccount acc = user.GetAccounts()[0];
+            IBankTransaction? transactions = (acc as PersonalAccount)?.GetTransactionManager();
+
+            // Act
+            transactions.AddDepositTransaction(100);
+            decimal res1 = transactions.CalculateAccountBalance();
+            transactions.AddDepositTransaction(1000);
+            decimal res2 = transactions.CalculateAccountBalance();
+            transactions.AddDepositTransaction(10000);
+            decimal res3 = transactions.CalculateAccountBalance();
+            transactions.AddWithdrawTransaction(50);
+            decimal res4 = transactions.CalculateAccountBalance();
+            transactions.AddWithdrawTransaction(500);
+            decimal res5 = transactions.CalculateAccountBalance();
+            transactions.AddWithdrawTransaction(5000);
+            decimal res6 = transactions.CalculateAccountBalance();
+
+            // Assert
+            Assert.That(res1, Is.EqualTo(100));
+            Assert.That(res2, Is.EqualTo(1100));
+            Assert.That(res3, Is.EqualTo(11100));
+            Assert.That(res4, Is.EqualTo(11050));
+            Assert.That(res5, Is.EqualTo(10550));
+            Assert.That(res6, Is.EqualTo(5550));
+        }
+
+        [Test]
         public void TestAddingUsersToBranch() 
         {
             // Arrange
-            IBankBranch branch = new LocalBank("123 Bank Road, 987 City");
-            DateTime dob = new DateTime(1996, 8, 20);
             Customer user1 = new RegularCustomer("Bob", dob, branch);
             Customer user2 = new RegularCustomer("Bill", dob, branch);
             Customer user3 = new RegularCustomer("Billy", dob, branch);
@@ -84,8 +121,6 @@ namespace Boolean.CSharp.Test
         public void TestOverdraftGeneralAccount() 
         {
             // Arrange
-            IBankBranch branch = new LocalBank("123 Bank Road, 987 City");
-            DateTime dob = new DateTime(1996, 8, 20);
             Customer user = new RegularCustomer("Bob", dob, branch);
             IEmployee manager = new Manager("Jim");
             user.RegisterWithBankBranch(branch);
@@ -113,8 +148,6 @@ namespace Boolean.CSharp.Test
         public void TestOverdraftSavingsAccount() 
         {
             // Arrange
-            IBankBranch branch = new LocalBank("123 Bank Road, 987 City");
-            DateTime dob = new DateTime(1996, 8, 20);
             Customer user = new RegularCustomer("Bob", dob, branch);
             IEmployee manager = new Manager("Jim");
             user.RegisterWithBankBranch(branch);
@@ -146,8 +179,6 @@ namespace Boolean.CSharp.Test
         public void TestOverdraftRequests() 
         {
             // Arrange
-            IBankBranch branch = new LocalBank("123 Bank Road, 987 City");
-            DateTime dob = new DateTime(1996, 8, 20);
             Customer user = new RegularCustomer("Bob", dob, branch);
             IEmployee manager = new Manager("Jim");
             branch.AddEmployeeToBranch(manager);
