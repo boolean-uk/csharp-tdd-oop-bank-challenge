@@ -10,20 +10,18 @@ namespace Boolean.CSharp.Main.Accounts
 {
     public abstract class BankAccount
     {
-        private decimal balance;
         private ITransactionManager transactions;
 
         public BankAccount(ITransactionManager transactionManager)
         {
-            this.balance = 0m;
             this.transactions = transactionManager;
         }
         public void ApplyTransaction(ITransaction transaction)
         {
-            balance += transaction.EffectOnBalance();
             transactions.AddTransaction(transaction);
         }
-        public decimal Balance { get => balance; }
+
+        public decimal Balance { get => transactions.CalculateBalance(); }
         public ITransactionManager Transactions { get => transactions; }
     }
 }

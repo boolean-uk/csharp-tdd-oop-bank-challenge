@@ -11,5 +11,6 @@ namespace Boolean.CSharp.Main.TransactionManagement
     {
         public void AddTransaction(ITransaction transaction);
         public List<ITransaction> GetTransactions();
+        public decimal CalculateBalance();
     }
 }

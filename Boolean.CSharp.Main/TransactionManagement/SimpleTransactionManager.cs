@@ -21,6 +21,11 @@ namespace Boolean.CSharp.Main.TransactionManagement
             transactions.Add(transaction);
         }
 
+        public decimal CalculateBalance()
+        {
+            return transactions.Sum(transaction => transaction.EffectOnBalance());
+        }
+
         public List<ITransaction> GetTransactions()
         {
             return GetTransactions(DateTime.MinValue, DateTime.Now);
