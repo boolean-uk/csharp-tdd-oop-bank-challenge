@@ -12,6 +12,8 @@ namespace Boolean.CSharp.Main.Accounts
         protected List<Transaction> transactions;
         public bool IsOverdraftRequested { get; protected set; }
         public bool IsOverdraftApproved { get; internal set; }
+        public string PhoneNumber { get; set; }
+
 
         public BankAccount()
         {

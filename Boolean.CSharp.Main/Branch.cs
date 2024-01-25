@@ -20,5 +20,12 @@ namespace Boolean.CSharp.Main
         {
             accounts.Remove(account);
         }
+
+        public void AddAccount(BankAccount bankAccount, string phoneNumber)
+        {
+            bankAccount.PhoneNumber = phoneNumber;
+            accounts.Add(bankAccount);
+        }
+
     }
 }
