@@ -9,7 +9,7 @@ namespace Boolean.CSharp.Main.Transactions
 {
     public class BankTransaction
     {
-        public int Id;
+        public int Id = 0;
         public string TransactionType { get; set; }
         //public TransactionStatus Status { get; set; }
         public string Date { get; set; }
@@ -23,12 +23,20 @@ namespace Boolean.CSharp.Main.Transactions
         {
             this.Id++;
             this.TransactionType = TransactionType;
-            this.Date = DateTime.Now.ToString("yyyy - mm - dd HH:mm");
+            this.Date = DateTime.Now.ToString("yyyy - mm - dd HH:mm:ss");
             this.Amount = amount;
             this.NewBalance = newBalance;
             this.OldBalance = oldBalance;
         }
 
+        public BankTransaction(string TransactionType, double amount, double newBalance)
+        {
+            this.Id++;
+            this.TransactionType = TransactionType;
+            this.Date = DateTime.Now.ToString("yyyy - mm - dd HH:mm:ss");
+            this.Amount = amount;
+            this.NewBalance = newBalance;
+        }
 
         public string ToString()
         {

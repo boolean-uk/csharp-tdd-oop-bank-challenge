@@ -15,11 +15,8 @@ namespace Boolean.CSharp.Main.Accounts
     {
         private Guid _accountId = Guid.NewGuid();
         private List<BankTransaction> _transactions = new List<BankTransaction>();
-        
-        protected Account(Branches Branch) 
-        {
-            this.Branches = Branch;
-        }    
+
+
         public Guid AccountId { get { return _accountId; } set { _accountId = value; } }
         public Branches Branches { get; set; }
 
@@ -28,14 +25,12 @@ namespace Boolean.CSharp.Main.Accounts
         public void deposit(double amount)
         {
             makeTransaction("deposit", amount);
-
-
         }
 
         public void withdraw(double amount)
         {
             makeTransaction("withdraw", amount);
-            
+
         }
 
         public void printTransactions()
@@ -67,23 +62,40 @@ namespace Boolean.CSharp.Main.Accounts
             if (type.ToLower() == "deposit")
             {
                 newBalance = oldBalance + amount;
+                oldBalance = oldBalance;
 
             }
             else if (type.ToLower() == "withdraw")
             {
                 newBalance = oldBalance - amount;
+                oldBalance = oldBalance;
+
 
             }
 
             BankTransaction transaction = new BankTransaction(type.ToLower(), amount, newBalance, oldBalance);
             _transactions.Add(transaction);
+            
         }
-
 
         public double getBalance()
         {
-            BankTransaction latestTransaction = _transactions.OrderByDescending(t => t.Date).First();
-            double balance = latestTransaction.NewBalance;
+            double balance = 0;
+
+            foreach (BankTransaction transaction in _transactions.OrderBy(t => t.Date))
+            {
+                switch (transaction.TransactionType.ToLower())
+                {
+                    case "deposit":
+                        balance += transaction.Amount;
+                        break;
+
+                    case "withdraw":
+                        balance -= transaction.Amount;
+                        break;
+                }
+            }
+
             return balance;
         }
     }

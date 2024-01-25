@@ -58,7 +58,7 @@ namespace Boolean.CSharp.Test
             currentAccount.withdraw(1000);
             double b = currentAccount.getBalance();
 
-            Assert.That(b, Is.EqualTo(1000));
+            Assert.That(b, Is.EqualTo(0));
         }
 
         [Test]
@@ -81,7 +81,7 @@ namespace Boolean.CSharp.Test
             sa.withdraw(1000);
             double b = sa.getBalance();
 
-            Assert.That(b, Is.EqualTo(1000));
+            Assert.That(b, Is.EqualTo(0));
         }
 
         [Test]
@@ -104,12 +104,14 @@ namespace Boolean.CSharp.Test
             CurrentAccount currentAccount = new CurrentAccount(customer);
             currentAccount.makeTransaction("deposit", 1000);
             currentAccount.makeTransaction("deposit", 500);
+            double b = currentAccount.getBalance();
 
-            
 
-            Assert.That(b, Is.EqualTo(1000));
+            Assert.That(b, Is.EqualTo(1500));
 
         }
+
+        
 
 
 

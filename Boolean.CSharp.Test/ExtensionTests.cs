@@ -1,4 +1,6 @@
 ﻿using Boolean.CSharp.Main;
+using Boolean.CSharp.Main.Accounts;
+using Boolean.CSharp.Main.Users;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -17,14 +19,32 @@ namespace Boolean.CSharp.Test
             _extension = new Extension();
         }
         [Test]
-        private void TestQuestion1()
+        public void CheckBalance()
         {
+            Customer cus = new Customer("Seb", "Oslo");
+
+            SavingsAccount sa = new SavingsAccount(cus);
+
+            sa.makeTransaction("deposit", 1000);
+
+            sa.makeTransaction("deposit", 500);
+            sa.makeTransaction("withdraw", 500);
+            sa.makeTransaction("withdraw", 500);
+            sa.makeTransaction("deposit", 500);
+            double balance = sa.getBalance();
+
+            Assert.That(1000, Is.EqualTo(balance));
 
         }
         [Test]
-        private void TestQuestion2()
+        public void getBranch()
         {
+            Customer customer = new Customer("Nigel", "London");
 
+            SavingsAccount sa = new SavingsAccount(customer);
+
+
+            Assert.That("London", Is.EqualTo(sa.Customer.branch));
         }
     }
 }

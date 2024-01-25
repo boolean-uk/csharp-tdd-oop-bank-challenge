@@ -8,17 +8,22 @@ Customer cus = new Customer("Seb", "Oslo");
 
 SavingsAccount sa = new SavingsAccount(cus);
 
-
 sa.makeTransaction("deposit", 1000);
+Console.WriteLine();
+sa.makeTransaction("deposit", 500);
+Console.WriteLine();
+sa.makeTransaction("withdraw", 500);
+Console.WriteLine();
+sa.makeTransaction("withdraw", 500);
+Console.WriteLine();
+sa.makeTransaction("deposit", 500);
 
-sa.makeTransaction("deposit", 500);
-sa.makeTransaction("withdraw", 500);
-sa.makeTransaction("withdraw", 500);
-sa.makeTransaction("deposit", 500);
 
 sa.printTransactions();
 
-Console.WriteLine();
+
+
+
 
 
 
