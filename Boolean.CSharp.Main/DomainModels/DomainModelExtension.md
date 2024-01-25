@@ -20,8 +20,8 @@ I want to approve or reject overdraft requests.
 |`CurrentAccount`(Child)|`Withdraw(Transactions transaction)`		|				|void		|
 |`SavingsAccount`(Child)|`getBalance()`								|				|int		|
 |						|`printStatement()`							|				|void		|
-|						|											|				|			|
-|						|											|				|			|
+|						|`RequestOverdraft()`						|				|			|
+|						|`FixODrequest()`							|				|			|
 |						|											|				|			|
 |						|											|				|			|
 |`Enums`				|`TransactionTypes`							|				|			|

@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boolean.CSharp.Main
+namespace Boolean.CSharp.Main.Overdrafts
 {
-    public class OverdraftRequest
+    public class OverdraftCreator
     {
-        public OverdraftRequest() { }
-
 
     }
 }

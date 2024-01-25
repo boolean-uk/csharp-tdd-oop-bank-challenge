@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Boolean.CSharp.Main.Overdrafts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ namespace Boolean.CSharp.Main.AccountFolder
     {
         
         private List<Transactions> _transactions = new List<Transactions>();
+        private List<OverdraftRequest> _ODrequests = new List<OverdraftRequest>();
 
         public void Deposit(Transactions transaction)
         {
@@ -67,5 +69,17 @@ namespace Boolean.CSharp.Main.AccountFolder
             }
             return _transactions.Last().Balance;
         }
+
+        public void RequestOverdraft()
+        {
+
+        }
+
+        public void FixODrequest()
+        {
+
+        }
+
+        public List<OverdraftRequest> OverDraftRequests { get { return _ODrequests; } set { _ODrequests = value; } }
     }
 }
