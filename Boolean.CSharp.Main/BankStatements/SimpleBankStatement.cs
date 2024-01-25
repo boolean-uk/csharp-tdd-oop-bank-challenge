@@ -12,12 +12,10 @@ namespace Boolean.CSharp.Main.BankStatements
     public class SimpleBankStatement : IBankStatement
     {
         private BankAccount account;
-        private int receiptColumnWidth;
 
         public SimpleBankStatement(BankAccount account)
         {
             this.account = account;
-            this.receiptColumnWidth = 20;
         }
 
         public string GenerateStatement()

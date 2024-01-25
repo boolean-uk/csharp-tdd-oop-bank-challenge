@@ -1,6 +1,7 @@
 ﻿using Boolean.CSharp.Main;
 using Boolean.CSharp.Main.AccountManagement;
 using Boolean.CSharp.Main.Accounts;
+using Boolean.CSharp.Main.Branches;
 using Boolean.CSharp.Main.Customers;
 using Boolean.CSharp.Main.Transactions;
 using NUnit.Framework;
@@ -39,6 +40,18 @@ namespace Boolean.CSharp.Test
             account.ApplyTransaction(generousGift);
             account.ApplyTransaction(recklessPurchase);
             Assert.That(account.Balance == 1000m);
+        }
+
+        [Test]
+        public void BranchTest()
+        {
+            Branch valleyBranch = new Branch("Valley Branch");
+            Branch coastBranch = new Branch("Coast Branch");
+            bank.LinkAccountToBranch(valleyBranch, bank.GetCustomerAccounts(john)[0]);
+            bank.LinkAccountToBranch(valleyBranch, bank.GetCustomerAccounts(jane)[0]);
+            bank.LinkAccountToBranch(coastBranch, bank.GetCustomerAccounts(john)[1]);
+            Assert.That(bank.GetBranchAccounts(valleyBranch).Count == 2);
+            Assert.That(bank.GetBranchAccounts(coastBranch).Count == 1);
         }
 
     }

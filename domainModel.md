@@ -7,8 +7,10 @@
 
 ### BankAccount (Abstract Class)
 #### Fields
-* **`balance: decimal`** - The current balance of the account.
 * **`transactions: ITransactionManager`** - Contains a record of transactions on this account.
+#### Properties
+* **`Balance: decimal`** - Calculated from ITransactionManager
+
 #### Methods
 * **`ApplyTransaction(ITransaction): void`** - Applies a transaction to the account.
 
@@ -29,7 +31,6 @@
 * **`Amount: decimal`** - The amount being transferred.
 * **`Date: DateTime`** - Timestamp of when the transaction was made.
 #### Methods
-* **`ApplyToAccount(BankAccount): void`** - Applies the transaction to the specified BankAccount.
 * **`EffectOnBalance(): decimal`** - A signed version of the amount being applied to the bank account.
 
 ### DebitTransaction : ITransaction
@@ -40,7 +41,7 @@
 #### Methods
 * **`AddTransaction(ITransaction): void`** - Adds an ITransaction to the transaction manager.
 * **`GetTransactions(DateTime, DateTime): List<ITransaction>`** - Retrieves a list of transactions between two points in time.
-
+* **`CalculateBalance(): decimal`** -Returns the sum of all the transactions.
 ### TransactionManager : ITransactionManager
 #### Fields
 * **`transactions: List<ITransaction>`** - Holds a list of transactions.
