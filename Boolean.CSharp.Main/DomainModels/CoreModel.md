@@ -15,36 +15,6 @@ So I can use my account,
 I want to deposit and withdraw funds.
 
 
-
-Create Current Account(Should be able to withdraw and save money to account)
-
-Create Savings Account(Should be able to withdraw and save money to account)
-
-Generate Bank Statements(Print out transaction dates, amounts, currentBalance)
-
-Deposit Funds
-Withdraw Funds
-
-When depositing and withdrawing funds, create DateTime.now()
-the return of the deposit and withdrawals should be stored somewhere.
-
-public class Transactions
-
-double amount;
-DateTime = _datetime;
-double balance;
-
-
-public abstract class Account
-methods:
-Deposit - Deposits a specified amount to the account calling the method.
-Withdraw - Withraws a specified amount from the account calling the method.
-printTransactions - prints out an iterated list of all transactions that have been made.
-(Account needs a List of Transactions.)
-
-
-
-
 -----------------------------------------------------------------------------------------------
 |Classes:				| Methods:									| Scenario		| Output	|
 |						|											|				|			|
@@ -57,7 +27,4 @@ printTransactions - prints out an iterated list of all transactions that have be
 |`Transaction`			|											|				|			|
 |						|											|				|			|
 |						|											|				|			|
-|						|											|				|			|
-|						|											|				|			|
-|						|											|				|			|
-|						|											|				|			|
+-----------------------------------------------------------------------------------------------
