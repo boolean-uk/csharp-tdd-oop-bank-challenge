@@ -73,7 +73,7 @@ namespace Boolean.CSharp.Test
             Assert.That(account.Balance == balanceBeforeTransaction);
             OverdraftTransaction transactionToBeApproved = (OverdraftTransaction)account.Transactions.GetTransactions().Last();
             transactionToBeApproved.Approve();
-            Assert.That(account.Balance == balanceBeforeTransaction - purchase.Amount);
+            Assert.That(account.Balance < 0 && account.Balance == balanceBeforeTransaction - purchase.Amount);
         }
 
     }
