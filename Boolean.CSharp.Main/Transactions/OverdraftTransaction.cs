@@ -23,7 +23,11 @@ namespace Boolean.CSharp.Main.Transactions
 
         public void Approve()
         {
-            throw new NotImplementedException();
+            if (!this.isApproved)
+            {
+                this.isApproved = true;
+                this.amount = this.underlyingTransaction.Amount;
+            }
         }
 
         public decimal EffectOnBalance()

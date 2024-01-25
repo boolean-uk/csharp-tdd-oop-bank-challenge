@@ -16,7 +16,8 @@ namespace Boolean.CSharp.Main.Accounts
 
         public void ApplyOverdraftTransaction(ITransaction transaction)
         {
-            throw new NotImplementedException();
+            try { ApplyTransaction(transaction); }
+            catch { ApplyTransaction(new OverdraftTransaction(transaction)); }
         }
     }
 }
