@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClassDiagrams\" />
+    <Folder Include="Overdrafts\" />
   </ItemGroup>
 
 </Project>
