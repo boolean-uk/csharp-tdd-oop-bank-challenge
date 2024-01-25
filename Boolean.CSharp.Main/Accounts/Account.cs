@@ -15,65 +15,62 @@ namespace Boolean.CSharp.Main.Accounts
     {
         private Guid _accountId = Guid.NewGuid();
         private List<BankTransaction> _transactions = new List<BankTransaction>();
-
-
-        public Guid AccountId { get { return _accountId; } set { _accountId = value; } }
         public Branches Branches { get; set; }
+
+        
+        public Guid AccountId { get { return _accountId; } set { _accountId = value; } }
+        
 
 
 
         public void deposit(double amount)
         {
-            makeTransaction("deposit", amount);
+            makeTransaction(TransactionType.Credit, amount);
         }
 
         public void withdraw(double amount)
         {
-            makeTransaction("withdraw", amount);
+            makeTransaction(TransactionType.Debit, amount);
 
         }
 
         public void printTransactions()
         {
-            Console.WriteLine("{0,20} || {1,10} || {2,10} || {3,10} ", "Date", "Credit", "Debit", "Balance");
+            Console.WriteLine("{0,23} || {1,10} || {2,10} || {3,10} ", "Date", "Credit", "Debit", "Balance");
+            Console.WriteLine(("").PadRight(65, '-'));
             foreach (BankTransaction bt in _transactions.OrderByDescending(t => t.Date))
             {
 
                 Console.WriteLine("{0,10} || {1,10} || {2,10} || {3,10} ",
                     bt.Date.ToString(),
-                    bt.TransactionType == "deposit" ? bt.Amount : 0,
-                    bt.TransactionType == "withdraw" ? bt.Amount : 0,
+                    bt.TransactionType == TransactionType.Credit? bt.Amount : 0,
+                    bt.TransactionType == TransactionType.Debit ? bt.Amount : 0,
                     bt.NewBalance);
             }
         }
 
-        public void makeTransaction(string type, double amount)
+        public void makeTransaction(TransactionType type, double amount)
         {
-            double oldBalance = 0;
+            double oldBalance = getBalance();
             double newBalance = 0;
+            double delta = 0;
 
             if (_transactions.Any())
             {
                 BankTransaction latestTransaction = _transactions.OrderByDescending(t => t.Date).First();
-                oldBalance = latestTransaction.OldBalance;
-                newBalance = latestTransaction.OldBalance;
             }
 
-            if (type.ToLower() == "deposit")
+            if (type == TransactionType.Credit)
             {
-                newBalance = oldBalance + amount;
-                oldBalance = oldBalance;
+                delta = amount;
 
             }
-            else if (type.ToLower() == "withdraw")
+            else if (type == TransactionType.Debit)
             {
-                newBalance = oldBalance - amount;
-                oldBalance = oldBalance;
-
-
+                delta = -amount;
             }
-
-            BankTransaction transaction = new BankTransaction(type.ToLower(), amount, newBalance, oldBalance);
+            newBalance = oldBalance + delta;
+            BankTransaction transaction = new BankTransaction(type, amount, newBalance, oldBalance);
             _transactions.Add(transaction);
             
         }
@@ -84,13 +81,13 @@ namespace Boolean.CSharp.Main.Accounts
 
             foreach (BankTransaction transaction in _transactions.OrderBy(t => t.Date))
             {
-                switch (transaction.TransactionType.ToLower())
+                switch (transaction.TransactionType)
                 {
-                    case "deposit":
+                    case TransactionType.Credit:
                         balance += transaction.Amount;
                         break;
 
-                    case "withdraw":
+                    case TransactionType.Debit:
                         balance -= transaction.Amount;
                         break;
                 }
@@ -98,5 +95,6 @@ namespace Boolean.CSharp.Main.Accounts
 
             return balance;
         }
+
     }
 }

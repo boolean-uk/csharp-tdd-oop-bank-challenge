@@ -4,19 +4,20 @@ using Boolean.CSharp.Main.Enums;
 using Boolean.CSharp.Main.Transactions;
 using Boolean.CSharp.Main.Users;
 
-Customer cus = new Customer("Seb", "Oslo");
+Customer cus = new Customer("Seb");
 
 SavingsAccount sa = new SavingsAccount(cus);
+sa.Branches = Branches.Oslo;
 
-sa.makeTransaction("deposit", 1000);
-Console.WriteLine();
-sa.makeTransaction("deposit", 500);
-Console.WriteLine();
-sa.makeTransaction("withdraw", 500);
-Console.WriteLine();
-sa.makeTransaction("withdraw", 500);
-Console.WriteLine();
-sa.makeTransaction("deposit", 500);
+sa.deposit(1000);
+
+sa.deposit(500);
+
+sa.withdraw(500);
+
+sa.withdraw(500);
+
+sa.deposit(500);
 
 
 sa.printTransactions();

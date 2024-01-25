@@ -21,30 +21,29 @@ namespace Boolean.CSharp.Test
         [Test]
         public void CheckBalance()
         {
-            Customer cus = new Customer("Seb", "Oslo");
+            Customer cus = new Customer("Seb");
 
             SavingsAccount sa = new SavingsAccount(cus);
 
-            sa.makeTransaction("deposit", 1000);
+            sa.deposit(1000);
+            sa.deposit(1000);
+            sa.withdraw(1000);
+            sa.withdraw(1000);
 
-            sa.makeTransaction("deposit", 500);
-            sa.makeTransaction("withdraw", 500);
-            sa.makeTransaction("withdraw", 500);
-            sa.makeTransaction("deposit", 500);
             double balance = sa.getBalance();
 
-            Assert.That(1000, Is.EqualTo(balance));
+            Assert.That(0, Is.EqualTo(balance));
 
         }
         [Test]
         public void getBranch()
         {
-            Customer customer = new Customer("Nigel", "London");
+            Customer customer = new Customer("Nigel");
 
             SavingsAccount sa = new SavingsAccount(customer);
+            sa.Branches = Main.Enums.Branches.Oslo;
 
-
-            Assert.That("London", Is.EqualTo(sa.Customer.branch));
+            Assert.That("Oslo", Is.EqualTo(sa.Branches.ToString()));
         }
     }
 }

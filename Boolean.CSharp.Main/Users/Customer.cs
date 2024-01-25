@@ -13,14 +13,12 @@ namespace Boolean.CSharp.Main.Users
 
         public Guid CustomerId { get; set; }
         public string name { get; set; }
-        public string branch { get; set; }
 
 
-        public Customer(string Name, string Branch) 
+        public Customer(string Name) 
         {
             this.CustomerId = Guid.NewGuid();
             this.name = Name;
-            this.branch = Branch;
         }
 
         
