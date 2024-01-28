@@ -47,6 +47,10 @@ namespace Boolean.CSharp.Main
         public List<float> balanceList { get; private set; }
         public List<Transaction> transactionsList { get; private set; }
         public string AccountID { get; private set; }
+        public string branch {  get; private set; }
+        public bool haveOverdraftRequest { get; private set; }
+        public bool approvedOverdraftRequest { get; private set; }
+        public float overDraftRequestAmount { get; private set; }
 
         //Constructor, by default balance is 0.0,
         //transactionslists are empty
@@ -57,27 +61,23 @@ namespace Boolean.CSharp.Main
             this.balanceList = new List<float>();
             this.transactionsList = new List<Transaction>();
             this.AccountID = Guid.NewGuid().ToString();
+            this.branch = "DefaultBranch";
+            this.haveOverdraftRequest = false;
+            this.approvedOverdraftRequest = false;
+            this.overDraftRequestAmount = 0;
         }
 
-        //MakeTransactionfunction
+        //MakeTransactionFunction
         public void MakeTransaction(float amount)
         {
             //check if there is enough money, and amount in transaction is'nt zero
             //Created a more simple if statement here
+            //created other if statement for overdraft
 
             //Check amount != 0.0
             if (amount == 0.0f)
             {
                 return;
-            }
-
-            //Withdrawal, check if there is enough money to withdraw given amount
-            if (amount < 0.0f && currentBalance + amount >= 0.0f) 
-            {
-                Transaction currentTransaction = new Transaction(amount);
-                transactionsList.Add(currentTransaction);
-                currentBalance += amount;
-                balanceList.Add(currentBalance);
             }
 
             //Deposit
@@ -87,6 +87,28 @@ namespace Boolean.CSharp.Main
                 transactionsList.Add(currentTransaction);
                 currentBalance += amount;
                 balanceList.Add(currentBalance);
+            }
+
+            //withdraw
+            else 
+            {
+                //overdraft
+                if (approvedOverdraftRequest && haveOverdraftRequest && (currentBalance + amount >= (0.0f - overDraftRequestAmount))) 
+                {
+                    Transaction currentTransaction = new Transaction(amount);
+                    transactionsList.Add(currentTransaction);
+                    currentBalance += amount;
+                    balanceList.Add(currentBalance);
+                }
+
+                //regular withdraw
+                else if (currentBalance + amount >= 0.0f)
+                {   
+                    Transaction currentTransaction = new Transaction(amount);
+                    transactionsList.Add(currentTransaction);
+                    currentBalance += amount;
+                    balanceList.Add(currentBalance);
+                }
             }
         }
 
@@ -111,12 +133,31 @@ namespace Boolean.CSharp.Main
             return bankStatement;
         }
 
+        //set branch
+        public void SetBranch(string branch)
+        {
+            this.branch = branch;
+        }
+
+        // Request overdraft
+        public void RequestOverdraft(float amount)
+        {
+            this.overDraftRequestAmount = amount;
+            this.haveOverdraftRequest = true;
+        }
+
+        //Approve overdraft request
+        public void ApproveOverdraftRequest()
+        {
+            this.approvedOverdraftRequest = true;
+        }
+
     }
 
     //CurrentAccount, almost identical to bankAccount, just one property differ
     public class CurrentAccount : BankAccount 
     {
-        public readonly string accountType;
+        public string accountType { get; private set; }
 
         public CurrentAccount()
         {

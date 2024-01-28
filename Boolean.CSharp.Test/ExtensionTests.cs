@@ -8,25 +8,53 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Test
 {
-    /*
-    [TestFixture]
     public class ExtensionTests
     {
-        private Extension _extension;
-        public ExtensionTests()
-        {
-            _extension = new Extension();
-        }
         [Test]
-        private void TestQuestion1()
+        public void CanSetBranch()
         {
+            //create new bankAccount
+            BankAccount myAccount = new BankAccount();
 
+            //Check if branch is default
+            Assert.IsTrue(myAccount.branch.Equals("DefaultBranch"));
+
+            //set branch to paris
+            myAccount.SetBranch("Paris");
+
+            //check if branch is set to paris
+            Assert.IsTrue(myAccount.branch.Equals("Paris"));
         }
-        [Test]
-        private void TestQuestion2()
-        {
 
+        [Test]
+        public void OverdraftTest()
+        {
+            //new bankAccount
+            BankAccount myAccount = new BankAccount();
+
+            //try to make withdrawal without overdraft approved
+            myAccount.MakeTransaction(-100.0f);
+            Assert.AreEqual(0.0f, myAccount.currentBalance);
+
+            //insert money
+            myAccount.MakeTransaction(50.0f);
+
+            //request overdraft
+            myAccount.RequestOverdraft(500.0f);
+
+            //approve overdraft
+            myAccount.ApproveOverdraftRequest();
+
+            //withdraw overdraft
+            myAccount.MakeTransaction(-100.0f);
+            Assert.AreEqual(-50.0f, myAccount.currentBalance);
+
+            myAccount.MakeTransaction(-400.0f);
+            Assert.AreEqual(-450.0f, myAccount.currentBalance);
+
+            //check that it is not possible to make overdraft over the limit
+            myAccount.MakeTransaction(-400.0f);
+            Assert.AreEqual(-450.0f, myAccount.currentBalance);
         }
     }
-    */
 }

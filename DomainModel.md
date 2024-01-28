@@ -3,16 +3,19 @@
 Class:
 	BankAccount
 Properties:
-	public readonly float: currentBalance
-	public readonly list<int>: balanceList
-	private list<Transaction>: transactionsList
-	public readonly string: accountID
+	public float: currentBalance {get; private set;}
+	public list<int>: balanceList {get; private set;}
+	public list<Transaction>: transactionsList {get; private set;}
+	public string: accountID {get; private set;}
+	public string: Branch {get; private set;}
 Methods:
 	MakeTransaction(Transaction, transaction);
 		//Creates a transaction object
 		//Executes transaction and updates balance/balancelist
 	GetBankStatement();
 		//Generates bankstatement of current status
+	SetBranch(string branch)
+		//sets branch
 
 Class: 
 	CurrentAccount: BankAccount
