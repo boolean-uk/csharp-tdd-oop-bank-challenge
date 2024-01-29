@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Boolean.CSharp.Main.Accounts.GeneralAccount">
+    <Position X="0.5" Y="3.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>EACAAABAAAAAAAAAAAAAAAJEAAAAAAIAAAAAkABAAAI=</HashCode>
+      <FileName>Accounts\GeneralAccount.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Boolean.CSharp.Main.Accounts.SavingsAccount">
+    <Position X="3" Y="3.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>EACAAABAADAAAAAAAAAAAAJEAAAAAAIAAAAAgABAAAI=</HashCode>
+      <FileName>Accounts\SavingsAccount.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Boolean.CSharp.Main.Users.Customer">
+    <Position X="6.25" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAIAAAAAMAAAAAEgCAAABAAAIBAAAEABAA=</HashCode>
+      <FileName>Users\Customer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Boolean.CSharp.Main.Users.Manager">
+    <Position X="8.75" Y="3.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>ABAAIAAAAAAAQIgAAIAAAAAFAAAAAAAAAAAAAAEABAA=</HashCode>
+      <FileName>Users\Manager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Boolean.CSharp.Main.Users.RegularCustomer">
+    <Position X="6.25" Y="7.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Users\RegularCustomer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Boolean.CSharp.Main.Transactions.TransactionManager">
+    <Position X="11.5" Y="3.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgCAAAgAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Transactions\TransactionManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Boolean.CSharp.Main.Branch.LocalBank">
+    <Position X="16.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAACAAAAwAAABIAAAAAAAAABAEAAACAAAAAhEAA=</HashCode>
+      <FileName>Branch\LocalBank.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Boolean.CSharp.Main.MessageProvider.TwilioSMSSender">
+    <Position X="19.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ExternalConnectivity\TwilioSMSSender.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Boolean.CSharp.Main.Transactions.OverdraftRequestFixedAmount">
+    <Position X="14" Y="3.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAgQIAAAAAAAEAAQAAAAAAAAIAAEAAAAAA=</HashCode>
+      <FileName>Transactions\OverdraftRequestFixedAmount.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="Boolean.CSharp.Main.Users.IUser">
+    <Position X="6.5" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAEAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Users\IUser.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Boolean.CSharp.Main.Accounts.IAccount">
+    <Position X="2" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAABEAAAAAAIAAAAAgAAAAAI=</HashCode>
+      <FileName>Accounts\IAccount.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Boolean.CSharp.Main.Transactions.IBankTransaction">
+    <Position X="11.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgCAAAgAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Transactions\IBankTransaction.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Boolean.CSharp.Main.Branch.IBankBranch">
+    <Position X="16.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAACAAAAgAAABIAAAAAAAAABAAAAAAAAAAABEAA=</HashCode>
+      <FileName>Branch\IBankBranch.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Boolean.CSharp.Main.MessageProvider.ITextSender">
+    <Position X="19.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ExternalConnectivity\ITextSender.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Boolean.CSharp.Main.Transactions.IOverdraftRequest">
+    <Position X="14" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAEAAQAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>Transactions\IOverdraftRequest.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Boolean.CSharp.Main.Users.IEmployee">
+    <Position X="9.25" Y="0.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAIAAAAAAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Users\IEmployee.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
