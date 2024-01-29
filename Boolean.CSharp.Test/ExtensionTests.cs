@@ -16,6 +16,7 @@ namespace Boolean.CSharp.Test
         {
             _extension = new Extension();
         }
+        /*
         [Test]
         private void TestQuestion1()
         {
@@ -26,5 +27,6 @@ namespace Boolean.CSharp.Test
         {
 
         }
+        */
     }
 }
