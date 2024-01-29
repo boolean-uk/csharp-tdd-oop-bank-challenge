@@ -9,28 +9,30 @@ namespace Boolean.CSharp.Main.Accounts
 {
     public abstract class Account
     {
-        public int accountNumber { get; }
-        public double balance { get; protected set; }
+        public int AccountNumber { get; }
+        public double Balance { get; protected set; }
         private readonly List<Transaction> transactions;
+        public Enums.Branches Branch { get; set; }
 
-        protected Account(int accountNumber)
+        protected Account(int accountNumber, Enums.Branches defaultBranch = Enums.Branches.Oslo)
         {
-            this.accountNumber = accountNumber;
-            balance = 0;
+            this.AccountNumber = accountNumber;
+            Balance = 0;
             transactions = new List<Transaction>();
+            Branch = defaultBranch;
         }
 
         public void Deposit(double amount)
         {
-            balance += amount;
+            Balance += amount;
             AddTransaction(amount);
         }
 
         public bool Withdraw(double amount)
         {
-            if (balance >= amount)
+            if (Balance >= amount)
             {
-                balance -= amount;
+                Balance -= amount;
                 AddTransaction(-amount);
                 return true;
             }
@@ -43,7 +45,7 @@ namespace Boolean.CSharp.Main.Accounts
 
         public void AddTransaction(double amount)
         {
-            transactions.Add(new Transaction(amount, balance));
+            transactions.Add(new Transaction(amount, Balance));
         }
 
         public List<Transaction> GetTransactions()

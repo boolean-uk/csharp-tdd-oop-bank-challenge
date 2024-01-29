@@ -25,5 +25,4 @@ namespace Boolean.CSharp.Main
             Console.WriteLine("-----------------------------------------");
         }
     }
-
 }

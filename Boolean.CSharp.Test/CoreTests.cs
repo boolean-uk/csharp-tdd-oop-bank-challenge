@@ -1,4 +1,4 @@
-﻿using Boolean.CSharp.Main;
+﻿using Boolean.CSharp.Main.Users;
 using NUnit.Framework;
 
 namespace Boolean.CSharp.Test
@@ -28,7 +28,7 @@ namespace Boolean.CSharp.Test
 
             customer.Deposit(1, 1000);
 
-            Assert.AreEqual(1000, customer.GetSpecifiedAccount(1).balance);
+            Assert.AreEqual(1000, customer.GetSpecifiedAccount(1).Balance);
         }
 
         [Test]
@@ -40,7 +40,7 @@ namespace Boolean.CSharp.Test
             customer.Deposit(1, 1000);
             customer.Withdraw(1, 500);
 
-            Assert.AreEqual(500, customer.GetSpecifiedAccount(1).balance);
+            Assert.AreEqual(500, customer.GetSpecifiedAccount(1).Balance);
         }
 
         [Test]
