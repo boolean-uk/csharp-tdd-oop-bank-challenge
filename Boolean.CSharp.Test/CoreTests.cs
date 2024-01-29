@@ -10,12 +10,12 @@ namespace Boolean.CSharp.Test
         public void AddCustomer()
         {
             //Set Up
-            Bank bank = new Bank();
+            Bank bank = new Bank(1, BankLocation.Oslo);
             //Execute
             bank.createCustomer("Sebastian", "Hanssen");
             //verify
-            Assert.That(Is.Not.Null, bank.customers);
-            Assert.That("Sebastian", bank.customers[0].firstName);
+            Assert.That(bank.customers.Count, Is.Not.Null);
+            Assert.That(bank.customers[0].FirstName, Is.EqualTo("Sebastian"));
         }
 
     }
