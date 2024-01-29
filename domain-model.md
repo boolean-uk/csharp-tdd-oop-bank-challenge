@@ -24,6 +24,7 @@ I want to deposit and withdraw funds.
 
 | Classes  | Methods                     | Function                                           | Scenario                 | Output                |
 |----------|-----------------------------|----------------------------------------------------|--------------------------|-----------------------|
+| Bank     | createCustomer(string name) | Creates a customer in the bank                     | Creates customer         | Customer              |
 | Customer | createChecking(string name) | Creates an account in the bank                     | Creates account          | Checking Account      |
 | Customer | createSavings(string name)  | Creates a savings account in the bank              | Creates account          | Savings Account       |
 | Account  | showHistory()               | Generate bank statements with various information. | Generates bank statement | Strings/Stringbuilder |
