@@ -8,20 +8,12 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main.Transactions
 {
-    public class OverdraftRequestFixedAmount : IOverdraftRequest
+    public class OverdraftRequestFixedAmount(Customer customer, decimal newLimit, IAccount account) : IOverdraftRequest
     {
-        Customer _customer;
-        decimal _desiredOverdraftLimit;
-        DateTime _time;
-        IAccount _account;
-
-        public OverdraftRequestFixedAmount(Customer customer, decimal newLimit, IAccount account)
-        {
-            _customer = customer;
-            _desiredOverdraftLimit = newLimit;
-            _time = DateTime.Now;
-            _account = account;
-        }
+        Customer _customer = customer;
+        decimal _desiredOverdraftLimit = newLimit;
+        DateTime _time = DateTime.Now;
+        IAccount _account = account;
 
         /// <inheritdoc />
         public IAccount GetOverdraftRequestAccount()
