@@ -6,18 +6,16 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class CoreTests
     {
-        private Core _core;
-
-        public CoreTests()
-        {
-            _core = new Core();
-
-        }
-
         [Test]
-        public void TestQuestion1()
+        public void AddCustomer()
         {
-
+            //Set Up
+            Bank bank = new Bank();
+            //Execute
+            bank.createCustomer("Sebastian", "Hanssen");
+            //verify
+            Assert.That(Is.Not.Null, bank.customers);
+            Assert.That("Sebastian", bank.customers[0].firstName);
         }
 
     }
