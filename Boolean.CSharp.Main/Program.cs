@@ -1,10 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Boolean.CSharp.Main;
 
-
-// See https://aka.ms/new-console-template for more information
-using Boolean.CSharp.Main;
-
 Customer customer = new Customer();
 CurrentAccount currentaccount = new CurrentAccount();
 BankTransaction newtransaction = new BankTransaction();

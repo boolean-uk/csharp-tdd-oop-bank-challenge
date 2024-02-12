@@ -8,7 +8,7 @@ namespace Boolean.CSharp.Test
     public class ExtensionTest
     {
         [Test]
-        public void TestTransactionHistory()
+        public void TestGenerateBankStatement2()
         {
 
             Customer customer = new Customer();
@@ -16,15 +16,15 @@ namespace Boolean.CSharp.Test
             BankTransaction newtransaction = new BankTransaction();
             BankTransaction secondtransaction = new BankTransaction();
             BankTransaction thirdtransaction = new BankTransaction();
-            newtransaction.makeTransaction("23.01.2023", "Deposit", 500, currentaccount);
+            newtransaction.makeTransaction("10.01.2012", "Deposit", 1000, currentaccount);
 
             customer.TransactionHistory.Add(newtransaction);
 
-            secondtransaction.makeTransaction(DateTime.Now.ToString("dd/MM/yyyy"), "Deposit", 1500, currentaccount);
+            secondtransaction.makeTransaction("13.01.2012", "Deposit", 2000, currentaccount);
 
             customer.TransactionHistory.Add(secondtransaction);
 
-            thirdtransaction.makeTransaction(DateTime.Now.ToString("dd/MM/yyyy"), "Withdrawal", 700, currentaccount);
+            thirdtransaction.makeTransaction("14.01.2012", "Withdrawal", 500, currentaccount);
 
             customer.TransactionHistory.Add(thirdtransaction);
 
@@ -32,9 +32,9 @@ namespace Boolean.CSharp.Test
 
             // Assert
             var expectedOutput = "      Date ||     Credit ||      Debit ||    Balance\r\n" +
-                                 $"{DateTime.Now:dd/MM/yyyy} ||       1500 ||          0 || 2000,00\r\n" +
-                                 $"{DateTime.Now:dd/MM/yyyy} ||          0 ||        700 || 1300,00\r\n" +
-                                 $"{"23.01.2023"} ||        500 ||          0 || 500,00\r\n";
+                                 $"{"14.01.2012"} ||          0 ||        500 || 2500,00\r\n" +
+                                 $"{"13.01.2012"} ||       2000 ||          0 || 3000,00\r\n" +
+                                 $"{"10.01.2012"} ||       1000 ||          0 || 1000,00\r\n";
 
             Assert.AreEqual(expectedOutput, customer.generateStatement());
         }
