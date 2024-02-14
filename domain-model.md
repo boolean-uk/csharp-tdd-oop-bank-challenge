@@ -29,5 +29,5 @@ I want to deposit and withdraw funds.
 | Customer | createSavings(string name)  | Creates a savings account in the bank              | Creates account          | Savings Account       |
 | Account  | showHistory()               | Generate bank statements with various information. | Generates bank statement | Strings/Stringbuilder |
 | Account  | deposit(double amount)      | Deposit money into the account                     | Deposits money           | double                |
-| Account  | withdraw(double amount)     | Withdrwas money from the account                   | Withdraws money          | double                |
+| Account  | withdraw(double amount)     | Withdraws money from the account                   | Withdraws money          | double                |
 |          |                             |                                                    | Not enough money         | error                 |
