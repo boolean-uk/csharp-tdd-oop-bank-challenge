@@ -11,20 +11,18 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class ExtensionTests
     {
-        private Extension _extension;
-        public ExtensionTests()
-        {
-            _extension = new Extension();
-        }
         [Test]
-        private void TestQuestion1()
+        public void CheckEnum()
         {
-
-        }
-        [Test]
-        private void TestQuestion2()
-        {
-
+            //Set Up
+            Bank bank = new Bank(1, BankLocation.Oslo);
+            bool checkEnum = bank.BankLocation is Enum;
+            //Execute
+            bank.createCustomer("Sebastian", "Hanssen");
+            //verify
+            Assert.That(bank.customers.Count, Is.Not.Null);
+            Assert.That(bank.customers[0].FirstName, Is.EqualTo("Sebastian"));
+            Assert.That(checkEnum, Is.EqualTo(true));;
         }
     }
 }
