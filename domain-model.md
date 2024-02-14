@@ -1,6 +1,6 @@
 ```
 As a customer,
-So I can safely store use my money,
+So I can safely store and use my money,
 I want to create a current account.
 ```
 
