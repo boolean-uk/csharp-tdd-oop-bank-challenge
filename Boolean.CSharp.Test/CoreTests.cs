@@ -103,7 +103,7 @@ namespace Boolean.CSharp.Test
             Assert.That(bank.customers[0].Accounts, Is.Not.Null);
             Assert.That(bank.customers[0].Accounts[0].Balance, Is.EqualTo(5.00));
             Assert.That(bank.customers[0].Accounts[0].FreeWithdrawals, Is.EqualTo(9999));
-            Assert.That(bank.customers[0].Accounts[0].ShowHistory(), Is.EqualTo("13/02/2024 | +20,00 | 20,00 , 14/02/2024 | -15,00 | 5,00"));
+            Assert.That(bank.customers[0].Accounts[0].ShowHistory(), Is.EqualTo("13/02/2024 | +20.00 | 20.00 , 14/02/2024 | -15.00 | 5.00"));
         }
     }
 }
