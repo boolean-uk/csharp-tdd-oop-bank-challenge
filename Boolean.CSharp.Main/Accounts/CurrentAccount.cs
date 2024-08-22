@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NUnit.Framework.Constraints;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,6 +36,39 @@ namespace Boolean.CSharp.Main
             Transactions.Add(transaction);
 
             return true;
+        }
+
+        public void GenerateStatement()
+        {
+            Console.WriteLine("{0,-12} || {1, -8} || {2, -8} || {3, -8}",
+                    "date",
+                    "credit",
+                    "debit",
+                    "balance"
+                );
+
+            foreach (var transaction in Transactions)
+            {
+                decimal? credit = null;
+                decimal? debit = null;
+
+                switch (transaction.Type)
+                {
+                    case(TransactionType.Deposit):
+                        credit = transaction.Amount;
+                        break;
+                    case(TransactionType.Withdraw):
+                        debit = transaction.Amount;
+                        break;
+                }
+
+                Console.WriteLine("{0,-12} || {1, -8} || {2, -8} || {3, -8}",
+                    transaction.FormattedDate,
+                    $"{credit}",
+                    $"{debit}",
+                    Math.Round(transaction.Balance,2)
+                );
+            }
         }
     }
 }

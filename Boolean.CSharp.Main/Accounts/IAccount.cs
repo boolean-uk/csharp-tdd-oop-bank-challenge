@@ -15,5 +15,7 @@ namespace Boolean.CSharp.Main
         public bool Deposit(decimal amount);
 
         public bool Withdraw(decimal amount);
+
+        public void GenerateStatement();
     }
 }

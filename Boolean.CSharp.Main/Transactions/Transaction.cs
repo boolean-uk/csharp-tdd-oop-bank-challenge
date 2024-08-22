@@ -9,7 +9,7 @@ namespace Boolean.CSharp.Main
     public class Transaction
     {
         private DateTime _Date {  get; } = DateTime.Now;
-        public string FormattedDate => _Date.ToString("yyyy-MM-dd");
+        public string FormattedDate => _Date.ToString("dd/MM/yyy");
         public decimal Amount { get; }
         public decimal Balance { get; }
 
