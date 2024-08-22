@@ -2,8 +2,12 @@ using Boolean.CSharp.Main.Interface;
 
 namespace Boolean.CSharp.Main.Models;
 
-public class SavingAccount : IAccount
+public class SavingAccount(string name) : IAccount
 {
+    public string Name { get; } = name;
+    public AccountType AccountType { get; } = AccountType.Saving;
+    public bool SmsNotification { get; set; } = false;
+
     public List<BankTransaction> GetTransactions()
     {
         throw new NotImplementedException();
@@ -27,5 +31,10 @@ public class SavingAccount : IAccount
     public decimal GetBalance()
     {
         throw new NotImplementedException();
+    }
+    
+    public void ToggleSmsNotification()
+    {
+        SmsNotification = !SmsNotification;
     }
 }
