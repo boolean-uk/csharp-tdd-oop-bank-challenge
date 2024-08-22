@@ -9,6 +9,11 @@ namespace Boolean.CSharp.Main.View
 {
     internal class View
     {
+        internal void createBankAccount(Customer customer)
+        {
+            Console.WriteLine($"Bank account for {customer.FirstName} {customer.LastName} is being created!");
+        }
+
         internal IPerson createPerson(bool isCustomer)
         {
             if (isCustomer) {

@@ -11,6 +11,7 @@ namespace Boolean.CSharp.Main.Model
         private List<Engineer> _engineerList;
         private List<Customer> _customerList;
         private List<BankAccount> _bankAccountList;
+        private int _nextID = 0;
 
         public Bank()
         {
@@ -23,7 +24,13 @@ namespace Boolean.CSharp.Main.Model
 
         internal void addNewCustomer(IPerson person)
         {
-            _customerList.Add((Customer)person);
+            _customerList.Add(new Customer(person.FirstName, person.LastName, person.PhoneNumber, person.CashOnHand));
+        }
+
+        internal void createBankAccount(Customer person)
+        {
+            person.ID = this._nextID++;
+            _bankAccountList.Add(new BankAccount(person.ID));
         }
 
         internal List<Customer> getCustomers()

@@ -10,9 +10,14 @@ namespace Boolean.CSharp.Main.Model
     {
         private TransactionsAccount _transactionsAccount;
         private SavingsAccount _savingsAccount;
-        private int _bankId;
-        public BankAccount(Customer customer) {
-            //this._bankId = customer.getCustomerID();
+        private int _bankId; //same id as owner aka customer
+        public BankAccount(int customerID) {
+            _bankId = customerID;
         }
+
+        public TransactionsAccount getTransactionsAccount() { return _transactionsAccount; }
+        public SavingsAccount getSavingsAccount() { return _savingsAccount; }
+
+
     }
 }

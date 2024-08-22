@@ -23,15 +23,17 @@ namespace Boolean.CSharp.Main.Controller
         public bool createPerson(bool isCustomer)
         {
             // all view stuff is just for looks and prints since we do not actually run a interactable view
-            model.createPerson(view.createPerson(isCustomer));
+            model.createPerson(isCustomer, view.createPerson(isCustomer));
             return true;
         }
 
         public List<Customer> GetCustomers() { return model.getCustomers(); }
 
-        public void createBankAccount()
+        public bool createBankAccount(Customer customer)
         {
-
+            view.createBankAccount(customer);
+            model.createBankAccount(customer);
+            return false;
         }
     }
 }

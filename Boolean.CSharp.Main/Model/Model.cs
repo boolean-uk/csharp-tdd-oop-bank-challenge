@@ -16,9 +16,9 @@ namespace Boolean.CSharp.Main.Model
             this._bank = new Bank();
         }
 
-        internal bool createPerson(IPerson person)
+        internal bool createPerson(bool isCustomer, IPerson person)
         {
-            if (person == null && person is IPerson)
+            if (person != null && person is Customer)
             {
                 _bank.addNewCustomer(person);
                 return true;
@@ -26,12 +26,15 @@ namespace Boolean.CSharp.Main.Model
             return false;
         }
 
-        public bool createBankAccount(IPerson person)
+        public int createBankAccount(Customer person)
         {
-            if (person == null)
+            if (person != null && person is Customer && person.ID == null) //id == null if person does not have bank account, id is given by bank
             {
+
+                int userID = _bank.createBankAccount(person);
+                return userID;
             }
-            return false;
+            return -1;
         }
 
         private bool checkDuplicateID(IPerson person)

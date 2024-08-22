@@ -14,7 +14,7 @@ namespace Boolean.CSharp.Main.Model
         public string PhoneNumber { get; private set; }
         public int Age { get; private set; }
         public float CashOnHand { get; private set; }
-        public int ID { get; private set; }
+        public int ID { get; set; } //ID delegated by bank
 
         public Customer(string FirstName, string LastName, string PhoneNumber, float CashOnHand) {
             this.FirstName = FirstName;
@@ -22,6 +22,7 @@ namespace Boolean.CSharp.Main.Model
             this.PhoneNumber = PhoneNumber;
             this.CashOnHand = CashOnHand;
             this.Email = this.FirstName.ToLower() + "." + LastName.ToLower() + "@email.com";
+            this.ID = -1;
         }
 
         //pass this as arg, when creating a bank acount the customer is given a unique id
