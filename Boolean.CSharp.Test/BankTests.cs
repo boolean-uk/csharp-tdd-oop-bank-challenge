@@ -27,7 +27,31 @@ namespace Boolean.CSharp.Test
 
             //Assert
             Assert.IsTrue(bank.accounts.Contains(account));
-            
+            bank.accounts.Remove(account);
+
+        }
+
+        public void checkIfSavingsAccountCreated()
+        {
+
+            //Arrange 
+            Bank bank = new Bank();
+            SavingsAccount Saccount = new SavingsAccount();
+            string accountHolder = "Mike Smith";
+            string type = "Savings";
+            bool overdrafted  = false;
+            decimal overdraftAmount = 0;
+            decimal rent = 1.23m;
+
+            //Act
+            Saccount.Create(type, accountHolder);
+            var account = bank.accounts.OfType<SavingsAccount>().FirstOrDefault(x => x.nameOfHolder == accountHolder);
+
+
+            //Assert
+            Assert.IsTrue(bank.accounts.Contains(account));
+            bank.accounts.Remove(account);
+
         }
     }
 }

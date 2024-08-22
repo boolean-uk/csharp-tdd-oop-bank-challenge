@@ -9,7 +9,7 @@ namespace Boolean.CSharp.Main.Classes
 {
     public class SavingsAccount : IAccount
     {
-        public bool Create(string type)
+        public bool Create(string type,string name)
         {
             throw new NotImplementedException();
         }
@@ -26,7 +26,11 @@ namespace Boolean.CSharp.Main.Classes
 
         public List<Transaction> transactionList = new List<Transaction>();
 
+        public string nameOfHolder {  get; set; }
+
         public bool overdrafted {  get; set; }
+
+        decimal rent {  get; set; }
 
         public decimal overdraftedAmount { get; set; }
     }
