@@ -1,6 +1,6 @@
 namespace Boolean.CSharp.Main;
 
-public class Customer : IPerson
+public interface IAccount
 {
     
 }

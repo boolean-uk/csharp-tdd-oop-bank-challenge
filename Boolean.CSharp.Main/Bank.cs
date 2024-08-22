@@ -1,6 +1,9 @@
-namespace Boolean.CSharp.Main;
+using Boolean.CSharp.Main.Interface;
 
-public class Bank
+namespace Boolean.CSharp.Main.Core;
+
+public class Bank(string name)
 {
-    
+    private string _name = name;
+    private List<IBranch> _branches = new();
 }
