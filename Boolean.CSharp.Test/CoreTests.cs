@@ -17,7 +17,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestQuestion1()
         {
-
+            Customer c = new Customer();
         }
 
     }
