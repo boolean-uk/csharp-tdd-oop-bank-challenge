@@ -28,11 +28,37 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        public void AddFundsTest() { }
+        public void AddFundsTest() 
+        {
+            SavingsAccount s = new SavingsAccount("Test");
+            s.DepositFunds(500);
+            s.DepositFunds(500);
+        }
 
 
         [Test]
-        public void RemoveFundsTest() { }
+        public void RemoveFundsTest() 
+        {
+            SavingsAccount s = new SavingsAccount("Test");
+            s.DepositFunds(500);
+            s.DepositFunds(500);
+            s.WithdrawFunds(500);
+        }
+
+        [Test]
+        public void UpdateFundsTest()
+        {
+            SavingsAccount s = new SavingsAccount("Test");
+            s.DepositFunds(500);
+            s.DepositFunds(500);
+            s.WithdrawFunds(500);
+
+            foreach (string line in s.GenerateBankStatment()) {
+                Console.WriteLine(line);
+            }
+
+
+        }
 
     }
 }
