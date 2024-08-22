@@ -12,7 +12,6 @@ namespace Boolean.CSharp.Main
         public AccountType Type { get; }
         public decimal Balance { get; set; }
         public List<Transaction> Transactions { get; set; }
-
-        
+        public bool Deposit(decimal amount);
     }
 }
