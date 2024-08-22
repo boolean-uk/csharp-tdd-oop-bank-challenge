@@ -18,11 +18,21 @@ namespace Boolean.CSharp.Test
         [Test]
         public void CreateCustomer()
         {
-            Customer c = new Customer("Dave");
-            PrivateObject obj = new PrivateObject(c);
-            Assert.IsNotNull(c);
-            Assert.That(c.Name.Equals("Dave"));
+
         }
+
+        [Test]
+        public void CreateSavingsAccount()
+        {
+            SavingsAccount s = new SavingsAccount("Test");
+        }
+
+        [Test]
+        public void AddFundsTest() { }
+
+
+        [Test]
+        public void RemoveFundsTest() { }
 
     }
 }

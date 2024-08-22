@@ -13,12 +13,14 @@ namespace Boolean.CSharp.Main.Model
 
         private string _name;
         private List<IAccount> _accounts;
-        private Customer(string name) 
+        internal Customers(string name) 
         { 
             this._name = name;
             this._accounts = new List<IAccount>();
         }
 
-        private string Name { get { return _name; } }
+        internal string Name { get { return _name; } }
+        internal List<IAccount> Accounts { get { return _accounts; } }
+
     }
 }
