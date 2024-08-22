@@ -61,6 +61,30 @@ namespace Boolean.CSharp.Main.Classes
             return sum;
         }
 
+        public Request requestOverdraft(IAccount account, string justficiation, decimal amount)
+        {
+            if ((account as SavingsAccount)?.overdrafted == true)
+            {
+                return null;
+            }
+            else
+            {
+                Request request = new Request(justficiation, amount, account);
+                return request;
+            }
+        }
+
+        public void updateOverdraft(IAccount account, bool status, decimal toBeGiven)
+        {
+            if (status == true)
+            {
+                (account as SavingsAccount).overdrafted = status;
+                (account as SavingsAccount).overdraftedAmount = toBeGiven;
+
+            }
+
+        }
+
         public List<Transaction> transactionList = new List<Transaction>();
 
         public SavingsAccount(string nameOfHolder, List<Transaction> transactionList)

@@ -173,11 +173,34 @@ namespace Boolean.CSharp.Test
             //Act
             cityBranch.accounts.Add(account);
             string expectedBranch = "City";
-            Assert.AreEqual(cityBranch.getType(account), expectedBranch);
+            Assert.AreEqual(cityBranch.getName(account), expectedBranch);
             Assert.IsTrue(cityBranch.accounts.Contains(account));
 
 
             
+        }
+
+        [Test]
+
+        public void checkIfRequestHandled()
+        {
+
+
+            //Arrange
+            Bank bank = new Bank();
+            RegularAccount account = new RegularAccount();
+            string accountHolder = "John Johnson";
+            var currentAccount = bank.accounts.OfType<RegularAccount>().FirstOrDefault(x => x.nameOfHolder == accountHolder);
+            decimal amountToGive = 200;
+            string justficiation = "fired from my job!";
+
+
+            //Act
+            account.requestOverdraft(currentAccount, justficiation, amountToGive);
+            account.updateOverdraft(currentAccount, true, 200);
+
+            //Assert
+            Assert.AreEqual(currentAccount.overdraftedAmount, amountToGive);
         }
     }
 }

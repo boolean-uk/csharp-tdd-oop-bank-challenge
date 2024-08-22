@@ -62,6 +62,30 @@ namespace Boolean.CSharp.Main.Classes
             return sum;
         }
 
+        public Request requestOverdraft(IAccount account, string justficiation, decimal amount)
+        {
+            if ((account as RegularAccount)?.overdrafted == true)
+            {
+                return null;
+            }
+            else
+            {
+                Request request = new Request(justficiation,amount,account);
+                return request;
+            }
+        }
+
+        public void updateOverdraft(IAccount account, bool status, decimal toBeGiven)
+        {
+            if (status == true)
+            {
+                (account as RegularAccount).overdrafted = status;
+                (account as RegularAccount).overdraftedAmount = toBeGiven;
+
+            }
+
+        }
+
 
         public string nameOfHolder { get; set; }
 
@@ -76,6 +100,13 @@ namespace Boolean.CSharp.Main.Classes
         }
 
         public List<Transaction> transactionList { get { return _transactionList; } }
+
+        public bool overdrafted { get; set; }
+
+        private decimal _defuaultRent = 0;
+        decimal rent { get { return _defuaultRent; } set { value = _defuaultRent; } }
+
+        public decimal overdraftedAmount { get; set; }
 
     }
 }

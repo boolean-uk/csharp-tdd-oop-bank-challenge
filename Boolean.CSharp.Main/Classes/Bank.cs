@@ -18,5 +18,16 @@ namespace Boolean.CSharp.Main.Classes
             get { return _accounts; }
             set { _accounts = value; }
         }
+
+        public bool handleRequst(Request request, bool decision) {
+        
+            if (request == null) return false;
+            else
+            {
+                decimal sumToGive = request.amount;
+                request.account.updateOverdraft(request.account,decision,sumToGive);
+                return true;
+            }
+        }
     }
 }
