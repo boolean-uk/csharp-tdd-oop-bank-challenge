@@ -16,4 +16,6 @@ public class WestBranch(Manager m) : IBranch
     {
         throw new NotImplementedException();
     }
+    
+    public List<Customer> GetAllCustomers() => _customers;
 }
