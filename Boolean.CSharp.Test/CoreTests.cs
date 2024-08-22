@@ -1,4 +1,5 @@
 ﻿using Boolean.CSharp.Main;
+using Boolean.CSharp.Main.Model;
 using NUnit.Framework;
 
 namespace Boolean.CSharp.Test
@@ -15,9 +16,11 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        public void TestQuestion1()
+        public void CreateCustomer()
         {
-            Customer c = new Customer();
+            Customer c = new Customer("Dave");
+            Assert.IsNotNull(c);
+            Assert.That(c.Name.Equals("Dave"));
         }
 
     }
