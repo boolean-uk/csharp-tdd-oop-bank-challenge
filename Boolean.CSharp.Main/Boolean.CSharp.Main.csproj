@@ -13,4 +13,10 @@
     <PackageReference Include="NUnit3TestAdapter" Version="4.4.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Model\" />
+    <Folder Include="Controler\" />
+    <Folder Include="View\" />
+  </ItemGroup>
+
 </Project>
