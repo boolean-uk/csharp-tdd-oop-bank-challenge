@@ -19,7 +19,19 @@ namespace Boolean.CSharp.Main
                 return false; 
 
             Balance += amount;
-            Transaction transaction = new Transaction(amount, Balance);
+            Transaction transaction = new Transaction(amount, Balance, TransactionType.Deposit);
+            Transactions.Add(transaction);
+
+            return true;
+        }
+
+        public bool Withdraw(decimal amount)
+        {
+            if ((Balance - amount) < 0) //Not enough money in account
+                return false;
+
+            Balance -= amount;
+            Transaction transaction = new Transaction(amount, Balance, TransactionType.Withdraw);
             Transactions.Add(transaction);
 
             return true;

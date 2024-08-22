@@ -12,11 +12,14 @@ namespace Boolean.CSharp.Main
         public string FormattedDate => _Date.ToString("yyyy-MM-dd");
         public decimal Amount { get; }
         public decimal Balance { get; }
-        
-        public Transaction(decimal amount, decimal balance)
+
+        public TransactionType Type { get; }
+
+        public Transaction(decimal amount, decimal balance, TransactionType type)
         {
             Amount = amount;
             Balance = balance;
+            Type = type;
         }
     }
 }

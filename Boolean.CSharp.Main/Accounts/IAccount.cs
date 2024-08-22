@@ -13,5 +13,7 @@ namespace Boolean.CSharp.Main
         public decimal Balance { get; set; }
         public List<Transaction> Transactions { get; set; }
         public bool Deposit(decimal amount);
+
+        public bool Withdraw(decimal amount);
     }
 }
