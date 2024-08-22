@@ -18,7 +18,7 @@
 | Customer | RequestOverdraft(Account)   | Requests overdraft for a specific account                         | ture, success        |
 |          |                             |                                                                   | false, error         |
 | Manager  | ManageOverdraftRequests()   | Manages the overdraft requests                                    | void                 |
-| Customer | SendStatementToPhone(bool)  | Lets the customer decide if they want SMS updates or not          | void                 |
+| Customer | SetSmsNotification(bool)    | Lets the customer decide if they want SMS updates or not          | void                 |
 
 Core:
 - As a customer, I want to create a current account, So I can safely store use my money.
