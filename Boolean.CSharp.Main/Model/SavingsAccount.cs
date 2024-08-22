@@ -16,7 +16,7 @@ namespace Boolean.CSharp.Main.Model
             this._balance = 0f;
             this._interestRate = 0;
         }
-
+        public float getBalance() { return this._balance; }
         public void deposit(float amount) { _balance += amount; }
         public float withdraw(float amount) { _balance -= amount; return amount;  }
     }

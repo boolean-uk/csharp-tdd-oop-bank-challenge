@@ -10,7 +10,7 @@ namespace Boolean.CSharp.Main.Model
     {
         private TransactionsAccount _transactionsAccount {  get; }
         private SavingsAccount _savingsAccount { get; }
-        private int _bankId; //same id as owner aka customer
+        private int _bankId; 
         public BankAccount(int customerID) {
             _bankId = customerID;
             this._transactionsAccount = new TransactionsAccount();
@@ -18,15 +18,18 @@ namespace Boolean.CSharp.Main.Model
         }
 
         public int getBankId() { return _bankId; }
-        //public TransactionsAccount getTransactionsAccount() { return _transactionsAccount; }
-        //public SavingsAccount getSavingsAccount() { return _savingsAccount; }
 
-        public bool depositMoneyToTransactionalAccount(float amount) { throw new NotImplementedException(); }
+        public float getTransactionsAccountBalance() { return _transactionsAccount.getBalance(); }
+        public float getSavingsAccountBalance() { return _transactionsAccount.getBalance(); }
+        public TransactionsAccount getTransactionsAccount() { return _transactionsAccount; }
+        public SavingsAccount getSavingsAccount() { return _savingsAccount; }
 
-        public bool depositMoneyToSavingsAccount(float amount) { throw new NotImplementedException(); }
+        public void depositMoneyToTransactionalAccount(float amount) { this._transactionsAccount.deposit(amount); }
 
-        public bool withdrawMoneyFromTransactionalAccount(float amount) { throw new NotImplementedException(); }
-        public bool withdrawMoneyFromSavingsAccount(float amount) { throw new NotImplementedException(); }
+        public void depositMoneyToSavingsAccount(float amount) { this._savingsAccount.deposit(amount); }
+
+        public void withdrawMoneyFromTransactionalAccount(float amount) { this._transactionsAccount.withdraw(amount); }
+        public void withdrawMoneyFromSavingsAccount(float amount) { this._savingsAccount.withdraw(amount); }
 
 
     }

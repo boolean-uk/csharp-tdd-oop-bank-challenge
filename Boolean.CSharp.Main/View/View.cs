@@ -27,6 +27,16 @@ namespace Boolean.CSharp.Main.View
             return null; //for engineer creation later
         }
 
+        internal void depositingMoneyToAccount(float amount)
+        {
+            Console.WriteLine($"Depositing {amount} into your account!");
+        }
+
+        internal void withdrawingMoneyFromAccount(float amount)
+        {
+            Console.WriteLine($"Withdrawing {amount} from your account!");
+        }
+
         internal void doesNotExistWarning()
         {
             throw new NotImplementedException();

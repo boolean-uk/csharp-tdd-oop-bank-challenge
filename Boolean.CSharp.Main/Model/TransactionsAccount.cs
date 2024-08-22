@@ -13,6 +13,7 @@ namespace Boolean.CSharp.Main.Model
         public TransactionsAccount() { 
         this._balance = 0f;
         }
+        public float getBalance() { return this._balance; }
 
         public void deposit(float amount) { _balance += amount; }
         public float withdraw(float amount) { _balance -= amount; return amount; }

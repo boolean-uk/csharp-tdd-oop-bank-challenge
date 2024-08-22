@@ -45,5 +45,24 @@ namespace Boolean.CSharp.Main.Model
         {
             return _bank.getCustomers();
         }
+
+        internal bool depositMoneyIntoTransactionalAccount(float amount, int customerID)
+        {
+            return _bank.depositMoneyIntoTransactionalAccount(amount, customerID);
+        }
+        internal bool depositMoneyIntoSavingsAccount(float amount, int customerID)
+        {
+            return _bank.depositMoneyIntoSavingsAccount(amount, customerID);
+        }
+        internal bool withdrawMoneyFromTransactionalAccount(float amount, int customerID)
+        {
+            //dont really care where the money goes, just check that it actually withdraws
+            return _bank.withdrawMoneyFromTransactionalAccount(amount,customerID);
+            
+        }
+        internal bool withdrawMoneyFromSavingsAccount(float amount, int customerID)
+        {
+            return _bank.withdrawMoneyFromSavingsAccount(amount, customerID);
+        }
     }
 }

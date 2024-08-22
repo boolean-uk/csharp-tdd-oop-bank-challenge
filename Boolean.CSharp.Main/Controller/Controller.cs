@@ -45,5 +45,28 @@ namespace Boolean.CSharp.Main.Controller
             }
             return bankAccount;
         }
+
+        public bool depositMoneyIntoTransactionalAccount(float amount, int customerID)
+        {
+            view.depositingMoneyToAccount(amount);
+            return model.depositMoneyIntoTransactionalAccount(amount, customerID);
+        }
+
+        public bool depositMoneyIntoSavingsAccount(float amount, int customerID)
+        {
+            view.depositingMoneyToAccount(amount);
+            return model.depositMoneyIntoSavingsAccount(amount, customerID);
+        }
+
+        public bool withdrawMoneyFromTransactionalAccount(float amount, int customerID)
+        {
+            view.withdrawingMoneyFromAccount(amount);
+            return model.withdrawMoneyFromTransactionalAccount(amount, customerID);
+        }
+        public bool withdrawMoneyFromSavingsAccount(float amount, int customerID)
+        {
+            view.withdrawingMoneyFromAccount(amount);
+            return model.withdrawMoneyFromSavingsAccount(amount,customerID);
+        }
     }
 }

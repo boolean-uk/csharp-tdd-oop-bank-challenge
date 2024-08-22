@@ -38,6 +38,47 @@ namespace Boolean.CSharp.Main.Model
             return _customerList;
         }
 
+        internal bool depositMoneyIntoTransactionalAccount(float amount, int customerID)
+        {
+            BankAccount bankAccount = _bankAccountList.Find(account => account.getBankId() == customerID);
+            if (bankAccount != null)
+            {
+                bankAccount.depositMoneyToTransactionalAccount(amount);
+                return true;
+            }
+            return false;
+        }
+        internal bool depositMoneyIntoSavingsAccount(float amount, int customerID)
+        {
+            BankAccount bankAccount = _bankAccountList.Find(account => account.getBankId() == customerID);
+            if (bankAccount != null)
+            {
+                bankAccount.depositMoneyToSavingsAccount(amount);
+                return true;
+            }
+            return false;
+        }
+        internal bool withdrawMoneyFromTransactionalAccount(float amount, int customerID)
+        {
+            BankAccount bankAccount = _bankAccountList.Find(account => account.getBankId() == customerID);
+            if (bankAccount != null)
+            {
+                bankAccount.withdrawMoneyFromTransactionalAccount(amount);
+                return true;
+            }
+            return false;
+        }
+        internal bool withdrawMoneyFromSavingsAccount(float amount, int customerID)
+        {
+            BankAccount bankAccount = _bankAccountList.Find(account => account.getBankId() == customerID);
+            if (bankAccount != null)
+            {
+                bankAccount.withdrawMoneyFromSavingsAccount(amount);
+                return true;
+            }
+            return false;
+        }
+
         internal BankAccount getBankAccount(int customerID) { return _bankAccountList.Find(account => account.getBankId() == customerID); }
     }
 }

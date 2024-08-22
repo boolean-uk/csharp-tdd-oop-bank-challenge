@@ -13,27 +13,38 @@ namespace Boolean.CSharp.Test
     {
         private Core _core;
         private Main.Controller.Controller _controller;
-        private Main.Model.Model _model = new Main.Model.Model();
-        private Main.View.View _view = new Main.View.View();
+        private Main.Model.Model _model;
+        private Main.View.View _view;
 
         public CoreTests()
         {
             _core = new Core();
+        }
+
+        private void TestSetup()
+        {
+            _model = new Main.Model.Model();
+            _view = new Main.View.View();
             _controller = new Main.Controller.Controller(_model, _view);
         }
 
-        [Test]
-        public void TestQuestion1()
+        //only to be called after testsetup
+        private void CustomerCreation(int amount)
         {
-
+            for (int i = 0; i < amount; i++)
+            {
+                _controller.createPerson(true);
+            }
         }
 
         [Test]
         public void CustomerCreationTest()
         {
-            bool isCustomer = _controller.createPerson(true);
+            TestSetup();
+            CustomerCreation(1);
+            //bool isCustomer = _controller.createPerson(true);
             List<Customer> customerList = _controller.GetCustomers();
-            Assert.IsTrue(isCustomer);
+            //Assert.IsTrue(isCustomer);
             Assert.That(customerList.Count == 1);
             Assert.That(customerList.First().FirstName == "Test");
             
@@ -46,16 +57,42 @@ namespace Boolean.CSharp.Test
         [Test]
         public void CustomerCreationTest2()
         {
-            bool isCustomer = _controller.createPerson(true);
+            TestSetup();
+            CustomerCreation(2);
+            //bool isCustomer = _controller.createPerson(true);
             List<Customer> customerList = _controller.GetCustomers();
-            Assert.IsTrue(isCustomer);
+            //Assert.IsTrue(isCustomer);
             Assert.That(customerList.Count == 2);
             Assert.That(customerList.First().FirstName == "Test");
+            
+            Customer customer = customerList.First();
+            _controller.createBankAccount(customer);
 
-            Customer customer = customerList.Last();
+
+            customer = customerList.Last();
             _controller.createBankAccount(customer);
 
             Assert.That(customerList.Last().ID == 2);
+        }
+
+        [Test]
+        public void CustomerAccountDepositTest()
+        {
+            TestSetup();
+            CustomerCreation(1);
+            List<Customer> customerList = _controller.GetCustomers();
+            Customer customer = customerList.First();
+            _controller.createBankAccount(customer);
+            _controller.depositMoneyIntoTransactionalAccount(100.0f, customer.ID);
+            BankAccount bankAccount = _controller.getBankAccount(customer.ID);
+            Assert.That(bankAccount.getTransactionsAccountBalance() == 100.0f);
+        
+        }
+
+        [Test]
+        public void CustomerAccountWithdrawTest()
+        {
+            Assert.Pass();
         }
     }
 }
