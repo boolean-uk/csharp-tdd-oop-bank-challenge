@@ -24,12 +24,30 @@ namespace Boolean.CSharp.Main.Classes
 
         public bool deposit(decimal amount, IAccount account)
         {
-            throw new NotImplementedException();
+            DateOnly dayOfTransfer = DateOnly.FromDateTime(DateTime.Now);
+            if (amount > 0 && account != null)
+            {
+                Transaction transaction = new Transaction(account, amount, dayOfTransfer);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        public bool withdraw(decimal amount)
+        public bool withdraw(decimal amount, IAccount account)
         {
-            throw new NotImplementedException();
+            DateOnly dayOfTransfer = DateOnly.FromDateTime(DateTime.Now);
+            if (amount < 0 && account != null)
+            {
+                Transaction transaction = new Transaction(account, amount, dayOfTransfer);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public List<Transaction> transactionList = new List<Transaction>();

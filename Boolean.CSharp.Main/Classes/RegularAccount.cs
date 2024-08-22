@@ -1,7 +1,9 @@
 ﻿using Boolean.CSharp.Main.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,12 +25,30 @@ namespace Boolean.CSharp.Main.Classes
 
         public bool deposit(decimal amount, IAccount account)
         {
-            throw new NotImplementedException();
+            DateOnly dayOfTransfer =DateOnly.FromDateTime(DateTime.Now);
+            if (amount > 0 && account != null)
+            {
+                Transaction transaction = new Transaction(account, amount, dayOfTransfer);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        public bool withdraw(decimal amount)
+        public bool withdraw(decimal amount, IAccount account)
         {
-            throw new NotImplementedException();
+            DateOnly dayOfTransfer = DateOnly.FromDateTime(DateTime.Now);
+            if (amount < 0 && account != null)
+            {
+                Transaction transaction = new Transaction(account, amount, dayOfTransfer);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public decimal balance()
