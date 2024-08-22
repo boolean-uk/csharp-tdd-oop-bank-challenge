@@ -1,4 +1,5 @@
 ﻿using Boolean.CSharp.Main;
+using Microsoft.VisualStudio.TestPlatform.Utilities;
 using NUnit.Framework;
 using System.Transactions;
 
@@ -98,6 +99,31 @@ namespace Boolean.CSharp.Test
             bool deposit = account.Deposit(-1000);
 
             Assert.IsFalse(deposit);
+        }
+
+
+        [Test]
+        public void GenerateStatement()
+        {
+            Customer customer = new Customer();
+            customer.CreateAccount(AccountType.Current);
+            IAccount account = customer.accounts[0];
+
+            account.Deposit(5000);
+            account.Withdraw(3000);
+
+            account.GenerateStatement(); //For visual testing in test log
+
+            using (var stringWriter = new StringWriter())
+            {
+                Console.SetOut(stringWriter);
+                account.GenerateStatement();
+                string output = stringWriter.ToString();
+
+                Assert.IsTrue(output.Contains("date         || credit   || debit    || balance "));
+                Assert.IsTrue(output.Contains("|| 5000     ||          || 5000    "));
+                Assert.IsTrue(output.Contains("||          || 3000     || 2000    "));
+            }
         }
     }
 }
