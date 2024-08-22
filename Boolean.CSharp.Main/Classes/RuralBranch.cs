@@ -9,13 +9,17 @@ namespace Boolean.CSharp.Main.Classes
 {
     public class RuralBranch : IBranch
     {
-        public string Name => throw new NotImplementedException();
+        public string Name => nameof(RuralBranch);
 
         public List<IAccount> accounts => throw new NotImplementedException();
 
-        public string getType(IAccount account)
+        public string getName(IAccount account)
         {
-            throw new NotImplementedException();
+            if (accounts.Contains(account))
+            {
+                return Name;
+            }
+            return "Account not in this branch";
         }
     }
 }
