@@ -12,14 +12,23 @@ namespace Boolean.CSharp.Main
 
         public bool CreateAccount(AccountType type)
         {
+            IAccount? account = null; 
+
             switch (type)
             {
                 case AccountType.Current:
-                    IAccount account = new CurrentAccount();
-                    accounts.Add(account);
+                    account = new CurrentAccount();
+                    break;
+
+                case AccountType.Savings:
+                    account = new SavingsAccount();
                     break;
             }
 
+            if (account == null)
+                return false;
+
+            accounts.Add(account);
             return true;
         }
     }

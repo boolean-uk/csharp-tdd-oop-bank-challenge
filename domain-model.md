@@ -23,8 +23,7 @@ I want to deposit and withdraw funds.
 |                           | CreateAccount(AccountType accountType)     | Customer can open an account of their choice   | bool                           |
 | enum AccountType          |                                            | store types of accounts as values              | Current, Savings               |
 | IAccount                  | decimal Balance {get; set;}                | Store account balances                         | decimal balance                |
-|                           | private readonly int Id                            | store unique accountId                         | int Id                         |
-|                           | private readonly AccountType type              | store type of account                          | AccountType type             |
+|                           | AccountType Type {get;}             | store type of account                          | AccountType type             |
 |                           | List\<Transaction> transactions {get; set;} | store all account transactions                 | List\<Transaction> transactions |
 |                           | Deposit(decimal amount)                    | Deposit money into an account                  | bool                           |
 |                           | Withdraw(decimal amount)                   | Withdraw money from an account                 | bool                           |
