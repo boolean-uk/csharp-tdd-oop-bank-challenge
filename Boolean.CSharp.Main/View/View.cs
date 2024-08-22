@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Boolean.CSharp.Main.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,17 @@ namespace Boolean.CSharp.Main.View
 {
     internal class View
     {
+        internal IPerson createPerson(bool isCustomer)
+        {
+            if (isCustomer) {
+                Console.WriteLine("A customer is being created!");
+                string FirstName = "Test";
+                string LastName = "Testsson";
+                string PhoneNumber = "1234567890";
+                float CashOnHand = 1000.0f;
+                return new Customer(FirstName, LastName, PhoneNumber, CashOnHand);
+            }
+            return null; //for engineer creation later
+        }
     }
 }

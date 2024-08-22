@@ -31,7 +31,11 @@ namespace Boolean.CSharp.Test
         [Test]
         public void CustomerCreationTest()
         {
-            
+            bool isCustomer = _controller.createPerson(true);
+            List<Customer> customerList = _controller.GetCustomers();
+            Assert.IsTrue(isCustomer);
+            Assert.That(customerList.Count == 1);
+            Assert.That(customerList.First().FirstName == "Test");
         }
     }
 }

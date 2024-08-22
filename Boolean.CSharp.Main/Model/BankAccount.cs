@@ -12,7 +12,7 @@ namespace Boolean.CSharp.Main.Model
         private SavingsAccount _savingsAccount;
         private int _bankId;
         public BankAccount(Customer customer) {
-            this._bankId = customer.getCustomerID();
+            //this._bankId = customer.getCustomerID();
         }
     }
 }

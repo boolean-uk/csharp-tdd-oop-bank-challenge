@@ -12,12 +12,26 @@ namespace Boolean.CSharp.Main.Controller
 {
     internal class Controller
     {
-        Model.Model Model;
-        View.View View;
-        public Controller(Model.Model Model, View.View View)
+        private Model.Model model;
+        private View.View view;
+        public Controller(Model.Model model, View.View view)
         {
-            this.Model = Model;
-            this.View = View;
+            this.model = model;
+            this.view = view;
+        }
+
+        public bool createPerson(bool isCustomer)
+        {
+            // all view stuff is just for looks and prints since we do not actually run a interactable view
+            model.createPerson(view.createPerson(isCustomer));
+            return true;
+        }
+
+        public List<Customer> GetCustomers() { return model.getCustomers(); }
+
+        public void createBankAccount()
+        {
+
         }
     }
 }
