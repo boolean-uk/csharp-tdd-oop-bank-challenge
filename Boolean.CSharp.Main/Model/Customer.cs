@@ -8,12 +8,13 @@ namespace Boolean.CSharp.Main.Model
 {
     internal class Customer : IPerson
     {
-        public string FirstName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string LastName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Email { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string PhoneNumber { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int Age { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public float CashOnHand { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string FirstName { get; private set; }
+        public string LastName { get; private set; }
+        public string Email { get; private set; }
+        public string PhoneNumber { get; private set; }
+        public int Age { get; private set; }
+        public float CashOnHand { get; private set; }
+        public int ID { get; private set; }
 
         public Customer(string FirstName, string LastName, string PhoneNumber, float CashOnHand) {
             this.FirstName = FirstName;
@@ -23,8 +24,19 @@ namespace Boolean.CSharp.Main.Model
             this.Email = this.FirstName.ToLower() + "." + LastName.ToLower() + "@email.com";
         }
 
-        //pass this as arg
-        public bool createBankAccount() { throw new NotImplementedException(); }
+        //pass this as arg, when creating a bank acount the customer is given a unique id
+        public bool createBankAccount() 
+        {
+
+
+            //call controller and pass relevant args
+            //should return a new id for the user which we can set later
+            //this.ID = functionReturn;
+            
+
+
+            return false;
+        }
 
         public bool depositMoneyToTransactionalAccount(float amount) { throw new NotImplementedException(); }
 
@@ -35,5 +47,7 @@ namespace Boolean.CSharp.Main.Model
 
         //pass this as arg
         public void generateBankStatements() { throw new NotImplementedException(); }
+
+
     }
 }

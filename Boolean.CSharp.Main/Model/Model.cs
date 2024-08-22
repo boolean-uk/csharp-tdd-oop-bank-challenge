@@ -8,5 +8,11 @@ namespace Boolean.CSharp.Main.Model
 {
     internal class Model
     {
+        private Bank bank;
+
+        public Model() { 
+        this.bank = new Bank();
+        }
+
     }
 }

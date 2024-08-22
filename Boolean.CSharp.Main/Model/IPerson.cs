@@ -8,12 +8,12 @@ namespace Boolean.CSharp.Main.Model
 {
     internal interface IPerson
     {
-        string FirstName { get; set; }
-        string LastName { get; set; }
-        int Age { get; set; }
-        string Email { get; set; }
-        string PhoneNumber { get; set; }
-        float CashOnHand { get; set; }
+        string FirstName { get; }
+        string LastName { get; }
+        int Age { get; }
+        string Email { get; }
+        string PhoneNumber { get; }
+        float CashOnHand { get; }
 
         
     }
