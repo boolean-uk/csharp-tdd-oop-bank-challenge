@@ -39,10 +39,7 @@ namespace Boolean.CSharp.Test
             SavingsAccount Saccount = new SavingsAccount();
             string accountHolder = "Mike Smith";
             string type = "Savings";
-            bool overdrafted  = false;
-            decimal overdraftAmount = 0;
-            decimal rent = 1.23m;
-
+            
             //Act
             Saccount.Create(type, accountHolder);
             var account = bank.accounts.OfType<SavingsAccount>().FirstOrDefault(x => x.nameOfHolder == accountHolder);

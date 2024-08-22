@@ -11,7 +11,15 @@ namespace Boolean.CSharp.Main.Classes
     {
         public bool Create(string type,string name)
         {
-            throw new NotImplementedException();
+            if (type == "Savings")
+            {
+                SavingsAccount savingsAccount = new SavingsAccount(name, new List<Transaction>());
+                savingsAccount.rent = rent;
+                savingsAccount.overdrafted = false;
+                savingsAccount.overdraftedAmount = 0;
+                return true;
+            }
+            return false;
         }
 
         public bool deposit(decimal amount)
@@ -26,11 +34,19 @@ namespace Boolean.CSharp.Main.Classes
 
         public List<Transaction> transactionList = new List<Transaction>();
 
+        public SavingsAccount(string nameOfHolder, List<Transaction> transactionList)
+        {
+            this.nameOfHolder = nameOfHolder;
+            this.transactionList = transactionList;
+        }
+
+        public SavingsAccount() { }
         public string nameOfHolder {  get; set; }
 
         public bool overdrafted {  get; set; }
 
-        decimal rent {  get; set; }
+        private decimal _defuaultRent = 1.25m;
+        decimal rent { get { return _defuaultRent; } set { value = _defuaultRent; } }
 
         public decimal overdraftedAmount { get; set; }
     }
