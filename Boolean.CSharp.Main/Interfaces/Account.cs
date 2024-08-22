@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Boolean.CSharp.Main.Interfaces
 {
     public abstract class Account
-    { 
+    {
         public int ID { get; set; }
         public string Type { get; set; }
         public string Owner { get; set; }
@@ -17,20 +17,51 @@ namespace Boolean.CSharp.Main.Interfaces
 
         public List<Transaction> TransactionHistory { get; set; } = new List<Transaction>();
 
-        public double Balance { get; } = 0;
+        private double _balance { get; set; } = 0;
+
+        public double Balance { get { return _balance; } }
 
         public string GenerateStatement()
         {
             StringBuilder sb = new StringBuilder();
             foreach (Transaction transaction in TransactionHistory)
             {
-                sb.Append(transaction.date + " || ");
-                sb.Append(transaction.credit + " || ");
-                sb.Append(transaction.debit + " || ");
-                sb.AppendLine(transaction.balance + " ");
+                sb.Append($"{transaction.date}\t||");
+
+                if(transaction.credit == 0)
+                {
+                    sb.Append($"\t\t||");
+                }
+                else
+                {
+                    sb.Append($"{transaction.credit}\t\t||");
+                }
+
+                if (transaction.debit == 0)
+                {
+                    sb.Append($"\t\t||");
+                }
+                else
+                {
+                    sb.Append($"{transaction.debit}\t\t||");
+                }
+
+                sb.AppendLine($"{transaction.balance}");
             }
 
             return sb.ToString(); 
+        }
+
+        public bool AddBalance(double amount)
+        {
+            _balance += amount;
+            return true;
+        }
+
+        public bool RemoveBalance(double amount)
+        {
+            _balance -= amount;
+            return true;
         }
     }
 }

@@ -20,12 +20,43 @@ namespace Boolean.CSharp.Test
         {
             Bank bank = new Bank();
 
-            bool result = bank.AddAccount(name, bankType);
+            int result = bank.AddAccount(name, bankType);
 
-            Assert.That(result, Is.True);
+            Assert.That(result, Is.EqualTo(0));
         }
 
+        [Test]
 
+        public void DepositFromAccount()
+        {
+            Bank bank = new Bank();
+            string name = "test";
+            string bankType = "current";
+            double amount = 1000.00;
+
+            int BankID = bank.AddAccount(name, bankType);
+            double result = bank.Deposit(BankID, amount);
+
+            Assert.That(result, Is.EqualTo(amount));
+        }
+
+        [Test]
+        public void WithdrawFromBank()
+        {
+            Bank bank = new Bank();
+            string name = "test";
+            string bankType = "current";
+            double amountDeposit = 1000;
+            double amountWithdraw = 800;
+            double expectedResult = 200;
+
+            int bankID = bank.AddAccount(name, bankType);
+            bank.Deposit(bankID, amountDeposit);
+            double result = bank.Withdraw(bankID, amountWithdraw);
+
+            Assert.That(result, Is.EqualTo(expectedResult));
+        }
+        
 
         public void TestGenerateBankStatement()
         {

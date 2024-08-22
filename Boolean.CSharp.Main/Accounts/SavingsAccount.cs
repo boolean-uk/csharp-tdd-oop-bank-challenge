@@ -12,9 +12,9 @@ namespace Boolean.CSharp.Main.Accounts
 
         public SavingsAccount(int id, string type, string owner)
         {
-            ID = id;
-            Type = type;
-            Owner = owner;
+            this.ID = id;
+            this.Type = type;
+            this.Owner = owner;
         }
     }
 }

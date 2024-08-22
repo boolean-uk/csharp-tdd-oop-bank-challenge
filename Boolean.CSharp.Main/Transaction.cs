@@ -9,7 +9,7 @@ namespace Boolean.CSharp.Main
 {
     public class Transaction
     {
-        public DateTime date {  get; set; }
+        public string date {  get; set; }
         
         public double credit { get; set; }
         
@@ -17,7 +17,7 @@ namespace Boolean.CSharp.Main
         
         public double balance { get; set; }
 
-        public Transaction(DateTime date, double balance, double credit, double debit) 
+        public Transaction(string date, double balance, double credit, double debit) 
         { 
             this.date = date;
             this.balance = balance;
