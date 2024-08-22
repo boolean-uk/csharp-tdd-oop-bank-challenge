@@ -10,3 +10,10 @@ public interface IAccount
     public decimal Withdraw(decimal amount);
     public decimal GetBalance();
 }
+
+public enum AccountType
+{
+    SPENDING,
+    SAVING,
+    CREDIT
+}

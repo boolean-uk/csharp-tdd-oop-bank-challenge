@@ -5,13 +5,14 @@ namespace Boolean.CSharp.Main.Models;
 public class Customer(string name, int socialSecurityNumber, string phoneNumber, DateTime birthDate)
 {
     private string _name = name;
-    private int _socialSecurityNumber = socialSecurityNumber;
     private string _phoneNumber = phoneNumber;
     private DateTime _birthDate = birthDate;
-    private List<IAccount> _accounts = new List<IAccount>();
     private bool _smsNotification = false;
+    
+    public int SocialSecurityNumber { get; } = socialSecurityNumber;
+    public List<IAccount> Accounts { get; } = new List<IAccount>();
 
-    public bool CreateAccount(IAccount account)
+    public bool CreateAccount(string name, AccountType accountType)
     {
         return false;
     }

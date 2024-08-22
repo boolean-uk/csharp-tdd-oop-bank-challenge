@@ -9,12 +9,14 @@ public class WestBranch(Manager m) : IBranch
     
     public bool NewCustomer(Customer c)
     {
-        throw new NotImplementedException();
+        if (_customers.Any(x => x.SocialSecurityNumber.Equals(c.SocialSecurityNumber))) return false;
+        _customers.Add(c);
+        return true;
     }
 
     public Customer GetCustomer(int ssn)
     {
-        throw new NotImplementedException();
+        return _customers.FirstOrDefault(customer => customer.SocialSecurityNumber.Equals(ssn))!;
     }
     
     public List<Customer> GetAllCustomers() => _customers;

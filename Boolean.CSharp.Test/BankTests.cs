@@ -1,4 +1,5 @@
 ﻿using Boolean.CSharp.Main;
+using Boolean.CSharp.Main.Interface;
 using Boolean.CSharp.Main.Models;
 using NUnit.Framework;
 
@@ -7,18 +8,15 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class BankTests
     {
-        private Bank _bank;
-
-        public BankTests()
-        {
-            _bank = new Bank("BooleanBank");
-        }
+        private readonly Bank _bank = new("BooleanBank");
+        private Customer _customer = new Customer("John Doe", 0101991234,
+            "98891337", new DateTime(1990, 1, 1));
 
         [Test]
         public void TestCreateNewBranch()
         {
-            Manager m = new Manager();
-            WestBranch wb = new WestBranch(m);
+            var m = new Manager();
+            var wb = new WestBranch(m);
             _bank.AddBranch(wb);
             
             Assert.That(_bank.GetBranches().Count, Is.EqualTo(1));
@@ -28,57 +26,61 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestCreateNewCustomer()
         {
-            Manager m = new Manager();
-            WestBranch wb = new WestBranch(m);
-
-            Customer c = new Customer("John Doe", 0101991234,
-                "98891337", new DateTime(1990, 1, 1));
-            wb.NewCustomer(c);
+            var m = new Manager();
+            var wb = new WestBranch(m);
+            wb.NewCustomer(_customer);
             
-            Assert.That(wb.GetAllCustomers().Contains(c), Is.True);
+            Assert.That(wb.GetAllCustomers().Contains(_customer), Is.True);
         }
 
 
         [Test]
         public void TestGetCustomer()
         {
-            Manager m = new Manager();
-            WestBranch wb = new WestBranch(m);
-
-            Customer c = new Customer("John Doe", 0101991234,
-                "98891337", new DateTime(1990, 1, 1));
-            wb.NewCustomer(c);
+            var m = new Manager();
+            var wb = new WestBranch(m);
+            wb.NewCustomer(_customer);
             
-            Assert.That(wb.GetCustomer(0101991234), Is.EqualTo(c));
+            Assert.That(wb.GetCustomer(0101991234), Is.EqualTo(_customer));
+        }
+
+
+        [Test]
+        public void TestCreateAccount()
+        {
+            _customer.CreateAccount("Main Account", AccountType.SPENDING);
+            
+            Assert.That(_customer.Accounts.Count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void TestGetAccount()
+        {
+            _customer.CreateAccount("Main Account", AccountType.SPENDING);
+            
+            Assert.That(_customer.GetAccount("Main Account"), Is.EqualTo(_customer.Accounts[0]));
         }
         
+        [Test]
+        public void TestRequestOverdraft() { Assert.Fail(); }
         
         [Test]
-        public void TestCreateAccount() {}
+        public void TestSetSmsNotification() { Assert.Fail(); }
         
         [Test]
-        public void TestGetAccount() {}
+        public void TestDeposit() { Assert.Fail(); }
         
         [Test]
-        public void TestRequestOverdraft() {}
+        public void TestWithdraw() { Assert.Fail(); }
         
         [Test]
-        public void TestSetSmsNotification() {}
+        public void TestGetTransactions() { Assert.Fail(); }
         
         [Test]
-        public void TestDeposit() {}
-        
-        [Test]
-        public void TestWithdraw() {}
-        
-        [Test]
-        public void TestGetTransactions() {}
-        
-        [Test]
-        public void TestGetBalance() {}
+        public void TestGetBalance() { Assert.Fail(); }
         
         
         [Test]
-        public void TestManageOverdraftRequests() {}
+        public void TestManageOverdraftRequests() { Assert.Fail(); }
     }
 }
