@@ -1,4 +1,6 @@
-namespace Boolean.CSharp.Main;
+using Boolean.CSharp.Main.Models;
+
+namespace Boolean.CSharp.Main.Interface;
 
 public interface IBranch
 {

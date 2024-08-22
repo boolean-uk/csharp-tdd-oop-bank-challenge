@@ -1,4 +1,6 @@
-namespace Boolean.CSharp.Main;
+using Boolean.CSharp.Main.Interface;
+
+namespace Boolean.CSharp.Main.Models;
 
 public class Customer(string name, int socialSecurityNumber, string phoneNumber, DateTime birthDate)
 {

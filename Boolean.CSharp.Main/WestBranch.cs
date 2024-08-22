@@ -1,7 +1,7 @@
 using Boolean.CSharp.Main.Interface;
 using Boolean.CSharp.Main.Models;
 
-namespace Boolean.CSharp.Main.Core;
+namespace Boolean.CSharp.Main;
 
 public class WestBranch(Manager m) : IBranch
 {

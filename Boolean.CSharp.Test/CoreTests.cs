@@ -10,7 +10,7 @@ namespace Boolean.CSharp.Test
 
         public CoreTests()
         {
-            _bank = new Bank();
+            _bank = new Bank("BooleanBank");
         }
         [Test]
         public void TestQuestion1()

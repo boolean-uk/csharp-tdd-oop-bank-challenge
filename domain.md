@@ -1,19 +1,24 @@
-| Class    | Method                         | Scenario                                                          | Output                |
-|----------|--------------------------------|-------------------------------------------------------------------|-----------------------|
-| Customer | CreateAccount(AccountType)     | Lets the customer create a new account                            | true, success-message |
-|          |                                |                                                                   | false, error-message  |
-| Customer | FindAccountOnName(string name) | Finds the account with corresponding name                         | ture, Account         |
-|          |                                |                                                                   | false, null           |
-| Account  | GetTransactions()              | Fetches the transaction statement for this account                | list of transactions  |
-| Account  | PrintTransactions(List)        | Print the list of transactions                                    | void                  |
-| Account  | Deposit(decimal amount)        | Deposits the amount into the account                              | true if successful    |
-|          |                                |                                                                   | false if not          |
-| Account  | Withdraw(decimal amount)       | Withdraws the amount from the account                             | true if successful    |
-|          |                                |                                                                   | false if not          |
-| Account  | GetBalance()                   | Calculates and returns the balance based on transaction statement | decimal               |
-| Customer | RequestOverdraft(Account)      | Requests overdraft for a specific account                         | void                  |
-| Manager  | ManageOverdraftRequests()      | Manages the overdraft requests                                    | void                  |
-| Customer | SendStatementToPhone(bool)     | Lets the customer decide if they want SMS updates or not          | void                  |
+| Class    | Method                      | Scenario                                                          | Output               |
+|----------|-----------------------------|-------------------------------------------------------------------|----------------------|
+| Branch   | NewCustomer(Customer)       | Creates a new customer and adds them to this branch               | true if successful   |
+|          |                             |                                                                   | false if not         |
+| Branch   | GetCustomer(int customerId) | Looks for a customer based on their customer ID                   | Customer             |
+|          |                             |                                                                   | null                 |
+| Customer | CreateAccount(AccountType)  | Lets the customer create a new account                            | true if successful   |
+|          |                             |                                                                   | false if not         |
+| Customer | GetAccount(string name)     | Finds the account with corresponding name                         | Account              |
+|          |                             |                                                                   | null                 |
+| Account  | GetTransactions()           | Fetches the transaction statement for this account                | list of transactions |
+| Account  | PrintTransactions(List)     | Print the list of transactions                                    | void                 |
+| Account  | Deposit(decimal amount)     | Deposits the amount into the account                              | true if successful   |
+|          |                             |                                                                   | false if not         |
+| Account  | Withdraw(decimal amount)    | Withdraws the amount from the account                             | true if successful   |
+|          |                             |                                                                   | false if not         |
+| Account  | GetBalance()                | Calculates and returns the balance based on transaction statement | decimal              |
+| Customer | RequestOverdraft(Account)   | Requests overdraft for a specific account                         | ture, success        |
+|          |                             |                                                                   | false, error         |
+| Manager  | ManageOverdraftRequests()   | Manages the overdraft requests                                    | void                 |
+| Customer | SendStatementToPhone(bool)  | Lets the customer decide if they want SMS updates or not          | void                 |
 
 Core:
 - As a customer, I want to create a current account, So I can safely store use my money.

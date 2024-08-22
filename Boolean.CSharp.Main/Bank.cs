@@ -1,6 +1,6 @@
 using Boolean.CSharp.Main.Interface;
 
-namespace Boolean.CSharp.Main.Core;
+namespace Boolean.CSharp.Main;
 
 public class Bank(string name)
 {
