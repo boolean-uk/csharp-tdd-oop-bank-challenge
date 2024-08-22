@@ -92,7 +92,34 @@ namespace Boolean.CSharp.Test
         [Test]
         public void CustomerAccountWithdrawTest()
         {
-            Assert.Pass();
+            TestSetup();
+            CustomerCreation(1);
+            List<Customer> customerList = _controller.GetCustomers();
+            Customer customer = customerList.First();
+            _controller.createBankAccount(customer);
+            _controller.depositMoneyIntoTransactionalAccount(100.0f, customer.ID);
+            BankAccount bankAccount = _controller.getBankAccount(customer.ID);
+            Assert.That(bankAccount.getTransactionsAccountBalance() == 100.0f);
+            _controller.withdrawMoneyFromTransactionalAccount(50.0f, customer.ID);
+            bankAccount = _controller.getBankAccount(customer.ID);
+            Assert.That(bankAccount.getTransactionsAccountBalance() == 50.0f);
+        }
+
+        [Test]
+        public void CustomerAccountWithdrawOverLimitTest()
+        {
+            TestSetup();
+            CustomerCreation(1);
+            List<Customer> customerList = _controller.GetCustomers();
+            Customer customer = customerList.First();
+            _controller.createBankAccount(customer);
+            _controller.depositMoneyIntoTransactionalAccount(100.0f, customer.ID);
+            BankAccount bankAccount = _controller.getBankAccount(customer.ID);
+            Assert.That(bankAccount.getTransactionsAccountBalance() == 100.0f);
+            bool successful = _controller.withdrawMoneyFromTransactionalAccount(150.0f, customer.ID);
+            bankAccount = _controller.getBankAccount(customer.ID);
+            Assert.That(bankAccount.getTransactionsAccountBalance() == 100.0f);
+            Assert.IsFalse(successful);
         }
     }
 }

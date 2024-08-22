@@ -61,7 +61,7 @@ namespace Boolean.CSharp.Main.Model
         internal bool withdrawMoneyFromTransactionalAccount(float amount, int customerID)
         {
             BankAccount bankAccount = _bankAccountList.Find(account => account.getBankId() == customerID);
-            if (bankAccount != null)
+            if (bankAccount != null && bankAccount.getTransactionsAccountBalance() >= amount)
             {
                 bankAccount.withdrawMoneyFromTransactionalAccount(amount);
                 return true;
@@ -71,7 +71,7 @@ namespace Boolean.CSharp.Main.Model
         internal bool withdrawMoneyFromSavingsAccount(float amount, int customerID)
         {
             BankAccount bankAccount = _bankAccountList.Find(account => account.getBankId() == customerID);
-            if (bankAccount != null)
+            if (bankAccount != null && bankAccount.getSavingsAccountBalance() >= amount)
             {
                 bankAccount.withdrawMoneyFromSavingsAccount(amount);
                 return true;
