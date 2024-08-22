@@ -19,6 +19,7 @@ namespace Boolean.CSharp.Test
         public void CreateCustomer()
         {
             Customer c = new Customer("Dave");
+            PrivateObject obj = new PrivateObject(c);
             Assert.IsNotNull(c);
             Assert.That(c.Name.Equals("Dave"));
         }

@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 namespace Boolean.CSharp.Main.Model
 {
 
-    public class Customer
+    internal class Customers
     {
 
         private string _name;
         private List<IAccount> _accounts;
-        public Customer(string name) 
+        private Customer(string name) 
         { 
             this._name = name;
             this._accounts = new List<IAccount>();
         }
 
-        public string Name { get { return _name; } }
+        private string Name { get { return _name; } }
     }
 }

@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controler\" />
+    <Folder Include="DataBaseFolder\" />
     <Folder Include="View\" />
   </ItemGroup>
 
