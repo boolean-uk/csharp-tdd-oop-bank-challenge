@@ -22,7 +22,7 @@ namespace Boolean.CSharp.Main.Classes
             return false;
         }
 
-        public bool deposit(decimal amount)
+        public bool deposit(decimal amount, IAccount account)
         {
             throw new NotImplementedException();
         }
