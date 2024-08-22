@@ -51,9 +51,9 @@ namespace Boolean.CSharp.Main.Classes
             }
         }
 
-        public decimal balance()
+        public decimal balance(IAccount account)
         {
-            throw new NotImplementedException();
+            return 0;
         }
 
 

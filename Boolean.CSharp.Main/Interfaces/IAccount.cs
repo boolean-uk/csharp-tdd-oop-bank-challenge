@@ -12,7 +12,7 @@ namespace Boolean.CSharp.Main.Interfaces
         bool Create(string type,string name);
         bool deposit(decimal amount,IAccount account);
         bool withdraw(decimal amount,IAccount account);
-        decimal balance();
+        decimal balance(IAccount account);
 
 
     }

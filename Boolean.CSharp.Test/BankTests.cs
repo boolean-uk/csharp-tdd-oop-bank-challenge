@@ -87,44 +87,75 @@ namespace Boolean.CSharp.Test
 
 
 
-            [Test]
+        [Test]
 
-            public void checkIfWithdrawn()
+        public void checkIfWithdrawn()
+        {
+
+            //Arrange
+            Bank bank = new Bank();
+            RegularAccount account = new RegularAccount();
+            SavingsAccount savingsAccount = new SavingsAccount();
+            string receiver = "John Johnson";
+            decimal amount = -500;
+            var accountToTransferTo = bank.accounts
+             .FirstOrDefault(a =>
+                (a is RegularAccount && ((RegularAccount)a).nameOfHolder == receiver) ||
+                (a is SavingsAccount && ((SavingsAccount)a).nameOfHolder == receiver)
+    );
+
+            //Act
+            Transaction transaction = new Transaction(savingsAccount, amount, new DateOnly(2024, 12, 25));
+            if (accountToTransferTo.GetType() == typeof(RegularAccount))
             {
-
-                //Arrange
-                Bank bank = new Bank();
-                RegularAccount account = new RegularAccount();
-                SavingsAccount savingsAccount = new SavingsAccount();
-                string receiver = "John Johnson";
-                decimal amount = -500;
-                var accountToTransferTo = bank.accounts
-                 .FirstOrDefault(a =>
-                    (a is RegularAccount && ((RegularAccount)a).nameOfHolder == receiver) ||
-                    (a is SavingsAccount && ((SavingsAccount)a).nameOfHolder == receiver)
-        );
-
-                //Act
-                Transaction transaction = new Transaction(savingsAccount, amount, new DateOnly(2024, 12, 25));
-                if (accountToTransferTo.GetType() == typeof(RegularAccount))
-                {
-                    account.deposit(amount, accountToTransferTo);
-                    account.transactionList.Add(transaction);
-                    Assert.IsTrue(account.transactionList.Contains(transaction));
-                }
-                else if (accountToTransferTo.GetType() == typeof(SavingsAccount))
-                {
-                    savingsAccount.deposit(amount, accountToTransferTo);
-                    savingsAccount.transactionList.Add(transaction);
-                    Assert.IsTrue(savingsAccount.transactionList.Contains(transaction));
-                }
-
-
-
+                account.deposit(amount, accountToTransferTo);
+                account.transactionList.Add(transaction);
+                Assert.IsTrue(account.transactionList.Contains(transaction));
+            }
+            else if (accountToTransferTo.GetType() == typeof(SavingsAccount))
+            {
+                savingsAccount.deposit(amount, accountToTransferTo);
+                savingsAccount.transactionList.Add(transaction);
+                Assert.IsTrue(savingsAccount.transactionList.Contains(transaction));
             }
 
+        }
+
+        [Test]
+
+        public void checkIfRegularBalanceCorrect()
+        {
+
+            //Arrange
+            Bank bank = new Bank();
+            RegularAccount regular = new RegularAccount();
+            string accountHodler = "John Johnson";
+            decimal expectedSum = 100;
+            var account = bank.accounts.OfType<RegularAccount>().FirstOrDefault(x => x.nameOfHolder == accountHodler);
+            //Act
+
+            decimal currentBalance= regular.balance(account);
+            Assert.AreEqual(expectedSum, currentBalance);
+        }
 
 
+        [Test]
+
+        public void checkIfSavingsBalanceCorrect()
+        {
+
+            //Arrange
+            Bank bank = new Bank();
+            SavingsAccount savings = new SavingsAccount();
+            string accountHodler = "John Johnson";
+            decimal expectedSum = 100;
+            var account = bank.accounts.OfType<SavingsAccount>().FirstOrDefault(x => x.nameOfHolder == accountHodler);
+            //Act
+
+            decimal currentBalance = savings.balance(savings);
+            Assert.AreEqual(expectedSum, currentBalance);
         }
     }
+}
 
+    

@@ -50,6 +50,12 @@ namespace Boolean.CSharp.Main.Classes
             }
         }
 
+        public decimal balance(IAccount account)
+        {
+
+            return -1;
+        }
+
         public List<Transaction> transactionList = new List<Transaction>();
 
         public SavingsAccount(string nameOfHolder, List<Transaction> transactionList)
