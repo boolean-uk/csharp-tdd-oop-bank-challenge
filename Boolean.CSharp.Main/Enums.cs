@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boolean.CSharp.Main.Acounts
+namespace Boolean.CSharp.Main
 {
-    internal interface IAccount
+    internal class Enums
     {
     }
 }
