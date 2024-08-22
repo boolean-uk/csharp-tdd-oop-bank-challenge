@@ -13,6 +13,8 @@ namespace Boolean.CSharp.Main.Interfaces
         string Type { get; set; }
         string Owner { get; set; }
 
+        //string Branch { get; set; }
+
         List<Transaction> TransactionHistory { get; set; }
 
         double Balance { get; }

@@ -14,10 +14,15 @@ namespace Boolean.CSharp.Test
 
         }
 
-        [Test]
-        public void TestQuestion1()
+        [TestCase("Ola", "current")]
+        [TestCase("Lise", "savings")]
+        public void CreateCurrentAccount(string name, string bankType)
         {
+            Bank bank = new Bank();
 
+            bool result = bank.AddAccount(name, bankType);
+
+            Assert.That(result, Is.True);
         }
 
     }
