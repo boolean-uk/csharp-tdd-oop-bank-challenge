@@ -26,24 +26,19 @@ namespace Boolean.CSharp.Main.Model
             return false;
         }
 
-        public int createBankAccount(Customer person)
+        public bool createBankAccount(Customer person)
         {
-            if (person != null && person is Customer && person.ID == null) //id == null if person does not have bank account, id is given by bank
+            if (person != null && person is Customer && person.ID == -1) //id == null if person does not have bank account, id is given by bank
             {
-
-                int userID = _bank.createBankAccount(person);
-                return userID;
+                _bank.createBankAccount(person);
+                return true;
             }
-            return -1;
+            return false;
         }
 
-        private bool checkDuplicateID(IPerson person)
+        internal BankAccount GetBankAccount(int customerID)
         {
-
-
-
-
-            return false;
+            return _bank.getBankAccount(customerID);
         }
 
         internal List<Customer> getCustomers()

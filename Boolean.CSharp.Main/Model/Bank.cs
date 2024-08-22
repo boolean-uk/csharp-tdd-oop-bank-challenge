@@ -11,7 +11,7 @@ namespace Boolean.CSharp.Main.Model
         private List<Engineer> _engineerList;
         private List<Customer> _customerList;
         private List<BankAccount> _bankAccountList;
-        private int _nextID = 0;
+        private int _nextID = 1;
 
         public Bank()
         {
@@ -37,5 +37,7 @@ namespace Boolean.CSharp.Main.Model
         {
             return _customerList;
         }
+
+        internal BankAccount getBankAccount(int customerID) { return _bankAccountList.Find(account => account.getBankId() == customerID); }
     }
 }

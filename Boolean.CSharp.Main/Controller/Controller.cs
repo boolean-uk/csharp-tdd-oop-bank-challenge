@@ -32,8 +32,18 @@ namespace Boolean.CSharp.Main.Controller
         public bool createBankAccount(Customer customer)
         {
             view.createBankAccount(customer);
-            model.createBankAccount(customer);
-            return false;
+            return model.createBankAccount(customer);
+        }
+
+        public BankAccount getBankAccount(int customerID)
+        {
+            BankAccount bankAccount = model.GetBankAccount(customerID);
+
+            if (bankAccount == null)
+            {
+                view.doesNotExistWarning();
+            }
+            return bankAccount;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Boolean.CSharp.Test
         private Core _core;
         private Main.Controller.Controller _controller;
         private Main.Model.Model _model = new Main.Model.Model();
-        private Main.View.View _view  = new Main.View.View();
+        private Main.View.View _view = new Main.View.View();
 
         public CoreTests()
         {
@@ -25,7 +25,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestQuestion1()
         {
-            
+
         }
 
         [Test]
@@ -36,6 +36,26 @@ namespace Boolean.CSharp.Test
             Assert.IsTrue(isCustomer);
             Assert.That(customerList.Count == 1);
             Assert.That(customerList.First().FirstName == "Test");
+            
+            Customer customer = customerList.First();
+            _controller.createBankAccount(customer);
+
+            Assert.That(customerList.First().ID == 1);
+        }
+
+        [Test]
+        public void CustomerCreationTest2()
+        {
+            bool isCustomer = _controller.createPerson(true);
+            List<Customer> customerList = _controller.GetCustomers();
+            Assert.IsTrue(isCustomer);
+            Assert.That(customerList.Count == 2);
+            Assert.That(customerList.First().FirstName == "Test");
+
+            Customer customer = customerList.Last();
+            _controller.createBankAccount(customer);
+
+            Assert.That(customerList.Last().ID == 2);
         }
     }
 }

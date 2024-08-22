@@ -26,5 +26,10 @@ namespace Boolean.CSharp.Main.View
             }
             return null; //for engineer creation later
         }
+
+        internal void doesNotExistWarning()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

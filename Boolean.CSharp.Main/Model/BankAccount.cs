@@ -15,6 +15,7 @@ namespace Boolean.CSharp.Main.Model
             _bankId = customerID;
         }
 
+        public int getBankId() { return _bankId; }
         public TransactionsAccount getTransactionsAccount() { return _transactionsAccount; }
         public SavingsAccount getSavingsAccount() { return _savingsAccount; }
 
