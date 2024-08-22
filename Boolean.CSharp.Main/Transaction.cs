@@ -9,20 +9,20 @@ namespace Boolean.CSharp.Main
 {
     public class Transaction
     {
-        private DateTime _date;
+        public DateTime date {  get; set; }
         
-        private double _credit;
+        public double credit { get; set; }
         
-        private double _debit;
+        public double debit { get; set; }
         
-        private double _balance;
+        public double balance { get; set; }
 
         public Transaction(DateTime date, double balance, double credit, double debit) 
         { 
-            _date = date;
-            _balance = balance;
-            _credit = credit;
-            _debit = debit;
+            this.date = date;
+            this.balance = balance;
+            this.credit = credit;
+            this.debit = debit;
         }
     }
 }

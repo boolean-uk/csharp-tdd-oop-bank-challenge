@@ -11,7 +11,9 @@ namespace Boolean.CSharp.Main
     public class Bank
     {
 
-        private List<IAccount> _accounts = new List<IAccount>();
+        private List<Account> _accounts = new List<Account>();
+
+        private List<string> _users { get { return _accounts.Select(account => account.Owner).Distinct().ToList(); } }
         public bool AddAccount(string user, string bankType)
         {
 
@@ -27,6 +29,21 @@ namespace Boolean.CSharp.Main
             }
             
             return false;
+        }
+
+        public string PrintBankStateMent(string user)
+        {
+            List<Account> accountsWithUser = _accounts.Where(account => account.Owner == user).ToList();
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("date     || credit   || depit    || balance  ");
+
+            foreach (Account account in accountsWithUser)
+            {
+                sb.AppendLine(account.GenerateStatement());
+            }
+
+            return sb.ToString();
         }
     }
 }

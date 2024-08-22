@@ -25,5 +25,18 @@ namespace Boolean.CSharp.Test
             Assert.That(result, Is.True);
         }
 
+
+
+        public void TestGenerateBankStatement()
+        {
+            Bank bank = new Bank();
+            string user = "Bob";
+
+            //Deposit and withdraw
+
+            string result = bank.PrintBankStateMent(user);
+
+            Assert.NotNull(result);
+        }
     }
 }
