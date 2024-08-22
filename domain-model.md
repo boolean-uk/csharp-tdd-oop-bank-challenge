@@ -16,20 +16,22 @@ I want to generate bank statements with transaction dates, amounts, and balance 
 So I can use my account,\
 I want to deposit and withdraw funds.
 
-
 | Classes                   | Methods                                    | Scenario                                       | Outputs                        |
 |---------------------------|--------------------------------------------|------------------------------------------------|--------------------------------|
 | Customer                  | List\<IAccount> accounts {get; set;}        | Store a customers accounts                     | List\<IAccount> accounts        |
-|                           | CreateAccount(AccountType accountType)     | Customer can open an account of their choice   | bool                           |
+|                           | CreateAccount(AccountType type)            | Customer can open an account of their choice   | bool                           |
 | enum AccountType          |                                            | store types of accounts as values              | Current, Savings               |
 | IAccount                  | decimal Balance {get; set;}                | Store account balances                         | decimal balance                |
-|                           | AccountType Type {get;}             | store type of account                          | AccountType type             |
-|                           | List\<Transaction> transactions {get; set;} | store all account transactions                 | List\<Transaction> transactions |
+|                           | AccountType Type {get;}                    | Store account type                             | AccountType type               |
+|                           | List\<Transaction> Transactions {get; set;} | store all account transactions                 | List\<Transaction> transactions |
 |                           | Deposit(decimal amount)                    | Deposit money into an account                  | bool                           |
 |                           | Withdraw(decimal amount)                   | Withdraw money from an account                 | bool                           |
 |                           | GenerateStatement()                        | generate/print statement from selected account | void                           |
 | CurrentAccount : IAccount | -> IAccount                                |                                                |                                |
 | SavingsAccount : IAccount | -> IAccount                                |                                                |                                |
-| Transaction               | Date date {get; set;}                      | store transaction date                         | Date date                      |
-|                           | decimal Amount {get; set;}                 | store transaction amount                       | decimal amount                 |
-|                           | decimal Balance {get; set;}                | store updated balance at time of transaction   | decimal balance                |
+| enum TransactionType      |                                            | store types of transactions                    | Deposit, Withdraw              |
+| Transaction               | DateTime _Date {get;}                      | store transaction date                         | Date date                      |
+|                           | TransactionType Type {get; }               | store transaction type                         | TransactionType type           |
+|                           | string FormattedDate                       | store date as string                           | string date                    |
+|                           | decimal Amount {get; }                     | store transaction amount                       | decimal amount                 |
+|                           | decimal Balance {get; }                    | store updated balance at time of transaction   | decimal balance                |
