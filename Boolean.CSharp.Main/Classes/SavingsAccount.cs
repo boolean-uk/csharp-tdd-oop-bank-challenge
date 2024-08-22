@@ -52,8 +52,13 @@ namespace Boolean.CSharp.Main.Classes
 
         public decimal balance(IAccount account)
         {
+            decimal sum = 0;
 
-            return -1;
+            foreach (var item in transactionList)
+            {
+                sum += item.amount;
+            }
+            return sum;
         }
 
         public List<Transaction> transactionList = new List<Transaction>();

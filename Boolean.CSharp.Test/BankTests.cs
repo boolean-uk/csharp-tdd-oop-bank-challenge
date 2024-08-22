@@ -155,6 +155,30 @@ namespace Boolean.CSharp.Test
             decimal currentBalance = savings.balance(savings);
             Assert.AreEqual(expectedSum, currentBalance);
         }
+
+
+        [Test]
+
+        public void checkIfBranchCorrect()
+        {
+            //Arrange
+
+            Bank bank = new Bank();
+            CityBranch cityBranch = new CityBranch();
+            RemoteBranch remoteBranch = new RemoteBranch();
+            RuralBranch ruralBranch = new RuralBranch();
+            string accountHodler = "John Johnson";
+            var account = bank.accounts.OfType<RegularAccount>().FirstOrDefault(x => x.nameOfHolder == accountHodler);
+
+            //Act
+            cityBranch.accounts.Add(account);
+            string expectedBranch = "City";
+            Assert.AreEqual(cityBranch.getType(account), expectedBranch);
+            Assert.IsTrue(cityBranch.accounts.Contains(account));
+
+
+            
+        }
     }
 }
 
