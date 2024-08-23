@@ -12,8 +12,8 @@ namespace Boolean.CSharp.Main.Abstract
     {
         public ICustomer owner;
         public IBranch branch;
-        public bool type; //True = Current | False = Saving
-        protected List<string> transactionHistory;
+        public bool type { get; set; } //True = Current | False = Saving
+        protected List<string> transactionHistory { get; }
 
         protected Account(ICustomer owner, IBranch branch, bool type)
         {
