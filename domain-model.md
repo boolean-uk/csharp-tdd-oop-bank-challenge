@@ -1,6 +1,6 @@
 | Classes     | Methods                                                            | Scenario                                                                           | Outputs |
 |-------------|--------------------------------------------------------------------|------------------------------------------------------------------------------------|---------|
-| `Account`   | `Account(ICustomer owner, IBranch branch)`                         | Create an account linked to the given customer and branch                          | ----    |
+| `Account`   | `Account(ICustomer owner, IBranch branch, bool current)`           | Create an account linked to the given customer, branch, and if current or savings  | ----    |
 |             | `Deposit(decimal amount)`                                          | Deposit money to account                                                           | void    |
 |             | `Withdraw(decimal amount)`                                         | Withdraw money from account                                                        | true    |
 |             |                                                                    | Cannot withdraw the given amount                                                   | false   |

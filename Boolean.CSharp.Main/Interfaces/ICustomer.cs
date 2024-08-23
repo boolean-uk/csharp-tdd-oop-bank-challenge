@@ -8,5 +8,8 @@ namespace Boolean.CSharp.Main.Interfaces
 {
     public interface ICustomer
     {
+        public string name { get; set; }
+
+        public string GetName();
     }
 }

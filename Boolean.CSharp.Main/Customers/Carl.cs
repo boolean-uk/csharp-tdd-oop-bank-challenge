@@ -9,5 +9,16 @@ namespace Boolean.CSharp.Main.Customers
 {
     public class Carl : ICustomer
     {
+        public string name { get; set; }
+
+        public Carl()
+        {
+            this.name = "Carl";
+        }
+
+        public string GetName()
+        {
+            return this.name;
+        }
     }
 }
