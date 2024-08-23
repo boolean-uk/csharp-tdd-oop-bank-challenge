@@ -94,5 +94,19 @@ namespace Boolean.CSharp.Test
             Assert.IsFalse(withdrawResult);
             Assert.That(result, Is.EqualTo(expectedBalance));
         }
+
+        [Test]
+        public void TestGetBankStatement()
+        {
+            User user = new User("Jonas", Role.Customer);
+            ConsumptionAccount account = new ConsumptionAccount(user, Branch.Oslo);
+            account.Deposit(1000);
+            account.Deposit(2000);
+            account.Withdraw(500);
+            
+            string bankStatement = account.GetBankStatement();
+
+            Assert.IsNotEmpty(bankStatement);
+        }
     }
 }
