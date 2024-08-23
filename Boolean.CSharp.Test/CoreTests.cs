@@ -46,5 +46,22 @@ namespace Boolean.CSharp.Test
             Assert.That(duplicate, Is.False);
         }
 
+        [Test]
+        public void CreateSavingAccountTest()
+        {
+            //Arrange
+            Bank bank = new Bank();
+            Joaquin joaquin = new Joaquin();
+            MasterCard mastercard = new MasterCard();
+
+            //Act
+            bool result = bank.CreateSaving(joaquin, mastercard);
+            bool duplicate = bank.CreateSaving(joaquin, mastercard);
+
+            //Assert
+            Assert.That(result, Is.True);
+            Assert.That(duplicate, Is.False);
+        }
+
     }
 }
