@@ -16,9 +16,11 @@
 |             | `Withdraw(decimal amount)`                                         | Override the withdraw method in Account                                            | bool    |
 |-------------|--------------------------------------------------------------------|------------------------------------------------------------------------------------|---------|
 | `Bank`      | `Bank()`                                                           | Create a bank that keeps track of all the registered accounts                      | ----    |
-|             | `CreateSaving(ICustomer customer, IBranch branch)`                 | Create a savings account of a branch and owned by the customer                     | void    |
-|             | `CreateCurrent(ICustomer customer, IBranch branch)`                | Create a current account of a branch and owned by the customer                     | void    |
-|             | `HandleOverdraft(ICustomer customer, decimal amount)`              | Handle the overdraft requested from the customer                                   | true    |
+|             | `CreateSaving(ICustomer customer, IBranch branch)`                 | Create a savings account of a branch and owned by the customer                     | true    |
+|             |                                                                    | This customer already has a savings account                                        | false   |
+|             | `CreateCurrent(ICustomer customer, IBranch branch)`                | Create a current account of a branch and owned by the customer                     | true    |
+|             |                                                                    | This customer already has a current account                                        | false   |
+|             | `HandleOverdraft(ICustomer customer, decimal amount)`              | Handle the overdraft requested from the customer. Only works on current accounts   | true    |
 |             |                                                                    | Overdraft was denied                                                               | false   |
 |             | `HandleDeposit(ICustomer customer, decimal amount, bool current)`  | Deposit the specified amount to account (true = current | false = saving)          | void    |
 |             | `HandleWithdraw(ICustomer customer, decimal amount, bool current)` | Withdraw the specified amount from account (true = curren | false = saving)        | true    |

@@ -1,14 +1,13 @@
-﻿using Boolean.CSharp.Main;
-using NUnit.Framework;
+﻿using Boolean.CSharp.Main.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boolean.CSharp.Test
+namespace Boolean.CSharp.Main.Customers
 {
-    public class ExtensionTests
+    public class Joaquin : ICustomer
     {
     }
 }
