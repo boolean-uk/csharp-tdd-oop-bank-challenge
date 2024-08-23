@@ -10,6 +10,8 @@ namespace Boolean.CSharp.Main
 {
     public class CurrentAccount : IAccount
     {
+        public bool OverdraftRequestIsActive { get; set; } = false;
+        public decimal BalanceLimit { get; set; } = 0;
         public AccountType Type { get; } = AccountType.Current;
 
         public Branch Branch { get; set; }
@@ -33,7 +35,7 @@ namespace Boolean.CSharp.Main
 
         public bool Withdraw(decimal amount)
         {
-           if ((GetBalance() - amount) < 0) //Not enough money in account
+           if ((GetBalance() - amount) < BalanceLimit) //Not enough money in account
                 return false;
            
 

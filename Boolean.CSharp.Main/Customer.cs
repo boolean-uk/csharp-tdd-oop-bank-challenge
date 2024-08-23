@@ -31,5 +31,11 @@ namespace Boolean.CSharp.Main
             accounts.Add(account);
             return true;
         }
+
+        //Apply for an arranged overdraft (assume bank decides overdraft limit)
+        public void RequestOverdraft(IAccount account)
+        {
+            account.OverdraftRequestIsActive = true;
+        }
     }
 }
