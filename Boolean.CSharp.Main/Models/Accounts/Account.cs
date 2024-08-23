@@ -14,13 +14,19 @@ public class Account(string name, AccountType type)
     public void PrintTransactions()
     {
         StringBuilder sb = new();
+        var currentBalance = 0m;
         sb.AppendLine($"Transaction history for account {Name}:");
-        sb.AppendLine($"date       || credit    || debit     || balance || comment");
+        sb.AppendLine($"date    || credit  || debit   || balance || comment");
         foreach (var t in BankTransactions)
         {
-            var balance = GetBalance();
-            sb.AppendLine($"{t._date:d/M/yy} || {(t._amount > 0 ? t._amount : 0)} || {(t._amount < 0 ? 0 : t._amount)} || {balance} || {t._description}");
+            currentBalance += t._amount;
+            var date = t._date.ToString("d/M/yy");
+            var deposit = t._amount > 0 ? t._amount.ToString() : "0";
+            var withdraw = t._amount < 0 ? t._amount.ToString() : "0";
+            var desc = t._description;
+            sb.AppendLine($"{date.PadRight(7)} || {deposit.PadRight(7)} || {withdraw.PadRight(7)} || {currentBalance.ToString().PadRight(7)} || {desc}");
         }
+        Console.WriteLine(sb.ToString());
     }
 
     public bool Deposit(decimal amount, string description = "")
