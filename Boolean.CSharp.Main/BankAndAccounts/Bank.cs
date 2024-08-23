@@ -49,11 +49,11 @@ namespace Boolean.CSharp.Main.BankAndAccounts
             return true;
         }
 
-        public string GetTransactionHistory(ICustomer joaquin, bool type)
+        public string GetTransactionHistory(ICustomer customer, bool type)
         {
             foreach (Account account in this._accounts)
             {
-                if (account.owner.GetName() == joaquin.GetName() && account.type == type)
+                if (account.owner.GetName() == customer.GetName() && account.type == type)
                 {
                     return account.Transactions();
                 }
@@ -63,12 +63,25 @@ namespace Boolean.CSharp.Main.BankAndAccounts
 
         public void HandleDeposit(ICustomer customer, decimal amount, bool type)
         {
-            throw new NotImplementedException();
+            foreach(Account account in this._accounts)
+            {
+                if(account.owner.GetName() == customer.GetName() && account.type == type)
+                {
+                    account.Deposit(amount);
+                }
+            }
         }
 
         public bool HandleWithdraw(ICustomer customer, decimal amount, bool type)
         {
-            throw new NotImplementedException();
+            foreach (Account account in this._accounts)
+            {
+                if (account.owner.GetName() == customer.GetName() && account.type == type)
+                {
+                    return account.Withdraw(amount);
+                }
+            }
+            return false;
         }
     }
 }
