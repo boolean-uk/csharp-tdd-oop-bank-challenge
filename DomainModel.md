@@ -43,8 +43,8 @@ I want statements to be sent as messages to my phone.
 | `Account` | `List<Transaction> TransactionHistory` | `GetBalance(User user)` | Store and view balance in savings account | `int?` |
 | `Account` | `List<Transaction> TransactionHistory` | `Deposit(int amount, User user)` | Deposit money in savings account | `true` |
 | `Account` | `List<Transaction> TransactionHistory` | `Withdraw(int amount, User user)` | Withdraw money in savings account | `true` |
-| `Account` | `List<Transaction> TransactionHistory` | `GetBankStatement(User user)` | Withdraw money in savings account | `true` |
+| `Account` | `List<Transaction> TransactionHistory` | `GetBankStatement(User user)` | Generate bank statement | `string` |
 | `Account` | `Branch Branch` | `GetBranch(User user)` | Get branch of account | `Branch?` |
 | `Account` | `string Overdraft` | `SetOverdraft(int amount, User user)` | Set overdraft as manager | `true` |
-| `Account` | `string Overdraft` | `SetOverdraft(int amount, User user)` | Attempt to set overdraft | `false` |
+| `Account` | `string Overdraft` | `SetOverdraft(int amount, User user)` | Attempt to set overdraft as customer | `false` |
 | `SmsController` |  | `SendBankStatement(string phoneNumber, User user)` | Get bank statement and send to phone | `false` |
