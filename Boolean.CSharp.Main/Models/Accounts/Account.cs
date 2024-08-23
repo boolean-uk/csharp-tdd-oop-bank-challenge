@@ -23,17 +23,24 @@ public class Account(string name, AccountType type)
         }
     }
 
-    public decimal Deposit(decimal amount, string description = "")
+    public bool Deposit(decimal amount, string description = "")
     {
         BankTransactions.Add(new BankTransaction(DateTime.Now, amount, description));
-        return GetBalance();
+        return true;
     }
 
-    public decimal Withdraw(decimal amount, string description = "")
+    public bool Withdraw(decimal amount, string description = "")
     {
         if (amount > 0) amount *= -1;
+        var overdraft = GetOverdraft();
+        if (!(GetBalance() + amount > overdraft)) return false;
         BankTransactions.Add(new BankTransaction(DateTime.Now, amount, description));
-        return GetBalance();
+        return true;
+    }
+
+    private decimal GetOverdraft()
+    {
+        return Overdraft.ApprovedOverdrafts.GetValueOrDefault(this, 0);
     }
 
     public decimal GetBalance()

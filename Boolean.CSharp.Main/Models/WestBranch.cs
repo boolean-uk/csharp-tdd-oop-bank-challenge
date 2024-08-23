@@ -5,7 +5,7 @@ namespace Boolean.CSharp.Main.Models;
 public class WestBranch(Manager m) : IBranch
 {
     private Manager _manager = m;
-    private List<Customer> _customers = new List<Customer>();
+    private List<Customer> _customers = new();
     
     public bool NewCustomer(Customer c)
     {

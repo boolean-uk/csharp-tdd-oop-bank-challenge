@@ -1,5 +1,4 @@
 ﻿using Boolean.CSharp.Main;
-using Boolean.CSharp.Main.Interface;
 using Boolean.CSharp.Main.Models;
 using Boolean.CSharp.Main.Models.Accounts;
 using NUnit.Framework;
@@ -125,11 +124,31 @@ namespace Boolean.CSharp.Test
             var result = account.GetBalance();
             Assert.That(result, Is.EqualTo(200));
         }
-        
+
         [Test]
-        public void TestRequestOverdraft() { Assert.Fail(); }
-        
+        public void TestRequestOverdraft()
+        {
+            Customer c = new ("John Doe", 0101991234,
+                "98891337", new DateTime(1990, 1, 1));
+            c.CreateAccount("Main Account", AccountType.Spending);
+            c.RequestOverDraft(c.GetAccount("Main Account"), 500);
+            
+            Assert.That(Overdraft.OverdraftRequests.Count, Is.EqualTo(1));
+        }
+
         [Test]
-        public void TestManageOverdraftRequests() { Assert.Fail(); }
+        public void TestManageOverdraftRequests()
+        {
+            Customer c = new ("John Doe", 0101991234,
+                "98891337", new DateTime(1990, 1, 1));
+            c.CreateAccount("Main Account", AccountType.Spending);
+            c.RequestOverDraft(c.GetAccount("Main Account"), 500);
+            
+            var m = new Manager();
+            var or = Overdraft.OverdraftRequests.FirstOrDefault()!;
+            Overdraft.ApproveOverdraft(m, or);
+            
+            Assert.That(Overdraft.ApprovedOverdrafts.Count, Is.EqualTo(1));
+        }
     }
 }
