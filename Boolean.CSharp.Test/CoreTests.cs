@@ -3,22 +3,68 @@ using NUnit.Framework;
 
 namespace Boolean.CSharp.Test
 {
-    [TestFixture]
     public class CoreTests
     {
-        private Core _core;
-
-        public CoreTests()
-        {
-            _core = new Core();
-
-        }
-
         [Test]
-        public void TestQuestion1()
+        public void shouldCreateCurrentAccount()
         {
+            //SetUp
+            //Execute
+            //Verify
 
+            Assert.Fail();
+        }  
+        
+        [Test]
+        public void shouldCreateSavingsAccount()
+        {
+            //SetUp
+            //Execute
+            //Verify
+
+            Assert.Fail();
+        }  
+        
+        [Test]
+        public void shouldDepositIntoAccount()
+        {
+            //SetUp
+            //Execute
+            //Verify
+
+            Assert.Fail();
+        }  
+        
+        [Test]
+        public void shouldWithDrawalFromAccount()
+        {
+            //SetUp
+            //Execute
+            //Verify
+
+            Assert.Fail();
+        }  
+        
+        [Test]
+        public void shouldGetTransactions()
+        {
+            //SetUp
+            //Execute
+            //Verify
+
+            Assert.Fail();
+        }  
+        
+        [Test]
+        public void shouldGenerateStatements()
+        {
+            //SetUp
+            //Execute
+            //Verify
+
+            Assert.Fail();
         }
+
 
     }
 }
