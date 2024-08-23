@@ -27,7 +27,7 @@ namespace Boolean.CSharp.Main.Accounts
                 {
                     balance += t.Amount;
                 }
-                else if (t.TransactionAction != TransactionAction.Debit)
+                else if (t.TransactionAction == TransactionAction.Debit)
                 {
                     balance -= t.Amount;
                 }
@@ -44,7 +44,9 @@ namespace Boolean.CSharp.Main.Accounts
 
         public bool Withdraw(int amount)
         {
-            return false;
+            Transaction newTransaction = new Transaction(amount, GetBalance(), TransactionAction.Debit);
+            _transactions.Add(newTransaction);
+            return true;
         }
 
         public string GetBankStatement()
