@@ -6,8 +6,8 @@ public class Account(string name, AccountType type)
 {
     public string Name { get; } = name;
     public AccountType AccountType { get; } = type;
-    public bool SmsNotification { get; set; } = false;
-    private List<BankTransaction> BankTransactions { get; set; } = new();
+    public bool SmsNotification { get; private set; } = false;
+    private List<BankTransaction> BankTransactions { get; } = new();
     
     public List<BankTransaction> GetTransactions() => BankTransactions;
 

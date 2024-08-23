@@ -17,18 +17,13 @@ public class Program
         Customer c = new("Eyvind Malde", 123456789, "88887777", new DateTime(2000, 6, 26));
         branch.NewCustomer(c);
 
-        Account acc = c.CreateAccount("Spending", AccountType.Spending);
+        var acc = c.CreateAccount("Spending", AccountType.Spending);
 
-        var temp = acc.Deposit(100);
-
-        acc.PrintTransactions();
-
-        temp = acc.Deposit(200);
-        temp = acc.Deposit(300);
+        acc.Deposit(100);
 
         acc.PrintTransactions();
 
-        temp = acc.Withdraw(500);
+        acc.PrintTransactions();
 
         acc.PrintTransactions();
     }
