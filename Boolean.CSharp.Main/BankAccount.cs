@@ -26,6 +26,11 @@ namespace Boolean.CSharp.Main
             return true;
         }
 
+        public string PrintBankStatements()
+        {
+            throw new NotImplementedException();
+        }
+
         public decimal Balance { get { return _balance; } }
 
         public List<BankStatement> BankStatements { get { return _bankStatements; } }

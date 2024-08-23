@@ -65,6 +65,24 @@ namespace Boolean.CSharp.Test
             Assert.That(bankAccount.BankStatements[2].Type.Equals("Withdraw"));
         }
 
-        
+        [Test]
+        public void Test7PrintBankStatement()
+        {
+            BankAccount bankAccount = new CurrentAccount();
+            bankAccount.Deposit(1000);
+            bankAccount.Deposit(2000);
+            bankAccount.Withdraw(500);
+            string printedStatement = bankAccount.PrintBankStatements();
+            Assert.That(printedStatement.Contains("date"));
+            Assert.That(printedStatement.Contains("credit"));
+            Assert.That(printedStatement.Contains("debit"));
+            Assert.That(printedStatement.Contains("balance"));
+            Assert.That(printedStatement.Contains("1000.00"));
+            Assert.That(printedStatement.Contains("2000.00"));
+            Assert.That(printedStatement.Contains("500.00"));
+            Assert.That(printedStatement.Contains("3500.00"));
+            Assert.That(printedStatement.Contains("2500.00"));
+
+        }
     }
 }
