@@ -23,7 +23,6 @@ namespace Boolean.CSharp.Main
 
         public decimal GetBalance();
 
-        
-
+        public void TextBankStatement();
     }
 }

@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
+using Twilio.Types;
 
 namespace Boolean.CSharp.Main
 {
@@ -85,6 +88,50 @@ namespace Boolean.CSharp.Main
             decimal balance = deposit - withdraw;
 
             return balance;
+        }
+
+        public void TextBankStatement()
+        {
+            var accountSid = "ACe367dade7dc53a1e07a0106575ffc8b3"; //insert when testing
+            var authToken = "c3b3858a7426c90a41d6fd6af0530dfc"; //insert when testing
+            TwilioClient.Init(accountSid, authToken);
+
+            var messageOptions = new CreateMessageOptions(
+            // new PhoneNumber("+4741424344")); //insert your own number
+            // messageOptions.From = new PhoneNumber("+15005550006"); //insert twilio number 
+            new PhoneNumber("+4747614767"));
+            messageOptions.From = new PhoneNumber("+19073187037");
+            messageOptions.Body = FormatMessage();
+
+
+            var message = MessageResource.Create(messageOptions);
+        }
+
+        private string FormatMessage()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("date || credit || debit || balance");
+
+            foreach (var transaction in Transactions)
+            {
+                decimal? credit = null;
+                decimal? debit = null;
+
+                switch (transaction.Type)
+                {
+                    case (TransactionType.Deposit):
+                        credit = transaction.Amount;
+                        break;
+                    case (TransactionType.Withdraw):
+                        debit = transaction.Amount;
+                        break;
+                }
+
+                sb.AppendLine($"{transaction.FormattedDate} || {credit} || {debit} || {Math.Round(transaction.RemainingBalance, 2)}");
+            }
+
+            return sb.ToString();
         }
     }
 }
