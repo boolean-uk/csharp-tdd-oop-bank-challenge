@@ -26,11 +26,11 @@ namespace Boolean.CSharp.Main.Model
             return false;
         }
 
-        public bool createBankAccount(Customer person)
+        public bool createBankAccount(Customer person, Enum branch)
         {
             if (person != null && person is Customer && person.ID == -1) //id == null if person does not have bank account, id is given by bank
             {
-                _bank.createBankAccount(person);
+                _bank.createBankAccount(person, branch);
                 return true;
             }
             return false;

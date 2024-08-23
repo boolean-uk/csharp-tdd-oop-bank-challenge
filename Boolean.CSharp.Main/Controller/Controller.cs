@@ -29,10 +29,10 @@ namespace Boolean.CSharp.Main.Controller
 
         public List<Customer> GetCustomers() { return model.getCustomers(); }
 
-        public bool createBankAccount(Customer customer)
+        public bool createBankAccount(Customer customer, Enum branch)
         {
             view.createBankAccount(customer);
-            return model.createBankAccount(customer);
+            return model.createBankAccount(customer, branch);
         }
 
         public BankAccount getBankAccount(int customerID)

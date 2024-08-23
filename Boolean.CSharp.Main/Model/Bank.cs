@@ -13,6 +13,15 @@ namespace Boolean.CSharp.Main.Model
         private List<BankAccount> _bankAccountList;
         private int _nextID = 1;
 
+        internal enum Branch
+        {
+            HR,
+            Economy,
+            IT,
+            Security,
+            Other
+        }
+
         public Bank()
         {
             this._engineerList = new List<Engineer>();
@@ -27,10 +36,39 @@ namespace Boolean.CSharp.Main.Model
             _customerList.Add(new Customer(person.FirstName, person.LastName, person.PhoneNumber, person.CashOnHand));
         }
 
-        internal void createBankAccount(Customer person)
+        internal void createBankAccount(Customer person, Enum branch)
         {
-            person.ID = this._nextID++;
-            _bankAccountList.Add(new BankAccount(person.ID));
+            
+            switch (branch)
+            {
+                case Branch.HR:
+
+                    person.ID = this._nextID++;
+                    _bankAccountList.Add(new BankAccount(person.ID, Branch.HR));
+                    break;
+                case Branch.Economy:
+                    person.ID = this._nextID++;
+                    _bankAccountList.Add(new BankAccount(person.ID, Branch.Economy)); 
+                    break;
+                case Branch.IT:
+                    person.ID = this._nextID++;
+                    _bankAccountList.Add(new BankAccount(person.ID, Branch.IT)); 
+                    break;
+                case Branch.Security:
+                    person.ID = this._nextID++;
+                    _bankAccountList.Add(new BankAccount(person.ID, Branch.Security));
+                    break;
+                case Branch.Other:
+                    person.ID = this._nextID++;
+                    _bankAccountList.Add(new BankAccount(person.ID, Branch.Other));
+                    break;
+                default:
+                    person.ID = this._nextID++;
+                    _bankAccountList.Add(new BankAccount(person.ID));
+                    break;
+            }
+
+
         }
 
         internal List<Customer> getCustomers()

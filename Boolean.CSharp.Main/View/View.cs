@@ -45,22 +45,49 @@ namespace Boolean.CSharp.Main.View
 
         internal void printBankStatements(List<BankStatement> bankStatements)
         {
-            string formatString = "{0, -20} || {1, -21} || {2, -7} || {3, -7} || {4, -10}";
+            string formatString = "{0, -20} || {1, -21} || {2, -7} || {3, -7} || {4, -10} || {5, -10}";
             Console.WriteLine();
-            Console.WriteLine(formatString, "Date", "account", "credit", "debit", "balance");
+            Console.WriteLine(formatString, "Date", "account", "credit", "debit", "balance", "branch");
 
             bankStatements.ForEach(bankStatement =>
             {
-                if (bankStatement.transactionalAccount())
+                if (bankStatement.transactionalAccount() && bankStatement.branch() != null)
                 {
                     if (bankStatement.withdraw())
                     {
-                        Console.WriteLine(formatString, bankStatement.date(), "Transactional Account", bankStatement.transactionValue(), "", bankStatement.balanceAtTime());
+                        Console.WriteLine(formatString, bankStatement.date(), "Transactional Account", bankStatement.transactionValue(), "", bankStatement.balanceAtTime(), bankStatement.branch().ToString());
 
                     }
                     else
                     {
-                        Console.WriteLine(formatString, bankStatement.date(), "Transactional Account", "", bankStatement.transactionValue(), bankStatement.balanceAtTime());
+                        Console.WriteLine(formatString, bankStatement.date(), "Transactional Account", "", bankStatement.transactionValue(), bankStatement.balanceAtTime(), bankStatement.branch().ToString());
+
+                    }
+                }
+                else if (bankStatement.transactionalAccount() && bankStatement.branch() == null)
+                {
+                    if (bankStatement.withdraw())
+                    {
+                        Console.WriteLine(formatString, bankStatement.date(), "Transactional Account", bankStatement.transactionValue(), "", bankStatement.balanceAtTime(), "NaN");
+
+                    }
+                    else
+                    {
+                        Console.WriteLine(formatString, bankStatement.date(), "Transactional Account", "", bankStatement.transactionValue(), bankStatement.balanceAtTime(), "NaN");
+
+                    }
+                }
+                else if (!bankStatement.transactionalAccount() && bankStatement.branch() != null)
+                {
+                    if (bankStatement.withdraw())
+                    {
+                        Console.WriteLine(formatString, bankStatement.date(), "Savings Account", bankStatement.transactionValue(), "", bankStatement.balanceAtTime(), bankStatement.branch().ToString());
+
+
+                    }
+                    else
+                    {
+                        Console.WriteLine(formatString, bankStatement.date(), "Savings Account", "", bankStatement.transactionValue(), bankStatement.balanceAtTime(), bankStatement.branch().ToString());
 
                     }
                 }
@@ -68,13 +95,13 @@ namespace Boolean.CSharp.Main.View
                 {
                     if (bankStatement.withdraw())
                     {
-                        Console.WriteLine(formatString, bankStatement.date(), "Savings Account", bankStatement.transactionValue(), "", bankStatement.balanceAtTime());
+                        Console.WriteLine(formatString, bankStatement.date(), "Savings Account", bankStatement.transactionValue(), "", bankStatement.balanceAtTime(), "NaN");
 
 
                     }
                     else
                     {
-                        Console.WriteLine(formatString, bankStatement.date(), "Savings Account", "", bankStatement.transactionValue(), bankStatement.balanceAtTime());
+                        Console.WriteLine(formatString, bankStatement.date(), "Savings Account", "", bankStatement.transactionValue(), bankStatement.balanceAtTime(), "NaN");
 
                     }
                 }

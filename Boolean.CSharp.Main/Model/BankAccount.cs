@@ -12,9 +12,20 @@ namespace Boolean.CSharp.Main.Model
         private SavingsAccount _savingsAccount { get; }
         private List<BankStatement> _bankStatements { get; }
         private int _bankId;
+        private Enum _branch;
 
         public BankAccount(int customerID)
         {
+            _bankId = customerID;
+            this._transactionsAccount = new TransactionsAccount();
+            this._savingsAccount = new SavingsAccount(5);
+            this._bankStatements = new List<BankStatement>();
+        }
+
+        //for branch associaton
+        public BankAccount(int customerID, Enum branch)
+        {
+            _branch = branch;
             _bankId = customerID;
             this._transactionsAccount = new TransactionsAccount();
             this._savingsAccount = new SavingsAccount(5);
@@ -72,19 +83,19 @@ namespace Boolean.CSharp.Main.Model
         {
             if (transactionalAccount && !withdraw)
             {
-                this._bankStatements.Add(new BankStatement(getDate(), transactionalValue, transactionalValue + getTransactionsAccountBalance(), _bankId, transactionalAccount, withdraw));
+                this._bankStatements.Add(new BankStatement(getDate(), transactionalValue, transactionalValue + getTransactionsAccountBalance(), _bankId, transactionalAccount, withdraw, _branch));
             }
             else if (transactionalAccount && withdraw)
             {
-                this._bankStatements.Add(new BankStatement(getDate(), transactionalValue, getTransactionsAccountBalance() - transactionalValue, _bankId, transactionalAccount, withdraw));
+                this._bankStatements.Add(new BankStatement(getDate(), transactionalValue, getTransactionsAccountBalance() - transactionalValue, _bankId, transactionalAccount, withdraw, _branch));
             }
             else if (!transactionalAccount && !withdraw) 
             {
-                this._bankStatements.Add(new BankStatement(getDate(), transactionalValue, transactionalValue + getSavingsAccountBalance(), _bankId, transactionalAccount, withdraw));
+                this._bankStatements.Add(new BankStatement(getDate(), transactionalValue, transactionalValue + getSavingsAccountBalance(), _bankId, transactionalAccount, withdraw, _branch));
             }
             else
             {
-                this._bankStatements.Add(new BankStatement(getDate(), transactionalValue, getSavingsAccountBalance() - transactionalValue, _bankId, transactionalAccount, withdraw));
+                this._bankStatements.Add(new BankStatement(getDate(), transactionalValue, getSavingsAccountBalance() - transactionalValue, _bankId, transactionalAccount, withdraw, _branch));
             }
         }
         private DateTime getDate() { return DateTime.Now; }

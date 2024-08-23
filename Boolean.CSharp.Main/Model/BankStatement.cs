@@ -14,8 +14,9 @@ namespace Boolean.CSharp.Main.Model
         private int _customerID;
         private bool _transactionalAccount;
         private bool _withdraw;
+        private Enum _branch;
 
-        public BankStatement(DateTime date, float transactionValue, float balanceAtTime, int customerID, bool transactionalAccount, bool withdraw)
+        public BankStatement(DateTime date, float transactionValue, float balanceAtTime, int customerID, bool transactionalAccount, bool withdraw, Enum branch)
         {
             _date = date;
             _transactionValue = transactionValue;
@@ -23,6 +24,7 @@ namespace Boolean.CSharp.Main.Model
             _customerID = customerID;
             _transactionalAccount = transactionalAccount;
             _withdraw = withdraw;
+            _branch = branch;
         }
 
         public DateTime date() { return _date; }
@@ -31,5 +33,6 @@ namespace Boolean.CSharp.Main.Model
         public float balanceAtTime() { return _balanceAtTime; }
         public bool transactionalAccount() { return _transactionalAccount; }
         public bool withdraw() { return _withdraw; }
+        public Enum branch() { return _branch; }
     }
 }
