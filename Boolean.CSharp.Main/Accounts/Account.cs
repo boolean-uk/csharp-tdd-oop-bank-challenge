@@ -57,7 +57,27 @@ namespace Boolean.CSharp.Main.Accounts
 
         public string GetBankStatement()
         {
-            return string.Empty;
+            StringBuilder bankStatement = new StringBuilder(string.Empty);
+            if (_transactions.Count <= 0)
+            {
+                return string.Empty;
+            }
+
+            bankStatement.AppendLine("date       || credit  || debit  || balance");
+            foreach (Transaction t in _transactions)
+            {
+                bankStatement.Append($"{t.DateCreated.Date} || ");
+                if (t.TransactionAction == TransactionAction.Credit)
+                {
+                    bankStatement.Append($"{t.Amount} ||        || ");
+                }
+                else if(t.TransactionAction == TransactionAction.Debit)
+                {
+                    bankStatement.Append($"       || {t.Amount} || ");
+                }
+                bankStatement.Append($"{t.Balance}");
+            }
+            return bankStatement.ToString();
         }
 
         public bool SetOverdraft(int amount, User userAttemptingAction)
