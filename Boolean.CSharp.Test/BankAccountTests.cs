@@ -10,8 +10,18 @@ namespace Boolean.CSharp.Test
         [Test]
         public void Test1CreateACurrentAccount()
         {
+            // Create account...
             CurrentAccount currentAccount = new CurrentAccount();
             Assert.IsNotNull(currentAccount);
+        }
+
+        [Test]
+        public void Test2DepositAndWithdrawFromAccount()
+        {
+            // Store and use money...
+            CurrentAccount currentAccount = new CurrentAccount();
+            bool result1 = currentAccount.Deposit(1000);
+            bool result2 = currentAccount.Withdraw(500);
         }
 
     }

@@ -9,5 +9,14 @@ namespace Boolean.CSharp.Main
 {
     public class CurrentAccount : BankAccount
     {
+        public bool Deposit(int v)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Withdraw(int v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
