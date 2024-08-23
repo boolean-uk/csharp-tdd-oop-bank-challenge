@@ -85,6 +85,8 @@ namespace Boolean.CSharp.Test
                 "98891337", new DateTime(1990, 1, 1));
             var account = c.CreateAccount("Main Account", AccountType.Spending);
             account.Deposit(500);
+            
+            Assert.That(account.GetTransactions().Count, Is.EqualTo(1));
         }
 
         [Test]
@@ -95,6 +97,8 @@ namespace Boolean.CSharp.Test
             var account = c.CreateAccount("Main Account", AccountType.Spending);
             account.Deposit(500);
             account.Withdraw(300);
+            
+            Assert.That(account.GetTransactions().Count, Is.EqualTo(2));
         }
 
         [Test]
