@@ -1,4 +1,6 @@
 ﻿using Boolean.CSharp.Main;
+using Boolean.CSharp.Main.Accounts;
+using Boolean.CSharp.Main.Enums;
 using NUnit.Framework;
 
 namespace Boolean.CSharp.Test
@@ -14,10 +16,17 @@ namespace Boolean.CSharp.Test
 
         }
 
-        [Test]
-        public void TestQuestion1()
+        [TestCase(5000)]
+        public void TestGetBalance(int depositAmount)
         {
+            User user = new User("Jonas", Role.Customer);
+            ConsumptionAccount account = new ConsumptionAccount(user);
+            account.Deposit(depositAmount, user);
 
+            int? result = account.GetBalance(user);
+
+            Assert.IsNotNull(result);
+            Assert.That(result, Is.EqualTo(depositAmount));
         }
 
     }

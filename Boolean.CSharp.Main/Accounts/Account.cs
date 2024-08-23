@@ -11,39 +11,43 @@ namespace Boolean.CSharp.Main.Accounts
         protected User _owner;
         protected List<Transaction> _transactions = new List<Transaction>();
 
-        public int? GetBalance(User user)
+        protected Account(User owner)
+        {
+            _owner = owner;
+        }
+
+        public int? GetBalance(User userAttemptingAction)
         {
             return null;
         }
 
-        public bool Deposit(int amount, User user)
+        public bool Deposit(int amount, User userAttemptingAction)
         {
             return false;
         }
 
-        public bool Withdraw(int amount, User user)
+        public bool Withdraw(int amount, User userAttemptingAction)
         {
             return false;
         }
 
-        public string GetBankStatement(User user)
+        public string GetBankStatement(User userAttemptingAction)
         {
             return string.Empty;
         }
 
-        public Branch? GetBranch(User user)
+        public Branch? GetBranch(User userAttemptingAction)
         {
             return null;
         }
 
-        public bool SetOverdraft(int amount, User user)
+        public bool SetOverdraft(int amount, User userAttemptingAction)
         {
             return false;
         }
 
-        public User? GetOwner(User user)
+        public User? GetOwner(User userAttemptingAction)
         {
-
             return null;
         }
     }
