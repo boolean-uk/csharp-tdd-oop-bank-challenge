@@ -11,11 +11,13 @@ namespace Boolean.CSharp.Main.Accounts
         protected User _owner;
         protected List<Transaction> _transactions = new List<Transaction>();
         protected Branch _branch;
+        protected int _overdraft;
 
         protected Account(User owner, Branch branch)
         {
             _owner = owner;
             _branch = branch;
+            _overdraft = 0;
         }
 
         public int GetBalance()
@@ -44,6 +46,10 @@ namespace Boolean.CSharp.Main.Accounts
 
         public bool Withdraw(int amount)
         {
+            if (amount > GetBalance() + _overdraft)
+            {
+                return false;
+            }
             Transaction newTransaction = new Transaction(amount, GetBalance(), TransactionAction.Debit);
             _transactions.Add(newTransaction);
             return true;
@@ -56,7 +62,12 @@ namespace Boolean.CSharp.Main.Accounts
 
         public bool SetOverdraft(int amount, User userAttemptingAction)
         {
-            return false;
+            if (userAttemptingAction.Role != Role.Manager)
+            {
+                return false;
+            }
+            _overdraft = amount;
+            return true;
         }
 
         public Branch Branch { get { return _branch; } }
