@@ -1,13 +1,14 @@
-using Boolean.CSharp.Main.Interface;
+using System.Transactions;
 
-namespace Boolean.CSharp.Main.Models;
+namespace Boolean.CSharp.Main.Models.Accounts;
 
-public class CreditAccount(string name) : IAccount
+public class Account(string name, AccountType type)
 {
     public string Name { get; } = name;
-    public AccountType AccountType { get; } = AccountType.Credit;
+    public AccountType AccountType { get; } = type;
     public bool SmsNotification { get; set; } = false;
-
+    private List<Transaction> Transactions { get; set; } = new();
+    
     public List<BankTransaction> GetTransactions()
     {
         throw new NotImplementedException();
@@ -37,4 +38,11 @@ public class CreditAccount(string name) : IAccount
     {
         SmsNotification = !SmsNotification;
     }
+}
+
+public enum AccountType
+{
+    Spending,
+    Saving,
+    Credit
 }

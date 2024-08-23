@@ -1,5 +1,6 @@
 using System.Linq.Expressions;
 using Boolean.CSharp.Main.Interface;
+using Boolean.CSharp.Main.Models.Accounts;
 
 namespace Boolean.CSharp.Main.Models;
 
@@ -10,11 +11,11 @@ public class Customer(string name, int socialSecurityNumber, string phoneNumber,
     private DateTime _birthDate = birthDate;
     
     public int SocialSecurityNumber { get; } = socialSecurityNumber;
-    public List<IAccount> Accounts { get; } = new List<IAccount>();
+    public List<Account> Accounts { get; } = new List<Account>();
 
-    public IAccount CreateAccount(string name, AccountType accountType)
+    public Account CreateAccount(string name, AccountType accountType)
     {
-        IAccount? newAccount = null;
+        Account? newAccount = null;
         if (Accounts.Any(a => a.Name.Equals(name))) return newAccount;
         switch (accountType)
         {
@@ -34,13 +35,13 @@ public class Customer(string name, int socialSecurityNumber, string phoneNumber,
         return newAccount;
     }
 
-    public IAccount GetAccount(string accountName)
+    public Account GetAccount(string accountName)
     {
         var account = Accounts.FirstOrDefault(a => a.Name.ToLower().Equals(accountName.ToLower()))!;
         return account;
     }
 
-    public bool RequestOverDraft(IAccount account, decimal amount)
+    public bool RequestOverDraft(Account account, decimal amount)
     {
         return false;
     }
