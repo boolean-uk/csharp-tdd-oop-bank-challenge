@@ -22,6 +22,10 @@ namespace Boolean.CSharp.Test
             CurrentAccount currentAccount = new CurrentAccount();
             bool result1 = currentAccount.Deposit(1000);
             bool result2 = currentAccount.Withdraw(500);
+            Assert.IsTrue(result1);
+            Assert.IsTrue(result2);
+
+
         }
 
     }
