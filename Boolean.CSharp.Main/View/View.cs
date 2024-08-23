@@ -16,7 +16,8 @@ namespace Boolean.CSharp.Main.View
 
         internal IPerson createPerson(bool isCustomer)
         {
-            if (isCustomer) {
+            if (isCustomer)
+            {
                 Console.WriteLine("A customer is being created!");
                 string FirstName = "Test";
                 string LastName = "Testsson";
@@ -39,7 +40,46 @@ namespace Boolean.CSharp.Main.View
 
         internal void doesNotExistWarning()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("\n   Object does not exist!   \n");
+        }
+
+        internal void printBankStatements(List<BankStatement> bankStatements)
+        {
+            string formatString = "{0, -20} || {1, -21} || {2, -7} || {3, -7} || {4, -10}";
+            Console.WriteLine();
+            Console.WriteLine(formatString, "Date", "account", "credit", "debit", "balance");
+
+            bankStatements.ForEach(bankStatement =>
+            {
+                if (bankStatement.transactionalAccount())
+                {
+                    if (bankStatement.withdraw())
+                    {
+                        Console.WriteLine(formatString, bankStatement.date(), "Transactional Account", bankStatement.transactionValue(), "", bankStatement.balanceAtTime());
+
+                    }
+                    else
+                    {
+                        Console.WriteLine(formatString, bankStatement.date(), "Transactional Account", "", bankStatement.transactionValue(), bankStatement.balanceAtTime());
+
+                    }
+                }
+                else
+                {
+                    if (bankStatement.withdraw())
+                    {
+                        Console.WriteLine(formatString, bankStatement.date(), "Savings Account", bankStatement.transactionValue(), "", bankStatement.balanceAtTime());
+
+
+                    }
+                    else
+                    {
+                        Console.WriteLine(formatString, bankStatement.date(), "Savings Account", "", bankStatement.transactionValue(), bankStatement.balanceAtTime());
+
+                    }
+                }
+
+            });
         }
     }
 }

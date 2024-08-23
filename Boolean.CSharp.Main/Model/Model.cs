@@ -36,7 +36,7 @@ namespace Boolean.CSharp.Main.Model
             return false;
         }
 
-        internal BankAccount GetBankAccount(int customerID)
+        internal BankAccount getBankAccount(int customerID)
         {
             return _bank.getBankAccount(customerID);
         }

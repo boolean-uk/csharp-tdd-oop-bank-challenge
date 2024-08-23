@@ -135,10 +135,17 @@ namespace Boolean.CSharp.Test
             _controller.createBankAccount(customer2);
             _controller.depositMoneyIntoTransactionalAccount(100.0f, customer1.ID);
             _controller.depositMoneyIntoTransactionalAccount(200.0f, customer2.ID);
-            _controller.withdrawMoneyFromTransactionalAccount(150.0f, customer1.ID);
+            _controller.depositMoneyIntoSavingsAccount(100.0f, customer1.ID);
+            _controller.depositMoneyIntoSavingsAccount(200.0f, customer2.ID);
+            _controller.withdrawMoneyFromTransactionalAccount(50.0f, customer1.ID);
             _controller.withdrawMoneyFromTransactionalAccount(150.0f, customer2.ID);
+            _controller.withdrawMoneyFromSavingsAccount(50.0f, customer1.ID);
+            _controller.withdrawMoneyFromSavingsAccount(150.0f, customer2.ID);
 
+            _controller.printBankStatements(customer1.ID);
+            _controller.printBankStatements(customer2.ID);
 
+            Assert.Pass();
         }
     }
 }

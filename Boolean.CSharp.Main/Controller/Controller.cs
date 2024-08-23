@@ -37,7 +37,7 @@ namespace Boolean.CSharp.Main.Controller
 
         public BankAccount getBankAccount(int customerID)
         {
-            BankAccount bankAccount = model.GetBankAccount(customerID);
+            BankAccount bankAccount = model.getBankAccount(customerID);
 
             if (bankAccount == null)
             {
@@ -67,6 +67,11 @@ namespace Boolean.CSharp.Main.Controller
         {
             view.withdrawingMoneyFromAccount(amount);
             return model.withdrawMoneyFromSavingsAccount(amount,customerID);
+        }
+
+        public void printBankStatements(int customerID)
+        {
+            view.printBankStatements(model.getBankAccount(customerID).getBankStatemets());
         }
 
 

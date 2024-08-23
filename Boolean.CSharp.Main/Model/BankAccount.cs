@@ -18,6 +18,7 @@ namespace Boolean.CSharp.Main.Model
             _bankId = customerID;
             this._transactionsAccount = new TransactionsAccount();
             this._savingsAccount = new SavingsAccount(5);
+            this._bankStatements = new List<BankStatement>();
         }
 
         public int getBankId() { return _bankId; }
@@ -36,8 +37,8 @@ namespace Boolean.CSharp.Main.Model
 
         public List<BankStatement> getBankStatemets() { return _bankStatements; }
 
-        internal void logTransaction(float transactionalValue, float balance, bool transactionalAccount) {
-            this._bankStatements.Add(new BankStatement(getDate(), transactionalValue, balance, _bankId, transactionalAccount));
+        internal void logTransaction(float transactionalValue, float balance, bool transactionalAccount, bool withdraw  ) {
+            this._bankStatements.Add(new BankStatement(getDate(), transactionalValue, balance, _bankId, transactionalAccount, withdraw));
         }
 
         private DateTime getDate() { return DateTime.Now; }

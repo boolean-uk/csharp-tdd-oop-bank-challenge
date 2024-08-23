@@ -13,14 +13,16 @@ namespace Boolean.CSharp.Main.Model
         private float _balanceAtTime;
         private int _customerID;
         private bool _transactionalAccount;
+        private bool _withdraw;
 
-        public BankStatement(DateTime date, float transactionValue, float balanceAtTime, int customerID, bool transactionalAccount)
+        public BankStatement(DateTime date, float transactionValue, float balanceAtTime, int customerID, bool transactionalAccount, bool withdraw)
         {
             _date = date;
             _transactionValue = transactionValue;
             _balanceAtTime = balanceAtTime;
             _customerID = customerID;
             _transactionalAccount = transactionalAccount;
+            _withdraw = withdraw;
         }
 
         public DateTime date() { return _date; }
@@ -28,5 +30,6 @@ namespace Boolean.CSharp.Main.Model
         public int customerID() { return _customerID; }
         public float balanceAtTime() { return _balanceAtTime; }
         public bool transactionalAccount() { return _transactionalAccount; }
+        public bool withdraw() { return _withdraw; }
     }
 }
