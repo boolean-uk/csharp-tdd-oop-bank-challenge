@@ -14,6 +14,8 @@
 | `Current`   | `Current(ICustomer owner, IBranch branch)`                         | Create a current account linked to the given customer and branch                   | ----    |
 |             | `Deposit(decimal amount)`                                          | Override the deposit method in Account                                             | void    |
 |             | `Withdraw(decimal amount)`                                         | Override the withdraw method in Account                                            | bool    |
+|             | `Overdraft(decimal amount)`                                        | Overdraft from a current account and go into negatives                             | true    |
+|             |                                                                    | Overdraft limit reached, specified by the branch                                   | false   |
 |-------------|--------------------------------------------------------------------|------------------------------------------------------------------------------------|---------|
 | `Bank`      | `Bank()`                                                           | Create a bank that keeps track of all the registered accounts                      | ----    |
 |             | `CreateSaving(ICustomer customer, IBranch branch)`                 | Create a savings account of a branch and owned by the customer                     | true    |

@@ -30,7 +30,7 @@ namespace Boolean.CSharp.Main.BankAndAccounts
         {
             //Get the old balance and check if we can withdraw that amount
             decimal oldBalance = Balance();
-            if(oldBalance + branch.GetAllowedOverdraft() >= amount) //No limit to withdraw amount and can overdraft
+            if(oldBalance >= amount) //No limit to withdraw amount
             {
                 string depositMessage = "\n";
                 //Date of transaction
@@ -46,5 +46,27 @@ namespace Boolean.CSharp.Main.BankAndAccounts
             }
             return false;
         }
+
+        public bool Overdraft(decimal amount)
+        {
+            //Get the old balance and check if we can withdraw that amount
+            decimal oldBalance = Balance();
+            if (oldBalance + branch.GetAllowedOverdraft() >= amount) //No limit to withdraw amount and can overdraft
+            {
+                string depositMessage = "\n";
+                //Date of transaction
+                depositMessage += DateTime.Now.ToString("dd/MM/yyyy") + "\t||";
+                //Empty
+                depositMessage += "\t\t||";
+                //Withdraw
+                depositMessage += amount.ToString() + "\t||";
+                //New Balance
+                depositMessage += (oldBalance - amount).ToString();
+                this.transactionHistory.Add(depositMessage);
+                return true;
+            }
+            return false;
+        }
+
     }
 }

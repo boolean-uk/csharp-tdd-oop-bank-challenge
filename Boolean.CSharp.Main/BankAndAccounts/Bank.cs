@@ -86,7 +86,14 @@ namespace Boolean.CSharp.Main.BankAndAccounts
 
         public bool HandleOverdraft(ICustomer customer, decimal amount)
         {
-            throw new NotImplementedException();
+            foreach(var account in this._accounts)
+            {
+                if(account.owner.GetName() == customer.GetName() && account is Current current)
+                {
+                    return current.Overdraft(amount);
+                }
+            }
+            return false;
         }
 
         public bool HandleWithdraw(ICustomer customer, decimal amount, bool type)
