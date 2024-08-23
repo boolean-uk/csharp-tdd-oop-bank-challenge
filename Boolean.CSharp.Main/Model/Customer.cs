@@ -25,29 +25,29 @@ namespace Boolean.CSharp.Main.Model
             this.ID = -1;
         }
 
-        //pass this as arg, when creating a bank acount the customer is given a unique id
-        public bool createBankAccount() 
-        {
+        ////pass this as arg, when creating a bank acount the customer is given a unique id
+        //public bool createBankAccount() 
+        //{
 
 
-            //call controller and pass relevant args
-            //should return a new id for the user which we can set later
-            //this.ID = functionReturn;
+        //    //call controller and pass relevant args
+        //    //should return a new id for the user which we can set later
+        //    //this.ID = functionReturn;
             
 
 
-            return false;
-        }
+        //    return false;
+        //}
 
-        public bool depositMoneyToTransactionalAccount(float amount) { throw new NotImplementedException(); }
+        //public bool depositMoneyToTransactionalAccount(float amount) { throw new NotImplementedException(); }
 
-        public bool depositMoneyToSavingsAccount(float amount) { throw new NotImplementedException(); }
+        //public bool depositMoneyToSavingsAccount(float amount) { throw new NotImplementedException(); }
 
-        public bool withdrawMoneyFromTransactionalAccount(float amount) { throw new NotImplementedException(); }
-        public bool withdrawMoneyFromSavingsAccount(float amount) { throw new NotImplementedException(); }
+        //public bool withdrawMoneyFromTransactionalAccount(float amount) { throw new NotImplementedException(); }
+        //public bool withdrawMoneyFromSavingsAccount(float amount) { throw new NotImplementedException(); }
 
-        //pass this as arg
-        public void generateBankStatements() { throw new NotImplementedException(); }
+        ////pass this as arg
+        //public void generateBankStatements() { throw new NotImplementedException(); }
 
 
     }

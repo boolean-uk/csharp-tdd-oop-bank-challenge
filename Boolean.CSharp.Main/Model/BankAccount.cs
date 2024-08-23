@@ -23,8 +23,39 @@ namespace Boolean.CSharp.Main.Model
 
         public int getBankId() { return _bankId; }
 
-        public float getTransactionsAccountBalance() { return _transactionsAccount.getBalance(); }
-        public float getSavingsAccountBalance() { return _transactionsAccount.getBalance(); }
+        public float getTransactionsAccountBalance()
+        {
+            float balance = 0.0f;
+            _bankStatements.ForEach(statement =>
+            {
+                if (statement.transactionalAccount() && !statement.withdraw())
+                {
+                    balance += statement.transactionValue();
+                }
+                else if (statement.transactionalAccount() && statement.withdraw()) 
+                {
+                    balance -= statement.transactionValue();
+                }
+            });
+            return balance;
+        }
+
+        public float getSavingsAccountBalance()
+        {
+            float balance = 0.0f;
+            _bankStatements.ForEach(statement =>
+            {
+                if (!statement.transactionalAccount() && !statement.withdraw())
+                {
+                    balance += statement.transactionValue();
+                }
+                else if (!statement.transactionalAccount() && statement.withdraw())
+                {
+                    balance -= statement.transactionValue();
+                }
+            });
+            return balance;
+        }
         public TransactionsAccount getTransactionsAccount() { return _transactionsAccount; }
         public SavingsAccount getSavingsAccount() { return _savingsAccount; }
 
@@ -37,10 +68,25 @@ namespace Boolean.CSharp.Main.Model
 
         public List<BankStatement> getBankStatemets() { return _bankStatements; }
 
-        internal void logTransaction(float transactionalValue, float balance, bool transactionalAccount, bool withdraw  ) {
-            this._bankStatements.Add(new BankStatement(getDate(), transactionalValue, balance, _bankId, transactionalAccount, withdraw));
+        internal void logTransaction(float transactionalValue, bool transactionalAccount, bool withdraw)
+        {
+            if (transactionalAccount && !withdraw)
+            {
+                this._bankStatements.Add(new BankStatement(getDate(), transactionalValue, transactionalValue + getTransactionsAccountBalance(), _bankId, transactionalAccount, withdraw));
+            }
+            else if (transactionalAccount && withdraw)
+            {
+                this._bankStatements.Add(new BankStatement(getDate(), transactionalValue, getTransactionsAccountBalance() - transactionalValue, _bankId, transactionalAccount, withdraw));
+            }
+            else if (!transactionalAccount && !withdraw) 
+            {
+                this._bankStatements.Add(new BankStatement(getDate(), transactionalValue, transactionalValue + getSavingsAccountBalance(), _bankId, transactionalAccount, withdraw));
+            }
+            else
+            {
+                this._bankStatements.Add(new BankStatement(getDate(), transactionalValue, getSavingsAccountBalance() - transactionalValue, _bankId, transactionalAccount, withdraw));
+            }
         }
-
         private DateTime getDate() { return DateTime.Now; }
 
 
