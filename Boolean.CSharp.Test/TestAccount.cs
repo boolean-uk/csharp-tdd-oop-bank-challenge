@@ -1,4 +1,4 @@
-﻿using Boolean.CSharp.Main;
+﻿using Boolean.CSharp.Main.Accounts;
 using Boolean.CSharp.Main.Branches;
 using Boolean.CSharp.Main.Interfaces;
 using NUnit.Framework;
@@ -12,14 +12,15 @@ namespace Boolean.CSharp.Test
 {
     public class TestAccount
     {
-        [Test]
-        public void TestDeposit(double funds)
+        [TestCase(5)]
+        public void TestBalance(double funds)
         {
-            Account account = new Account();
+            AmericanExpress branch = new AmericanExpress();
+            Savings account = new Savings(1, 1, branch);
 
-            account.funds += funds;
+            account.Deposit(funds);
 
-            Assert.That(account.funds == funds);
+            Assert.That(account.Balance() == funds);
         }
     }
 }
