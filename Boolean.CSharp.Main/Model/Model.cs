@@ -64,5 +64,20 @@ namespace Boolean.CSharp.Main.Model
         {
             return _bank.withdrawMoneyFromSavingsAccount(amount, customerID);
         }
+
+        internal bool requestOverdraft(int customerID, float amount, string reason)
+        {
+            return _bank.requestOverdraft(customerID, amount, reason);
+        }
+
+        internal List<OverdraftRequest> getOverdraftRequests()
+        {
+            return _bank.getOverdraftRequests();
+        }
+
+        internal void approveOverdraftRequest(OverdraftRequest overdraftRequest)
+        {
+            _bank.approveOverdraftRequest(overdraftRequest);
+        }
     }
 }

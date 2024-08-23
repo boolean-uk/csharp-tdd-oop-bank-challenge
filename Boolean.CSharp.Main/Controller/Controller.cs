@@ -74,6 +74,22 @@ namespace Boolean.CSharp.Main.Controller
             view.printBankStatements(model.getBankAccount(customerID).getBankStatemets());
         }
 
+        public bool requestOverdraft(int customerID, float amount, string reason) 
+        { 
+            view.requestOverdraft(amount);
+            return model.requestOverdraft(customerID, amount, reason);
+        }
+
+        public List<OverdraftRequest> getOverdraftRequests()
+        {
+            view.printOverdraftRequests(model.getOverdraftRequests());
+            return model.getOverdraftRequests();
+        }
+
+        public void approveOverdraftRequest(OverdraftRequest overdraftRequest)
+        {
+            model.approveOverdraftRequest(overdraftRequest);
+        }
 
     }
 }

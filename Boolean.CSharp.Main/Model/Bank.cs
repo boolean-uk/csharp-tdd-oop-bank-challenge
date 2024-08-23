@@ -11,6 +11,7 @@ namespace Boolean.CSharp.Main.Model
         private List<Engineer> _engineerList;
         private List<Customer> _customerList;
         private List<BankAccount> _bankAccountList;
+        private List<OverdraftRequest> _overdraftRequestList;
         private int _nextID = 1;
 
         internal enum Branch
@@ -27,6 +28,7 @@ namespace Boolean.CSharp.Main.Model
             this._engineerList = new List<Engineer>();
             this._bankAccountList = new List<BankAccount>();
             this._customerList = new List<Customer>();
+            this._overdraftRequestList = new List<OverdraftRequest>();
         }
 
         internal List<Customer> customers { get; }
@@ -38,7 +40,7 @@ namespace Boolean.CSharp.Main.Model
 
         internal void createBankAccount(Customer person, Enum branch)
         {
-            
+
             switch (branch)
             {
                 case Branch.HR:
@@ -48,11 +50,11 @@ namespace Boolean.CSharp.Main.Model
                     break;
                 case Branch.Economy:
                     person.ID = this._nextID++;
-                    _bankAccountList.Add(new BankAccount(person.ID, Branch.Economy)); 
+                    _bankAccountList.Add(new BankAccount(person.ID, Branch.Economy));
                     break;
                 case Branch.IT:
                     person.ID = this._nextID++;
-                    _bankAccountList.Add(new BankAccount(person.ID, Branch.IT)); 
+                    _bankAccountList.Add(new BankAccount(person.ID, Branch.IT));
                     break;
                 case Branch.Security:
                     person.ID = this._nextID++;
@@ -118,5 +120,28 @@ namespace Boolean.CSharp.Main.Model
         }
 
         internal BankAccount getBankAccount(int customerID) { return _bankAccountList.Find(account => account.getBankId() == customerID); }
+
+        internal bool requestOverdraft(int customerID, float amount, string reason)
+        {
+            if (_customerList.Any(customer => customer.ID == customerID))
+            {
+                _overdraftRequestList.Add(new OverdraftRequest(customerID, amount, reason));
+                return true;
+            }
+            return false;
+        }
+
+        internal List<OverdraftRequest> getOverdraftRequests()
+        {
+            return _overdraftRequestList;
+        }
+
+        internal void approveOverdraftRequest(OverdraftRequest overdraftRequest)
+        {
+            if (_overdraftRequestList.Find(request => request == overdraftRequest) != null)
+            {
+                overdraftRequest.approve();
+            }
+        }
     }
 }

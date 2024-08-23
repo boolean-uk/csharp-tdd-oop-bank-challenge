@@ -182,5 +182,27 @@ namespace Boolean.CSharp.Test
 
             Assert.Pass();
         }
+
+        [Test]
+        public void OverdraftRequestTest()
+        {
+            TestSetup();
+            CustomerCreation(2);
+            List<Customer> customerList = _controller.GetCustomers();
+            Customer customer1 = customerList.First();
+            Customer customer2 = customerList.Last();
+            _controller.createBankAccount(customer1, Bank.Branch.HR);
+            _controller.createBankAccount(customer2, Bank.Branch.IT);
+
+            _controller.requestOverdraft(customer1.ID, 500.0f, "I want to buy chicken nuggets");
+            _controller.requestOverdraft(customer2.ID, 5000.0f, "I want to buy HiFi speakers");
+
+            List<OverdraftRequest> requests = _controller.getOverdraftRequests();
+
+            _controller.approveOverdraftRequest(requests.First());
+
+          _controller.getOverdraftRequests();
+
+        }
     }
 }

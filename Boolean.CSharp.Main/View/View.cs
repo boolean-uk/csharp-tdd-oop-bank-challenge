@@ -108,5 +108,18 @@ namespace Boolean.CSharp.Main.View
 
             });
         }
+
+        internal void requestOverdraft(float amount)
+        {
+            Console.WriteLine($"\nAn overdraft request of {amount} has been registered!");
+        }
+
+        internal void printOverdraftRequests(List<OverdraftRequest> overdraftRequests)
+        {
+            string formatString = "{0, -11} || {1, -50} || {2, -15} ||";
+            Console.WriteLine(formatString, "\nCustomer ID", "Reason", "Is Approved?");
+
+            overdraftRequests.ForEach(request => Console.WriteLine(formatString, request.getCustomerID(), request.getReason(), request.getIsApproved()));
+        }
     }
 }
