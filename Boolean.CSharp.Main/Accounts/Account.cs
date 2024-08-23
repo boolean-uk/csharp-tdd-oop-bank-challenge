@@ -41,7 +41,10 @@ namespace Boolean.CSharp.Main.Accounts
 
         public void Withdraw(double funds)
         {
-            
+            string date = DateTime.Now.ToString("dd/MM/yyyy");
+            double balance = Balance();
+            balance -= funds;
+            history.Add(date + " || " + " ||       " + Math.Round(funds, 2) + " || " + balance);
         }
     }
 }
