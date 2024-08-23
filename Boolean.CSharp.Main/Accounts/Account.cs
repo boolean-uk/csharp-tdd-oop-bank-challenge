@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Boolean.CSharp.Main.Enums;
 
-namespace Boolean.CSharp.Main
+namespace Boolean.CSharp.Main.Accounts
 {
     public abstract class Account
     {
@@ -40,9 +41,9 @@ namespace Boolean.CSharp.Main
             return false;
         }
 
-        public User? GetOwner(User user) 
+        public User? GetOwner(User user)
         {
-        
+
             return null;
         }
     }
