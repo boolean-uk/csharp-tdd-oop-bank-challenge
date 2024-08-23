@@ -24,5 +24,7 @@ namespace Boolean.CSharp.Main
         }
 
         public decimal Balance { get { return _balance; } }
+
+        public List<BankStatement> BankStatements { get; set; }
     }
 }

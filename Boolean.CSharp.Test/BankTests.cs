@@ -52,5 +52,15 @@ namespace Boolean.CSharp.Test
             Assert.AreEqual(500, bankStatement.Balance);
             Assert.AreEqual("Deposit", bankStatement.Type);
         }
+
+        [Test]
+        public void Test6GetBankStatementsFromAccount()
+        {
+            BankAccount bankAccount = new CurrentAccount();
+            bankAccount.Deposit(1000);
+            bankAccount.Deposit(2000);
+            bankAccount.Withdraw(500);
+            Assert.That(bankAccount.BankStatements.Count == 3);
+        }
     }
 }
