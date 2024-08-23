@@ -1,18 +1,12 @@
 ﻿using Boolean.CSharp.Main;
 using NUnit.Framework;
+using System.Xml.Linq;
 
 namespace Boolean.CSharp.Test
 {
     [TestFixture]
     public class CoreTests
     {
-        private Core _core;
-
-        public CoreTests()
-        {
-            _core = new Core();
-
-        }
 
         [TestCase("Ola", "current")]
         [TestCase("Lise", "savings")]
@@ -23,6 +17,19 @@ namespace Boolean.CSharp.Test
             int result = bank.AddAccount(name, bankType);
 
             Assert.That(result, Is.EqualTo(0));
+        }
+
+        [TestCase("Ola", "urrent")]
+        [TestCase("Lise", "xx")]
+
+        public void CreateAccountWithWrongTypes(string name, string bankType)
+        {
+            Bank bank = new Bank();
+
+            int result = bank.AddAccount(name, bankType);
+
+            Assert.That(result, Is.EqualTo(-1));
+
         }
 
         [Test]
@@ -62,8 +69,12 @@ namespace Boolean.CSharp.Test
         {
             Bank bank = new Bank();
             string user = "Bob";
-
-            //Deposit and withdraw
+            string bankType = "current";
+            double amountDeposit = 1000;
+            double amountWithdraw = 800;
+            int bankID = bank.AddAccount(user, bankType);
+            bank.Deposit(bankID, amountDeposit);
+            bank.Withdraw(bankID, amountWithdraw);
 
             string result = bank.PrintBankStateMent(user);
 

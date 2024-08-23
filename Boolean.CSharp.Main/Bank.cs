@@ -15,6 +15,7 @@ namespace Boolean.CSharp.Main
         private List<Account> _accounts = new List<Account>();
 
         private List<string> _users { get { return _accounts.Select(account => account.Owner).Distinct().ToList(); } }
+
         public int AddAccount(string user, string bankType)
         {
 
@@ -42,7 +43,7 @@ namespace Boolean.CSharp.Main
                 return 0;
             }
 
-            Account AcctoBeDeposited = _accounts.Where(account => account.ID == ID).First();
+            Account AcctoBeDeposited = GetAccount(ID);
             Transaction transaction = new Transaction(DateTime.Today.ToString("dd/MM/yyyy"), AcctoBeDeposited.Balance, amount, 0);
             AcctoBeDeposited.TransactionHistory.Add(transaction);
 
@@ -57,7 +58,7 @@ namespace Boolean.CSharp.Main
                 return 0;
             }
 
-            Account AccToBeWithdrawn = _accounts.Where(account => account.ID == ID).First();
+            Account AccToBeWithdrawn = GetAccount(ID);
             Transaction transaction = new Transaction(DateTime.Today.ToString("dd/MM/yyyy"), AccToBeWithdrawn.Balance, 0, amount);
             AccToBeWithdrawn.TransactionHistory.Add(transaction);
 
@@ -67,7 +68,7 @@ namespace Boolean.CSharp.Main
 
         public string PrintBankStateMent(string user)
         {
-            List<Account> accountsWithUser = _accounts.Where(account => account.Owner == user).ToList();
+            List<Account> accountsWithUser = FindAccountsUser(user).ToList();
 
             StringBuilder sb = new StringBuilder();
             sb.AppendLine($"date\t\t|| credit\t|| debit\t|| balance\t");
@@ -78,6 +79,20 @@ namespace Boolean.CSharp.Main
             }
 
             return sb.ToString();
+        }
+
+        public Account GetAccount(int ID)
+        {
+            return _accounts.First(account => account.ID == ID);
+        }
+        public List<Account> FindAccountsUser(string user)
+        {
+            return _accounts.Where(account => account.Owner == user).ToList();
+        }
+
+        public double CalculateBalance(int ID)
+        {
+            return GetAccount(ID).CalculateBalance();
         }
     }
 }

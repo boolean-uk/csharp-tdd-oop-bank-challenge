@@ -16,9 +16,9 @@ I want to deposit and withdraw funds.
 
 | Classes         | Methods																| Scenario								| Outputs					|
 |-----------------|---------------------------------------------------------------------|---------------------------------------|---------------------------|
-| `Bank`		  | `AddAccount(string UserID, string bankType)`						| Banktype does not exist				| false						|
-|				  |																		| Account added succesfully				| true						|
-|				  |																		| User does not exist					| false						|
+| `Bank`		  | `AddAccount(string UserID, string bankType)`						| Banktype does not exist				| int						|
+|				  |																		| Account added succesfully				| int						|
+|				  |																		| User does not exist					| int						|
 |				  |																		|										|							|
 |				  |	`Deposit(int bankId, double amount)`								|										| int						|
 | 				  |																		|										|							|

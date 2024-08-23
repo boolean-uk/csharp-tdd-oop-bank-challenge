@@ -63,5 +63,16 @@ namespace Boolean.CSharp.Main.Interfaces
             _balance -= amount;
             return true;
         }
+
+        public double CalculateBalance()
+        {
+            double totalBalance = 0;
+            foreach (Transaction transaction in TransactionHistory)
+            {
+                totalBalance -= transaction.debit;
+                totalBalance += transaction.credit;
+            }
+            return totalBalance;
+        }
     }
 }
