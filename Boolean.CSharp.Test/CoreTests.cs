@@ -15,14 +15,6 @@ namespace Boolean.CSharp.Test
         private Main.Controller.Controller _controller;
         private Main.Model.Model _model;
         private Main.View.View _view;
-        //private enum Branch
-        //{
-        //    HR,
-        //    Economy,
-        //    IT,
-        //    Security,
-        //    Other
-        //}
 
         public CoreTests()
         {
@@ -46,19 +38,56 @@ namespace Boolean.CSharp.Test
             }
         }
 
+        private void addFundsToCustomerAccount(Customer customer, float amount, bool isTransactional)
+        {
+            if (isTransactional)
+            {
+                _controller.depositMoneyIntoTransactionalAccount(amount, customer.ID);
+            }
+            else
+            {
+                _controller.depositMoneyIntoSavingsAccount(amount, customer.ID);
+            }
+        }
+
+        private bool withdrawFundsFromCustomerAccount(Customer customer, float amount, bool isTransactional)
+        {
+            if (isTransactional)
+            {
+                return _controller.withdrawMoneyFromTransactionalAccount(amount, customer.ID);
+            }
+            else
+            {
+                return _controller.withdrawMoneyFromSavingsAccount(amount, customer.ID);
+            }
+        }
+
+        private void createBankAccount(Customer customer, Enum branch)
+        {
+            _controller.createBankAccount(customer, branch);
+        }
+
+        private void createBankAccounts(List<Customer> customers, Enum branch)
+        {
+            customers.ForEach(customer => _controller.createBankAccount(customer, branch));
+        }
+
+        private void printBankStatements(List<Customer> customers)
+        {
+            customers.ForEach(customer => _controller.printBankStatements(customer.ID));
+        }
+
         [Test]
         public void CustomerCreationTest()
         {
             TestSetup();
             CustomerCreation(1);
-            //bool isCustomer = _controller.createPerson(true);
             List<Customer> customerList = _controller.GetCustomers();
-            //Assert.IsTrue(isCustomer);
             Assert.That(customerList.Count == 1);
             Assert.That(customerList.First().FirstName == "Test");
 
             Customer customer = customerList.First();
-            _controller.createBankAccount(customer, null);
+            createBankAccount(customer, null);
 
             Assert.That(customerList.First().ID == 1);
         }
@@ -68,18 +97,16 @@ namespace Boolean.CSharp.Test
         {
             TestSetup();
             CustomerCreation(2);
-            //bool isCustomer = _controller.createPerson(true);
             List<Customer> customerList = _controller.GetCustomers();
-            //Assert.IsTrue(isCustomer);
             Assert.That(customerList.Count == 2);
             Assert.That(customerList.First().FirstName == "Test");
 
             Customer customer = customerList.First();
-            _controller.createBankAccount(customer, null);
+            createBankAccount(customer, null);
 
 
             customer = customerList.Last();
-            _controller.createBankAccount(customer, null);
+            createBankAccount(customer, null);
 
             Assert.That(customerList.Last().ID == 2);
         }
@@ -91,7 +118,7 @@ namespace Boolean.CSharp.Test
             CustomerCreation(1);
             List<Customer> customerList = _controller.GetCustomers();
             Customer customer = customerList.First();
-            _controller.createBankAccount(customer, null);
+            createBankAccount(customer, null);
             _controller.depositMoneyIntoTransactionalAccount(100.0f, customer.ID);
             BankAccount bankAccount = _controller.getBankAccount(customer.ID);
             Assert.That(bankAccount.getTransactionsAccountBalance() == 100.0f);
@@ -105,7 +132,7 @@ namespace Boolean.CSharp.Test
             CustomerCreation(1);
             List<Customer> customerList = _controller.GetCustomers();
             Customer customer = customerList.First();
-            _controller.createBankAccount(customer, null);
+            createBankAccount(customer, null);
             _controller.depositMoneyIntoTransactionalAccount(100.0f, customer.ID);
             BankAccount bankAccount = _controller.getBankAccount(customer.ID);
             Assert.That(bankAccount.getTransactionsAccountBalance() == 100.0f);
@@ -121,7 +148,7 @@ namespace Boolean.CSharp.Test
             CustomerCreation(1);
             List<Customer> customerList = _controller.GetCustomers();
             Customer customer = customerList.First();
-            _controller.createBankAccount(customer, null);
+            createBankAccount(customer, null);
             _controller.depositMoneyIntoTransactionalAccount(100.0f, customer.ID);
             BankAccount bankAccount = _controller.getBankAccount(customer.ID);
             Assert.That(bankAccount.getTransactionsAccountBalance() == 100.0f);
@@ -140,19 +167,22 @@ namespace Boolean.CSharp.Test
             List<Customer> customerList = _controller.GetCustomers();
             Customer customer1 = customerList.First();
             Customer customer2 = customerList.Last();
-            _controller.createBankAccount(customer1, null);
-            _controller.createBankAccount(customer2, null);
-            _controller.depositMoneyIntoTransactionalAccount(100.0f, customer1.ID);
-            _controller.depositMoneyIntoTransactionalAccount(200.0f, customer2.ID);
-            _controller.depositMoneyIntoSavingsAccount(100.0f, customer1.ID);
-            _controller.depositMoneyIntoSavingsAccount(200.0f, customer2.ID);
-            _controller.withdrawMoneyFromTransactionalAccount(50.0f, customer1.ID);
-            _controller.withdrawMoneyFromTransactionalAccount(150.0f, customer2.ID);
-            _controller.withdrawMoneyFromSavingsAccount(50.0f, customer1.ID);
-            _controller.withdrawMoneyFromSavingsAccount(150.0f, customer2.ID);
+            createBankAccount(customer1, null);
+            createBankAccount(customer2, null);
 
-            _controller.printBankStatements(customer1.ID);
-            _controller.printBankStatements(customer2.ID);
+            addFundsToCustomerAccount(customer1, 100.0f, true);
+            addFundsToCustomerAccount(customer2, 200.0f, true);
+
+            addFundsToCustomerAccount(customer1, 100.0f, false);
+            addFundsToCustomerAccount(customer2, 200.0f, false);
+
+            withdrawFundsFromCustomerAccount(customer1, 50.0f, true);
+            withdrawFundsFromCustomerAccount(customer2, 150.0f, true);
+
+            withdrawFundsFromCustomerAccount(customer1, 50.0f, false);
+            withdrawFundsFromCustomerAccount(customer2, 150.0f, false);
+
+            printBankStatements(customerList);
 
             Assert.Pass();
         }
@@ -160,25 +190,30 @@ namespace Boolean.CSharp.Test
         [Test]
         public void BankBranchTest()
         {
-            
+
             TestSetup();
             CustomerCreation(2);
             List<Customer> customerList = _controller.GetCustomers();
             Customer customer1 = customerList.First();
             Customer customer2 = customerList.Last();
-            _controller.createBankAccount(customer1, Bank.Branch.HR);
-            _controller.createBankAccount(customer2, Bank.Branch.IT);
-            _controller.depositMoneyIntoTransactionalAccount(100.0f, customer1.ID);
-            _controller.depositMoneyIntoTransactionalAccount(200.0f, customer2.ID);
-            _controller.depositMoneyIntoSavingsAccount(100.0f, customer1.ID);
-            _controller.depositMoneyIntoSavingsAccount(200.0f, customer2.ID);
-            _controller.withdrawMoneyFromTransactionalAccount(50.0f, customer1.ID);
-            _controller.withdrawMoneyFromTransactionalAccount(150.0f, customer2.ID);
-            _controller.withdrawMoneyFromSavingsAccount(50.0f, customer1.ID);
-            _controller.withdrawMoneyFromSavingsAccount(150.0f, customer2.ID);
 
-            _controller.printBankStatements(customer1.ID);
-            _controller.printBankStatements(customer2.ID);
+            createBankAccount(customer1, Bank.Branch.HR);
+            createBankAccount(customer2, Bank.Branch.IT);
+
+            addFundsToCustomerAccount(customer1, 100.0f, true);
+            addFundsToCustomerAccount(customer2, 200.0f, true);
+
+            addFundsToCustomerAccount(customer1, 100.0f, false);
+            addFundsToCustomerAccount(customer2, 200.0f, false);
+
+            withdrawFundsFromCustomerAccount(customer1, 50.0f, true);
+            withdrawFundsFromCustomerAccount(customer2, 150.0f, true);
+
+            withdrawFundsFromCustomerAccount(customer1, 50.0f, false);
+            withdrawFundsFromCustomerAccount(customer2, 150.0f, false);
+
+
+            printBankStatements(customerList);
 
             Assert.Pass();
         }
@@ -191,8 +226,8 @@ namespace Boolean.CSharp.Test
             List<Customer> customerList = _controller.GetCustomers();
             Customer customer1 = customerList.First();
             Customer customer2 = customerList.Last();
-            _controller.createBankAccount(customer1, Bank.Branch.HR);
-            _controller.createBankAccount(customer2, Bank.Branch.IT);
+            createBankAccount(customer1, Bank.Branch.HR);
+            createBankAccount(customer2, Bank.Branch.IT);
 
             _controller.requestOverdraft(customer1.ID, 500.0f, "I want to buy chicken nuggets");
             _controller.requestOverdraft(customer2.ID, 5000.0f, "I want to buy HiFi speakers");
@@ -201,8 +236,37 @@ namespace Boolean.CSharp.Test
 
             _controller.approveOverdraftRequest(requests.First());
 
-          _controller.getOverdraftRequests();
+            _controller.getOverdraftRequests();
+        }
 
+        [Test]
+        public void StressTest()
+        {
+            TestSetup();
+            CustomerCreation(50);
+            List<Customer> customerList = _controller.GetCustomers();
+            Assert.That(customerList.Count, Is.EqualTo(50));
+            createBankAccounts(customerList, Bank.Branch.IT);
+            Assert.That(customerList.Last().ID, Is.EqualTo(50));
+        }
+
+        [Test]
+        public void StressTwoTest()
+        {
+            TestSetup();
+            CustomerCreation(50);
+            List<Customer> customerList = _controller.GetCustomers();
+            Assert.That(customerList.Count, Is.EqualTo(50));
+            createBankAccounts(customerList, Bank.Branch.IT);
+            Assert.That(customerList.Last().ID, Is.EqualTo(50));
+
+            addFundsToCustomerAccount(customerList.Last(), 50000.0f, true);
+            bool withdrawalSuccess = withdrawFundsFromCustomerAccount(customerList.Last(), 60000.0f, true);
+            Assert.IsFalse(withdrawalSuccess);
+            withdrawalSuccess = withdrawFundsFromCustomerAccount(customerList.Last(), 60000.0f, false);
+            Assert.IsFalse(withdrawalSuccess);
+
+            printBankStatements(customerList);
         }
     }
 }
