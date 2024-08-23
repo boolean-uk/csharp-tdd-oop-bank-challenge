@@ -22,5 +22,7 @@ namespace Boolean.CSharp.Main
             _balance -= amount;
             return true;
         }
+
+        public decimal Balance { get { return _balance; } }
     }
 }
