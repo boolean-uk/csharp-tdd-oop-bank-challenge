@@ -92,15 +92,13 @@ namespace Boolean.CSharp.Main
 
         public void TextBankStatement()
         {
-            var accountSid = "ACe367dade7dc53a1e07a0106575ffc8b3"; //insert when testing
-            var authToken = "c3b3858a7426c90a41d6fd6af0530dfc"; //insert when testing
+            var accountSid = "[accountSid]"; //insert when testing
+            var authToken = "[authToken]"; //insert when testing
             TwilioClient.Init(accountSid, authToken);
 
             var messageOptions = new CreateMessageOptions(
-            // new PhoneNumber("+4741424344")); //insert your own number
-            // messageOptions.From = new PhoneNumber("+15005550006"); //insert twilio number 
-            new PhoneNumber("+4747614767"));
-            messageOptions.From = new PhoneNumber("+19073187037");
+            new PhoneNumber("+4741424344")); //insert your own number
+            messageOptions.From = new PhoneNumber("+15005550006"); //insert twilio number 
             messageOptions.Body = FormatMessage();
 
 
