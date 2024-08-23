@@ -47,8 +47,10 @@ namespace Boolean.CSharp.Test
         [Test]
         public void Test5GenerateBankStatement()
         {
-            BankStatement bankStatement = new BankStatement();
+            BankStatement bankStatement = new BankStatement(DateTime.Now, 500, "Deposit", 500);
             Assert.IsNotNull(bankStatement);
+            Assert.AreEqual(500, bankStatement.Balance);
+            Assert.AreEqual("Deposit", bankStatement.Type);
         }
     }
 }
