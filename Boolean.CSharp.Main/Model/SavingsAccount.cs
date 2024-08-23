@@ -45,11 +45,8 @@ namespace Boolean.CSharp.Main.Model
                 }
                 sr.Close();
             }
-            Console.WriteLine(balance);
-
 
             s = $"{DateTime.Now}|    |{funds}|{balance}";
-            Console.WriteLine(s);
 
             using (StreamWriter outputFile = new StreamWriter(Path.Combine(_docPath, $"{_id}.txt"), true))
             {
@@ -62,8 +59,6 @@ namespace Boolean.CSharp.Main.Model
         {
             double balance = -funds;
             string s;
-
-
             using (StreamReader sr = new StreamReader(Path.Combine(_docPath, $"{_id}.txt")))
             {
                 string line;
@@ -74,12 +69,7 @@ namespace Boolean.CSharp.Main.Model
                 }
                 sr.Close();
             }
-            Console.WriteLine(balance);
-
-
-
             s = $"{DateTime.Now}|{funds}|    |{balance}";
-            Console.WriteLine(s);
 
             using (StreamWriter outputFile = new StreamWriter(Path.Combine(_docPath, $"{_id}.txt"), true))
             {
@@ -88,7 +78,7 @@ namespace Boolean.CSharp.Main.Model
             }
         }
 
-        internal List<string> GenerateBankStatment() 
+        public List<string> GenerateBankStatment() 
         {
             List<string> statment = new List<string>();
             statment.Add($"{_name}  Id: {_id}");
@@ -103,8 +93,23 @@ namespace Boolean.CSharp.Main.Model
                 }
                 sr.Close();
             }
-
             return statment;
+        }
+
+        internal string GetBalance()
+        {
+            string line = "";
+            using (StreamReader sr = new StreamReader(Path.Combine(_docPath, $"{_id}.txt")))
+            {
+                while ((line = sr.ReadLine()) != null)
+                {   
+                    string[] fields = line.Split("|".ToCharArray());
+                    line = fields[3];
+                }
+                sr.Close();
+            }
+            return line!;
+
         }
     }
 }

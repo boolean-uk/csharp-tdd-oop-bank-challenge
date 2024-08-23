@@ -11,7 +11,7 @@ namespace Boolean.CSharp.Main.Controler
     public class MainControler
     {
         private Managment management;
-        public MainControler() { 
+        internal MainControler() { 
             this.management = new Managment();
         }
 
@@ -24,7 +24,7 @@ namespace Boolean.CSharp.Main.Controler
             }
             else
             {
-                return if(c.CreateAccount(AccountName)) ;
+                return c.CreateAccount(AccountName); 
             }
         }
 
@@ -40,6 +40,11 @@ namespace Boolean.CSharp.Main.Controler
             {
                 throw new Exception(e.ToString());
             }
-        } 
+        }
+
+        internal object GetAccountBalance(string socialSecurityNr, string accountName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
