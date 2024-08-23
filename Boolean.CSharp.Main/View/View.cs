@@ -48,8 +48,18 @@ namespace Boolean.CSharp.Main.View
             }
         }
 
+        internal static void AddFunds(string AccountName, string SocialSecurityNr, MainControler Controler, double i) 
+        {
+            Controler.AddFundToAccount(i, AccountName, SocialSecurityNr);
+        }
 
-        
+        internal static void WithdrawFunds(string AccountName, string SocialSecurityNr, MainControler Controler, double i)
+        {
+            Controler.WithdrawFundsFromAccount(i, AccountName, SocialSecurityNr);
+        }
+
+
+
 
     }
 }

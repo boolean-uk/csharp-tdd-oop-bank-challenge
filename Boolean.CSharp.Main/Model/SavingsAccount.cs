@@ -23,7 +23,7 @@ namespace Boolean.CSharp.Main.Model
 
         internal SavingsAccount(string name, string path)
         {
-            _name = "Savings Account: " + name;
+            _name = name;
             _id = Guid.NewGuid().ToString();
             _created = DateTime.Now;
             _docPath = path;
@@ -31,7 +31,7 @@ namespace Boolean.CSharp.Main.Model
             outputFile.Close();
         }
 
-        internal void DepositFunds(double funds)
+        public void DepositFunds(double funds)
         {
             double balance = funds;
             string s;
@@ -55,7 +55,7 @@ namespace Boolean.CSharp.Main.Model
             }
         }
 
-        internal void WithdrawFunds(double funds) 
+        public void WithdrawFunds(double funds) 
         {
             double balance = -funds;
             string s;
@@ -110,6 +110,11 @@ namespace Boolean.CSharp.Main.Model
             }
             return line!;
 
+        }
+
+        public string GetAccountName()
+        {
+            return _name;
         }
     }
 }

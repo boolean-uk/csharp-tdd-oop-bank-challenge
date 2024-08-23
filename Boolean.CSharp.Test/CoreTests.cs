@@ -35,7 +35,9 @@ namespace Boolean.CSharp.Test
         [Test]
         public void AddFundsTest() 
         {
-   
+            View.CreateCustomer("Test", "111111-0000", _main);
+            View.CreateAccount("Account1", "111111-0000", _main);
+            View.
         }
 
 

@@ -28,12 +28,42 @@ namespace Boolean.CSharp.Main.Controler
             }
         }
 
-        internal bool CreateCustomer(string customerName, string socialSecurityNr)
+        internal bool CreateCustomer(string CustomerName, string SocialSecurityNr)
         {
             try
             {
-                Customer c = new Customer(customerName, socialSecurityNr);
+                Customer c = new Customer(CustomerName, SocialSecurityNr);
                 management.AddCustomer(c);
+                return true;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.ToString());
+            }
+        }
+
+        internal bool AddFundToAccount(double value, string AccountName, string SocialSecurityNr)
+        {
+            try
+            {
+                Customer? c = management.GetCustomer().FirstOrDefault(propa => propa.CustomerId == SocialSecurityNr);
+                IAccount? a = c!.Accounts.FirstOrDefault(propa => propa.GetAccountName() == AccountName);
+                a!.DepositFunds(value);
+                return true;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.ToString());
+            }
+        }
+
+        internal bool WithdrawFundsFromAccount(double value, string AccountName, string SocialSecurityNr)
+        {
+            try
+            {
+                Customer? c = management.GetCustomer().FirstOrDefault(propa => propa.CustomerId == SocialSecurityNr);
+                IAccount? a = c!.Accounts.FirstOrDefault(propa => propa.GetAccountName() == AccountName);
+                a!.WithdrawFunds(value);
                 return true;
             }
             catch (Exception e)
