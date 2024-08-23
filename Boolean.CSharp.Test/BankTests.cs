@@ -61,6 +61,10 @@ namespace Boolean.CSharp.Test
             bankAccount.Deposit(2000);
             bankAccount.Withdraw(500);
             Assert.That(bankAccount.BankStatements.Count == 3);
+            Assert.That(bankAccount.BankStatements[1].Balance == 3000);
+            Assert.That(bankAccount.BankStatements[2].Type.Equals("Withdraw"));
         }
+
+        
     }
 }
