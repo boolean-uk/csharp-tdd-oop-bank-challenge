@@ -2,5 +2,7 @@
 {
     internal interface IAccount
     {
+
+        List<string> GenerateBankStatment();
     }
 }

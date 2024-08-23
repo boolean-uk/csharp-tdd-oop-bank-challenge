@@ -8,19 +8,44 @@ using System.Threading.Tasks;
 namespace Boolean.CSharp.Main.Model
 {
 
-    internal class Customers
+    internal class Customer
     {
 
         private string _name;
         private List<IAccount> _accounts;
-        internal Customers(string name) 
+        private readonly string _customerId;
+        private readonly DateTime _created;
+        private readonly string _docPath;
+
+        internal Customer(string name, string socialsecurity) 
         { 
             this._name = name;
+            this._created = DateTime.Now;
+            this._customerId = socialsecurity;
             this._accounts = new List<IAccount>();
+            this._docPath = $"..\\..\\..\\..\\Boolean.CSharp.Main\\DataBaseFolder\\{_customerId}\\";
         }
 
         internal string Name { get { return _name; } }
         internal List<IAccount> Accounts { get { return _accounts; } }
+
+        internal string CustomerId { get { return _customerId; } }
+
+        internal bool CreateAccount(string name)
+        {
+            try
+            {
+                IAccount account = new SavingsAccount(name, _docPath);
+                _accounts.Add(account);
+                return true;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.ToString());
+            } 
+        }
+
+        internal List<IAccount> getaccounts() { return _accounts; }
 
     }
 }
