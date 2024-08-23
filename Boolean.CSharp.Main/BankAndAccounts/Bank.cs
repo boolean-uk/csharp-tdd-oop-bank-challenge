@@ -60,5 +60,15 @@ namespace Boolean.CSharp.Main.BankAndAccounts
             }
             return string.Empty;
         }
+
+        public void HandleDeposit(ICustomer customer, decimal amount, bool type)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool HandleWithdraw(ICustomer customer, decimal amount, bool type)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

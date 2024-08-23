@@ -86,21 +86,24 @@ namespace Boolean.CSharp.Test
         [Test]
         public void DepositAndWithdrawTest()
         {
-            ////Arrange
-            //Bank bank = new Bank();
-            //Joaquin joaquin = new Joaquin();
-            //MasterCard mastercard = new MasterCard();
-            //bank.CreateCurrent(joaquin, mastercard);
-            //bank.CreateSaving(joaquin, mastercard);
-            //
-            //bank.HandleDeposit(joaquin, 100, true); //Deposit to current
-            //bank.HandleDeposit(joaquin, 100, false); //Deposit to savings
-            //
-            //
-            ////Act
-            //bool result = bank.HandleWithdraw(joaquin, 100, true);
-            //
+            //Arrange
+            Bank bank = new Bank();
+            Joaquin joaquin = new Joaquin();
+            MasterCard mastercard = new MasterCard();
+            bank.CreateCurrent(joaquin, mastercard);
+            bank.CreateSaving(joaquin, mastercard);
             
+            bank.HandleDeposit(joaquin, 100, true); //Deposit to current
+            bank.HandleDeposit(joaquin, 100, false); //Deposit to savings
+            
+            
+            //Act
+            bool resultSuccess = bank.HandleWithdraw(joaquin, 100, true);
+            bool resultFailure = bank.HandleWithdraw(joaquin, 101, false);
+
+            //Assert
+            Assert.That(resultSuccess, Is.True);
+            Assert.That(resultFailure, Is.False);
         }
 
     }
