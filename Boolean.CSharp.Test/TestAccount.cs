@@ -13,6 +13,11 @@ namespace Boolean.CSharp.Test
     public class TestAccount
     {
         [TestCase(5)]
+        [TestCase(500)]
+        [TestCase(5000)]
+        [TestCase(250)]
+        [TestCase(35)]
+        [TestCase(52)]
         public void TestBalance(double funds)
         {
             AmericanExpress branch = new AmericanExpress();

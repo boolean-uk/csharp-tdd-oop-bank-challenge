@@ -22,12 +22,21 @@ namespace Boolean.CSharp.Main.Accounts
 
         public void Deposit(double funds)
         {
-
+            string date = DateTime.Now.ToString("dd/MM/yyyy");
+            double balance = funds;
+            if(history.Count != 0)//not first action
+            {
+                balance += Balance();
+            }
+            history.Add(date + " || " + Math.Round(funds, 2) + " ||        || " + balance);
         }
 
         public double Balance()
         {
-            return 0;
+            string s = history[history.Count - 1];
+            int lastIndex = s.LastIndexOf("|| ");
+            string b = s.Substring(lastIndex + 3);
+            return Convert.ToDouble(b);
         }
     }
 }
