@@ -30,7 +30,7 @@ namespace Boolean.CSharp.Main
         }
         public List<ITransaction> GetTransactions()
         {
-            throw new NotImplementedException();
+            return _transactions;
         }
 
         string IAccount.GenerateStatement()
