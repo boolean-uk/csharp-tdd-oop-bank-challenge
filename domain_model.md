@@ -3,10 +3,10 @@
 | Class/Interface   | Members                      | Method/Property             | Scenario                     | Output     |
 |-------------------|------------------------------|-----------------------------|------------------------------|------------|
 | BankAccount       | `decimal balance`            | Deposit(decimal amount)     | deposit amount to account    | bool       |
-|                   | `List<BankStatement>`        | Withdraw(decimal amount)    | withdraw amount from account | bool       |
+|                   | `LinkedList<BankStatement>`  | Withdraw(decimal amount)    | withdraw amount from account | bool       |
 |                   | `BankBranch bankBranch`      | PrintBankStatements()       | string as a print            | string     |
 |                   |                              | Balance {get;}              | get the balance of account   | decimal    |
-|                   |                              | BankStatements {get;}       | get the bank statements      | List<BankStatement>|
+|                   |                              | BankStatements {get;}       | get the bank statements      | LinkedList<BankStatement>|
 |                   |                              | BankBranch {get;}           | get the branch of the account| BankBranch |
 |                   |                              |                             |                              |            |
 | CurrentAccount    | inherits from BankAccount    |                             |                              |            |

@@ -61,17 +61,17 @@ namespace Boolean.CSharp.Test
             bankAccount.Deposit(2000);
             bankAccount.Withdraw(500);
             Assert.That(bankAccount.BankStatements.Count == 3);
-            Assert.That(bankAccount.BankStatements[1].Balance == 3000);
-            Assert.That(bankAccount.BankStatements[2].Type.Equals("Withdraw"));
+            Assert.That(bankAccount.BankStatements.ElementAt(1).Balance == 3000);
+            Assert.That(bankAccount.BankStatements.ElementAt(0).Type.Equals("Withdraw"));
         }
 
         [Test]
         public void Test7PrintBankStatement()
         {
             BankAccount bankAccount = new CurrentAccount();
-            bankAccount.Deposit(1000);
-            bankAccount.Deposit(2000);
-            bankAccount.Withdraw(500);
+            bankAccount.Deposit(1000.00m);
+            bankAccount.Deposit(2000.00m);
+            bankAccount.Withdraw(500.00m);
             string printedStatement = bankAccount.PrintBankStatements();
             Assert.That(printedStatement.Contains("date"));
             Assert.That(printedStatement.Contains("credit"));
