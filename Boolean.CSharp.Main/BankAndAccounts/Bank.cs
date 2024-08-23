@@ -49,6 +49,11 @@ namespace Boolean.CSharp.Main.BankAndAccounts
             return true;
         }
 
+        public decimal GetBalance(ICustomer customer, bool type)
+        {
+            throw new NotImplementedException();
+        }
+
         public string GetTransactionHistory(ICustomer customer, bool type)
         {
             foreach (Account account in this._accounts)

@@ -2,6 +2,8 @@
 using Boolean.CSharp.Main.Branches;
 using Boolean.CSharp.Main.Customers;
 using NUnit.Framework;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Diagnostics;
 
 /*
 ## User Stories
@@ -104,6 +106,28 @@ namespace Boolean.CSharp.Test
             //Assert
             Assert.That(resultSuccess, Is.True);
             Assert.That(resultFailure, Is.False);
+        }
+
+        [Test]
+        public void AcceptanceCriteriaTest()
+        {
+            //Arrange
+            Bank bank = new Bank();
+            Joaquin joaquin = new Joaquin();
+            MasterCard mastercard = new MasterCard();
+            bank.CreateCurrent(joaquin, mastercard);
+
+            bank.HandleDeposit(joaquin, 1000, true);
+            bank.HandleDeposit(joaquin, 2000, true);
+            bank.HandleWithdraw(joaquin, 500, true);
+
+            //Act
+            string result = bank.GetTransactionHistory(joaquin, true);
+            decimal balance = bank.GetBalance(joaquin, true);
+
+            //Assert
+            Assert.That(result, !Is.EqualTo(string.Empty));
+            Assert.That(balance, Is.EqualTo(2500));
         }
 
     }
