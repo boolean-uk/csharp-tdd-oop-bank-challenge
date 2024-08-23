@@ -16,7 +16,7 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        public void Test2DepositAndWithdrawFromAccount()
+        public void Test2DepositAndWithdrawFromCurrentAccount()
         {
             // Store and use money...
             CurrentAccount currentAccount = new CurrentAccount();
@@ -28,5 +28,11 @@ namespace Boolean.CSharp.Test
             Assert.That(currentAccount.Balance == 500);
         }
 
+        [Test]
+        public void Test3CreateASavingsAccount()
+        {
+            SavingsAccount savingsAccount = new SavingsAccount();
+            Assert.IsNotNull(currentAccount);
+        }
     }
 }
