@@ -35,22 +35,34 @@ namespace Boolean.CSharp.Test
         [Test]
         public void AddFundsTest() 
         {
-            View.CreateCustomer("Test", "111111-0000", _main);
-            View.CreateAccount("Account1", "111111-0000", _main);
-            View.
+            View.CreateCustomer("Test", "123456-0000", _main);
+            View.CreateAccount("Account1", "123456-0000", _main);
+            View.AddFunds("Account1", "123456-0000", _main, 500);
+            View.GetAccountBalance("Account1", "123456-0000", _main);
         }
 
 
         [Test]
         public void RemoveFundsTest() 
         {
-    
+            View.CreateCustomer("Test", "123456-0000", _main);
+            View.CreateAccount("Account1", "123456-0000", _main);
+            View.AddFunds("Account1", "123456-0000", _main, 500);
+            View.AddFunds("Account1", "123456-0000", _main, 500);
+            View.WithdrawFunds("Account1", "123456-0000", _main, 200);
+            View.GetAccountBalance("Account1", "123456-0000", _main);
+
         }
 
         [Test]
-        public void UpdateFundsTest()
+        public void GenerateBankStatmentTest()
         {
-            
+            View.CreateCustomer("Test", "123456-0000", _main);
+            View.CreateAccount("Account1", "123456-0000", _main);
+            View.AddFunds("Account1", "123456-0000", _main, 500);
+            View.AddFunds("Account1", "123456-0000", _main, 500);
+            View.WithdrawFunds("Account1", "123456-0000", _main, 200);
+            View.GenerateBankStatment("Account1", "123456-0000", _main);
 
 
         }

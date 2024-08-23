@@ -46,7 +46,7 @@ namespace Boolean.CSharp.Main.Controler
         {
             try
             {
-                Customer? c = management.GetCustomer().FirstOrDefault(propa => propa.CustomerId == SocialSecurityNr);
+                Customer? c = management.GetCustomer().FirstOrDefault(c => c.CustomerId.Equals(SocialSecurityNr));
                 IAccount? a = c!.Accounts.FirstOrDefault(propa => propa.GetAccountName() == AccountName);
                 a!.DepositFunds(value);
                 return true;
@@ -61,7 +61,7 @@ namespace Boolean.CSharp.Main.Controler
         {
             try
             {
-                Customer? c = management.GetCustomer().FirstOrDefault(propa => propa.CustomerId == SocialSecurityNr);
+                Customer? c = management.GetCustomer().FirstOrDefault(c => c.CustomerId.Equals(SocialSecurityNr));
                 IAccount? a = c!.Accounts.FirstOrDefault(propa => propa.GetAccountName() == AccountName);
                 a!.WithdrawFunds(value);
                 return true;
@@ -76,9 +76,18 @@ namespace Boolean.CSharp.Main.Controler
             return management.GetCustomer();
         }
 
-        internal object GetAccountBalance(string socialSecurityNr, string accountName)
+        internal string GetAccountBalance(string AccountName, string SocialSecurityNr)
         {
-            throw new NotImplementedException();
+            Customer? c = management.GetCustomer().FirstOrDefault(propa => propa.CustomerId == SocialSecurityNr);
+            IAccount? a = c!.Accounts.FirstOrDefault(propa => propa.GetAccountName() == AccountName);
+            return a!.GetBalance();
+        }
+
+        internal List<string> GenerateAccountStatment(string AccountName, string SocialSecurityNr)
+        {
+            Customer? c = management.GetCustomer().FirstOrDefault(propa => propa.CustomerId == SocialSecurityNr);
+            IAccount? a = c!.Accounts.FirstOrDefault(propa => propa.GetAccountName() == AccountName);
+            return a!.GenerateBankStatment();
         }
     }
 }

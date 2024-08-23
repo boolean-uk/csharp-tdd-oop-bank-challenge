@@ -33,7 +33,7 @@ namespace Boolean.CSharp.Main.Model
 
         public void DepositFunds(double funds)
         {
-            double balance = funds;
+            double balance = 0;
             string s;
             using (StreamReader sr = new StreamReader(Path.Combine(_docPath, $"{_id}.txt")))
             {
@@ -41,12 +41,12 @@ namespace Boolean.CSharp.Main.Model
                 while ((line = sr.ReadLine()) != null)
                 {
                     string[] fields = line.Split("|".ToCharArray());
-                    balance += Convert.ToDouble(fields[3]);
+                    balance = Convert.ToDouble(fields[3]);
                 }
                 sr.Close();
             }
 
-            s = $"{DateTime.Now}|    |{funds}|{balance}";
+            s = $"{DateTime.Now}|    |{funds}|{balance+funds}";
 
             using (StreamWriter outputFile = new StreamWriter(Path.Combine(_docPath, $"{_id}.txt"), true))
             {
@@ -57,7 +57,7 @@ namespace Boolean.CSharp.Main.Model
 
         public void WithdrawFunds(double funds) 
         {
-            double balance = -funds;
+            double balance = 0;
             string s;
             using (StreamReader sr = new StreamReader(Path.Combine(_docPath, $"{_id}.txt")))
             {
@@ -65,11 +65,11 @@ namespace Boolean.CSharp.Main.Model
                 while ((line = sr.ReadLine()) != null)
                 {
                     string[] fields = line.Split("|".ToCharArray());
-                    balance += Convert.ToDouble(fields[3]);
+                    balance = Convert.ToDouble(fields[3]);
                 }
                 sr.Close();
             }
-            s = $"{DateTime.Now}|{funds}|    |{balance}";
+            s = $"{DateTime.Now}|{funds}|    |{balance-funds}";
 
             using (StreamWriter outputFile = new StreamWriter(Path.Combine(_docPath, $"{_id}.txt"), true))
             {
@@ -82,34 +82,34 @@ namespace Boolean.CSharp.Main.Model
         {
             List<string> statment = new List<string>();
             statment.Add($"{_name}  Id: {_id}");
-            statment.Add("date       || credit  || debit  || balance");
+            statment.Add($"=================================================");
+            statment.Add("    Date-Time       || Credit || Debit || Balance");
             using (StreamReader sr = new StreamReader(Path.Combine(_docPath, $"{_id}.txt")))
             {
                 string line;
                 while ((line = sr.ReadLine()) != null)
                 {
                     string[] fields = line.Split("|".ToCharArray());
-                    statment.Add($"{fields[0]} || {fields[1]}  || {fields[2]} || {fields[3]}");
+                    statment.Add($"{fields[0]} ||  {fields[1]}  ||  {fields[2]}  || {fields[3]}");
                 }
                 sr.Close();
             }
             return statment;
         }
 
-        internal string GetBalance()
+        public string GetBalance()
         {
-            string line = "";
-            using (StreamReader sr = new StreamReader(Path.Combine(_docPath, $"{_id}.txt")))
+            using StreamReader sr = new StreamReader(Path.Combine(_docPath, $"{_id}.txt"));
+            string line1 = "XX";
+            string line;
+            while ((line = sr.ReadLine()) != null)
             {
-                while ((line = sr.ReadLine()) != null)
-                {   
-                    string[] fields = line.Split("|".ToCharArray());
-                    line = fields[3];
-                }
-                sr.Close();
+                string[] fields = line.Split("|".ToCharArray());
+                line1 = fields[3];
+                
             }
-            return line!;
-
+            sr.Close(); 
+            return line1;
         }
 
         public string GetAccountName()

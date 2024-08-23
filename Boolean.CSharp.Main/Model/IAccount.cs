@@ -10,5 +10,7 @@
         void DepositFunds(double funds);
 
         void WithdrawFunds(double funds);
+
+        string GetBalance();
     }
 }
