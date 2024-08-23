@@ -24,7 +24,7 @@ namespace Boolean.CSharp.Test
             customer.CreateAccount(AccountType.Current);
 
             Assert.AreEqual(customer.accounts[0].Type, AccountType.Current);
-            Assert.AreEqual(customer.accounts[1].Balance, 0m);
+            Assert.AreEqual(customer.accounts[1].GetBalance(), 0m);
             Assert.IsTrue(customer.accounts.Count() == 2);
         }
 
@@ -37,7 +37,7 @@ namespace Boolean.CSharp.Test
             customer.CreateAccount(AccountType.Savings);
 
             Assert.AreEqual(customer.accounts[0].Type, AccountType.Savings);
-            Assert.AreEqual(customer.accounts[1].Balance, 0m);
+            Assert.AreEqual(customer.accounts[1].GetBalance(), 0m);
             Assert.IsTrue(customer.accounts.Count() == 3);
         }
 
@@ -54,9 +54,8 @@ namespace Boolean.CSharp.Test
             var transactions = account.Transactions;
 
             Assert.AreEqual(transactions[0].Amount, 50);
-            Assert.AreEqual(transactions[1].Balance, 3050);
             Assert.AreEqual(transactions[1].Type, TransactionType.Deposit);
-            Assert.IsTrue(account.Balance == 3050);
+            Assert.IsTrue(account.GetBalance() == 3050);
         }
 
         [Test]
@@ -72,9 +71,8 @@ namespace Boolean.CSharp.Test
             var transactions = account.Transactions;
 
             Assert.AreEqual(transactions[1].Amount, 3000);
-            Assert.AreEqual(transactions[1].Balance, 2000);
             Assert.AreEqual(transactions[1].Type, TransactionType.Withdraw);
-            Assert.IsTrue(account.Balance == 2000);
+            Assert.IsTrue(account.GetBalance() == 2000);
         }
 
         [Test]

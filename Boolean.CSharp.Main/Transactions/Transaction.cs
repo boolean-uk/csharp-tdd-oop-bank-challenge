@@ -11,15 +11,16 @@ namespace Boolean.CSharp.Main
         private DateTime _Date {  get; } = DateTime.Now;
         public string FormattedDate => _Date.ToString("dd/MM/yyy");
         public decimal Amount { get; }
-        public decimal Balance { get; }
+
+        public decimal RemainingBalance { get; }
 
         public TransactionType Type { get; }
 
-        public Transaction(decimal amount, decimal balance, TransactionType type)
+        public Transaction(decimal amount, TransactionType type, decimal remainingBalance)
         {
             Amount = amount;
-            Balance = balance;
             Type = type;
+            RemainingBalance = remainingBalance;
         }
     }
 }

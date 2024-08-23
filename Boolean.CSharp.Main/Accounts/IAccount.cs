@@ -10,12 +10,13 @@ namespace Boolean.CSharp.Main
     public interface IAccount
     {
         public AccountType Type { get; }
-        public decimal Balance { get; set; }
         public List<Transaction> Transactions { get; set; }
         public bool Deposit(decimal amount);
 
         public bool Withdraw(decimal amount);
 
         public void GenerateStatement();
+
+        public decimal GetBalance();
     }
 }

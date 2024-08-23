@@ -11,7 +11,6 @@ namespace Boolean.CSharp.Main
     public class CurrentAccount : IAccount
     {
         public AccountType Type { get; } = AccountType.Current;
-        public decimal Balance { get; set; } = 0m;
         public List<Transaction> Transactions { get; set; } = new List<Transaction>();
   
         public bool Deposit(decimal amount)
@@ -19,8 +18,7 @@ namespace Boolean.CSharp.Main
             if (amount < 0) 
                 return false; 
 
-            Balance += amount;
-            Transaction transaction = new Transaction(amount, Balance, TransactionType.Deposit);
+            Transaction transaction = new Transaction(amount, TransactionType.Deposit, GetBalance() + amount);
             Transactions.Add(transaction);
 
             return true;
@@ -28,11 +26,11 @@ namespace Boolean.CSharp.Main
 
         public bool Withdraw(decimal amount)
         {
-            if ((Balance - amount) < 0) //Not enough money in account
+           if ((GetBalance() - amount) < 0) //Not enough money in account
                 return false;
+           
 
-            Balance -= amount;
-            Transaction transaction = new Transaction(amount, Balance, TransactionType.Withdraw);
+            Transaction transaction = new Transaction(amount, TransactionType.Withdraw, GetBalance() - amount);
             Transactions.Add(transaction);
 
             return true;
@@ -66,9 +64,20 @@ namespace Boolean.CSharp.Main
                     transaction.FormattedDate,
                     $"{credit}",
                     $"{debit}",
-                    Math.Round(transaction.Balance,2)
+                    Math.Round(transaction.RemainingBalance,2)
                 );
             }
+        }
+
+        public decimal GetBalance()
+        {
+       
+            decimal deposit = Transactions.Where(x => x.Type == TransactionType.Deposit).Sum(x => x.Amount);
+            decimal withdraw = Transactions.Where(x => x.Type == TransactionType.Withdraw).Sum(x => x.Amount);
+
+            decimal balance = deposit - withdraw;
+
+            return balance;
         }
     }
 }

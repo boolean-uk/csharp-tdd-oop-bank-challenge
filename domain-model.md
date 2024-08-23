@@ -21,7 +21,7 @@ I want to deposit and withdraw funds.
 | Customer                  | List\<IAccount> accounts {get; set;}        | Store a customers accounts                     | List\<IAccount> accounts        |
 |                           | CreateAccount(AccountType type)            | Customer can open an account of their choice   | bool                           |
 | enum AccountType          |                                            | store types of accounts as values              | Current, Savings               |
-| IAccount                  | decimal Balance {get; set;}                | Store account balances                         | decimal balance                |
+| IAccount                  | decimal GetBalance()                | Calculate bal based on transactions                         | decimal balance                |
 |                           | AccountType Type {get;}                    | Store account type                             | AccountType type               |
 |                           | List\<Transaction> Transactions {get; set;} | store all account transactions                 | List\<Transaction> transactions |
 |                           | Deposit(decimal amount)                    | Deposit money into an account                  | bool                           |
@@ -34,4 +34,4 @@ I want to deposit and withdraw funds.
 |                           | TransactionType Type {get; }               | store transaction type                         | TransactionType type           |
 |                           | string FormattedDate                       | store date as string                           | string date                    |
 |                           | decimal Amount {get; }                     | store transaction amount                       | decimal amount                 |
-|                           | decimal Balance {get; }                    | store updated balance at time of transaction   | decimal balance                |
+|                           | decimal RemainingBalance { get; }          | store remaining balance | decimal remainingBalance                |
