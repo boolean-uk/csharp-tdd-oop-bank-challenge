@@ -10,11 +10,19 @@ namespace Boolean.CSharp.Main.Accounts
     public class CurrentAccount : Account
     {
 
-        public CurrentAccount(int id, string type, string owner)
+        public CurrentAccount(int id, BankTypes type, string owner)
         {
-            this.ID = ID;
+            this.ID = id;
             this.Type = type;
             this.Owner = owner;
+        }
+
+        public CurrentAccount(int id, BankTypes type, string owner, Branches branch)
+        {
+            this.ID = id;
+            this.Type = type;
+            this.Owner = owner;
+            this.Branch = branch;
         }
     }
 }

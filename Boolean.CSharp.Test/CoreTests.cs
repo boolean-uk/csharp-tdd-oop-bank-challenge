@@ -8,9 +8,9 @@ namespace Boolean.CSharp.Test
     public class CoreTests
     {
 
-        [TestCase("Ola", "current")]
-        [TestCase("Lise", "savings")]
-        public void CreateCurrentAccount(string name, string bankType)
+        [TestCase("Ola", BankTypes.Current)]
+        [TestCase("Lise", BankTypes.Saving)]
+        public void CreateCurrentAccount(string name, BankTypes bankType)
         {
             Bank bank = new Bank();
 
@@ -19,26 +19,13 @@ namespace Boolean.CSharp.Test
             Assert.That(result, Is.EqualTo(0));
         }
 
-        [TestCase("Ola", "urrent")]
-        [TestCase("Lise", "xx")]
-
-        public void CreateAccountWithWrongTypes(string name, string bankType)
-        {
-            Bank bank = new Bank();
-
-            int result = bank.AddAccount(name, bankType);
-
-            Assert.That(result, Is.EqualTo(-1));
-
-        }
-
         [Test]
 
         public void DepositFromAccount()
         {
             Bank bank = new Bank();
             string name = "test";
-            string bankType = "current";
+            BankTypes bankType = BankTypes.Current;
             double amount = 1000.00;
 
             int BankID = bank.AddAccount(name, bankType);
@@ -52,7 +39,7 @@ namespace Boolean.CSharp.Test
         {
             Bank bank = new Bank();
             string name = "test";
-            string bankType = "current";
+            BankTypes bankType = BankTypes.Current;
             double amountDeposit = 1000;
             double amountWithdraw = 800;
             double expectedResult = 200;
@@ -69,7 +56,7 @@ namespace Boolean.CSharp.Test
         {
             Bank bank = new Bank();
             string user = "Bob";
-            string bankType = "current";
+            BankTypes bankType = BankTypes.Current;
             double amountDeposit = 1000;
             double amountWithdraw = 800;
             int bankID = bank.AddAccount(user, bankType);

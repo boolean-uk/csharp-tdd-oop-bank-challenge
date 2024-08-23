@@ -16,23 +16,31 @@ namespace Boolean.CSharp.Main
 
         private List<string> _users { get { return _accounts.Select(account => account.Owner).Distinct().ToList(); } }
 
-        public int AddAccount(string user, string bankType)
+        public int AddAccount(string user, BankTypes bankType)
         {
 
-            if (bankType == "current")
+            if (bankType == BankTypes.Current)
             {
                 Account account = new CurrentAccount(_accounts.Count(), bankType, user);
                 _accounts.Add(account);
 
                 return account.ID;
             }
-            if (bankType == "savings")
+            if (bankType == BankTypes.Saving)
             {
                 Account account = new SavingsAccount(_accounts.Count(), bankType, user);
                 _accounts.Add(account);
                 return account.ID;
             }
             
+            return -1;
+        }
+
+        //Added a secound one for extentions
+        public int AddAccount(string user, BankTypes bankType, Branches branch)
+        {
+
+
             return -1;
         }
 
@@ -48,7 +56,7 @@ namespace Boolean.CSharp.Main
             AcctoBeDeposited.TransactionHistory.Add(transaction);
 
             AcctoBeDeposited.AddBalance(amount);
-            return AcctoBeDeposited.Balance;
+            return AcctoBeDeposited.CalculateBalance();
         }
 
         public double Withdraw(int ID, double amount)
@@ -63,7 +71,7 @@ namespace Boolean.CSharp.Main
             AccToBeWithdrawn.TransactionHistory.Add(transaction);
 
             AccToBeWithdrawn.RemoveBalance(amount);
-            return AccToBeWithdrawn.Balance;
+            return AccToBeWithdrawn.CalculateBalance();
         }
 
         public string PrintBankStateMent(string user)

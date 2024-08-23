@@ -10,10 +10,11 @@ namespace Boolean.CSharp.Main.Interfaces
     public abstract class Account
     {
         public int ID { get; set; }
-        public string Type { get; set; }
+        public BankTypes Type { get; set; }
         public string Owner { get; set; }
 
         //string Branch { get; set; }
+        public Branches Branch { get; set; }
 
         public List<Transaction> TransactionHistory { get; set; } = new List<Transaction>();
 

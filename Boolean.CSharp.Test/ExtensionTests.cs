@@ -17,7 +17,7 @@ namespace Boolean.CSharp.Test
         {
             Bank bank = new Bank();
             string user = "Bob";
-            string bankType = "current";
+            BankTypes bankType = BankTypes.Current;
             double amountDeposit = 1000;
             double amountWithdraw = 700;
             double expectedResult = 300;

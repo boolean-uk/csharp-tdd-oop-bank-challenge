@@ -5,7 +5,7 @@ Console.WriteLine("Hello, World!");
 
 Bank bank = new Bank();
 
-int id = bank.AddAccount("Anders", "current");
+int id = bank.AddAccount("Anders", BankTypes.Current);
 
 bank.Deposit(id, 3000.00);
 bank.Withdraw(id, 2000.00);
