@@ -38,5 +38,10 @@ namespace Boolean.CSharp.Main.Accounts
             string b = s.Substring(lastIndex + 3);
             return Convert.ToDouble(b);
         }
+
+        public void Withdraw(double funds)
+        {
+            
+        }
     }
 }

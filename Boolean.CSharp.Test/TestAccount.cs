@@ -12,20 +12,24 @@ namespace Boolean.CSharp.Test
 {
     public class TestAccount
     {
-        [TestCase(5)]
-        [TestCase(500)]
-        [TestCase(5000)]
-        [TestCase(250)]
-        [TestCase(35)]
-        [TestCase(52)]
-        public void TestBalance(double funds)
+        [TestCase(5, 2)]
+        [TestCase(500, 0)]
+        [TestCase(5000, 723)]
+        [TestCase(250, 69)]
+        [TestCase(35, 2)]
+        [TestCase(52, 42)]
+        public void TestBalance(double funds, double withdraw)
         {
             AmericanExpress branch = new AmericanExpress();
             Savings account = new Savings(1, 1, branch);
 
             account.Deposit(funds);
 
-            Assert.That(account.Balance() == funds);
+            account.Withdraw(withdraw);
+
+            Assert.That(account.Balance() == funds - withdraw);
         }
+
+
     }
 }
