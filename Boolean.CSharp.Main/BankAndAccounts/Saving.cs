@@ -30,7 +30,7 @@ namespace Boolean.CSharp.Main.BankAndAccounts
         {
             //Get the old balance and check if we can withdraw that amount
             decimal oldBalance = Balance();
-            if (oldBalance >= amount)
+            if (oldBalance >= amount && amount <= 500) //Maximum allowed withdraw is 500 on a savings account | CANNOT OVERDRAFT
             {
                 string depositMessage = "\n";
                 //Date of transaction

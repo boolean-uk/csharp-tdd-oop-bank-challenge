@@ -30,7 +30,7 @@ namespace Boolean.CSharp.Main.BankAndAccounts
         {
             //Get the old balance and check if we can withdraw that amount
             decimal oldBalance = Balance();
-            if(oldBalance >= amount)
+            if(oldBalance + branch.GetAllowedOverdraft() >= amount) //No limit to withdraw amount and can overdraft
             {
                 string depositMessage = "\n";
                 //Date of transaction

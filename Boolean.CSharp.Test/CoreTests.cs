@@ -131,5 +131,34 @@ namespace Boolean.CSharp.Test
             Assert.That(balance, Is.EqualTo(2500));
         }
 
+        [Test]
+
+        public void OverdraftTest()
+        {
+            //Arrange
+            Bank bank = new Bank();
+            Joaquin joaquin = new Joaquin();
+            Carl carl = new Carl();
+            Henrik henrik = new Henrik();
+            MasterCard mastercard = new MasterCard();
+            Visa visa = new Visa();
+            Benevolent benevolent = new Benevolent();
+
+            bank.CreateCurrent(joaquin, mastercard);
+            bank.CreateCurrent(carl, benevolent);
+            bank.CreateCurrent(henrik, visa);
+
+            //Act
+            bool resultMastercard = bank.HandleOverdraft(joaquin, 200);
+            bool resultVisa = bank.HandleOverdraft(henrik, 200);
+            bool resultBenevolent = bank.HandleOverdraft(carl, 1000);
+            decimal carlBalance = bank.GetBalance(carl, true);
+
+            //Assert
+            Assert.That(resultMastercard, Is.True);
+            Assert.That(resultVisa, Is.False);
+            Assert.That(resultBenevolent, Is.True);
+            Assert.That(carlBalance, Is.EqualTo(-1000));
+        }
     }
 }

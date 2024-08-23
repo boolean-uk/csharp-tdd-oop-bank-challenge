@@ -8,5 +8,9 @@ namespace Boolean.CSharp.Main.Interfaces
 {
     public interface IBranch
     {
+        public string name { get; set; }
+        public decimal allowedOverdraft {  get; set; }
+
+        public decimal GetAllowedOverdraft();
     }
 }
