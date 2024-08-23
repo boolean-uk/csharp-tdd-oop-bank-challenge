@@ -3,7 +3,7 @@
 | Class/Interface   | Members                      | Method/Property             | Scenario                     | Output     |
 |-------------------|------------------------------|-----------------------------|------------------------------|------------|
 | BankAccount       | `decimal balance`            | Deposit(decimal amount)     | deposit amount to account    | bool       |
-|                   | `List<BankStatement>`        | Withdraw(decimal amount)    | withdraw amount to account   | bool       |
+|                   | `List<BankStatement>`        | Withdraw(decimal amount)    | withdraw amount from account | bool       |
 |                   | `BankBranch bankBranch`      | Balance {get;}              | get the balance of account   | decimal    |
 |                   |                              | BankStatements {get;}       | get the bank statements      | List<BankStatement>|
 |                   |                              | BankBranch {get;}           | get the branch of the account| BankBranch |

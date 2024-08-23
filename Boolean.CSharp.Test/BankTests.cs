@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace Boolean.CSharp.Test
 {
     [TestFixture]
-    public class BankAccountTests
+    public class BankTests
     {
 
         [Test]
@@ -43,5 +43,8 @@ namespace Boolean.CSharp.Test
             savingsAccount.Withdraw(500);
             Assert.That(savingsAccount.Balance == 500);
         }
+
+        [Test]
+        public void 
     }
 }
