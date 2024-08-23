@@ -11,7 +11,14 @@ namespace Boolean.CSharp.Main
     public class CurrentAccount : IAccount
     {
         public AccountType Type { get; } = AccountType.Current;
+
+        public Branch Branch { get; set; }
         public List<Transaction> Transactions { get; set; } = new List<Transaction>();
+
+        public CurrentAccount(Branch branch)
+        {
+            Branch = branch;
+        }
   
         public bool Deposit(decimal amount)
         {

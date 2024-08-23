@@ -10,7 +10,13 @@ namespace Boolean.CSharp.Main
     public class SavingsAccount : IAccount
     {
         public AccountType Type { get; } = AccountType.Savings;
+        public Branch Branch { get; set; }
         public List<Transaction> Transactions { get; set; } = new List<Transaction>();
+
+        public SavingsAccount(Branch branch)
+        {
+            Branch = branch;
+        }
 
         public bool Deposit(decimal amount)
         {

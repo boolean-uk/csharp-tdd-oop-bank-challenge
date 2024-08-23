@@ -10,18 +10,18 @@ namespace Boolean.CSharp.Main
     {
         public List<IAccount> accounts {  get; set; }  = new List<IAccount>();
 
-        public bool CreateAccount(AccountType type)
+        public bool CreateAccount(AccountType type, Branch branch)
         {
             IAccount? account = null; 
 
             switch (type)
             {
                 case AccountType.Current:
-                    account = new CurrentAccount();
+                    account = new CurrentAccount(branch);
                     break;
 
                 case AccountType.Savings:
-                    account = new SavingsAccount();
+                    account = new SavingsAccount(branch);
                     break;
             }
 

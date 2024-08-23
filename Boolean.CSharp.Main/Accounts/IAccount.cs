@@ -10,6 +10,8 @@ namespace Boolean.CSharp.Main
     public interface IAccount
     {
         public AccountType Type { get; }
+
+        public Branch Branch { get; }
         public List<Transaction> Transactions { get; set; }
         public bool Deposit(decimal amount);
 
