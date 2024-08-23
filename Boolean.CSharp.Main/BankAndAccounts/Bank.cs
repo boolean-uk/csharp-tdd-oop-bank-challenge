@@ -22,7 +22,7 @@ namespace Boolean.CSharp.Main.BankAndAccounts
             //Check if this customer already has a current account
             foreach (var account in this._accounts)
             {
-                if(account.owner.GetName() == customer.GetName() && account.current)
+                if(account.owner.GetName() == customer.GetName() && account.type)
                 {
                     return false; //Customer already has a current account.
                 }
@@ -38,7 +38,7 @@ namespace Boolean.CSharp.Main.BankAndAccounts
             //Check if this customer already has a savings account
             foreach(var account in this._accounts)
             {
-                if(account.owner.GetName() == customer.GetName() && !account.current)
+                if(account.owner.GetName() == customer.GetName() && !account.type)
                 {
                     return false; //Customer already has a savings account
                 }
@@ -49,9 +49,16 @@ namespace Boolean.CSharp.Main.BankAndAccounts
             return true;
         }
 
-        public string GetTransactionHistory(Joaquin joaquin, bool v)
+        public string GetTransactionHistory(ICustomer joaquin, bool type)
         {
-            throw new NotImplementedException();
+            foreach (Account account in this._accounts)
+            {
+                if (account.owner.GetName() == joaquin.GetName() && account.type == type)
+                {
+                    return account.Transactions();
+                }
+            }
+            return string.Empty;
         }
     }
 }

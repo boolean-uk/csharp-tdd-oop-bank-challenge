@@ -1,6 +1,6 @@
 | Classes     | Methods                                                            | Scenario                                                                           | Outputs |
 |-------------|--------------------------------------------------------------------|------------------------------------------------------------------------------------|---------|
-| `Account`   | `Account(ICustomer owner, IBranch branch, bool current)`           | Create an account linked to the given customer, branch, and if current or savings  | ----    |
+| `Account`   | `Account(ICustomer owner, IBranch branch, bool type)`              | Create an account linked to the given customer, branch, and type                   | ----    |
 |             | `Deposit(decimal amount)`                                          | Deposit money to account                                                           | void    |
 |             | `Withdraw(decimal amount)`                                         | Withdraw money from account                                                        | true    |
 |             |                                                                    | Cannot withdraw the given amount                                                   | false   |
@@ -22,11 +22,11 @@
 |             |                                                                    | This customer already has a current account                                        | false   |
 |             | `HandleOverdraft(ICustomer customer, decimal amount)`              | Handle the overdraft requested from the customer. Only works on current accounts   | true    |
 |             |                                                                    | Overdraft was denied                                                               | false   |
-|             | `HandleDeposit(ICustomer customer, decimal amount, bool current)`  | Deposit the specified amount to account (true = current | false = saving)          | void    |
-|             | `HandleWithdraw(ICustomer customer, decimal amount, bool current)` | Withdraw the specified amount from account (true = curren | false = saving)        | true    |
+|             | `HandleDeposit(ICustomer customer, decimal amount, bool type)`     | Deposit the specified amount to account (true = current | false = saving)          | void    |
+|             | `HandleWithdraw(ICustomer customer, decimal amount, bool type)`    | Withdraw the specified amount from account (true = current | false = saving)       | true    |
 |             |                                                                    | Cannot withdraw more money than the existing amount                                | false   |
-|             | `GetTransactionHistory(ICustomer customer, bool current)`          | Get the transaction history of the selected account                                | string  |
-|             | `GetBalance(ICustomer customer, bool current)`                     | Get the balance of the selected account                                            | decimal |
+|             | `GetTransactionHistory(ICustomer customer, bool type)`             | Get the transaction history of the selected account                                | string  |
+|             | `GetBalance(ICustomer customer, bool type)`                        | Get the balance of the selected account                                            | decimal |
 |-------------|--------------------------------------------------------------------|------------------------------------------------------------------------------------|---------|
 | `ICustomer` | `GetName()`                                                        | Return the name of the customer                                                    | string  |
 |-------------|--------------------------------------------------------------------|------------------------------------------------------------------------------------|---------|
