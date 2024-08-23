@@ -10,12 +10,12 @@ namespace Boolean.CSharp.Main.Model
     {
         private float _balance { get; set; }
 
-        public TransactionsAccount() { 
+        internal TransactionsAccount() { 
         this._balance = 0f;
         }
-        //public float getBalance() { return this._balance; }
+        //internal float getBalance() { return this._balance; }
 
-        public void deposit(float amount, BankAccount bankAccount) { _balance += amount; bankAccount.logTransaction(amount, true, false); }
-        public float withdraw(float amount, BankAccount bankAccount) { _balance -= amount; bankAccount.logTransaction(amount, true, true);  return amount; }
+        internal void deposit(float amount, BankAccount bankAccount) { _balance += amount; bankAccount.logTransaction(amount, true, false); }
+        internal float withdraw(float amount, BankAccount bankAccount) { _balance -= amount; bankAccount.logTransaction(amount, true, true);  return amount; }
     }
 }

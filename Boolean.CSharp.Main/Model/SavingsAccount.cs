@@ -16,11 +16,11 @@ namespace Boolean.CSharp.Main.Model
             this._balance = 0f;
             this._interestRate = 0;
         }
-        //public float getBalance() { return this._balance; }
+        //internal float getBalance() { return this._balance; }
 
 
 
-        public void deposit(float amount, BankAccount bankAccount) { _balance += amount; bankAccount.logTransaction(amount, false, false); }
-        public float withdraw(float amount, BankAccount bankAccount) { _balance -= amount; bankAccount.logTransaction(amount    , false, true);  return amount;  }
+        internal void deposit(float amount, BankAccount bankAccount) { _balance += amount; bankAccount.logTransaction(amount, false, false); }
+        internal float withdraw(float amount, BankAccount bankAccount) { _balance -= amount; bankAccount.logTransaction(amount    , false, true);  return amount;  }
     }
 }

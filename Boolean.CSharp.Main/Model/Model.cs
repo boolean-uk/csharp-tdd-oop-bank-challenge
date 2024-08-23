@@ -11,7 +11,7 @@ namespace Boolean.CSharp.Main.Model
         private Bank _bank;
 
 
-        public Model()
+        internal Model()
         {
             this._bank = new Bank();
         }
@@ -26,7 +26,7 @@ namespace Boolean.CSharp.Main.Model
             return false;
         }
 
-        public bool createBankAccount(Customer person, Enum branch)
+        internal bool createBankAccount(Customer person, Enum branch)
         {
             if (person != null && person is Customer && person.ID == -1) //id == null if person does not have bank account, id is given by bank
             {

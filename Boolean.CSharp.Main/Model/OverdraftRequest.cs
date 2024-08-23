@@ -12,7 +12,7 @@ namespace Boolean.CSharp.Main.Model
         private float _amount;
         private string _reason;
         private bool _isApproved;
-        public OverdraftRequest(int customerID, float _amount, string _reason)
+        internal OverdraftRequest(int customerID, float _amount, string _reason)
         {
             this._customerID = customerID;
             this._amount = _amount;

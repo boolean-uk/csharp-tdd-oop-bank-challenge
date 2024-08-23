@@ -16,7 +16,7 @@ namespace Boolean.CSharp.Main.Model
         private bool _withdraw;
         private Enum _branch;
 
-        public BankStatement(DateTime date, float transactionValue, float balanceAtTime, int customerID, bool transactionalAccount, bool withdraw, Enum branch)
+        internal BankStatement(DateTime date, float transactionValue, float balanceAtTime, int customerID, bool transactionalAccount, bool withdraw, Enum branch)
         {
             _date = date;
             _transactionValue = transactionValue;
@@ -27,12 +27,12 @@ namespace Boolean.CSharp.Main.Model
             _branch = branch;
         }
 
-        public DateTime date() { return _date; }
-        public float transactionValue() { return _transactionValue; }
-        public int customerID() { return _customerID; }
-        public float balanceAtTime() { return _balanceAtTime; }
-        public bool transactionalAccount() { return _transactionalAccount; }
-        public bool withdraw() { return _withdraw; }
-        public Enum branch() { return _branch; }
+        internal DateTime date() { return _date; }
+        internal float transactionValue() { return _transactionValue; }
+        internal int customerID() { return _customerID; }
+        internal float balanceAtTime() { return _balanceAtTime; }
+        internal bool transactionalAccount() { return _transactionalAccount; }
+        internal bool withdraw() { return _withdraw; }
+        internal Enum branch() { return _branch; }
     }
 }

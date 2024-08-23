@@ -8,7 +8,6 @@ namespace Boolean.CSharp.Main.Model
 {
     internal class Bank
     {
-        private List<Engineer> _engineerList;
         private List<Customer> _customerList;
         private List<BankAccount> _bankAccountList;
         private List<OverdraftRequest> _overdraftRequestList;
@@ -23,9 +22,8 @@ namespace Boolean.CSharp.Main.Model
             Other
         }
 
-        public Bank()
+        internal Bank()
         {
-            this._engineerList = new List<Engineer>();
             this._bankAccountList = new List<BankAccount>();
             this._customerList = new List<Customer>();
             this._overdraftRequestList = new List<OverdraftRequest>();

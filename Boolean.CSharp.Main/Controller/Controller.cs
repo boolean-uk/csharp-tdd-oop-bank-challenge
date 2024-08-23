@@ -14,28 +14,28 @@ namespace Boolean.CSharp.Main.Controller
     {
         private Model.Model model;
         private View.View view;
-        public Controller(Model.Model model, View.View view)
+        internal Controller(Model.Model model, View.View view)
         {
             this.model = model;
             this.view = view;
         }
 
-        public bool createPerson(bool isCustomer)
+        internal bool createPerson(bool isCustomer)
         {
             // all view stuff is just for looks and prints since we do not actually run a interactable view
             model.createPerson(isCustomer, view.createPerson(isCustomer));
             return true;
         }
 
-        public List<Customer> GetCustomers() { return model.getCustomers(); }
+        internal List<Customer> GetCustomers() { return model.getCustomers(); }
 
-        public bool createBankAccount(Customer customer, Enum branch)
+        internal bool createBankAccount(Customer customer, Enum branch)
         {
             view.createBankAccount(customer);
             return model.createBankAccount(customer, branch);
         }
 
-        public BankAccount getBankAccount(int customerID)
+        internal BankAccount getBankAccount(int customerID)
         {
             BankAccount bankAccount = model.getBankAccount(customerID);
 
@@ -46,47 +46,47 @@ namespace Boolean.CSharp.Main.Controller
             return bankAccount;
         }
 
-        public bool depositMoneyIntoTransactionalAccount(float amount, int customerID)
+        internal bool depositMoneyIntoTransactionalAccount(float amount, int customerID)
         {
             view.depositingMoneyToAccount(amount);
             return model.depositMoneyIntoTransactionalAccount(amount, customerID);
         }
 
-        public bool depositMoneyIntoSavingsAccount(float amount, int customerID)
+        internal bool depositMoneyIntoSavingsAccount(float amount, int customerID)
         {
             view.depositingMoneyToAccount(amount);
             return model.depositMoneyIntoSavingsAccount(amount, customerID);
         }
 
-        public bool withdrawMoneyFromTransactionalAccount(float amount, int customerID)
+        internal bool withdrawMoneyFromTransactionalAccount(float amount, int customerID)
         {
             view.withdrawingMoneyFromAccount(amount);
             return model.withdrawMoneyFromTransactionalAccount(amount, customerID);
         }
-        public bool withdrawMoneyFromSavingsAccount(float amount, int customerID)
+        internal bool withdrawMoneyFromSavingsAccount(float amount, int customerID)
         {
             view.withdrawingMoneyFromAccount(amount);
             return model.withdrawMoneyFromSavingsAccount(amount,customerID);
         }
 
-        public void printBankStatements(int customerID)
+        internal void printBankStatements(int customerID)
         {
             view.printBankStatements(model.getBankAccount(customerID).getBankStatemets());
         }
 
-        public bool requestOverdraft(int customerID, float amount, string reason) 
+        internal bool requestOverdraft(int customerID, float amount, string reason) 
         { 
             view.requestOverdraft(amount);
             return model.requestOverdraft(customerID, amount, reason);
         }
 
-        public List<OverdraftRequest> getOverdraftRequests()
+        internal List<OverdraftRequest> getOverdraftRequests()
         {
             view.printOverdraftRequests(model.getOverdraftRequests());
             return model.getOverdraftRequests();
         }
 
-        public void approveOverdraftRequest(OverdraftRequest overdraftRequest)
+        internal void approveOverdraftRequest(OverdraftRequest overdraftRequest)
         {
             model.approveOverdraftRequest(overdraftRequest);
         }

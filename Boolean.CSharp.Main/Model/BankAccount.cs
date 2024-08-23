@@ -32,9 +32,9 @@ namespace Boolean.CSharp.Main.Model
             this._bankStatements = new List<BankStatement>();
         }
 
-        public int getBankId() { return _bankId; }
+        internal int getBankId() { return _bankId; }
 
-        public float getTransactionsAccountBalance()
+        internal float getTransactionsAccountBalance()
         {
             float balance = 0.0f;
             _bankStatements.ForEach(statement =>
@@ -51,7 +51,7 @@ namespace Boolean.CSharp.Main.Model
             return balance;
         }
 
-        public float getSavingsAccountBalance()
+        internal float getSavingsAccountBalance()
         {
             float balance = 0.0f;
             _bankStatements.ForEach(statement =>
@@ -67,17 +67,17 @@ namespace Boolean.CSharp.Main.Model
             });
             return balance;
         }
-        public TransactionsAccount getTransactionsAccount() { return _transactionsAccount; }
-        public SavingsAccount getSavingsAccount() { return _savingsAccount; }
+        internal TransactionsAccount getTransactionsAccount() { return _transactionsAccount; }
+        internal SavingsAccount getSavingsAccount() { return _savingsAccount; }
 
-        public void depositMoneyToTransactionalAccount(float amount) { this._transactionsAccount.deposit(amount, this); }
+        internal void depositMoneyToTransactionalAccount(float amount) { this._transactionsAccount.deposit(amount, this); }
 
-        public void depositMoneyToSavingsAccount(float amount) { this._savingsAccount.deposit(amount, this); }
+        internal void depositMoneyToSavingsAccount(float amount) { this._savingsAccount.deposit(amount, this); }
 
-        public void withdrawMoneyFromTransactionalAccount(float amount) { this._transactionsAccount.withdraw(amount, this); }
-        public void withdrawMoneyFromSavingsAccount(float amount) { this._savingsAccount.withdraw(amount, this); }
+        internal void withdrawMoneyFromTransactionalAccount(float amount) { this._transactionsAccount.withdraw(amount, this); }
+        internal void withdrawMoneyFromSavingsAccount(float amount) { this._savingsAccount.withdraw(amount, this); }
 
-        public List<BankStatement> getBankStatemets() { return _bankStatements; }
+        internal List<BankStatement> getBankStatemets() { return _bankStatements; }
 
         internal void logTransaction(float transactionalValue, bool transactionalAccount, bool withdraw)
         {
