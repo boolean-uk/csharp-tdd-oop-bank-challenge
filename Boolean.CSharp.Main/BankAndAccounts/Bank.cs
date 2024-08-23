@@ -35,7 +35,18 @@ namespace Boolean.CSharp.Main.BankAndAccounts
 
         public bool CreateSaving(ICustomer customer, IBranch branch)
         {
-            throw new NotImplementedException();
+            //Check if this customer already has a savings account
+            foreach(var account in this._accounts)
+            {
+                if(account.owner.GetName() == customer.GetName() && !account.current)
+                {
+                    return false; //Customer already has a savings account
+                }
+            }
+
+            //Create a savings account
+            this._accounts.Add(new Saving(customer, branch));
+            return true;
         }
     }
 }
