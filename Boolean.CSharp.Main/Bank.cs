@@ -127,15 +127,21 @@ namespace Boolean.CSharp.Main
             return account.AddOverDraftRequest(requestAmount);
         }
 
-        public bool ApproveOverdraftRequest(int accountID, int requestID, Roles role, RequestStatus status)
+        public double ApproveOverdraftRequest(int accountID, int requestID, Roles role, RequestStatus status)
         {
-            if (role!= Roles.Admin) {  return false; }
+            if (role!= Roles.Admin) {  return -1; }
                
             Account account = GetAccount(accountID);
             OverDraftRequest ODRequest = account.GetOverDraftRequest(requestID);
 
             ODRequest.Status = status;
-            return true;
+
+            if (status == RequestStatus.Accepted)
+            {
+                account.Overdraft += ODRequest.Amount;
+            }
+
+            return account.Overdraft;
         }
     }
 }

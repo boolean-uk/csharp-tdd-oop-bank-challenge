@@ -73,8 +73,8 @@ namespace Boolean.CSharp.Test
             int ID = bank.AddAccount(user, bankType, branch);
             int requestID = bank.RequestOverdraft(ID, requestAmount);
 
-            bool result = bank.ApproveOverdraftRequest(ID, requestID, IsAdmin, toBeStatus);
-            Assert.That(result, Is.True);
+            double result = bank.ApproveOverdraftRequest(ID, requestID, IsAdmin, toBeStatus);
+            Assert.That(result, Is.EqualTo(requestAmount));
         }
 
         [Test]
@@ -91,8 +91,8 @@ namespace Boolean.CSharp.Test
             int ID = bank.AddAccount(user, bankType, branch);
             int requestID = bank.RequestOverdraft(ID, requestAmount);
 
-            bool result = bank.ApproveOverdraftRequest(ID, requestID, IsAdmin, toBeStatus);
-            Assert.That(result, Is.False);
+            double result = bank.ApproveOverdraftRequest(ID, requestID, IsAdmin, toBeStatus);
+            Assert.That(result, Is.EqualTo(-1));
         }
     }
 }

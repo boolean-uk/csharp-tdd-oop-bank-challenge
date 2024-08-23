@@ -20,8 +20,8 @@ namespace Boolean.CSharp.Main.Interfaces
 
         private double _balance { get; set; } = 0;
 
-        public double Balance { get { return _balance; } }
-
+        public double Balance { get { return CalculateBalance(); } }
+        
         public double Overdraft = 0;
 
         private List<OverDraftRequest> OverDraftRequests { get; set; } = new List<OverDraftRequest>();
