@@ -25,7 +25,7 @@ namespace Boolean.CSharp.Test
             Assert.IsTrue(result1);
             Assert.IsTrue(result2);
 
-
+            Assert.That(currentAccount.Balance == 500);
         }
 
     }

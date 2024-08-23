@@ -9,5 +9,6 @@ namespace Boolean.CSharp.Main
 {
     public class CurrentAccount : BankAccount
     {
+        public int Balance { get; set; }
     }
 }
