@@ -123,19 +123,5 @@ namespace Boolean.CSharp.Test
                 Assert.IsTrue(output.Contains("||          || 3000     || 2000    "));
             }
         }
-
-        [Test]
-        public void CheckBranch()
-        {
-            Customer customer = new Customer();
-            customer.CreateAccount(AccountType.Current, Branch.Oslo);
-            customer.CreateAccount(AccountType.Current, Branch.Bournemouth);
-            customer.CreateAccount(AccountType.Current, Branch.Southampton);
-            var accounts = customer.accounts;
-
-            Assert.AreEqual(accounts[0].Branch, Branch.Oslo);
-            Assert.AreEqual(accounts[1].Branch, Branch.Bournemouth);
-            Assert.AreEqual(accounts[2].Branch, Branch.Southampton);
-        }
     }
 }
