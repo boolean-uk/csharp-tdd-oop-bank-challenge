@@ -6,6 +6,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
+using Twilio.Types;
+
 
 namespace Boolean.CSharp.Main
 {
@@ -142,6 +146,27 @@ namespace Boolean.CSharp.Main
             }
 
             return account.Overdraft;
+        }
+
+        public string SendStateMentSMS(string user)
+        {
+            string bankStatement = PrintBankStateMent(user);
+
+            //DO NOT PUSH THIS EITHER APPERENTLY
+            var accountSid = "";
+            //Put in auth token here
+            //DO NOT PUSH THE AUTH TOKEN
+            var authToken = "";
+            TwilioClient.Init(accountSid, authToken);
+
+            var messageOptions = new CreateMessageOptions(
+                new PhoneNumber("+4741251290"));
+            messageOptions.From = new PhoneNumber("+16505176160");
+            messageOptions.Body = bankStatement;
+
+
+            var message = MessageResource.Create(messageOptions);
+            return bankStatement;
         }
     }
 }
