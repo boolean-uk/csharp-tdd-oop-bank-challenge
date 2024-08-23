@@ -15,8 +15,7 @@ namespace Boolean.CSharp.Test
             IAccount result = customer.CreateAccount("Current");
             
             //Verify
-            Assert.IsNotNull(result);
-            Assert.AreEqual(result.GetType, typeof(CurrentAccount));
+            Assert.That(result.GetType() == typeof(CurrentAccount));
         }  
         
         [Test]
@@ -29,8 +28,7 @@ namespace Boolean.CSharp.Test
             IAccount result = customer.CreateAccount("Savings");
 
             //Verify
-            Assert.IsNotNull(result);
-            Assert.AreEqual(result.GetType, typeof(SavingsAccount));
+            Assert.That(result.GetType() == typeof(SavingsAccount));
         }  
         
         [Test]
