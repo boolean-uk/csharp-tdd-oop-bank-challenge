@@ -1,4 +1,4 @@
-using System.Transactions;
+using System.Text;
 
 namespace Boolean.CSharp.Main.Models.Accounts;
 
@@ -7,31 +7,38 @@ public class Account(string name, AccountType type)
     public string Name { get; } = name;
     public AccountType AccountType { get; } = type;
     public bool SmsNotification { get; set; } = false;
-    private List<Transaction> Transactions { get; set; } = new();
+    private List<BankTransaction> BankTransactions { get; set; } = new();
     
-    public List<BankTransaction> GetTransactions()
-    {
-        throw new NotImplementedException();
-    }
+    public List<BankTransaction> GetTransactions() => BankTransactions;
 
     public void PrintTransactions()
     {
-        throw new NotImplementedException();
+        StringBuilder sb = new();
+        sb.AppendLine($"Transaction history for account {Name}:");
+        sb.AppendLine($"date       || credit    || debit     || balance || comment");
+        foreach (var t in BankTransactions)
+        {
+            var balance = GetBalance();
+            sb.AppendLine($"{t._date:d/M/yy} || {(t._amount > 0 ? t._amount : 0)} || {(t._amount < 0 ? 0 : t._amount)} || {balance} || {t._description}");
+        }
     }
 
-    public decimal Deposit(decimal amount)
+    public decimal Deposit(decimal amount, string description = "")
     {
-        throw new NotImplementedException();
+        BankTransactions.Add(new BankTransaction(DateTime.Now, amount, description));
+        return GetBalance();
     }
 
-    public decimal Withdraw(decimal amount)
+    public decimal Withdraw(decimal amount, string description = "")
     {
-        throw new NotImplementedException();
+        if (amount > 0) amount *= -1;
+        BankTransactions.Add(new BankTransaction(DateTime.Now, amount, description));
+        return GetBalance();
     }
 
     public decimal GetBalance()
     {
-        throw new NotImplementedException();
+        return BankTransactions.Sum(x => x._amount);
     }
 
     public void ToggleSmsNotification()
