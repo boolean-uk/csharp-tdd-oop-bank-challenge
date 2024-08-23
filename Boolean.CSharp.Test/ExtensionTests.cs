@@ -94,5 +94,24 @@ namespace Boolean.CSharp.Test
             double result = bank.ApproveOverdraftRequest(ID, requestID, IsAdmin, toBeStatus);
             Assert.That(result, Is.EqualTo(-1));
         }
+
+        [Test]
+        public void TestSendBankStatementSMS()
+        {
+            //Until I find a safe way to insert the auth token,
+            //A lot is commented out in the function
+            Bank bank = new Bank();
+            string user = "Bob";
+            BankTypes bankType = BankTypes.Current;
+            double amountDeposit = 1000;
+            double amountWithdraw = 800;
+            int bankID = bank.AddAccount(user, bankType);
+            bank.Deposit(bankID, amountDeposit);
+            bank.Withdraw(bankID, amountWithdraw);
+
+            string result = bank.SendStateMentSMS(user);
+
+            Assert.NotNull(result);
+        }
     }
 }

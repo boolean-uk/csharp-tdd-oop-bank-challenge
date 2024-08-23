@@ -50,8 +50,8 @@ namespace Boolean.CSharp.Test
 
             Assert.That(result, Is.EqualTo(expectedResult));
         }
-        
 
+        [Test]
         public void TestGenerateBankStatement()
         {
             Bank bank = new Bank();
