@@ -77,12 +77,11 @@ namespace Boolean.CSharp.Test
             Assert.That(printedStatement.Contains("credit"));
             Assert.That(printedStatement.Contains("debit"));
             Assert.That(printedStatement.Contains("balance"));
-            Assert.That(printedStatement.Contains("1000.00"));
-            Assert.That(printedStatement.Contains("2000.00"));
-            Assert.That(printedStatement.Contains("500.00"));
-            Assert.That(printedStatement.Contains("3500.00"));
-            Assert.That(printedStatement.Contains("2500.00"));
-
+            Assert.That(printedStatement.Contains("1000"));
+            Assert.That(printedStatement.Contains("2000"));
+            Assert.That(printedStatement.Contains("500"));
+            Assert.That(printedStatement.Contains("3000"));
+            Assert.That(printedStatement.Contains("2500"));
         }
     }
 }

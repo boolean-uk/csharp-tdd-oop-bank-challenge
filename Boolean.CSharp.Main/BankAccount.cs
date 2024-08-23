@@ -29,19 +29,19 @@ namespace Boolean.CSharp.Main
         public string PrintBankStatements()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("date".PadRight(20));
-            sb.Append("||  credit".PadRight(12));
-            sb.Append("||  debit".PadRight(12));
-            sb.AppendLine("|| balance".PadRight(12));
+            sb.Append("date".PadRight(20) + "||");
+            sb.Append("credit ||".PadLeft(12));
+            sb.Append("debit ||".PadLeft(12));
+            sb.AppendLine("balance ||".PadLeft(12));
 
             
 
             foreach (var bs in _bankStatements)
             {
-                sb.Append($"{bs.DateTime}".PadRight(20));
-                if (bs.Type == "Deposit") sb.Append("|| " + $"{bs.Amount} ".PadLeft(9) + "|| ".PadRight(12));
-                if (bs.Type == "Withdraw") sb.Append("|| ".PadRight(12) + "|| " + $"{bs.Amount} ".PadLeft(9));
-                sb.AppendLine($"|| {bs.Balance}".PadRight(12));
+                sb.Append($"{bs.DateTime}".PadRight(20) + "||");
+                if (bs.Type == "Deposit") sb.Append($"{bs.Amount} ||".PadLeft(12) + " ||".PadLeft(12));
+                if (bs.Type == "Withdraw") sb.Append(" ||".PadLeft(12) + $"{bs.Amount} ||".PadLeft(12));
+                sb.AppendLine($"{bs.Balance} ||".PadLeft(12));
             }
 
             return sb.ToString();
