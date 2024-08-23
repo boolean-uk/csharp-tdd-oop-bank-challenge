@@ -47,7 +47,7 @@ namespace Boolean.CSharp.Test
             //Assert.IsTrue(isCustomer);
             Assert.That(customerList.Count == 1);
             Assert.That(customerList.First().FirstName == "Test");
-            
+
             Customer customer = customerList.First();
             _controller.createBankAccount(customer);
 
@@ -64,7 +64,7 @@ namespace Boolean.CSharp.Test
             //Assert.IsTrue(isCustomer);
             Assert.That(customerList.Count == 2);
             Assert.That(customerList.First().FirstName == "Test");
-            
+
             Customer customer = customerList.First();
             _controller.createBankAccount(customer);
 
@@ -86,7 +86,7 @@ namespace Boolean.CSharp.Test
             _controller.depositMoneyIntoTransactionalAccount(100.0f, customer.ID);
             BankAccount bankAccount = _controller.getBankAccount(customer.ID);
             Assert.That(bankAccount.getTransactionsAccountBalance() == 100.0f);
-        
+
         }
 
         [Test]
@@ -120,6 +120,25 @@ namespace Boolean.CSharp.Test
             bankAccount = _controller.getBankAccount(customer.ID);
             Assert.That(bankAccount.getTransactionsAccountBalance() == 100.0f);
             Assert.IsFalse(successful);
+        }
+
+        [Test]
+        public void BankStatementTest()
+        {
+
+            TestSetup();
+            CustomerCreation(2);
+            List<Customer> customerList = _controller.GetCustomers();
+            Customer customer1 = customerList.First();
+            Customer customer2 = customerList.Last();
+            _controller.createBankAccount(customer1);
+            _controller.createBankAccount(customer2);
+            _controller.depositMoneyIntoTransactionalAccount(100.0f, customer1.ID);
+            _controller.depositMoneyIntoTransactionalAccount(200.0f, customer2.ID);
+            _controller.withdrawMoneyFromTransactionalAccount(150.0f, customer1.ID);
+            _controller.withdrawMoneyFromTransactionalAccount(150.0f, customer2.ID);
+
+
         }
     }
 }

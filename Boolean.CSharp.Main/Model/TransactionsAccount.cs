@@ -15,7 +15,7 @@ namespace Boolean.CSharp.Main.Model
         }
         public float getBalance() { return this._balance; }
 
-        public void deposit(float amount) { _balance += amount; }
-        public float withdraw(float amount) { _balance -= amount; return amount; }
+        public void deposit(float amount, BankAccount bankAccount) { _balance += amount; bankAccount.logTransaction(amount, _balance, true); }
+        public float withdraw(float amount, BankAccount bankAccount) { _balance -= amount; bankAccount.logTransaction(amount, _balance, true);  return amount; }
     }
 }
