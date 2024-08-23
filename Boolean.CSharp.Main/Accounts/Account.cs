@@ -66,16 +66,16 @@ namespace Boolean.CSharp.Main.Accounts
             bankStatement.AppendLine("date       || credit  || debit  || balance");
             foreach (Transaction t in _transactions)
             {
-                bankStatement.Append($"{t.DateCreated.Date} || ");
+                bankStatement.Append($"{t.DateCreated} || ");
                 if (t.TransactionAction == TransactionAction.Credit)
                 {
-                    bankStatement.Append($"{t.Amount} ||        || ");
+                    bankStatement.Append($"{t.Amount}.00 ||        || ");
                 }
                 else if(t.TransactionAction == TransactionAction.Debit)
                 {
-                    bankStatement.Append($"       || {t.Amount} || ");
+                    bankStatement.Append($"        || {t.Amount}.00 || ");
                 }
-                bankStatement.Append($"{t.Balance}");
+                bankStatement.AppendLine($"{t.Balance}.00");
             }
             return bankStatement.ToString();
         }
