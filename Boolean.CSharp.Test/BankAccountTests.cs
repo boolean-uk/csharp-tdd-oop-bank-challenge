@@ -34,5 +34,14 @@ namespace Boolean.CSharp.Test
             SavingsAccount savingsAccount = new SavingsAccount();
             Assert.IsNotNull(savingsAccount);
         }
+
+        [Test]
+        public void Test4DepositAndWithdrawFromSavingsAccount()
+        {
+            SavingsAccount savingsAccount = new SavingsAccount();
+            savingsAccount.Deposit(1000);
+            savingsAccount.Withdraw(500);
+            Assert.That(savingsAccount.Balance == 500);
+        }
     }
 }
