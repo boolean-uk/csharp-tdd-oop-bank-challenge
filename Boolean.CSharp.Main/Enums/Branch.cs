@@ -7,6 +7,11 @@ namespace Boolean.CSharp.Main.Enums
 {
     public enum Branch
     {
-        Oslo
+        Oslo,
+        Stavanger,
+        Bergen,
+        Hamar,
+        Trondheim,
+        Fredrikstad
     }
 }

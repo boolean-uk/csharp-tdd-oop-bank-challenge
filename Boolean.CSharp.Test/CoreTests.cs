@@ -27,5 +27,17 @@ namespace Boolean.CSharp.Test
 
             Assert.That(result, Is.EqualTo(depositAmount));
         }
+
+        [TestCase(5000)]
+        public void TestDeposit(int depositAmount)
+        {
+            User user = new User("Jonas", Role.Customer);
+            ConsumptionAccount account = new ConsumptionAccount(user, Branch.Trondheim);
+            account.Deposit(depositAmount);
+
+            int result = account.GetBalance();
+
+            Assert.That(result, Is.EqualTo(depositAmount));
+        }
     }
 }
