@@ -6,16 +6,8 @@ using NUnit.Framework;
 namespace Boolean.CSharp.Test
 {
     [TestFixture]
-    public class CoreTests
+    public class Tests
     {
-        private Core _core;
-
-        public CoreTests()
-        {
-            _core = new Core();
-
-        }
-
         [TestCase(5000)]
         public void TestGetBalance(int depositAmount)
         {
@@ -107,6 +99,27 @@ namespace Boolean.CSharp.Test
             string bankStatement = account.GetBankStatement();
 
             Assert.IsNotEmpty(bankStatement);
+        }
+
+        [Test]
+        public void TestSendMessage()
+        {
+            string accountSid = "";
+            string atuhToken = "";
+            string yourTwilioPhoneNumberFrom = "";
+            string yourPhoneNumber = "";
+
+            User user = new User("Jonas", Role.Customer);
+            ConsumptionAccount account = new ConsumptionAccount(user, Branch.Oslo);
+            SmsController smsController = new SmsController(accountSid, atuhToken);
+            account.Deposit(1000);
+            account.Deposit(2000);
+            account.Withdraw(500);
+
+            string bankStatement = account.GetBankStatement();
+            bool messageSendt = smsController.SendMessage(bankStatement, yourPhoneNumber, yourTwilioPhoneNumberFrom);
+
+            Assert.IsTrue(messageSendt);
         }
     }
 }

@@ -11,7 +11,6 @@ namespace Boolean.CSharp.Main
     {
         private string _name;
         private Role _role;
-        private List<Account> _accounts;
 
         public User(string name, Role role)
         {
