@@ -1,5 +1,6 @@
 ## User Stories
 
+```
 As a customer,
 So I can safely store use my money,
 I want to create a current account.
@@ -35,6 +36,7 @@ I want to approve or reject overdraft requests.
 As a customer,
 So I can stay up to date,
 I want statements to be sent as messages to my phone.
+```
 
 ## Domain Model
 
