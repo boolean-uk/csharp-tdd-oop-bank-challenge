@@ -24,6 +24,10 @@ namespace Boolean.CSharp.Main.Model
             this._customerId = socialsecurity;
             this._accounts = new List<IAccount>();
             this._docPath = $"..\\..\\..\\..\\Boolean.CSharp.Main\\DataBaseFolder\\{_customerId}\\";
+            bool exists = System.IO.Directory.Exists(_docPath);
+
+            if (!exists)
+                System.IO.Directory.CreateDirectory(_docPath);
         }
 
         internal string Name { get { return _name; } }

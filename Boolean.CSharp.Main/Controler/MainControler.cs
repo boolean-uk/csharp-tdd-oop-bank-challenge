@@ -42,6 +42,10 @@ namespace Boolean.CSharp.Main.Controler
             }
         }
 
+        internal List<Customer> GetCustomers() { 
+            return management.GetCustomer();
+        }
+
         internal object GetAccountBalance(string socialSecurityNr, string accountName)
         {
             throw new NotImplementedException();

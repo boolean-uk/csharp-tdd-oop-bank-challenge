@@ -1,14 +1,7 @@
 ﻿using Boolean.CSharp.Main;
 using Boolean.CSharp.Main.Controler;
-using Boolean.CSharp.Main.Model;
 using Boolean.CSharp.Main.View;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Test
 {
@@ -29,13 +22,14 @@ namespace Boolean.CSharp.Test
         public void CreateCustomer()
         {
             View.CreateCustomer("Test", "111111-0000", _main);
-            Assert.True(true);
+            View.GetCustomersList(_main);
         }
 
         [Test]
         public void CreateSavingsAccount()
         {
-            
+            View.CreateCustomer("Test", "111111-0000", _main);
+            View.CreateAccount("Account1", "111111-0000", _main);
         }
 
         [Test]

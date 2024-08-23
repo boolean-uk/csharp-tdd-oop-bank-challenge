@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Boolean.CSharp.Main.Controler;
 using System.Runtime.CompilerServices;
+using Boolean.CSharp.Main.Model;
 
 [assembly: InternalsVisibleTo("Boolean.CSharp.Test")]
 
@@ -38,6 +39,14 @@ namespace Boolean.CSharp.Main.View
             Console.WriteLine($"Your balance is: {Controler.GetAccountBalance(SocialSecurityNr, AccountName)}");
         }
 
+        internal static void GetCustomersList(MainControler Controler) 
+        {
+            Console.WriteLine($"Cutomers in list");
+            foreach (Customer c in Controler.GetCustomers())
+            {
+                Console.WriteLine(c.Name);
+            }
+        }
 
 
         
