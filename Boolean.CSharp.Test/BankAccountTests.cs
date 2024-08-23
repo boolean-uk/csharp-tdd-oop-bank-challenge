@@ -32,7 +32,7 @@ namespace Boolean.CSharp.Test
         public void Test3CreateASavingsAccount()
         {
             SavingsAccount savingsAccount = new SavingsAccount();
-            Assert.IsNotNull(currentAccount);
+            Assert.IsNotNull(savingsAccount);
         }
     }
 }
