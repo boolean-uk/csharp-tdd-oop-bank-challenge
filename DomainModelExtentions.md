@@ -22,12 +22,13 @@ I want statements to be sent as messages to my phone.
 
 
 
-| Classes         | Methods																| Scenario								| Outputs					|
-|-----------------|---------------------------------------------------------------------|---------------------------------------|---------------------------|
-| `Bank`		  | `CalculateBalance(int bankID)`										|										| double					|
-|				  |																		|										|							|
-|				  |	`AddAccount(string user, string bankType, string branch)`			| Branch does not exist										| string					|
-| 				  |																		|										|							|
-|				  |	`Withdraw(int bankId, double amount)`								|										| int						|
-| 				  |																		|										|							|
-| `Account`       | `PrintBankStateMents()`												|										| string					|
+| Classes         | Methods																								| Scenario								| Outputs					|
+|-----------------|-----------------------------------------------------------------------------------------------------|---------------------------------------|---------------------------|
+| `Bank`		  | `CalculateBalance(int bankID)`																		|										| double					|
+|				  |																										|										|							|
+|				  |	`AddAccount(string user, string bankType, string branch)`											|										| int						|
+| 				  |																										|										|							|
+|			      | `RequestOverdraft(int accountID, double amount)`													|										|							|
+| 				  |																										|										|							|
+|			      | `ApproveOverDraftRequest(int accountID, int overDraftID, Roles isAdmin, RequestStatus status)`		| Role is not Admin 					| false						|
+| 				  |																										| Role is Admin							| true						|

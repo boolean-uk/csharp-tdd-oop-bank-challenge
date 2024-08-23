@@ -17,7 +17,7 @@ namespace Boolean.CSharp.Main.Accounts
             this.Owner = owner;
         }
 
-        public SavingsAccount(int id, BankTypes type, string owner, string branch)
+        public SavingsAccount(int id, BankTypes type, string owner, Branches branch)
         {
             this.ID = id;
             this.Type = type;

@@ -14,4 +14,17 @@
         København,
         Berlin
     }
+
+    public enum RequestStatus
+    {
+        Pending,
+        Accepted,
+        Denied
+    }
+
+    public enum Roles
+    {
+        User,
+        Admin
+    }
 }

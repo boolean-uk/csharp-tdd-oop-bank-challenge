@@ -39,7 +39,19 @@ namespace Boolean.CSharp.Main
         //Added a secound one for extentions
         public int AddAccount(string user, BankTypes bankType, Branches branch)
         {
+            if (bankType == BankTypes.Current)
+            {
+                Account account = new CurrentAccount(_accounts.Count(), bankType, user, branch);
+                _accounts.Add(account);
 
+                return account.ID;
+            }
+            if (bankType == BankTypes.Saving)
+            {
+                Account account = new SavingsAccount(_accounts.Count(), bankType, user, branch);
+                _accounts.Add(account);
+                return account.ID;
+            }
 
             return -1;
         }
@@ -68,9 +80,15 @@ namespace Boolean.CSharp.Main
 
             Account AccToBeWithdrawn = GetAccount(ID);
             Transaction transaction = new Transaction(DateTime.Today.ToString("dd/MM/yyyy"), AccToBeWithdrawn.Balance, 0, amount);
-            AccToBeWithdrawn.TransactionHistory.Add(transaction);
+            
 
-            AccToBeWithdrawn.RemoveBalance(amount);
+            bool succesfull = AccToBeWithdrawn.RemoveBalance(amount);
+
+            if (succesfull)
+            {
+                AccToBeWithdrawn.TransactionHistory.Add(transaction);
+            }    
+
             return AccToBeWithdrawn.CalculateBalance();
         }
 
@@ -101,6 +119,23 @@ namespace Boolean.CSharp.Main
         public double CalculateBalance(int ID)
         {
             return GetAccount(ID).CalculateBalance();
+        }
+
+        public int RequestOverdraft(int ID, double requestAmount)
+        {
+            Account account = GetAccount(ID);
+            return account.AddOverDraftRequest(requestAmount);
+        }
+
+        public bool ApproveOverdraftRequest(int accountID, int requestID, Roles role, RequestStatus status)
+        {
+            if (role!= Roles.Admin) {  return false; }
+               
+            Account account = GetAccount(accountID);
+            OverDraftRequest ODRequest = account.GetOverDraftRequest(requestID);
+
+            ODRequest.Status = status;
+            return true;
         }
     }
 }

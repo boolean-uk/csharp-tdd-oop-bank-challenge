@@ -22,6 +22,10 @@ namespace Boolean.CSharp.Main.Interfaces
 
         public double Balance { get { return _balance; } }
 
+        public double Overdraft = 0;
+
+        private List<OverDraftRequest> OverDraftRequests { get; set; } = new List<OverDraftRequest>();
+
         public string GenerateStatement()
         {
             StringBuilder sb = new StringBuilder();
@@ -61,6 +65,11 @@ namespace Boolean.CSharp.Main.Interfaces
 
         public bool RemoveBalance(double amount)
         {
+            if (amount + Overdraft < 0) 
+            {
+                return false; 
+            }
+
             _balance -= amount;
             return true;
         }
@@ -74,6 +83,18 @@ namespace Boolean.CSharp.Main.Interfaces
                 totalBalance += transaction.credit;
             }
             return totalBalance;
+        }
+
+        public int AddOverDraftRequest(double amount)
+        {
+            OverDraftRequest request = new OverDraftRequest(OverDraftRequests.Count() + 1, amount);
+            OverDraftRequests.Add(request);
+            return request.ID;
+        }
+
+        public OverDraftRequest GetOverDraftRequest(int requestID)
+        {
+            return OverDraftRequests[requestID - 1];
         }
     }
 }
