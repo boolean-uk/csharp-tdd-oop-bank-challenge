@@ -45,6 +45,10 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        public void 
+        public void Test5GenerateBankStatement()
+        {
+            BankStatement bankStatement = new BankStatement();
+            Assert.IsNotNull(bankStatement);
+        }
     }
 }
