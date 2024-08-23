@@ -1,7 +1,7 @@
 |Classes                  |Methods                        |Scenarios               |Outputs      |
 |_________________________|_______________________________|________________________|_____________|
-|Account                  |Account(int customerId,        |Account created         |int          |
-|						  |IBranch branch)                |						   |			 |
+|Account                  |Account(int customerId,        |Account created         |----         |
+|						  |int accountNum, IBranch branch)|						   |			 |
 |						  |								  |						   |			 |
 |                         |Deposit(double funds)          |Funds deposited and     |void    	 |
 |                         |                               |recorded on history     |			 |
