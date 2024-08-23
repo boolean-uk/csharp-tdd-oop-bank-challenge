@@ -20,8 +20,8 @@ namespace Boolean.CSharp.Test
         public void CreateCurrentAccount()
         {
             Customer customer = new Customer();
-            customer.CreateAccount(AccountType.Current);
-            customer.CreateAccount(AccountType.Current);
+            customer.CreateAccount(AccountType.Current, Branch.Bournemouth);
+            customer.CreateAccount(AccountType.Current, Branch.Oslo);
 
             Assert.AreEqual(customer.accounts[0].Type, AccountType.Current);
             Assert.AreEqual(customer.accounts[1].GetBalance(), 0m);
@@ -32,9 +32,9 @@ namespace Boolean.CSharp.Test
         public void CreateSavingsAccount()
         {
             Customer customer = new Customer();
-            customer.CreateAccount(AccountType.Savings);
-            customer.CreateAccount(AccountType.Savings);
-            customer.CreateAccount(AccountType.Savings);
+            customer.CreateAccount(AccountType.Savings, Branch.Oslo);
+            customer.CreateAccount(AccountType.Savings, Branch.Stockholm);
+            customer.CreateAccount(AccountType.Savings, Branch.Oslo);
 
             Assert.AreEqual(customer.accounts[0].Type, AccountType.Savings);
             Assert.AreEqual(customer.accounts[1].GetBalance(), 0m);
@@ -45,7 +45,7 @@ namespace Boolean.CSharp.Test
         public void Deposit()
         {
             Customer customer = new Customer();
-            customer.CreateAccount(AccountType.Savings);
+            customer.CreateAccount(AccountType.Savings, Branch.Oslo);
             IAccount account = customer.accounts[0];
 
             account.Deposit(50);
@@ -62,7 +62,7 @@ namespace Boolean.CSharp.Test
         public void Withdraw()
         {
             Customer customer = new Customer();
-            customer.CreateAccount(AccountType.Current);
+            customer.CreateAccount(AccountType.Current, Branch.Trondheim);
             IAccount account = customer.accounts[0];
 
             account.Deposit(5000);
@@ -79,7 +79,7 @@ namespace Boolean.CSharp.Test
         public void IllegalWithdraw()
         {
             Customer customer = new Customer();
-            customer.CreateAccount(AccountType.Current);
+            customer.CreateAccount(AccountType.Current, Branch.Bournemouth);
             IAccount account = customer.accounts[0];
 
             bool withdraw = account.Withdraw(3000);
@@ -91,7 +91,7 @@ namespace Boolean.CSharp.Test
         public void IllegalDeposit()
         {
             Customer customer = new Customer();
-            customer.CreateAccount(AccountType.Current);
+            customer.CreateAccount(AccountType.Current, Branch.Oslo);
             IAccount account = customer.accounts[0];
 
             bool deposit = account.Deposit(-1000);
@@ -104,7 +104,7 @@ namespace Boolean.CSharp.Test
         public void GenerateStatement()
         {
             Customer customer = new Customer();
-            customer.CreateAccount(AccountType.Current);
+            customer.CreateAccount(AccountType.Current, Branch.Oslo);
             IAccount account = customer.accounts[0];
 
             account.Deposit(5000);
@@ -122,6 +122,20 @@ namespace Boolean.CSharp.Test
                 Assert.IsTrue(output.Contains("|| 5000     ||          || 5000    "));
                 Assert.IsTrue(output.Contains("||          || 3000     || 2000    "));
             }
+        }
+
+        [Test]
+        public void CheckBranch()
+        {
+            Customer customer = new Customer();
+            customer.CreateAccount(AccountType.Current, Branch.Oslo);
+            customer.CreateAccount(AccountType.Current, Branch.Bournemouth);
+            customer.CreateAccount(AccountType.Current, Branch.Southampton);
+            var accounts = customer.accounts;
+
+            Assert.AreEqual(accounts[0].Branch, Branch.Oslo);
+            Assert.AreEqual(accounts[1].Branch, Branch.Bournemouth);
+            Assert.AreEqual(accounts[2].Branch, Branch.Southampton);
         }
     }
 }
