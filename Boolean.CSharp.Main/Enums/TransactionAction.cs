@@ -5,8 +5,9 @@ using System.Text;
 
 namespace Boolean.CSharp.Main.Enums
 {
-    public enum Branch
+    public enum TransactionAction
     {
-        Oslo
+        Credit,
+        Debit
     }
 }

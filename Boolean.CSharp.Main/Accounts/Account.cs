@@ -10,35 +10,46 @@ namespace Boolean.CSharp.Main.Accounts
     {
         protected User _owner;
         protected List<Transaction> _transactions = new List<Transaction>();
+        protected Branch _branch;
 
-        protected Account(User owner)
+        protected Account(User owner, Branch branch)
         {
             _owner = owner;
+            _branch = branch;
         }
 
-        public int? GetBalance(User userAttemptingAction)
+        public int GetBalance()
         {
-            return null;
+            int balance = 0;
+            foreach (Transaction t in _transactions)
+            {
+                if (t.TransactionAction == TransactionAction.Credit)
+                {
+                    balance += t.Amount;
+                }
+                else if (t.TransactionAction != TransactionAction.Debit)
+                {
+                    balance -= t.Amount;
+                }
+            }
+            return balance;
         }
 
-        public bool Deposit(int amount, User userAttemptingAction)
+        public bool Deposit(int amount)
+        {
+            Transaction newTransaction = new Transaction(amount, GetBalance(), TransactionAction.Credit);
+            _transactions.Add(newTransaction);
+            return true;
+        }
+
+        public bool Withdraw(int amount)
         {
             return false;
         }
 
-        public bool Withdraw(int amount, User userAttemptingAction)
-        {
-            return false;
-        }
-
-        public string GetBankStatement(User userAttemptingAction)
+        public string GetBankStatement()
         {
             return string.Empty;
-        }
-
-        public Branch? GetBranch(User userAttemptingAction)
-        {
-            return null;
         }
 
         public bool SetOverdraft(int amount, User userAttemptingAction)
@@ -46,9 +57,6 @@ namespace Boolean.CSharp.Main.Accounts
             return false;
         }
 
-        public User? GetOwner(User userAttemptingAction)
-        {
-            return null;
-        }
+        public Branch Branch { get { return _branch; } }
     }
 }

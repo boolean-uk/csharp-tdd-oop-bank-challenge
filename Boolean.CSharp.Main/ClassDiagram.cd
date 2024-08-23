@@ -31,12 +31,12 @@
   <Class Name="Boolean.CSharp.Main.Transaction">
     <Position X="8.25" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>EAAAAAAAAAAAAAAAACgAEACAAAAAAAAAAAREAAAAAAA=</HashCode>
       <FileName>Transaction.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Boolean.CSharp.Main.SmsController">
-    <Position X="7" Y="2.75" Width="1.5" />
+    <Position X="5.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>SmsController.cs</FileName>
@@ -54,6 +54,13 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Branch.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Boolean.CSharp.Main.Action">
+    <Position X="8" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Action.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />

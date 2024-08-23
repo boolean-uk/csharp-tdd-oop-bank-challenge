@@ -20,14 +20,12 @@ namespace Boolean.CSharp.Test
         public void TestGetBalance(int depositAmount)
         {
             User user = new User("Jonas", Role.Customer);
-            ConsumptionAccount account = new ConsumptionAccount(user);
-            account.Deposit(depositAmount, user);
+            ConsumptionAccount account = new ConsumptionAccount(user, Branch.Oslo);
+            account.Deposit(depositAmount);
 
-            int? result = account.GetBalance(user);
+            int result = account.GetBalance();
 
-            Assert.IsNotNull(result);
             Assert.That(result, Is.EqualTo(depositAmount));
         }
-
     }
 }
