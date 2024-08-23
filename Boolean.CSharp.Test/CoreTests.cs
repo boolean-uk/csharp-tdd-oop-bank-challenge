@@ -63,5 +63,45 @@ namespace Boolean.CSharp.Test
             Assert.That(duplicate, Is.False);
         }
 
+        [Test]
+        public void TransactionHistoryTest()
+        {
+            //Arrange
+            Bank bank = new Bank();
+            Joaquin joaquin = new Joaquin();
+            MasterCard mastercard = new MasterCard();
+            bank.CreateCurrent(joaquin, mastercard);
+            bank.CreateSaving(joaquin, mastercard);
+
+            //Act
+            string resultCurrent = bank.GetTransactionHistory(joaquin, true);
+            string resultSavings = bank.GetTransactionHistory(joaquin, false);
+
+            //Assert
+            Assert.That(resultCurrent, !Is.EqualTo(string.Empty));
+            Assert.That(resultSavings, !Is.EqualTo(string.Empty));
+        }
+
+
+        [Test]
+        public void DepositAndWithdrawTest()
+        {
+            ////Arrange
+            //Bank bank = new Bank();
+            //Joaquin joaquin = new Joaquin();
+            //MasterCard mastercard = new MasterCard();
+            //bank.CreateCurrent(joaquin, mastercard);
+            //bank.CreateSaving(joaquin, mastercard);
+            //
+            //bank.HandleDeposit(joaquin, 100, true); //Deposit to current
+            //bank.HandleDeposit(joaquin, 100, false); //Deposit to savings
+            //
+            //
+            ////Act
+            //bool result = bank.HandleWithdraw(joaquin, 100, true);
+            //
+            
+        }
+
     }
 }

@@ -25,6 +25,8 @@
 |             | `HandleDeposit(ICustomer customer, decimal amount, bool current)`  | Deposit the specified amount to account (true = current | false = saving)          | void    |
 |             | `HandleWithdraw(ICustomer customer, decimal amount, bool current)` | Withdraw the specified amount from account (true = curren | false = saving)        | true    |
 |             |                                                                    | Cannot withdraw more money than the existing amount                                | false   |
+|             | `GetTransactionHistory(ICustomer customer, bool current)`          | Get the transaction history of the selected account                                | string  |
+|             | `GetBalance(ICustomer customer, bool current)`                     | Get the balance of the selected account                                            | decimal |
 |-------------|--------------------------------------------------------------------|------------------------------------------------------------------------------------|---------|
 | `ICustomer` | `GetName()`                                                        | Return the name of the customer                                                    | string  |
 |-------------|--------------------------------------------------------------------|------------------------------------------------------------------------------------|---------|

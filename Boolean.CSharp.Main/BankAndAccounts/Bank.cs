@@ -48,5 +48,10 @@ namespace Boolean.CSharp.Main.BankAndAccounts
             this._accounts.Add(new Saving(customer, branch));
             return true;
         }
+
+        public string GetTransactionHistory(Joaquin joaquin, bool v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
