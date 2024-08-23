@@ -25,12 +25,16 @@ namespace Boolean.CSharp.Main.Abstract
 
         public string Transactions()
         {
-            string history = "date\t\t||\tcredit\t||\tdebit\t||\tbalance\t";
+            string history = "date\t\t\t||credit\t||debit\t||balance";
 
-            foreach (string transaction in transactionHistory)
+            transactionHistory.Reverse();
+
+            foreach(var transaction in transactionHistory)
             {
-                history += transaction;
+                history += transaction.ToString();
             }
+
+            transactionHistory.Reverse();
             
             return history;
         }

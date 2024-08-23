@@ -124,6 +124,7 @@ namespace Boolean.CSharp.Test
             //Act
             string result = bank.GetTransactionHistory(joaquin, true);
             decimal balance = bank.GetBalance(joaquin, true);
+            string tesResult = bank.GetTransactionHistory(joaquin, true);
 
             //Assert
             Assert.That(result, !Is.EqualTo(string.Empty));

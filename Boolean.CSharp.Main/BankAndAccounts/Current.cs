@@ -16,11 +16,11 @@ namespace Boolean.CSharp.Main.BankAndAccounts
         {
             string depositMessage = "\n";
             //Date of transaction
-            depositMessage += DateTime.Now.ToString("dd/MM/yyyy") + "\t||\t";
+            depositMessage += DateTime.Now.ToString("dd/MM/yyyy") + "\t||";
             //Deposit
-            depositMessage += amount.ToString() + "\t||\t";
+            depositMessage += amount.ToString() + "\t||";
             //Empty
-            depositMessage += "\t||\t";
+            depositMessage += "\t\t||";
             //New Balance
             depositMessage += (Balance() + amount).ToString();
             this.transactionHistory.Add(depositMessage);
@@ -34,11 +34,11 @@ namespace Boolean.CSharp.Main.BankAndAccounts
             {
                 string depositMessage = "\n";
                 //Date of transaction
-                depositMessage += DateTime.Now.ToString("dd/MM/yyyy") + "\t||\t";
+                depositMessage += DateTime.Now.ToString("dd/MM/yyyy") + "\t||";
                 //Empty
-                depositMessage += "\t||\t";
+                depositMessage += "\t\t||";
                 //Withdraw
-                depositMessage += amount.ToString() + "\t||\t";
+                depositMessage += amount.ToString() + "\t||";
                 //New Balance
                 depositMessage += (oldBalance - amount).ToString();
                 this.transactionHistory.Add(depositMessage);

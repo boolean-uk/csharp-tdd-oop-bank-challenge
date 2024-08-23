@@ -51,12 +51,19 @@ namespace Boolean.CSharp.Main.BankAndAccounts
 
         public decimal GetBalance(ICustomer customer, bool type)
         {
-            throw new NotImplementedException();
+            foreach(var account in this._accounts)
+            {
+                if (account.owner.GetName() == customer.GetName() && account.type == type)
+                {
+                    return account.Balance();
+                }
+            }
+            return 0;
         }
 
         public string GetTransactionHistory(ICustomer customer, bool type)
         {
-            foreach (Account account in this._accounts)
+            foreach (var account in this._accounts)
             {
                 if (account.owner.GetName() == customer.GetName() && account.type == type)
                 {
@@ -79,7 +86,7 @@ namespace Boolean.CSharp.Main.BankAndAccounts
 
         public bool HandleWithdraw(ICustomer customer, decimal amount, bool type)
         {
-            foreach (Account account in this._accounts)
+            foreach (var account in this._accounts)
             {
                 if (account.owner.GetName() == customer.GetName() && account.type == type)
                 {
