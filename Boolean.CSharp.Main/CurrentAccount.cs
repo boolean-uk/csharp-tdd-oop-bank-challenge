@@ -1,16 +1,16 @@
 ﻿using Boolean.CSharp.Main;
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boolean.CSharp.Test
+namespace Boolean.CSharp.Main
 {
-    [TestFixture]
-    public class ExtensionTests
+    public class CurrentAccount : Account
     {
-     
+        public override AccountType AccountType { get; } = AccountType.Current;
+
     }
 }
+
