@@ -8,9 +8,16 @@ namespace Boolean.CSharp.Main.Acounts
 {
     public class CurrentSavingsAccount : Account
     {
-        public void Deposit(int v)
+        public void Deposit(decimal amount)
         {
-            throw new NotImplementedException();
+            if (amount > 0)
+            {
+                this.Balance += amount;
+            }
+            else
+            {
+                Console.WriteLine("Cant deposit a value like that");
+            }
         }
     }
 }
