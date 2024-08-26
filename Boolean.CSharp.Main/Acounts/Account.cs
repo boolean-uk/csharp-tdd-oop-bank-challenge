@@ -15,8 +15,18 @@ namespace Boolean.CSharp.Main.Acounts
 
         public Branch yourBranch { get; set; }
 
+        public void Deposit(decimal amount)
+        {
+            if (amount >= 0)
+            {
+                this.Balance += amount;
+            }
+            else
+            {
+                Console.WriteLine("Cant deposit a value like that");
+            }
+        }
 
 
-        
     }
 }

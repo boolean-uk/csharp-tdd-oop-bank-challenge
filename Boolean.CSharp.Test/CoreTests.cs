@@ -12,15 +12,21 @@ namespace Boolean.CSharp.Test
         [Test]
         public void DepositTest()
         {
-           CurrentSavingsAccount savingsAccount = new CurrentSavingsAccount();
+            CurrentSavingsAccount currentSavingsAccount = new CurrentSavingsAccount();
+            SavingsAccount savingsAccount = new SavingsAccount();
 
-            decimal expected = 1000;
+            decimal expected1 = 2000;
+            decimal expected2 = 1000;
 
+            currentSavingsAccount.Deposit(1300);
+            currentSavingsAccount.Deposit(0);
+            currentSavingsAccount.Deposit(700);
             savingsAccount.Deposit(1000);
 
-            decimal result = savingsAccount.Balance;
+            decimal result1 = currentSavingsAccount.Balance;
+            decimal result2 = savingsAccount.Balance;
 
-            Assert.AreEqual(expected, result);
+            Assert.AreEqual(expected2, result2);
 
         }
 
