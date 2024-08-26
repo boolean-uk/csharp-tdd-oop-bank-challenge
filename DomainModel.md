@@ -56,20 +56,14 @@ I want statements to be sent as messages to my phone.
 |                                  |                                                                           |                                                                |                              |
 |                                  | RequestToTransaction()                                                    | Request gets accepted and customer is able to withdraw         |                              |
 |                                  |                                                                           |                                                                |                              |
-|                                  |                                                                           |                                                                |                              |
 |----------------------------------|---------------------------------------------------------------------------|----------------------------------------------------------------|------------------------------|
 | Transaction                      | Public Transaction(decimal Amount, DateTime date, TransactionType type)   |                                                                |                              |
-|                                  |                                                                           |                                                                |                              |
 |                                  |                                                                           |                                                                |                              |
 |----------------------------------|---------------------------------------------------------------------------|----------------------------------------------------------------|------------------------------|
 | CurrentAccount : Account         |                                                                           |                                                                |                              |
 |                                  |                                                                           |                                                                |                              |
-|                                  |                                                                           |                                                                |                              |
-|                                  |                                                                           |                                                                |                              |
 |----------------------------------|---------------------------------------------------------------------------|----------------------------------------------------------------|------------------------------|
 | SavingsAccount : Account         |                                                                           |                                                                |                              |
-|                                  |                                                                           |                                                                |                              |
-|                                  |                                                                           |                                                                |                              |
 |                                  |                                                                           |                                                                |                              |
 |----------------------------------|---------------------------------------------------------------------------|----------------------------------------------------------------|------------------------------|
 | Person                           | Public Person(string name, Role role, Bank? bank)                         | Person can be either a manager, customer or engineer           |                              |
@@ -88,7 +82,6 @@ I want statements to be sent as messages to my phone.
 |                                  |                                                                           |                                                                |                              |
 |                                  | moneyLeftInFund()                                                         | Bank wants to see how much money is left in the emergency fund | decimal                      |
 |                                  |                                                                           |                                                                |                              |
-|                                  |                                                                           |                                                                |                              |
 |----------------------------------|---------------------------------------------------------------------------|----------------------------------------------------------------|------------------------------|
 | Branch                           | addAccount(Account account)                                               | Adds a specific account to a branch                            |                              |
 |                                  |                                                                           |                                                                |                              |
@@ -97,9 +90,6 @@ I want statements to be sent as messages to my phone.
 | OverdraftRequest                 | Public OverdraftRequest(decimal amount, Account account)                  | Customer creates a request for a potential overdraft           |                              |
 |                                  |                                                                           |                                                                |                              |
 |                                  | Accept()                                                                  | Accepts the request                                            |                              |
-|                                  |                                                                           |                                                                |                              |
-|                                  |                                                                           |                                                                |                              |
-|                                  |                                                                           |                                                                |                              |
 |                                  |                                                                           |                                                                |                              |
 |----------------------------------|---------------------------------------------------------------------------|----------------------------------------------------------------|------------------------------|
 | Enums                            | Public Enum Role(CUSTOMER, ENGINEER, BANK_MANAGER)                        |                                                                |                              |

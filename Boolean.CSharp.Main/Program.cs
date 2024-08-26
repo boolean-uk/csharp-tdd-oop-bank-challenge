@@ -19,7 +19,15 @@ manager.answerOverdraft(savings.OverdraftRequests.First());
 Console.WriteLine(bank.moneyLeftInFund());
 Console.WriteLine(savings.printStatement());
 
-savings.RequestOverdraft(10000);
+savings.RequestOverdraft(1000);
 manager.answerOverdraft(savings.OverdraftRequests.First());
+
+
+Console.WriteLine(bank.moneyLeftInFund());
+Console.WriteLine(savings.printStatement());
+savings.Deposit(1000);
+savings.Deposit(2000);
+savings.Deposit(2000);
+
 Console.WriteLine(bank.moneyLeftInFund());
 Console.WriteLine(savings.printStatement());
