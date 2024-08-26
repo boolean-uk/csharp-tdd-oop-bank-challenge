@@ -32,6 +32,10 @@ namespace Boolean.CSharp.Main.Entities
         }
 
     
+        public double Credit { get => this._credit; set => this._credit = value; }
+        public double Debit { get => this._debit; set => this._debit = value; }
+        public TransactionType TransactionType { get => this._transationType; set => this._transationType = value; }
+        public DateTime Date { get => this._date; set => this._date = value; }
     }
 }
 

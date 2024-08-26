@@ -24,7 +24,7 @@ namespace Boolean.CSharp.Test
 
             Customer c = new Customer("Espen", "Luna", 93458577);
 
-            b.CreateAccount(c, AccountType.Current);
+            b.CreateAccount(c, AccountType.Current, BankBranches.Bergen, "Brukskonto1");
             BankAccount act = c.FindBankAccount(0);
 
             Assert.That(act, Is.Not.Null);

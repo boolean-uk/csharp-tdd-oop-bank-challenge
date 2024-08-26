@@ -25,22 +25,46 @@ namespace Boolean.CSharp.Main
 
         public bool AddCustomer(Customer c)
         {
-            throw new NotImplementedException();
+            if(!this._customers.Any(x => x.PhoneNumber == c.PhoneNumber))
+            {
+                this._customers.Add(c);
+                return true;
+            }
+            return false;
+            
         }
 
         public bool RemoveCustomer(Customer c)
         {
-            throw new NotImplementedException();
+            if (this._customers.Any(x => x.PhoneNumber == c.PhoneNumber))
+            {
+                this._customers.Remove(c);
+                return true;
+            }
+            return false;
         }
 
         public Customer FindCustomer(int phoneNumber)
         {
-            throw new NotImplementedException();
+            return this._customers.Find(c => c.PhoneNumber == phoneNumber);
         }
 
-        public BankAccount CreateAccount(Customer c, AccountType t)
-        { 
-            throw new NotImplementedException();
+        public BankAccount CreateAccount(Customer c, AccountType t, BankBranches b, string accountname)
+        {
+            if (t == AccountType.Current)
+            {
+                BankAccount account = new CurrentAccount(b, this._runningIDs, accountname, c);
+                this._runningIDs++;
+                c.AddBankAccount(account);
+                return account;
+            }
+            else
+            {
+                BankAccount account = new SavingAccount(b, this._runningIDs, accountname, c);
+                this._runningIDs++;
+                c.AddBankAccount(account);
+                return account;
+            }
         }
 
         public List<Customer> Customers { get => this._customers; set => this._customers = value; }

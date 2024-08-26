@@ -24,12 +24,12 @@ namespace Boolean.CSharp.Main.Person
 
         public BankAccount FindBankAccount(int accountnumber)
         {
-            throw new NotImplementedException();
+            return this._bankAccounts.Find(x => x.Accountnumber == accountnumber);
         }
 
         public void AddBankAccount(BankAccount b)
         {
-            throw new NotImplementedException();
+            this._bankAccounts.Add(b);
         }
         
         public List<BankAccount> BankAccounts { get => this._bankAccounts; set => this._bankAccounts = value; }

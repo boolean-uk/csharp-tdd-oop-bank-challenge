@@ -24,7 +24,8 @@ namespace Boolean.CSharp.Main.Person
 
         public void ApproveRequest(Tuple<BankAccount, BankTransaction> b)
         {
-            throw new NotImplementedException();
+            b.Item1.ApprovedTransaction(b.Item2);
+            GetOverdraftRequests().Remove(b);
         }
     }
 }

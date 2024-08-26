@@ -17,13 +17,16 @@ namespace Boolean.CSharp.Test
 
         }
 
-        [TestCase(500, TransactionType.Deposit, 500)]
-        [TestCase(3.50, TransactionType.Deposit, 3.50)]
-        [TestCase(2500, TransactionType.Withdrawal, 2500)]
-        public void TestMakeTransaction(double amount, TransactionType t, double expected)
+        [TestCase(2500, 500, TransactionType.Deposit, 3000)]
+        [TestCase(17, 3.50, TransactionType.Deposit, 20.50)]
+        [TestCase(2500, 500, TransactionType.Withdrawal, 2000)]
+        public void TestMakeTransaction(double balance, double amount, TransactionType t, double expected)
         {
+            BankTransaction preload = new BankTransaction(balance, TransactionType.Deposit);
+            Customer customer = new Customer("Espen", "Luna", 93458577);
             Manager m = new Manager();
-            BankAccount act = new CurrentAccount(BankBranches.Bergen, 123);
+            BankAccount act = new CurrentAccount(BankBranches.Bergen, 123, "Brukskonto1", customer);
+            act.MakeTransaction(preload);
 
             BankTransaction tr = new BankTransaction(amount, t);
             double newbalance = act.MakeTransaction(tr);
@@ -34,7 +37,8 @@ namespace Boolean.CSharp.Test
         public void TestMakeOverdraftTransaction()
         {
             Manager m = new Manager();
-            BankAccount act = new CurrentAccount(BankBranches.Bergen, 123);
+            Customer customer = new Customer("Espen", "Luna", 93458577);
+            BankAccount act = new CurrentAccount(BankBranches.Bergen, 123, "Brukskonto1", customer);
             BankTransaction tr = new BankTransaction(500, TransactionType.Withdrawal);
             act.MakeTransaction(tr);
 

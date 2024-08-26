@@ -59,16 +59,14 @@ namespace Boolean.CSharp.Test
             bank.AddCustomer(c2);
             Customer foundCustomer1 = bank.FindCustomer(93458577);
 
-            Assert.That(foundCustomer1, Is.EqualTo(c1));
             Assert.That(foundCustomer1.FirstName, Is.EqualTo("Espen"));
             Assert.That(foundCustomer1.LastName, Is.EqualTo("Luna"));
             Assert.That(foundCustomer1.PhoneNumber, Is.EqualTo(93458577));
 
             Customer foundCustomer2 = bank.FindCustomer(12345678);
-            Assert.That(foundCustomer1, Is.EqualTo(c2));
-            Assert.That(foundCustomer1.FirstName, Is.EqualTo("Per"));
-            Assert.That(foundCustomer1.LastName, Is.EqualTo("Pedersen"));
-            Assert.That(foundCustomer1.PhoneNumber, Is.EqualTo(12345678));
+            Assert.That(foundCustomer2.FirstName, Is.EqualTo("Per"));
+            Assert.That(foundCustomer2.LastName, Is.EqualTo("Pedersen"));
+            Assert.That(foundCustomer2.PhoneNumber, Is.EqualTo(12345678));
 
             Assert.That(bank.FindCustomer(3123854), Is.EqualTo(null));
 
@@ -82,10 +80,10 @@ namespace Boolean.CSharp.Test
 
             Customer c = new Customer("Espen", "Luna", 93458577);
 
-            BankAccount currentAccount = bank.CreateAccount(c, AccountType.Current);
+            BankAccount currentAccount = bank.CreateAccount(c, AccountType.Current, BankBranches.Bergen, "Brukskonto1");
             Assert.That(currentAccount.GetType(), Is.EqualTo(typeof(CurrentAccount)));
 
-            BankAccount savingAccount = bank.CreateAccount(c, AccountType.Saving);
+            BankAccount savingAccount = bank.CreateAccount(c, AccountType.Saving, BankBranches.Bergen, "Sparekonto1");
             Assert.That(savingAccount.GetType(), Is.EqualTo(typeof(SavingAccount)));
 
             Assert.That(c.BankAccounts.Count(), Is.EqualTo(2));

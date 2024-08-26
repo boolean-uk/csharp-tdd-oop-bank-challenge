@@ -49,7 +49,7 @@ I want statements to be sent as messages to my phone.
 | `Bank`		| FindCustomer(int phonenr?)  |  Finds customer with the given number	 | Customer		|
 |				|							  |	 Fails to find the customer				 | null			|
 |				|							  |									         |				|
-| `Bank`		| CreateAccount(Customer c, AccountType t)   |  Creates a new account for customer 	 | BankAccount	|
+| `Bank`		| CreateAccount(Customer c, AccountType t, BankBranches b)   |  Creates a new account for customer 	 | BankAccount	|
 |				|							  |									         |				|
 | `Customer`	| FindBankAccount(int number) |  Finds account with given number	 	 | BankAccount	|
 |				|							  |									         |				|
@@ -57,7 +57,14 @@ I want statements to be sent as messages to my phone.
 |				|													|																			   |					|
 | `BankAccount` | MakeTransaction(BankTransaction tr) |  Makes transaction to account     | double newbalance  |
 |               |												    |																			   |		    	    |
+| `BankAccount` | ApprovedTransaction(BankTransaction tr) |  Approves, and adds an overdraft transaction request     | double newbalance  |
+|               |												    |																			   |		    	    |
+
 | `BankAccount` | GetBalance() |  Returns the bank account balance    | double balance  |
+|               |												    |																			   |		    	    |
+| `BankAccount` | SendTransaction() |  Sends transaction confirmation to sms    | void  |
+|               |												    |																			   |		    	    |
+| `BankAccount` | PrintTransactionHistory() |  Prints transactionhistory to console    | void  |
 |               |												    |																			   |		    	    |
 | `Manager    ` | GetOverdraftRequests()							|  Returns list of overdraftrequests    | List<Tuple<BankAccount,Banktransaction>> req  |
 |               |												    |																			   |		    	    |
