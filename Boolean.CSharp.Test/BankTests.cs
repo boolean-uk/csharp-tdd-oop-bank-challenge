@@ -83,5 +83,14 @@ namespace Boolean.CSharp.Test
             Assert.That(printedStatement.Contains("3000"));
             Assert.That(printedStatement.Contains("2500"));
         }
+
+        [Test]
+        public void Test8AddBranchToAccount()
+        {
+            BankAccount bankAccount = new CurrentAccount();
+            bankAccount.Branch = new BankBranch("Bob's Bank", "London");
+            string result1 = bankAccount.Branch.Name;
+            Assert.That(result1.Equals("Bob's Bank"));
+        }
     }
 }
