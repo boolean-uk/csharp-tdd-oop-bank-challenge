@@ -20,6 +20,7 @@ namespace Boolean.CSharp.Main.Acounts
             }
         }
 
+        public Branch associatedBranch { get; set; }
         public List<Transaction> Transactions { get; set; } = new List<Transaction>();
 
         public Branch yourBranch { get; set; }

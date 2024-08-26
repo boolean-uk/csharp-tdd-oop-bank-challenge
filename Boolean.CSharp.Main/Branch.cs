@@ -13,6 +13,18 @@ namespace Boolean.CSharp.Main
         public List<Account> accounts {  get; set; } = new List<Account>();
         public string Name { get; set; }
 
+        public Branch(string name)
+        {
+            Name = name;
+        }
 
+
+
+        //maybe redundant
+        public void AddAccount(Account account)
+        {
+            account.associatedBranch = this;
+            accounts.Add(account);
+        }
     }
 }
