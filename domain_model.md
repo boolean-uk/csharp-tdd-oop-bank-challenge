@@ -20,11 +20,10 @@
 |                   |                              |                             |                              |            |
 | BankBranch        | `string name`                | Name {get;}                 | name of the bank             | string     |
 |                   | `string location`            | Location {get;}             | location of the bank branch  | string     |
+|                   | `Manager manager`            | Manager {get;}			     | manager of the account       | Manager    |
 |                   |                              |                             |                              |            |
 | Person            | `string name`                | Name {get;}                 | name of the person           | string     |
 |                   | `int id`                     | Id {get;}                   | id of the person             | int        |
-|                   |                              |                             |                              |            |
-| Customer          | inherits from Person         |                             |                              |            |
 |                   |                              |                             |                              |            |
 | Manager           | inherits from Person         |                             |                              |            |
 |                   |                              |                             |                              |            |

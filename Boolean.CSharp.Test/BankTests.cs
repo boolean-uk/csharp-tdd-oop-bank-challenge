@@ -97,6 +97,7 @@ namespace Boolean.CSharp.Test
         public void Test9RequestOverdraft()
         {
             BankAccount bankAccount = new CurrentAccount();
+            bankAccount.Manager = new Manager("Bob", 1234);
             bankAccount.RequestOverdraft(500);
             decimal amount = bankAccount.Balance;
             Assert.That(amount == -500m);
@@ -107,7 +108,24 @@ namespace Boolean.CSharp.Test
         {
             BankAccount bankAccount = new CurrentAccount();
             bool result1 = bankAccount.RequestOverdraft(999999999999999);
+            bankAccount.Manager = new Manager("Bob", 1234);
             Assert.IsFalse(result1);
+        }
+
+        [Test]
+        public void Test11PrintStatementWithOverdraft()
+        {
+            BankAccount bankAccount = new CurrentAccount();
+            bankAccount.Manager = new Manager("Bob", 1234);
+            bankAccount.Deposit(1000.00m);
+            bankAccount.Deposit(2000.00m);
+            bankAccount.Withdraw(500.00m);
+            bankAccount.Withdraw(2500.00m);
+            bankAccount.RequestOverdraft(500.00m);
+            bankAccount.RequestOverdraft(200.00m);
+            string printedStatement = bankAccount.PrintBankStatements();
+            Assert.That(printedStatement.Contains("-500"));
+            Assert.That(printedStatement.Contains("-700"));
         }
     }
 }

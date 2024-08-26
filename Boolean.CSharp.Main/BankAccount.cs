@@ -11,6 +11,7 @@ namespace Boolean.CSharp.Main
         //private decimal _balance = 0;
         private Stack<BankStatement> _bankStatements = new Stack<BankStatement>();
         private BankBranch _bankBranch;
+        private Manager _manager;
 
         public bool Deposit(decimal amount)
         {
@@ -37,9 +38,17 @@ namespace Boolean.CSharp.Main
             decimal totalBalance = 0;
             if (_bankStatements.Count > 0) totalBalance = _bankStatements.Peek().Balance;
 
-            totalBalance -= amount;
-            _bankStatements.Push(new BankStatement(DateTime.Now, amount, "Withdraw", totalBalance));
-            return true;
+            if (_manager != null)
+            {
+                if (_manager.ApproveOverdraft(amount, totalBalance))
+                {
+                    totalBalance -= amount;
+                    _bankStatements.Push(new BankStatement(DateTime.Now, amount, "Withdraw", totalBalance));
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public string PrintBankStatements()
@@ -49,8 +58,6 @@ namespace Boolean.CSharp.Main
             sb.Append("credit ||".PadLeft(12));
             sb.Append("debit ||".PadLeft(12));
             sb.AppendLine("balance ||".PadLeft(12));
-
-            
 
             foreach (var bs in _bankStatements)
             {
@@ -68,5 +75,6 @@ namespace Boolean.CSharp.Main
         public Stack<BankStatement> BankStatements { get { return _bankStatements; } }
 
         public BankBranch Branch { get { return _bankBranch; } set { _bankBranch = value; } }
+        public Manager Manager { get { return _manager; } set { _manager = value; } }
     }
 }
