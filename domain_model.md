@@ -5,6 +5,7 @@
 | BankAccount       | `decimal balance`            | Deposit(decimal amount)     | deposit amount to account    | bool       |
 |                   | `Stack<BankStatement>`       | Withdraw(decimal amount)    | withdraw amount from account | bool       |
 |                   | `BankBranch bankBranch`      | PrintBankStatements()       | string as a print            | string     |
+|                   |                              | RequestOverdraft(decimal amount, Manager manager) request overdraft | bool |
 |                   |                              | Balance {get;}              | get the balance of account   | decimal    |
 |                   |                              | BankStatements {get;}       | get the bank statements      | Stack<BankStatement>|
 |                   |                              | BankBranch {get;}           | get the branch of the account| BankBranch |
@@ -20,7 +21,6 @@
 |                   |                              |                             |                              |            |
 | BankBranch        | `string name`                | Name {get;}                 | name of the bank             | string     |
 |                   | `string location`            | Location {get;}             | location of the bank branch  | string     |
-|                   | `Manager manager`            | Manager {get;}			     | manager of the account       | Manager    |
 |                   |                              |                             |                              |            |
 | Person            | `string name`                | Name {get;}                 | name of the person           | string     |
 |                   | `int id`                     | Id {get;}                   | id of the person             | int        |
