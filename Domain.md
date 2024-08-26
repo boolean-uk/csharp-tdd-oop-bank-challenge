@@ -23,8 +23,8 @@
 |                         |, Bank bank)                   |                        |             |                                                                                                                     
 |_________________________|_______________________________|________________________|_____________|
 |Bank                     |CreateAccount(int customerId   |Customer creates a new  |true         |                            
-|                         |, IBranch branch, bool savings)|bank account            |             |                                                                        
-|                         |                               |                        |             |    
+|                         |, IBranch branch, bool         |bank account            |             |                                                                        
+|                         |savingsAccount)                |                        |             |    
 |                         |                               |Customer does not exist |false        |                                   
 |                         |                               |                        |             |     
 |                         |RequestWithdraw(int customerId |Customer withdraws money|true         |                                                         

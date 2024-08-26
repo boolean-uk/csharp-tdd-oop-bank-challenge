@@ -12,6 +12,11 @@ namespace Boolean.CSharp.Main
         private double overDraftLimit = 0;
         public Bank() { }
 
+        public bool CreateAccount(int customerId)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool CreateCustomer(Customer customer)
         {
             if(customer.customerId == -1)

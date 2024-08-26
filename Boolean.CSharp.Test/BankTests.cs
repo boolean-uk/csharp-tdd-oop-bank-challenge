@@ -1,4 +1,5 @@
 ﻿using Boolean.CSharp.Main;
+using Boolean.CSharp.Main.Interfaces;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,34 @@ namespace Boolean.CSharp.Test
             manager.overDraftLimit = newLimit;
             bank.SetOverdraftLimit(manager);
             Assert.That(bank.GetOverdraftLimit() == newLimit);
+        }
+
+
+        [Test]
+        public void TestCreateAccount()
+        {
+            Customer customer1 = new Customer(55);
+            Customer customer2 = new Customer(0);
+            Customer customer3 = new Customer(10000);
+
+            Bank bank = new Bank();
+
+            bank.CreateCustomer(customer2);
+            bank.CreateCustomer(customer3);
+            bank.CreateCustomer(customer1);
+
+
+            bool result1 = bank.CreateAccount(customer1.customerId);
+            bool result2 = bank.CreateAccount(customer2.customerId);
+            bool result3 = bank.CreateAccount(customer3.customerId);
+            bool result4 = bank.CreateAccount(customer3.customerId);
+            bool result5 = bank.CreateAccount(42);
+
+            Assert.That(true == result1);
+            Assert.That(true == result2);
+            Assert.That(true == result3);
+            Assert.That(true == result4);
+            Assert.That(false == result5);
         }
     }
 }
