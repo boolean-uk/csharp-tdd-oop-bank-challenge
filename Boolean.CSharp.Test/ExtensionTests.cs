@@ -72,5 +72,45 @@ namespace Boolean.CSharp.Test
             Assert.AreEqual(resultEmergencyFund, expectedEmergencyFund);
 
         }
+
+        [Test]
+
+        public void DeclineOverdraftRequestTest()
+        {
+            decimal expectedBalance = 0;
+            Bank bank = new Bank("DNB", 10000);
+            Person avgjoe = new Person("Flier", Boolean.CSharp.Main.Role.CUSTOMER, null);
+            Person manager = new Person("Big Dawg", Boolean.CSharp.Main.Role.MANAGER, bank);
+            SavingsAccount savings = new SavingsAccount();
+
+            avgjoe.addAccount(savings);
+            savings.RequestOverdraft(1000);
+
+            decimal resultBalance = savings.Balance;
+            Assert.AreEqual(expectedBalance, resultBalance);
+
+
+
+        }
+
+        [Test]
+
+        public void WrongRoleForAcceptingTest()
+        {
+            decimal expectedBalance = 0;
+            Bank bank = new Bank("DNB", 10000);
+            Person avgjoe = new Person("Flier", Boolean.CSharp.Main.Role.CUSTOMER, null);
+            Person manager = new Person("Rando", Boolean.CSharp.Main.Role.CUSTOMER, bank);
+            SavingsAccount savings = new SavingsAccount();
+
+            avgjoe.addAccount(savings);
+            savings.RequestOverdraft(1000);
+
+            decimal resultBalance = savings.Balance;
+            Assert.AreEqual(expectedBalance, resultBalance);
+
+
+
+        }
     }
 }
