@@ -9,11 +9,11 @@ namespace Boolean.CSharp.Main.Classes
 {
     public class Request
     {
-        public Request(string justficiation, decimal amount, IAccount account)
+        public Request(string justficiation, decimal amount, string name)
         {
             this.justficiation = justficiation;
             this.amount = amount;
-            this.account = account;
+            this.name = name;
         }
 
         public Request() { }
@@ -22,6 +22,6 @@ namespace Boolean.CSharp.Main.Classes
 
         public decimal amount { get; set; }
 
-        public IAccount account { get; set; }
+        public string name { get; set; }
     }
 }

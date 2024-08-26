@@ -12,26 +12,31 @@ namespace Boolean.CSharp.Test
     public class BankTests
     {
 
+
+
         [Test]
 
         public void checkIfRegularAccountCreated()
         {
             //Arrange
             Bank bank = new Bank();
-            RegularAccount Raccount = new RegularAccount();
+            RegularAccount account = new RegularAccount();
             string accountHolder = "Jonh Johnson";
             string type = "Regular";
 
             //Act
-            Raccount.Create(type, accountHolder);
-            var account = bank.accounts.OfType<RegularAccount>().FirstOrDefault(x => x.nameOfHolder == accountHolder);
+            account.Create(type, accountHolder);
+            var accountToCheck = Bank.accounts.FirstOrDefault(x => x.AccountHolderName == accountHolder);
 
             //Assert
-            Assert.IsTrue(bank.accounts.Contains(account));
-            bank.accounts.Remove(account);
+            Assert.IsTrue(Bank.accounts.Contains(accountToCheck));
+            Bank.accounts.Remove(accountToCheck);
 
         }
 
+
+
+        [Test]
         public void checkIfSavingsAccountCreated()
         {
 
@@ -43,82 +48,123 @@ namespace Boolean.CSharp.Test
 
             //Act
             Saccount.Create(type, accountHolder);
-            var account = bank.accounts.OfType<SavingsAccount>().FirstOrDefault(x => x.nameOfHolder == accountHolder);
-
+            var account = Bank.accounts.FirstOrDefault(x => x.AccountHolderName == accountHolder);
 
             //Assert
-            Assert.IsTrue(bank.accounts.Contains(account));
-            bank.accounts.Remove(account);
+            Assert.IsTrue(Bank.accounts.Contains(account));
+            Bank.accounts.Remove(account);
 
         }
 
-
+        [Test]
 
         public void checkIfDeposited()
         {
 
-            //Arrange
             Bank bank = new Bank();
+            bank.bankName = "Min Bank 1";
+            Bank.accounts = new List<IAccount>();
+
             RegularAccount account = new RegularAccount();
-            SavingsAccount savingsAccount = new SavingsAccount();
             string receiver = "John Johnson";
-            decimal amount = 500;
-            var accountToTransferTo = bank.accounts
-             .FirstOrDefault(a =>
-                (a is RegularAccount && ((RegularAccount)a).nameOfHolder == receiver) ||
-                (a is SavingsAccount && ((SavingsAccount)a).nameOfHolder == receiver)
-    );
+            decimal amount = 500m;
 
-            //Act
-            Transaction transaction = new Transaction(savingsAccount, amount, new DateOnly(2024, 12, 24));
-            if (accountToTransferTo.GetType() == typeof(RegularAccount))
-            {
-                account.deposit(amount, accountToTransferTo);
-                account.transactionList.Add(transaction);
-                Assert.IsTrue(account.transactionList.Contains(transaction));
-            }
-            else if (accountToTransferTo.GetType() == typeof(SavingsAccount))
-            {
-                savingsAccount.deposit(amount, accountToTransferTo);
-                savingsAccount.transactionList.Add(transaction);
-                Assert.IsTrue(savingsAccount.transactionList.Contains(transaction));
-            }
+            account.Create("Regular", receiver);
+            Bank.accounts.Add(account);
+
+            // Act
+            account.deposit(amount, receiver);
+
+            // Assert
+            decimal balance = account.balance(receiver);
+            Assert.AreEqual(amount, balance);
+            Bank.accounts.Remove(account);
+
         }
-
 
 
         [Test]
 
-        public void checkIfWithdrawn()
+        public void checkIfDepositedSavings()
         {
 
-            //Arrange
             Bank bank = new Bank();
-            RegularAccount account = new RegularAccount();
-            SavingsAccount savingsAccount = new SavingsAccount();
+            bank.bankName = "Min Bank 1";
+            Bank.accounts = new List<IAccount>();
+
+            SavingsAccount account = new SavingsAccount();
             string receiver = "John Johnson";
-            decimal amount = -500;
-            var accountToTransferTo = bank.accounts
-             .FirstOrDefault(a =>
-                (a is RegularAccount && ((RegularAccount)a).nameOfHolder == receiver) ||
-                (a is SavingsAccount && ((SavingsAccount)a).nameOfHolder == receiver)
-    );
+            decimal amount = 500m;
 
-            //Act
-            Transaction transaction = new Transaction(savingsAccount, amount, new DateOnly(2024, 12, 25));
-            if (accountToTransferTo.GetType() == typeof(RegularAccount))
-            {
-                account.deposit(amount, accountToTransferTo);
-                account.transactionList.Add(transaction);
-                Assert.IsTrue(account.transactionList.Contains(transaction));
-            }
-            else if (accountToTransferTo.GetType() == typeof(SavingsAccount))
-            {
-                savingsAccount.deposit(amount, accountToTransferTo);
-                savingsAccount.transactionList.Add(transaction);
-                Assert.IsTrue(savingsAccount.transactionList.Contains(transaction));
-            }
+            account.Create("Savings", receiver);
+            Bank.accounts.Add(account);
 
+            // Act
+            account.deposit(amount, receiver);
+
+            // Assert
+            decimal balance = account.balance(receiver);
+            Assert.AreEqual(amount, balance);
+            Bank.accounts.Remove(account);
+
+        }
+
+
+        [Test]
+        public void CheckIfWithdrawnSavings()
+        {
+            // Arrange
+            Bank bank = new Bank();
+            bank.bankName = "Min Bank 1";
+            Bank.accounts = new List<IAccount>();
+
+            SavingsAccount account = new SavingsAccount();
+            string receiver = "John Johnson";
+            decimal depositAmount = 1000m;
+            decimal withdrawAmount = 500m;
+
+            account.Create("Savings", receiver);
+            Bank.accounts.Add(account);
+
+            // Act
+            account.deposit(depositAmount, receiver);
+            bool withdrawResult = account.withdraw(withdrawAmount, receiver);
+
+            // Assert
+            Assert.IsTrue(withdrawResult);
+            decimal balance = account.balance(receiver);
+            Assert.AreEqual(depositAmount - withdrawAmount, balance);
+
+            Bank.accounts.Remove(account);
+        }
+
+        [Test]
+
+        public void CheckIfWithdrawn()
+        {
+            // Arrange
+            Bank bank = new Bank();
+            bank.bankName = "Min Bank 1";
+            Bank.accounts = new List<IAccount>();
+
+            RegularAccount account = new RegularAccount();
+            string receiver = "John Johnson";
+            decimal depositAmount = 1000m;
+            decimal withdrawAmount = 500m;
+
+            account.Create("Regular", receiver);
+            Bank.accounts.Add(account);
+
+            // Act
+            account.deposit(depositAmount, receiver);
+            bool withdrawResult = account.withdraw(withdrawAmount, receiver);
+
+            // Assert
+            Assert.IsTrue(withdrawResult);
+            decimal balance = account.balance(receiver);
+            Assert.AreEqual(depositAmount - withdrawAmount, balance);
+
+            Bank.accounts.Remove(account);
         }
 
         [Test]
@@ -128,15 +174,22 @@ namespace Boolean.CSharp.Test
 
             //Arrange
             Bank bank = new Bank();
-            RegularAccount regular = new RegularAccount();
-            string accountHodler = "John Johnson";
-            decimal expectedSum = 100;
-            var account = bank.accounts.OfType<RegularAccount>().FirstOrDefault(x => x.nameOfHolder == accountHodler);
-            //Act
+            bank.bankName = "Min Bank 1";
+            Bank.accounts = new List<IAccount>();
 
-            decimal currentBalance= regular.balance(account);
-            Assert.AreEqual(expectedSum, currentBalance);
+            RegularAccount account = new RegularAccount();
+            string receiver = "John Johnson";
+            account.Create("Regular", receiver);
+            Bank.accounts.Add(account);
+            account.deposit(100, receiver);
+            account.deposit(100, receiver);
+
+            decimal expectedBalance = 200;
+            Assert.AreEqual(expectedBalance, account.balance(receiver));
+            Bank.accounts.Remove(account);
         }
+
+
 
 
         [Test]
@@ -146,14 +199,19 @@ namespace Boolean.CSharp.Test
 
             //Arrange
             Bank bank = new Bank();
-            SavingsAccount savings = new SavingsAccount();
-            string accountHodler = "John Johnson";
-            decimal expectedSum = 100;
-            var account = bank.accounts.OfType<SavingsAccount>().FirstOrDefault(x => x.nameOfHolder == accountHodler);
-            //Act
+            bank.bankName = "Min Bank 1";
+            Bank.accounts = new List<IAccount>();
 
-            decimal currentBalance = savings.balance(savings);
-            Assert.AreEqual(expectedSum, currentBalance);
+            SavingsAccount account = new SavingsAccount();
+            string receiver = "John Johnson";
+            account.Create("Savings", receiver);
+            Bank.accounts.Add(account);
+            account.deposit(100, receiver);
+            account.deposit(100, receiver);
+
+            decimal expectedBalance = 200;
+            Assert.AreEqual(expectedBalance, account.balance(receiver));
+            Bank.accounts.Remove(account);
         }
 
 
@@ -162,47 +220,61 @@ namespace Boolean.CSharp.Test
         public void checkIfBranchCorrect()
         {
             //Arrange
-
             Bank bank = new Bank();
-            CityBranch cityBranch = new CityBranch();
-            RemoteBranch remoteBranch = new RemoteBranch();
-            RuralBranch ruralBranch = new RuralBranch();
-            string accountHodler = "John Johnson";
-            var account = bank.accounts.OfType<RegularAccount>().FirstOrDefault(x => x.nameOfHolder == accountHodler);
+            RuralBranch branch = new RuralBranch();
+            branch.accounts = new List<IAccount>();
+            bank.bankName = "Min Bank 1";
+            Bank.accounts = new List<IAccount>();
 
-            //Act
-            cityBranch.accounts.Add(account);
-            string expectedBranch = "City";
-            Assert.AreEqual(cityBranch.getName(account), expectedBranch);
-            Assert.IsTrue(cityBranch.accounts.Contains(account));
+            SavingsAccount account = new SavingsAccount();
+            string receiver = "John Johnson";
+            account.Create("Savings", receiver);
+            Bank.accounts.Add(account);
+            branch.accounts.Add(account);
 
 
-            
+            Assert.IsTrue(branch.accounts.Contains(account));
+            Bank.accounts.Remove(account);
+
+
         }
 
         [Test]
 
         public void checkIfRequestHandled()
         {
-
-
-            //Arrange
+            // Arrange
             Bank bank = new Bank();
+            bank.bankName = "Min Bank 1";
+
+            // Clear static collections to ensure test isolation
+            Bank.accounts = new List<IAccount>();
+            Bank.requestQueue = new List<Request>();
+
             RegularAccount account = new RegularAccount();
-            string accountHolder = "John Johnson";
-            var currentAccount = bank.accounts.OfType<RegularAccount>().FirstOrDefault(x => x.nameOfHolder == accountHolder);
-            decimal amountToGive = 200;
-            string justficiation = "fired from my job!";
+            string receiver = "Alan Wake";
+            account.Create("Regular", receiver);
+            Bank.accounts.Add(account);
+            decimal amountToIncrease = 100m;
 
 
-            //Act
-            account.requestOverdraft(currentAccount, justficiation, amountToGive);
-            account.updateOverdraft(currentAccount, true, 200);
 
-            //Assert
-            Assert.AreEqual(currentAccount.overdraftedAmount, amountToGive);
+            // Act
+            bool overdraftRequested = account.RequestOverdraft(receiver, "Medical needs", amountToIncrease);
+            bool requestHandled = bank.handleRequest(receiver, true);
+
+
+
+            RegularAccount accountAfterRequestHandled = Bank.accounts?.OfType<RegularAccount>().FirstOrDefault(x => x.AccountHolderName == receiver);
+            Assert.IsTrue(accountAfterRequestHandled.overdrafted);
+            Assert.AreEqual(accountAfterRequestHandled.overdraftedAmount,amountToIncrease);
+
+            Bank.accounts.Remove(account);
+            
         }
+
     }
 }
 
-    
+
+

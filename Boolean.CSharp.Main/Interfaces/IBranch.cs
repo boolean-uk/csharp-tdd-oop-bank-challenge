@@ -13,6 +13,6 @@ namespace Boolean.CSharp.Main.Interfaces
 
         List<IAccount> accounts { get; }
 
-        string getName(IAccount account);
+        bool isIsBranch(string name);
     }
 }

@@ -9,25 +9,53 @@ namespace Boolean.CSharp.Main.Classes
 {
     public class Bank
     {
+        public Bank() { }
 
-        private List<IAccount> _accounts;
+        public static List<IAccount> accounts { get; set; } = new List<IAccount>();
+
+        public static List<Request> requestQueue { get; set; } = new List<Request>();
+
         public string bankName { get; set; }
 
-        public List<IAccount> accounts
+        public bool handleRequest(string name, bool decision)
         {
-            get { return _accounts; }
-            set { _accounts = value; }
-        }
+            if (string.IsNullOrEmpty(name))
+            {
+                return false;
+            }
 
-        public bool handleRequst(Request request, bool decision) {
-        
-            if (request == null) return false;
+            Request request = Bank.requestQueue?.FirstOrDefault(x => x.name == name);
+            if (request == null)
+            {
+                Console.WriteLine("Request not found for name: " + name);
+                return false;
+            }
+
+            RegularAccount account = Bank.accounts?.OfType<RegularAccount>().FirstOrDefault(x => x.AccountHolderName == name);
+            if (account == null)
+            {
+                Console.WriteLine("Account not found for name: " + name);
+                return false;
+            }
+
+            if (decision)
+            {
+                account.overdrafted = true;
+                account.overdraftedAmount = request.amount;
+                // Immediately print to verify it was set
+                Console.WriteLine("Overdraft status set to true for account: " + account.overdrafted);
+            }
             else
             {
-                decimal sumToGive = request.amount;
-                request.account.updateOverdraft(request.account,decision,sumToGive);
-                return true;
+                Console.WriteLine("Request rejected for name: " + name);
             }
+
+            Bank.requestQueue.Remove(request);
+
+            Console.WriteLine($"Final overdraft status: {account.overdrafted}");
+            Console.WriteLine($"Request queue count after handling: {Bank.requestQueue.Count()}");
+
+            return true;
         }
     }
 }

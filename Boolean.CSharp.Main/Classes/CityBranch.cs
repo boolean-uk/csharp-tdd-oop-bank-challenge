@@ -14,13 +14,9 @@ namespace Boolean.CSharp.Main.Classes
 
         public List<IAccount> accounts => throw new NotImplementedException();
 
-        public string getName(IAccount account)
+        public bool isIsBranch(string name)
         {
-            if (accounts.Contains(account))
-            {
-                return Name;
-            }
-            return "Account not in this branch";
+            throw new NotImplementedException();
         }
     }
 }

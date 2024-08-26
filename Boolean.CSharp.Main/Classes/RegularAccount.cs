@@ -6,104 +6,132 @@ using System.Linq;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using Twilio.TwiML.Fax;
 
 
 namespace Boolean.CSharp.Main.Classes
 {
+
+
     public class RegularAccount : IAccount
     {
+
+        Statement statement = new Statement();
+        
+        
         public bool Create(string type, string name)
         {
             if (type == "Regular")
             {
-                RegularAccount account = new RegularAccount(name,new List<Transaction>());
+                RegularAccount account = new RegularAccount(new List<Transaction>());
+                account.AccountHolderName = name;
+                account.overdrafted = false;
+                account.overdraftedAmount = 0;
+                Bank.accounts.Add(account);
                 return true;
             }
             return false;
         }
 
 
-        public bool deposit(decimal amount, IAccount account)
-        {
-            DateOnly dayOfTransfer =DateOnly.FromDateTime(DateTime.Now);
-            if (amount > 0 && account != null)
-            {
-                Transaction transaction = new Transaction(account, amount, dayOfTransfer);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public bool withdraw(decimal amount, IAccount account)
+        public bool deposit(decimal amount, string Receiver)
         {
             DateOnly dayOfTransfer = DateOnly.FromDateTime(DateTime.Now);
-            if (amount < 0 && account != null)
+            RegularAccount account = Bank.accounts.OfType<RegularAccount>().FirstOrDefault(x=>x.AccountHolderName==Receiver);
+            string receipt;
+            string type = "Deposit";
+
+            if (amount > 0 && account != null)
             {
-                Transaction transaction = new Transaction(account, amount, dayOfTransfer);
+                Transaction transaction = new Transaction(account, amount, dayOfTransfer, type);
+                transactionList.Add(transaction);
                 return true;
             }
             else
             {
+                
                 return false;
             }
         }
 
-        public decimal balance(IAccount account)
+        public bool withdraw(decimal amount, string receiver)
+        {
+            DateOnly dayOfTransfer = DateOnly.FromDateTime(DateTime.Now);
+            string type = "Withdraw";
+            decimal currentBalance = balance(receiver);
+
+            
+            RegularAccount account = Bank.accounts.OfType<RegularAccount>()
+                .FirstOrDefault(x => x.AccountHolderName == receiver);
+
+            
+            if (amount > 0 && account != null &&  currentBalance>= amount)
+            {
+                // Create and add the transaction
+                Transaction transaction = new Transaction(account, amount, dayOfTransfer, type);
+                transactionList.Add(transaction);
+                return true;
+            }
+            return false;
+        }
+
+        public decimal balance (string Receiver)
         {
             decimal sum = 0;
-
             foreach (var item in transactionList)
             {
-                sum += item.amount;
+                if (item.type == "Withdraw")
+                {
+                    sum -= item.amount;
+                }
+                else if (item.type== "Deposit") {
+                    sum += item.amount;
+                }
             }
             return sum;
         }
 
-        public Request requestOverdraft(IAccount account, string justficiation, decimal amount)
+
+
+        public bool RequestOverdraft(string name, string justification, decimal amount)
         {
-            if ((account as RegularAccount)?.overdrafted == true)
+            var account = Bank.accounts?.OfType<RegularAccount>().FirstOrDefault(x => x.AccountHolderName == name);
+            if (account == null || account.overdrafted)
             {
-                return null;
-            }
-            else
-            {
-                Request request = new Request(justficiation,amount,account);
-                return request;
-            }
-        }
-
-        public void updateOverdraft(IAccount account, bool status, decimal toBeGiven)
-        {
-            if (status == true)
-            {
-                (account as RegularAccount).overdrafted = status;
-                (account as RegularAccount).overdraftedAmount = toBeGiven;
-
+                return false;
             }
 
+            var request = new Request(justification, amount, name);
+            Bank.requestQueue.Add(request);
+            return true;
         }
 
 
-        public string nameOfHolder { get; set; }
 
-        private List<Transaction> _transactionList = new List<Transaction>();
+
+
 
 
         public RegularAccount() { }
-        public RegularAccount(string nameOfHolder, List<Transaction> transactionList)
+        public RegularAccount(List<Transaction> transactionList)
         {
-            this.nameOfHolder = nameOfHolder;
+            
             _transactionList = transactionList;
         }
 
-        public List<Transaction> transactionList { get { return _transactionList; } }
+        private List<Transaction> _transactionList = new List<Transaction>();
+        public List<Transaction> transactionList
+        {
+            get { return _transactionList; }
+            set { _transactionList = value; }
+        }
 
         public bool overdrafted { get; set; }
 
         private decimal _defuaultRent = 0;
+
+        private string _AccountHolderName;
+        public string AccountHolderName { get { return _AccountHolderName; } set { _AccountHolderName = value; } }
         decimal rent { get { return _defuaultRent; } set { value = _defuaultRent; } }
 
         public decimal overdraftedAmount { get; set; }

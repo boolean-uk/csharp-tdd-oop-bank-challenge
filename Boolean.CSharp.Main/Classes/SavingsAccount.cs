@@ -7,94 +7,95 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main.Classes
 {
-    public class SavingsAccount : IAccount
+    public class SavingsAccount :  IAccount
     {
-        public bool Create(string type,string name)
+
+         Statement statement = new Statement();
+        public bool Create(string type, string name)
         {
             if (type == "Savings")
             {
-                SavingsAccount savingsAccount = new SavingsAccount(name, new List<Transaction>());
-                savingsAccount.rent = rent;
-                savingsAccount.overdrafted = false;
-                savingsAccount.overdraftedAmount = 0;
+                SavingsAccount account = new SavingsAccount(new List<Transaction>());
+                account.AccountHolderName = name;
+                Bank.accounts.Add(account);
                 return true;
             }
             return false;
         }
 
-        public bool deposit(decimal amount, IAccount account)
+        public bool deposit(decimal amount, string Receiver)
         {
             DateOnly dayOfTransfer = DateOnly.FromDateTime(DateTime.Now);
+            SavingsAccount account = Bank.accounts.OfType<SavingsAccount>().FirstOrDefault(x => x.AccountHolderName == Receiver);
+            string receipt;
+            string type = "Deposit";
+
             if (amount > 0 && account != null)
             {
-                Transaction transaction = new Transaction(account, amount, dayOfTransfer);
+                Transaction transaction = new Transaction(account, amount, dayOfTransfer, type);
+                transactionList.Add(transaction);
                 return true;
             }
             else
             {
+
                 return false;
             }
         }
 
-        public bool withdraw(decimal amount, IAccount account)
+        public bool withdraw(decimal amount, string receiver)
         {
             DateOnly dayOfTransfer = DateOnly.FromDateTime(DateTime.Now);
-            if (amount < 0 && account != null)
+            string type = "Withdraw";
+            decimal currentBalance = balance(receiver);
+
+
+            SavingsAccount account = Bank.accounts.OfType<SavingsAccount>()
+                .FirstOrDefault(x => x.AccountHolderName == receiver);
+
+
+            if (amount > 0 && account != null && currentBalance >= amount)
             {
-                Transaction transaction = new Transaction(account, amount, dayOfTransfer);
+                // Create and add the transaction
+                Transaction transaction = new Transaction(account, amount, dayOfTransfer, type);
+                transactionList.Add(transaction);
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
-        public decimal balance(IAccount account)
+        public decimal balance(String Receiver)
         {
             decimal sum = 0;
 
             foreach (var item in transactionList)
             {
-                sum += item.amount;
+                if (item.type == "Withdraw")
+                {
+                    sum -= item.amount;
+                }
+                else if (item.type == "Deposit")
+                {
+                    sum += item.amount;
+                }
             }
             return sum;
         }
 
-        public Request requestOverdraft(IAccount account, string justficiation, decimal amount)
+
+        private List<Transaction> _transactionList = new List<Transaction>();
+
+
+        public List<Transaction> transactionList { get { return _transactionList; } set { _transactionList = value; } }
+
+        public SavingsAccount(List<Transaction> transactionList)
         {
-            if ((account as SavingsAccount)?.overdrafted == true)
-            {
-                return null;
-            }
-            else
-            {
-                Request request = new Request(justficiation, amount, account);
-                return request;
-            }
-        }
-
-        public void updateOverdraft(IAccount account, bool status, decimal toBeGiven)
-        {
-            if (status == true)
-            {
-                (account as SavingsAccount).overdrafted = status;
-                (account as SavingsAccount).overdraftedAmount = toBeGiven;
-
-            }
-
-        }
-
-        public List<Transaction> transactionList = new List<Transaction>();
-
-        public SavingsAccount(string nameOfHolder, List<Transaction> transactionList)
-        {
-            this.nameOfHolder = nameOfHolder;
             this.transactionList = transactionList;
         }
 
         public SavingsAccount() { }
-        public string nameOfHolder {  get; set; }
+        private string _AccountHolderName;
+        public string AccountHolderName { get { return _AccountHolderName; } set { _AccountHolderName = value; } }
 
         public bool overdrafted {  get; set; }
 

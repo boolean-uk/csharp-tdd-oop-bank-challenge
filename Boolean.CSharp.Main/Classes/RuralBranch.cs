@@ -11,15 +11,19 @@ namespace Boolean.CSharp.Main.Classes
     {
         public string Name => nameof(RuralBranch);
 
-        public List<IAccount> accounts => throw new NotImplementedException();
+        public List<IAccount> accounts { get; set; }
 
-        public string getName(IAccount account)
+        public bool isIsBranch(string name)
         {
+            IAccount account = (IAccount)Bank.accounts.Where(x => x.AccountHolderName == name);
             if (accounts.Contains(account))
             {
-                return Name;
+                return true;
             }
-            return "Account not in this branch";
+            else
+            {
+                return false;
+            }
         }
     }
 }

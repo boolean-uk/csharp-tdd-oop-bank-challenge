@@ -10,13 +10,13 @@ namespace Boolean.CSharp.Main.Interfaces
     public interface IAccount
     {
 
+        string AccountHolderName { get; set; }
         bool Create(string type,string name);
-        bool deposit(decimal amount,IAccount account);
-        bool withdraw(decimal amount,IAccount account);
-        decimal balance(IAccount account);
+        bool deposit(decimal amount,string receiver);
+        bool withdraw(decimal amount,string receiver);
+        decimal balance(string Receiver);
 
-        Request requestOverdraft(IAccount account, string justficiation, decimal amount);
-        void updateOverdraft(IAccount account,bool status, decimal amount);
+       
 
 
     }
