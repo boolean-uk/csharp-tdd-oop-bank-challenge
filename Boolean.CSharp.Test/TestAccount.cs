@@ -39,7 +39,7 @@ namespace Boolean.CSharp.Test
 
             for (double funds = 1000.00; funds < 4000.00; funds += 1000.00)
             {
-                account.Deposit(funds);
+                account.Deposit(Math.Round(funds, 2));
                 account.Withdraw(funds / 2.0);
             }
             /*
