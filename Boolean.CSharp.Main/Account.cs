@@ -15,5 +15,23 @@ namespace Boolean.CSharp.Main
         {
             return this.balance;
         }
+        public double deposit(double amount)
+        {
+            this.balance += amount;
+
+            return this.balance;
+        }
+
+        public double withdraw(double amount)
+        {
+            if (this.balance < amount)
+            {
+                Console.WriteLine("Your balance is to low, change amount!");
+                return this.balance;
+            }
+
+            this.balance -= amount;
+            return this.balance;
+        }
     }
 }

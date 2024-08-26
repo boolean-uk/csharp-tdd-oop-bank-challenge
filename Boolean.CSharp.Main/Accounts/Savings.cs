@@ -8,6 +8,6 @@ namespace Boolean.CSharp.Main.Accounts
 {
     public class Savings : Account
     {
-    
+       
     }
 }
