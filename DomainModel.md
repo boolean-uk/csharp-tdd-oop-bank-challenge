@@ -72,7 +72,9 @@ I want statements to be sent as messages to my phone.
 |                                  | addAccount(Account account)                                               | Person adds an account                                         |                              |
 |                                  |                                                                           |                                                                |                              |
 |----------------------------------|---------------------------------------------------------------------------|----------------------------------------------------------------|------------------------------|
-| Bank                             | addBranch(Branch branch)                                                  | Adds a specific branch to a bank                               |                              |
+| Bank                             | Public Bank(string name, decimal EmergencyFund)                           | Creates a new bank object with a set fund                      |                              |
+|                                  |                                                                           |                                                                |                              |
+|                                  | addBranch(Branch branch)                                                  | Adds a specific branch to a bank                               |                              |
 |                                  |                                                                           |                                                                |                              |
 |                                  | getAllBranches()                                                          | Bank wants to see all connected branches                       | List<Branch>                 |
 |                                  |                                                                           |                                                                |                              |

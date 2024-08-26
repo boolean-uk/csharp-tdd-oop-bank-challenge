@@ -9,9 +9,14 @@ namespace Boolean.CSharp.Main
     public class Bank
     {
         public string Name { get; set; }
-
+        public decimal EmergencyFund { get; set; }
         public List<Branch> Branches { get; set; } = new List<Branch>();
 
+        public Bank(string name, decimal funds) 
+        {
+            Name = name;
+            EmergencyFund = funds;
+        }
 
 
         public void addBranch(Branch branch)
@@ -21,7 +26,7 @@ namespace Boolean.CSharp.Main
 
         public List<Branch> getBranches()
         {
-            throw new NotImplementedException();
+            return Branches;
         }
     }
 }

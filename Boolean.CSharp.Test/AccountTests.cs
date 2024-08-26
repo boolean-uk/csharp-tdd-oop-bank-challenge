@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Boolean.CSharp.Test
 {
     [TestFixture]
-    public class CoreTests
+    public class AccountTests
     {
         
 
@@ -62,39 +62,7 @@ namespace Boolean.CSharp.Test
             Assert.AreEqual(expected, result);
         }
 
-        [Test]
-
-        public void PersonAccountTest()
-        {
-            Person pax = new Person("Flier", Role.CUSTOMER);
-            CurrentSavingsAccount savingsAccount = new CurrentSavingsAccount();
-            pax.addAccount(savingsAccount);
-
-            decimal expected = 1500;
-            savingsAccount.Deposit(1500);
-
-            decimal result = pax.Accounts.First().getBalance();
-            Assert.AreEqual(result, expected);
-
-
-        }
-
-
-        [Test]
-        public void getBranchesTest()
-        {
-            Bank bank = new Bank();
-            Branch stavangerBranch = new Branch("StavangerDNB");
-            Branch osloBranch = new Branch("OsloDNB");
-
-            bank.addBranch(stavangerBranch);
-            bank.addBranch(osloBranch);
-            string expected = "StavangerDNB";
-            List<Branch> results = bank.getBranches();
-            Assert.AreEqual(expected, results.First().Name);
-
-
-        }   
+        
 
     }
 }
