@@ -16,7 +16,7 @@ namespace Boolean.CSharp.Main
 
         public decimal Balance { get; }    
 
-        public Transaction(decimal amount, decimal balance, TransactionType transactionType)
+        public Transaction(decimal amount, TransactionType transactionType, decimal balance)
         {
             this.Amount = amount;
             this.Balance = balance;

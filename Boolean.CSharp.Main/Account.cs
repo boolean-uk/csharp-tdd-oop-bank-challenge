@@ -8,21 +8,26 @@ namespace Boolean.CSharp.Main
 {
     public abstract class Account
     {
-        private decimal _balance;
 
         public virtual AccountType AccountType { get; }
         public TransactionType TransactionType { get; }
         public Transaction Transaction { get; set; }
         public List<Transaction> Transactions { get; set; } = new List<Transaction>();
-        public decimal Balance { get { return _balance; } set { _balance = value; } } 
 
+
+        public decimal GetBalance() { 
+            decimal deposit = Transactions.Where(t => t.TransactionType == TransactionType.Deposit).Sum(t => t.Amount);
+            decimal withdraw = Transactions.Where(t => t.TransactionType == TransactionType.Withdraw).Sum(t => t.Amount);
+
+            decimal balance = deposit - withdraw;
+            return balance;
+        }
 
         public bool Deposit(decimal amount, TransactionType transactionType)
         { 
             if (amount > 0)
             {
-                Balance += amount;
-                Transaction transaction = new Transaction(amount, Balance, transactionType);
+                Transaction transaction = new Transaction(amount, TransactionType.Deposit, GetBalance() + amount);
                 Transactions.Add(transaction);
                 return true;
             }
@@ -35,8 +40,7 @@ namespace Boolean.CSharp.Main
         {
             if (amount > 0)
             {
-                Balance -= amount;
-                Transaction transaction = new Transaction(amount, Balance, transactionType);
+                Transaction transaction = new Transaction(amount, TransactionType.Withdraw, GetBalance() - amount);
                 Transactions.Add(transaction);
                 return true;
             }
