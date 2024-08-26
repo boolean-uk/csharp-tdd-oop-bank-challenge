@@ -75,8 +75,8 @@ namespace Boolean.CSharp.Test
             customer.accounts.Add(bank.CreateAccount(customer.customerId, branch1, false));
 
 
-            bank.RequestDeposit(customer.customerId, 50, customer.accounts[0], false);
-            bank.RequestDeposit(customer.customerId, 25, customer.accounts[0], false);
+            bank.RequestDeposit(customer, 50, customer.accounts[0]);
+            bank.RequestDeposit(customer, 25, customer.accounts[0]);
             string date = DateTime.Now.ToString("dd/MM/yyyy");
             string expected = 
                 "date       || credit  || debit  || balance\n" +

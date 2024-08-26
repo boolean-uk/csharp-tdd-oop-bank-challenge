@@ -68,9 +68,9 @@ namespace Boolean.CSharp.Main
         }
 
        
-        public void RequestDeposit(int customerId, double funds, int bankAccount, bool overdraw)
+        public void RequestDeposit(Customer customer, double funds, int bankAccount)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void SetOverdraftLimit(Manager manager)
