@@ -1,4 +1,5 @@
 ﻿using Boolean.CSharp.Main.Accounts;
+using Boolean.CSharp.Main.Enum;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -37,30 +38,50 @@ namespace Boolean.CSharp.Main
             return true;
         }
 
-        /*
-        public bool answerOverdraft(Account account, double amount)
+        public bool decideOverdraft(Overdraft overdraft, Role role, bool accept)
         {
 
-            if (!branches.Any(b => b.branchName == account.branch.branchName))
+            
+            if (role != Role.MANAGER)
             {
-                Console.WriteLine("Account not found!");
-                return false; 
-            }
-
-            if (account.getBalance() > amount)
-            {
-                Console.WriteLine("Your balance is to high to ask for an overdraft!");
+                Console.WriteLine($"Only the manager can decide on an overdraft!");
                 return false;
             }
 
-            if (account.getBalance() - amount < 0 && this.emergencyFund > amount)
+            if (emergencyFund < overdraft.amount)
             {
-                this.emergencyFund -= amount;
-                
+                Console.WriteLine($"Emergencyfund is to low to gice an overdraft!");
+                return false;
             }
 
-            return true;
+                Account account = overdraft.Account;
+
+            if (!accept)
+            {
+                account._requests.Remove(overdraft);
+                Console.WriteLine("Overdraft request declined by the manager!");
+                return false;
+            }
+
+                overdraft.answer = Answer.ACCEPTED;
+                account._transactions.Add(overdraft.transactions);
+
+            if (account.getBalance() > 0)
+            {
+                
+                emergencyFund -= (account.getBalance() + overdraft.amount);
+            } 
+            else 
+            {
+                emergencyFund -= overdraft.amount;
+            }
+
+                account._requests.Remove(overdraft);
+
+                Console.WriteLine("Overdraft approved by the manager!");
+                Console.WriteLine("You owe the bank: " + account.getBalance());
+
+                return true;
         }
-        */
     }
 }

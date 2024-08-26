@@ -1,6 +1,7 @@
 ﻿
 using Boolean.CSharp.Main;
 using Boolean.CSharp.Main.Accounts;
+using Boolean.CSharp.Main.Enum;
 
 /*
 savings.deposit(500);
@@ -23,6 +24,20 @@ savings.deposit(500);
 savings.deposit(200);
 savings.withdraw(100);
 
+Console.WriteLine(" \n CURRENTTTTT \n");
+
 Current current = new Current(Oslo);
 
 bank.createAccount(current);
+
+current.deposit(1000);
+current.deposit(1000);
+current.withdraw(2000);
+
+current.requestOverdraft(5000);
+
+bank.decideOverdraft(current._requests.First(), Role.MANAGER, false);
+
+current.deposit(500);
+
+current.bankStatement();

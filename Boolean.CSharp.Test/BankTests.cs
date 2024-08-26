@@ -42,9 +42,10 @@ namespace Boolean.CSharp.Test
 
             bool expected = true;
 
-            bool result = bank.decideOverdraft(savings._requests.First(), person.Role);
+            bool result = bank.decideOverdraft(savings._requests.First(), person.Role, true);
 
             Assert.That(expected == result);
+            Assert.That(bank.emergencyFund == 8000);
         }
 
     }
