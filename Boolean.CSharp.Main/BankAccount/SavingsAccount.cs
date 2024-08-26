@@ -11,5 +11,7 @@ namespace Boolean.CSharp.Main.BankAccount
         public string AccountName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public bool savingsAccount { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public List<Transaction> transactionHistory { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public List<Transaction> TransactionHistory { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        bool IBankAccount.SavingsAccount { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     }
 }

@@ -33,6 +33,7 @@
 |`Customer : Person`| List\<IBankAccount> _bankAccounts_ |
 |`Engineer : Person`|  |
 |`IBankAccount`| string _accountName_, bool _savingsAccount_, List\<Transaction> _transactionHistory_ |
-|`SavingsAccount : IBankAccount`|
-|`Account : IBankAccount`|
+|`SavingsAccount : IBankAccount`|  |
+|`Account : IBankAccount`|  | 
 |`Transaction`| DateTime _date_, string _typeOfTransaction_, decimal _amount_ |
+|`TransactionType`| enum _Current_, enum _Saving_ |
