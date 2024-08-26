@@ -41,7 +41,7 @@ public abstract class Account(Customer customer, string name, AccountType type)
         if (amount > 0) amount *= -1;
         BankTransaction bt = new(DateTime.Now, amount, description);
         var newBalance = GetBalance() + amount;
-        if (!(newBalance > 0))
+        if (!(newBalance >= 0))
         {
             Overdraft.NewOverdraftRequest(_customer, this, bt, newBalance);
             return false;
