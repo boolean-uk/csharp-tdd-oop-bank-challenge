@@ -21,9 +21,9 @@ namespace Boolean.CSharp.Main
             Role = role;
         }
 
-
-
-
-
+        public void addAccount(CurrentSavingsAccount savingsAccount)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

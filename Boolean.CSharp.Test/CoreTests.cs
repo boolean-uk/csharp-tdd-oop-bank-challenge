@@ -62,6 +62,24 @@ namespace Boolean.CSharp.Test
             Assert.AreEqual(expected, result);
         }
 
+        [Test]
+
+        public void PersonAccountTest()
+        {
+            Person pax = new Person("Flier", Role.CUSTOMER);
+            CurrentSavingsAccount savingsAccount = new CurrentSavingsAccount();
+            pax.addAccount(savingsAccount);
+
+            decimal expected = 1500;
+            savingsAccount.Deposit(1500);
+
+            decimal result = pax.Accounts.First().getBalance();
+            Assert.AreEqual(result, expected);
+
+
+        
+
+        }
 
     }
 }
