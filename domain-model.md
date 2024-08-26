@@ -59,7 +59,6 @@ I want statements to be sent as messages to my phone.
 |               |												    |																			   |		    	    |
 | `BankAccount` | ApprovedTransaction(BankTransaction tr) |  Approves, and adds an overdraft transaction request     | double newbalance  |
 |               |												    |																			   |		    	    |
-
 | `BankAccount` | GetBalance() |  Returns the bank account balance    | double balance  |
 |               |												    |																			   |		    	    |
 | `BankAccount` | SendTransaction() |  Sends transaction confirmation to sms    | void  |
