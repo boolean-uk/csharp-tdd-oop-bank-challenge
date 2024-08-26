@@ -14,6 +14,9 @@ namespace Boolean.CSharp.Main.Accounts
 
         }
 
-  
+        public string GenerateStatement()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
