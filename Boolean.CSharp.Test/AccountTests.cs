@@ -1,5 +1,6 @@
 ﻿using Boolean.CSharp.Main;
 using Boolean.CSharp.Main.Accounts;
+using Boolean.CSharp.Main.Enum;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,8 @@ namespace Boolean.CSharp.Test
         {
             Savings savings = new Savings();
 
-            savings.balance = 500;
+            Transactions transactions = new Transactions(500, DateTime.Now, TransactionType.CREDIT);
+            savings._transactions.Add(transactions);
 
             double expected = 500;
 
@@ -44,14 +46,14 @@ namespace Boolean.CSharp.Test
         {
             Savings savings = new Savings();
 
-            savings.balance = 500;
+            Transactions transactions = new Transactions(500, DateTime.Now, TransactionType.CREDIT);
+            savings._transactions.Add(transactions);
 
-            double expected = 200;
+            double expected = 300;
 
             double result = savings.withdraw(300);
 
             Assert.That(expected == result);
-
         }
     }
 }
