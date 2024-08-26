@@ -1,9 +1,11 @@
 ﻿using Boolean.CSharp.Main;
+using Boolean.CSharp.Main.Enums;
+using Boolean.CSharp.Main.Person;
 using NUnit.Framework;
 
 namespace Boolean.CSharp.Test
 {
-    [TestFixture]
+  
     public class CoreTests
     {
         private Core _core;
@@ -15,8 +17,25 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        public void TestQuestion1()
+        public void TestCurrentAccount()
         {
+
+            //arrange
+            Customer customer = new Customer("Ali Haider", 1);
+
+            string accountNumber = "1290 11 11212";
+            
+            //act
+            var accountToChech = customer.createAccount(AccountType.Current, accountNumber);
+
+            //assert
+            Assert.IsNotNull(accountToChech);
+
+
+
+
+
+
 
         }
 
