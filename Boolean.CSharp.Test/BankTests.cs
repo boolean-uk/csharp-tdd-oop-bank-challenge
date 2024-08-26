@@ -6,28 +6,47 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class BankTest
     {
-        private Bank bank;
-
-
-
-
 
         [Test]
         public void CreateAccountTest()
         {
             Bank bank = new Bank();
-            IPerson person = new Customer();
-            SavingAccount savingAccount = new SavingAccount();
-            CurrentAccount currentAccount = new CurrentAccount();
+            IPerson person = new Customer("Test");
+            BankBranch branch = new BankBranch(1); 
+            SavingAccount savingAccount = new SavingAccount(0,1);
+            CurrentAccount currentAccount = new CurrentAccount(0,1);
             string accountType1 = "Savings";
             string accountType2 = "Current";
+            string accountType3 = "Stocks";
 
-            IAccount created1 = bank.CreateAccount(person, accountType1);
-            IAccount created2 = bank.CreateAccount(person, accountType2);
+            bool created1 = bank.CreateAccount(person, accountType1,1);
+            bool created2 = bank.CreateAccount(person, accountType2, 1);
+            bool created3 = bank.CreateAccount(person, accountType3, 1);
 
-            Assert.That(created1.GetType(), Is.EqualTo(savingAccount.GetType()));
-            Assert.That(created2.GetType(), Is.EqualTo(currentAccount.GetType()));
+            Assert.That(created1, Is.EqualTo(true));
+            Assert.That(created2, Is.EqualTo(true));
+            Assert.That(created3, Is.EqualTo(false));
 
+        }
+        [TestCase (1)]
+        [TestCase (2)]
+        [TestCase (3)]
+        public void AddBankBranchTest(int id)
+        {
+            Bank bank = new Bank();
+            bool added = bank.AddBranch(id);
+            
+            Assert.That(added, Is.True);
+        }
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(3)]
+        public void GetBankBranchTest(int id)
+        {
+            Bank bank = new Bank();
+            BankBranch branch = bank.GetBranch(id);
+
+            Assert.That(branch.Id, Is.EqualTo(id));
         }
 
     }

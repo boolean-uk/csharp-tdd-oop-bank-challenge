@@ -8,10 +8,10 @@ namespace Boolean.CSharp.Main
 {
     public interface IAccount
     {
-        string Name { get; set; }
+        int AccountNumber { get; set; }
         decimal Balance { get; set; }
 
-        public bool Withdraw(decimal amount);
-        public bool Deposit(decimal amount);
+        public decimal Withdraw(decimal amount);
+        public decimal Deposit(decimal amount);
     }
 }

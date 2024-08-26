@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boolean.CSharp.Main
+namespace Boolean.CSharp.Test
 {
-    public class BankFillial
+    internal class CustomerTests
     {
-        public string NameFillial { get; set; }
-
     }
 }

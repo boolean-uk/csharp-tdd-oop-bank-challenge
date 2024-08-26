@@ -8,15 +8,25 @@ namespace Boolean.CSharp.Main
 {
     public class CurrentAccount : IAccount
     {
-        public string Name     { get; set; }
         public decimal Balance { get; set; }
+        public int AccountNumber { get; set; }
 
-        public bool Deposit(decimal amount)
+        public CurrentAccount(decimal balance, int AccountNumber)
         {
-            throw new NotImplementedException();
+            this.Balance = balance;
+            this.AccountNumber = AccountNumber;
+        }
+        public decimal Deposit(decimal amount)
+        {
+            if (amount < 0)
+            {
+                amount = 0;
+            }
+            this.Balance += amount;
+            return this.Balance;
         }
 
-        public bool Withdraw(decimal amount)
+        public decimal Withdraw(decimal amount)
         {
             throw new NotImplementedException();
         }
