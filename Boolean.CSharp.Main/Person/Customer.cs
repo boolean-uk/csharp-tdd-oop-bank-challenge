@@ -15,7 +15,7 @@ namespace Boolean.CSharp.Main.Person
 
         public List<IAccount> accounts { get { return _account; } }
 
-        //
+        
         public Customer(string name, int id) : base(name, id) { }
 
       
