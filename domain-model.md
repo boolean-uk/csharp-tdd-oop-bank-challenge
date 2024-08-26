@@ -37,3 +37,4 @@
 |`Account : IBankAccount`|  | 
 |`Transaction`| DateTime _date_, string _typeOfTransaction_, decimal _amount_ |
 |`TransactionType`| enum _Current_, enum _Saving_ |
+|`AccountType`| enum _Withdraw_, enum _Deposit_ |
