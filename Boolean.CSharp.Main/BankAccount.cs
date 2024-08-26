@@ -9,7 +9,8 @@ namespace Boolean.CSharp.Main
     public abstract class BankAccount
     {
         //private decimal _balance = 0;
-        Stack<BankStatement> _bankStatements = new Stack<BankStatement>();
+        private Stack<BankStatement> _bankStatements = new Stack<BankStatement>();
+        private BankBranch _bankBranch;
 
         public bool Deposit(decimal amount)
         {
@@ -55,5 +56,7 @@ namespace Boolean.CSharp.Main
         public decimal Balance { get { return _bankStatements.Peek().Balance; } }
 
         public Stack<BankStatement> BankStatements { get { return _bankStatements; } }
+
+        public BankBranch Branch { get { return _bankBranch; } set { _bankBranch = value; } }
     }
 }
