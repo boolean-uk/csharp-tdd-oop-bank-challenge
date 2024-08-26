@@ -1,2 +1,10 @@
 ﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+
+using Boolean.CSharp.Main;
+using Boolean.CSharp.Main.Account;
+using Boolean.CSharp.Main.Entities;
+using Boolean.CSharp.Main.Enum;
+using Boolean.CSharp.Main.Person;
+using NUnit.Framework;
+using System.Transactions;
+
