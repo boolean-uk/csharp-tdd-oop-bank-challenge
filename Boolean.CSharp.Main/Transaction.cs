@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main
 {
-    public class Bank
+    public class Transaction
     {
-        public string Name { get; set; }
-
-        public List<Branch> Branches { get; set; } = new List<Branch>();
+        public decimal amount { get; set; }
+        public DateTime date { get; set; }
+        public TransactionType type { get; set; }
     }
 }

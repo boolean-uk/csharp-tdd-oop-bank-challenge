@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main
 {
-    public class Person
+    public class Branch
     {
-        public string Name { get; set; }
 
-        public List<Account> Accounts { get; set; } = new List<Account>();
+        public List<Account> accounts {  get; set; } = new List<Account>();
+        public string Name { get; set; }
 
 
     }

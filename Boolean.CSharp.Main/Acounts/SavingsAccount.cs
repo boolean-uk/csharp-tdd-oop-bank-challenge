@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main.Acounts
 {
-    internal class SavingsAccount
+    public class SavingsAccount : Account
     {
     }
 }

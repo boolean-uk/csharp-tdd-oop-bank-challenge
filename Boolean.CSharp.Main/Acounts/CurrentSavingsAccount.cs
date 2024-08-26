@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main.Acounts
 {
-    internal class CurrentSavingsAccount
+    public class CurrentSavingsAccount : Account
     {
+        public void Deposit(int v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

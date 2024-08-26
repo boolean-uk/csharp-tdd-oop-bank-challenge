@@ -1,4 +1,5 @@
 ﻿using Boolean.CSharp.Main;
+using Boolean.CSharp.Main.Acounts;
 using NUnit.Framework;
 
 namespace Boolean.CSharp.Test
@@ -6,17 +7,20 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class CoreTests
     {
-        private Core _core;
-
-        public CoreTests()
-        {
-            _core = new Core();
-
-        }
+        
 
         [Test]
-        public void TestQuestion1()
+        public void DepositTest()
         {
+           CurrentSavingsAccount savingsAccount = new CurrentSavingsAccount();
+
+            decimal expected = 1000;
+
+            savingsAccount.Deposit(1000);
+
+            decimal result = savingsAccount.Balance;
+
+            Assert.AreEqual(expected, result);
 
         }
 

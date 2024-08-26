@@ -41,13 +41,13 @@ I want statements to be sent as messages to my phone.
 |----------------------------------|---------------------------------------------------------------------------|----------------------------------------------------------------|------------------------------|
 | Classes                          | Methods											                       | Scenario                                                       | Outputs                      |
 |----------------------------------|---------------------------------------------------------------------------|----------------------------------------------------------------|------------------------------|
-| Account                          | deposit(decimal amount)                                                   |                                                                |                              |
+| Account (abstract)               | deposit(decimal amount)                                                   | customer deposits money                                        |                              |
 |                                  |                                                                           |                                                                |                              |
 |                                  |                                                                           |                                                                |                              |
-|                                  | withdraw(decimal amount)                                                  |                                                                |                              |
+|                                  | withdraw(decimal amount)                                                  | customer withdraws money                                       |                              |
 |                                  |                                                                           |                                                                |                              |
 |                                  |                                                                           |                                                                |                              |
-|                                  | getBalance()                                                              |                                                                |                              |
+|                                  | getBalance()                                                              | customer wants to see how much money exists in the account     | decimal                      |
 |                                  |                                                                           |                                                                |                              |
 |                                  |                                                                           |                                                                |                              |
 |                                  | printStatement()                                                          |                                                                | string                       |
@@ -77,7 +77,7 @@ I want statements to be sent as messages to my phone.
 |                                  | getAllBranches()                                                          | Bank wants to see all connected branches                       | List<Branch>                 |
 |                                  |                                                                           |                                                                |                              |
 |                                  |                                                                           |                                                                |                              |
-|                                  |                                                                           |                                                                |                              |
+|                                  | decimal emergencyFund                                                     |                                                                |                              |
 |                                  |                                                                           |                                                                |                              |
 |----------------------------------|---------------------------------------------------------------------------|----------------------------------------------------------------|------------------------------|
 | Branch                           | addAccount(Account account)                                               | Adds a specific account to a branch                            |                              |
@@ -90,9 +90,8 @@ I want statements to be sent as messages to my phone.
 |                                  |                                                                           |                                                                |                              |
 |                                  |                                                                           |                                                                |                              |
 |----------------------------------|---------------------------------------------------------------------------|----------------------------------------------------------------|------------------------------|
-| Enums                            | Public Enum Role(CUSTOMER, ENGINEER, BANK_MANAGER)                        |                                                               |                              |
+| Enums                            | Public Enum Role(CUSTOMER, ENGINEER, BANK_MANAGER)                        |                                                                |                              |
 |                                  |                                                                           |                                                                |                              |
 |                                  | Public Enum TransactionType(CREDIT, DEBIT)                                |                                                                |                              |
 |                                  |                                                                           |                                                                |                              |
 |----------------------------------|---------------------------------------------------------------------------|----------------------------------------------------------------|------------------------------|
-
