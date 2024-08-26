@@ -9,6 +9,7 @@ namespace Boolean.CSharp.Main
     public class Bank
     {
         private int customers = -1;
+        private double overDraftLimit = 0;
         public Bank() { }
 
         public bool CreateCustomer(Customer customer)
@@ -22,5 +23,16 @@ namespace Boolean.CSharp.Main
             }
             return false;
         }
+
+        public double GetOverdraftLimit()
+        {
+            return overDraftLimit; 
+        }
+
+        public void SetOverdraftLimit(Manager manager)
+        {
+            overDraftLimit = manager.overDraftLimit;
+        }
+        
     }
 }

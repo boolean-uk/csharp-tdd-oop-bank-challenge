@@ -20,7 +20,7 @@
 |Savings : Account        |								  |      				   |			 |
 |_________________________|_______________________________|________________________|_____________|
 |Manager                  |SetOverdraftLimit(double funds |Overdraft limit set     |void   	     |                                                                                                                                                                                                      
-|                         |Bank bank)                     |                        |             |                                                                                                                     
+|                         |, Bank bank)                   |                        |             |                                                                                                                     
 |_________________________|_______________________________|________________________|_____________|
 |Bank                     |CreateAccount(int customerId   |Customer creates a new  |true         |                            
 |                         |, IBranch branch, bool savings)|bank account            |             |                                                                        

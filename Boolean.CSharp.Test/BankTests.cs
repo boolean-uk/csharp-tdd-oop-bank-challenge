@@ -22,5 +22,16 @@ namespace Boolean.CSharp.Test
             Assert.That(!bank.CreateCustomer(customer));
 
         }
+
+        [Test]
+        public void TestManager()
+        {
+            double newLimit = 500;
+            Bank bank = new Bank();
+            Manager manager = new Manager();
+            manager.overDraftLimit = newLimit;
+            bank.SetOverdraftLimit(manager);
+            Assert.That(bank.GetOverdraftLimit() == newLimit);
+        }
     }
 }
