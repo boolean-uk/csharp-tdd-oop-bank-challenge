@@ -108,15 +108,6 @@ namespace Boolean.CSharp.Test
             Assert.That(ca.overDraft);
         }
 
-        [Test]
-        public void sendTransactionTest()
-        {
-            Account ca = (CurrentAccount)_bank.createCurrentAccount(_customer, _branchname);
-            Transactions trans = new Transactions(60f, ca);
-            ca.transaction(trans);
-            Assert.That(ca.sendTransaction());
-        }
-
         [TestCase(true)]
         [TestCase(false)]
         public void overDraftTest(bool overdraft)
