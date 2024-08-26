@@ -47,7 +47,6 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-
         public void BalanceTest()
         {
             CurrentSavingsAccount savingsAccount = new CurrentSavingsAccount();
@@ -58,7 +57,7 @@ namespace Boolean.CSharp.Test
             savingsAccount.Deposit(1500);
             savingsAccount.Withdraw(1000);
 
-            decimal result = savingsAccount.Balance;
+            decimal result = savingsAccount.getBalance();
 
             Assert.AreEqual(expected, result);
         }

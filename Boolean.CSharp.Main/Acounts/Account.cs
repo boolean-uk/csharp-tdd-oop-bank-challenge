@@ -28,7 +28,7 @@ namespace Boolean.CSharp.Main.Acounts
         {
             if (amount >= 0)
             {
-                Transactions.Add(new Transaction { amount = amount, date = DateTime.Now, type = TransactionType.CREDIT});
+                Transactions.Add(new Transaction { amount = amount, date = DateTime.Now, type = TransactionType.CREDIT, balance = Balance + amount});
             }
             else
             {
@@ -44,8 +44,34 @@ namespace Boolean.CSharp.Main.Acounts
             }
             else
             {
-                Transactions.Add(new Transaction { amount = amount, date = DateTime.Now, type = TransactionType.DEBIT });
+                Transactions.Add(new Transaction { amount = amount, date = DateTime.Now, type = TransactionType.DEBIT, balance = Balance - amount });
             }
+        }
+
+        public decimal getBalance()
+        {
+            return this.Balance;
+        }
+
+        public string printStatement()
+        {
+            string statement = "date       || credit || debit || balance\n";
+            foreach (Transaction t in Transactions) 
+            {
+                statement += $"{t.date.ToString("dd/MM/yyyy")} ||"   ;
+                if (t.type == TransactionType.CREDIT)
+                {
+                    statement += $"  {t.amount}  ||       ||";
+                }
+                else
+                {
+                    statement += $"        ||  {t.amount}  ||";
+                }
+                statement += $"  {t.balance}  \n";
+            }
+
+
+            return statement;
         }
     }
 }

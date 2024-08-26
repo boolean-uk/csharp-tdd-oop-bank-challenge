@@ -11,7 +11,18 @@ namespace Boolean.CSharp.Main
     {
         public string Name { get; set; }
 
+        public Role Role { get; set; }
+
         public List<Account> Accounts { get; set; } = new List<Account>();
+
+        public Person(string name, Role role)
+        {
+            Name = name;
+            Role = role;
+        }
+
+
+
 
 
     }
