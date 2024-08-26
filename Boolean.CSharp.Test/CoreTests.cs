@@ -11,29 +11,29 @@ namespace Boolean.CSharp.Test
         public void CreateCurrentAccount()
         {
             Customer customer = new Customer();
-            customer.CreateAccount(AccountType.Current);
+            customer.CreateAccount(AccountType.Current, Branch.Trondheim);
 
-            Assert.AreEqual(customer.accounts[0].AccountType, AccountType.Current);
-            Assert.AreEqual(customer.accounts.Count(), 1);
+            Assert.AreEqual(customer.Accounts[0].AccountType, AccountType.Current);
+            Assert.AreEqual(customer.Accounts.Count(), 1);
         }
 
         [Test]
         public void CreateSavingsAccount()
         {
             Customer customer = new Customer();
-            customer.CreateAccount(AccountType.Savings);
-            customer.CreateAccount(AccountType.Savings);
+            customer.CreateAccount(AccountType.Savings, Branch.Trondheim);
+            customer.CreateAccount(AccountType.Savings, Branch.Oslo);
 
-            Assert.AreEqual(customer.accounts[0].AccountType, AccountType.Savings);
-            Assert.AreEqual(customer.accounts.Count(), 2);
+            Assert.AreEqual(customer.Accounts[0].AccountType, AccountType.Savings);
+            Assert.AreEqual(customer.Accounts.Count(), 2);
         }
 
         [Test]
         public void Deposit()
         {
             Customer customer = new Customer();
-            customer.CreateAccount(AccountType.Current);
-            Account account = customer.accounts[0];
+            customer.CreateAccount(AccountType.Current, Branch.Trondheim);
+            Account account = customer.Accounts[0];
 
             account.Deposit(100, TransactionType.Deposit);
             account.Deposit(50, TransactionType.Deposit);
@@ -41,7 +41,7 @@ namespace Boolean.CSharp.Test
             var transactions = account.Transactions;
 
             Assert.AreEqual(transactions[0].Amount, 100);
-            Assert.AreEqual(transactions[1].Balance, 100+50);
+            Assert.AreEqual(transactions[1].Balance, 100 + 50);
 
         }
 
@@ -49,8 +49,8 @@ namespace Boolean.CSharp.Test
         public void Withdraw()
         {
             Customer customer = new Customer();
-            customer.CreateAccount(AccountType.Savings);
-            Account account = customer.accounts[0];
+            customer.CreateAccount(AccountType.Savings, Branch.Trondheim);
+            Account account = customer.Accounts[0];
             account.Deposit(100, TransactionType.Deposit);
 
             account.Withdraw(50, TransactionType.Withdraw);
@@ -64,8 +64,8 @@ namespace Boolean.CSharp.Test
         public void GenerateBankStatement()
         {
             Customer customer = new Customer();
-            customer.CreateAccount(AccountType.Current);
-            Account account = customer.accounts[0];
+            customer.CreateAccount(AccountType.Current, Branch.Trondheim);
+            Account account = customer.Accounts[0];
             account.Deposit(1000, TransactionType.Deposit);
             account.Deposit(2000, TransactionType.Deposit);
             account.Withdraw(500, TransactionType.Withdraw);
@@ -85,15 +85,14 @@ namespace Boolean.CSharp.Test
         [Test]
         public void BranchTest()
         {
-            Customer customer = new Customer();
-            customer.CreateAccount(AccountType.Current, Branch.Bergen);
-            customer.CreateAccount(AccountType.Current, Branch.Trondheim);
+            Customer customer1 = new Customer();
+            customer1.CreateAccount(AccountType.Current, Branch.Trondheim);
+            customer1.CreateAccount(AccountType.Current, Branch.Bergen);
+            Account account = customer1.Accounts[0];
+            Account account2 = customer1.Accounts[1];
 
-            var accounts = customer.accounts;
-
-            Assert.AreEqual(accounts[0].Branch, Bergen);
-            Assert.AreEqual(accounts[1].Branch, Trondheim);
+            Assert.AreEqual(account.Branch, Branch.Trondheim);
+            Assert.AreEqual(account2.Branch, Branch.Bergen);
         }
-
     }
 }

@@ -8,6 +8,8 @@ namespace Boolean.CSharp.Main
 {
     public class SavingsAccount : Account
     {
+        public SavingsAccount(Branch branch) : base(branch) { }
+
         public override AccountType AccountType { get; } = AccountType.Savings;
 
     }

@@ -13,6 +13,11 @@ namespace Boolean.CSharp.Main
         public TransactionType TransactionType { get; }
         public Transaction Transaction { get; set; }
         public List<Transaction> Transactions { get; set; } = new List<Transaction>();
+        public Branch Branch { get; set; }
+
+        public Account(Branch branch) { 
+            this.Branch = branch; 
+        }
 
 
         public decimal GetBalance() { 

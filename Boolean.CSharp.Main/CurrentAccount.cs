@@ -9,6 +9,10 @@ namespace Boolean.CSharp.Main
 {
     public class CurrentAccount : Account
     {
+
+        public CurrentAccount(Branch branch) : base(branch) {
+        }
+
         public override AccountType AccountType { get; } = AccountType.Current;
 
     }

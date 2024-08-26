@@ -9,9 +9,10 @@ namespace Boolean.CSharp.Main
 {
     public enum Branch
     {
+        Stavanger,
         Bergen,
         Oslo,
         Trondheim,
-        Stavanger
+        Stokholm
     }
 }
