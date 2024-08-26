@@ -82,5 +82,18 @@ namespace Boolean.CSharp.Test
             }
         }
 
+        [Test]
+        public void BranchTest()
+        {
+            Customer customer = new Customer();
+            customer.CreateAccount(AccountType.Current, Branch.Bergen);
+            customer.CreateAccount(AccountType.Current, Branch.Trondheim);
+
+            var accounts = customer.accounts;
+
+            Assert.AreEqual(accounts[0].Branch, Bergen);
+            Assert.AreEqual(accounts[1].Branch, Trondheim);
+        }
+
     }
 }
