@@ -16,7 +16,7 @@ namespace Boolean.CSharp.Test
             _core = new Core();
             _bank = new Bank();
             _branchname = "Main Branch";
-            _customer = new Customer();
+            _customer = new Customer((ICustomer)_bank, _branchname);
         }
 
         [Test]
@@ -36,9 +36,9 @@ namespace Boolean.CSharp.Test
         [Test]
         public void getTransactionHistoryTest()
         {
-            Transactions tran1 = new Transactions();
-            Transactions tran2 = new Transactions();
             Account ca = _bank.createCurrentAccount(_customer, _branchname);
+            Transactions tran1 = new Transactions(70f, ca);
+            Transactions tran2 = new Transactions(59f, ca);
             ca.transaction(tran1);
             ca.transaction(tran2);
             List<Transactions> transactions = ca.getTransactionHistory();
@@ -50,8 +50,7 @@ namespace Boolean.CSharp.Test
         public void depositTest()
         {
             Account ca = _bank.createCurrentAccount(_customer, _branchname);
-            Customer customer = new Customer();
-            customer.deposit(70.0f, ca);
+            _customer.deposit(70.0f, ca);
             Assert.That(ca.getBalance(), Is.EqualTo(70.0f));
         }
 
@@ -59,9 +58,8 @@ namespace Boolean.CSharp.Test
         public void withDrawTest()
         {
             Account ca = _bank.createCurrentAccount(_customer, _branchname);
-            Customer customer = new Customer();
-            customer.deposit(70.0f, ca);
-            customer.withDraw(70.0f, ca);
+            _customer.deposit(70.0f, ca);
+            _customer.withDraw(70.0f, ca);
             Assert.That(ca.getBalance(), Is.EqualTo(0.0f));
         }
 
@@ -69,8 +67,7 @@ namespace Boolean.CSharp.Test
         public void getBalanceTest()
         {
             Account ca = _bank.createCurrentAccount(_customer, _branchname);
-            Customer customer = new Customer();
-            customer.deposit(70.0f, ca);
+            _customer.deposit(70.0f, ca);
             Assert.That(ca.getBalance(), Is.EqualTo(70.0f));
         }
 
@@ -94,7 +91,8 @@ namespace Boolean.CSharp.Test
         {
             CurrentAccount ca = (CurrentAccount)_bank.createCurrentAccount(_customer, _branchname);
             _customer.requestOverDraft(ca);
-            _bank.rejectRequest(ca);
+            IManager bankManager = (IManager)_bank;
+            bankManager.rejectRequest(ca);
             Assert.That(_bank.requests.Count == 0);
             Assert.That(!ca.overDraft);
         }
@@ -104,7 +102,8 @@ namespace Boolean.CSharp.Test
         {
             CurrentAccount ca = (CurrentAccount)_bank.createCurrentAccount(_customer, _branchname);
             _customer.requestOverDraft(ca);
-            _bank.approveRequest(ca);
+            IManager bankManager = (IManager)_bank;
+            bankManager.approveRequest(ca);
             Assert.That(_bank.requests.Count == 0);
             Assert.That(ca.overDraft);
         }
@@ -112,7 +111,22 @@ namespace Boolean.CSharp.Test
         [Test]
         public void sendTransactionTest()
         {
+            Account ca = (CurrentAccount)_bank.createCurrentAccount(_customer, _branchname);
+            Transactions trans = new Transactions(60f, ca);
+            ca.transaction(trans);
+            Assert.That(ca.sendTransaction());
+        }
 
+        [TestCase(true)]
+        [TestCase(false)]
+        public void overDraftTest(bool overdraft)
+        {
+            CurrentAccount ca = (CurrentAccount)_bank.createCurrentAccount(_customer, _branchname);
+            ca.overDraft = overdraft;
+            _customer.withDraw(50f, ca);
+            //Console.WriteLine(ca.overDraft);
+            Console.WriteLine(ca.getBalance() > 0f);
+            Assert.That(ca.getBalance() == (-50f), Is.EqualTo(overdraft));
         }
 
     }

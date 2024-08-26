@@ -13,5 +13,19 @@
             this._account = account;
         }
 
+        public string getTransaction()
+        {
+            return $"{getTransactionAction()} from acount {Account.accountNumber}";
+        }
+
+        private string getTransactionAction()
+        {
+            if (Amount > 0)
+            {
+                return "Deposited";
+            }
+            return "Withdrew";
+        }
+
     }
 }

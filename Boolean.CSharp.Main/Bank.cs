@@ -6,29 +6,52 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main
 {
-    public class Bank
+    public class Bank : IManager, ICustomer
     {
         private List<CurrentAccount> _overDraftRequests;
         public List<CurrentAccount> requests { get { return _overDraftRequests; } }
 
+        private List<Account> _allBankAccount;
+
+        private int _accountNumber;
+
+        public Bank()
+        {
+            _overDraftRequests = new List<CurrentAccount>();
+            _accountNumber = 0;
+            _allBankAccount = new List<Account>();
+        }
         public void approveRequest(CurrentAccount ca)
         {
-            throw new NotImplementedException();
+            ca.overDraft = true;
+            _overDraftRequests.Remove(ca);
         }
 
         public Account createCurrentAccount(Customer customer, string branch)
         {
-            throw new NotImplementedException();
+            _accountNumber++;
+            Account act = new CurrentAccount(customer, branch, _accountNumber);
+            _allBankAccount.Add(act);
+            return act;
         }
 
-        public Account createSavingsAccount(Customer customer, string _branchname)
+        public Account createSavingsAccount(Customer customer, string branch)
         {
-            throw new NotImplementedException();
+            _accountNumber++;
+            Account act =  new SavingsAccount(customer, branch, _accountNumber);
+            _allBankAccount.Add(act );
+            return act;
         }
 
         public void rejectRequest(CurrentAccount ca)
         {
-            throw new NotImplementedException();
+            ca.overDraft = false;
+            _overDraftRequests.Remove(ca);
+        }
+
+        public void requestsOverDraft(Account ca)
+        {
+            _overDraftRequests.Add((CurrentAccount)ca);
         }
     }
 }
