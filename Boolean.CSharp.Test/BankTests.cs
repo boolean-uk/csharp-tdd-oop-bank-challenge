@@ -1,4 +1,5 @@
 ﻿using Boolean.CSharp.Main;
+using Boolean.CSharp.Main.Branches;
 using Boolean.CSharp.Main.Interfaces;
 using NUnit.Framework;
 using System;
@@ -48,19 +49,20 @@ namespace Boolean.CSharp.Test
             bank.CreateCustomer(customer2);
             bank.CreateCustomer(customer3);
             bank.CreateCustomer(customer1);
+            IBranch branch1 = new Amax();
+            IBranch branch2 = new AmericanExpress();
 
+            int result1 = bank.CreateAccount(customer1.customerId, branch1, false);
+            int result2 = bank.CreateAccount(customer2.customerId, branch1, true);
+            int result3 = bank.CreateAccount(customer3.customerId, branch2, false);
+            int result4 = bank.CreateAccount(customer3.customerId, branch2, true);
+            int result5 = bank.CreateAccount(42, branch2, false);
 
-            bool result1 = bank.CreateAccount(customer1.customerId);
-            bool result2 = bank.CreateAccount(customer2.customerId);
-            bool result3 = bank.CreateAccount(customer3.customerId);
-            bool result4 = bank.CreateAccount(customer3.customerId);
-            bool result5 = bank.CreateAccount(42);
-
-            Assert.That(true == result1);
-            Assert.That(true == result2);
-            Assert.That(true == result3);
-            Assert.That(true == result4);
-            Assert.That(false == result5);
+            Assert.That(result1 == 0);
+            Assert.That(result2 == 0);
+            Assert.That(result3 == 0);
+            Assert.That(result4 == 1);
+            Assert.That(result5 == -1);
         }
     }
 }

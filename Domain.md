@@ -22,14 +22,14 @@
 |Manager                  |SetOverdraftLimit(double funds |Overdraft limit set     |void   	     |                                                                                                                                                                                                      
 |                         |, Bank bank)                   |                        |             |                                                                                                                     
 |_________________________|_______________________________|________________________|_____________|
-|Bank                     |CreateAccount(int customerId   |Customer creates a new  |true         |                            
+|Bank                     |CreateAccount(int customerId   |Customer creates a new  |int          |                            
 |                         |, IBranch branch, bool         |bank account            |             |                                                                        
 |                         |savingsAccount)                |                        |             |    
-|                         |                               |Customer does not exist |false        |                                   
+|                         |                               |Customer does not exist |-1           |                                   
 |                         |                               |                        |             |     
 |                         |RequestWithdraw(int customerId |Customer withdraws money|true         |                                                         
-|                         |double funds, bool             |                        |             |                       
-|                         |savings, bool overdraw)        |Customer does not exist |false        |                                                        
+|                         |double funds, int accountNumber|                        |             |                       
+|                         |bool savings, bool overdraw)   |Customer does not exist |false        |                                                        
 |                         |                               |                        |             |     
 |                         |                               |Customer does not have  |             |                            
 |                         |                               |savings/current account |false        |                                 
@@ -40,8 +40,8 @@
 |                         |                               |denied.                 |             |            
 |                         |                               |                        |             |     
 |                         |RequestDeposit(int customerId  |Customer deposits money |true         |                                                         
-|                         |,double funds, bool            |into account            |             |                                             
-|                         |savings)                       |                        |             |             
+|                         |double funds, int accountNumber|into account            |             |                                             
+|                         |bool savings, bool overdraw)   |                        |             |             
 |                         |                               |Customer does not exist |false        |                                 
 |                         |                               |                        |             |     
 |                         |                               |Customer does not have  |             |                            
