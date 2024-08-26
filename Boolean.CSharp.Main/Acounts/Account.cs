@@ -27,6 +27,16 @@ namespace Boolean.CSharp.Main.Acounts
             }
         }
 
-
+        public void Withdraw(decimal amount)
+        {
+            if (amount < 0 || amount > this.Balance)
+            {
+                Console.WriteLine("Cant withdraw a value like that or you do not have enough money in your account...");
+            }
+            else
+            {
+                this.Balance -= amount;
+            }
+        }
     }
 }

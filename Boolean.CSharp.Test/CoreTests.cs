@@ -26,9 +26,26 @@ namespace Boolean.CSharp.Test
             decimal result1 = currentSavingsAccount.Balance;
             decimal result2 = savingsAccount.Balance;
 
+            Assert.AreEqual(expected1, result1);
             Assert.AreEqual(expected2, result2);
 
         }
+
+        [Test]
+        public void WithdrawTest()
+        {
+            CurrentSavingsAccount currentSavingAccount = new CurrentSavingsAccount();
+
+            decimal expected = 1000;
+            currentSavingAccount.Deposit(1500);
+            currentSavingAccount.Withdraw(500);
+
+            decimal result = currentSavingAccount.Balance;
+
+            Assert.AreEqual(expected, result);
+
+        }
+
 
     }
 }
