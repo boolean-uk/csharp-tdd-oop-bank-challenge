@@ -8,8 +8,54 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Test
 {
+
     public class ExtensionTests
     {
+
+        [Test]
+        public void shouldGetBalance()
+        {
+            //SetUp
+            //Execute
+            //Verify
+            Assert.Fail();
+        }
+        
+        [Test]
+        public void shouldSendStatementToPhone()
+        {
+            //SetUp
+            //Execute
+            //Verify
+            Assert.Fail();
+        }
+       
+        [Test]
+        public void shouldSendOverdrafRequest()
+        {
+            //SetUp
+            //Execute
+            //Verify
+            Assert.Fail();
+        }
+      
+        [Test]
+        public void shouldApproveOverdraftRequest()
+        {
+            //SetUp
+            //Execute
+            //Verify
+            Assert.Fail();
+        }   
+        
+        [Test]
+        public void shouldRejectOverdraftRequest()
+        {
+            //SetUp
+            //Execute
+            //Verify
+            Assert.Fail();
+        }
       
     }
 }

@@ -33,7 +33,7 @@ namespace Boolean.CSharp.Main
             return _transactions;
         }
 
-        string IAccount.GenerateStatement()
+        public string GenerateStatement()
         {
             _transactions.Reverse();
             string statement = "date       || credit  || debit  || balance\n";
@@ -46,7 +46,11 @@ namespace Boolean.CSharp.Main
             return statement;
         }
 
+       
+
         public decimal Balance { get { return _balance; } }
+
+
         public List<ITransaction> Transaction {  get => _transactions; }
 
         public string AccountNumber { get; set; }
