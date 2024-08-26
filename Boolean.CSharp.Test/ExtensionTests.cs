@@ -51,7 +51,7 @@ namespace Boolean.CSharp.Test
 
         public void AcceptOverdraftRequestTest()
         {
-            decimal expectedBalance = -1100;
+            decimal expectedBalance = -100;
             decimal expectedEmergencyFund = 9900;
             Bank bank = new Bank("DNB", 10000);
             Person avgjoe = new Person("Flier", Boolean.CSharp.Main.Role.CUSTOMER, null);
