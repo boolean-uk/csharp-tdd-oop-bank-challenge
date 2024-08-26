@@ -52,6 +52,11 @@ I want statements to be sent as messages to my phone.
 |                                  |                                                                           |                                                                |                              |
 |                                  | printStatement()                                                          |                                                                | string                       |
 |                                  |                                                                           |                                                                |                              |
+|                                  | RequestOverdraft()                                                        | Customer request an overdraft                                  |                              |
+|                                  |                                                                           |                                                                |                              |
+|                                  | RequestToTransaction()                                                    | Request gets accepted and customer is able to withdraw         |                              |
+|                                  |                                                                           |                                                                |                              |
+|                                  |                                                                           |                                                                |                              |
 |----------------------------------|---------------------------------------------------------------------------|----------------------------------------------------------------|------------------------------|
 | Transaction                      | Public Transaction(decimal Amount, DateTime date, TransactionType type)   |                                                                |                              |
 |                                  |                                                                           |                                                                |                              |
@@ -67,7 +72,8 @@ I want statements to be sent as messages to my phone.
 |                                  |                                                                           |                                                                |                              |
 |                                  |                                                                           |                                                                |                              |
 |----------------------------------|---------------------------------------------------------------------------|----------------------------------------------------------------|------------------------------|
-| Person                           | Public Person(string name, Role role)                                     | Person can be either a manager, customer or engineer           |                              |
+| Person                           | Public Person(string name, Role role, Bank? bank)                         | Person can be either a manager, customer or engineer           |                              |
+|                                  |                                                                           | ? is for when the person works at the bank as the manager      |                              |
 |                                  |                                                                           |                                                                |                              |
 |                                  | addAccount(Account account)                                               | Person adds an account                                         |                              |
 |                                  |                                                                           |                                                                |                              |
@@ -80,8 +86,8 @@ I want statements to be sent as messages to my phone.
 |                                  |                                                                           |                                                                |                              |
 |                                  | getAllBranches()                                                          | Bank wants to see all connected branches                       | List<Branch>                 |
 |                                  |                                                                           |                                                                |                              |
+|                                  | moneyLeftInFund()                                                         | Bank wants to see how much money is left in the emergency fund | decimal                      |
 |                                  |                                                                           |                                                                |                              |
-|                                  | decimal emergencyFund                                                     |                                                                |                              |
 |                                  |                                                                           |                                                                |                              |
 |----------------------------------|---------------------------------------------------------------------------|----------------------------------------------------------------|------------------------------|
 | Branch                           | addAccount(Account account)                                               | Adds a specific account to a branch                            |                              |
@@ -100,6 +106,6 @@ I want statements to be sent as messages to my phone.
 |                                  |                                                                           |                                                                |                              |
 |                                  | Public Enum TransactionType(CREDIT, DEBIT)                                |                                                                |                              |
 |                                  |                                                                           |                                                                |                              |
-|                                  | Public Enum OverdraftStatus(ACCEPTED, DECLINED)                           |                                                                |                              |
+|                                  | Public Enum OverdraftStatus(ACCEPTED, DECLINED)                           | might be redundant for the current methods                     |                              |
 |                                  |                                                                           |                                                                |                              |
 |----------------------------------|---------------------------------------------------------------------------|----------------------------------------------------------------|------------------------------|

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boolean.CSharp.Main
+namespace Boolean.CSharp.Main.Extensions
 {
     public class Bank
     {
@@ -12,7 +12,7 @@ namespace Boolean.CSharp.Main
         public decimal EmergencyFund { get; set; }
         public List<Branch> Branches { get; set; } = new List<Branch>();
 
-        public Bank(string name, decimal funds) 
+        public Bank(string name, decimal funds)
         {
             Name = name;
             EmergencyFund = funds;
@@ -26,6 +26,11 @@ namespace Boolean.CSharp.Main
         public List<Branch> getBranches()
         {
             return Branches;
+        }
+
+        public decimal moneyLeftInFund()
+        {
+            return EmergencyFund;
         }
     }
 }

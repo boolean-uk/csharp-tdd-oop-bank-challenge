@@ -85,7 +85,8 @@ namespace Boolean.CSharp.Main.Acounts
 
         public void RequestoToTransaction()
         {
-            Withdraw(OverdraftRequests.First().Amount);
+            Transactions.Add(new Transaction { amount = OverdraftRequests.First().Amount, date = DateTime.Now, type = TransactionType.DEBIT, balance = Balance - OverdraftRequests.First().Amount });
+            Console.WriteLine($"You owe the bank: {Balance}$");
         }
     }
 }

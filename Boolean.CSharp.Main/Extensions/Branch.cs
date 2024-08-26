@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boolean.CSharp.Main
+namespace Boolean.CSharp.Main.Extensions
 {
     public class Branch
     {
 
-        public List<Account> accounts {  get; set; } = new List<Account>();
+        public List<Account> accounts { get; set; } = new List<Account>();
         public string Name { get; set; }
 
         public Branch(string name)
