@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using Boolean.CSharp.Main.Enum;
@@ -54,6 +55,29 @@ namespace Boolean.CSharp.Main
 
             Console.WriteLine($"New balance: {getBalance()}");
             return transactions.amount;
+        }
+        
+        public string bankStatement()
+        {
+            string print = $"~~~~~ Account Transactions ~~~~~ \n Date       || Credit || Debit || Balance ";
+
+            double balanceAmount = 0;
+            foreach (var transaction in _transactions)
+            {
+                if (transaction.transactionType == TransactionType.CREDIT)
+                {
+                    balanceAmount += transaction.amount;
+                    print += $" \n {transaction.date.ToString("dd/MM/yyyy")} ||  {transaction.amount}   ||       ||   {balanceAmount}";
+                }
+                else
+                {
+                    balanceAmount -= transaction.amount;
+                    print += $" \n {transaction.date.ToString("dd/MM/yyyy")} ||        ||  {transaction.amount}  ||   {balanceAmount}";
+                }
+            }
+
+            Console.WriteLine(print);
+            return print;
         }
     }
 }
