@@ -11,6 +11,13 @@ namespace Boolean.CSharp.Main
         //private decimal _balance = 0;
         private Stack<BankStatement> _bankStatements = new Stack<BankStatement>();
         private BankBranch _bankBranch;
+        private ISMSSender _smsSender;
+
+        public BankAccount()
+        {
+            _bankBranch = new BankBranch("Default bank", "Earth"); // just a default bank if none get set
+            _smsSender = new TwilioSMS();
+        }
 
         public bool Deposit(decimal amount)
         {
@@ -48,6 +55,11 @@ namespace Boolean.CSharp.Main
             }
 
             return false;
+        }
+
+        public void SendSMSStatements(string phoneNr)
+        {
+            _smsSender.SendSMS(PrintBankStatements(), phoneNr);
         }
 
         public string PrintBankStatements()

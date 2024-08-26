@@ -125,5 +125,7 @@ namespace Boolean.CSharp.Test
             Assert.That(printedStatement.Contains("-500"));
             Assert.That(printedStatement.Contains("-700"));
         }
+
+        // Not adding a test for the Twilio SMS, as it would drain the account in an instant...
     }
 }
