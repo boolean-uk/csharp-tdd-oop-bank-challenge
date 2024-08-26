@@ -10,6 +10,8 @@ namespace Boolean.CSharp.Main
     {
 
         public virtual AccountType AccountType { get; }
+        public virtual bool OverdraftActive { get; set; } 
+        public virtual decimal BalanceCapacity { get; set; }
         public TransactionType TransactionType { get; }
         public Transaction Transaction { get; set; }
         public List<Transaction> Transactions { get; set; } = new List<Transaction>();
@@ -43,14 +45,16 @@ namespace Boolean.CSharp.Main
 
         public bool Withdraw(decimal amount, TransactionType transactionType)
         {
-            if (amount > 0)
+            if ((GetBalance() - amount) > BalanceCapacity)
             {
                 Transaction transaction = new Transaction(amount, TransactionType.Withdraw, GetBalance() - amount);
                 Transactions.Add(transaction);
                 return true;
             }
             return false;
+           
         }
+
 
 
         public void GenerateBankStatement()
@@ -85,5 +89,7 @@ namespace Boolean.CSharp.Main
 
             }
         }
+
+        
     }
 }

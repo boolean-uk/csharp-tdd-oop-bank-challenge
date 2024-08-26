@@ -30,6 +30,11 @@ namespace Boolean.CSharp.Main
 
             return false;
 
-        } 
+        }
+
+        public void RequestOverdraft(Account account)
+        {
+            account.OverdraftActive = true;
+        }
     }
 }

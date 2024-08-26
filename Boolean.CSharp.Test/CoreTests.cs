@@ -94,5 +94,51 @@ namespace Boolean.CSharp.Test
             Assert.AreEqual(account.Branch, Branch.Trondheim);
             Assert.AreEqual(account2.Branch, Branch.Bergen);
         }
+
+        [Test]
+        public void RequestOverdraft()
+        {
+            Customer customer = new Customer();
+            customer.CreateAccount(AccountType.Current, Branch.Trondheim);
+            Account account = customer.Accounts[0];
+            customer.RequestOverdraft(account);
+
+            Assert.That(account.OverdraftActive, Is.True);
+        }
+
+        [Test]
+        public void ApproveOverdraft()
+        {
+            Customer customer = new Customer();
+            customer.CreateAccount(AccountType.Current, Branch.Trondheim);
+            Account account = customer.Accounts[0];
+            customer.RequestOverdraft(account);
+            Manager manager = new Manager();
+
+            manager.ApproveOverdraft(account, 200); // customer can withdraw 200 under 0
+            account.Withdraw(100, TransactionType.Withdraw); // customer is within approved amount
+
+            Assert.That(account.OverdraftActive, Is.False);
+            Assert.That(account.BalanceCapacity == -200, Is.True);
+            Assert.That(account.GetBalance() == -100, Is.True);
+        }
+
+        [Test]
+        public void RejectOverdraft()
+        {
+            Customer customer = new Customer();
+            customer.CreateAccount(AccountType.Current, Branch.Oslo);
+            var account = customer.Accounts[0];
+            customer.RequestOverdraft(account);
+            Manager manager = new Manager();
+
+            manager.RejectOverdraft(account);
+
+            account.Withdraw(200, TransactionType.Withdraw);
+
+            Assert.IsFalse(account.OverdraftActive);
+            Assert.IsTrue(account.BalanceCapacity == 0);
+            Assert.AreEqual(account.GetBalance(), 0);
+        }
     }
 }

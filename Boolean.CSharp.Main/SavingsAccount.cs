@@ -11,6 +11,8 @@ namespace Boolean.CSharp.Main
         public SavingsAccount(Branch branch) : base(branch) { }
 
         public override AccountType AccountType { get; } = AccountType.Savings;
+        public override bool OverdraftActive { get; set; } = false;
+        public override decimal BalanceCapacity { get; set; } = 0m;
 
     }
 }
