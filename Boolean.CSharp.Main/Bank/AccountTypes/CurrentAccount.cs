@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main.Bank.AccountTypes
 {
-    public class CurrentAccount
+    public class CurrentAccount : Account
     {
+
     }
 }

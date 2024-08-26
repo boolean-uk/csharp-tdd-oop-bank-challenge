@@ -6,23 +6,9 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main.Bank
 {
-    public abstract class Account 
+    public interface IAccount
     {
-        //IAccount _account;
-        //public Account(IAccount account) 
-        //{
-        //    _account = account;
-        //}
-
-        public virtual bool CreateAccount()
-        {
-            return false;
-        }
-
         public string AccountType { get; set; }
-
         public string Branch { get; set; }
-
-
     }
 }

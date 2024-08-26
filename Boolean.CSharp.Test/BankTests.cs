@@ -1,4 +1,6 @@
 ﻿using Boolean.CSharp.Main;
+using Boolean.CSharp.Main.Bank.AccountTypes;
+using Boolean.CSharp.Main.Bank;
 using NUnit.Framework;
 
 namespace Boolean.CSharp.Test
@@ -16,6 +18,12 @@ namespace Boolean.CSharp.Test
         [Test]
         public void CanCreateCurrentAccountTest()
         {
+            CurrentAccount currentAccount = new CurrentAccount();
+
+            bool newAccount = currentAccount.CreateAccount();
+
+            Assert.That(newAccount, Is.True);
+
 
         }
 
@@ -23,20 +31,36 @@ namespace Boolean.CSharp.Test
         [Test]
         public void CanCreateSavingsAccountTest()
         {
+            /*SavingsAccount savingsAccount = new SavingsAccount();
+            bool newAccount = savingsAccount.CreateAccount();
 
+            Assert.That(newAccount, Is.True);
+            */
         }
 
         //4. As a customer, So I can use my account, I want to deposit and withdraw funds.
         [Test]
         public void CanMakeDepositTest()
         {
+            /*decimal depositAmount = 200.00M;
+            CurrentAccount currentAccount = new CurrentAccount();
 
+            bool hasMadeDeposit = currentAccount.MakeDeposit(depositAmount);
+
+            Assert.That(hasMadeDeposit, Is.True);
+            */
         }
 
         [Test]
         public void CanMakeWithdrawalTest()
         {
+            /*decimal withdrawAmount = 200.00M;
+            CurrentAccount currentAccount = new CurrentAccount() { Balance = 200.00M };
 
+            bool hasMadeWithdrawal = currentAccount.MakeWithdrawal(withdrawAmount);
+
+            Assert.That(hasMadeWithdrawal, Is.True);
+            */
         }
 
         //3. As a customer, So I can keep a record of my finances, I want to generate bank statements with transaction dates, amounts, and balance at the time of transaction.
