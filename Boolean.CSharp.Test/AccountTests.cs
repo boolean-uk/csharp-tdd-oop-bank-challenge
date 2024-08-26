@@ -17,7 +17,8 @@ namespace Boolean.CSharp.Test
         [Test]
         public void GetBalanceTest()
         {
-            Savings savings = new Savings();
+            Branch Oslo = new Branch("Oslo");
+            Savings savings = new Savings(Oslo);
 
             Transactions transactions = new Transactions(500, DateTime.Now, TransactionType.CREDIT);
             savings._transactions.Add(transactions);
@@ -32,7 +33,8 @@ namespace Boolean.CSharp.Test
         [Test]
         public void DepositTest()
         {
-            Savings savings = new Savings();
+            Branch Oslo = new Branch("Oslo");
+            Savings savings = new Savings(Oslo);
 
             double expected = 500.30;
 
@@ -44,7 +46,8 @@ namespace Boolean.CSharp.Test
         [Test]
         public void WithdrawTest()
         {
-            Savings savings = new Savings();
+            Branch Oslo = new Branch("Oslo");
+            Savings savings = new Savings(Oslo);
 
             Transactions transactions = new Transactions(500, DateTime.Now, TransactionType.CREDIT);
             savings._transactions.Add(transactions);
@@ -59,7 +62,8 @@ namespace Boolean.CSharp.Test
         [Test]
         public void BankStatementTest()
         {
-            Savings savings = new Savings();
+            Branch Oslo = new Branch("Oslo");
+            Savings savings = new Savings(Oslo);
 
             Transactions transactions1 = new Transactions(1000, DateTime.Now, TransactionType.CREDIT);
             Transactions transactions2 = new Transactions(2000, DateTime.Now, TransactionType.CREDIT);

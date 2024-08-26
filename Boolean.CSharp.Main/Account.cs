@@ -12,7 +12,7 @@ namespace Boolean.CSharp.Main
     {
         public double balance { get; set; } = 0;
         public Branch branch { get; set; }
-        public ICollection<Transactions> _transactions = new List<Transactions>();  
+        public ICollection<Transactions> _transactions = new List<Transactions>(); 
 
         public double getBalance()
         {

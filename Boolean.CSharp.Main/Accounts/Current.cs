@@ -8,5 +8,9 @@ namespace Boolean.CSharp.Main.Accounts
 {
     public class Current : Account
     {
+        public Current(Branch branch) 
+        {
+            this.branch = branch;
+        }
     }
 }
