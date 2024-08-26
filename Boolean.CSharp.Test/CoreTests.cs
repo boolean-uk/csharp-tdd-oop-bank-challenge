@@ -46,6 +46,23 @@ namespace Boolean.CSharp.Test
 
         }
 
+        [Test]
+
+        public void BalanceTest()
+        {
+            CurrentSavingsAccount savingsAccount = new CurrentSavingsAccount();
+
+            decimal expected = 2000;
+
+            savingsAccount.Deposit(1500);
+            savingsAccount.Deposit(1500);
+            savingsAccount.Withdraw(1000);
+
+            decimal result = savingsAccount.Balance;
+
+            Assert.AreEqual(expected, result);
+        }
+
 
     }
 }

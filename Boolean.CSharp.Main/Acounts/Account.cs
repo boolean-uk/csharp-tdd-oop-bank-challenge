@@ -45,7 +45,6 @@ namespace Boolean.CSharp.Main.Acounts
             else
             {
                 Transactions.Add(new Transaction { amount = amount, date = DateTime.Now, type = TransactionType.DEBIT });
-
             }
         }
     }
