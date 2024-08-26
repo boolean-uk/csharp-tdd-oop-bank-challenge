@@ -18,13 +18,28 @@ namespace Boolean.CSharp.Main.Person
 
         public Customer(string name, int id) : base(name, id) { }
 
-        public object createAccount(AccountType current, string accountNumber)
-        {
-            throw new NotImplementedException();
-        }
+      
+         public bool createAccount(AccountType accountType, string accountNumber)
+         {
+             IAccount account = null;
 
+             switch (accountType)
+             {
+                 case AccountType.Current:
+                     account = new CurrentAccount(accountNumber);
+                     break;
 
+                 case AccountType.Savings:
+                     account = new SavingsAccount(accountNumber);
+                     break;
+             }
+             if (account != null)
+             {
+                 accounts.Add(account);
+                 return true;
 
-        
+             }
+             return false;
+         } 
     }
 }

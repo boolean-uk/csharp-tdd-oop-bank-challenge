@@ -24,19 +24,21 @@ namespace Boolean.CSharp.Test
             Customer customer = new Customer("Ali Haider", 1);
 
             string accountNumber = "1290 11 11212";
+
+            AccountType current = AccountType.Current;
             
             //act
-            var accountToChech = customer.createAccount(AccountType.Current, accountNumber);
+            var accountToChech = customer.createAccount(current, accountNumber);
 
             //assert
             Assert.IsNotNull(accountToChech);
 
+        }
+        [Test]
 
-
-
-
-
-
+        public void TestSavingsAccount()
+        {
+            Assert.Fail();
         }
 
     }
