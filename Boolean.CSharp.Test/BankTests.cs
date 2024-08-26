@@ -4,13 +4,13 @@ using NUnit.Framework;
 namespace Boolean.CSharp.Test
 {
     [TestFixture]
-    public class CoreTests
+    public class BankTests
     {
-        private Core _core;
+        private Bank _core;
 
-        public CoreTests()
+        public BankTests()
         {
-            _core = new Core();
+            _core = new Bank();
 
         }
 

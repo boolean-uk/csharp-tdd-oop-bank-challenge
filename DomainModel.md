@@ -40,4 +40,4 @@ As a customer,
 So I can stay up to date,
 I want statements to be sent as messages to my phone.
 
-![Image]("C:\Users\DNordv\exercises\csharp-tdd-oop-bank-challenge\DomainModel1.png")
+![Image]("./DomainModel1.png")
