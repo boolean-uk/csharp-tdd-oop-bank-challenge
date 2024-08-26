@@ -1,5 +1,6 @@
 ﻿using Boolean.CSharp.Main.Interfaces;
 using System;
+using Boolean.CSharp.Main.Classes;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -27,17 +28,37 @@ namespace Boolean.CSharp.Main.Classes
             {
                 return "No transactions to display.";
             }
+            var accountHolderName = transactionList[0].Account.AccountHolderName;
+            var account = Bank.accounts.OfType<RegularAccount>().FirstOrDefault(x => x.AccountHolderName == accountHolderName);
 
-            string nameofholder = transactionList[0].Account.AccountHolderName;
-            string result = $"Bank statement for: {nameofholder}\n";
-            result += "date       || credit     || debit     ||balance\n";
+            if (account == null)
+            {
+                return "Account not found.";
+            }
+
+            string result = $"Bank statement for: {accountHolderName}\n";
+            result += "Date       || Credit     || Debit      || Balance\n";
+
+            // Calculate balance progressively
+            decimal currentBalance = 0;
 
             foreach (var item in transactionList)
             {
                 string dateFormatted = item.transactionDate.ToString("dd/MM/yyyy");
                 string creditFormatted = item.type == "Deposit" ? item.amount.ToString("F2", CultureInfo.InvariantCulture) : string.Empty;
-                string debitFormatted = item.type == "Withdraw" ? Math.Abs(item.amount).ToString("F2", CultureInfo.InvariantCulture) : string.Empty;
-                string balanceFormatted = item.Account.balance(nameofholder).ToString("F2", CultureInfo.InvariantCulture);
+                string debitFormatted = item.type == "Withdraw" ? item.amount.ToString("F2", CultureInfo.InvariantCulture) : string.Empty;
+
+                // Update current balance based on transaction type
+                if (item.type == "Deposit")
+                {
+                    currentBalance += item.amount;
+                }
+                else if (item.type == "Withdraw")
+                {
+                    currentBalance -= item.amount;
+                }
+
+                string balanceFormatted = currentBalance.ToString("F2", CultureInfo.InvariantCulture);
 
                 result += $"{dateFormatted} || {creditFormatted,-10} || {debitFormatted,-10} || {balanceFormatted,-10}\n";
             }

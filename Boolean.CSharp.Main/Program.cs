@@ -10,36 +10,25 @@ bank.bankName = "Min Bank 1";
 Bank.accounts = new List<IAccount>();
 Bank.requestQueue = new List<Request>();
 Bank.requestQueue.Clear();
+Statement state = new Statement();
 RegularAccount account = new RegularAccount();
-string receiver = "Alan Wake";
-account.Create("Regular", receiver);
+SavingsAccount savingsAccount = new SavingsAccount();
+string person1 = "Alan Wake";
+account.Create("Regular", person1);
 Bank.accounts.Add(account);
-decimal amountToIncrease = 100m;
+string person2 = "John Johnson";
+savingsAccount.Create("Savings", person2);
+Bank.accounts.Add(savingsAccount);
 
-// Act
-Bank.requestQueue.Clear();
-Console.WriteLine($"Account hash before RequestOverdraft: {account.GetHashCode()}");
-
-account.RequestOverdraft(receiver, "can't pay bills", amountToIncrease);
-Console.WriteLine($"Overdrafted status after request: {account.overdrafted}");
-Console.WriteLine($"Request Queue Count after request: {Bank.requestQueue.Count()}");
-
-// Print the contents of the request queue for verification
-foreach (var req in Bank.requestQueue)
+foreach (var item in Bank.accounts)
 {
-    Console.WriteLine($"Request in queue: {req.name}, {req.amount}");
+    Console.WriteLine(item.AccountHolderName);
 }
 
-// Handle the request
-bank.handleRequest(receiver, true);
 
-Console.WriteLine($"Overdrafted status after handle: {account.overdrafted}");
-Console.WriteLine($"Request Queue Count after handle: {Bank.requestQueue.Count()}");
-
-// Verify the account reference again
-Console.WriteLine($"Account hash after HandleRequest: {account.GetHashCode()}");
-
-RegularAccount accountAfter = Bank.accounts?.OfType<RegularAccount>().FirstOrDefault(x => x.AccountHolderName == receiver);
-Console.WriteLine("Regetting account" + account.AccountHolderName);
-Console.WriteLine("Status after everything = " + accountAfter.overdrafted);
-
+// Act
+var person1Account = Bank.accounts.OfType<RegularAccount>().FirstOrDefault(x => x.AccountHolderName == person1);
+account.deposit(500, person1);
+account.withdraw(300, person1);
+account.deposit(150, person1);
+Console.Write(state.PrintFormatted(person1Account.transactionList));

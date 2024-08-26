@@ -1,27 +1,38 @@
 ﻿using Boolean.CSharp.Main.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using Twilio.TwiML.Fax;
+
 
 namespace Boolean.CSharp.Main.Classes
 {
-    public class SavingsAccount :  IAccount
+
+
+    public class SavingsAccount : IAccount
     {
 
-         Statement statement = new Statement();
+        Statement statement = new Statement();
+
+
         public bool Create(string type, string name)
         {
             if (type == "Savings")
             {
                 SavingsAccount account = new SavingsAccount(new List<Transaction>());
                 account.AccountHolderName = name;
+                account.overdrafted = false;
+                account.overdraftedAmount = 0;
                 Bank.accounts.Add(account);
                 return true;
             }
             return false;
         }
+
 
         public bool deposit(decimal amount, string Receiver)
         {
@@ -33,7 +44,7 @@ namespace Boolean.CSharp.Main.Classes
             if (amount > 0 && account != null)
             {
                 Transaction transaction = new Transaction(account, amount, dayOfTransfer, type);
-                transactionList.Add(transaction);
+                account.transactionList.Add(transaction);
                 return true;
             }
             else
@@ -58,50 +69,70 @@ namespace Boolean.CSharp.Main.Classes
             {
                 // Create and add the transaction
                 Transaction transaction = new Transaction(account, amount, dayOfTransfer, type);
-                transactionList.Add(transaction);
+                account.transactionList.Add(transaction);
                 return true;
             }
             return false;
         }
 
-        public decimal balance(String Receiver)
+        public decimal balance(string receiver)
         {
-            decimal sum = 0;
+            SavingsAccount account1 = Bank.accounts?.OfType<SavingsAccount>().FirstOrDefault(x => x.AccountHolderName == receiver);
 
-            foreach (var item in transactionList)
+            if (account1 == null)
             {
-                if (item.type == "Withdraw")
-                {
-                    sum -= item.amount;
-                }
-                else if (item.type == "Deposit")
-                {
-                    sum += item.amount;
-                }
+                Console.WriteLine("Account not found for receiver: " + receiver);
+                return 0;
             }
-            return sum;
+
+            return account1.transactionList
+            .Sum(item => item.type.Equals("Withdraw", StringComparison.OrdinalIgnoreCase) ? -item.amount : item.amount);
         }
 
 
-        private List<Transaction> _transactionList = new List<Transaction>();
 
-
-        public List<Transaction> transactionList { get { return _transactionList; } set { _transactionList = value; } }
-
-        public SavingsAccount(List<Transaction> transactionList)
+        public bool RequestOverdraft(string name, string justification, decimal amount)
         {
-            this.transactionList = transactionList;
+            var account = Bank.accounts?.OfType<SavingsAccount>().FirstOrDefault(x => x.AccountHolderName == name);
+            if (account == null || account.overdrafted)
+            {
+                return false;
+            }
+
+            var request = new Request(justification, amount, name);
+            Bank.requestQueue.Add(request);
+            return true;
         }
+
+
+
+
+
+
 
         public SavingsAccount() { }
-        private string _AccountHolderName;
-        public string AccountHolderName { get { return _AccountHolderName; } set { _AccountHolderName = value; } }
+        public SavingsAccount(List<Transaction> transactionList)
+        {
 
-        public bool overdrafted {  get; set; }
+            _transactionList = transactionList;
+        }
+
+        private List<Transaction> _transactionList = new List<Transaction>();
+        public List<Transaction> transactionList
+        {
+            get { return _transactionList; }
+            set { _transactionList = value; }
+        }
+
+        public bool overdrafted { get; set; }
 
         private decimal _defuaultRent = 1.25m;
+
+        private string _AccountHolderName;
+        public string AccountHolderName { get { return _AccountHolderName; } set { _AccountHolderName = value; } }
         decimal rent { get { return _defuaultRent; } set { value = _defuaultRent; } }
 
         public decimal overdraftedAmount { get; set; }
+
     }
 }

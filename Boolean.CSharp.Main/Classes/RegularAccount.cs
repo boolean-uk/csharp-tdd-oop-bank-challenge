@@ -44,7 +44,7 @@ namespace Boolean.CSharp.Main.Classes
             if (amount > 0 && account != null)
             {
                 Transaction transaction = new Transaction(account, amount, dayOfTransfer, type);
-                transactionList.Add(transaction);
+                account.transactionList.Add(transaction);
                 return true;
             }
             else
@@ -69,26 +69,24 @@ namespace Boolean.CSharp.Main.Classes
             {
                 // Create and add the transaction
                 Transaction transaction = new Transaction(account, amount, dayOfTransfer, type);
-                transactionList.Add(transaction);
+                account.transactionList.Add(transaction);
                 return true;
             }
             return false;
         }
 
-        public decimal balance (string Receiver)
+        public decimal balance(string receiver)
         {
-            decimal sum = 0;
-            foreach (var item in transactionList)
+            RegularAccount account1 = Bank.accounts?.OfType<RegularAccount>().FirstOrDefault(x => x.AccountHolderName == receiver);
+
+            if (account1 == null)
             {
-                if (item.type == "Withdraw")
-                {
-                    sum -= item.amount;
-                }
-                else if (item.type== "Deposit") {
-                    sum += item.amount;
-                }
+                Console.WriteLine("Account not found for receiver: " + receiver);
+                return 0;
             }
-            return sum;
+
+            return account1.transactionList
+            .Sum(item => item.type.Equals("Withdraw", StringComparison.OrdinalIgnoreCase) ? -item.amount : item.amount);
         }
 
 
