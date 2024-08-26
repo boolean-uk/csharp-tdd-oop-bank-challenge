@@ -16,7 +16,15 @@ namespace Boolean.CSharp.Main.Classes
 
         public bool isIsBranch(string name)
         {
-            throw new NotImplementedException();
+            IAccount account = (IAccount)Bank.accounts.Where(x => x.AccountHolderName == name);
+            if (accounts.Contains(account))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
