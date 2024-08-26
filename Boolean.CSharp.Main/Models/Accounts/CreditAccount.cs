@@ -1,5 +1,5 @@
 namespace Boolean.CSharp.Main.Models.Accounts;
 
-public class CreditAccount(string name) : Account(name, AccountType.Credit)
+public class CreditAccount(Customer customer, string name) : Account(customer, name, AccountType.Credit)
 {
 }

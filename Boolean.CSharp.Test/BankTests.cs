@@ -9,49 +9,33 @@ namespace Boolean.CSharp.Test
     public class BankTests
     {
         [Test]
-        public void TestCreateNewBranch()
-        { 
-            Bank b = new("BooleanBank");
-            var m = new Manager();
-            var wb = new WestBranch(m);
-            b.AddBranch(wb);
-            
-            Assert.That(b.GetBranches().Count, Is.EqualTo(1));
-        }
-
-
-        [Test]
         public void TestCreateNewCustomer()
         {
             Customer c = new ("John Doe", 0101991234,
-                "98891337", new DateTime(1990, 1, 1));
-            var m = new Manager();
-            var wb = new WestBranch(m);
-            wb.NewCustomer(c);
+                "98891337", new DateTime(1990, 1, 1), Branch.Vest);
+            var b = new Bank("Bank");
+            b.NewCustomer(c);
             
-            Assert.That(wb.GetAllCustomers().Contains(c), Is.True);
+            Assert.That(b.GetAllCustomers().Contains(c), Is.True);
         }
-
 
         [Test]
         public void TestGetCustomer()
         {
             Customer c = new ("John Doe", 0101991234,
-                "98891337", new DateTime(1990, 1, 1));
-            var m = new Manager();
-            var wb = new WestBranch(m);
-            wb.NewCustomer(c);
+                "98891337", new DateTime(1990, 1, 1), Branch.Vest);
+            var b = new Bank("Bank");
+            b.NewCustomer(c);
             
-            Assert.That(wb.GetCustomer(0101991234), Is.EqualTo(c));
+            Assert.That(b.GetCustomer(0101991234), Is.EqualTo(c));
         }
-
 
         [Test]
         public void TestCreateAccount()
         {
             
             Customer c = new ("John Doe", 0101991234,
-                "98891337", new DateTime(1990, 1, 1));
+                "98891337", new DateTime(1990, 1, 1), Branch.Vest);
             c.CreateAccount("Main Account", AccountType.Spending);
             
             Assert.That(c.Accounts.Count, Is.EqualTo(1));
@@ -61,7 +45,7 @@ namespace Boolean.CSharp.Test
         public void TestGetAccount()
         {
             Customer c = new ("John Doe", 0101991234,
-                "98891337", new DateTime(1990, 1, 1));
+                "98891337", new DateTime(1990, 1, 1), Branch.Vest);
             c.CreateAccount("Main Account", AccountType.Spending);
             
             Assert.That(c.GetAccount("Main Account").AccountType, Is.EqualTo(AccountType.Spending));
@@ -71,7 +55,7 @@ namespace Boolean.CSharp.Test
         public void TestSetSmsNotification()
         {
             Customer c = new ("John Doe", 0101991234,
-                "98891337", new DateTime(1990, 1, 1));
+                "98891337", new DateTime(1990, 1, 1), Branch.Vest);
             var account = c.CreateAccount("Main Account", AccountType.Spending);
             account.ToggleSmsNotification();
 
@@ -82,7 +66,7 @@ namespace Boolean.CSharp.Test
         public void TestDeposit()
         {
             Customer c = new ("John Doe", 0101991234,
-                "98891337", new DateTime(1990, 1, 1));
+                "98891337", new DateTime(1990, 1, 1), Branch.Vest);
             var account = c.CreateAccount("Main Account", AccountType.Spending);
             account.Deposit(500);
             
@@ -93,7 +77,7 @@ namespace Boolean.CSharp.Test
         public void TestWithdraw()
         {
             Customer c = new ("John Doe", 0101991234,
-                "98891337", new DateTime(1990, 1, 1));
+                "98891337", new DateTime(1990, 1, 1), Branch.Vest);
             var account = c.CreateAccount("Main Account", AccountType.Spending);
             account.Deposit(500);
             account.Withdraw(300);
@@ -105,7 +89,7 @@ namespace Boolean.CSharp.Test
         public void TestGetTransactions()
         {
             Customer c = new ("John Doe", 0101991234,
-                "98891337", new DateTime(1990, 1, 1));
+                "98891337", new DateTime(1990, 1, 1), Branch.Vest);
             var account = c.CreateAccount("Main Account", AccountType.Spending);
             account.Deposit(500);
             account.Withdraw(300);
@@ -116,7 +100,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestGetBalance() { 
             Customer c = new ("John Doe", 0101991234,
-                "98891337", new DateTime(1990, 1, 1));
+                "98891337", new DateTime(1990, 1, 1), Branch.Vest);
             var account = c.CreateAccount("Main Account", AccountType.Spending);
             account.Deposit(500);
             account.Withdraw(300);
@@ -129,9 +113,9 @@ namespace Boolean.CSharp.Test
         public void TestRequestOverdraft()
         {
             Customer c = new ("John Doe", 0101991234,
-                "98891337", new DateTime(1990, 1, 1));
-            c.CreateAccount("Main Account", AccountType.Spending);
-            c.RequestOverDraft(c.GetAccount("Main Account"), 500);
+                "98891337", new DateTime(1990, 1, 1), Branch.Vest);
+            var a = c.CreateAccount("Main Account", AccountType.Spending);
+            a.Withdraw(500);
             
             Assert.That(Overdraft.OverdraftRequests.Count, Is.EqualTo(1));
         }
@@ -140,15 +124,13 @@ namespace Boolean.CSharp.Test
         public void TestManageOverdraftRequests()
         {
             Customer c = new ("John Doe", 0101991234,
-                "98891337", new DateTime(1990, 1, 1));
-            c.CreateAccount("Main Account", AccountType.Spending);
-            c.RequestOverDraft(c.GetAccount("Main Account"), 500);
+                "98891337", new DateTime(1990, 1, 1), Branch.Vest);
+            var a = c.CreateAccount("Main Account", AccountType.Spending);
+            a.Withdraw(500);
             
-            var m = new Manager();
-            var or = Overdraft.OverdraftRequests.FirstOrDefault()!;
-            Overdraft.ApproveOverdraft(m, or);
+            Overdraft.ApproveOverdraft(new Manager(), Overdraft.OverdraftRequests.FirstOrDefault()!);
             
-            Assert.That(Overdraft.ApprovedOverdrafts.Count, Is.EqualTo(1));
+            Assert.That(Overdraft.OverdraftRequests.Count, Is.EqualTo(0));
         }
     }
 }

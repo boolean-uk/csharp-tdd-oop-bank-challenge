@@ -2,12 +2,13 @@ using System.Text;
 
 namespace Boolean.CSharp.Main.Models.Accounts;
 
-public class Account(string name, AccountType type)
+public abstract class Account(Customer customer, string name, AccountType type)
 {
+    private Customer _customer = customer;
     public string Name { get; } = name;
     public AccountType AccountType { get; } = type;
     public bool SmsNotification { get; private set; } = false;
-    private List<BankTransaction> BankTransactions { get; } = new();
+    public List<BankTransaction> BankTransactions { get; } = new();
     
     public List<BankTransaction> GetTransactions() => BankTransactions;
 
@@ -38,15 +39,15 @@ public class Account(string name, AccountType type)
     public bool Withdraw(decimal amount, string description = "")
     {
         if (amount > 0) amount *= -1;
-        var overdraft = GetOverdraft();
-        if (!(GetBalance() + amount > overdraft)) return false;
-        BankTransactions.Add(new BankTransaction(DateTime.Now, amount, description));
+        BankTransaction bt = new(DateTime.Now, amount, description);
+        var newBalance = GetBalance() + amount;
+        if (!(newBalance > 0))
+        {
+            Overdraft.NewOverdraftRequest(_customer, this, bt, newBalance);
+            return false;
+        }
+        BankTransactions.Add(bt);
         return true;
-    }
-
-    private decimal GetOverdraft()
-    {
-        return Overdraft.ApprovedOverdrafts.GetValueOrDefault(this, 0);
     }
 
     public decimal GetBalance()

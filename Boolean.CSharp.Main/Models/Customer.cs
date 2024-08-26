@@ -3,12 +3,13 @@ using Boolean.CSharp.Main.Models.Accounts;
 
 namespace Boolean.CSharp.Main.Models;
 
-public class Customer(string name, int socialSecurityNumber, string phoneNumber, DateTime birthDate) : IPerson
+public class Customer(string name, int socialSecurityNumber, string phoneNumber, DateTime birthDate, Branch branch) : IPerson
 {
     private string _name = name;
     private string _phoneNumber = phoneNumber;
     private DateTime _birthDate = birthDate;
-    
+    private Branch _branch = branch;
+
     public int SocialSecurityNumber { get; } = socialSecurityNumber;
     public List<Account> Accounts { get; } = new();
 
@@ -19,13 +20,13 @@ public class Customer(string name, int socialSecurityNumber, string phoneNumber,
         switch (accountType)
         {
             case AccountType.Spending:
-                newAccount = new SpendingAccount(name);
+                newAccount = new SpendingAccount(this, name);
                 break;
             case AccountType.Saving:
-                newAccount = new SavingAccount(name);
+                newAccount = new SavingAccount(this, name);
                 break;
             case AccountType.Credit:
-                newAccount = new CreditAccount(name);
+                newAccount = new CreditAccount(this, name);
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(accountType), accountType, null);
@@ -38,10 +39,5 @@ public class Customer(string name, int socialSecurityNumber, string phoneNumber,
     {
         var account = Accounts.FirstOrDefault(a => a.Name.ToLower().Equals(accountName.ToLower()))!;
         return account;
-    }
-
-    public bool RequestOverDraft(Account account, decimal amount)
-    {
-        return Overdraft.NewOverdraftRequest(this, account, amount);
     }
 }
