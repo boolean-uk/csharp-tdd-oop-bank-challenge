@@ -9,7 +9,16 @@ namespace Boolean.CSharp.Main.Acounts
 {
     public abstract class Account
     {
-        public decimal Balance { get; set; } = 0;
+        public decimal Balance { 
+            get
+            { 
+                return Transactions
+                    .Where(x => x.type == TransactionType.CREDIT)
+                    .Sum(x => x.amount) - Transactions
+                    .Where(x => x.type == TransactionType.DEBIT)
+                    .Sum(x => x.amount);
+            }
+        }
 
         public List<Transaction> Transactions { get; set; } = new List<Transaction>();
 
@@ -19,7 +28,7 @@ namespace Boolean.CSharp.Main.Acounts
         {
             if (amount >= 0)
             {
-                this.Balance += amount;
+                Transactions.Add(new Transaction { amount = amount, date = DateTime.Now, type = TransactionType.CREDIT});
             }
             else
             {
@@ -35,7 +44,8 @@ namespace Boolean.CSharp.Main.Acounts
             }
             else
             {
-                this.Balance -= amount;
+                Transactions.Add(new Transaction { amount = amount, date = DateTime.Now, type = TransactionType.DEBIT });
+
             }
         }
     }
