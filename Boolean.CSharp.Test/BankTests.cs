@@ -1,4 +1,5 @@
 ﻿using Boolean.CSharp.Main;
+using Boolean.CSharp.Main.Accounts;
 using NUnit.Framework;
 
 namespace Boolean.CSharp.Test
@@ -6,12 +7,21 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class BankTests
     {
-        private Bank _core;
 
-        public BankTests()
+        [Test]
+        public void CreateAccountTest()
         {
-            _core = new Bank();
+            Bank bank = new Bank("DNB", 10000);
+            Branch oslo = new Branch("Oslo");
+            Savings savings = new Savings() {branch = oslo};
+            Current current = new Current() {branch = oslo};
 
+            bool expected = true;
+
+            bool result = bank.createAccount(savings);
+
+            Assert.That(expected == result);
+            
         }
 
         [Test]

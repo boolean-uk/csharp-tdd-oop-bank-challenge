@@ -11,6 +11,7 @@ namespace Boolean.CSharp.Main
     public abstract class Account
     {
         public double balance { get; set; } = 0;
+        public Branch branch { get; set; }
         public ICollection<Transactions> _transactions = new List<Transactions>();  
 
         public double getBalance()
