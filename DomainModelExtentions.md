@@ -32,3 +32,5 @@ I want statements to be sent as messages to my phone.
 | 				  |																										|										|							|
 |			      | `ApproveOverDraftRequest(int accountID, int overDraftID, Roles isAdmin, RequestStatus status)`		| Role is not Admin 					| false						|
 | 				  |																										| Role is Admin							| true						|
+| 				  |																										|										|							|
+|			      | `SendStateMentSMS(string user)`																		|										| string					|
