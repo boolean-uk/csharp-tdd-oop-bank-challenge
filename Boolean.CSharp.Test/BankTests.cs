@@ -18,7 +18,9 @@ namespace Boolean.CSharp.Test
 
             Bank bank = new Bank();
 
-            Assert.That(bank.CreateCustomer() != -1);
+            Assert.That(bank.CreateCustomer(customer));
+            Assert.That(!bank.CreateCustomer(customer));
+
         }
     }
 }

@@ -55,9 +55,9 @@
 |                         |RequestBankStatement(int       |Prints bank statement   |string       |                                                             
 |                         |customerId, bool savings)      |                        |             |                               
 |                         |                               |                        |             |     
-|                         |CreateCustomer()               |Creates a new customer  |int          |                                                             
+|                         |CreateCustomer(Customer custom)|Creates a new customer  |true         |                                                             
 |                         |                               |                        |             |     
-|                         |                               |Customer already exists |-1           |                                                                                                                                      
+|                         |                               |Customer already exists |false        |                                                                                                                                      
 |_________________________|_______________________________|________________________|_____________|                                                                                                          
 |Customer                 |Customer(double funds)         |                        |----         |                                                                                                                                            
 |_________________________|_______________________________|________________________|_____________|                                                                                                                                                                                   

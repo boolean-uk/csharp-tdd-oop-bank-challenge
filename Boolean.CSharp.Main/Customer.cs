@@ -13,7 +13,7 @@ namespace Boolean.CSharp.Main
             this.funds = funds;
         }
         public double funds;
-        public int customerId = 0;
+        public int customerId = -1;
 
     }
 }

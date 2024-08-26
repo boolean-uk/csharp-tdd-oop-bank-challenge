@@ -8,11 +8,19 @@ namespace Boolean.CSharp.Main
 {
     public class Bank
     {
+        private int customers = -1;
         public Bank() { }
 
-        public int CreateCustomer()
+        public bool CreateCustomer(Customer customer)
         {
-            throw new NotImplementedException();
+            if(customer.customerId == -1)
+            {
+                //new customer
+                customers++;
+                customer.customerId = customers;
+                return true;
+            }
+            return false;
         }
     }
 }
