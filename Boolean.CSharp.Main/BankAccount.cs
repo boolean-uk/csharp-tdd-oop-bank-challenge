@@ -8,21 +8,26 @@ namespace Boolean.CSharp.Main
 {
     public abstract class BankAccount
     {
-        private decimal _balance = 0;
+        //private decimal _balance = 0;
         Stack<BankStatement> _bankStatements = new Stack<BankStatement>();
 
         public bool Deposit(decimal amount)
         {
-            _balance += amount;
-            _bankStatements.Push(new BankStatement(DateTime.Now, amount, "Deposit", _balance));
+            //_balance += amount;
+            decimal totalBalance = amount;
+            if (_bankStatements.Count > 0) totalBalance += _bankStatements.Peek().Balance;
+            _bankStatements.Push(new BankStatement(DateTime.Now, amount, "Deposit", totalBalance));
             return true;
         }
 
         public bool Withdraw(decimal amount)
         {
-            if (amount > _balance) return false;
-            _balance -= amount;
-            _bankStatements.Push(new BankStatement(DateTime.Now, amount, "Withdraw", _balance));
+            decimal totalBalance = 0;
+            if (_bankStatements.Count > 0) totalBalance = _bankStatements.Peek().Balance;
+            if (amount > totalBalance) return false;
+            //_balance -= amount;
+            totalBalance -= amount;
+            _bankStatements.Push(new BankStatement(DateTime.Now, amount, "Withdraw", totalBalance));
             return true;
         }
 
@@ -47,7 +52,7 @@ namespace Boolean.CSharp.Main
             return sb.ToString();
         }
 
-        public decimal Balance { get { return _balance; } }
+        public decimal Balance { get { return _bankStatements.Peek().Balance; } }
 
         public Stack<BankStatement> BankStatements { get { return _bankStatements; } }
     }
