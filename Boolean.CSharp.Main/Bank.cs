@@ -67,9 +67,27 @@ namespace Boolean.CSharp.Main
             return overDraftLimit; 
         }
 
+       
+        public void RequestDeposit(int customerId, double funds, int bankAccount, bool overdraw)
+        {
+            throw new NotImplementedException();
+        }
+
         public void SetOverdraftLimit(Manager manager)
         {
             overDraftLimit = manager.overDraftLimit;
+        }
+
+        public string RequestBankStatement(int customerId, int accountNumber)
+        {
+            foreach (var account in bankAccounts)
+            {
+                if(account.customerId == customerId && account.accountNumber == accountNumber)
+                {
+                    return account.GenerateStatement();
+                }
+            }
+            return "Account not found";
         }
         
     }

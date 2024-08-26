@@ -64,5 +64,27 @@ namespace Boolean.CSharp.Test
             Assert.That(result4 == 1);
             Assert.That(result5 == -1);
         }
+
+        [Test]
+        public void TestRequestDeposit()
+        {
+            Bank bank = new Bank();
+            Customer customer = new Customer(100);
+            bank.CreateCustomer(customer);
+            IBranch branch1 = new Amax();
+            customer.accounts.Add(bank.CreateAccount(customer.customerId, branch1, false));
+
+
+            bank.RequestDeposit(customer.customerId, 50, customer.accounts[0], false);
+            bank.RequestDeposit(customer.customerId, 25, customer.accounts[0], false);
+            string date = DateTime.Now.ToString("dd/MM/yyyy");
+            string expected = 
+                "date       || credit  || debit  || balance\n" +
+                date+     " ||  25.00  ||        || 75.00\n" +
+                date +    " ||  50.00  ||        || 50.00\n";
+            
+            Assert.That(bank.RequestBankStatement(customer.customerId, customer.accounts[0]) == expected);
+        }
+
     }
 }

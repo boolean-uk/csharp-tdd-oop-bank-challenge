@@ -14,6 +14,6 @@ namespace Boolean.CSharp.Main
         }
         public double funds;
         public int customerId = -1;
-
+        public List<int> accounts = new List<int>();
     }
 }

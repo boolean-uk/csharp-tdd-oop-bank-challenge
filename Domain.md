@@ -29,7 +29,7 @@
 |                         |                               |                        |             |     
 |                         |RequestWithdraw(int customerId |Customer withdraws money|true         |                                                         
 |                         |double funds, int accountNumber|                        |             |                       
-|                         |bool savings, bool overdraw)   |Customer does not exist |false        |                                                        
+|                         | bool overdraw)                |Customer does not exist |false        |                                                        
 |                         |                               |                        |             |     
 |                         |                               |Customer does not have  |             |                            
 |                         |                               |savings/current account |false        |                                 
@@ -41,7 +41,7 @@
 |                         |                               |                        |             |     
 |                         |RequestDeposit(int customerId  |Customer deposits money |true         |                                                         
 |                         |double funds, int accountNumber|into account            |             |                                             
-|                         |bool savings, bool overdraw)   |                        |             |             
+|                         | bool overdraw)                |                        |             |             
 |                         |                               |Customer does not exist |false        |                                 
 |                         |                               |                        |             |     
 |                         |                               |Customer does not have  |             |                            
@@ -53,7 +53,7 @@
 |                         |                               |amount                  |             |           
 |                         |                               |                        |             |     
 |                         |RequestBankStatement(int       |Prints bank statement   |string       |                                                             
-|                         |customerId, bool savings)      |                        |             |                               
+|                         |customerId, int accountNUmber) |                        |             |                               
 |                         |                               |                        |             |     
 |                         |CreateCustomer(Customer custom)|Creates a new customer  |true         |                                                             
 |                         |                               |                        |             |     
