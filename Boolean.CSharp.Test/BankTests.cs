@@ -27,9 +27,28 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        public void RequestOverdraft()
+        public void RequestOverdraftTest()
         {
-            //Person
+            Branch Oslo = new Branch("Oslo");
+            Branch Bergen = new Branch("Bergen");
+
+            Bank bank = new Bank("DNB", 10000, Oslo, Bergen);
+            Savings savings = new Savings(Oslo);
+
+            bank.createAccount(savings);
+
+            bool expected = false;
+
+            bool result = bank.requestOverdraft(savings, 300);
+
+            Assert.That(expected == result);
+
+        }
+
+        [Test]
+        public void DecideOverdraftTest()
+        {
+            // yo
         }
 
     }

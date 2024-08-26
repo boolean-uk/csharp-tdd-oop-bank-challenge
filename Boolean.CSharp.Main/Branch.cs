@@ -9,17 +9,17 @@ namespace Boolean.CSharp.Main
 {
     public class Branch
     {
-        public string Name { get; set; }
+        public string branchName { get; set; }
         public List<Account> accounts = new List<Account>();
 
         public Branch(string name) 
         {   
-            this.Name = name;
+            this.branchName = name;
         }
 
         public void AddAccount(Account account) 
         {
-            Console.WriteLine($"Account added to branch: {this.Name}");
+            Console.WriteLine($"Account added to branch: {this.branchName}");
             accounts.Add(account);
         }
 
@@ -27,7 +27,7 @@ namespace Boolean.CSharp.Main
         {
             foreach (var account in accounts)
             {
-                Console.WriteLine($"Branch: {account.branch.Name} | Balance: {account.getBalance()}");
+                Console.WriteLine($"Branch: {account.branch.branchName} | Balance: {account.getBalance()}");
             }
 
             return accounts;

@@ -24,17 +24,22 @@ namespace Boolean.CSharp.Main
         public bool createAccount(Account account)
         {
 
-            if (!branches.Any(b => b.Name == account.branch.Name))
+            if (!branches.Any(b => b.branchName == account.branch.branchName))
             {
-                Console.WriteLine($"{this.Name} does not have a {account.branch.Name} branch!");
+                Console.WriteLine($"{this.Name} does not have a {account.branch.branchName} branch!");
                 return false; 
             }
 
-            Branch branch = branches.Find(b => b.Name == account.branch.Name);
+            Branch branch = branches.Find(b => b.branchName == account.branch.branchName);
 
             branch.AddAccount(account);
 
             return true;
+        }
+
+        public bool requestOverdraft(Savings savings, int v)
+        {
+            throw new NotImplementedException();
         }
     }
 }
