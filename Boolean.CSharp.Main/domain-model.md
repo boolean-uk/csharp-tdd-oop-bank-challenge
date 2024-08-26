@@ -84,6 +84,7 @@ date       || credit  || debit  || balance
 | `Transaction : ITransaction` | | Implements ITransaction interface||
 | `Customer` | CreateAccount(string accountType) | Creates an account of type current or savings| IAccount|
 |		     | SendStatement(string statement) | Sends a statement as a message to the customers phone| void?|
-|		     | SendOverdraftRequest(string accountnr)|The customer request an overdraft on its account|string|
-|`Manager`	 | OverdraftRequest(string accountnr) |The manager approves an overdraft request  | true|	
-||												  |The manager rejects an overdraft request|false|
+|		     | SendOverdraftRequest(IAccount account, decimal amount)|The customer request an overdraft on its account|OverdraftRequest|
+|`Manager`	 | HandleOverdraftRequest(OverdraftRequest request, bool approve) |The manager approves or rejects an overdraft| void|
+|`OverdraftRequest`|Approve()| Changes the request status to approved| void |
+|		    |Reject() | Changes the request status to rejected | void |

@@ -10,6 +10,8 @@ namespace Boolean.CSharp.Main
     {
         private readonly List<ITransaction> _transactions = new List<ITransaction>();
         private decimal _balance {  get; set; }
+        private decimal _overdraftLimit { get; set; }
+
         public CurrentAccount()
         {
             AccountNumber = Guid.NewGuid().ToString();
@@ -23,8 +25,11 @@ namespace Boolean.CSharp.Main
 
         public void Withdraw(decimal amount)
         {
-            _balance -= amount;
-            _transactions.Add(new Transaction(amount, "Withdrawal", _balance));
+            if (_balance >= (amount - _overdraftLimit))
+            {
+                _balance -= amount;
+                _transactions.Add(new Transaction(amount, "Withdrawal", _balance));
+            }
         }
 
         public List<ITransaction> GetTransactions()
@@ -44,14 +49,17 @@ namespace Boolean.CSharp.Main
             return statement;
         }
 
-       public decimal Balance {  get {  return _balance; } }
+      
+
+        public decimal Balance {  get {  return _balance; } }
         
 
         
 
         public List<ITransaction> Transactions { get => _transactions; }
         public string AccountNumber { get; set; }
+        public string Type => "Current";
 
-
+        public decimal OverdraftLimit { get => _overdraftLimit; set => _overdraftLimit = value; }
     }
 }

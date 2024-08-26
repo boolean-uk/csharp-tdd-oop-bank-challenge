@@ -33,6 +33,14 @@ namespace Boolean.CSharp.Main
 
 
         }
+
+        public OverdraftRequest SendOverdraftRequest(IAccount account, decimal amount)
+        {
+
+            return new OverdraftRequest(account, amount, "Pending"); 
+        }
+
+
         public string Name { get; private set; }
         public List<IAccount> Accounts { get; private set; } = new List<IAccount>();
 

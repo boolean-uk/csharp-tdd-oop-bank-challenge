@@ -14,5 +14,7 @@ namespace Boolean.CSharp.Main
         void Withdraw(decimal amount);
         List<ITransaction> GetTransactions();
         string GenerateStatement();
+        decimal OverdraftLimit { get; set; }
+        string Type { get; }
     }
 }
