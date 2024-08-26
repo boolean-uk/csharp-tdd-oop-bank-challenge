@@ -29,9 +29,12 @@ namespace Boolean.CSharp.Main.Accounts
                 balance += Balance();
             }
             string spaceHelper = "";
-            if (funds < 1000)
+            if (funds.ToString().Length < 4)// space must be added
             {
-                spaceHelper = " ";
+                for (int i = 0; i < (4 - funds.ToString().Length); i++)
+                {
+                    spaceHelper += " ";
+                }
             }
             string decimalHelper = "";
             if (!funds.ToString().Contains("."))// .00 must be added
@@ -44,9 +47,12 @@ namespace Boolean.CSharp.Main.Accounts
                 balanceHelper = ".00";
             }
             string balanceSpace = "";
-            if (balance < 1000)// .00 must be added
+            if (balance.ToString().Length < 4)// space must be added
             {
-                balanceSpace = " ";
+                for(int i = 0; i < (4 - balance.ToString().Length); i++)
+                {
+                    balanceSpace += " ";
+                }
             }
 
             history.Add(date + " || " + Math.Round(funds, 2) + decimalHelper+ spaceHelper + " ||         || " + balance + balanceHelper + balanceSpace);
@@ -68,9 +74,12 @@ namespace Boolean.CSharp.Main.Accounts
             balance -= funds;
 
             string spaceHelper = "";
-            if(funds < 1000)
+            if (funds.ToString().Length < 4)// space must be added
             {
-                spaceHelper = " ";
+                for (int i = 0; i < (4 - funds.ToString().Length); i++)
+                {
+                    spaceHelper += " ";
+                }
             }
             string decimalHelper = "";
             if(!funds.ToString().Contains("."))// .00
@@ -83,9 +92,12 @@ namespace Boolean.CSharp.Main.Accounts
                 balanceHelper = ".00";
             }
             string balanceSpace = "";
-            if (balance < 1000)// .00 must be added
+            if (balance.ToString().Length < 4)// space must be added
             {
-                balanceSpace = " ";
+                for (int i = 0; i < (4 - balance.ToString().Length); i++)
+                {
+                    balanceSpace += " ";
+                }
             }
 
 

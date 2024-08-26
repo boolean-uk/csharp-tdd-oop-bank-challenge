@@ -68,9 +68,26 @@ namespace Boolean.CSharp.Main
         }
 
        
-        public void RequestDeposit(Customer customer, double funds, int bankAccount)
+        public bool RequestDeposit(Customer customer, double funds, int bankAccount)
         {
-            
+            if(funds > customer.funds)
+            {
+                return false; // not enough funds to make deposit
+            }
+            foreach (var account in bankAccounts)
+            {
+                if (account.customerId == customer.customerId && account.accountNumber == bankAccount)
+                {
+                    // account found! Time for deposit
+                    account.Deposit(funds);
+                    customer.funds -= funds; //well, you dont get to deposit and keep the money. You gave it to the bank
+                    return false;
+                }
+            }
+
+
+
+            return false; // account does not exist
         }
 
         public void SetOverdraftLimit(Manager manager)

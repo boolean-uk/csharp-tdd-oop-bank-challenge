@@ -79,11 +79,20 @@ namespace Boolean.CSharp.Test
             bank.RequestDeposit(customer, 25, customer.accounts[0]);
             string date = DateTime.Now.ToString("dd/MM/yyyy");
             string expected = 
-                "date       || credit  || debit  || balance\n" +
-                date+     " ||  25.00  ||        || 75.00\n" +
-                date +    " ||  50.00  ||        || 50.00\n";
-            
-            Assert.That(bank.RequestBankStatement(customer.customerId, customer.accounts[0]) == expected);
+                "date       || credit  || debit   || balance\n" +
+                date+     " || 25.00   ||         || 75.00  \n" +
+                date +    " || 50.00   ||         || 50.00  \n";
+
+            string result1 = bank.RequestBankStatement(customer.customerId, customer.accounts[0]);
+
+            bool result2 = bank.RequestDeposit(customer, 222222, customer.accounts[0]);//not enough money
+
+            bool result3 = bank.RequestDeposit(customer, 25, 2); //account does not exist
+
+
+            Assert.That(result1 == expected);
+            Assert.That(result2 == false);
+            Assert.That(result3 == false);
         }
 
     }

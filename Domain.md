@@ -39,9 +39,9 @@
 |                         |                               |account and overdraw is |             |                            
 |                         |                               |denied.                 |             |            
 |                         |                               |                        |             |     
-|                         |RequestDeposit(int customerId  |Customer deposits money |true         |                                                         
-|                         |double funds, int accountNumber|into account            |             |                                             
-|                         | bool overdraw)                |                        |             |             
+|                         |RequestDeposit(int customer    |Customer deposits money |true         |                                                         
+|                         |double funds,int accountNumber)|into account            |             |                                             
+|                         |                               |                        |             |             
 |                         |                               |Customer does not exist |false        |                                 
 |                         |                               |                        |             |     
 |                         |                               |Customer does not have  |             |                            
