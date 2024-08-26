@@ -32,6 +32,16 @@ namespace Boolean.CSharp.Main
             return true;
         }
 
+        public bool RequestOverdraft(decimal amount)
+        {
+            decimal totalBalance = 0;
+            if (_bankStatements.Count > 0) totalBalance = _bankStatements.Peek().Balance;
+
+            totalBalance -= amount;
+            _bankStatements.Push(new BankStatement(DateTime.Now, amount, "Withdraw", totalBalance));
+            return true;
+        }
+
         public string PrintBankStatements()
         {
             StringBuilder sb = new StringBuilder();

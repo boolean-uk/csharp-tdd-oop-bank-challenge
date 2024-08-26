@@ -92,5 +92,22 @@ namespace Boolean.CSharp.Test
             string result1 = bankAccount.Branch.Name;
             Assert.That(result1.Equals("Bob's Bank"));
         }
+
+        [Test]
+        public void Test9RequestOverdraft()
+        {
+            BankAccount bankAccount = new CurrentAccount();
+            bankAccount.RequestOverdraft(500);
+            decimal amount = bankAccount.Balance;
+            Assert.That(amount == -500m);
+        }
+
+        [Test]
+        public void Test10RequestOverdraftFail()
+        {
+            BankAccount bankAccount = new CurrentAccount();
+            bool result1 = bankAccount.RequestOverdraft(999999999999999);
+            Assert.IsFalse(result1);
+        }
     }
 }
