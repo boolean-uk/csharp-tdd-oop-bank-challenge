@@ -13,6 +13,7 @@ namespace Boolean.CSharp.Main
         public double balance { get; set; } = 0;
         public Branch branch { get; set; }
         public ICollection<Transactions> _transactions = new List<Transactions>(); 
+        public ICollection<Overdraft> _requests = new List<Overdraft>();
 
         public double getBalance()
         {
@@ -48,7 +49,7 @@ namespace Boolean.CSharp.Main
 
             if (getBalance() < amount)
             {
-                Console.WriteLine("Your balance is to low, change amount!");
+                Console.WriteLine("Your balance is to low, change amount OR ask for overdraft!");
                 return getBalance();
             }
 
@@ -79,6 +80,23 @@ namespace Boolean.CSharp.Main
 
             Console.WriteLine(print);
             return print;
+        }
+
+        public bool requestOverdraft(double amount)
+        {
+            if (getBalance() > amount)
+            {
+                Console.WriteLine("Your balance is to high to ask for an overdraft!");
+                return false;
+            }
+
+            Transactions transactions = new Transactions(amount, DateTime.Now, TransactionType.DEBIT);
+
+            Overdraft overdraft = new Overdraft(this, amount, Answer.DECLINED, transactions);
+
+            _requests.Add(overdraft);
+
+            return true;
         }
     }
 }

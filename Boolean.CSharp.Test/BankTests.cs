@@ -1,6 +1,7 @@
 ﻿using Boolean.CSharp.Main;
 using Boolean.CSharp.Main.Accounts;
 using NUnit.Framework;
+using Boolean.CSharp.Main.Enum;
 
 namespace Boolean.CSharp.Test
 {
@@ -27,28 +28,23 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        public void RequestOverdraftTest()
+        public void DecideOverdraftTest()
         {
             Branch Oslo = new Branch("Oslo");
             Branch Bergen = new Branch("Bergen");
 
             Bank bank = new Bank("DNB", 10000, Oslo, Bergen);
+            Person person = new Person("Ben", Role.MANAGER, bank);
+
             Savings savings = new Savings(Oslo);
 
-            bank.createAccount(savings);
+            savings.requestOverdraft(2000);
 
-            bool expected = false;
+            bool expected = true;
 
-            bool result = bank.requestOverdraft(savings, 300);
+            bool result = bank.decideOverdraft(savings._requests.First(), person.Role);
 
             Assert.That(expected == result);
-
-        }
-
-        [Test]
-        public void DecideOverdraftTest()
-        {
-            // yo
         }
 
     }

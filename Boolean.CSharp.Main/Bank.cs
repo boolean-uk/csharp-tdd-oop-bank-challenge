@@ -10,9 +10,9 @@ namespace Boolean.CSharp.Main
 {
     public class Bank
     {
-        public string Name { get; set; }
-        public double emergencyFund { get; set; }
-        public List<Branch> branches = new List<Branch>();
+       public string Name { get; set; }
+       public double emergencyFund { get; set; }
+       public List<Branch> branches = new List<Branch>();
        public Bank(string name, double emergencyFund, Branch? one, Branch? two) 
        {
             this.Name = name;
@@ -37,9 +37,30 @@ namespace Boolean.CSharp.Main
             return true;
         }
 
-        public bool requestOverdraft(Savings savings, int v)
+        /*
+        public bool answerOverdraft(Account account, double amount)
         {
-            throw new NotImplementedException();
+
+            if (!branches.Any(b => b.branchName == account.branch.branchName))
+            {
+                Console.WriteLine("Account not found!");
+                return false; 
+            }
+
+            if (account.getBalance() > amount)
+            {
+                Console.WriteLine("Your balance is to high to ask for an overdraft!");
+                return false;
+            }
+
+            if (account.getBalance() - amount < 0 && this.emergencyFund > amount)
+            {
+                this.emergencyFund -= amount;
+                
+            }
+
+            return true;
         }
+        */
     }
 }

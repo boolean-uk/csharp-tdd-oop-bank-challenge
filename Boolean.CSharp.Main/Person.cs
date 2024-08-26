@@ -13,10 +13,12 @@ namespace Boolean.CSharp.Main
     {
         public string Name { get; set; }
         public Role Role { get; set; }
-        public Person(string name, Role role)
+        public Bank bank { get; set; }
+        public Person(string name, Role role, Bank bank)
         {
             this.Name = name;
             this.Role = role;
+            this.bank = bank;
         }                      
     }
 }

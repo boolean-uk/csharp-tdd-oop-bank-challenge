@@ -75,5 +75,24 @@ namespace Boolean.CSharp.Test
 
             Assert.That(2500 == savings.getBalance());
         }
+
+        [Test]
+        public void RequestOverdraftTest()
+        {
+            Branch Oslo = new Branch("Oslo");
+            Branch Bergen = new Branch("Bergen");
+
+
+            Savings savings = new Savings(Oslo);
+            Transactions transactions = new Transactions(100, DateTime.Now, TransactionType.CREDIT);
+            savings._transactions.Add(transactions);
+
+            bool expected = true;
+
+            bool result = savings.requestOverdraft(200);
+
+            Assert.That(expected == result);
+
+        }
     }
 }
