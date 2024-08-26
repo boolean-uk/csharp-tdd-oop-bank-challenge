@@ -71,6 +71,8 @@ I want statements to be sent as messages to my phone.
 |                                  |                                                                           |                                                                |                              |
 |                                  | addAccount(Account account)                                               | Person adds an account                                         |                              |
 |                                  |                                                                           |                                                                |                              |
+|                                  | answerOverdraft(Person person, OverdraftRequest request)                  | Accepts/declines the request based on role                     |                              |
+|                                  |                                                                           |                                                                |                              |
 |----------------------------------|---------------------------------------------------------------------------|----------------------------------------------------------------|------------------------------|
 | Bank                             | Public Bank(string name, decimal EmergencyFund)                           | Creates a new bank object with a set fund                      |                              |
 |                                  |                                                                           |                                                                |                              |
@@ -84,9 +86,11 @@ I want statements to be sent as messages to my phone.
 |----------------------------------|---------------------------------------------------------------------------|----------------------------------------------------------------|------------------------------|
 | Branch                           | addAccount(Account account)                                               | Adds a specific account to a branch                            |                              |
 |                                  |                                                                           |                                                                |                              |
+|----------------------------------|---------------------------------------------------------------------------|----------------------------------------------------------------|------------------------------|
 |                                  |                                                                           |                                                                |                              |
+| OverdraftRequest                 | Public OverdraftRequest(decimal amount, Account account)                  | Customer creates a request for a potential overdraft           |                              |
 |                                  |                                                                           |                                                                |                              |
-|                                  |                                                                           |                                                                |                              |
+|                                  | Accept()                                                                  | Accepts the request                                            |                              |
 |                                  |                                                                           |                                                                |                              |
 |                                  |                                                                           |                                                                |                              |
 |                                  |                                                                           |                                                                |                              |
@@ -95,5 +99,7 @@ I want statements to be sent as messages to my phone.
 | Enums                            | Public Enum Role(CUSTOMER, ENGINEER, BANK_MANAGER)                        |                                                                |                              |
 |                                  |                                                                           |                                                                |                              |
 |                                  | Public Enum TransactionType(CREDIT, DEBIT)                                |                                                                |                              |
+|                                  |                                                                           |                                                                |                              |
+|                                  | Public Enum OverdraftStatus(ACCEPTED, DECLINED)                           |                                                                |                              |
 |                                  |                                                                           |                                                                |                              |
 |----------------------------------|---------------------------------------------------------------------------|----------------------------------------------------------------|------------------------------|

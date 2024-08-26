@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
+using Boolean.CSharp.Main.Extensions;
 
 namespace Boolean.CSharp.Main.Acounts
 {
@@ -24,6 +25,8 @@ namespace Boolean.CSharp.Main.Acounts
         public List<Transaction> Transactions { get; set; } = new List<Transaction>();
 
         public Branch yourBranch { get; set; }
+
+        public List<OverdraftRequest> OverdraftRequests { get; set; } = new List<OverdraftRequest>();
 
         public void Deposit(decimal amount)
         {
@@ -73,6 +76,16 @@ namespace Boolean.CSharp.Main.Acounts
 
 
             return statement;
+        }
+
+        public void RequestOverdraft(decimal amount)
+        {
+            OverdraftRequests.Add(new OverdraftRequest(amount, this));    
+        }
+
+        public void RequestoToTransaction()
+        {
+            Withdraw(OverdraftRequests.First().Amount);
         }
     }
 }

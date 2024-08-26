@@ -18,7 +18,6 @@ namespace Boolean.CSharp.Main
             EmergencyFund = funds;
         }
 
-
         public void addBranch(Branch branch)
         {
             Branches.Add(branch);

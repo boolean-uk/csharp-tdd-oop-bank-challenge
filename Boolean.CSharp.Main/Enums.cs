@@ -22,5 +22,11 @@ namespace Boolean.CSharp.Main
             CREDIT,
             DEBIT
         }
+
+        public enum OverdraftStatus
+        {
+            ACCEPTED,
+            DECLINED
+        }
     
 }

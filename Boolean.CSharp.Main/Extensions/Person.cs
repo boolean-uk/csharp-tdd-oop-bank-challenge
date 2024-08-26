@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boolean.CSharp.Main
+namespace Boolean.CSharp.Main.Extensions
 {
     public class Person
     {
@@ -24,6 +24,20 @@ namespace Boolean.CSharp.Main
         public void addAccount(Account account)
         {
             Accounts.Add(account);
+        }
+
+        public void answerOverdraft(Person person, OverdraftRequest request)
+        {
+            if (person.Role != Role.CUSTOMER)
+            {
+                Console.WriteLine("You are not allowed to perform this action...");
+                return;
+            }
+            Console.WriteLine("Request got accepted");
+            request.Accept();
+
+            request.Account.RequestoToTransaction();
+
         }
     }
 }
