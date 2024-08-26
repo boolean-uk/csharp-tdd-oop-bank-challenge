@@ -55,5 +55,21 @@ namespace Boolean.CSharp.Test
 
             Assert.That(expected == result);
         }
+
+        [Test]
+        public void BankStatementTest()
+        {
+            Savings savings = new Savings();
+
+            Transactions transactions1 = new Transactions(1000, DateTime.Now, TransactionType.CREDIT);
+            Transactions transactions2 = new Transactions(2000, DateTime.Now, TransactionType.CREDIT);
+            Transactions transactions3 = new Transactions(500, DateTime.Now, TransactionType.DEBIT);
+
+            savings._transactions.Add(transactions1);
+            savings._transactions.Add(transactions2);
+            savings._transactions.Add(transactions3);
+
+            Assert.That(2500 == savings.getBalance());
+        }
     }
 }
