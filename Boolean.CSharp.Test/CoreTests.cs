@@ -77,9 +77,24 @@ namespace Boolean.CSharp.Test
             Assert.AreEqual(result, expected);
 
 
-        
-
         }
+
+
+        [Test]
+        public void getBranchesTest()
+        {
+            Bank bank = new Bank();
+            Branch stavangerBranch = new Branch("StavangerDNB");
+            Branch osloBranch = new Branch("OsloDNB");
+
+            bank.addBranch(stavangerBranch);
+            bank.addBranch(osloBranch);
+            string expected = "StavangerDNB";
+            List<Branch> results = bank.getBranches();
+            Assert.AreEqual(expected, results.First().Name);
+
+
+        }   
 
     }
 }

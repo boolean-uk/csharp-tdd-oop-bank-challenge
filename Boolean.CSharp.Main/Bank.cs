@@ -11,5 +11,17 @@ namespace Boolean.CSharp.Main
         public string Name { get; set; }
 
         public List<Branch> Branches { get; set; } = new List<Branch>();
+
+
+
+        public void addBranch(Branch branch)
+        {
+            Branches.Add(branch);
+        }
+
+        public List<Branch> getBranches()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
