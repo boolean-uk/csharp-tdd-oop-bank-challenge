@@ -8,10 +8,20 @@ namespace Boolean.CSharp.Main.BankAccount
 {
     public class SavingsAccount : IBankAccount
     {
-        public string AccountName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public bool savingsAccount { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public List<Transaction> transactionHistory { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public List<Transaction> TransactionHistory { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        bool IBankAccount.SavingsAccount { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        #region Properties
+        private string _accountName;
+        private AccountType _accountType;
+        private List<Transaction> _transactionHistory = new List<Transaction>();
+
+        public string AccountName { get => _accountName; set => _accountName = value; }
+        public AccountType AccountType { get => _accountType; }
+        public List<Transaction> TransactionHistory { get => _transactionHistory; }
+        #endregion
+
+        public SavingsAccount (string accountName, AccountType accountType) 
+        {
+            _accountName = accountName;
+            _accountType = accountType;
+        }
     }
 }

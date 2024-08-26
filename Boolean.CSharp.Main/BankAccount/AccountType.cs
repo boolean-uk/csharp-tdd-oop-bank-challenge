@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main.BankAccount
 {
-    public enum TransactionType
+    public enum AccountType
     {
         Current,
         Saving

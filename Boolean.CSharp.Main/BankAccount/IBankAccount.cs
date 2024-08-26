@@ -9,7 +9,7 @@ namespace Boolean.CSharp.Main.BankAccount
     public interface IBankAccount
     {
         string AccountName { get; set; }
-        bool SavingsAccount {  get; set; }
-        List<Transaction> TransactionHistory { get; set; }
+        AccountType AccountType { get; }
+        List<Transaction> TransactionHistory { get; }
     }
 }

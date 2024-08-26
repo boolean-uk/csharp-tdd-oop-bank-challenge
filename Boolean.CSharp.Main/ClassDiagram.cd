@@ -29,30 +29,30 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Boolean.CSharp.Main.BankAccount.SavingsAccount">
-    <Position X="13.5" Y="2.75" Width="1.5" />
+    <Position X="13.5" Y="2.75" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAQBAAAAAAA=</HashCode>
+      <HashCode>AAAAAIAAAQAAAACAAAAAAAAAAAIAAAAAAAQAAAAAAQA=</HashCode>
       <FileName>BankAccount\SavingsAccount.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Boolean.CSharp.Main.BankAccount.Account">
-    <Position X="11.5" Y="2.75" Width="1.5" />
+    <Position X="11.25" Y="2.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAQBAAAAAAA=</HashCode>
+      <HashCode>AAAAAIAAAQAAAACAAAAAAAAAAAIAAAAAAAQAAAAAAQA=</HashCode>
       <FileName>BankAccount\Account.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Boolean.CSharp.Main.BankAccount.Transaction">
-    <Position X="12.5" Y="4.5" Width="1.5" />
+    <Position X="11.25" Y="6" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAQAAAAAAABAAAAACAAAAAAAABAABCAAAAAAA=</HashCode>
       <FileName>BankAccount\Transaction.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Boolean.CSharp.Main.Bank">
-    <Position X="2.5" Y="1" Width="1.5" />
+    <Position X="2.75" Y="1" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAgAA=</HashCode>
       <FileName>Bank.cs</FileName>
@@ -61,9 +61,16 @@
   <Interface Name="Boolean.CSharp.Main.BankAccount.IBankAccount">
     <Position X="12.5" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAQAAAAAAQA=</HashCode>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAQA=</HashCode>
       <FileName>BankAccount\IBankAccount.cs</FileName>
     </TypeIdentifier>
   </Interface>
+  <Enum Name="Boolean.CSharp.Main.BankAccount.AccountType">
+    <Position X="13.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BankAccount\AccountType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
