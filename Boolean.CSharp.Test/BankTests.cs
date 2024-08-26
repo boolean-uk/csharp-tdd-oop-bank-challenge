@@ -13,8 +13,8 @@ namespace Boolean.CSharp.Test
             Bank bank = new Bank();
             IPerson person = new Customer("Test");
             BankBranch branch = new BankBranch(1); 
-            SavingAccount savingAccount = new SavingAccount(0,1);
-            CurrentAccount currentAccount = new CurrentAccount(0,1);
+            SavingAccount savingAccount = new SavingAccount(123);
+            CurrentAccount currentAccount = new CurrentAccount(121);
             string accountType1 = "Savings";
             string accountType2 = "Current";
             string accountType3 = "Stocks";

@@ -21,11 +21,13 @@ namespace Boolean.CSharp.Main
             IAccount account;
             if (accountType == "Savings")
             {
-                account = new SavingAccount(0, accountNumber);
+                account = new SavingAccount(accountNumber);
+                account.AccountBalance.Add(accountNumber, 0);
             }
             else if (accountType == "Current")
             {
-                account = new CurrentAccount(0, accountNumber);
+                account = new CurrentAccount(accountNumber);
+                account.AccountBalance.Add(accountNumber, 0);
             }
             else
             {
@@ -39,15 +41,18 @@ namespace Boolean.CSharp.Main
             return true;
 
         }
-
-        public bool Deposit(decimal amount, IAccount account)
-        {
-            return false;
-        }
-
         public bool AddBranch(int id)
         {
-            throw new NotImplementedException();
+            foreach (var item in BankBranches)
+            {
+                if (item.Id.Equals(id))
+                {
+                    return false;
+                }
+            }
+            BankBranch branch = new BankBranch(id);
+            BankBranches.Add(branch);
+            return true;
         }
 
         public BankBranch GetBranch(int id)

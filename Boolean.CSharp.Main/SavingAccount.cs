@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,20 +12,48 @@ namespace Boolean.CSharp.Main
         public decimal Balance { get; set; }
         public int AccountNumber { get; set; }
 
-        public SavingAccount(decimal balance, int accountNumber)
-        {
-            this.Balance = balance;
+        public Dictionary<int, decimal> AccountBalance { get; set; } = new Dictionary<int, decimal>();
+
+        public SavingAccount(int accountNumber)
+        { 
             this.AccountNumber = accountNumber;
         }
 
         public decimal Deposit(decimal amount)
         {
-            throw new NotImplementedException();
+            decimal credit = 0;
+
+            if (amount < 0)
+            {
+                amount = 0;
+            }
+            decimal value = AccountBalance.FirstOrDefault(t => t.Key == this.AccountNumber).Value;
+
+            credit = value += amount;
+
+            AccountBalance[AccountNumber] = credit;
+
+            Transaction transaction = new Transaction(DateTime.Now, amount, credit, 0);
+            transaction.PrintTransaction();
+
+
+            return credit;
         }
 
         public decimal Withdraw(decimal amount)
         {
-            throw new NotImplementedException();
+            decimal debit = 0;
+            decimal value = AccountBalance.FirstOrDefault(t => t.Key == this.AccountNumber).Value;
+            if (amount > 0 && amount <= value)
+            {
+               debit = value -= amount;
+            }
+
+            AccountBalance[AccountNumber] = debit;
+            Transaction transaction = new Transaction(DateTime.Now, amount, 0, debit);
+            transaction.PrintTransaction();
+
+            return debit;
         }
     }
 }

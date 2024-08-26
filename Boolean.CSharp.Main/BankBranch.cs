@@ -29,7 +29,7 @@ namespace Boolean.CSharp.Main
             return true;
         }
 
-        public List<IPerson> GetCustomers()
+        public List<IPerson> GetCustomer()
         {
             throw new NotImplementedException();
         }
