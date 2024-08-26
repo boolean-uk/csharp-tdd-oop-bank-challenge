@@ -11,6 +11,9 @@ namespace Boolean.CSharp.Main
         public double balance { get; set; } = 0;
         public ICollection<Transactions> _transactions { get { return _transactions; } }
 
-        public Account() { }
+        public double getBalance()
+        {
+            return this.balance;
+        }
     }
 }
