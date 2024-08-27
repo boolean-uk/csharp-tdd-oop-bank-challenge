@@ -3,14 +3,18 @@
     internal interface IAccount
     {
 
-        List<string> GenerateBankStatment();
+       List<string> GenerateBankStatment();
 
-        string GetAccountName();
+       string GetAccountName();
 
-        void DepositFunds(double funds);
+       void DepositFunds(double funds);
 
         void WithdrawFunds(double funds);
 
         string GetBalance();
+
+        void SetBranch(string branch);
+
+        string GetBranch();
     }
 }

@@ -20,15 +20,17 @@ namespace Boolean.CSharp.Main.Model
         private readonly string _id;
         private readonly DateTime _created;
         private readonly string _docPath;
+        private string _branch;
 
         internal SavingsAccount(string name, string path)
         {
-            _name = name;
-            _id = Guid.NewGuid().ToString();
-            _created = DateTime.Now;
-            _docPath = path;
+            this._name = name;
+            this._id = Guid.NewGuid().ToString();
+            this._created = DateTime.Now;
+            this._docPath = path;
             StreamWriter outputFile = new StreamWriter(Path.Combine(_docPath, $"{_id}.txt"));
             outputFile.Close();
+            this._branch = "Default";
         }
 
         public void DepositFunds(double funds)
@@ -116,5 +118,8 @@ namespace Boolean.CSharp.Main.Model
         {
             return _name;
         }
+
+        public string GetBranch() { return _branch; }
+        public void SetBranch(string branch) { _branch = branch; }
     }
 }

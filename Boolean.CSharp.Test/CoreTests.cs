@@ -21,48 +21,50 @@ namespace Boolean.CSharp.Test
         [Test]
         public void CreateCustomer()
         {
-            View.CreateCustomer("Test", "111111-0000", _main);
-            View.GetCustomersList(_main);
+            _main.CreateCustomer("Test_1", "111111-0000");
+            _main.GetCustomersList();
+            string docPath = $"..\\..\\..\\..\\Boolean.CSharp.Main\\DataBaseFolder\\111111-0000\\";
+            Assert.True(System.IO.Directory.Exists(docPath));
         }
 
         [Test]
         public void CreateSavingsAccount()
         {
-            View.CreateCustomer("Test", "111111-0000", _main);
-            View.CreateAccount("Account1", "111111-0000", _main);
+            _main.CreateCustomer("Test_2", "222222-0000");
+            _main.CreateAccount("Account1", "222222-0000");
         }
 
         [Test]
         public void AddFundsTest() 
         {
-            View.CreateCustomer("Test", "123456-0000", _main);
-            View.CreateAccount("Account1", "123456-0000", _main);
-            View.AddFunds("Account1", "123456-0000", _main, 500);
-            View.GetAccountBalance("Account1", "123456-0000", _main);
+            _main.CreateCustomer("Test_3", "123456-0000");
+            _main.CreateAccount("Account1", "123456-0000");
+            _main.AddFundToAccount(500, "Account1", "123456-0000");   
+            _main.GetAccountBalance("Account1", "123456-0000");
         }
 
 
         [Test]
         public void RemoveFundsTest() 
         {
-            View.CreateCustomer("Test", "123456-0000", _main);
-            View.CreateAccount("Account1", "123456-0000", _main);
-            View.AddFunds("Account1", "123456-0000", _main, 500);
-            View.AddFunds("Account1", "123456-0000", _main, 500);
-            View.WithdrawFunds("Account1", "123456-0000", _main, 200);
-            View.GetAccountBalance("Account1", "123456-0000", _main);
+            _main.CreateCustomer("Test_3", "123456-0000");
+            _main.CreateAccount("Account1", "123456-0000");
+            _main.AddFundToAccount(500,"Account1", "123456-0000");
+            _main.AddFundToAccount(500, "Account1", "123456-0000");
+            _main.WithdrawFundsFromAccount(200, "Account1", "123456-0000");
+            _main.GetAccountBalance("Account1", "123456-0000");
 
         }
 
         [Test]
         public void GenerateBankStatmentTest()
         {
-            View.CreateCustomer("Test", "123456-0000", _main);
-            View.CreateAccount("Account1", "123456-0000", _main);
-            View.AddFunds("Account1", "123456-0000", _main, 500);
-            View.AddFunds("Account1", "123456-0000", _main, 500);
-            View.WithdrawFunds("Account1", "123456-0000", _main, 200);
-            View.GenerateBankStatment("Account1", "123456-0000", _main);
+            _main.CreateCustomer("Test_3", "123456-0000");
+            _main.CreateAccount("Account1", "123456-0000"  );
+            _main.AddFundToAccount(500, "Account1", "123456-0000");
+            _main.AddFundToAccount(500, "Account1", "123456-0000");
+            _main.WithdrawFundsFromAccount(200, "Account1", "123456-0000");
+            _main.GenerateAccountStatment("Account1", "123456-0000");
 
 
         }
