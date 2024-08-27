@@ -18,7 +18,7 @@
 | `Customer` | CreateAccount() | Create an account for normal use | bool | The CreateAccount()-method calls a method in  |
 |  | CreateSavingsAccount() | Create a savings account | bool | The CreateSavingsAccount()-method creates an account by calling a method in the Bank-class. Send customer ID? The customer ID then becomes a key for a dictionary in Bank. |
 |  | GetBankStatement() | Generate a bank statement  | void | The GetBankStatement()-method does a print that contains transaction dates, amounts and the balance at the time of the transaction. |
-| `IBankAccount` | Withdraw(decimal) | Withdraw money from an account | bool | The Withdraw()-method makes a Transaction-object sends it to an account.
+| `BankAccount` | Withdraw(decimal) | Withdraw money from an account | bool | The Withdraw()-method makes a Transaction-object sends it to an account.
 |  | Deposit(decimal) | Deposit money to an account | bool | The Deposit()-method makes a Transaction-object and sends it to an account money from an account.
 
 ***
@@ -27,14 +27,13 @@
 
 | **Classes** | Properties |
 |:---:|:---:|
-|`Bank`| Dictionary\<int, IBankAccount> _bankAccounts_|
+|`Bank`| Dictionary\<int, BankAccount> _bankAccounts_|
 |`Person`| Bank _bank_, int _id_, string _name_ |
 |`Manager : Person`|  |
-|`Customer : Person`| List\<IBankAccount> _bankAccounts_ |
+|`Customer : Person`| List\<BankAccount> _bankAccounts_ |
 |`Engineer : Person`|  |
-|`IBankAccount`| string _accountName_, bool _savingsAccount_, List\<Transaction> _transactionHistory_ |
-|`SavingsAccount : IBankAccount`|  |
-|`Account : IBankAccount`|  | 
+|`BankAccount`| string _accountName_, int _customerID_, List\<Transaction> _transactionHistory_ |
+|`SavingsAccount : BankAccount`|  |
+|`Account : BankAccount`|  | 
 |`Transaction`| DateTime _date_, string _typeOfTransaction_, decimal _amount_ |
-|`TransactionType`| enum _Current_, enum _Saving_ |
 |`AccountType`| enum _Withdraw_, enum _Deposit_ |

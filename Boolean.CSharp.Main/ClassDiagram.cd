@@ -29,23 +29,21 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Boolean.CSharp.Main.BankAccount.SavingsAccount">
-    <Position X="13.5" Y="2.75" Width="2.25" />
+    <Position X="13.5" Y="3.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAIAAAQAAAACAAAAAAAAAAAIAAAAAAAQAAAAAAQA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>BankAccount\SavingsAccount.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Boolean.CSharp.Main.BankAccount.Account">
-    <Position X="11.25" Y="2.75" Width="1.75" />
+    <Position X="11.25" Y="3.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAIAAAQAAAACAAAAAAAAAAAIAAAAAAAQAAAAAAQA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>BankAccount\Account.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Boolean.CSharp.Main.BankAccount.Transaction">
-    <Position X="11.25" Y="6" Width="2" />
+    <Position X="11.25" Y="5.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAQAAAAAAABAAAAACAAAAAAAABAABCAAAAAAA=</HashCode>
       <FileName>BankAccount\Transaction.cs</FileName>
@@ -58,22 +56,15 @@
       <FileName>Bank.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Interface Name="Boolean.CSharp.Main.BankAccount.IBankAccount">
-    <Position X="12.5" Y="1" Width="1.5" />
+  <Class Name="Boolean.CSharp.Main.BankAccount.BankAccount">
+    <Position X="12.25" Y="0.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAQA=</HashCode>
-      <FileName>BankAccount\IBankAccount.cs</FileName>
+      <HashCode>AAAAAAAQAQAAAACAAAAAAAAAEAAAAAAAAAQAAAAAAQA=</HashCode>
+      <FileName>BankAccount\BankAccount.cs</FileName>
     </TypeIdentifier>
-  </Interface>
-  <Enum Name="Boolean.CSharp.Main.BankAccount.AccountType">
-    <Position X="14.25" Y="6" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAACAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>BankAccount\AccountType.cs</FileName>
-    </TypeIdentifier>
-  </Enum>
+  </Class>
   <Enum Name="Boolean.CSharp.Main.BankAccount.TransactionType">
-    <Position X="14.25" Y="7.25" Width="1.5" />
+    <Position X="13.5" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAI=</HashCode>
       <FileName>BankAccount\TransactionType.cs</FileName>
