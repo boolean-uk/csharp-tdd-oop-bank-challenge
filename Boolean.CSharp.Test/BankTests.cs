@@ -107,7 +107,7 @@ namespace Boolean.CSharp.Test
             currentAccount.MakeDeposit(2000.00M);
             currentAccount.MakeWithdrawal(500.00M);
 
-            string printBankStatement = currentAccount.Print;
+            string printBankStatement = currentAccount.PrintBankStatement;
 
             Assert.That(printBankStatement, Does.Contain("|| date                   || credit    || debit     || balance  "));
            

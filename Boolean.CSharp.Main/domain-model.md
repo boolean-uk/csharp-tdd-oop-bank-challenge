@@ -12,21 +12,19 @@
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Account			| List<Transaction> MyTransactions						|									| lsit of transactions							|
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-|Account			|														|  CreateAccount(Account account)	| adds new account								| 
+| Account			|														| CreateAccount(Account account)	| adds new account								| 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| Account			|														|  Deposit(decimal amount)			| if deposit add to balance						| decimal
+| Account			|														| MakeDeposit(decimal amount)		| if deposit add to balance						| bool
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| Account			|														|  Withdraw(decimal amount)			| if withdrawal subtract from balance			| decimal
+| Account			|														| MakeWithdrawal(decimal amount)	| if withdrawal subtract from balance			| bool
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| Account			| string AccountType { get; set; }						|									| property to get account type					| 
+| Account			|														| GenerateBankStatement()			| generate string of bank statement				|
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| Account			| decimal Balance { get; set; }							|									| property to get account balance				| decimal
+| Account			| string AccountType { get; set; }						|									| property to get account type					| string
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Account			| string Branch { get; set; }							|									| set Branch associated with account			|
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| Account			| List<Transaction> BankStatement						|									| list of transactions							|
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| Account			|														| PrintBankStatement()				| prints bank statement							|
+| Account			| PrintBankStatement { get; set; }						| 									| property to get bank statement				| string
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | CurrentAccount	| 														| CurrentAccount()					| constructor									|
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -38,10 +36,11 @@
 
 | Interfaces        |
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| ITransaction		| dateTime Date { get; set; }							|								| property to get date and time of transaction	| DateTime
+| ITransaction		| dateTime Date { get; set; }							|									| property to get date and time of transaction	| DateTime
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| ITransaction		| decimal Amount { get; set; }							|								| property to get amount of deposit or withdraw	| decimal
+| ITransaction		| decimal Amount { get; set; }							|									| property to get amount of deposit or withdraw	| decimal
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
+| ITransaction		| decimal Balance { get; set; }							|									| property to get account balance				| decimal
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| ITransaction		| string TransactionType { get; set; }					|									| property to get transaction type				| string
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -10,11 +10,6 @@ currentAccount.MakeDeposit(1000.00M);
 currentAccount.MakeDeposit(2000.00M);
 currentAccount.MakeWithdrawal(500.00M);
 
-string printBankStatement = currentAccount.Print;
+string printBankStatement = currentAccount.PrintBankStatement;
 
 Console.WriteLine(printBankStatement);
-
-
-
-// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");

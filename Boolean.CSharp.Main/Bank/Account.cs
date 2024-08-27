@@ -95,7 +95,7 @@ namespace Boolean.CSharp.Main.Bank
 
         public List<Transaction> MyTransactions { get { return _transactions; } }
 
-        public string Print { get { return GenerateBankStatement().ToString(); } }
+        public string PrintBankStatement { get { return GenerateBankStatement().ToString(); } }
 
         public decimal Balance { get { return _balance; } }
 
