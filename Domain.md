@@ -27,9 +27,9 @@
 |                         |savingsAccount)                |                        |             |    
 |                         |                               |Customer does not exist |-1           |                                   
 |                         |                               |                        |             |     
-|                         |RequestWithdraw(int customerId |Customer withdraws money|true         |                                                         
-|                         |double funds, int accountNumber|                        |             |                       
-|                         | bool overdraw)                |Customer does not exist |false        |                                                        
+|                         |RequestWithdraw(Customer       |Customer withdraws money|true         |                                                         
+|                         |customer, double funds,        |                        |             |                       
+|                         |int accountNumber bool overdraw)|Customer does not exist|false       |                                                        
 |                         |                               |                        |             |     
 |                         |                               |Customer does not have  |             |                            
 |                         |                               |savings/current account |false        |                                 
@@ -39,7 +39,7 @@
 |                         |                               |account and overdraw is |             |                            
 |                         |                               |denied.                 |             |            
 |                         |                               |                        |             |     
-|                         |RequestDeposit(int customer    |Customer deposits money |true         |                                                         
+|                         |RequestDeposit(Customer custome|Customer deposits money |true         |                                                         
 |                         |double funds,int accountNumber)|into account            |             |                                             
 |                         |                               |                        |             |             
 |                         |                               |Customer does not exist |false        |                                 

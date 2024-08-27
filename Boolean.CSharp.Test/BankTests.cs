@@ -8,6 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Boolean.CSharp.Test
 {
@@ -95,5 +96,50 @@ namespace Boolean.CSharp.Test
             Assert.That(result3 == false);
         }
 
+
+        [Test]
+        public void TestRequestWithdraw() 
+        {
+            Bank bank = new Bank();
+            Customer customer = new Customer(100);
+            bank.CreateCustomer(customer);
+            IBranch branch1 = new Amax();
+            customer.accounts.Add(bank.CreateAccount(customer.customerId, branch1, false));
+
+
+            bank.RequestDeposit(customer, 500, customer.accounts[0]);
+
+            //test regular withdraw
+            bool result1 = bank.RequestWithdraw(customer, 100, customer.accounts[0], false);
+            Assert.That(result1 == true);
+            string date = DateTime.Now.ToString("dd/MM/yyyy");
+            string expected =
+            "date       || credit  || debit   || balance\n" +
+            date +    " ||         || 100.00  || 400.00  \n" +
+               date + " || 500.00  ||         || 500.00  \n";
+            string result2 = bank.RequestBankStatement(customer.customerId, customer.accounts[0]);
+            Assert.That(result2 == expected);
+
+
+            //test Overdraw (400 left in account)
+            Manager manager = new Manager();
+            manager.overDraftLimit = 200;
+            bank.SetOverdraftLimit(manager);
+
+            bool result3 = bank.RequestWithdraw(customer, 1000, customer.accounts[0], true);
+            Assert.That(result3 == false); // limit does not cover this high of an overdraw
+
+
+            bool result4 = bank.RequestWithdraw(customer, 600, customer.accounts[0], true);
+            Assert.That(result4 == true);
+            expected =
+            "date       || credit  || debit   || balance\n" +
+             date +   " ||         || 600.00  || -200.00  \n" +
+            date +    " ||         || 100.00  || 400.00  \n" +
+               date + " || 500.00  ||         || 500.00  \n";
+
+            string result5 = bank.RequestBankStatement(customer.customerId, customer.accounts[0]);
+            Assert.That(result5 == expected);
+        }
     }
 }

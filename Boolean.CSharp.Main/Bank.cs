@@ -106,6 +106,10 @@ namespace Boolean.CSharp.Main
             }
             return "Account not found";
         }
-        
+
+        public bool RequestWithdraw(Customer customer, double funds, int accountNumber, bool overdraw)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
