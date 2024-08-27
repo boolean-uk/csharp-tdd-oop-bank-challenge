@@ -8,8 +8,8 @@ namespace Boolean.CSharp.Main
 {
     public class Current : Account
     {
-        private string _accountnr;
-        private string _type;
+        //private string _accountnr;
+        //private string _type;
         //private string _branch;
         //private string _ownername;
         private double _balance = 0;
@@ -27,9 +27,9 @@ namespace Boolean.CSharp.Main
         //    throw new NotImplementedException();
         //}
 
-        public string AccountNr { get => _accountnr; set => _accountnr = value; }
+        //public string AccountNr { get => _accountnr; set => _accountnr = value; }
 
-        public string Type { get => _type; set => _type = value; }
+        //public string Type { get => _type; set => _type = value; }
 
         //public string Branch { get => _branch; set => _branch = value; }
 
