@@ -26,5 +26,9 @@ namespace Boolean.CSharp.Main
         {
             _balance += amount;
         }
+        public void Withdraw(decimal amount)
+        {
+            _balance -= amount;
+        }
     }
 }

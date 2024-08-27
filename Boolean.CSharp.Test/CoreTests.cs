@@ -52,10 +52,10 @@ namespace Boolean.CSharp.Test
         {
             // init 
             SavingsAccount savingsAccount = new(300m);
-            decimal expected = 500m - 300;
+            decimal expected = 100;
 
             // run
-            savingsAccount.Withdraw(300);
+            savingsAccount.Withdraw(200);
 
             // assert
             Assert.That(expected, Is.EqualTo(savingsAccount.GetBalance()));
