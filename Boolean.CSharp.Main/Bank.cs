@@ -10,19 +10,20 @@ namespace Boolean.CSharp.Main
     {
         private string _name;
 
-        List<Account> accounts = new List<Account>();
+        private List<Account> _accounts;
 
-        public Bank(List<Account> accounts, string name)
+        public Bank(string name)
         {
             this._name = name;
-            this.accounts = accounts;
+            //this._accounts = accounts;
         }
 
-        public void CreateCurrentAccount(Customer customer, string accountnr, string type, string branch)
+        public void CreateCurrentAccount(Customer customer, Branch branch, string accountnr, string type)
         {
-
+            
         }
 
         public string Name { get => _name; set => _name = value; }
+        public List<Account> Accounts { get => _accounts; set => _accounts = value; }
     }
 }

@@ -8,7 +8,7 @@ namespace Boolean.CSharp.Main
 {
     public class Branch : Bank
     {
-        public Branch(List<Account> accounts, string name) : base(accounts, name)
+        public Branch(string name) : base(name)
         {
 
         }
