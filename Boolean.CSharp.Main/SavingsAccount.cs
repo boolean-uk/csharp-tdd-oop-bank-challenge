@@ -9,5 +9,10 @@ namespace Boolean.CSharp.Test
         {
            
         }
+
+        public void Withdraw(int v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

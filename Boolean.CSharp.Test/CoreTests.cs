@@ -48,6 +48,20 @@ namespace Boolean.CSharp.Test
             Assert.That(expected, Is.EqualTo(savingsAccount.GetBalance()));
         }
         [Test]
+        public void WithdrawTest()
+        {
+            // init 
+            SavingsAccount savingsAccount = new(300m);
+            decimal expected = 500m - 300;
+
+            // run
+            savingsAccount.Withdraw(300);
+
+            // assert
+            Assert.That(expected, Is.EqualTo(savingsAccount.GetBalance()));
+        }
+
+        [Test]
         public void PrintStatementTest()
         {
             //init
