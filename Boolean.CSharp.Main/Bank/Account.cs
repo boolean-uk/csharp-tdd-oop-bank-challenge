@@ -1,28 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Boolean.CSharp.Main.Bank
+﻿namespace Boolean.CSharp.Main.Bank
 {
-    public abstract class Account 
+    public abstract class Account
     {
-        //IAccount _account;
-        //public Account(IAccount account) 
-        //{
-        //    _account = account;
-        //}
+        private List<Account> _myAccounts = new List<Account>();
+        private string _accountType = "";
 
-        public virtual bool CreateAccount()
+        public bool CreateAccount(Account account)
         {
+            _accountType = account.AccountType;
+            if (account.AccountType == "Current")
+            {
+                _myAccounts.Add(account);
+                return true;
+            }
+            if (account.AccountType == "Savings")
+            {
+                _myAccounts.Add(account);
+                return true;
+            }
             return false;
         }
 
-        public string AccountType { get; set; }
-
-        public string Branch { get; set; }
-
-
+        public string AccountType { get { return _accountType; } set { _accountType = value; } }
+        public List<Account> MyAccounts { get { return _myAccounts; } }
+        
     }
 }

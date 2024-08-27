@@ -17,13 +17,13 @@ namespace Boolean.CSharp.Test
         //1. As a customer, So I can safely store use my money, I want to create a current account.
         [Test]
         public void CanCreateCurrentAccountTest()
-        {
-            CurrentAccount currentAccount = new CurrentAccount();
+        { 
+            Branch branch = new Branch();
+            CurrentAccount currentAccount1 = new CurrentAccount("Current");
+            
+            bool hasBeenCreated = branch.CreateAccount(currentAccount1);
 
-            bool newAccount = currentAccount.CreateAccount();
-
-            Assert.That(newAccount, Is.True);
-
+            Assert.That(hasBeenCreated, Is.True);
 
         }
 
@@ -31,11 +31,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void CanCreateSavingsAccountTest()
         {
-            /*SavingsAccount savingsAccount = new SavingsAccount();
-            bool newAccount = savingsAccount.CreateAccount();
-
-            Assert.That(newAccount, Is.True);
-            */
+            
         }
 
         //4. As a customer, So I can use my account, I want to deposit and withdraw funds.
