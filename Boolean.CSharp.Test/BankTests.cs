@@ -62,6 +62,8 @@ namespace Boolean.CSharp.Test
             bool hasMadeWithdrawal = currentAccount.MakeWithdrawal(withdrawAmount);
 
             Assert.That(hasMadeWithdrawal, Is.True);
+
+            Assert.That(currentAccount.Balance, Is.EqualTo(100.00M));
             
         }
 

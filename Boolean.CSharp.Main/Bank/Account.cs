@@ -45,9 +45,19 @@ namespace Boolean.CSharp.Main.Bank
 
         }
 
-        public bool MakeWithdrawal(decimal withdrawAmount)
+        public bool MakeWithdrawal(decimal amount)
         {
-            throw new NotImplementedException();
+            _amount = amount;
+            _date = Date;
+
+            if (_balance > _amount)
+            {
+                Transaction transaction1 = new Transaction(_amount, _date);
+                _transactions.Add(transaction1);
+                _balance -= _amount;
+                return true;
+            }
+            return false;
         }
 
         public string AccountType { get { return _accountType; } set { _accountType = value; } }
