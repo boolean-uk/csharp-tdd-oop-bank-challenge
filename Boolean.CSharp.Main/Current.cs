@@ -17,7 +17,7 @@ namespace Boolean.CSharp.Main
         Customer _customer;
         Branch _branch;
 
-        public Current(Customer customer, Branch branch, string accountnr, string type, double balance) : base(accountnr, type, branch, balance)
+        public Current(Customer customer, Branch branch, string accountnr, string type, double balance) : base(branch, accountnr, type, balance)
         {
             this._customer = customer;
         }

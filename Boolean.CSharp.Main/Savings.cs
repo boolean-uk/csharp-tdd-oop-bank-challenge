@@ -8,9 +8,11 @@ namespace Boolean.CSharp.Main
 {
     public class Savings : Account
     {
-        public Savings(string accountNr, string type, string branch, double balance) : base(accountNr, type, branch, balance)
+        public Savings(Branch branch, string accountNr, string type, double balance) : base(branch, accountNr, type, balance)
         {
         }
+
+        
 
         public string AccountNr { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public string Type { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
