@@ -86,15 +86,15 @@ namespace Boolean.CSharp.Test
 
             Current sample = newBranch.CreateCurrentAccount(customer, newBranch, "000001");
 
-            newBranch.DebitTransfer(sample.AccountNr, 200);
-            newBranch.DebitTransfer(sample.AccountNr, 300);
+            newBranch.Deposit(sample.AccountNr, 500);
+            newBranch.Deposit(sample.AccountNr, 300);
+            newBranch.Withdraw(sample.AccountNr, 500);
 
-            double expected = 500;
+            double expected = 300;
             
             double result = sample.GetBalance();
 
             Assert.AreEqual(expected, result);
-
 
         }
     }
