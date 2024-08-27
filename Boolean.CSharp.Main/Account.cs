@@ -25,15 +25,15 @@ namespace Boolean.CSharp.Main
             _balance = balance;
         }
 
-        string AccountNr { get => _accountnr; set => _accountnr = value; }
-        string Type { get => _type; set => _type = value; } //Very much feeling this may be redundant, seeing as I aldready have classes for each account type
+        public string AccountNr { get => _accountnr; set => _accountnr = value; }
+        public string Type { get => _type; set => _type = value; } //Very much feeling this may be redundant, seeing as I aldready have classes for each account type
         //string Branch { get => _branch; set => _branch = value; }
         //string OwnerName { get => _ownername; set => _ownername = value; }
-        double Balance { get => _balance; set => _balance = value; }
-        public string GetOwnerName()
-        {
-            return "";
-        }
+        public double Balance { get => _balance; set => _balance = value; }
+        //public string GetOwnerName()
+        //{
+        //    return "";
+        //}
 
     }
 }

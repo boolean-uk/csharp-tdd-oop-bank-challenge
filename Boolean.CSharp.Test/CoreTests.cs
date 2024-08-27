@@ -19,18 +19,19 @@ namespace Boolean.CSharp.Test
         {
             //List<Account> newBranchAccounts = new List<Account>(); // A list of accounts
             Branch newBranch = new Branch("Oslo"); // Bank object
-            
+
             Customer customer = new Customer("John Doe"); //Customer
-            Account current = new Current(customer, newBranch, "000001", "Current", 0.0); //Making an account with the constructor
+            //Account current = new Current(customer, newBranch, "000001", "Current", 0.0); //Making an account with the constructor
 
             bool expected = true;
 
             newBranch.CreateCurrentAccount(customer, newBranch, "000001", "Current"); //Making an account with the method
 
             bool result = false;
-            if (newBranch.Accounts.Contains(current)) //Checking if its added to the list of accounts 
+
+            if (newBranch.Accounts[0].AccountNr == "000001") 
             {
-                result = true;
+                result = true; 
             }
 
             Assert.IsTrue(expected == result);
