@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Boolean.CSharp.Main.BankAccountClasses;
+using Microsoft.VisualBasic;
 
 namespace Boolean.CSharp.Main.Persons
 {
@@ -30,22 +31,29 @@ namespace Boolean.CSharp.Main.Persons
 
         public void DepositToAccount(string accountName, decimal amount)
         {
-            throw new NotImplementedException();
+            BankAccount depositToAccount = GetAccount(accountName);
+            Transaction transaction = new Transaction(DateTime.Now.ToString("dd/MM/yyyy"), TransactionType.Deposit, amount);
+
+            depositToAccount.Deposit(transaction);
         }
-        public void WithdrawFromAccount(string v1, int v2)
+        public void WithdrawFromAccount(string accountName, decimal amount)
         {
-            throw new NotImplementedException();
+            BankAccount depositToAccount = GetAccount(accountName);
+            Transaction transaction = new Transaction(DateTime.Now.ToString("dd/MM/yyyy"), TransactionType.Withdraw, amount);
+
+            depositToAccount.Withdraw(transaction);
         }
 
         public void GenerateBankStatement(string accountName)
         {
-            throw new NotImplementedException();
+            BankAccount bankAccount = GetAccount(accountName);
+
+            bankAccount.PrintBankStatement();
         }
 
-        public object GetAccount(string accountName)
+        public BankAccount GetAccount(string accountName)
         {
-            throw new NotImplementedException();
+            return Bank.GetAccount(accountName, ID);
         }
-
     }
 }

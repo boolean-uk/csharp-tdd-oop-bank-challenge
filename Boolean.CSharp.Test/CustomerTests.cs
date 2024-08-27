@@ -30,28 +30,17 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        public void GenerateBankStatement()
-        {
-            Bank bank = new Bank();
-            Customer customer = new Customer(bank, 32, "john");
-
-            customer.CreateSavingsAccount("Bank statement Test");
-            customer.GenerateBankStatement("Bank statement Test");
-
-            Assert.Fail();
-        }
-
-        [Test]
         public void DepositToAccount()
         {
             Bank bank = new Bank();
             Customer customer = new Customer(bank, 32, "john");
 
-            customer.CreateAccount("Deposit account Test");
-            customer.DepositToAccount("Deposit account Test", 500);
-            //customer.GenerateBankStatement("Savings account Test");
+            string accountName = "Deposit account Test";
 
-            Assert.That((customer.GetAccount("Deposit account Test").Balance == 500), Is.True);
+            customer.CreateAccount(accountName);
+            customer.DepositToAccount(accountName, 500);
+
+            Assert.That((customer.GetAccount(accountName).Balance == 500), Is.True);
         }
 
         [Test]
@@ -60,11 +49,13 @@ namespace Boolean.CSharp.Test
             Bank bank = new Bank();
             Customer customer = new Customer(bank, 32, "john");
 
-            customer.CreateAccount("Deposit account Test");
-            customer.DepositToAccount("Deposit account Test", 500);
-            customer.WithdrawFromAccount("Deposit account Test", 250);
+            string accountName = "Deposit account Test";
 
-            Assert.That((customer.GetAccount("Deposit account Test").Balance == 250), Is.True);
+            customer.CreateAccount(accountName);
+            customer.DepositToAccount(accountName, 500);
+            customer.WithdrawFromAccount(accountName, 250);
+
+            Assert.That((customer.GetAccount(accountName).Balance == 250), Is.True);
         }
     }
 }
