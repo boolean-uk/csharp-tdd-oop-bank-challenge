@@ -15,7 +15,6 @@ namespace Boolean.CSharp.Main
         public Bank(string name)
         {
             this._name = name;
-            //this._accounts = accounts;
         }
 
         public Account CreateCurrentAccount(Customer customer, Branch branch, string accountnr, string type)
