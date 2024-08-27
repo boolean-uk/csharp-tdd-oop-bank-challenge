@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 
 
+
 namespace Boolean.CSharp.Main
 {
     public class Bank
@@ -83,5 +84,6 @@ namespace Boolean.CSharp.Main
 
                 return true;
         }
+
     }
 }

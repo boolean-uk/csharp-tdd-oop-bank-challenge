@@ -5,6 +5,9 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using Boolean.CSharp.Main.Enum;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
+using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main
 {
@@ -97,6 +100,24 @@ namespace Boolean.CSharp.Main
             _requests.Add(overdraft);
 
             return true;
+        }
+
+        public void phoneMessage()
+        {
+            string accountSid = "SID";
+            string authToken = "AUTH_TOKEN";
+
+            TwilioClient.Init(accountSid, authToken);
+
+            var messageOptions = new CreateMessageOptions(
+                new Twilio.Types.PhoneNumber("+4790414810"));
+            messageOptions.From = new Twilio.Types.PhoneNumber("+12562724075");
+            messageOptions.Body = bankStatement();
+
+            var message = MessageResource.Create(messageOptions);
+
+           
+            Console.WriteLine(message.Body);
         }
     }
 }

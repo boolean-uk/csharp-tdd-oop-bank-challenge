@@ -36,8 +36,10 @@ current.withdraw(2000);
 
 current.requestOverdraft(5000);
 
-bank.decideOverdraft(current._requests.First(), Role.MANAGER, false);
+bank.decideOverdraft(current._requests.First(), Role.MANAGER, true);
 
 current.deposit(500);
 
-current.bankStatement();
+// current.bankStatement();
+
+current.phoneMessage();
