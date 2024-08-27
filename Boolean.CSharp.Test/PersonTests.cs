@@ -26,7 +26,7 @@ namespace Boolean.CSharp.Test
             bool created2 = bank.CreateAccount(person, accountType2,1);
 
             Assert.That(created1, Is.EqualTo(true));
-            Assert.That(created2.GetType(), Is.EqualTo(true));
+            Assert.That(created2, Is.EqualTo(true));
 
         }
 

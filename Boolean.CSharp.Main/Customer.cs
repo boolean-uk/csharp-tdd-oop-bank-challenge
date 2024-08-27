@@ -16,7 +16,5 @@ namespace Boolean.CSharp.Main
         {
             this.Name = name;
         }
-
-
     }
 }

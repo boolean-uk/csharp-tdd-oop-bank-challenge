@@ -32,7 +32,8 @@ namespace Boolean.CSharp.Test
 
         [TestCase(1000, 1000, 0)]
         [TestCase(2000, 1000, 1000)]
-        [TestCase(50, 100, 0)]
+        [TestCase(50, 100, -50)]
+        [TestCase(0, 2500, 0)]
         public void WhitdrawalTest(decimal balance, decimal whitdrawal, decimal expected)
         {
             IAccount current = new CurrentAccount(132);

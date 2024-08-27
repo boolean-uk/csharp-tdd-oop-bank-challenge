@@ -10,7 +10,7 @@ namespace Boolean.CSharp.Main
     {
         public string Name { get; set; }
         public List<IAccount> Accounts { get; set; } = new List<IAccount>();
-        public bool isManager { get; }
+        public bool isManager { get; set; }
 
         public IPerson(string name)
         {
@@ -19,8 +19,13 @@ namespace Boolean.CSharp.Main
 
         public void AddAccount(IAccount account)
         {
-            Accounts.Add(account);
-
+            foreach (var item in Accounts)
+            {
+                if(!item.AccountNumber.Equals(account.AccountNumber))
+                {
+                    Accounts.Add(account);
+                }
+            }
         }
 
     }

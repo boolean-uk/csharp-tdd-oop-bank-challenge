@@ -12,6 +12,7 @@ namespace Boolean.CSharp.Main
         private decimal _amount;
         private decimal _credit;
         private decimal _debit;
+        private string _transaction;
 
         public Transaction(DateTime date, decimal amount, decimal credit, decimal debit)
         {
@@ -19,6 +20,7 @@ namespace Boolean.CSharp.Main
             _amount = amount;
             _credit = credit;
             _debit = debit;
+            _transaction = GetTransaction();
         }
 
         public string GetTransaction()
@@ -55,34 +57,7 @@ namespace Boolean.CSharp.Main
 
         public void PrintTransaction()
         {
-            StringBuilder sb = new StringBuilder();
-
-
-            sb.AppendLine("date       || credit  || debit  || balance");
-
-            sb.AppendFormat("{0:dd/MM/yyyy}", _date).Append(" || ");
-
-            if (_credit > 0)
-            {
-                sb.AppendFormat("{0,8:0.00}", _credit).Append(" || ");
-            }
-            else
-            {
-                sb.Append("        || ");
-            }
-
-            if (_debit > 0)
-            {
-                sb.AppendFormat("{0,8:0.00}", _debit).Append(" || ");
-            }
-            else
-            {
-                sb.Append("        || ");
-            }
-
-            sb.AppendFormat("{0,8:0.00}", _amount);
-
-            Console.WriteLine(sb.ToString());
+            Console.WriteLine(_transaction);
         }
 
     }
