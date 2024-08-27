@@ -10,12 +10,12 @@ namespace Boolean.CSharp.Main.BankAccountClasses
     {
         #region Properties
         private string _accountName;
-        private List<Transaction> _transactionHistory;
         private int _customerID;
+        private List<Transaction> _transactionHistory = new List<Transaction>();
 
         public string AccountName { get => _accountName; set => _accountName = value; }
+        public int CustomerID { get => _customerID; }
         public List<Transaction> TransactionHistory { get => _transactionHistory; }
-        public int CustomerID { get => _customerID; set => _customerID = value; }
         #endregion
 
         public BankAccount(string accountName, int customerID)
