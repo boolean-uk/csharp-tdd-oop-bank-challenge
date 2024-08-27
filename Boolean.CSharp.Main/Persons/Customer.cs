@@ -27,5 +27,25 @@ namespace Boolean.CSharp.Main.Persons
 
             Bank.CreateAccount(savingsAccount);
         }
+
+        public void DepositToAccount(string accountName, decimal amount)
+        {
+            throw new NotImplementedException();
+        }
+        public void WithdrawFromAccount(string v1, int v2)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void GenerateBankStatement(string accountName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object GetAccount(string accountName)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
