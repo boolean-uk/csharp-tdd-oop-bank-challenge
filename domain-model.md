@@ -1,54 +1,30 @@
-| Class                                       | Method                                                                   | Scenario                                | Output                                |
-|----------------------------------------------|-------------------------------------------------------------------------|------------------------------------------|---------------------------------------|-----------------------------------------------|
-| `Customer` : `IPerson`                      | `createBankAccount()`                                              | if called with args                                        | Creates an account for the customer, returns true/false                                      |
-|                                             | `depositMoneyToTransactionalAccount(float)`                             | if called with args                                        | Deposits money into transactional account, returns true/false                                     |
-|                                             | `depositMoneyToSavingsAccount(float)`                               | if called with args                                      | Deposits money into savings account                                      |
-|                                             | `withdrawMoneyFromTransactionalAccount(float)`                     |                                         |                                       |
-|                                             | `withdrawMoneyFromSavingsAccount(float)`                          |                                         |                                       |
-|                                             | `generateBankStatements()`                                         |                                         |                                       |
-|                                             | `getCustomerID()`                                          |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-| `IPerson`                                   |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-| `Engineer`                                  |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-| `BankAccount`                               |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-| `Bank`                                      |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-|            `Customer`                       |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       | 
-|                                             |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
-|                                             |                                           |                                         |                                       |
+| Package |Class                                      | Method                                 | Scenario                                 | Output  |
+---------------|-------------------------------------------|----------------------------------------|------------------------------------------|---------|
+| `Model`       | `Model`                                   | `createPerson`                         |                                          |         |
+|               |                                           | `createBankAccount`                    |                                          | |
+|               |                                           | `requestOverdraft`                     |                                          | |
+|               |                                           | `approveOverdraftRequest`              |                                          | |	
+|               |                                           | `getOverdraftRequests`                 |                                          | |
+|               |                                           | `getBankAccount`                       |                                          | |
+|               |                                           | `getCustomers`                         |                                          | |
+|               |                                           | `withdrawMoneySavings`                 |                                          | |
+|               |                                           | `withdrawMoney`                        |                                          | |
+|               |                                           | `depositMoneySavings`                  |                                          | |
+|               |                                           | `depositMoney`                         |                                          | |
+|               | `Bank`  "Has all model methods"           |                                        |                                          | |
+|               | `BankAccount` "Has most model methods"    | `getBankId`                            |                                          | |
+|               |                                           | `getBankStatements`                    |                                          | |
+|               |                                           | `getDate`                              |                                          | |
+|               |                                           | `getBalanceSavings`                    |                                          | |
+|               |                                           | `getBalanceTransac`                    |                                          | |
+|               | `BankStatement` "Only get set"            |                                        |                                          | |
+|               | `Customer` "Only get set"                 |                                        |                                          | |
+|               | `OverdraftRequest`                        | `approve`                              |                                          | |
+|               |                                           | `getAmount`                            |                                          | |
+|               |                                           | `getCustomerID`                        |                                          | |
+|               |                                           | `getIsApproved`                        |                                          | |
+|               |                                           | `getReason`                            |                                          | |
+|               | `SavingsAccount`                          |                                        |                                          | |
+|               | `TransactionalAccount`                    |                                        |                                          | |
+| `View`        | `View`"Contains prints and no real logic" |                                        |                                          | |
+| `Controller`  | `Controller` "Contains methods to pass data between model and view, basically copies of what exists in model"                            |                                        |                                          | |
