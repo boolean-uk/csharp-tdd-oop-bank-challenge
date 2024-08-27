@@ -74,22 +74,25 @@ namespace Boolean.CSharp.Test
             Branch branch = new Branch();
             CurrentAccount currentAccount = new CurrentAccount("Current");
             branch.CreateAccount(currentAccount);
-
-            decimal balance = 2500.00M;
+            List<Transaction> bankStatement = currentAccount.MyTransactions;
 
             currentAccount.MakeDeposit(1000.00M);
-            List<Transaction> bankStatement1 = currentAccount.MyTransactions;
-            Assert.That(bankStatement1.Count, Is.EqualTo(1));
+            Assert.That(bankStatement.Count, Is.EqualTo(1));
+            Assert.That(bankStatement.First().Amount, Is.EqualTo(1000.00M));
+            Assert.That(bankStatement.First().Date, !Is.Null);
+            Assert.That(bankStatement.First().Balance, Is.EqualTo(1000.00M));
 
             currentAccount.MakeDeposit(2000.00M);
-            List<Transaction> bankStatement2 = currentAccount.MyTransactions;
-            Assert.That(bankStatement2.Count, Is.EqualTo(2));
+            bankStatement = currentAccount.MyTransactions;
+            Assert.That(bankStatement.Count, Is.EqualTo(2));
 
             currentAccount.MakeWithdrawal(500.00M);
-            List<Transaction> bankStatement3 = currentAccount.MyTransactions;
-            Assert.That(bankStatement3.Count, Is.EqualTo(3));
+            bankStatement = currentAccount.MyTransactions;
+            Assert.That(bankStatement.Count, Is.EqualTo(3));
 
-            Assert.That(bankStatement3, Does.Contain(balance));
+            decimal expectedbalance = 2500.00M;
+            Assert.That(bankStatement.Last().Balance == expectedbalance);
+            
 
         }
 

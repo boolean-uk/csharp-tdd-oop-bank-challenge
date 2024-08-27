@@ -36,9 +36,9 @@ namespace Boolean.CSharp.Main.Bank
 
             if (_amount > 0)
             {
-                Transaction transaction = new Transaction(_amount, _date);
-                _transactions.Add(transaction);
                 _balance += _amount;
+                Transaction transaction = new Transaction(_amount, _date, _balance);
+                _transactions.Add(transaction);
                 return true;
             }
             return false;
@@ -52,9 +52,9 @@ namespace Boolean.CSharp.Main.Bank
 
             if (_balance > _amount)
             {
-                Transaction transaction1 = new Transaction(_amount, _date);
-                _transactions.Add(transaction1);
                 _balance -= _amount;
+                Transaction transaction1 = new Transaction(_amount, _date, _balance);
+                _transactions.Add(transaction1);
                 return true;
             }
             return false;

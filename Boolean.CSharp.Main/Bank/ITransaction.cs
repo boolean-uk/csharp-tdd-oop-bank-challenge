@@ -8,6 +8,7 @@ namespace Boolean.CSharp.Main.Bank
 {
     public interface ITransaction
     {
+        decimal Balance { get; }
         decimal Amount { get; }
         DateTime Date { get; }
     }
