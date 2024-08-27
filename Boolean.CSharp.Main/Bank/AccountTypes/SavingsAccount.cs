@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main.Bank.AccountTypes
 {
-    public class SavingsAccount
+    public class SavingsAccount : Account
     {
+        public SavingsAccount(string accountType) 
+        {
+            AccountType = accountType;
+        }
     }
 }

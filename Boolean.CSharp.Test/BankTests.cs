@@ -31,11 +31,16 @@ namespace Boolean.CSharp.Test
         [Test]
         public void CanCreateSavingsAccountTest()
         {
-            
+            Branch branch = new Branch();
+            SavingsAccount savingsaccount1 = new SavingsAccount("Savings");
+
+            bool hasBeenCreated = branch.CreateAccount(savingsaccount1);
+
+            Assert.That(hasBeenCreated, Is.True);
         }
 
         //4. As a customer, So I can use my account, I want to deposit and withdraw funds.
-        [Test]
+        //[Test]
         public void CanMakeDepositTest()
         {
             /*decimal depositAmount = 200.00M;
@@ -45,9 +50,10 @@ namespace Boolean.CSharp.Test
 
             Assert.That(hasMadeDeposit, Is.True);
             */
+            
         }
 
-        [Test]
+        //[Test]
         public void CanMakeWithdrawalTest()
         {
             /*decimal withdrawAmount = 200.00M;
@@ -60,7 +66,7 @@ namespace Boolean.CSharp.Test
         }
 
         //3. As a customer, So I can keep a record of my finances, I want to generate bank statements with transaction dates, amounts, and balance at the time of transaction.
-        [Test]
+        //[Test]
         public void CanGenerateBankStatementTest()
         {
 
