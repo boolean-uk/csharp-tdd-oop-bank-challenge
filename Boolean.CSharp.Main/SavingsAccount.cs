@@ -1,18 +1,14 @@
 ﻿
+using Boolean.CSharp.Main;
+
 namespace Boolean.CSharp.Test
 {
-    public class SavingsAccount
+    public class SavingsAccount : Account
     {
-        private int v;
-
-        public SavingsAccount(int v)
+        //private decimal _balance = 0;
+        public SavingsAccount(decimal number):base(number) 
         {
-            this.v = v;
-        }
-
-        public decimal GetBalance()
-        {
-            throw new NotImplementedException();
+           
         }
     }
 }
