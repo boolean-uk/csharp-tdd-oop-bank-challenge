@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Boolean.CSharp.Main.Controller.Controller">
+    <Position X="1.5" Y="0.75" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAIABBAACAQAAgAAQAAQIAAAAJAAk=</HashCode>
+      <FileName>Controller\Controller.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Boolean.CSharp.Main.Model.OverdraftRequest">
+    <Position X="17.5" Y="0.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAYAAAACAAIAAAAAAAAAAAAAAAQAADAAAAAAIA=</HashCode>
+      <FileName>Model\OverdraftRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Boolean.CSharp.Main.Model.Bank">
+    <Position X="6.25" Y="0.75" Width="3.5" />
+    <NestedTypes>
+      <Enum Name="Boolean.CSharp.Main.Model.Bank.Branch" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Model\Bank.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAESQAABAAAAIAAAIABBAAAAQAAAAASAAAIEAAAAAAk=</HashCode>
+      <FileName>Model\Bank.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Boolean.CSharp.Main.Model.BankAccount">
+    <Position X="17" Y="6.25" Width="4.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQCwAEAAEAAAAAAAAAgAAAAAgCgAAAIQAQGAAAU=</HashCode>
+      <FileName>Model\BankAccount.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Boolean.CSharp.Main.Model.BankStatement">
+    <Position X="14.5" Y="0.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAACIAAQAAAAAABADAAAAEAACAAABAAQQAAAAQEAEAA=</HashCode>
+      <FileName>Model\BankStatement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Boolean.CSharp.Main.Model.Customer" BaseTypeListCollapsed="true">
+    <Position X="9.25" Y="6.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAACAAgAAAAEAAQAAAAAAAAAAAAAAQAAAAAAg=</HashCode>
+      <FileName>Model\Customer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Boolean.CSharp.Main.Model.Model">
+    <Position X="10" Y="0.75" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAQAAIAAAIABBAACAQAAAAAQAAAIAAAAAAAk=</HashCode>
+      <FileName>Model\Model.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Boolean.CSharp.Main.Model.SavingsAccount">
+    <Position X="12.5" Y="6.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAgAAAAABAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Model\SavingsAccount.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Boolean.CSharp.Main.Model.TransactionsAccount">
+    <Position X="14.75" Y="6.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Model\TransactionsAccount.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Boolean.CSharp.Main.View.View">
+    <Position X="1.5" Y="7" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAgAAABAAACAAAAgAAQAAAAABAAAAAg=</HashCode>
+      <FileName>View\View.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Boolean.CSharp.Main.Model.IPerson">
+    <Position X="6.25" Y="6.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAACAAAAAAAEAAQAAAAAAAAAAAAAAQAAAAAAg=</HashCode>
+      <FileName>Model\IPerson.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
