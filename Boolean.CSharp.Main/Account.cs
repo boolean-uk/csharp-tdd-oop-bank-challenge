@@ -24,7 +24,7 @@ namespace Boolean.CSharp.Main
 
         public void Deposit(decimal amount)
         {
-            
+            _balance += amount;
         }
     }
 }
