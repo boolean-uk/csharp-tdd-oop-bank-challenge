@@ -16,6 +16,14 @@ namespace Boolean.CSharp.Main.Controler
             this.management = new Managment();
         }
 
+        internal View.View ViewDisplays
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         internal bool CreateAccount(string AccountName, string SocialSecurityNr)
         {
             Customer? c = management.GetCustomer().FirstOrDefault(propa => propa.CustomerId == SocialSecurityNr);
@@ -25,7 +33,7 @@ namespace Boolean.CSharp.Main.Controler
             }
             else
             {
-                View.View.CreateAccount(AccountName);
+                ViewDisplays.View.CreateAccount(AccountName);
                 return c.CreateAccount(AccountName); 
             }
         }
@@ -36,7 +44,7 @@ namespace Boolean.CSharp.Main.Controler
             {
                 Customer c = new Customer(CustomerName, SocialSecurityNr);
                 management.AddCustomer(c);
-                View.View.CreateCustomer(CustomerName);
+                ViewDisplays.View.CreateCustomer(CustomerName);
                 return true;
             }
             catch (Exception e)
@@ -106,13 +114,13 @@ namespace Boolean.CSharp.Main.Controler
         {
             Customer? c = management.GetCustomer().FirstOrDefault(propa => propa.CustomerId == SocialSecurityNr);
             IAccount? a = c!.Accounts.FirstOrDefault(propa => propa.GetAccountName() == AccountName);
-            View.View.GenerateBankStatment(a!.GenerateBankStatment());
+            ViewDisplays.View.GenerateBankStatment(a!.GenerateBankStatment());
             return true;
         }
 
         internal bool OverdraftCheck(string AccountName, string SocialSecurityNr, double overdraft)
         {
-            if (View.View.OverdraftCheck(AccountName, SocialSecurityNr, overdraft))
+            if (ViewDisplays.View.OverdraftCheck(AccountName, SocialSecurityNr, overdraft))
             {
                 return true;
             }
@@ -124,7 +132,7 @@ namespace Boolean.CSharp.Main.Controler
 
         internal void GetCustomersList()
         {
-            View.View.GetCustomersList(GetCustomers());
+            ViewDisplays.View.GetCustomersList(GetCustomers());
         }
 
 

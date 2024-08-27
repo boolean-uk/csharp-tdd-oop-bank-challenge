@@ -2,8 +2,9 @@
 {
     internal interface IAccount
     {
+        Customer CustomerOwnAccount { get; set; }
 
-       List<string> GenerateBankStatment();
+        List<string> GenerateBankStatment();
 
        string GetAccountName();
 
