@@ -7,10 +7,5 @@ namespace Boolean.CSharp.Main.Bank.AccountTypes
         { 
             AccountType = accountType;
         }
-
-        public bool MakeDeposit(decimal depositAmount)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
