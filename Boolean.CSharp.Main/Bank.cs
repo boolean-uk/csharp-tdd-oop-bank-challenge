@@ -19,14 +19,16 @@ namespace Boolean.CSharp.Main
 
         public Current CreateCurrentAccount(Customer customer, Branch branch, string accountnr, string type)
         {
-            Current current = new Current(customer, branch, accountnr, type, 0.0);
+            List<Transaction> transactions = new List<Transaction>();
+            Current current = new Current(branch, transactions, customer, accountnr, type, 0.0);
             _accounts.Add(current);
             return current;
         }
 
         public Savings CreateSavingsAccount(Customer customer, Branch branch, string accountnr, string type)
         {
-            Savings savings = new Savings(customer, branch, accountnr, type, 0.0);
+            List<Transaction> transactions = new List<Transaction>();
+            Savings savings = new Savings(branch, transactions, customer, accountnr, type, 0.0);
             _accounts.Add(savings);
             return savings;
         }
@@ -45,6 +47,7 @@ namespace Boolean.CSharp.Main
             Transaction thisTransaction = new Transaction(DateTime.Now, null, amount);
             var matches = _accounts.FirstOrDefault(x => x.AccountNr == accountnr);
             matches.Transactions.Add(thisTransaction);
+            //matches.Transactions.Add(thisTransaction);
             return thisTransaction;
         }
     }

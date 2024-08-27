@@ -8,21 +8,34 @@ namespace Boolean.CSharp.Main
 {
     public class Current : Account
     {
-        private List<Transaction> transactions = new List<Transaction>();
+        //private List<Transaction> transactions = new List<Transaction>();
 
         Customer _customer;
         //Transaction _transaction;
 
-        public Current(Customer customer, Branch branch, string accountnr, string type, double balance) : base(branch, accountnr, type, balance)
+        public Current(Branch branch, List<Transaction> transactions, Customer customer, string accountnr, string type, double balance) : base(branch, transactions, accountnr, type, balance)
         {
             this._customer = customer;
         }
 
-        public List<Transaction> Transactions { get => transactions; set => transactions = value; }
+        //public List<Transaction> Transactions { get => transactions; set => transactions = value; }
 
         public double GetBalance()
         {
-            return 0.0;
+            double debit = 0;
+            double credit = 0;
+            foreach (Transaction t in Transactions) //This is skipping, why? Corrected to get it from the abstract class
+            {
+                if (t.Debit != null)
+                {
+                    debit += (double)t.Debit;
+                }
+                if (t.Credit != null)
+                {
+                    credit += (double)t.Credit;
+                }
+            }
+            return debit - credit;
         }
     }
 }

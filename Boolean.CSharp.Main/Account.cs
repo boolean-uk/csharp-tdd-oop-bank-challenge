@@ -17,8 +17,9 @@ namespace Boolean.CSharp.Main
 
         Branch _branch;
 
-        public Account(Branch branch, string accountNr, string type, double balance)
+        public Account(Branch branch, List<Transaction> transactions, string accountNr, string type, double balance)
         {
+            _transactions = transactions;
             _accountnr = accountNr;
             _type = type;
             _branch = branch;
