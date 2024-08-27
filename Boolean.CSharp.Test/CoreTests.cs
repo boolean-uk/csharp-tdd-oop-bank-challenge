@@ -25,7 +25,7 @@ namespace Boolean.CSharp.Test
 
             bool expected = true;
 
-            Account test = newBranch.CreateCurrentAccount(customer, newBranch, "000001", "Current"); //Making an account with the method
+            Account sample = newBranch.CreateCurrentAccount(customer, newBranch, "000001", "Current"); //Making an account with the method
 
             bool result = false;
 
@@ -38,7 +38,7 @@ namespace Boolean.CSharp.Test
 
             bool testCheck = false;
 
-            if (newBranch.Accounts.Contains(test))
+            if (newBranch.Accounts.Contains(sample))
             {
                 testCheck = true;
             }
@@ -56,7 +56,7 @@ namespace Boolean.CSharp.Test
 
             bool expected = true;
 
-            newBranch.CreateSavingsAccount(customer, newBranch, "000001", "Savings");
+            Account sample = newBranch.CreateSavingsAccount(customer, newBranch, "000001", "Savings");
 
             bool result = false;
 
@@ -66,6 +66,15 @@ namespace Boolean.CSharp.Test
             }
 
             Assert.IsTrue(expected == result);
+
+            bool testCheck = false;
+
+            if (newBranch.Accounts.Contains(sample))
+            {
+                testCheck = true;
+            }
+
+            Assert.IsTrue(testCheck);
         }
     }
 }
