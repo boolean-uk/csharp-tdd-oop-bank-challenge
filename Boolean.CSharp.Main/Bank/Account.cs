@@ -1,5 +1,6 @@
 ﻿
 using System.Security.Principal;
+using System.Text;
 
 namespace Boolean.CSharp.Main.Bank
 {
@@ -64,6 +65,8 @@ namespace Boolean.CSharp.Main.Bank
         public List<Account> MyAccounts { get { return _myAccounts; } }
 
         public List<Transaction> MyTransactions { get { return _transactions; } }
+
+        public bool Print { get; set; }
 
         public decimal Balance { get { return _balance; } }
 

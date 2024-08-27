@@ -93,13 +93,20 @@ namespace Boolean.CSharp.Test
             decimal expectedbalance = 2500.00M;
             Assert.That(bankStatement.Last().Balance == expectedbalance);
             
-
         }
 
-        //[Test]
+        [Test]
         public void CanPrintBankStatementTest()
         {
+            Branch branch = new Branch();
+            CurrentAccount currentAccount = new CurrentAccount("Current");
+            branch.CreateAccount(currentAccount);
+            List<Transaction> bankStatement = currentAccount.MyTransactions;
 
+            bool printBankStatement = currentAccount.Print;
+
+            Assert.That(printBankStatement, Is.True);
+            
         }
 
 
