@@ -52,16 +52,17 @@ namespace Boolean.CSharp.Test
             
         }
 
-        //[Test]
+        [Test]
         public void CanMakeWithdrawalTest()
         {
-            /*decimal withdrawAmount = 200.00M;
-            CurrentAccount currentAccount = new CurrentAccount() { Balance = 200.00M };
+            decimal withdrawAmount = 200.00M;
+            CurrentAccount currentAccount = new CurrentAccount("Current");
+            currentAccount.MakeDeposit(300.00M);
 
             bool hasMadeWithdrawal = currentAccount.MakeWithdrawal(withdrawAmount);
 
             Assert.That(hasMadeWithdrawal, Is.True);
-            */
+            
         }
 
         //3. As a customer, So I can keep a record of my finances, I want to generate bank statements with transaction dates, amounts, and balance at the time of transaction.

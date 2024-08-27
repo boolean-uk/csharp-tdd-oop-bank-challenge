@@ -1,4 +1,5 @@
 ﻿
+
 namespace Boolean.CSharp.Main.Bank.AccountTypes
 {
     public class CurrentAccount : Account
@@ -7,5 +8,7 @@ namespace Boolean.CSharp.Main.Bank.AccountTypes
         { 
             AccountType = accountType;
         }
+
+        
     }
 }

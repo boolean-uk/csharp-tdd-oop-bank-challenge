@@ -45,6 +45,11 @@ namespace Boolean.CSharp.Main.Bank
 
         }
 
+        public bool MakeWithdrawal(decimal withdrawAmount)
+        {
+            throw new NotImplementedException();
+        }
+
         public string AccountType { get { return _accountType; } set { _accountType = value; } }
         public List<Account> MyAccounts { get { return _myAccounts; } }
 
