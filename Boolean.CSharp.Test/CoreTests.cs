@@ -25,7 +25,7 @@ namespace Boolean.CSharp.Test
 
             bool expected = true;
 
-            newBranch.CreateCurrentAccount(customer, newBranch, "000001", "Current"); //Making an account with the method
+            Account test = newBranch.CreateCurrentAccount(customer, newBranch, "000001", "Current"); //Making an account with the method
 
             bool result = false;
 
@@ -36,30 +36,36 @@ namespace Boolean.CSharp.Test
 
             Assert.IsTrue(expected == result);
 
-            
+            bool testCheck = false;
+
+            if (newBranch.Accounts.Contains(test))
+            {
+                testCheck = true;
+            }
+
+            Assert.IsTrue(testCheck);
+          
         }
 
-        //[Test]
-        //public void CreateSavingAccountTest()
-        //{
-        //    //List<Account> newBranchAccounts = new List<Account>(); // A list of accounts
-        //    Branch newBranch = new Branch("Oslo"); // Bank object
+        [Test]
+        public void CreateSavingAccountTest()
+        {
+            Branch newBranch = new Branch("Oslo");
 
-        //    Customer customer = new Customer("John Doe"); //Customer
-        //    //Account current = new Current(customer, newBranch, "000001", "Current", 0.0); //Making an account with the constructor
+            Customer customer = new Customer("John Doe");
 
-        //    bool expected = true;
+            bool expected = true;
 
-        //    newBranch.CreateSavingsAccount(customer, newBranch, "000001", "Current"); //Making an account with the method
+            newBranch.CreateSavingsAccount(customer, newBranch, "000001", "Savings");
 
-        //    bool result = false;
+            bool result = false;
 
-        //    if (newBranch.Accounts[0].AccountNr == "000001")
-        //    {
-        //        result = true;
-        //    }
+            if (newBranch.Accounts[0].AccountNr == "000001")
+            {
+                result = true;
+            }
 
-        //    Assert.IsTrue(expected == result);
-        //}
+            Assert.IsTrue(expected == result);
+        }
     }
 }

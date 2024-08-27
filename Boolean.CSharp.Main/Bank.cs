@@ -18,10 +18,16 @@ namespace Boolean.CSharp.Main
             //this._accounts = accounts;
         }
 
-        public void CreateCurrentAccount(Customer customer, Branch branch, string accountnr, string type)
+        public Account CreateCurrentAccount(Customer customer, Branch branch, string accountnr, string type)
         {
             Account current = new Current(customer, branch, accountnr, type, 0.0);
             _accounts.Add(current);
+            return current;
+        }
+
+        public void CreateSavingsAccount(Customer customer, Branch branch, string accountnr, string type)
+        {
+            
         }
 
         public string Name { get => _name; set => _name = value; }
@@ -29,8 +35,8 @@ namespace Boolean.CSharp.Main
 
         public Account GetAccount(string accountnr)
         {
-            var matches = _accounts.Where(x => x.AccountNr == accountnr).ToList(); ;
-            return matches[0];
+            var matches = _accounts.FirstOrDefault(x => x.AccountNr == accountnr);
+            return matches;
         } 
     }
 }

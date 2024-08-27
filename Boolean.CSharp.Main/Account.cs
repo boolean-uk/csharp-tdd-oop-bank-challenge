@@ -35,5 +35,7 @@ namespace Boolean.CSharp.Main
         //    return "";
         //}
 
+        public Branch Branch { get => _branch; set => _branch = value; }
+
     }
 }
