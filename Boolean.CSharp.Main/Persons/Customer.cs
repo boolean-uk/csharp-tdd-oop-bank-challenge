@@ -12,5 +12,10 @@ namespace Boolean.CSharp.Main.Persons
         {
 
         }
+
+        public void CreateAccount(string accountName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

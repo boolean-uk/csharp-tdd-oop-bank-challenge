@@ -11,6 +11,10 @@ namespace Boolean.CSharp.Test
         {
             Bank bank = new Bank();
             Customer customer = new Customer(bank, 32, "john");
+
+            customer.CreateAccount("accountName");
+
+            Assert.That((bank.BankAccounts.Count == 1), Is.True);
         }
 
     }

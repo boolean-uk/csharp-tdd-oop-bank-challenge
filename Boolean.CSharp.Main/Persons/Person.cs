@@ -14,7 +14,7 @@ namespace Boolean.CSharp.Main.Persons
         private string _name;
 
         public Bank Bank { get => _bank; }
-        public int Id { get => _id; set => _id = value; }
+        public int ID { get => _id; set => _id = value; }
         public string Name { get => _name; set => _name = value; }
         #endregion
 
