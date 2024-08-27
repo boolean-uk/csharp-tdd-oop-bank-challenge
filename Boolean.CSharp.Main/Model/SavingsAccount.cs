@@ -85,17 +85,21 @@ namespace Boolean.CSharp.Main.Model
             List<string> statment = new List<string>();
             statment.Add($"{_name}  Id: {_id}");
             statment.Add($"=================================================");
-            statment.Add("    Date-Time       || Credit || Debit || Balance");
+            statment.Add("      Date-Time       ||  Credit ||  Debit  ||   Balance");
             using (StreamReader sr = new StreamReader(Path.Combine(_docPath, $"{_id}.txt")))
             {
                 string line;
                 while ((line = sr.ReadLine()) != null)
                 {
                     string[] fields = line.Split("|".ToCharArray());
-                    statment.Add($"{fields[0]} ||  {fields[1]}  ||  {fields[2]}  || {fields[3]}");
+                    string s = string.Format(" {0,20} || {1,7} || {2,7} || {3,10} ", fields[0], fields[1], fields[2], fields[3]);
+                    statment.Add(s);
+
                 }
                 sr.Close();
             }
+
+
             return statment;
         }
 
