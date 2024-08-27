@@ -56,6 +56,7 @@ namespace Boolean.CSharp.Main.BankAccountClasses
                 } else if (transaction.TypeOfTransaction == TransactionType.Withdraw & transaction.Checked == false)
                 {
                     _balance -= transaction.Amount;
+                    transaction.Checked = true;
                 }
             }
         }
