@@ -21,5 +21,10 @@ namespace Boolean.CSharp.Main
             decimal temp = _balance;
             return temp;
         }
+
+        public void Deposit(decimal amount)
+        {
+            
+        }
     }
 }

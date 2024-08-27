@@ -1,5 +1,6 @@
 ﻿using Boolean.CSharp.Main;
 using NUnit.Framework;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Boolean.CSharp.Test
 {
@@ -32,6 +33,30 @@ namespace Boolean.CSharp.Test
 
             //Assert 
             Assert.That(computed, Is.EqualTo(expected));
+        }
+        [Test]
+        public void DepositTest()
+        {
+            // init 
+            SavingsAccount savingsAccount = new(500m);
+            decimal expected = 500m + 543;
+
+            // run
+            savingsAccount.Deposit(543);
+
+            // assert
+            Assert.That(expected, Is.EqualTo(savingsAccount.GetBalance()));
+        }
+        [Test]
+        public void PrintStatementTest()
+        {
+            //init
+            SavingsAccount savingsAccount = new(500);
+            
+            //run
+
+
+            //Assert
         }
 
     }
