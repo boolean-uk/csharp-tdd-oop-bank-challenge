@@ -30,5 +30,9 @@ namespace Boolean.CSharp.Main
         {
             _balance -= amount;
         }
+        public string GetStatement()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

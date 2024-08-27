@@ -66,11 +66,14 @@ namespace Boolean.CSharp.Test
         {
             //init
             SavingsAccount savingsAccount = new(500);
-            
-            //run
+            savingsAccount.Deposit(543);
+            savingsAccount.Withdraw(200);
 
+            //run
+            string statement = savingsAccount.GetStatement();
 
             //Assert
+            Assert.IsTrue(statement.Contains("543"));
         }
 
     }
