@@ -6,18 +6,19 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class CoreTests
     {
-        private Core _core;
-
-        public CoreTests()
-        {
-            _core = new Core();
-
-        }
-
         [Test]
-        public void TestQuestion1()
+        public void CreateAccTest()
         {
+            // init
+            Account account = new(5000);
+            decimal expected = 5000;
 
+            //run
+            decimal compute = account.GetBalance();
+
+            //assert
+            Assert.That(compute, Is.EqualTo(expected));
+            
         }
 
     }
