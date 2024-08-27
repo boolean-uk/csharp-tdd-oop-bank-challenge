@@ -19,7 +19,8 @@ namespace Boolean.CSharp.Test
             Account ca = new CurrentAccount();
             Account sa = new SavingsAccount();
             List<Account> accounts = new List<Account>() { ca, sa };
-            Customer customer = new Customer(accounts);
+            Bank bank = new Bank();
+            Customer customer = new Customer(accounts, bank);
 
             Assert.That(customer.Accounts.Count, Is.EqualTo(2));
         }
@@ -30,7 +31,8 @@ namespace Boolean.CSharp.Test
             Account ca = new CurrentAccount();
             Account sa = new SavingsAccount();
             List<Account> accounts = new List<Account>() { ca, sa };
-            Customer customer = new Customer(accounts);
+            Bank bank = new Bank();
+            Customer customer = new Customer(accounts, bank);
 
             customer.DepositToAccount(0, 1000);
 
@@ -43,7 +45,8 @@ namespace Boolean.CSharp.Test
             Account ca = new CurrentAccount();
             Account sa = new SavingsAccount();
             List<Account> accounts = new List<Account>() { ca, sa };
-            Customer customer = new Customer(accounts);
+            Bank bank = new Bank();
+            Customer customer = new Customer(accounts, bank);
             customer.DepositToAccount(0, 1000);
 
             customer.WithdrawFromAccount(0, 500);
@@ -57,7 +60,8 @@ namespace Boolean.CSharp.Test
             Account ca = new CurrentAccount();
             Account sa = new SavingsAccount();
             List<Account> accounts = new List<Account>() { ca, sa };
-            Customer customer = new Customer(accounts);
+            Bank bank = new Bank();
+            Customer customer = new Customer(accounts, bank);
             customer.DepositToAccount(0, 1000);
 
             string message = customer.WithdrawFromAccount(0, 2000);
@@ -71,10 +75,16 @@ namespace Boolean.CSharp.Test
             Account ca = new CurrentAccount();
             Account sa = new SavingsAccount();
             List<Account> accounts = new List<Account>() { ca, sa };
-            Customer customer = new Customer(accounts);
+            Bank bank = new Bank();
+            Customer customer = new Customer(accounts, bank);
             customer.DepositToAccount(0, 1000);
             customer.DepositToAccount(0, 2000);
             customer.WithdrawFromAccount(0, 500);
+            customer.WithdrawFromAccount(0, 8.21m);
+            customer.WithdrawFromAccount(0, 1001);
+            customer.DepositToAccount(0, 30000);
+            customer.DepositToAccount(0, 9.21m);
+            customer.WithdrawFromAccount(0, 7000);
 
             Console.WriteLine(customer.SeeBankStatement(0));
 

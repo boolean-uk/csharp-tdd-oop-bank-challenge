@@ -8,32 +8,31 @@ namespace Boolean.CSharp.Main
 {
     public class Transaction
     {
-        string date;
-        decimal amount;
-        decimal balance;
+        private string _date;
+        private decimal _amount;
 
-        public Transaction(decimal amount, decimal balance)
+        public string Date { get => _date; }
+        public decimal Amount { get => _amount; }
+
+        public Transaction(decimal amount)
         {
-            this.amount = amount;
-            this.balance = balance;
-            date = DateTime.Now.ToString("dd/MM/yyyy");
+            this._amount = amount;
+            _date = DateTime.Now.ToString("dd/MM/yyyy");
         }
 
         public override string ToString()
         {
             StringBuilder transactionString = new StringBuilder();
-            transactionString.Append($"{date, -10} ||");
+            transactionString.Append($"{_date, -10} ||");
 
-            if (amount > 0)
+            if (_amount > 0)
             {
-                transactionString.Append($" {amount, -10} || {"", -10 } ||");
+                transactionString.Append($" {_amount, -7} || {"", -7 } ||");
             }
             else
             {
-                transactionString.Append($" {"",-11}|| {-amount, -10} ||");
+                transactionString.Append($" {"",-7} || {-_amount, -7} ||");
             }
-
-            transactionString.Append($" {balance}");
 
             return transactionString.ToString();
 

@@ -8,12 +8,16 @@ namespace Boolean.CSharp.Main
 {
     public class Customer
     {
+        public bool SeemsResponsible { get; set; } = true;
+
+        public Bank bank;
         public List<Account> Accounts { get; }
 
-        public Customer(List<Account> accounts) 
+        public Customer(List<Account> accounts, Bank bank)
         {
             Accounts = accounts;
-        }
+            this.bank = bank;
+         }
 
         public void CreateSavingsAccount() { }
 
@@ -33,6 +37,16 @@ namespace Boolean.CSharp.Main
         public string SeeBankStatement(int accountID)
         {
             return Accounts[accountID].BankStatement();
+        }
+
+        public void RequestOverdraft(int accountID)
+        {
+            if (Accounts[accountID] is CurrentAccount currentAccount)
+            {
+                bank.RequestOverdraft(SeemsResponsible, currentAccount);
+
+            }
+
         }
     }
 }
