@@ -12,7 +12,7 @@ namespace Boolean.CSharp.Main
         private string _type;
         //private string _branch;
         //private string _ownername;
-        private double _balance;
+        private double _balance = 0;
 
         Branch _branch;
 

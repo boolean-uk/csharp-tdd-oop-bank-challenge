@@ -8,8 +8,10 @@ namespace Boolean.CSharp.Main
 {
     public class Savings : Account
     {
-        public Savings(Branch branch, string accountNr, string type, double balance) : base(branch, accountNr, type, balance)
+        Customer _customer;
+        public Savings(Customer customer, Branch branch, string accountNr, string type, double balance) : base(branch, accountNr, type, balance)
         {
+            this._customer = customer;
         }
     }
 }

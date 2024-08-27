@@ -25,9 +25,11 @@ namespace Boolean.CSharp.Main
             return current;
         }
 
-        public void CreateSavingsAccount(Customer customer, Branch branch, string accountnr, string type)
+        public Account CreateSavingsAccount(Customer customer, Branch branch, string accountnr, string type)
         {
-            
+            Account savings = new Savings(customer, branch, accountnr, type, 0.0);
+            _accounts.Add(savings);
+            return savings;
         }
 
         public string Name { get => _name; set => _name = value; }

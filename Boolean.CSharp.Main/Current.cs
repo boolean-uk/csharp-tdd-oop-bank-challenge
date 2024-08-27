@@ -8,7 +8,7 @@ namespace Boolean.CSharp.Main
 {
     public class Current : Account
     {
-        private double _balance = 0;
+        //private double _balance = 0;
 
         Customer _customer;
 
@@ -17,7 +17,7 @@ namespace Boolean.CSharp.Main
             this._customer = customer;
         }
 
-        public double Balance { get => _balance; set => _balance = value; }
+        //public double Balance { get => _balance; set => _balance = value; }
 
         
     }
