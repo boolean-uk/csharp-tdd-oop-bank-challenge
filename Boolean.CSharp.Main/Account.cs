@@ -13,7 +13,7 @@ namespace Boolean.CSharp.Main
 
         public Account(decimal number)
         {
-            _balance = number;
+            this._balance = number;
         }
 
         public decimal GetBalance()
