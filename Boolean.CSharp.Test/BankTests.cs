@@ -50,7 +50,6 @@ namespace Boolean.CSharp.Test
 
             Assert.That(hasMadeDeposit, Is.True);
             
-            
         }
 
         //[Test]

@@ -33,14 +33,15 @@ namespace Boolean.CSharp.Main.Bank
         {
             _amount = amount;
             _date = Date;
-            Transaction transaction = new Transaction(_amount, _date);
 
-            _transactions.Add(transaction);
-
-            if (transaction.Amount == amount)
+            if (_amount > 0)
+            {
+                Transaction transaction = new Transaction(_amount, _date);
+                _transactions.Add(transaction);
+                _balance += _amount;
                 return true;
-
-            else return false;
+            }
+            return false;
 
         }
 
