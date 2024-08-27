@@ -1,16 +1,21 @@
-﻿using Boolean.CSharp.Main.BankAccount;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Boolean.CSharp.Main.BankAccountClasses;
 
 namespace Boolean.CSharp.Main
 {
     public class Bank
     {
-        private Dictionary<int, IBankAccount> _bankAccounts;
+        private Dictionary<int, BankAccount> _bankAccounts;
 
-        public Dictionary<int, IBankAccount> BankAccounts;
+        public Dictionary<int, BankAccount> BankAccounts { get => _bankAccounts; }
+
+        public Bank()
+        {
+
+        }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boolean.CSharp.Main.BankAccount
+namespace Boolean.CSharp.Main.BankAccountClasses
 {
     public enum TransactionType
     {

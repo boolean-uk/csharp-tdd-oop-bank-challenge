@@ -1,23 +1,16 @@
 ﻿using Boolean.CSharp.Main;
+using Boolean.CSharp.Main.Persons;
 using NUnit.Framework;
 
 namespace Boolean.CSharp.Test
 {
-    [TestFixture]
-    public class CoreTests
+    public class CustomerTests
     {
-        private Core _core;
-
-        public CoreTests()
-        {
-            _core = new Core();
-
-        }
-
         [Test]
         public void TestQuestion1()
         {
-
+            Bank bank = new Bank();
+            Customer customer = new Customer(bank, 32, "john");
         }
 
     }
