@@ -30,10 +30,10 @@
 |`Bank`| Dictionary\<int, BankAccount> _bankAccounts_|
 |`Person`| Bank _bank_, int _id_, string _name_ |
 |`Manager : Person`|  |
-|`Customer : Person`| List\<BankAccount> _bankAccounts_ |
+|`Customer : Person`|  |
 |`Engineer : Person`|  |
-|`BankAccount`| string _accountName_, int _customerID_, List\<Transaction> _transactionHistory_ |
+|`BankAccount`| string _accountName_, int _customerID_, List\<Transaction> _transactionHistory_, decimal _balance_, StringBuilder _bankStatement_ |
 |`SavingsAccount : BankAccount`|  |
 |`Account : BankAccount`|  | 
-|`Transaction`| DateTime _date_, string _typeOfTransaction_, decimal _amount_ |
-|`AccountType`| enum _Withdraw_, enum _Deposit_ |
+|`Transaction`| string _date_, TransactionType _typeOfTransaction_, decimal _amount_, bool _checked_ |
+|`TransactionType`| enum _Withdraw_, enum _Deposit_ |
