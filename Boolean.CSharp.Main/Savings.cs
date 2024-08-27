@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main
 {
-    internal class Savings
+    public class Savings : Account
     {
+        public Savings(string accountNr, string type, string branch, double balance) : base(accountNr, type, branch, balance)
+        {
+        }
+
+        public string AccountNr { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Type { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Branch { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string OwnerName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public double Balance { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     }
 }

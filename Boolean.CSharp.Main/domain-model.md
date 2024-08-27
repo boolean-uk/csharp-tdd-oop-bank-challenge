@@ -38,8 +38,9 @@ I want statements to be sent as messages to my phone.
 
 | Classes                  | Members                                                | Methods                           | Scenario                                                     | Outputs |
 |--------------------------|--------------------------------------------------------|-----------------------------------|--------------------------------------------------------------|---------|
-| `interface Account`      | AccountNr, Type, Branch, Owner, Balance                |  PrintStatement(), Deposit(), Withdraw(), Create() |                                             |         |
-| `Customer`               | Name, contactinfo?                                     |                                   |                                                              |         |
+| `Abstract Account`       | AccountNr, Type, Branch, Owner, Balance                |  PrintStatement(), Deposit(), Withdraw()|                                             |         |
+| `Bank`                   |  List of accounts and branches                         |  CreateAccount()                  |                                                              |     |
+| `Customer`               | Name, contactinfo?                                     |                          |                                                                       |         |
 | `Savings`                | InterestRate                                           |                                   |                                                              |         |
 | `Current`                | bool overdraft, double overdraft                       |                                   |                                                              |         |
 | `Transaction`            | Transactions saved as a list? Tuple list?              |          |               | |
