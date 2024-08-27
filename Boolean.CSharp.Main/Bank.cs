@@ -1,4 +1,3 @@
-using Boolean.CSharp.Main.Interface;
 using Boolean.CSharp.Main.Models;
 
 namespace Boolean.CSharp.Main;
@@ -6,7 +5,7 @@ namespace Boolean.CSharp.Main;
 public class Bank(string name)
 {
     private string _name = name;
-    private List<Customer> _customers = new();
+    private readonly List<Customer> _customers = new();
     
     public bool NewCustomer(Customer c)
     {

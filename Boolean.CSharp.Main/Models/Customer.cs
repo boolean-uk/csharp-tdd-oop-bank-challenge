@@ -15,7 +15,7 @@ public class Customer(string name, int socialSecurityNumber, string phoneNumber,
 
     public Account CreateAccount(string name, AccountType accountType)
     {
-        Account? newAccount = null;
+        Account newAccount = null;
         if (Accounts.Any(a => a.Name.Equals(name))) return newAccount;
         switch (accountType)
         {

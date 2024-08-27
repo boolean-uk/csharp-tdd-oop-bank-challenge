@@ -4,7 +4,6 @@ namespace Boolean.CSharp.Main.Models.Accounts;
 
 public abstract class Account(Customer customer, string name, AccountType type)
 {
-    private Customer _customer = customer;
     public string Name { get; } = name;
     public AccountType AccountType { get; } = type;
     public bool SmsNotification { get; private set; } = false;
@@ -20,11 +19,11 @@ public abstract class Account(Customer customer, string name, AccountType type)
         sb.AppendLine($"date    || credit  || debit   || balance || comment");
         foreach (var t in BankTransactions)
         {
-            currentBalance += t._amount;
-            var date = t._date.ToString("d/M/yy");
-            var deposit = t._amount > 0 ? t._amount.ToString() : "0";
-            var withdraw = t._amount < 0 ? t._amount.ToString() : "0";
-            var desc = t._description;
+            currentBalance += t.Amount;
+            var date = t.Date.ToString("d/M/yy");
+            var deposit = t.Amount > 0 ? t.Amount.ToString() : "0";
+            var withdraw = t.Amount < 0 ? t.Amount.ToString() : "0";
+            var desc = t.Description;
             sb.AppendLine($"{date.PadRight(7)} || {deposit.PadRight(7)} || {withdraw.PadRight(7)} || {currentBalance.ToString().PadRight(7)} || {desc}");
         }
         Console.WriteLine(sb.ToString());
@@ -43,7 +42,7 @@ public abstract class Account(Customer customer, string name, AccountType type)
         var newBalance = GetBalance() + amount;
         if (!(newBalance >= 0))
         {
-            Overdraft.NewOverdraftRequest(_customer, this, bt, newBalance);
+            Overdraft.NewOverdraftRequest(customer, this, bt, newBalance);
             return false;
         }
         BankTransactions.Add(bt);
@@ -52,7 +51,7 @@ public abstract class Account(Customer customer, string name, AccountType type)
 
     public decimal GetBalance()
     {
-        return BankTransactions.Sum(x => x._amount);
+        return BankTransactions.Sum(x => x.Amount);
     }
 
     public void ToggleSmsNotification()

@@ -20,9 +20,18 @@ public class Program
         acc.Deposit(100);
 
         acc.PrintTransactions();
+        acc.Deposit(200);
+        acc.Deposit(300);
+        acc.Withdraw(100, "Kebab");
 
         acc.PrintTransactions();
+        acc.Withdraw(100, "Brannkamp");
+        acc.Withdraw(100);
+        acc.Withdraw(400, "Kjøpe narkotika");
 
+        acc.PrintTransactions();
+        
+        Overdraft.ApproveOverdraft(new Manager(), Overdraft.OverdraftRequests.FirstOrDefault()!);
         acc.PrintTransactions();
     }
 }

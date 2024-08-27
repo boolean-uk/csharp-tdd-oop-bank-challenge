@@ -5,12 +5,12 @@ namespace Boolean.CSharp.Main.Models;
 
 public static class Overdraft
 {
-    public static List<OverdraftRequests> OverdraftRequests = new();
+    public static readonly List<OverdraftRequests> OverdraftRequests = new();
 
     public static bool ApproveOverdraft(IPerson person, OverdraftRequests request)
     {
         if (person is not Manager) return false;
-        request.Account.BankTransactions.Add(request.BT);
+        request.Account.BankTransactions.Add(request.Bt);
         OverdraftRequests.Remove(request);
         return true;
     }
@@ -27,6 +27,6 @@ public class OverdraftRequests(Customer customer, Account account, BankTransacti
 {
     public Customer Customer { get; } = customer;
     public Account Account { get; } = account;
-    public BankTransaction BT { get; } = bt;
+    public BankTransaction Bt { get; } = bt;
     public decimal OverdraftAmount { get; } = overdraftAmount;
 }
