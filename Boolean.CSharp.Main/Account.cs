@@ -9,7 +9,7 @@ namespace Boolean.CSharp.Main
     public abstract class Account
     {
         private string _accountnr;
-        private string _type;
+        //private string _type;
         //private string _branch;
         //private string _ownername;
         private double _balance = 0;
@@ -17,18 +17,18 @@ namespace Boolean.CSharp.Main
 
         Branch _branch;
 
-        public Account(Branch branch, List<Transaction> transactions, string accountNr, string type, double balance)
+        public Account(Branch branch, string accountNr)
         {
-            _transactions = transactions;
+            //_transactions = transactions;
             _accountnr = accountNr;
-            _type = type;
+            //_type = type;
             _branch = branch;
             //_ownername = ownerName;
-            _balance = balance;
+            //_balance = balance;
         }
 
         public string AccountNr { get => _accountnr; set => _accountnr = value; }
-        public string Type { get => _type; set => _type = value; } //Very much feeling this may be redundant, seeing as I aldready have classes for each account type
+        //public string Type { get => _type; set => _type = value; } //Very much feeling this may be redundant, seeing as I aldready have classes for each account type
         public double Balance { get => _balance; set => _balance = value; }
       
         public List<Transaction> Transactions { get => _transactions; set => _transactions = value; }

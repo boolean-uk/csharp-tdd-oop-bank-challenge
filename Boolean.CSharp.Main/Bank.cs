@@ -17,18 +17,16 @@ namespace Boolean.CSharp.Main
             this._name = name;
         }
 
-        public Current CreateCurrentAccount(Customer customer, Branch branch, string accountnr, string type)
+        public Current CreateCurrentAccount(Customer customer, Branch branch, string accountnr)
         {
-            List<Transaction> transactions = new List<Transaction>();
-            Current current = new Current(branch, transactions, customer, accountnr, type, 0.0);
+            Current current = new Current(branch, customer, accountnr);
             _accounts.Add(current);
             return current;
         }
 
-        public Savings CreateSavingsAccount(Customer customer, Branch branch, string accountnr, string type)
+        public Savings CreateSavingsAccount(Customer customer, Branch branch, string accountnr)
         {
-            List<Transaction> transactions = new List<Transaction>();
-            Savings savings = new Savings(branch, transactions, customer, accountnr, type, 0.0);
+            Savings savings = new Savings(branch, customer, accountnr);
             _accounts.Add(savings);
             return savings;
         }

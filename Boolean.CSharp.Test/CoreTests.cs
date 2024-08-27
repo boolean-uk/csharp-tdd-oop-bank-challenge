@@ -25,7 +25,7 @@ namespace Boolean.CSharp.Test
 
             bool expected = true;
 
-            Current sample = newBranch.CreateCurrentAccount(customer, newBranch, "000001", "Current"); //Making an account with the method
+            Current sample = newBranch.CreateCurrentAccount(customer, newBranch, "000001"); //Making an account with the method
 
             bool result = false;
 
@@ -56,7 +56,7 @@ namespace Boolean.CSharp.Test
 
             bool expected = true;
 
-            Savings sample = newBranch.CreateSavingsAccount(customer, newBranch, "000001", "Savings");
+            Savings sample = newBranch.CreateSavingsAccount(customer, newBranch, "000001");
 
             bool result = false;
 
@@ -84,13 +84,13 @@ namespace Boolean.CSharp.Test
 
             Customer customer = new Customer("John Doe");
 
-            Current sample = newBranch.CreateCurrentAccount(customer, newBranch, "000001", "Savings");
+            Current sample = newBranch.CreateCurrentAccount(customer, newBranch, "000001");
 
             newBranch.DebitTransfer(sample.AccountNr, 200);
             newBranch.DebitTransfer(sample.AccountNr, 300);
 
             double expected = 500;
-
+            
             double result = sample.GetBalance();
 
             Assert.AreEqual(expected, result);
