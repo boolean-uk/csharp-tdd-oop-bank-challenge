@@ -17,14 +17,14 @@ namespace Boolean.CSharp.Main
             this._name = name;
         }
 
-        public Current CreateCurrentAccount(Customer customer, Branch branch, string accountnr)
+        public Current CreateCurrentAccount(Branch branch, Customer customer, string accountnr)
         {
             Current current = new Current(branch, customer, accountnr);
             _accounts.Add(current);
             return current;
         }
 
-        public Savings CreateSavingsAccount(Customer customer, Branch branch, string accountnr)
+        public Savings CreateSavingsAccount(Branch branch, Customer customer, string accountnr)
         {
             Savings savings = new Savings(branch, customer, accountnr);
             _accounts.Add(savings);
@@ -42,8 +42,9 @@ namespace Boolean.CSharp.Main
 
         public Transaction Deposit(string accountnr, double amount)
         {
-            Transaction thisTransaction = new Transaction(DateTime.Now, null, amount);
             var matches = _accounts.FirstOrDefault(x => x.AccountNr == accountnr);
+            double newBalance = matches.GetBalance() + amount;
+            Transaction thisTransaction = new Transaction(DateTime.Now, null, amount, newBalance);
             matches.Transactions.Add(thisTransaction);
             return thisTransaction;
         }
@@ -51,10 +52,29 @@ namespace Boolean.CSharp.Main
         public Transaction Withdraw(string accountnr, double amount)
         {
             double withdrawn = 0 - amount;
-            Transaction thisTransaction = new Transaction(DateTime.Now, null, withdrawn);
             var matches = _accounts.FirstOrDefault(x => x.AccountNr == accountnr);
+            double newBalance = matches.GetBalance() + amount;
+            Transaction thisTransaction = new Transaction(DateTime.Now, amount, null, newBalance);
             matches.Transactions.Add(thisTransaction);
             return thisTransaction;
+        }
+
+        public string Statement(string customername)
+        {
+            //StringBuilder sb = new StringBuilder();
+            string print = "";
+            var matches = _accounts.Where(x => x.Customer.Name == customername).ToList();
+            foreach (var match in matches)
+            {
+                print += match.GetType().Name+" Account with nr: "+match.AccountNr + " in: " + match.Branch.Name+"\n";
+                print += "\nDate                ||  credit    ||  debit    ||  balance";
+                foreach (Transaction transaction in match.Transactions)
+                {
+                    print += $"\n\n{transaction.Date}      {transaction.Credit}              {transaction.Debit}          {transaction.Newbalance}";
+                }
+                print += "\n\n";
+            }
+            return print;
         }
     }
 }

@@ -25,13 +25,13 @@ namespace Boolean.CSharp.Test
 
             bool expected = true;
 
-            Current sample = newBranch.CreateCurrentAccount(customer, newBranch, "000001"); //Making an account with the method
+            Current sample = newBranch.CreateCurrentAccount(newBranch, customer, "000001"); //Making an account with the method
 
             bool result = false;
 
-            if (newBranch.Accounts[0].AccountNr == "000001") 
+            if (newBranch.Accounts[0].AccountNr == "000001")
             {
-                result = true; 
+                result = true;
             }
 
             Assert.IsTrue(expected == result);
@@ -44,7 +44,7 @@ namespace Boolean.CSharp.Test
             }
 
             Assert.IsTrue(testCheck);
-          
+
         }
 
         [Test]
@@ -56,7 +56,7 @@ namespace Boolean.CSharp.Test
 
             bool expected = true;
 
-            Savings sample = newBranch.CreateSavingsAccount(customer, newBranch, "000001");
+            Savings sample = newBranch.CreateSavingsAccount(newBranch, customer, "000001");
 
             bool result = false;
 
@@ -84,17 +84,44 @@ namespace Boolean.CSharp.Test
 
             Customer customer = new Customer("John Doe");
 
-            Current sample = newBranch.CreateCurrentAccount(customer, newBranch, "000001");
+            Current sample = newBranch.CreateCurrentAccount(newBranch, customer, "000001");
 
             newBranch.Deposit(sample.AccountNr, 500);
             newBranch.Deposit(sample.AccountNr, 300);
             newBranch.Withdraw(sample.AccountNr, 500);
 
             double expected = 300;
-            
+
             double result = sample.GetBalance();
 
             Assert.AreEqual(expected, result);
+
+        }
+
+        [Test]
+        public void BankStatementTest()
+        {
+            Branch newBranch = new Branch("Oslo");
+
+            Customer customer = new Customer("John Doe");
+
+            Current sample = newBranch.CreateCurrentAccount(newBranch, customer, "000001");
+
+            newBranch.Deposit(sample.AccountNr, 500);
+            newBranch.Deposit(sample.AccountNr, 300);
+            newBranch.Withdraw(sample.AccountNr, 500);
+
+            Savings sample2 = newBranch.CreateSavingsAccount(newBranch, customer, "000001");
+
+            newBranch.Deposit(sample2.AccountNr, 500);
+            newBranch.Deposit(sample2.AccountNr, 300);
+            newBranch.Withdraw(sample2.AccountNr, 500);
+
+            string print = newBranch.Statement(customer.Name);
+
+            double expected = 300;
+
+            double result = sample.GetBalance();
 
         }
     }

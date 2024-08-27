@@ -44,5 +44,5 @@ I want statements to be sent as messages to my phone.
 | `Customer`               | Name, contactinfo?                                     |                          |                                                                       |         |
 | `Savings`                | InterestRate                                           |                                   |                                                              |         |
 | `Current`                | Customer and Branch                                    |                                   |                                                              |         |
-| `Transaction`            | Date, credit, debit, balance                           |                                   |               | |
+| `Transaction`            | Date, credit, debit,                           |                                   |               | |
 |        

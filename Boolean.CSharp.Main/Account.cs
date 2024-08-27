@@ -9,31 +9,45 @@ namespace Boolean.CSharp.Main
     public abstract class Account
     {
         private string _accountnr;
-        //private string _type;
-        //private string _branch;
-        //private string _ownername;
         private double _balance = 0;
         private List<Transaction> _transactions = new List<Transaction>();
 
+        Customer _customer;
         Branch _branch;
 
-        public Account(Branch branch, string accountNr)
+        public Account(Branch branch, Customer customer, string accountNr)
         {
-            //_transactions = transactions;
-            _accountnr = accountNr;
-            //_type = type;
             _branch = branch;
-            //_ownername = ownerName;
-            //_balance = balance;
+            _customer = customer;
+            _accountnr = accountNr;
         }
 
         public string AccountNr { get => _accountnr; set => _accountnr = value; }
-        //public string Type { get => _type; set => _type = value; } //Very much feeling this may be redundant, seeing as I aldready have classes for each account type
         public double Balance { get => _balance; set => _balance = value; }
       
         public List<Transaction> Transactions { get => _transactions; set => _transactions = value; }
 
         public Branch Branch { get => _branch; set => _branch = value; }
+
+        public Customer Customer { get => _customer; set => _customer = value; }
+
+        public double GetBalance()
+        {
+            double debit = 0;
+            double credit = 0;
+            foreach (Transaction t in Transactions)
+            {
+                if (t.Debit != null)
+                {
+                    debit += (double)t.Debit;
+                }
+                if (t.Credit != null)
+                {
+                    credit += (double)t.Credit;
+                }
+            }
+            return debit - credit;
+        }
 
     }
 }

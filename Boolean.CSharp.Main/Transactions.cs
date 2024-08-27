@@ -11,19 +11,19 @@ namespace Boolean.CSharp.Main
         private DateTime _date;
         private double? _credit;
         private double? _debit;
-        //private double _balance;
+        private double _newbalance;
 
-        public Transaction(DateTime date, double? credit, double? debit)
+        public Transaction(DateTime date, double? credit, double? debit, double newbalance)
         {
             _date = date;
             _credit = credit;
             _debit = debit;
-            //_balance = balance;
+            _newbalance = newbalance;
         }
 
         public DateTime Date { get => _date; set => _date = value; }
         public double? Credit { get => _credit; set => _credit = value; }
         public double? Debit { get => _debit; set => _debit = value; }
-        //public double Balance { get => _balance; set => _balance = value; }
+        public double Newbalance { get => _newbalance; set => _newbalance = value; }
     }
 }
