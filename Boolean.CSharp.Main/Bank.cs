@@ -81,7 +81,7 @@ namespace Boolean.CSharp.Main
                     // account found! Time for deposit
                     account.Deposit(funds);
                     customer.funds -= funds; //well, you dont get to deposit and keep the money. You gave it to the bank
-                    return false;
+                    return true;
                 }
             }
 
@@ -109,7 +109,41 @@ namespace Boolean.CSharp.Main
 
         public bool RequestWithdraw(Customer customer, double funds, int accountNumber, bool overdraw)
         {
-            throw new NotImplementedException();
+            Account acc = null;
+            foreach (var account in bankAccounts)
+            {
+                if (account.customerId == customer.customerId && account.accountNumber == accountNumber)
+                {
+                    // account found!
+                    acc = account;
+                }
+            }
+            if (acc == null)
+            {
+                //account not found
+                return false;
+            }
+            if (overdraw)
+            {
+                if (acc.Balance() < funds - overDraftLimit)
+                {
+                    // even with overdraw, it's not enough money in the account for this type of withdrawal
+                    return false;
+                }
+            }
+            else
+            {
+                if (acc.Balance() < funds)
+                {
+                    //not enough funds in account and this is no overdraw
+                    return false;
+                }
+            }
+
+            //withdraw is fine
+            customer.funds += funds;
+            acc.Withdraw(funds);
+            return true;
         }
     }
 }

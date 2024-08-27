@@ -101,7 +101,7 @@ namespace Boolean.CSharp.Test
         public void TestRequestWithdraw() 
         {
             Bank bank = new Bank();
-            Customer customer = new Customer(100);
+            Customer customer = new Customer(500);
             bank.CreateCustomer(customer);
             IBranch branch1 = new Amax();
             customer.accounts.Add(bank.CreateAccount(customer.customerId, branch1, false));
@@ -115,10 +115,12 @@ namespace Boolean.CSharp.Test
             string date = DateTime.Now.ToString("dd/MM/yyyy");
             string expected =
             "date       || credit  || debit   || balance\n" +
-            date +    " ||         || 100.00  || 400.00  \n" +
-               date + " || 500.00  ||         || 500.00  \n";
+            date +    " ||         || 100.00  || 400.00 \n" +
+               date + " || 500.00  ||         || 500.00 \n";
             string result2 = bank.RequestBankStatement(customer.customerId, customer.accounts[0]);
             Assert.That(result2 == expected);
+
+            Assert.That(customer.funds == 100);
 
 
             //test Overdraw (400 left in account)
@@ -134,12 +136,13 @@ namespace Boolean.CSharp.Test
             Assert.That(result4 == true);
             expected =
             "date       || credit  || debit   || balance\n" +
-             date +   " ||         || 600.00  || -200.00  \n" +
-            date +    " ||         || 100.00  || 400.00  \n" +
-               date + " || 500.00  ||         || 500.00  \n";
+             date +   " ||         || 600.00  || -200.00\n" +
+            date +    " ||         || 100.00  || 400.00 \n" +
+               date + " || 500.00  ||         || 500.00 \n";
 
             string result5 = bank.RequestBankStatement(customer.customerId, customer.accounts[0]);
             Assert.That(result5 == expected);
+            Assert.That(customer.funds == 700);
         }
     }
 }
