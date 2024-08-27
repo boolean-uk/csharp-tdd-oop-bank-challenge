@@ -40,16 +40,16 @@ namespace Boolean.CSharp.Test
         }
 
         //4. As a customer, So I can use my account, I want to deposit and withdraw funds.
-        //[Test]
+        [Test]
         public void CanMakeDepositTest()
         {
-            /*decimal depositAmount = 200.00M;
-            CurrentAccount currentAccount = new CurrentAccount();
+            decimal depositAmount = 200.00M;
+            CurrentAccount currentAccount = new CurrentAccount("Current");
 
             bool hasMadeDeposit = currentAccount.MakeDeposit(depositAmount);
 
             Assert.That(hasMadeDeposit, Is.True);
-            */
+            
             
         }
 
