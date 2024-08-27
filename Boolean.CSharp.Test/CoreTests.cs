@@ -25,7 +25,7 @@ namespace Boolean.CSharp.Test
 
             bool expected = true;
 
-            newBranch.CreateCurrentAccount(customer, "000001", "Current", "Oslo"); //Making an account with the method
+            newBranch.CreateCurrentAccount(customer, newBranch, "000001", "Current"); //Making an account with the method
 
             bool result = false;
             if (newBranchAccounts.Contains(current)) //Checking if its added to the list of accounts 
