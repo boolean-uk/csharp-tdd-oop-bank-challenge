@@ -2,7 +2,7 @@
 |--------------------------|-----------------------------------------|---------------------|----------------|
 | Customer				   | CreateCurrentAccount()					 |					   | CurrentAccount |
 |						   | CreateSavingsAccount()					 |					   | SavingsAccount |
-|						   | Deposit(int id, decimal amount)		 |					   | string message | 
+|						   | Deposit(int id, decimal amount)		 |					   |			    | 
 |	 					   | Withdraw( int id, decimal amount)		 |					   | string message	|
 | Account				   | List < Transaction > TransactionHistory |					   |				|
 |						   | Deposit(decimal amount)				 |					   |				| 
