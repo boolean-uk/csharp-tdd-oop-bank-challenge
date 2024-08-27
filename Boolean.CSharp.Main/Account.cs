@@ -13,6 +13,7 @@ namespace Boolean.CSharp.Main
         //private string _branch;
         //private string _ownername;
         private double _balance = 0;
+        private List<Transaction> _transactions = new List<Transaction>();
 
         Branch _branch;
 
@@ -27,13 +28,9 @@ namespace Boolean.CSharp.Main
 
         public string AccountNr { get => _accountnr; set => _accountnr = value; }
         public string Type { get => _type; set => _type = value; } //Very much feeling this may be redundant, seeing as I aldready have classes for each account type
-        //string Branch { get => _branch; set => _branch = value; }
-        //string OwnerName { get => _ownername; set => _ownername = value; }
         public double Balance { get => _balance; set => _balance = value; }
-        //public string GetOwnerName()
-        //{
-        //    return "";
-        //}
+      
+        public List<Transaction> Transactions { get => _transactions; set => _transactions = value; }
 
         public Branch Branch { get => _branch; set => _branch = value; }
 

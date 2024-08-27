@@ -8,17 +8,21 @@ namespace Boolean.CSharp.Main
 {
     public class Current : Account
     {
-        //private double _balance = 0;
+        private List<Transaction> transactions = new List<Transaction>();
 
         Customer _customer;
+        //Transaction _transaction;
 
         public Current(Customer customer, Branch branch, string accountnr, string type, double balance) : base(branch, accountnr, type, balance)
         {
             this._customer = customer;
         }
 
-        //public double Balance { get => _balance; set => _balance = value; }
+        public List<Transaction> Transactions { get => transactions; set => transactions = value; }
 
-        
+        public double GetBalance()
+        {
+            return 0.0;
+        }
     }
 }

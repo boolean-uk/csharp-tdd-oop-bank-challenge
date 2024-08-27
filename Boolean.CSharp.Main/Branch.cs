@@ -13,11 +13,5 @@ namespace Boolean.CSharp.Main
 
         }
 
-        //public void CreateCurrentAccount(Customer customer, string accountnr, string type, string branch)
-        //{
-
-        //}
-
-
     }
 }

@@ -17,16 +17,16 @@ namespace Boolean.CSharp.Main
             this._name = name;
         }
 
-        public Account CreateCurrentAccount(Customer customer, Branch branch, string accountnr, string type)
+        public Current CreateCurrentAccount(Customer customer, Branch branch, string accountnr, string type)
         {
-            Account current = new Current(customer, branch, accountnr, type, 0.0);
+            Current current = new Current(customer, branch, accountnr, type, 0.0);
             _accounts.Add(current);
             return current;
         }
 
-        public Account CreateSavingsAccount(Customer customer, Branch branch, string accountnr, string type)
+        public Savings CreateSavingsAccount(Customer customer, Branch branch, string accountnr, string type)
         {
-            Account savings = new Savings(customer, branch, accountnr, type, 0.0);
+            Savings savings = new Savings(customer, branch, accountnr, type, 0.0);
             _accounts.Add(savings);
             return savings;
         }
@@ -38,6 +38,14 @@ namespace Boolean.CSharp.Main
         {
             var matches = _accounts.FirstOrDefault(x => x.AccountNr == accountnr);
             return matches;
-        } 
+        }
+
+        public Transaction DebitTransfer(string accountnr, double amount)
+        {
+            Transaction thisTransaction = new Transaction(DateTime.Now, null, amount);
+            var matches = _accounts.FirstOrDefault(x => x.AccountNr == accountnr);
+            matches.Transactions.Add(thisTransaction);
+            return thisTransaction;
+        }
     }
 }
