@@ -15,20 +15,20 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        public void CreateAccountTest()
+        public void CreateCurrentAccountTest()
         {
-            List<Account> accounts = new List<Account>(); // A list of accounts
-            Bank bank = new Bank(accounts); // Bank object
+            List<Account> newBranchAccounts = new List<Account>(); // A list of accounts
+            Branch newBranch = new Branch(newBranchAccounts, "Oslo"); // Bank object
             
             Customer customer = new Customer("John Doe"); //Customer
-            Account current = new Current(customer, "000001", "Current", "Oslo", 0.0); //Making an account with the constructor
+            Account current = new Current(customer, newBranch, "000001", "Current", 0.0); //Making an account with the constructor
 
             bool expected = true;
 
-            bank.CreateAccount(customer, "000001", "Current", "Oslo"); //Making an account with the method
+            newBranch.CreateCurrentAccount(customer, "000001", "Current", "Oslo"); //Making an account with the method
 
             bool result = false;
-            if (accounts.Contains(current)) //Checking if its added to the list of accounts 
+            if (newBranchAccounts.Contains(current)) //Checking if its added to the list of accounts 
             {
                 result = true;
             }

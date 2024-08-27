@@ -10,13 +10,14 @@ namespace Boolean.CSharp.Main
     {
         private string _accountnr;
         private string _type;
-        private string _branch;
+        //private string _branch;
         //private string _ownername;
         private double _balance = 0;
 
         Customer _customer;
+        Branch _branch;
 
-        public Current(Customer customer, string accountnr, string type, string branch, double balance) : base(accountnr, type, branch, balance)
+        public Current(Customer customer, Branch branch, string accountnr, string type, double balance) : base(accountnr, type, branch, balance)
         {
             this._customer = customer;
         }
@@ -30,7 +31,7 @@ namespace Boolean.CSharp.Main
 
         public string Type { get => _type; set => _type = value; }
 
-        public string Branch { get => _branch; set => _branch = value; }
+        //public string Branch { get => _branch; set => _branch = value; }
 
         //public string OwnerName { get => _ownername; set => _ownername= value; }
 

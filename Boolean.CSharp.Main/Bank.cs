@@ -6,19 +6,23 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main
 {
-    public class Bank
+    public abstract class Bank
     {
-        List<Account> accounts = new List<Account>();
-        List<string> branches = new List<string>();
+        private string _name;
 
-        public Bank(List<Account> accounts)
+        List<Account> accounts = new List<Account>();
+
+        public Bank(List<Account> accounts, string name)
         {
+            this._name = name;
             this.accounts = accounts;
         }
 
-        public void CreateAccount(Customer customer, string accountnr, string type, string branch)
+        public void CreateCurrentAccount(Customer customer, string accountnr, string type, string branch)
         {
 
         }
+
+        public string Name { get => _name; set => _name = value; }
     }
 }
