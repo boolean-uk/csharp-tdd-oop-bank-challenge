@@ -14,22 +14,6 @@ namespace Boolean.CSharp.Main.Model
             this._customer = new List<Customer>();
         }
 
-        internal Customer StoresCustomer
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public Controler.MainControler ReturnsListOfCustomers
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
         internal bool AddCustomer(Customer customer)
         {
             try

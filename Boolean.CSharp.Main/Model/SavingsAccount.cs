@@ -33,13 +33,6 @@ namespace Boolean.CSharp.Main.Model
             this._branch = "Default";
         }
 
-        internal IAccount ImplementsIAccount
-        {
-            get => default;
-            set
-            {
-            }
-        }
 
         public void DepositFunds(double funds)
         {

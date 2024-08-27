@@ -16,13 +16,6 @@ namespace Boolean.CSharp.Main.Controler
             this.management = new Managment();
         }
 
-        internal View.View ViewDisplays
-        {
-            get => default;
-            set
-            {
-            }
-        }
 
         internal bool CreateAccount(string AccountName, string SocialSecurityNr)
         {
@@ -33,7 +26,7 @@ namespace Boolean.CSharp.Main.Controler
             }
             else
             {
-                ViewDisplays.View.CreateAccount(AccountName);
+                View.View.CreateAccount(AccountName);
                 return c.CreateAccount(AccountName); 
             }
         }
@@ -44,7 +37,7 @@ namespace Boolean.CSharp.Main.Controler
             {
                 Customer c = new Customer(CustomerName, SocialSecurityNr);
                 management.AddCustomer(c);
-                ViewDisplays.View.CreateCustomer(CustomerName);
+                View.View.CreateCustomer(CustomerName);
                 return true;
             }
             catch (Exception e)
@@ -75,7 +68,7 @@ namespace Boolean.CSharp.Main.Controler
             {
                 Customer? c = management.GetCustomer().FirstOrDefault(c => c.CustomerId.Equals(SocialSecurityNr));
                 IAccount? a = c!.Accounts.FirstOrDefault(propa => propa.GetAccountName() == AccountName);
-                if (Convert.ToDouble(a.GetBalance()) - value < 0)
+                if (Convert.ToDouble(a!.GetBalance()) - value < 0)
                 {
                     if (OverdraftCheck(AccountName, SocialSecurityNr, (Convert.ToDouble(a.GetBalance()) - value)))
                     {
@@ -114,13 +107,13 @@ namespace Boolean.CSharp.Main.Controler
         {
             Customer? c = management.GetCustomer().FirstOrDefault(propa => propa.CustomerId == SocialSecurityNr);
             IAccount? a = c!.Accounts.FirstOrDefault(propa => propa.GetAccountName() == AccountName);
-            ViewDisplays.View.GenerateBankStatment(a!.GenerateBankStatment());
+            View.View.GenerateBankStatment(a!.GenerateBankStatment());
             return true;
         }
 
         internal bool OverdraftCheck(string AccountName, string SocialSecurityNr, double overdraft)
         {
-            if (ViewDisplays.View.OverdraftCheck(AccountName, SocialSecurityNr, overdraft))
+            if (View.View.OverdraftCheck(AccountName, SocialSecurityNr, overdraft))
             {
                 return true;
             }
@@ -132,7 +125,7 @@ namespace Boolean.CSharp.Main.Controler
 
         internal void GetCustomersList()
         {
-            ViewDisplays.View.GetCustomersList(GetCustomers());
+            View.View.GetCustomersList(GetCustomers());
         }
 
 

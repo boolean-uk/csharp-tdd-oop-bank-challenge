@@ -35,14 +35,6 @@ namespace Boolean.CSharp.Main.Model
 
         internal string CustomerId { get { return _customerId; } }
 
-        public Controler.MainControler CreatesAndControlsCustomer
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
         internal bool CreateAccount(string name)
         {
             try

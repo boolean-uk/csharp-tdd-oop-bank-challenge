@@ -2,7 +2,6 @@
 {
     internal interface IAccount
     {
-        Customer CustomerOwnAccount { get; set; }
 
         List<string> GenerateBankStatment();
 
