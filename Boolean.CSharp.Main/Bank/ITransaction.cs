@@ -11,5 +11,6 @@ namespace Boolean.CSharp.Main.Bank
         decimal Balance { get; }
         decimal Amount { get; }
         DateTime Date { get; }
+        string TransactionType { get; }
     }
 }

@@ -103,10 +103,14 @@ namespace Boolean.CSharp.Test
             branch.CreateAccount(currentAccount);
             List<Transaction> bankStatement = currentAccount.MyTransactions;
 
-            bool printBankStatement = currentAccount.Print;
+            currentAccount.MakeDeposit(1000.00M);
+            currentAccount.MakeDeposit(2000.00M);
+            currentAccount.MakeWithdrawal(500.00M);
 
-            Assert.That(printBankStatement, Is.True);
-            
+            string printBankStatement = currentAccount.Print;
+
+            Assert.That(printBankStatement, Does.Contain("|| date                   || credit    || debit     || balance  "));
+           
         }
 
 
