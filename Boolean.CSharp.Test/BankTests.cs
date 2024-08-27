@@ -68,12 +68,32 @@ namespace Boolean.CSharp.Test
         }
 
         //3. As a customer, So I can keep a record of my finances, I want to generate bank statements with transaction dates, amounts, and balance at the time of transaction.
-        //[Test]
+        [Test]
         public void CanGenerateBankStatementTest()
         {
+            Branch branch = new Branch();
+            CurrentAccount currentAccount = new CurrentAccount("Current");
+            branch.CreateAccount(currentAccount);
+
+            decimal balance = 2500.00M;
+
+            currentAccount.MakeDeposit(1000.00M);
+            List<Transaction> bankStatement1 = currentAccount.MyTransactions;
+            Assert.That(bankStatement1.Count, Is.EqualTo(1));
+
+            currentAccount.MakeDeposit(2000.00M);
+            List<Transaction> bankStatement2 = currentAccount.MyTransactions;
+            Assert.That(bankStatement2.Count, Is.EqualTo(2));
+
+            currentAccount.MakeWithdrawal(500.00M);
+            List<Transaction> bankStatement3 = currentAccount.MyTransactions;
+            Assert.That(bankStatement3.Count, Is.EqualTo(3));
+
+            Assert.That(bankStatement3, Does.Contain(balance));
 
         }
 
+        //[Test]
         public void CanPrintBankStatementTest()
         {
 
