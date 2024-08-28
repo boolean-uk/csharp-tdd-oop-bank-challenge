@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,8 @@ namespace Boolean.CSharp.Main
     {
         private decimal _balance = 0;
         private List<ITransaction> _transactions = new();
+        private bool _manager = false;
+        private bool _engineer = false;
 
 
 
@@ -42,10 +45,10 @@ namespace Boolean.CSharp.Main
             string date = System.DateTime.Today.ToString("dd.MM.yy");
             statement.AppendLine($"Account initiated with {_transactions[0].beforeAmount} at {date}");
             statement.AppendLine($"date    ||debit   ||credit  ||balance |");
-        
+
             foreach (ITransaction transaction in _transactions)
             {
-                statement.Append( $"{date}".PadRight(8) + "|");
+                statement.Append($"{date}".PadRight(8) + "|");
                 if (transaction.operation == Operation.Add)
                 {
                     statement.Append("|" + $"{Math.Round(transaction.operationAmount, 2)}".PadRight(8) + "|");
@@ -62,6 +65,35 @@ namespace Boolean.CSharp.Main
 
             }
             return statement.ToString();
+        }
+        public decimal CalculateBalance()
+        {
+            if (_engineer == true)
+            {
+                decimal calculated = _transactions[0].beforeAmount;
+                foreach (ITransaction transaction in _transactions)
+                {
+                    if (transaction.operation == Operation.Add)
+                    {
+                        calculated += transaction.operationAmount;
+                    }
+                    else 
+                    {
+                        calculated -= transaction.operationAmount;
+                    }
+                }
+                return calculated;
+            }
+            return -88888888888m;
+        }
+
+        public void ManagerAccess(string password)
+        {
+            if (password == "password")
+            {
+                _engineer = true;
+            }
+
         }
     }
 }

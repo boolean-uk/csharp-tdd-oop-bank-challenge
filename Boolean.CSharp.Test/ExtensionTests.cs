@@ -12,7 +12,7 @@ namespace Boolean.CSharp.Test
     public class ExtensionTests
     {
         [Test]
-        public void PrintStatementTest()
+        public void CalculateBalanceTest()
         {
             //init
             SavingsAccount savingsAccount = new(500);
