@@ -10,6 +10,14 @@ namespace Boolean.CSharp.Test
            
         }
 
+        public decimal CalculateBalance()
+        {
+            throw new NotImplementedException();
+        }
 
+        public void ManagerAccess(string v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

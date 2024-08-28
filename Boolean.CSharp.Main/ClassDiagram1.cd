@@ -3,7 +3,7 @@
   <Class Name="Boolean.CSharp.Main.Account">
     <Position X="1.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EAAACAAAAAAAAAAAAAAAAAAEAAAAAAIAAAAAAAAAAAI=</HashCode>
+      <HashCode>EAAACAAAAAAAAAAAAAAAAAIEAAAAAAIAAAAAAAAAAAI=</HashCode>
       <FileName>Account.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -17,7 +17,7 @@
   <Class Name="Boolean.CSharp.Main.CreditTransaction">
     <Position X="8" Y="3.25" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAABAKA=</HashCode>
+      <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAAgAAAAIAAAAAAAABACA=</HashCode>
       <FileName>CreditTransaction.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.253" />
@@ -25,20 +25,20 @@
   <Class Name="Boolean.CSharp.Main.DebitTransaction">
     <Position X="6" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAABAKA=</HashCode>
+      <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAAgAAAAIAAAAAAAABACA=</HashCode>
       <FileName>DebitTransaction.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.106" />
   </Class>
   <Interface Name="Boolean.CSharp.Main.ITransaction">
-    <Position X="7.25" Y="0.5" Width="1.5" />
+    <Position X="7" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAABAKA=</HashCode>
+      <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAAgAAAAIAAAAAAAABACA=</HashCode>
       <FileName>ITransaction.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Enum Name="Boolean.CSharp.Main.Operation">
-    <Position X="10" Y="0.75" Width="1.5" />
+    <Position X="10" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Operation.cs</FileName>

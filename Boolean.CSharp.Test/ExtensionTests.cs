@@ -11,20 +11,21 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class ExtensionTests
     {
-        private Extension _extension;
-        public ExtensionTests()
-        {
-            _extension = new Extension();
-        }
         [Test]
-        private void TestQuestion1()
+        public void PrintStatementTest()
         {
+            //init
+            SavingsAccount savingsAccount = new(500);
+            savingsAccount.Deposit(543);
+            savingsAccount.Withdraw(200);
+            decimal expected = savingsAccount.GetBalance();
 
-        }
-        [Test]
-        private void TestQuestion2()
-        {
+            //run
+            savingsAccount.ManagerAccess("password");
+            decimal computed = savingsAccount.CalculateBalance();
 
+            //Assert
+            Assert.AreEqual(expected, computed);
         }
     }
 }
