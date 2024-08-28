@@ -79,7 +79,9 @@ namespace Boolean.CSharp.Main
 
         public void RequestOverdraft(string accountnr, double amount)
         {
-            
+            var matches = _accounts.FirstOrDefault(x => x.AccountNr == accountnr);
+            matches.PendingRequest = true;
+            matches.RequestedOverdraft = amount;
         }
     }
 }

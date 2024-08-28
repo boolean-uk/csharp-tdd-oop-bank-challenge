@@ -32,11 +32,16 @@ namespace Boolean.CSharp.Test
 
             gringotts.RequestOverdraft(gimmeMoreMoney.AccountNr, 5000);
 
-            (bool, double) expected = (true, 5000);
+            bool expectedstatus = true;
+            double expectedamount = 5000;
 
-            (bool, double) result = gimmeMoreMoney.PendingRequest;
+            bool statusresult = gimmeMoreMoney.PendingRequest;
+            double requestamount = gimmeMoreMoney.RequestedOverdraft;
 
-            Assert.AreEqual(expected, result);
+
+            Assert.AreEqual(expectedstatus, statusresult);
+            Assert.AreEqual(expectedamount, requestamount);
+
 
         }
     }

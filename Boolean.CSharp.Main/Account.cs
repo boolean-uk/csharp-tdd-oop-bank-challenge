@@ -11,7 +11,8 @@ namespace Boolean.CSharp.Main
         private string _accountnr;
         private double _balance = 0;
         private double _overdraft = 0;
-        private (bool, double) _pendingrequest = (false, 0.0);
+        private bool _pendingrequest = false;
+        private double _requestedoverdraft = 0;
         
 
         private List<Transaction> _transactions = new List<Transaction>();
@@ -29,7 +30,9 @@ namespace Boolean.CSharp.Main
         public string AccountNr { get => _accountnr; set => _accountnr = value; }
         public double Balance { get => _balance; set => _balance = value; }
 
-        public (bool, double) PendingRequest { get => _pendingrequest = (false, 0.0); set => _pendingrequest = value; }
+        public bool PendingRequest { get => _pendingrequest; set => _pendingrequest = value; }
+
+        public double RequestedOverdraft { get => _requestedoverdraft; set => _requestedoverdraft = value; }
       
         public List<Transaction> Transactions { get => _transactions; set => _transactions = value; }
 
