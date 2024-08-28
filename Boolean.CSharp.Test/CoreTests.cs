@@ -83,12 +83,28 @@ namespace Boolean.CSharp.Test
             Assert.That(result, Is.False);
         }
         [Test]
+        public void OverdraftBeyondLimitSeveral()
+        {
+            ExpensesAccount account = new(1, "0768631232");
+
+            bool result1 = account.Overdraft(500f);
+            bool result2 = account.Overdraft(500f);
+            bool result3 = account.Overdraft(500f);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(result1, Is.True);
+                Assert.That(result2, Is.True);
+                Assert.That(result3, Is.False);
+            });
+        }
+        [Test]
         public void OverdraftPositiveBalance()
         {
             ExpensesAccount account = new(1, "0768631232");
 
             account.Deposit(2000f);
-            bool result = account.Overdraft(1500f);
+            bool result = account.Overdraft(100f);
 
             // You cant overdraft an amount <= balance
             Assert.That(result, Is.False);

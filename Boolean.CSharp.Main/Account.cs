@@ -2,22 +2,42 @@
 {
     public abstract class Account
     {
-        private float _branchcode;
-        private float _balance { get { return CalculateBalance(); } }
+        private int _branchcode;
+        private float _balance { get { return _transactionHistory.Select(transaction => transaction.Amount).ToArray().Sum(); } }
         private List<Transaction> _transactionHistory = [];
         private float _overdraftLimit = 1000f;
         private string _customerPhoneNumber;
 
-        public Account(float branchcode, string customerPhoneNumber)
+        public Account(int branchcode, string customerPhoneNumber)
         {
             _branchcode = branchcode;
             _customerPhoneNumber = customerPhoneNumber;
         }
-
-        private float CalculateBalance() {throw new NotImplementedException(); }
-        public bool Deposit(float amount) { throw new NotImplementedException(); }
-        public bool Withdraw(float amount) {throw new NotImplementedException();}
-        public bool Overdraft(float amount){throw new NotImplementedException();}
+        public bool Deposit(float amount) 
+        {
+            if (amount <= 0) return false;
+            var transaction = new Transaction(amount, amount+_balance);
+            _transactionHistory.Add(transaction);
+            return true;
+        }
+        public bool Withdraw(float amount) 
+        {
+            if (amount <= 0) return false;
+            if (_balance < amount) return false;
+            var transaction = new Transaction(amount, _balance-amount);
+            _transactionHistory.Add(transaction);
+            return true;
+        }
+        public bool Overdraft(float amount)
+        {
+            if (amount <= 0) return false;
+            if (amount > _overdraftLimit) return false;
+            if (_balance <= -_overdraftLimit) return false;
+            if (_balance > amount) return false;
+            var transaction = new Transaction(amount, _balance - amount);
+            _transactionHistory.Add(transaction);
+            return true;
+        }
         public string GenerateStatement() { throw new NotImplementedException(); }
     }
 }

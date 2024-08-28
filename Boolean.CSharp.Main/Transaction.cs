@@ -12,5 +12,6 @@ namespace Boolean.CSharp.Main
         private float _amount = amount;
         private float _balance = balance;
 
+        public float Amount { get { return _amount; } }
     }
 }
