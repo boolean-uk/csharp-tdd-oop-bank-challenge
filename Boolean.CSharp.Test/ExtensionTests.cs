@@ -59,6 +59,8 @@ namespace Boolean.CSharp.Test
             double expectedamount = 0000;
             double overdraftIsSet = 5000;
 
+            gringotts.ManageRequest(gimmeMoreMoney.AccountNr, true);
+
             bool statusresult = gimmeMoreMoney.PendingRequest;
             double requestamount = gimmeMoreMoney.RequestedOverdraft;
             double result = gimmeMoreMoney.Overdraft;

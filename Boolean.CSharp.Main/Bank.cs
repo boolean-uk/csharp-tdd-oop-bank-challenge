@@ -83,5 +83,10 @@ namespace Boolean.CSharp.Main
             matches.PendingRequest = true;
             matches.RequestedOverdraft = amount;
         }
+
+        public void ManageRequest(string accountnr, bool decision)
+        {
+
+        }
     }
 }
