@@ -19,6 +19,4 @@ namespace Boolean.CSharp.Main.Bank
 
     }
 
-        
-    
 }

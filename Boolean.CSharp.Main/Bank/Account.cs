@@ -7,9 +7,7 @@ namespace Boolean.CSharp.Main.Bank
         private List<Account> _myAccounts = new List<Account>();
         private List<Transaction> _transactions = new List<Transaction>();
         private StringBuilder _bankStatement = new StringBuilder();
-        private string _accountType = "";
-        private decimal _amount;
-
+        
         private StringBuilder GenerateBankStatement()
         {
             _bankStatement.AppendLine("|| date                   || credit    || debit     || balance  ");
@@ -35,14 +33,13 @@ namespace Boolean.CSharp.Main.Bank
 
         public bool AddAccount(Account account)
         {
-            _accountType = account.AccountType;
-
-            if (_accountType == "Current")
+            
+            if (account.AccountType == "Current")
             {
                 _myAccounts.Add(account);
                 return true;
             }
-            if (_accountType == "Savings")
+            if (account.AccountType == "Savings")
             {
                 _myAccounts.Add(account);
                 return true;
@@ -52,12 +49,9 @@ namespace Boolean.CSharp.Main.Bank
 
         public bool MakeDeposit(decimal amount)
         {
-            _amount = amount;
-            
-
-            if (_amount > 0)
+            if (amount > 0)
             {
-                Transaction transaction = new Transaction(_amount, DateTime.Now, GetBalance() + _amount, "deposit");
+                Transaction transaction = new Transaction(amount, DateTime.Now, GetBalance() + amount, "deposit");
                 _transactions.Add(transaction);
                 return true;
             }
@@ -67,11 +61,9 @@ namespace Boolean.CSharp.Main.Bank
 
         public bool MakeWithdrawal(decimal amount)
         {
-            _amount = amount;
-
-            if (GetBalance() > _amount)
+            if (GetBalance() > amount)
             {
-                Transaction transaction1 = new Transaction(_amount, DateTime.Now, GetBalance() - _amount, "withdraw");
+                Transaction transaction1 = new Transaction(amount, DateTime.Now, GetBalance() - amount, "withdraw");
                 _transactions.Add(transaction1);
                 return true;
             }
@@ -98,12 +90,11 @@ namespace Boolean.CSharp.Main.Bank
             return _getbalance;
         }
 
-        public string AccountType { get { return _accountType; } set { _accountType = value; } }
+        public string AccountType { get; set; }
         public virtual string BranchName { get; set; }
         public List<Account> MyAccounts { get { return _myAccounts; } }
         public List<Transaction> MyTransactions { get { return _transactions; } }
         public string PrintBankStatement { get { return GenerateBankStatement().ToString(); } }
-
 
     }
 }
