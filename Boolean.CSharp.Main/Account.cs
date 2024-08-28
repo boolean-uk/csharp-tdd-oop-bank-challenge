@@ -30,6 +30,8 @@ namespace Boolean.CSharp.Main
         public string AccountNr { get => _accountnr; set => _accountnr = value; }
         public double Balance { get => _balance; set => _balance = value; }
 
+        public double Overdraft { get => _overdraft; set => _overdraft = value; }
+
         public bool PendingRequest { get => _pendingrequest; set => _pendingrequest = value; }
 
         public double RequestedOverdraft { get => _requestedoverdraft; set => _requestedoverdraft = value; }

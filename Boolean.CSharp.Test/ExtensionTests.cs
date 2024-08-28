@@ -42,7 +42,30 @@ namespace Boolean.CSharp.Test
             Assert.AreEqual(expectedstatus, statusresult);
             Assert.AreEqual(expectedamount, requestamount);
 
+        }
 
+        [Test]
+        public void ApproveOverdraftTest()
+        {
+            Branch gringotts = new Branch("Hogsmeade");
+
+            Customer customer = new Customer("John Doe");
+
+            Current gimmeMoreMoney = gringotts.CreateCurrentAccount(gringotts, customer, "000001");
+
+            gringotts.RequestOverdraft(gimmeMoreMoney.AccountNr, 5000);
+
+            bool expectedstatus = false;
+            double expectedamount = 0000;
+            double overdraftIsSet = 5000;
+
+            bool statusresult = gimmeMoreMoney.PendingRequest;
+            double requestamount = gimmeMoreMoney.RequestedOverdraft;
+            double result = gimmeMoreMoney.Overdraft;
+
+            Assert.AreEqual(expectedstatus, statusresult);
+            Assert.AreEqual(expectedamount, requestamount);
+            Assert.AreEqual(result, overdraftIsSet);
         }
     }
 }
