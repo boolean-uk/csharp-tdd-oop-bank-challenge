@@ -86,7 +86,18 @@ namespace Boolean.CSharp.Main
 
         public void ManageRequest(string accountnr, bool decision)
         {
-
+            var matches = _accounts.FirstOrDefault(x => x.AccountNr == accountnr);
+            if (decision == true)
+            {
+                matches.PendingRequest = false;
+                matches.Overdraft = matches.RequestedOverdraft;
+                matches.RequestedOverdraft = 0;
+            }
+            else
+            {
+                matches.PendingRequest = false;
+                matches.RequestedOverdraft = 0;
+            }
         }
     }
 }
