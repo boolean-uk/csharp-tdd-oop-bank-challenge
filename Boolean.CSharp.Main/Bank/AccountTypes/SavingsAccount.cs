@@ -11,6 +11,7 @@ namespace Boolean.CSharp.Main.Bank.AccountTypes
         public SavingsAccount(string accountType) 
         {
             AccountType = accountType;
+            BranchName = base.BranchName;
         }
 
     }

@@ -9,12 +9,14 @@ namespace Boolean.CSharp.Main.Bank
 {
     public  class Branch : Account
     {
-        private string BranchName { get; set; }
+        private string _branchName;
 
-        public Branch ()
+        public Branch() 
         {
-           
+            BranchName = _branchName;   
         }
+        public override string BranchName { get => base.BranchName; set => base.BranchName = _branchName; }
+
     }
 
         

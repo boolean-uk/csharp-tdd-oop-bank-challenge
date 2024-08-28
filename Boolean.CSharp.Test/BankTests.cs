@@ -22,7 +22,7 @@ namespace Boolean.CSharp.Test
             Branch branch = new Branch();
             CurrentAccount currentAccount1 = new CurrentAccount("Current");
             
-            bool hasBeenCreated = branch.CreateAccount(currentAccount1);
+            bool hasBeenCreated = branch.AddAccount(currentAccount1);
 
             Assert.That(hasBeenCreated, Is.True);
 
@@ -35,7 +35,7 @@ namespace Boolean.CSharp.Test
             Branch branch = new Branch();
             SavingsAccount savingsaccount1 = new SavingsAccount("Savings");
 
-            bool hasBeenCreated = branch.CreateAccount(savingsaccount1);
+            bool hasBeenCreated = branch.AddAccount(savingsaccount1);
 
             Assert.That(hasBeenCreated, Is.True);
         }
@@ -72,7 +72,7 @@ namespace Boolean.CSharp.Test
         {
             Branch branch = new Branch();
             CurrentAccount currentAccount = new CurrentAccount("Current");
-            branch.CreateAccount(currentAccount);
+            branch.AddAccount(currentAccount);
             List<Transaction> bankStatement = currentAccount.MyTransactions;
 
             currentAccount.MakeDeposit(1000.00M);
@@ -99,7 +99,7 @@ namespace Boolean.CSharp.Test
         {
             Branch branch = new Branch();
             CurrentAccount currentAccount = new CurrentAccount("Current");
-            branch.CreateAccount(currentAccount);
+            branch.AddAccount(currentAccount);
             List<Transaction> bankStatement = currentAccount.MyTransactions;
 
             currentAccount.MakeDeposit(1000.00M);

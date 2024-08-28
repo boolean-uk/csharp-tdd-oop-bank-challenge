@@ -3,7 +3,7 @@ using Boolean.CSharp.Main.Bank;
 
 Branch branch = new Branch();
 CurrentAccount currentAccount = new CurrentAccount("Current");
-branch.CreateAccount(currentAccount);
+branch.AddAccount(currentAccount);
 List<Transaction> bankStatement = currentAccount.MyTransactions;
 
 currentAccount.MakeDeposit(1000.00M);

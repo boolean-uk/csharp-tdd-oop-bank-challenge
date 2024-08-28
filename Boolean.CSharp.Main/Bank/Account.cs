@@ -9,8 +9,6 @@ namespace Boolean.CSharp.Main.Bank
         private StringBuilder _bankStatement = new StringBuilder();
         private string _accountType = "";
         private decimal _amount;
-        private string _transactionType = "";
-
 
         private StringBuilder GenerateBankStatement()
         {
@@ -35,15 +33,16 @@ namespace Boolean.CSharp.Main.Bank
             return _bankStatement;
         }
 
-        public bool CreateAccount(Account account)
+        public bool AddAccount(Account account)
         {
             _accountType = account.AccountType;
-            if (account.AccountType == "Current")
+
+            if (_accountType == "Current")
             {
                 _myAccounts.Add(account);
                 return true;
             }
-            if (account.AccountType == "Savings")
+            if (_accountType == "Savings")
             {
                 _myAccounts.Add(account);
                 return true;
@@ -54,12 +53,11 @@ namespace Boolean.CSharp.Main.Bank
         public bool MakeDeposit(decimal amount)
         {
             _amount = amount;
-            _transactionType = "deposit";
-
+            
 
             if (_amount > 0)
             {
-                Transaction transaction = new Transaction(_amount, DateTime.Now, GetBalance() + _amount, _transactionType);
+                Transaction transaction = new Transaction(_amount, DateTime.Now, GetBalance() + _amount, "deposit");
                 _transactions.Add(transaction);
                 return true;
             }
@@ -70,12 +68,10 @@ namespace Boolean.CSharp.Main.Bank
         public bool MakeWithdrawal(decimal amount)
         {
             _amount = amount;
-            _transactionType = "withdraw";
-
 
             if (GetBalance() > _amount)
             {
-                Transaction transaction1 = new Transaction(_amount, DateTime.Now, GetBalance() - _amount, _transactionType);
+                Transaction transaction1 = new Transaction(_amount, DateTime.Now, GetBalance() - _amount, "withdraw");
                 _transactions.Add(transaction1);
                 return true;
             }
@@ -102,13 +98,8 @@ namespace Boolean.CSharp.Main.Bank
             return _getbalance;
         }
 
-        public string GetBranch()
-        {
-            throw new NotImplementedException();
-        }
-
-
         public string AccountType { get { return _accountType; } set { _accountType = value; } }
+        public virtual string BranchName { get; set; }
         public List<Account> MyAccounts { get { return _myAccounts; } }
         public List<Transaction> MyTransactions { get { return _transactions; } }
         public string PrintBankStatement { get { return GenerateBankStatement().ToString(); } }

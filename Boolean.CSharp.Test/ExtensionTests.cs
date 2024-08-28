@@ -38,14 +38,17 @@ namespace Boolean.CSharp.Test
         [Test]
         public void CanGetAssociatedBranchTest()
         {
-            Branch branch = new Branch();
-            SavingsAccount account = new SavingsAccount("Savings");
-            branch.CreateAccount(account);
+            Branch branch = new Branch() { BranchName = "Trondheim" };
+            CurrentAccount currentAccount = new CurrentAccount("Current");
+            SavingsAccount savingsAccount = new SavingsAccount("Savings");
+            branch.AddAccount(currentAccount);
+            branch.AddAccount(savingsAccount);
 
-            string hasbranch = account.GetBranch();
+            foreach (Account account in branch.MyAccounts) 
+            { 
+                Assert.That(account.BranchName == branch.BranchName); 
+            }
 
-            Assert.That(hasbranch, Is.EqualTo(branch));
-            
         }
 
 
