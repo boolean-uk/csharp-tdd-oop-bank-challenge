@@ -13,7 +13,7 @@ namespace Boolean.CSharp.Main
         private List<ITransaction> _transactions = new();
         private bool _manager = false;
         private bool _engineer = false;
-
+        private Branch _branch;
 
 
 
@@ -77,7 +77,7 @@ namespace Boolean.CSharp.Main
                     {
                         calculated += transaction.operationAmount;
                     }
-                    else 
+                    else
                     {
                         calculated -= transaction.operationAmount;
                     }
@@ -93,19 +93,25 @@ namespace Boolean.CSharp.Main
             {
                 _engineer = true;
             }
-
         }
+
         public void ManagerAccess(string password)
         {
             if (password == "password")
             {
                 _manager = true;
             }
-
         }
-        public decimal GetBranch()
+
+        public void SetBranch(Branch branch)
         {
-            throw new NotImplementedException();
+            if (_manager == true)
+                _branch = branch;
+        }
+
+        public Branch GetBranch()
+        {
+            return _branch;
         }
     }
 }

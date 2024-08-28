@@ -35,10 +35,11 @@ namespace Boolean.CSharp.Test
             savingsAccount.Deposit(543);
             savingsAccount.Withdraw(200);
             Branch expected = Branch.Oslo;
+            savingsAccount.SetBranch(expected);
 
             //run
             savingsAccount.ManagerAccess("password");
-            decimal computed = savingsAccount.GetBranch();
+            Branch computed = savingsAccount.GetBranch();
 
             //Assert
             Assert.AreEqual(expected, computed);
