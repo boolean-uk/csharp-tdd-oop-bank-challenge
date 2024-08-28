@@ -10,8 +10,11 @@ namespace Boolean.CSharp.Main.Bank
     public  class Branch : Account
     {
         private string BranchName { get; set; }
-        
-       
+
+        public Branch ()
+        {
+           
+        }
     }
 
         

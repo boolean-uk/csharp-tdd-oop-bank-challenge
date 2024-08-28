@@ -12,5 +12,6 @@ namespace Boolean.CSharp.Main.Bank.AccountTypes
         {
             AccountType = accountType;
         }
+
     }
 }

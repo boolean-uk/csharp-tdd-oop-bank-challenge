@@ -102,14 +102,17 @@ namespace Boolean.CSharp.Main.Bank
             return _getbalance;
         }
 
+        public string GetBranch()
+        {
+            throw new NotImplementedException();
+        }
 
 
         public string AccountType { get { return _accountType; } set { _accountType = value; } }
         public List<Account> MyAccounts { get { return _myAccounts; } }
-
         public List<Transaction> MyTransactions { get { return _transactions; } }
-
         public string PrintBankStatement { get { return GenerateBankStatement().ToString(); } }
+
 
     }
 }
