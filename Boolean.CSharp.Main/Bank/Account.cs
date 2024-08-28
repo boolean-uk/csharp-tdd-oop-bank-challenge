@@ -26,6 +26,10 @@ namespace Boolean.CSharp.Main.Bank
                 {
                     _bankStatement.AppendLine($"|| {t.Date}    ||           || {t.Amount}    || {t.Balance}");
                 }
+                if (t.TransactionType == "overdraft")
+                {
+                    _bankStatement.AppendLine($"|| {t.Date}    ||           || {t.Amount}    || {t.Balance}");
+                }
 
             }
             return _bankStatement;
@@ -88,6 +92,17 @@ namespace Boolean.CSharp.Main.Bank
 
             }
             return _getbalance;
+        }
+
+        public bool MakeOverdraft(decimal amount, bool approval)
+        {
+            if(GetBalance() < amount && approval) 
+            {
+                Transaction transaction1 = new Transaction(amount, DateTime.Now, GetBalance() - amount, "overdraft");
+                _transactions.Add(transaction1);
+                return true;
+            }
+            return false;
         }
 
         public string AccountType { get; set; }

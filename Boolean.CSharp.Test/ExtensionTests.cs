@@ -56,12 +56,12 @@ namespace Boolean.CSharp.Test
         [Test]
         public void CanOverdraftAccountTest()
         {
+            bool approval = true;
             CurrentAccount currentAccount = new CurrentAccount("Current");
 
-            bool canOverDraft = currentAccount.MakeWithdrawal(500.00M);
+            bool canOverDraft = currentAccount.MakeOverdraft(500.00M, approval);
 
             Assert.That(canOverDraft, Is.True);
-
         }
 
 
