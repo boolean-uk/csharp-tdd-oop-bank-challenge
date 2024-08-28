@@ -90,6 +90,13 @@ namespace Boolean.CSharp.Main.Bank
             return false;
         }
 
+        public decimal GetBalance()
+        {
+            throw new NotImplementedException();
+        }
+
+
+
         public string AccountType { get { return _accountType; } set { _accountType = value; } }
         public List<Account> MyAccounts { get { return _myAccounts; } }
 
