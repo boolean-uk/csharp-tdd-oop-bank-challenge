@@ -36,13 +36,13 @@ I want statements to be sent as messages to my phone.
 
 
 
-| Classes                  | Members                                                | Methods                           | Scenario                                                     | Outputs |
-|--------------------------|--------------------------------------------------------|-----------------------------------|--------------------------------------------------------------|---------|
-| `Abstract Account`       | AccountNr, Type, Balance, Branch                       |                                   |                                             |         |
-| `Abstract Bank`          |  List of accounts. Banks name                          |  CreateAccount() methods & GetAccount()|                                                              |     |
-| `Branch`                 | ``                                        |                                   |                                                              |         | 
-| `Customer`               | Name, contactinfo?                                     |                          |                                                                       |         |
-| `Savings`                | InterestRate                                           |                                   |                                                              |         |
-| `Current`                | Customer and Branch                                    |                                   |                                                              |         |
-| `Transaction`            | Date, credit, debit,                           |                                   |               | |
+| Classes                | Members                                                | Methods                           | Scenario                                                     
+|------------------------|--------------------------------------------------------|-----------------------------------|--------------------------------------------------------------
+| Abstract Account       | `AccountNr`, `Type`, `Balance`, `Branch`, `Transactions`, `Customer`, `Branch`| `GetBalance()`|  Base class for all accounts, includes GetBalance() function
+| Abstract Bank          | `Name`, `List<Account>`|  `CreateCurrentAccount()`,`CreateSavingsAccount()`, `GetAccount()`, `Deposit()`, `Withdraw()`, `Statement()`| Most of the logic used by the different accounts goes here
+| Branch                 |                                                        |                                   |                                                              
+| Customer               | `Name`                                                 |                                   |                                                                       
+| Savings                |                                                        |                                   |                                                              
+| Current                |                                                        |                                   |                                                              
+| Transaction            | `Date`, `credit`, `debit`, `newbalance`                |                                   |              
 |        

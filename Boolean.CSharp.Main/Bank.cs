@@ -53,7 +53,7 @@ namespace Boolean.CSharp.Main
         {
             double withdrawn = 0 - amount;
             var matches = _accounts.FirstOrDefault(x => x.AccountNr == accountnr);
-            double newBalance = matches.GetBalance() + amount;
+            double newBalance = matches.GetBalance() - amount;
             Transaction thisTransaction = new Transaction(DateTime.Now, amount, null, newBalance);
             matches.Transactions.Add(thisTransaction);
             return thisTransaction;
@@ -67,10 +67,10 @@ namespace Boolean.CSharp.Main
             foreach (var match in matches)
             {
                 print += match.GetType().Name+" Account with nr: "+match.AccountNr + " in: " + match.Branch.Name+"\n";
-                print += "\nDate                ||  credit    ||  debit    ||  balance";
+                print += "\nDate".ToString().PadRight(15)+"||".ToString().PadRight(5)+"credit".ToString().PadRight(8)+"||".ToString().PadRight(5) + "debit".ToString().PadRight(8)+"||".ToString().PadRight(5) + "balance";
                 foreach (Transaction transaction in match.Transactions)
                 {
-                    print += $"\n\n{transaction.Date}      {transaction.Credit}              {transaction.Debit}          {transaction.Newbalance}";
+                    print += "\n"+transaction.Date.ToString("d").PadRight(14)+"||".ToString().PadRight(5)+transaction.Credit.ToString().PadRight(8)+"||".ToString().PadRight(5)+transaction.Debit.ToString().PadRight(8)+ "||".ToString().PadRight(5)+transaction.Newbalance.ToString().PadRight(8);
                 }
                 print += "\n\n";
             }

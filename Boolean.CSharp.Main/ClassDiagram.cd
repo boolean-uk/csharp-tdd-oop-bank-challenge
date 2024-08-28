@@ -1,45 +1,52 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Boolean.CSharp.Main.Bank">
-    <Position X="0.5" Y="0.5" Width="1.5" />
+    <Position X="4.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACIAAAAAAAQAAAAAAAAAQAAAAAAACAAAAAAEAAABA=</HashCode>
+      <HashCode>AAACIAAAAAAAQAAAAAAAAAQGAAAAAACAAAAAAEAAABI=</HashCode>
       <FileName>Bank.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Boolean.CSharp.Main.Branch">
-    <Position X="0.5" Y="5" Width="1.5" />
+    <Position X="4.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Branch.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Boolean.CSharp.Main.Account">
-    <Position X="3" Y="0.5" Width="1.5" />
+    <Position X="1.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EAAAAAAAAAAAAAQAAAgAAAAAAQAAAAgAAQAAAAEAAAA=</HashCode>
+      <HashCode>EAGAAAAAAAAAAIAAAAgAAAIAAQAAAAoAAAAAAAEAAAA=</HashCode>
       <FileName>Account.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Boolean.CSharp.Main.Current">
-    <Position X="2.25" Y="5" Width="1.5" />
+    <Position X="0.5" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Current.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Boolean.CSharp.Main.Customer">
-    <Position X="5.5" Y="0.5" Width="1.5" />
+    <Position X="7" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAIAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Customer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Boolean.CSharp.Main.Savings">
-    <Position X="4" Y="5" Width="1.5" />
+    <Position X="2.75" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Savings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Boolean.CSharp.Main.Transaction">
+    <Position X="8.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAABBAAAAAAIEAAAAQABCAAAAAAAAAA=</HashCode>
+      <FileName>Transactions.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

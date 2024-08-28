@@ -111,17 +111,25 @@ namespace Boolean.CSharp.Test
             newBranch.Deposit(sample.AccountNr, 300);
             newBranch.Withdraw(sample.AccountNr, 500);
 
-            Savings sample2 = newBranch.CreateSavingsAccount(newBranch, customer, "000001");
+            Savings sample2 = newBranch.CreateSavingsAccount(newBranch, customer, "000002");
 
             newBranch.Deposit(sample2.AccountNr, 500);
             newBranch.Deposit(sample2.AccountNr, 300);
+            newBranch.Deposit(sample2.AccountNr, 1200);
             newBranch.Withdraw(sample2.AccountNr, 500);
+            newBranch.Withdraw(sample2.AccountNr, 100);
+
 
             string print = newBranch.Statement(customer.Name);
 
-            double expected = 300;
+            double expected1 = 300;
+            double expected2 = 1400;
 
-            double result = sample.GetBalance();
+            double result1 = sample.GetBalance();
+            double result2 = sample2.GetBalance();
+
+            Assert.AreEqual(expected1, result1);
+            Assert.AreEqual(expected2, result2);
 
         }
     }
