@@ -10,9 +10,8 @@ namespace Boolean.CSharp.Main
     public class CurrentAccount : Account
     {
         public CurrentAccount(Branch branch) : base(branch) { }
+
         public override AccountType AccountType { get; } = AccountType.Current;
-        public override bool OverdraftActive { get; set; } = false;
-        public override decimal BalanceCapacity { get; set; } = 0m;
 
     }
 }

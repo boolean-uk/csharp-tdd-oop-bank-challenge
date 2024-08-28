@@ -9,7 +9,7 @@ namespace Boolean.CSharp.Main
 {
     public class Customer
     {
-        Account ?account;
+        public Account ?account;
 
         public List<Account> Accounts {  get; set; } = new List<Account>();
 

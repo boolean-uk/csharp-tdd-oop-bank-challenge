@@ -9,17 +9,19 @@ namespace Boolean.CSharp.Main
 {
     public class Transaction
     {
-        private DateTime _Date { get; } = DateTime.Now;
+        private decimal _balance;
+        private decimal _amount;
 
+        private DateTime _Date { get; } = DateTime.Now;
         public string Date => _Date.ToString("yyyy-MM-dd");
         public TransactionType TransactionType { get; }
-        public decimal Amount { get; }
-        public decimal Balance { get; }    
+        public decimal Amount { get { return _amount;  } }
+        public decimal Balance { get { return _balance;  } }
 
         public Transaction(decimal amount, TransactionType transactionType, decimal balance)
         {
-            this.Amount = amount;
-            this.Balance = balance;
+            this._amount = amount;
+            this._balance = balance;
             this.TransactionType = transactionType;
         }
 

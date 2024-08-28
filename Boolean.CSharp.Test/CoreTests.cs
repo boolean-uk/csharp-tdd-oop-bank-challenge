@@ -4,6 +4,8 @@ using System.Security.Principal;
 
 namespace Boolean.CSharp.Test
 {
+   
+
     [TestFixture]
     public class CoreTests
     {

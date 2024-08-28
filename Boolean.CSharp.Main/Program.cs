@@ -8,10 +8,9 @@ account.Deposit(2000, TransactionType.Deposit);
 account.Withdraw(500, TransactionType.Withdraw);
 
 
+account.GenerateBankStatement();
 
 Console.WriteLine();
 
-account.GenerateBankStatement();
-
-
+//account.SendBankStatement();
 

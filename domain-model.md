@@ -46,9 +46,8 @@ I want statements to be sent as messages to my phone.
   | enum Branch             |                                                         | stores branches as strings                                            | Bergen, Oslo, Trondheim, Stavanger
   -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
   | Account                 | AccountType Type                                        |                                                                       |        
-  |					        | TransactionType Type                                    |                                                                       |
   |					        | List<Transaction>                                       | store all account transactions                                        | List<Transactions>
-  |                         | decimal Balance                                         | store account balance (credit, debit)                                 | decimal       
+  |                         | decimal BalanceCapacity                                 | store account balance (credit, debit)                                 | decimal       
   |                         | Branch branch                                           | the branch associated with the account                                |        
   |                         | overDraftActive = false                                 | bool to see if overdraft from account is possible                     | bool       
   |					        | Deposit(decimal Amount, TransactionType)                | adds amount to account balance. Create deposit transaction.           | bool 
