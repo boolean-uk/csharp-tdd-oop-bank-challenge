@@ -10,8 +10,8 @@ namespace Boolean.CSharp.Main
     {
         private decimal _balance = 0;
         private List<ITransaction> _transactions = new();
-            
-        
+
+
 
 
         public Account(decimal number)
@@ -38,23 +38,28 @@ namespace Boolean.CSharp.Main
         public string GetStatement()
         {
             StringBuilder statement = new();
-            string date = System.DateTime.Today.ToString("ddmmyy");
+
+            string date = System.DateTime.Today.ToString("dd.MM.yy");
+            statement.AppendLine($"Account initiated with {_transactions[0].beforeAmount} at {date}");
+            statement.AppendLine($"date    ||debit   ||credit  ||balance |");
+        
             foreach (ITransaction transaction in _transactions)
             {
-                statement.AppendLine($"date      ||debit    ||credit   ||balance   ");
-                statement.AppendLine();
-                statement.Append($"{date}|".PadRight(9));
+                statement.Append( $"{date}".PadRight(8) + "|");
                 if (transaction.operation == Operation.Add)
                 {
-                    statement.AppendLine("|" + $"{Math.Round(transaction.operationAmount,1)}".PadRight(8) + "|");
-                    statement.AppendLine("|" + $"".PadRight(8) + "|");
+                    statement.Append("|" + $"{Math.Round(transaction.operationAmount, 2)}".PadRight(8) + "|");
+                    statement.Append("|" + $"".PadRight(8) + "|");
+                    statement.Append("|" + $"{Math.Round(transaction.GetBalance(), 2)}".PadRight(8) + "|");
                 }
                 else
                 {
-                    statement.AppendLine("|" + $"".PadRight(8) + "|");
-                    statement.AppendLine("|" + $"{Math.Round(transaction.operationAmount, 1)}".PadRight(8) + "|");
+                    statement.Append("|" + $"".PadRight(8) + "|");
+                    statement.Append("|" + $"{Math.Round(transaction.operationAmount, 2)}".PadRight(8) + "|");
+                    statement.Append("|" + $"{Math.Round(transaction.GetBalance(), 2)}".PadRight(8) + "|");
                 }
-                
+                statement.AppendLine();
+
             }
             return statement.ToString();
         }
