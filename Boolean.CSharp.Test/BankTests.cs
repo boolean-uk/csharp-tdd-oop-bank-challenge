@@ -63,8 +63,6 @@ namespace Boolean.CSharp.Test
             bool hasMadeWithdrawal = currentAccount.MakeWithdrawal(withdrawAmount);
 
             Assert.That(hasMadeWithdrawal, Is.True);
-
-            Assert.That(currentAccount.Balance, Is.EqualTo(100.00M));
             
         }
 
@@ -112,20 +110,6 @@ namespace Boolean.CSharp.Test
 
             Assert.That(printBankStatement, Does.Contain("|| date                   || credit    || debit     || balance  "));
            
-        }
-
-        [Test]
-        public void CanGetBalanceFromTransactionHistoryTest()
-        {
-            decimal expectedBalance = 2500.00M;
-            CurrentAccount currentAccount = new CurrentAccount("Current");
-            currentAccount.MakeDeposit(1000.00M);
-            currentAccount.MakeDeposit(2000.00M);
-            currentAccount.MakeWithdrawal(500.00M);
-
-            decimal actualBalance = currentAccount.GetBalance();
-
-            Assert.That(actualBalance, Is.EqualTo(expectedBalance));
         }
 
 

@@ -1,29 +1,25 @@
-﻿
-using System.Security.Principal;
-using System.Text;
+﻿using System.Text;
 
 namespace Boolean.CSharp.Main.Bank
 {
-    public abstract class Account : ITransaction
+    public abstract class Account
     {
         private List<Account> _myAccounts = new List<Account>();
         private List<Transaction> _transactions = new List<Transaction>();
         private StringBuilder _bankStatement = new StringBuilder();
         private string _accountType = "";
-        private decimal _balance;
         private decimal _amount;
-        private DateTime _date;
         private string _transactionType = "";
 
 
-        private StringBuilder GenerateBankStatement() 
+        private StringBuilder GenerateBankStatement()
         {
             _bankStatement.AppendLine("|| date                   || credit    || debit     || balance  ");
 
-            
+
             _transactions.Reverse();
 
-            foreach (Transaction t in _transactions) 
+            foreach (Transaction t in _transactions)
             {
 
                 if (t.TransactionType == "deposit")
@@ -34,7 +30,7 @@ namespace Boolean.CSharp.Main.Bank
                 {
                     _bankStatement.AppendLine($"|| {t.Date}    ||           || {t.Amount}    || {t.Balance}");
                 }
-                
+
             }
             return _bankStatement;
         }
@@ -58,14 +54,12 @@ namespace Boolean.CSharp.Main.Bank
         public bool MakeDeposit(decimal amount)
         {
             _amount = amount;
-            _date = Date;
             _transactionType = "deposit";
-            
+
 
             if (_amount > 0)
             {
-                _balance += _amount;
-                Transaction transaction = new Transaction(_amount, _date, _balance, _transactionType);
+                Transaction transaction = new Transaction(_amount, DateTime.Now, GetBalance() + _amount, _transactionType);
                 _transactions.Add(transaction);
                 return true;
             }
@@ -76,14 +70,12 @@ namespace Boolean.CSharp.Main.Bank
         public bool MakeWithdrawal(decimal amount)
         {
             _amount = amount;
-            _date = Date;
             _transactionType = "withdraw";
-            
 
-            if (_balance > _amount)
+
+            if (GetBalance() > _amount)
             {
-                _balance -= _amount;
-                Transaction transaction1 = new Transaction(_amount, _date, _balance, _transactionType);
+                Transaction transaction1 = new Transaction(_amount, DateTime.Now, GetBalance() - _amount, _transactionType);
                 _transactions.Add(transaction1);
                 return true;
             }
@@ -92,7 +84,22 @@ namespace Boolean.CSharp.Main.Bank
 
         public decimal GetBalance()
         {
-            throw new NotImplementedException();
+            decimal _getbalance = 0;
+
+            foreach (var transaction in _transactions)
+            {
+                if (transaction.TransactionType == "deposit")
+                {
+                    _getbalance += transaction.Amount;
+                }
+
+                if (transaction.TransactionType == "withdraw")
+                {
+                    _getbalance -= transaction.Amount;
+                }
+
+            }
+            return _getbalance;
         }
 
 
@@ -104,12 +111,5 @@ namespace Boolean.CSharp.Main.Bank
 
         public string PrintBankStatement { get { return GenerateBankStatement().ToString(); } }
 
-        public decimal Balance { get { return _balance; } }
-
-        public decimal Amount { get { return _amount; } }
-
-        public DateTime Date { get { return DateTime.Now; } }
-
-        public string TransactionType { get { return _transactionType; } }
     }
 }
