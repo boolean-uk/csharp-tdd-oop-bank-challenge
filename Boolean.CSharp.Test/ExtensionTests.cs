@@ -51,6 +51,19 @@ namespace Boolean.CSharp.Test
 
         }
 
+        //7. 7. As a customer, So I have an emergency fund, I want to be able to request an overdraft on my account.
+        //8. As a bank manager, So I can safeguard our funds, I want to approve or reject overdraft requests.
+        [Test]
+        public void CanOverdraftAccountTest()
+        {
+            CurrentAccount currentAccount = new CurrentAccount("Current");
+
+            bool canOverDraft = currentAccount.MakeWithdrawal(500.00M);
+
+            Assert.That(canOverDraft, Is.True);
+
+        }
+
 
     }
 }
