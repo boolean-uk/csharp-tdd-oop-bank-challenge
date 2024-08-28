@@ -87,13 +87,25 @@ namespace Boolean.CSharp.Main
             return -88888888888m;
         }
 
-        public void ManagerAccess(string password)
+        public void EngineerAccess(string password)
         {
             if (password == "password")
             {
                 _engineer = true;
             }
 
+        }
+        public void ManagerAccess(string password)
+        {
+            if (password == "password")
+            {
+                _manager = true;
+            }
+
+        }
+        public decimal GetBranch()
+        {
+            throw new NotImplementedException();
         }
     }
 }
