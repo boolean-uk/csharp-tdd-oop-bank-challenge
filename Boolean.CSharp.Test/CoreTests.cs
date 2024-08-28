@@ -9,7 +9,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void Deposit()
         {
-            ExpensesAccount account = new (1, "0768631232");
+            CurrentAccount account = new (1, "0768631232");
 
             bool result = account.Deposit(1000f);
 
@@ -18,7 +18,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void DepositNothing()
         {
-            ExpensesAccount account = new(1, "0768631232");
+            CurrentAccount account = new(1, "0768631232");
 
             bool result = account.Deposit(0f);
 
@@ -27,7 +27,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void DepositNegative()
         {
-            ExpensesAccount account = new(1, "0768631232");
+            CurrentAccount account = new(1, "0768631232");
 
             bool result = account.Deposit(-1000f);
 
@@ -36,7 +36,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void Withdraw()
         {
-            ExpensesAccount account = new(1, "0768631232");
+            CurrentAccount account = new(1, "0768631232");
 
             account.Deposit(1000f);
             bool result = account.Withdraw(1000f);
@@ -47,7 +47,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void WithdrawNegative()
         {
-            ExpensesAccount account = new(1, "0768631232");
+            CurrentAccount account = new(1, "0768631232");
 
             account.Deposit(1000f);
             bool result = account.Withdraw(-1000f);
@@ -57,7 +57,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void WithdrawMoreThanBalance()
         {
-            ExpensesAccount account = new(1, "0768631232");
+            CurrentAccount account = new(1, "0768631232");
 
             account.Deposit(1000f);
             bool result = account.Withdraw(2000f);
@@ -67,7 +67,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void Overdraft()
         {
-            ExpensesAccount account = new(1, "0768631232");
+            CurrentAccount account = new(1, "0768631232");
 
             bool result = account.Overdraft(500f);
 
@@ -76,7 +76,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void OverdraftBeyondLimit()
         {
-            ExpensesAccount account = new(1, "0768631232");
+            CurrentAccount account = new(1, "0768631232");
 
             bool result = account.Overdraft(1500f);
 
@@ -85,7 +85,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void OverdraftBeyondLimitSeveral()
         {
-            ExpensesAccount account = new(1, "0768631232");
+            CurrentAccount account = new(1, "0768631232");
 
             bool result1 = account.Overdraft(500f);
             bool result2 = account.Overdraft(500f);
@@ -101,7 +101,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void OverdraftPositiveBalance()
         {
-            ExpensesAccount account = new(1, "0768631232");
+            CurrentAccount account = new(1, "0768631232");
 
             account.Deposit(2000f);
             bool result = account.Overdraft(100f);

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main
 {
-    public class ExpensesAccount : Account
+    public class CurrentAccount : Account
     {
-        public ExpensesAccount(int branchcode, string customerPhoneNumber) : base(branchcode, customerPhoneNumber)
+        public CurrentAccount(int branchcode, string customerPhoneNumber) : base(branchcode, customerPhoneNumber)
         {
         }
     }
