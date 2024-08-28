@@ -40,28 +40,24 @@ namespace Boolean.CSharp.Main
             return matches;
         }
 
-        public Transaction Deposit(string accountnr, double amount)
+        public void Deposit(string accountnr, double amount)
         {
             var matches = _accounts.FirstOrDefault(x => x.AccountNr == accountnr);
             double newBalance = matches.GetBalance() + amount;
             Transaction thisTransaction = new Transaction(DateTime.Now, null, amount, newBalance);
             matches.Transactions.Add(thisTransaction);
-            return thisTransaction;
         }
 
-        public Transaction Withdraw(string accountnr, double amount)
+        public void Withdraw(string accountnr, double amount)
         {
-            double withdrawn = 0 - amount;
             var matches = _accounts.FirstOrDefault(x => x.AccountNr == accountnr);
             double newBalance = matches.GetBalance() - amount;
             Transaction thisTransaction = new Transaction(DateTime.Now, amount, null, newBalance);
             matches.Transactions.Add(thisTransaction);
-            return thisTransaction;
         }
 
         public string Statement(string customername)
         {
-            //StringBuilder sb = new StringBuilder();
             string print = "";
             var matches = _accounts.Where(x => x.Customer.Name == customername).ToList();
             foreach (var match in matches)
