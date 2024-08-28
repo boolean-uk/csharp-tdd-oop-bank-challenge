@@ -57,23 +57,6 @@ namespace Boolean.CSharp.Main.Interfaces
             return sb.ToString(); 
         }
 
-        public bool AddBalance(double amount)
-        {
-            _balance += amount;
-            return true;
-        }
-
-        public bool RemoveBalance(double amount)
-        {
-            if (amount + Overdraft < 0) 
-            {
-                return false; 
-            }
-
-            _balance -= amount;
-            return true;
-        }
-
         public double CalculateBalance()
         {
             double totalBalance = 0;

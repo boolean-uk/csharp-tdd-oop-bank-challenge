@@ -68,10 +68,9 @@ namespace Boolean.CSharp.Main
             }
 
             Account AcctoBeDeposited = GetAccount(ID);
-            Transaction transaction = new Transaction(DateTime.Today.ToString("dd/MM/yyyy"), AcctoBeDeposited.Balance, amount, 0);
+            Transaction transaction = new Transaction(DateTime.Today.ToString("dd/MM/yyyy"), AcctoBeDeposited.Balance + amount, amount, 0);
             AcctoBeDeposited.TransactionHistory.Add(transaction);
 
-            AcctoBeDeposited.AddBalance(amount);
             return AcctoBeDeposited.CalculateBalance();
         }
 
@@ -83,15 +82,8 @@ namespace Boolean.CSharp.Main
             }
 
             Account AccToBeWithdrawn = GetAccount(ID);
-            Transaction transaction = new Transaction(DateTime.Today.ToString("dd/MM/yyyy"), AccToBeWithdrawn.Balance, 0, amount);
-            
-
-            bool succesfull = AccToBeWithdrawn.RemoveBalance(amount);
-
-            if (succesfull)
-            {
-                AccToBeWithdrawn.TransactionHistory.Add(transaction);
-            }    
+            Transaction transaction = new Transaction(DateTime.Today.ToString("dd/MM/yyyy"), AccToBeWithdrawn.Balance - amount, 0, amount);
+            AccToBeWithdrawn.TransactionHistory.Add(transaction);
 
             return AccToBeWithdrawn.CalculateBalance();
         }
@@ -99,6 +91,7 @@ namespace Boolean.CSharp.Main
         public string PrintBankStateMent(string user)
         {
             List<Account> accountsWithUser = FindAccountsUser(user).ToList();
+            accountsWithUser.Reverse();
 
             StringBuilder sb = new StringBuilder();
             sb.AppendLine($"date\t\t|| credit\t|| debit\t|| balance\t");
