@@ -10,6 +10,10 @@ namespace Boolean.CSharp.Main
     {
         private string _accountnr;
         private double _balance = 0;
+        private double _overdraft = 0;
+        private (bool, double) _pendingrequest = (false, 0.0);
+        
+
         private List<Transaction> _transactions = new List<Transaction>();
 
         Customer _customer;
@@ -24,6 +28,8 @@ namespace Boolean.CSharp.Main
 
         public string AccountNr { get => _accountnr; set => _accountnr = value; }
         public double Balance { get => _balance; set => _balance = value; }
+
+        public (bool, double) PendingRequest { get => _pendingrequest = (false, 0.0); set => _pendingrequest = value; }
       
         public List<Transaction> Transactions { get => _transactions; set => _transactions = value; }
 
