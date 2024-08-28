@@ -8,5 +8,6 @@ namespace Boolean.CSharp.Main
 {
     public interface ISMSProvider
     {
+        public abstract bool SendSMS(string phonenr, string statement);
     }
 }
