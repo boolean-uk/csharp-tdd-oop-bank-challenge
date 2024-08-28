@@ -6,19 +6,55 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class CoreTests
     {
-        private Core _core;
-
-        public CoreTests()
-        {
-            _core = new Core();
-
-        }
-
         [Test]
-        public void TestQuestion1()
+        public void CreateAccount()
         {
 
         }
+        [Test]
+        public void CreateSavingsAccount()
+        {
 
+        }
+        [Test]
+        public void Deposit()
+        {
+
+        }
+        [Test]
+        public void DepositNothing()
+        {
+
+        }
+        [Test]
+        public void DepositNegative()
+        {
+
+        }
+        [Test]
+        public void Withdraw()
+        {
+
+        }
+        [Test]
+        public void WithdrawNegative()
+        {
+
+        }
+        [Test]
+        public void WithdrawMoreThanBalance()
+        {
+
+        }
+        [Test]
+        public void GenerateValidStatement()
+        {
+
+        }
+        [Test]
+        public void GenerateStatementFromNoTransactions()
+        {
+
+        }
     }
 }

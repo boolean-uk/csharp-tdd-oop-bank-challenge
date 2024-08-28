@@ -8,5 +8,9 @@ namespace Boolean.CSharp.Main
 {
     public class Twilio : ISMSProvider
     {
+        public bool SendSMS(string phonenr, string statement)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

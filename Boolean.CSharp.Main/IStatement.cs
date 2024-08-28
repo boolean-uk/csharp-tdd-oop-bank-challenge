@@ -8,5 +8,7 @@ namespace Boolean.CSharp.Main
 {
     public interface IStatement
     {
+        public abstract string GenerateStatement(List<Transaction> transactions);
     }
 }
+

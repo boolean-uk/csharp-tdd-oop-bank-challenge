@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main
 {
-    public class Transaction
+    public class Transaction(float amount, float balance)
     {
+        private string _date = DateTime.Now.ToString("dd/MM/yyyy");
+        private float _amount = amount;
+        private float _balance = balance;
+
     }
 }
