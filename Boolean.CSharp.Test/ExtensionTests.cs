@@ -95,5 +95,49 @@ namespace Boolean.CSharp.Test
             Assert.AreEqual(expectedamount, requestamount);
             Assert.AreEqual(result, overdraftIsSet);
         }
+
+        [Test]
+        public void DeclineWithdrawalTest()
+        {
+            Branch gringotts = new Branch("Hogsmeade");
+
+            Customer customer = new Customer("John Doe");
+
+            Current gimmeMoreMoney = gringotts.CreateCurrentAccount(gringotts, customer, "000001");
+
+            gringotts.RequestOverdraft(gimmeMoreMoney.AccountNr, 5000);
+
+            double expected = 0;
+
+            gringotts.ManageRequest(gimmeMoreMoney.AccountNr, true);
+
+            gringotts.Withdraw(gimmeMoreMoney.AccountNr, 10000);
+
+            double result = gimmeMoreMoney.GetBalance();
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void AcceptWithdrawalTest()
+        {
+            Branch gringotts = new Branch("Hogsmeade");
+
+            Customer customer = new Customer("John Doe");
+
+            Current gimmeMoreMoney = gringotts.CreateCurrentAccount(gringotts, customer, "000001");
+
+            gringotts.RequestOverdraft(gimmeMoreMoney.AccountNr, 10000);
+
+            double expected = -10000;
+
+            gringotts.ManageRequest(gimmeMoreMoney.AccountNr, true);
+
+            gringotts.Withdraw(gimmeMoreMoney.AccountNr, 10000);
+
+            double result = gimmeMoreMoney.GetBalance();
+
+            Assert.AreEqual(expected, result);
+        }
     }
 }

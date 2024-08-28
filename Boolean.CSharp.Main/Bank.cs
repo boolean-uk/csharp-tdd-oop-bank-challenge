@@ -52,8 +52,11 @@ namespace Boolean.CSharp.Main
         {
             var matches = _accounts.FirstOrDefault(x => x.AccountNr == accountnr);
             double newBalance = matches.GetBalance() - amount;
-            Transaction thisTransaction = new Transaction(DateTime.Now, amount, null, newBalance);
-            matches.Transactions.Add(thisTransaction);
+            if (newBalance >= (0 - matches.Overdraft))
+            {
+                Transaction thisTransaction = new Transaction(DateTime.Now, amount, null, newBalance);
+                matches.Transactions.Add(thisTransaction);
+            }
         }
 
         public string Statement(string customername)
