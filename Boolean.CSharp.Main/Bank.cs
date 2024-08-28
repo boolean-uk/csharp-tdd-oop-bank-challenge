@@ -66,7 +66,7 @@ namespace Boolean.CSharp.Main
             var matches = _accounts.Where(x => x.Customer.Name == customername).ToList();
             foreach (var match in matches)
             {
-                print += match.GetType().Name+" Account with nr: "+match.AccountNr + " in: " + match.Branch.Name+"\n";
+                print += match.GetType().Name+" Account with AccountNr: "+match.AccountNr + " in: " + match.Branch.Name+"\n";
                 print += "\nDate".ToString().PadRight(15)+"||".ToString().PadRight(5)+"credit".ToString().PadRight(8)+"||".ToString().PadRight(5) + "debit".ToString().PadRight(8)+"||".ToString().PadRight(5) + "balance";
                 foreach (Transaction transaction in match.Transactions)
                 {

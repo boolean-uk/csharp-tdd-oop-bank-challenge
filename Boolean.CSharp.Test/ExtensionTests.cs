@@ -16,5 +16,7 @@ namespace Boolean.CSharp.Test
         {
             _extension = new Extension();
         }
+
+        
     }
 }
