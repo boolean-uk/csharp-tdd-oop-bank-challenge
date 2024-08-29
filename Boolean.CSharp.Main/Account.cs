@@ -133,6 +133,11 @@ namespace Boolean.CSharp.Main
             _overDraftRequest = true;
         }
 
+        public void AproveOverdraft()
+        {
+            throw new NotImplementedException();
+        }
+
         public bool OverDraftRequest { get => _overDraftRequest; set => _overDraftRequest = value; }
     }
 

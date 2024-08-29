@@ -73,5 +73,22 @@ namespace Boolean.CSharp.Test
             Assert.IsTrue(expected == computed);
 
         }
+        [Test]
+        public void OverDraftTest1()
+        {
+            //init
+            Account account = new(500);
+            bool expected = true;
+
+            //run
+            account.RequestOverdraft();
+            account.ManagerAccess("password");
+            account.AproveOverdraft();
+            bool computed = account.Withdraw(600);
+
+            //Assert
+            Assert.IsTrue(expected == computed);
+        }
+
     }
 }
