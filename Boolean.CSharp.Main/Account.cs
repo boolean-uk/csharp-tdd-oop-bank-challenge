@@ -117,7 +117,7 @@ namespace Boolean.CSharp.Main
 
         public void RequestOverdraft()
         {
-            throw new NotImplementedException();
+            _overDraftRequest = true;
         }
 
         public bool OverDraftRequest { get => _overDraftRequest; set => _overDraftRequest = value; }
