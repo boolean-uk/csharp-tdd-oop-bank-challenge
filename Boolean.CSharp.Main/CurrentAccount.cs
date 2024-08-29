@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Boolean.CSharp.Main
+﻿namespace Boolean.CSharp.Main
 {
-    public class CurrentAccount : Account
+    public class CurrentAccount : Account 
     {
-        public CurrentAccount(int branchcode, string customerPhoneNumber) : base(branchcode, customerPhoneNumber)
+        public CurrentAccount(int branch, string phonenr,
+            ISMSProvider smsprovider, IStatement statementbuilder) :
+            base(branch, phonenr, statementbuilder, smsprovider)
         {
         }
+        public CurrentAccount(int branch, string phonenr) : base(branch, phonenr) { }
     }
 }

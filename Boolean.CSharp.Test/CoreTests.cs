@@ -112,12 +112,49 @@ namespace Boolean.CSharp.Test
         [Test]
         public void GenerateValidStatement()
         {
+            var root = "C:\\Users\\AMetaj\\source\\repos\\csharp-tdd-oop-bank-challenge\\Boolean.CSharp.Test";
+            var dotenv = Path.Combine(root, ".env");
+            DotEnv.Load(dotenv);
+            string expectedOutput = "date       || credit  || debit  || balance\r\n14/01/2012 ||         || 500.00 || 2500.00\r\n13/01/2012 || 2000.00 ||        || 3000.00\r\n10/01/2012 || 1000.00 ||        || 1000.00";
+            IStatement statementbuilder = new StatementBuilder();
+            ISMSProvider smsprovider = new TwilioProvider();
+            string phonenr = Environment.GetEnvironmentVariable("PHONE_NUMBER");
+            if (phonenr is null) throw new Exception("Phone number is null in test");
+            int branch = 1;
+            CurrentAccount account = new(branch, phonenr, smsprovider, statementbuilder);
+            var stringWriter = new StringWriter();
+            Console.SetOut(stringWriter);
+
+            account.Deposit(1000f);
+            account.Deposit(2000f);
+            account.Withdraw(500f);
+
+            account.GenerateStatement();
+
+            var output = stringWriter.ToString();
+            Assert.That(output, Is.EqualTo(expectedOutput));
 
         }
         [Test]
         public void GenerateStatementFromNoTransactions()
         {
+            string expectedOutput = "\r\n";
+            var root = "C:\\Users\\AMetaj\\source\\repos\\csharp-tdd-oop-bank-challenge\\Boolean.CSharp.Test";
+            var dotenv = Path.Combine(root, ".env");
+            DotEnv.Load(dotenv);
+            IStatement statementbuilder = new StatementBuilder();
+            ISMSProvider smsprovider = new TwilioProvider();
+            string phonenr = Environment.GetEnvironmentVariable("PHONE_NUMBER");
+            if (phonenr is null) throw new Exception("Phone number is null in test");
+            int branch = 1;
+            CurrentAccount account = new(branch, phonenr, smsprovider, statementbuilder);
+            var stringWriter = new StringWriter();
+            Console.SetOut(stringWriter);
 
+            account.GenerateStatement();
+
+            var output = stringWriter.ToString();
+            Assert.That(output, Is.EqualTo(expectedOutput));
         }
     }
 }

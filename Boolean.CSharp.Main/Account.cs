@@ -7,6 +7,16 @@
         private List<Transaction> _transactionHistory = [];
         private float _overdraftLimit = 1000f;
         private string _customerPhoneNumber;
+        private IStatement? _statementBuilder;
+        private ISMSProvider? _smsprovider;
+
+        public Account(int branchcode, string customerPhoneNumber, IStatement statementBuilder, ISMSProvider smsprovider) : this(branchcode, customerPhoneNumber)
+        {
+            _branchcode = branchcode;
+            _customerPhoneNumber = customerPhoneNumber;
+            _statementBuilder = statementBuilder;
+            _smsprovider = smsprovider;
+        }
 
         public Account(int branchcode, string customerPhoneNumber)
         {
