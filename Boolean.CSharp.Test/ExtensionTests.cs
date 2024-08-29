@@ -58,5 +58,20 @@ namespace Boolean.CSharp.Test
             //Assert
             Assert.IsTrue(Account.OverDraftRequest == true);
         }
+        [Test]
+        public void OverDraftDenial()
+        {
+            //innit
+            Account Account = new(500);
+            bool expected = true;
+
+            //run
+            bool computed = Account.Withdraw(600);
+
+
+            //Assert
+            Assert.IsTrue(expected == computed);
+
+        }
     }
 }

@@ -34,10 +34,15 @@ namespace Boolean.CSharp.Main
             _transactions.Add(new DebitTransaction(amount, this._balance));
             _balance += amount;
         }
-        public void Withdraw(decimal amount)
+        public bool Withdraw(decimal amount)
         {
-            _transactions.Add(new CreditTransaction(amount, this._balance));
-            _balance -= amount;
+            if ((_balance - amount) >= 0)
+            {
+                _transactions.Add(new CreditTransaction(amount, this._balance));
+                _balance -= amount;
+                return true;
+            }
+            return false;
         }
         public string GetStatement()
         {
@@ -122,4 +127,5 @@ namespace Boolean.CSharp.Main
 
         public bool OverDraftRequest { get => _overDraftRequest; set => _overDraftRequest = value; }
     }
+
 }
