@@ -115,7 +115,7 @@ namespace Boolean.CSharp.Test
             var root = "C:\\Users\\AMetaj\\source\\repos\\csharp-tdd-oop-bank-challenge\\Boolean.CSharp.Test";
             var dotenv = Path.Combine(root, ".env");
             DotEnv.Load(dotenv);
-            string expectedOutput = "date       || credit  || debit  || balance\r\n14/01/2012 ||         || 500.00 || 2500.00\r\n13/01/2012 || 2000.00 ||        || 3000.00\r\n10/01/2012 || 1000.00 ||        || 1000.00";
+            string expectedOutput = $"date       || credit  || debit  || balance\r\n{DateTime.Now.ToString("dd/MM/yyyy")} ||         || 500,00 || 2500,00 \r\n{DateTime.Now.ToString("dd/MM/yyyy")} || 2000,00 ||        || 3000,00 \r\n{DateTime.Now.ToString("dd/MM/yyyy")} || 1000,00 ||        || 1000,00 \r\n\r\n";
             IStatement statementbuilder = new StatementBuilder();
             ISMSProvider smsprovider = new TwilioProvider();
             string phonenr = Environment.GetEnvironmentVariable("PHONE_NUMBER");

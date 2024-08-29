@@ -27,15 +27,15 @@
         {
             if (amount <= 0) return false;
             var transaction = new Transaction(amount, amount+_balance);
-            _transactionHistory.Add(transaction);
+            _transactionHistory.Insert(0 ,transaction);
             return true;
         }
         public bool Withdraw(float amount) 
         {
             if (amount <= 0) return false;
             if (_balance < amount) return false;
-            var transaction = new Transaction(amount, _balance-amount);
-            _transactionHistory.Add(transaction);
+            var transaction = new Transaction(-amount, _balance-amount);
+            _transactionHistory.Insert(0, transaction);
             return true;
         }
         public bool Overdraft(float amount)
@@ -48,6 +48,15 @@
             _transactionHistory.Add(transaction);
             return true;
         }
-        public string GenerateStatement() { throw new NotImplementedException(); }
+        public void GenerateStatement() 
+        {
+            if (_transactionHistory.Count == 0) 
+            {
+                Console.WriteLine();
+                return;
+            }
+            string statement = _statementBuilder.GenerateStatement(_transactionHistory);
+            _smsprovider.SendSMS(_customerPhoneNumber, statement);
+        }
     }
 }
