@@ -15,6 +15,8 @@ namespace Boolean.CSharp.Main
         private bool _engineer = false;
         private Branch _branch;
         private bool _overDraftRequest = false;
+        private bool _overDraft = false;
+        private decimal _overdraftLimit = 0;
 
 
 
@@ -37,6 +39,12 @@ namespace Boolean.CSharp.Main
         public bool Withdraw(decimal amount)
         {
             if ((_balance - amount) >= 0)
+            {
+                _transactions.Add(new CreditTransaction(amount, this._balance));
+                _balance -= amount;
+                return true;
+            }
+            else if (_overDraft == true && (_balance - amount) >= _overdraftLimit)
             {
                 _transactions.Add(new CreditTransaction(amount, this._balance));
                 _balance -= amount;
