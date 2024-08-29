@@ -14,6 +14,7 @@ namespace Boolean.CSharp.Main
         private bool _manager = false;
         private bool _engineer = false;
         private Branch _branch;
+        private bool _overDraftRequest = false;
 
 
 
@@ -113,5 +114,12 @@ namespace Boolean.CSharp.Main
         {
             return _branch;
         }
+
+        public void RequestOverdraft()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool OverDraftRequest { get => _overDraftRequest; set => _overDraftRequest = value; }
     }
 }

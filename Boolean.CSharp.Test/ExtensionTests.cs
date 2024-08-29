@@ -44,5 +44,19 @@ namespace Boolean.CSharp.Test
             //Assert
             Assert.AreEqual(expected, computed);
         }
+        [Test]
+        public void OverDraftTest()
+        {
+            //init
+            Account Account = new(500);
+            Account.Withdraw(600);
+
+            //run
+            Account.RequestOverdraft();
+
+
+            //Assert
+            Assert.IsTrue(Account.OverDraftRequest == true);
+        }
     }
 }
