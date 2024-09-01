@@ -7,3 +7,4 @@ savingsAccount.Withdraw(909);
 
 //run
 Console.WriteLine(savingsAccount.GetStatement());
+savingsAccount.SendMessage();

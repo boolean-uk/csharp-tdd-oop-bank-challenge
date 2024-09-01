@@ -4,6 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Twilio.Types;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
+
 
 namespace Boolean.CSharp.Main
 {
@@ -143,6 +147,21 @@ namespace Boolean.CSharp.Main
                 return true;
             }
             return false;
+        }
+        public void SendMessage()
+        {
+            var accountSid = "I removed this for a reason";
+            var authToken = "I removed this for a reason ";
+            TwilioClient.Init(accountSid, authToken);
+
+            var messageOptions = new CreateMessageOptions(
+              new PhoneNumber("I removed this for a reason"));
+            messageOptions.From = new PhoneNumber("this as well is removed");
+            messageOptions.Body = GetStatement();
+
+
+            var message = MessageResource.Create(messageOptions);
+            Console.WriteLine(message.Body);
         }
 
         public bool OverDraftRequest { get => _overDraftRequest; set => _overDraftRequest = value; }
