@@ -133,9 +133,16 @@ namespace Boolean.CSharp.Main
             _overDraftRequest = true;
         }
 
-        public void AproveOverdraft()
+        public bool AproveOverdraft()
+            //sets the overdraft limit with: limit = currentbalance * 0.05 + Sum(previous debit transactions) * 0.1
         {
-            throw new NotImplementedException();
+            if (_manager)
+            {
+                _overdraftLimit = 0 - ((_balance * 0.05m) + _transactions.Where(t => t.operation == Operation.Add).ToList().Sum(s => s.operationAmount) * 0.1m);
+                _overDraft = true;
+                return true;
+            }
+            return false;
         }
 
         public bool OverDraftRequest { get => _overDraftRequest; set => _overDraftRequest = value; }
