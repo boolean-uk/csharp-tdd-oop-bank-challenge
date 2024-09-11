@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main.Person
 {
-    internal class Manager
+    public class Manager : Person
     {
+        public Manager(string name, int id) : base(name, id)
+        {
+        }
     }
 }

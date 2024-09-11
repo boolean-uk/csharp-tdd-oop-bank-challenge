@@ -1,5 +1,5 @@
 ﻿using Boolean.CSharp.Main;
-
+using Boolean.CSharp.Main.Accounts;
 using Boolean.CSharp.Main.Enums;
 using Boolean.CSharp.Main.Person;
 using NUnit.Framework;
@@ -60,5 +60,46 @@ namespace Boolean.CSharp.Test
             Assert.AreEqual(savings, accountCreated.Type);
 
         }
+        [Test]
+
+        public void TestDepositIntoAccount()
+        {
+            Customer customer = new Customer("Ali Haider", 1);
+            customer.createAccount(AccountType.Current, "123");
+            IAccount current = customer.accounts[0];
+
+            bool result = current.deposit(1000);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(1000 == current.Balance);
+   
+        }
+        [Test]
+
+        public void TestWithDrawFromAccount()
+        {
+            Customer customer = new Customer("Ali Haider", 1);
+            customer.createAccount(AccountType.Savings, "00786");
+            IAccount savings = customer.accounts[0];
+
+            savings.deposit(2000);
+            bool result = savings.withdraw(1500);
+
+            Assert.IsTrue(result);
+            Assert.AreEqual(500, savings.Balance);
+        }
+
+        [Test]
+        public void TestNotValidDeposit()
+        {
+            Customer customer = new Customer("Ali H", 89);
+            customer.createAccount(AccountType.Current, "1298 90 9292929");
+            IAccount current = customer.accounts[0];
+
+            bool result = current.deposit(-1000);
+
+            Assert.IsFalse(result);
+        }
+
     }
 }
