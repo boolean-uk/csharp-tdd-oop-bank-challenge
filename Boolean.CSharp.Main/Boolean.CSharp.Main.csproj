@@ -13,4 +13,8 @@
     <PackageReference Include="NUnit3TestAdapter" Version="4.4.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Boolean.CSharp.Source\Boolean.CSharp.Source.csproj" />
+  </ItemGroup>
+
 </Project>
