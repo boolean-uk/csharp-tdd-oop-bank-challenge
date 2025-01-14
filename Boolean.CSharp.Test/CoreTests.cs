@@ -29,7 +29,13 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestCreateCurrentAccount()
         {
-           
+           Assert.That(_currentAccount, Is.Not.Null);
+        }
+
+        [Test]
+        public void TestCreateSavingAccount()
+        {
+
         }
 
         [Test]
