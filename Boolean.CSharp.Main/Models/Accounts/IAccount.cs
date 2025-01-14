@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
+using Boolean.CSharp.Main.Communication;
 using Boolean.CSharp.Main.Models.Transactions;
 
 namespace Boolean.CSharp.Main.Models.Accounts
@@ -22,6 +23,7 @@ namespace Boolean.CSharp.Main.Models.Accounts
         public CreditTransaction Withdraw(decimal amount);
         public OverdraftRequest RequestOverdraft(decimal amount);
         public decimal GetOverdraftLimit();
+        public void sendBankStatement(ICommunicator communicator);
 
         public BankStatement CreateBankStatement();
     }

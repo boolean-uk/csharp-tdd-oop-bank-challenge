@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
+using Boolean.CSharp.Main.Communication;
 using Boolean.CSharp.Main.Models.Transactions;
 
 namespace Boolean.CSharp.Main.Models.Accounts
@@ -60,6 +61,11 @@ namespace Boolean.CSharp.Main.Models.Accounts
             BankStatement statement = new BankStatement(Transactions);
             BankStatements.Add(statement);
             return statement;
+        }
+        public void sendBankStatement(ICommunicator communicator)
+        {
+            BankStatement statement = CreateBankStatement();
+            communicator.Send(statement.getStatementString());
         }
     }
 }

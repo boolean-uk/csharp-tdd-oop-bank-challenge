@@ -22,10 +22,15 @@ namespace Boolean.CSharp.Main.Models.Transactions
         {
             Console.WriteLine(transactionString());
         }
-
+        //I Might have gotten some help on the formating
         public string transactionString()
         {
-            return Date.ToString() + " || " + Amount + " || " + "\r" + " || " + Balance;
+            string credit = $"-${Amount.ToString("F2")}";
+            string debit = "";
+            string balanceFormatted = Balance.ToString("F2");
+
+            return String.Format("{0,-12} || {1,-8} || {2,-8} || {3,-10}", Date.ToString("dd/MM/yyyy"), credit, debit, balanceFormatted);
         }
+
     }
 }
