@@ -10,7 +10,8 @@ namespace Boolean.CSharp.Main.Accounts
 {
     public abstract class Account(string name, Branch branch = Branch.Trondheim)
     {
-        private List<AccountTransaction> _transactions;
+        private List<AccountTransaction> _transactions = [];
+        public List<AccountTransaction> Transactions { get { return _transactions.ToList(); } }
         public string Name { get; set; } = name;
         public Branch Branch { get; } = branch;
         public Guid AccountId { get; } = new Guid();
@@ -21,8 +22,8 @@ namespace Boolean.CSharp.Main.Accounts
                 throw new NotImplementedException();
             }
         }
-
-        public double Balance { get { throw new NotImplementedException(); } }
+        protected void AddTransaction(AccountTransaction transaction) { _transactions.Add(transaction); }
+        public double Balance { get { return _transactions.Sum(x => x.Amount); } }
         public abstract AccountTransaction Deposit(double amount);
 
         public abstract AccountTransaction Withdraw(double amount);

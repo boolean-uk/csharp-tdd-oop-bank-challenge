@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main.Exceptions
 {
-    public class InsufficientFundsException : Exception
+    public class InsufficientFundsException : ArgumentException
     {
         public InsufficientFundsException() { }
 

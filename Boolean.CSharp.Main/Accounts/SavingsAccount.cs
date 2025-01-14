@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Boolean.CSharp.Main.Enums;
+using Boolean.CSharp.Main.Exceptions;
 
 namespace Boolean.CSharp.Main.Accounts
 {
-    public class SavingsAccount : Account
+    public class SavingsAccount : RegularAccount
     {
         private double _withdrawalLimit;
         private DateTime _withdrawalLock;
@@ -33,14 +34,11 @@ namespace Boolean.CSharp.Main.Accounts
             _withdrawalLock = DateTime.Now;
         }
 
-        public override AccountTransaction Deposit(double amount)
-        {
-            throw new NotImplementedException();
-        }
-
         public override AccountTransaction Withdraw(double amount)
         {
-            throw new NotImplementedException();
+            if (_withdrawalLimit < amount) throw new LimitExceededException($"You have set the limit for withdrawals to {_withdrawalLimit}, but tried to withdraw {amount}");
+            else if (DateTime.Now < _withdrawalLock) throw new LockedAccountException($"This account has locked withdrawals until {_withdrawalLock.ToString("yyyy-MM-dd HH-mm-ss")}");
+            return base.Withdraw(amount);
         }
     }
 }
