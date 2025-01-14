@@ -11,20 +11,85 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class ExtensionTests
     {
-        private Extension _extension;
-        public ExtensionTests()
+        [Test]
+        public void CalculateBalanceTest()
         {
-            _extension = new Extension();
+            //init
+            SavingsAccount savingsAccount = new(500);
+            savingsAccount.Deposit(543);
+            savingsAccount.Withdraw(200);
+            decimal expected = savingsAccount.GetBalance();
+
+            //run
+            savingsAccount.EngineerAccess("password");
+            decimal computed = savingsAccount.CalculateBalance();
+
+            //Assert
+            Assert.AreEqual(expected, computed);
         }
         [Test]
-        private void TestQuestion1()
+        public void GetBranchTest()
         {
+            //init
+            SavingsAccount savingsAccount = new(500);
+            savingsAccount.Deposit(543);
+            savingsAccount.Withdraw(200);
+            Branch expected = Branch.Oslo;
+            savingsAccount.SetBranch(expected);
+
+            //run
+            savingsAccount.ManagerAccess("password");
+            Branch computed = savingsAccount.GetBranch();
+
+            //Assert
+            Assert.AreEqual(expected, computed);
+        }
+        [Test]
+        public void OverDraftTest()
+        {
+            //init
+            Account Account = new(500);
+            Account.Withdraw(600);
+
+            //run
+            Account.RequestOverdraft();
+
+
+            //Assert
+            Assert.IsTrue(Account.OverDraftRequest == true);
+        }
+        [Test]
+        public void OverDraftDenial()
+        {
+            //innit
+            Account Account = new(500);
+            bool expected = false;
+
+            //run
+            bool computed = Account.Withdraw(600);
+
+
+            //Assert
+            Assert.IsTrue(expected == computed);
 
         }
         [Test]
-        private void TestQuestion2()
+        public void OverDraftTest1()
         {
+            //init
+            Account account = new(580);
+            bool expected = true;
 
+            //run
+            account.RequestOverdraft();
+            account.ManagerAccess("password");
+            bool computed2 = account.AproveOverdraft();
+            bool computed = account.Withdraw(600);
+
+            //Assert
+            Assert.IsTrue(expected == computed);
+            Assert.IsTrue(computed2);
         }
+
     }
 }

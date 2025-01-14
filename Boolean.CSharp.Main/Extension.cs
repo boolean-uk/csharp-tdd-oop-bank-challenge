@@ -12,7 +12,7 @@ namespace Boolean.CSharp.Main
         private Core _core;
         public Extension()
         {
-            Core? core = new Core();
+            Core core = new Core();
         }                      
     }
 }
