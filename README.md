@@ -42,6 +42,19 @@ So I can use my account,
 I want to deposit and withdraw funds.
 ```
 
+## Domain Model
+
+| Classes                                                                                               | Methods/Properties                                 | Scenario                        | Outputs          |
+|---------------|---------------------------------------------------------------------------------------|----------------------------------------------------|---------------------------------|------------------|
+|IAccount.cs    | Interface for accounts - A person can have different types of accounts
+|IAccount.cs    | Fields - accountType, accountBalance
+|ITransaction.cs| Interface for transaction - Different types of transaction
+|ITransaction.cs| Fields - Transaction type, Transaction amount, Deposit, Withdrawal, Date
+|Person.cs      | Inherits an account  
+|Person.cs      | Fields include name and Bank ID
+                                                        
+
+
 ## Acceptance Criteria
 
 **Given** a client makes a deposit of 1000 on 10-01-2012  
