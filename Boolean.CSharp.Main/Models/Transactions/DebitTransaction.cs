@@ -11,10 +11,19 @@ namespace Boolean.CSharp.Main.Models.Transactions
         public decimal Amount { get; set; }
         public DateTime Date { get; set; }
         public decimal Balance { get; set; }
-
+        public DebitTransaction(decimal amount, decimal balance) 
+        {
+            Amount = amount;
+            Date = DateTime.Now;
+            Balance = balance + amount;
+        }
         public void printTransaction()
         {
-            Console.WriteLine(Date.ToString() + " || " + "\r" + " || " + Amount + " || " + Balance);
+            Console.WriteLine(transactionString());
+        }
+        public string transactionString()
+        {
+            return Date.ToString() + " || " + "\r" + " || " + Amount + " || " + Balance;
         }
     }
 }

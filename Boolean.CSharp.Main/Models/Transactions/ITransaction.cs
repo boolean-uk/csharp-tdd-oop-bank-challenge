@@ -12,6 +12,7 @@ namespace Boolean.CSharp.Main.Models.Transactions
         DateTime Date { get; set; }
         decimal Balance { get; set; }
         void printTransaction();
+        string transactionString();
 
     }
 }

@@ -15,16 +15,16 @@ namespace Boolean.CSharp.Test
     {
         private Bank _bank;
         private Customer _customer1;
-        private Customer ;
+        private Customer _customer2;
         private CurrentAccount _currentAccount1;
 
         [SetUp]
         public void Setup()
         {
             _bank = new Bank();
-            _customer1 = new Customer();
+            _customer1 = new Customer("Nigel");
 
-            _currentAccount1 = _customer1.CreateAccount(AccountType.Current, Branch.Oslo) as CurrentAccount;
+            _currentAccount1 = _customer1.CreateAccount(AccountType.Current, Branch.Oslo, "Salary") as CurrentAccount;
 
             _bank.AddCustomer(_customer1);
         }
@@ -46,7 +46,9 @@ namespace Boolean.CSharp.Test
         {
             OverdraftRequest request1 = _currentAccount1.RequestOverdraft(1000);
 
-            request1.Approve(Role.Customer);
+
+            Assert.Throws<InvalidOperationException>(() => request1.Approve(Role.Customer));
+
             Assert.That(_currentAccount1.GetOverdraftLimit(), Is.EqualTo(0));
             request1.Approve(Role.Manager);
             Assert.That(_currentAccount1.GetOverdraftLimit(), Is.EqualTo(1000));

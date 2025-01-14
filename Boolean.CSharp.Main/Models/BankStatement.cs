@@ -18,7 +18,12 @@ namespace Boolean.CSharp.Main.Models
 
         public string printStatement()
         {
-            throw new NotImplementedException();
+            string statement = "date \r || credit \r || debit \r || balance \n";
+            foreach (ITransaction transaction in Transactions)
+            {
+                statement += transaction.transactionString() + "\n";
+            }
+            return statement;
         }
     }
 }

@@ -10,6 +10,7 @@ namespace Boolean.CSharp.Main.Models.Accounts
 {
     public interface IAccount
     {
+
         string AccountNumber { get; set; }
         string AccountName { get; set; }
         Branch Branch { get; set; }
@@ -17,9 +18,11 @@ namespace Boolean.CSharp.Main.Models.Accounts
         List<OverdraftRequest> OverdraftRequests { get; set; }
         List<ITransaction> Transactions { get; set; }
         public decimal GetBalance();
-        public Transaction Deposit(decimal amount);
-        public Transaction Withdraw(decimal amount);
-        public void RequestOverdraft(decimal amount);
+        public DebitTransaction Deposit(decimal amount);
+        public CreditTransaction Withdraw(decimal amount);
+        public OverdraftRequest RequestOverdraft(decimal amount);
         public decimal GetOverdraftLimit();
+
+        public BankStatement CreateBankStatement();
     }
 }

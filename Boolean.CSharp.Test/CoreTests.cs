@@ -20,13 +20,13 @@ namespace Boolean.CSharp.Test
         public void Setup()
         {
             _bank = new Bank();
-            _customer1 = new Customer();
-            _customer2 = new Customer();
+            _customer1 = new Customer("Nigel");
+            _customer2 = new Customer("Dave");
 
-            _currentAccount1 = _customer1.CreateAccount(AccountType.Current, Branch.Oslo) as CurrentAccount;
-            _savingsAccount1 = _customer1.CreateAccount(AccountType.Savings, Branch.Oslo) as SavingsAccount;
-            _currentAccount2 = _customer2.CreateAccount(AccountType.Current, Branch.Trondheim) as CurrentAccount;
-            _savingsAccount2 = _customer2.CreateAccount(AccountType.Savings, Branch.Trondheim) as SavingsAccount;
+            _currentAccount1 = _customer1.CreateAccount(AccountType.Current, Branch.Oslo, "Salary") as CurrentAccount;
+            _savingsAccount1 = _customer1.CreateAccount(AccountType.Savings, Branch.Oslo, "Pension") as SavingsAccount;
+            _currentAccount2 = _customer2.CreateAccount(AccountType.Current, Branch.Trondheim, "Salary") as CurrentAccount;
+            _savingsAccount2 = _customer2.CreateAccount(AccountType.Savings, Branch.Trondheim, "Luxury") as SavingsAccount;
 
             _bank.AddCustomer(_customer1);
             _bank.AddCustomer(_customer2);
@@ -43,7 +43,8 @@ namespace Boolean.CSharp.Test
             Assert.IsNotNull(_customer1);
             Assert.IsNotNull(_customer2);
             Assert.That(_customer1.Accounts.Count, Is.EqualTo(2));
-            Assert.That(_customer2.Accounts.First(), Is.EqualTo(_currentAccount1));
+            Assert.That(_customer2.Accounts.First(), Is.EqualTo(_currentAccount2));
+            Assert.That(_bank.Customers.Count, Is.EqualTo(2));
         }
 
         [Test]
@@ -54,7 +55,7 @@ namespace Boolean.CSharp.Test
 
             Assert.That(_currentAccount1.Transactions.Count, Is.EqualTo(2));
             Assert.That(_currentAccount1.Transactions.First().Amount, Is.EqualTo(1000));
-            Assert.That(_currentAccount1.Transactions.Last().Amount, Is.EqualTo(-500));
+            Assert.That(_currentAccount1.Transactions.Last().Amount, Is.EqualTo(500));
         }
 
         [Test]

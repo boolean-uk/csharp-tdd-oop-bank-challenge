@@ -10,41 +10,62 @@ namespace Boolean.CSharp.Main.Models.Accounts
 {
     public class CurrentAccount : IAccount
     {
-        public string AccountNumber { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string AccountName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public Branch Branch { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public List<OverdraftRequest> OverdraftRequests { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public List<ITransaction> Transactions { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public List<BankStatement> BankStatements { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public void CreateBankStatement()
+        public CurrentAccount(Branch branch, string accountName)
         {
-            throw new NotImplementedException();
+            Branch = branch;
+            AccountName = accountName;
+            AccountNumber = Guid.NewGuid().ToString();
+            Transactions = new List<ITransaction>();
+            BankStatements = new List<BankStatement>();
+            OverdraftRequests = new List<OverdraftRequest>();
         }
 
-        public Transaction Deposit(decimal amount)
-        {
-            throw new NotImplementedException();
-        }
-
+        public string AccountNumber { get; set; }
+        public string AccountName { get; set; }
+        public Branch Branch { get; set; }
+        public List<BankStatement> BankStatements { get; set; }
+        public List<OverdraftRequest> OverdraftRequests { get; set; }
+        public List<ITransaction> Transactions { get; set; }
         public decimal GetBalance()
-        {
-            throw new NotImplementedException();
+        {   
+            return Transactions.Count == 0 ? 0 : Transactions.Last().Balance;
         }
-
-        public decimal GetOverdraftLimit()
+        public DebitTransaction Deposit(decimal amount)
         {
-            throw new NotImplementedException();
+            decimal balance = Transactions.Count == 0 ? 0 : Transactions.Last().Balance;
+            DebitTransaction transaction = new DebitTransaction(amount, balance);
+            Transactions.Add(transaction);
+            return transaction;
         }
-
+        public CreditTransaction Withdraw(decimal amount)
+        {
+            decimal balance = Transactions.Count == 0 ? 0 : Transactions.Last().Balance;
+            CreditTransaction transaction = new CreditTransaction(amount, balance);
+            Transactions.Add(transaction);
+            return transaction;
+        }
         public OverdraftRequest RequestOverdraft(decimal amount)
         {
-            throw new NotImplementedException();
+            OverdraftRequest request = new OverdraftRequest(amount);
+            OverdraftRequests.Add(request);
+            return request;
+        }
+        public decimal GetOverdraftLimit()
+        {
+            if(OverdraftRequests.Where(x => x.Approved).Count() == 0)
+            {
+                return 0;
+            }
+
+            return OverdraftRequests.Where(x => x.Approved).Last().Amount;
         }
 
-        public Transaction Withdraw(decimal amount)
+        public BankStatement CreateBankStatement()
         {
-            throw new NotImplementedException();
+           BankStatement statement = new BankStatement(Transactions);
+            BankStatements.Add(statement);
+            return statement;
         }
     }
-}
+    }

@@ -12,9 +12,26 @@ namespace Boolean.CSharp.Main.Models
         public string Id { get; set; }
         public string Name { get; set; }
         public List<IAccount> Accounts { get; set; }
-        public IAccount CreateAccount(AccountType current, Branch oslo)
+        public Customer(string name)
         {
-            throw new NotImplementedException();
+            Name = name;
+            Accounts = new List<IAccount>();
+            Id = Guid.NewGuid().ToString();
+        }
+        public IAccount CreateAccount(AccountType current, Branch branch, string accountName)
+        {
+            IAccount account;
+            if (current == AccountType.Current)
+            {
+                account = new CurrentAccount(branch, accountName);
+            }
+            else
+            {
+                account = new SavingsAccount(branch, accountName);
+            }
+
+            Accounts.Add(account);
+            return account;
         }
     }
 }

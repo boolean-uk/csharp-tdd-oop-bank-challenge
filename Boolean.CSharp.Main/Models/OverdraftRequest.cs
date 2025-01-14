@@ -11,7 +11,11 @@ namespace Boolean.CSharp.Main.Models
         public bool Approved { get; set; }
         public decimal Amount { get; set; }
         public DateTime Date { get; set; }
-
+        public OverdraftRequest(decimal amount)
+        {
+            Amount = amount;
+            Date = DateTime.Now;
+        }
         public void Approve(Role role)
         {
             if(role == Role.Manager)
