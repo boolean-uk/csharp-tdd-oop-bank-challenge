@@ -35,7 +35,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestCreateSavingAccount()
         {
-
+            Assert.That(_savingAccount, Is.Not.Null);
         }
 
         [Test]
