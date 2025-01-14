@@ -1,0 +1,47 @@
+@startuml
+
+interface IAccount {
++Guid AccountNumber
++Branch Branch
+}
+
+enum Branch {
+
+}
+
+class CurrentAccount {
+
+}
+
+class Customer {
+
+}
+
+class Engineer {
+
+}
+
+class Manager {
+
+}
+
+class SavingsAccount {
+
+}
+
+interface IUser {
+
+}
+
+''''''''''''''''''''''''''''''''''''''''
+
+IAccount <|-- CurrentAccount
+IAccount <|-- SavingsAccount
+
+Branch <|-- Account
+
+IUser <|-- Customer
+IUser <|-- Engineer
+IUser <|-- Manager
+
+@enduml
