@@ -15,21 +15,31 @@ public abstract class Account
         _accountHolder = accountHolder;
     }
     
-    public bool Withdraw(decimal amount)
+    public bool Withdraw(decimal amount, DateTime date)
     {
         if (Balance < amount)
         {
             return false;
         }
         
-        _transactions.Add(new Transaction(amount, TransactionType.Withdrawal));
+        _transactions.Add(new Transaction(amount, TransactionType.Withdrawal, date));
         return true;
+    }
+    
+    public bool Deposit(decimal amount, DateTime date)
+    {
+        _transactions.Add(new Transaction(amount, TransactionType.Deposit, date));
+        return true;
+    }
+    
+    public bool Withdraw(decimal amount)
+    {
+        return Withdraw(amount, DateTime.Now);
     }
     
     public bool Deposit(decimal amount)
     {
-        _transactions.Add(new Transaction(amount, TransactionType.Deposit));
-        return true;
+        return Deposit(amount, DateTime.Now);
     }
 
     public override string ToString()

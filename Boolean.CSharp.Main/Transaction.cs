@@ -7,11 +7,11 @@ public class Transaction
     public decimal Amount { get; private set; }
     public TransactionType TransactionType { get; private set; }
 
-    public Transaction(decimal amount, TransactionType transactionType)
+    public Transaction(decimal amount, TransactionType transactionType, DateTime date)
     {
         TransactionType = transactionType;
         Id = Guid.NewGuid();
-        Date = DateTime.Now;
+        Date = date;
         Amount = amount;
     }
 }
