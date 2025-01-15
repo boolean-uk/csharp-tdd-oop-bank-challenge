@@ -18,14 +18,14 @@ namespace Boolean.CSharp.Test
             Customer customer1 = new Customer("Customer 1", branch);
             Customer customer2 = new Customer("Customer 2", branch);
 
-            Assert.AreEqual("customer1", customer1.CustomerId());
-            Assert.AreEqual("customer2", customer2.CustomerId());
+            Assert.AreEqual("Customer 1", customer1.GetCustomerId);
+            Assert.AreEqual("Customer 2", customer2.GetCustomerId);
 
-            Assert.AreNotEqual("customer2", customer1.CustomerId());
+            Assert.AreNotEqual("Customer 2", customer1.GetCustomerId);
 
-            Assert.AreEqual(branch, customer1.CurrentAccount().Branch());
+            Assert.AreEqual(branch, customer1.GetCurrentAccount.GetBranch);
 
-            Assert.NotNull(customer2.CurrentAccount());
+            Assert.NotNull(customer2.GetCurrentAccount);
         }
     }
 }

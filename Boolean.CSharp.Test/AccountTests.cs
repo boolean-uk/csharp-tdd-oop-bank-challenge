@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Boolean.CSharp.Main;
 
 namespace Boolean.CSharp.Test
 {
@@ -16,19 +17,19 @@ namespace Boolean.CSharp.Test
             Branch branch = new Branch("Gåsbu Branch");
             Customer customer1 = new Customer("Customer1", branch);
 
-            customer1.CurrentAccount().deposit(100);
-            Assert.AreEqual(100, customer1.CurrentAccount().Balance());
+            customer1.GetCurrentAccount.deposit(100);
+            Assert.AreEqual(100, customer1.GetCurrentAccount.Balance());
 
-            customer1.CurrentAccount().wihdraw(100);
-            Assert.AreEqual(0, customer1.CurrentAccount().Balance());
+            customer1.GetCurrentAccount.withdraw(100);
+            Assert.AreEqual(0, customer1.GetCurrentAccount.Balance());
 
             // check if account is negative
-            customer1.CurrentAccount().wihdraw(100);
-            Assert.AreEqual(0, customer1.CurrentAccount().Balance());
+            customer1.GetCurrentAccount.withdraw(100);
+            Assert.AreEqual(0, customer1.GetCurrentAccount.Balance());
 
-            customer1.CurrentAccount().setOverDrawAmount(100);
-            customer1.CurrentAccount().wihdraw(100);
-            Assert.AreEqual(-100, customer1.CurrentAccount().Balance());
+            customer1.GetCurrentAccount.setOverDrawAmount(100);
+            customer1.GetCurrentAccount.withdraw(100);
+            Assert.AreEqual(-100, customer1.GetCurrentAccount.Balance());
 
         }
     }
