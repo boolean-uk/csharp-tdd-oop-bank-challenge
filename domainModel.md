@@ -10,4 +10,3 @@
 | Account        | Manager  | SetBranch()                                 | set account branch                             | account branch set to one of the valid branches                              |
 | CurrentAccount | Customer | RequestOverdraft(float amount)              | request overdraft on account by amount         | creates an RequestOverdraft object and adds it to RequestOverdraftList       |
 | CurrentAccount | Manager  | ManageOverdraftRequest(bool approve)        | approve or deny an overdraft request           | approves or denies an RequestOverdraft, removes it from RequestOverdraftList |
-| User           | Customer | SendBankStatementToPhone(string number)     | send generated bank statement to phone         | generates bank statement and sends to phone (simulated)                      |

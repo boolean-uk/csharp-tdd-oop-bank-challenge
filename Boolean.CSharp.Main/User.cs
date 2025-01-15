@@ -34,18 +34,6 @@ namespace Boolean.CSharp.Main
             return account;
         }
 
-        public string GenerateBankStatement()
-        {
-            string bankStatement = "";
-
-            return bankStatement;
-        }
-
-        public void SendBankStatementToPhone(string number)
-        {
-            string bankStatement = GenerateBankStatement();
-        }
-
         public Guid UserID { get { return _userID; } }
         public Role UserRole { get { return _userRole; } }
         public string Username { get { return _username; } }

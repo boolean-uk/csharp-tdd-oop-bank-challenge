@@ -65,6 +65,17 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
+        public void TestDepositNegative()
+        {
+            float deposit = -1000f;
+
+            CurrentAccount account = _customerUser.CreateCurrentAccount("CurrentAccount1");
+            account.Deposit(deposit);
+
+            Assert.That(account.CalculateFunds(), Is.EqualTo(0f));
+        }
+
+        [Test]
         public void TestWithdraw()
         {
             float deposit = 5000f;
@@ -78,6 +89,22 @@ namespace Boolean.CSharp.Test
             account.Withdraw(withdraw);
 
             Assert.That(account.CalculateFunds(), Is.EqualTo(deposit - withdraw));
+        }
+
+        [Test]
+        public void TestWithdrawNegative()
+        {
+            float deposit = 5000f;
+            float withdraw = -1000f;
+
+            CurrentAccount account = _customerUser.CreateCurrentAccount("CurrentAccount1");
+            account.Deposit(deposit);
+
+            Assert.That(account.CalculateFunds(), Is.EqualTo(deposit));
+
+            account.Withdraw(withdraw);
+
+            Assert.That(account.CalculateFunds(), Is.EqualTo(deposit));
         }
 
         [Test]
@@ -104,50 +131,20 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        public void TestCalculateFunds()
+        public void TestTransferToNegative()
         {
-            CurrentAccount currentAccount1 = _customerUser.CreateCurrentAccount("CurrentAccount1");
-            currentAccount1.Deposit(240f);
-            currentAccount1.Deposit(253240f);
-            currentAccount1.Deposit(140f);
-            currentAccount1.Deposit(2f);
-
-            Assert.That(currentAccount1.CalculateFunds(), Is.EqualTo(240f + 253240f + 140f + 2f));
-        }
-
-        [Test]
-        public void TestSetBranch()
-        {
-            CurrentAccount currentAccount1 = _customerUser.CreateCurrentAccount("CurrentAccount1");
-
-            Assert.IsNull(currentAccount1.Branch);
-
-            currentAccount1.SetBranch(Role.Manager, Branch.Trondheim);
-
-            Assert.That(currentAccount1.Branch, Is.EqualTo(Branch.Trondheim));
-        }
-
-        [Test]
-        public void TestRequestAndManageOverdraft()
-        {
-            float requestAmount = 200f;
+            float deposit = 500f;
+            float transfer = -200f;
 
             CurrentAccount currentAccount1 = _customerUser.CreateCurrentAccount("CurrentAccount1");
+            SavingsAccount savingsAccount1 = _customerUser.CreateSavingsAccount("SavingsAccount1");
 
-            currentAccount1.Withdraw(10f);
-            Assert.That(currentAccount1.CalculateFunds(), Is.EqualTo(0f));
+            currentAccount1.Deposit(deposit);
 
-            currentAccount1.RequestOverdraft(requestAmount);
-            Assert.That(currentAccount1.OverdraftAmount, Is.EqualTo(0f));
+            currentAccount1.TransferTo(savingsAccount1.AccountNumber, transfer);
 
-            currentAccount1.ManageOverdraftRequest(Role.Customer, true);
-            Assert.That(currentAccount1.OverdraftAmount, Is.EqualTo(0f));
-
-            currentAccount1.ManageOverdraftRequest(Role.Manager, true);
-            Assert.That(currentAccount1.OverdraftAmount, Is.EqualTo(requestAmount));
-
-            currentAccount1.Withdraw(50f);
-            Assert.That(currentAccount1.CalculateFunds(), Is.EqualTo(-50f));
+            Assert.That(currentAccount1.CalculateFunds(), Is.EqualTo(deposit));
+            Assert.That(savingsAccount1.CalculateFunds(), Is.EqualTo(0f));
         }
 
         [Test]

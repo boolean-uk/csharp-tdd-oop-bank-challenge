@@ -11,6 +11,7 @@ namespace Boolean.CSharp.Main
     {
         private bool _locked = false;
 
+        // Cannot deposit or withdraw money from SavingsAccount, only transfer to or from other accounts in the bank
         public SavingsAccount(Guid ownerID, string accountName) : base(ownerID, accountName)
         {
             

@@ -2,19 +2,22 @@
 
 abstract Account {
 +CalculateFunds()
-+TransferTo(float amount, Account account)
-+SetBranch(Branch branch)
++CalculateFundsBeforeDateTime(DateTime dateTime)
++TransferTo(Guid accountNumber, float amount)
++SetBranch(Role role, Branch branch)
++GenerateBankStatement()
 ---
 +Guid AccountNumber
-+string Owner
++string OwnerID
 +string AccountName
 +Branch? Branch
-+List<Transaction> transactions
 }
 
-class Bank {
-List<User> Users
-List<Account> Accounts
+class BankData {
+---
+{static} +List<User> Users
+{static} +List<Account> Accounts
+{static} +List<Transaction> Transactions
 }
 
 enum Branch {
@@ -28,9 +31,16 @@ class CurrentAccount {
 +Deposit(float amount)
 +Withdraw(float amount)
 +RequestOverdraft(float amount)
-+ManageOverdraftRequest(bool approve)
++ManageOverdraftRequest(Role role, bool approve)
 ---
-float OverdraftAmount
++float OverdraftAmount
++OverdraftRequest? OverdraftRequest
+}
+
+struct OverdraftRequest {
+---
++Guid Account
++float amount
 }
 
 enum Role {
@@ -57,12 +67,10 @@ struct Transaction {
 class User {
 +CreateCurrentAccount(string name)
 +CreateSavingsAccount(string name)
-+GenerateBankStatement()
-+SendBankStatementToPhone(string number)
 ---
++Guid UserID
 +Role Role
 +string Username
-
 }
 
 ''''''''''''''''''''''''''''''''''''''''
@@ -71,10 +79,13 @@ Account <|-- CurrentAccount
 Account <|-- SavingsAccount
 Account <|-- Transaction
 
-Bank -- User
-Bank -- Account
+BankData -- User
+BankData -- Account
+BankData -- OverdraftRequest
 
 Branch <|-- Account
+
+OverdraftRequest -- CurrentAccount
 
 Role <|-- User
 

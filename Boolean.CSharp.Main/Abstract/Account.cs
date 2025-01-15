@@ -35,6 +35,7 @@ namespace Boolean.CSharp.Main.Abstract
             return funds;
         }
 
+        // Only used when generating bank statement
         public float CalculateFundsBeforeDateTime(DateTime dateTime)
         {
             float funds = 0f;
@@ -74,6 +75,7 @@ namespace Boolean.CSharp.Main.Abstract
             BankData.Transactions.Add(transaction);
         }
 
+        // Only manager can set branch
         public void SetBranch(Role role, Branch branch)
         {
             if (role == Role.Manager)
