@@ -14,9 +14,10 @@ namespace Boolean.CSharp.Test
         [Test]
         public void branchTest()
         {
-            Branch branch = new Branch("Gåsebu Branch");
+            Branch branch = new Branch("Gåsbu Branch");
 
-            Assert.AreEqual("Gåsebu Branch", branch.Name());
+            Assert.AreEqual("Gåsbu Branch", branch.Name());
+            Assert.AreNotSame("by Branch", branch.Name());
         }
 
     }
