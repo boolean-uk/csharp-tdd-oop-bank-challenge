@@ -46,6 +46,7 @@ namespace Boolean.CSharp.Test
             CurrentAccount.Deposit(100);
             Assert.That(CurrentAccount.CalculateBalance(), Is.EqualTo(100));
         }
+        [Test]
         public void Withdraw()
         {
             Customer customer = new Customer();
