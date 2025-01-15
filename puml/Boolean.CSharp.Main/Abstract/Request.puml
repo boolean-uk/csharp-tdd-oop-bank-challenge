@@ -1,0 +1,9 @@
+@startuml
+abstract class Request {
+    + Request(account:Account)
+    + {abstract} Approve() : void
+    + {abstract} Reject() : void
+    + Approved : bool <<get>> <<set>>
+}
+Request --> "Account" Account
+@enduml

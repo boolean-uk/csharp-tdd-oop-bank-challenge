@@ -1,0 +1,5 @@
+@startuml
+interface IOverdraftable {
+    + OverdraftLimit : decimal <<get>> <<set>>
+}
+@enduml

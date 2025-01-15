@@ -1,0 +1,9 @@
+@startuml
+class Transaction {
+    + Transaction(balance:decimal, type:TransactionType, date:DateTime?)
+    + Balance : decimal <<get>> <<set>>
+}
+Transaction o-> "Id" Guid
+Transaction --> "TransactionDate" DateTime
+Transaction --> "Type" TransactionType
+@enduml

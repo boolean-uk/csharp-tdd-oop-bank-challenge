@@ -1,0 +1,7 @@
+@startuml
+class ConsoleMessage {
+    + ConsoleMessage(message:string)
+    + <<override>> SendMessage() : void
+}
+MessageProvider <|-- ConsoleMessage
+@enduml

@@ -1,0 +1,8 @@
+@startuml
+class CurrentAccount {
+    + CurrentAccount(owner:Role)
+    + OverdraftLimit : decimal <<get>> <<set>> = 1000
+}
+Account <|-- CurrentAccount
+IOverdraftable <|-- CurrentAccount
+@enduml

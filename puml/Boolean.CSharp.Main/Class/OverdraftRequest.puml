@@ -1,0 +1,11 @@
+@startuml
+class OverdraftRequest {
+    + OverdraftRequest(account:Account)
+    + Overdraft(amount:decimal) : bool
+    + <<override>> Approve() : void
+    + <<override>> Reject() : void
+    + Amount : decimal <<get>> <<set>>
+}
+Request <|-- OverdraftRequest
+IBalanceRequest <|-- OverdraftRequest
+@enduml
