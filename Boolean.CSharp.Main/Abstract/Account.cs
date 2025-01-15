@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -81,7 +82,36 @@ namespace Boolean.CSharp.Main.Abstract
 
         public string GenerateBankStatement()
         {
-            throw new NotImplementedException();
+            string bankStatement = $"\n{"date",-10} || {"credit",-8} || {"debit",-8} || {"balance",-8}\n";
+
+            IEnumerable<Transaction> transactions = BankData.Transactions;
+
+            foreach (Transaction trs in transactions.Reverse())
+            {
+                
+                if (trs.ToAccountNumber != AccountNumber && trs.FromAccountNumber != AccountNumber)
+                    continue;
+
+                string time = trs.TimeOfTransaction.Date.ToShortDateString().ToString();
+
+                string credit = "";
+                string debit = "";
+
+                if (trs.ToAccountNumber == AccountNumber)
+                {
+                    credit = trs.Amount.ToString();
+                }
+                else
+                    debit = trs.Amount.ToString();
+
+                string balance = CalculateFundsBeforeDateTime(trs.TimeOfTransaction).ToString();
+
+                bankStatement += $"{time,-10} || {credit,-8} || {debit,-8} || {balance,-8}\n";
+            }
+
+            Console.WriteLine(bankStatement);
+
+            return bankStatement;
         }
 
         public Guid AccountNumber { get; set; } = Guid.NewGuid();

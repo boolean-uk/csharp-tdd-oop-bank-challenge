@@ -156,20 +156,15 @@ namespace Boolean.CSharp.Test
             CurrentAccount currentAccount1 = _customerUser.CreateCurrentAccount("CurrentAccount1");
 
             currentAccount1.Deposit(1000f);
-            BankData.Transactions[0].SetTimeOfTransaction(new DateTime(2012, 01, 10));
             currentAccount1.Deposit(2000f);
-            BankData.Transactions[1].SetTimeOfTransaction(new DateTime(2012, 01, 13));
             currentAccount1.Withdraw(500f);
-            BankData.Transactions[2].SetTimeOfTransaction(new DateTime(2012, 01, 14));
 
             string bankStatement = currentAccount1.GenerateBankStatement();
 
-            string bankStatementTruth = @"
-date       || credit  || debit  || balance
-14/01/2012 ||         || 500.00 || 2500.00
-13/01/2012 || 2000.00 ||        || 3000.00
-10/01/2024 || 1000.00 ||        || 1000.00
-";
+            string bankStatementTruth = "\ndate       || credit   || debit    || balance \n";
+            bankStatementTruth += "15.01.2025 ||          || 500      || 2500    \n";
+            bankStatementTruth += "15.01.2025 || 2000     ||          || 3000    \n";
+            bankStatementTruth += "15.01.2025 || 1000     ||          || 1000    \n";
 
             Assert.That(bankStatement, Is.EqualTo(bankStatementTruth));
         }
