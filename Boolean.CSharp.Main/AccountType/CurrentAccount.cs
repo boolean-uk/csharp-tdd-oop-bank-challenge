@@ -9,19 +9,35 @@ namespace Boolean.CSharp.Main.AccountType
 {
     public class CurrentAccount : IAccount
     {
+        public List<Transaction> transactions { get; set; }
         public Customer customer { get; set; }
         public double balance { get; set; }
 
+        public CurrentAccount(Customer customer)
+        {
+            this.transactions = new List<Transaction>();
+            this.customer = customer;
+            this.balance = 0;
+        }
+
         public double deposit(double amount)
         {
-            // TODO
-            return 0.0;
+            if (amount > 0)
+            {
+            this.balance += amount;
+                transactions.Add(new Transaction(amount));
+            }
+            return this.balance;
         }
 
         public double withdraw(double amount)
         {
-            // TODO
-            return 0.0;
+            if(this.balance >= amount && amount > 0)
+            {
+                this.balance -= amount;
+                transactions.Add(new Transaction(-amount));
+            }
+            return this.balance;
         }
     }
 }

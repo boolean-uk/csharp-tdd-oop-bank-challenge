@@ -1,4 +1,5 @@
-﻿using System.Security.Principal;
+﻿using System.Security.Cryptography.X509Certificates;
+using System.Security.Principal;
 using Boolean.CSharp.Main.AccountType;
 using NUnit.Framework;
 
@@ -7,51 +8,71 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class CoreTests
     {
-        public Bank bank { get; set; }
+        public Bank Bank { get; set; }
+        public Customer Customer { get; set; }
         [SetUp]
         public void SetUp()
         {
-            bank = new Bank();
+            Bank = new Bank();
+            Customer = new Customer("John", Bank);
+            Bank.CustomerList.Add(Customer);
         }
 
         [Test]
         public void CreateNewAccountOnExistingCustomerTest()
         {
-            Customer customer = new Customer(1, "John", bank);
-            bank.CustomerList.Add(customer);
-            IAccount account = bank.CreateAccount(customer, "C");
-            Assert.That(account, Is.EqualTo(customer.Account[0]));
-            Assert.Equals(account.Type, CurrentAccount.Type);
+            IAccount account = Bank.CreateAccount(Customer, 'c');
+            Assert.That(account, Is.EqualTo(Customer.accounts[0]));
+            Assert.AreEqual(account.GetType(), typeof(CurrentAccount));
         }
 
         [Test]
         public void createNewAccountOnNonExistingCustomerTest()
         {
-            Customer customer = new Customer(1, "John", bank);
-            IAccount account = bank.CreateAccount(customer, "S");
-            Assert.That(account, Is.EqualTo(customer.Account[0]));
-            Assert.Equals(account.Type, SavingsAccount.Type);
+            IAccount account = Bank.CreateAccount(Customer, 's');
+            Assert.That(account, Is.EqualTo(Customer.accounts[0]));
+            Assert.AreEqual(account.GetType(), typeof(SavingsAccount));
         }
 
         [Test]
         public void DepositAmountToSavingsAccountTest()
         {
-            Customer customer = new Customer(1, "John", bank);
-            bank.CustomerList.Add(customer);
-            IAccount customerAccount = bank.CreateAccount(customer, "S");
-            double depositBalance = customer.Deposit(customerAccount, 100);
-            Assert.Equals(customerAccount.Balance, depositBalance);
+            IAccount customerAccount = Bank.CreateAccount(Customer, 's');
+            double depositBalance = Customer.Deposit(customerAccount, 100);
+            Assert.AreEqual(customerAccount.balance, depositBalance);
         }
 
         [Test]
         public void WithDrawFromSavingsAccount()
         {
-            Customer customer = new Customer(1, "John", bank);
-            bank.CustomerList.Add(customer);
-            IAccount customerAccount = bank.CreateAccount(customer, "S");
-            customer.deposit(customerAccount, 100);
-            double withdrawBalance = customer.Withdraw(customerAccount, 90);
-            Assert.Equals(customerAccount.Balance, withdrawBalance);
+            IAccount customerAccount = Bank.CreateAccount(Customer, 's');
+            Customer.Deposit(customerAccount, 100);
+            double withdrawBalance = Customer.Withdraw(customerAccount, 90);
+            Assert.AreEqual(customerAccount.balance, withdrawBalance);
+        }
+
+        [Test]
+        public void AttemptWithdrawNegativeNumberTest()
+        {
+            IAccount customerAccount = Bank.CreateAccount(Customer, 'c');
+            Customer.Deposit(customerAccount, 200);
+            Customer.Withdraw(customerAccount, -200);
+            Assert.AreEqual(customerAccount.balance, 200);
+            Assert.AreEqual(customerAccount.transactions.Count, 1);
+        }
+
+        [Test]
+        public void TransactionsAddsUpTest()
+        {
+            IAccount customerAccount = Bank.CreateAccount(Customer, 's');
+            Customer.Deposit(customerAccount, 100);     // 100
+            Customer.Deposit(customerAccount, 200);     // 300
+            Customer.Deposit(customerAccount, 300);     // 600
+            Customer.Deposit(customerAccount, 200);     // 800
+            Assert.AreEqual(customerAccount.balance, customerAccount.transactions.Sum(x => x.amount));
+
+            Customer.Withdraw(customerAccount, 300);    // 500
+            Assert.AreEqual(customerAccount.balance, customerAccount.transactions.Sum(x => x.amount));
         }
 
 

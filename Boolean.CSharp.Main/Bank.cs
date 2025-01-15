@@ -13,16 +13,33 @@ namespace Boolean.CSharp.Test
             Accounts = new List<IAccount>();
         }
 
-        public IAccount CreateAccount(Customer customer, string type)
+        public IAccount CreateAccount(Customer customer, char type)
         {
-            // TODO
-            return new SavingsAccount(new Customer("John"));
+            if(type == 's')
+            {
+                SavingsAccount newAccount = new SavingsAccount(customer);
+                customer.accounts.Add(newAccount);
+                Accounts.Add(newAccount);
+                return newAccount;
+            }
+            else if(type == 'c')
+            {
+                CurrentAccount newAccount = new CurrentAccount(customer);
+                customer.accounts.Add(newAccount);
+                Accounts.Add(newAccount);
+                return newAccount;
+
+            } else {
+                throw new InvalidDataException("Type (char) is not valid");
+            }
         }
 
+        /*
         public Customer FindOrCreateCustomer(Customer customer)
         {
             // TODO
-            return new Customer("John");
+            return new Customer("John", this);
         }
+        */
     }
 }

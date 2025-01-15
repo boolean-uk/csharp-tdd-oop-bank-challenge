@@ -8,18 +8,18 @@ namespace Boolean.CSharp.Main
 {
     public class Transaction
     {
-        public DateTime Date { get; set; }
+        public DateTime date { get; set; }
         public double amount { get; set; }
 
-        public Transaction(DateTime date, double amount)
+        public Transaction(double amount)
         {
-            Date = date;
+            this.date = DateTime.Now;
             this.amount = amount;
         }
 
         public override string ToString()
         {
-            return $"{Date}: £{amount}";
+            return $"{date}: £{amount}";
         }
     }
 }

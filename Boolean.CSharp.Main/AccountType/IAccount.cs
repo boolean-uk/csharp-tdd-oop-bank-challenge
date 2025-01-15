@@ -9,6 +9,7 @@ namespace Boolean.CSharp.Main.AccountType
 {
     public interface IAccount
     {
+        List<Transaction> transactions { get; set; }
         Customer customer { get; set; }
         double balance { get; set; }
         double deposit(double amount);
