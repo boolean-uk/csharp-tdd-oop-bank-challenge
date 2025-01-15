@@ -48,7 +48,6 @@ struct Transaction {
 +Account? FromAccount
 +float Amount
 +DateTime TimeOfTransaction
-+string Message
 }
 
 class User {
