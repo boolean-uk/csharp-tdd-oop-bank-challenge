@@ -1,5 +1,5 @@
 ﻿using System.Security.Principal;
-using Boolean.CSharp.Main;
+using Boolean.CSharp.Main.AccountType;
 using NUnit.Framework;
 
 namespace Boolean.CSharp.Test
@@ -19,7 +19,7 @@ namespace Boolean.CSharp.Test
         {
             Customer customer = new Customer(1, "John", bank);
             bank.CustomerList.Add(customer);
-            Account account = bank.CreateAccount(customer, "C");
+            IAccount account = bank.CreateAccount(customer, "C");
             Assert.That(account, Is.EqualTo(customer.Account[0]));
             Assert.Equals(account.Type, CurrentAccount.Type);
         }
@@ -28,7 +28,7 @@ namespace Boolean.CSharp.Test
         public void createNewAccountOnNonExistingCustomerTest()
         {
             Customer customer = new Customer(1, "John", bank);
-            Account account = bank.CreateAccount(customer, "S");
+            IAccount account = bank.CreateAccount(customer, "S");
             Assert.That(account, Is.EqualTo(customer.Account[0]));
             Assert.Equals(account.Type, SavingsAccount.Type);
         }
@@ -38,7 +38,7 @@ namespace Boolean.CSharp.Test
         {
             Customer customer = new Customer(1, "John", bank);
             bank.CustomerList.Add(customer);
-            Account customerAccount = bank.CreateAccount(customer, "S");
+            IAccount customerAccount = bank.CreateAccount(customer, "S");
             double depositBalance = customer.Deposit(customerAccount, 100);
             Assert.Equals(customerAccount.Balance, depositBalance);
         }
@@ -48,7 +48,7 @@ namespace Boolean.CSharp.Test
         {
             Customer customer = new Customer(1, "John", bank);
             bank.CustomerList.Add(customer);
-            Account customerAccount = bank.CreateAccount(customer, "S");
+            IAccount customerAccount = bank.CreateAccount(customer, "S");
             customer.deposit(customerAccount, 100);
             double withdrawBalance = customer.Withdraw(customerAccount, 90);
             Assert.Equals(customerAccount.Balance, withdrawBalance);
