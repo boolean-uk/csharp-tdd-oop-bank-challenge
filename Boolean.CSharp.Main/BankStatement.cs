@@ -21,7 +21,7 @@ public class BankStatement
     {
         StringBuilder sb = new StringBuilder();
 
-        sb.AppendLine(" date      || credit  || debit  || balance");
+        sb.AppendLine(" date      || credit  ||  debit  || balance");
 
         transactions.Reverse();
         transactions.ForEach(t => sb.Append(t.ToString() + "\n"));

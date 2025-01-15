@@ -4,9 +4,8 @@ using Boolean.CSharp.Main;
 using Boolean.CSharp.Main.Enums;
 using NUnit.Framework;
 
-namespace Boolean.CSharp.Main.Tests
+namespace Boolean.CSharp.Test
 {
-    [TestFixture]
     public class BankBranchTest
     {
         private BankBranch bankBranch;
@@ -32,7 +31,7 @@ namespace Boolean.CSharp.Main.Tests
         public void RemoveOverdraftRequest()
         {
             bankBranch.AddOverdraftRequest(overdraftRequest);
-            bankBranch.RemoveOverdraftRequest(overdraftRequest);
+            bankBranch.RejectOverdraftRequest(overdraftRequest);
             List<OverdraftRequest> requests = bankBranch.GetOverdraftRequests();
 
             Assert.IsFalse(requests.Contains(overdraftRequest));
