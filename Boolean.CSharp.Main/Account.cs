@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace Boolean.CSharp.Main;
 
 public abstract class Account
@@ -9,6 +11,7 @@ public abstract class Account
     
     public Guid AccountNumber => _accountNumber;
     public decimal Balance => CalculateBalance();
+    public List<Transaction> Transactions => SortTransactions();
 
     public Account(ref User accountHolder)
     {
@@ -44,7 +47,25 @@ public abstract class Account
 
     public override string ToString()
     {
-        throw new NotImplementedException();
+        var calculatedBalance = Balance;
+        StringBuilder sb = new StringBuilder();
+        var standardFormat = "{0, -10} || {1, -6} || {2, -6} || {3, -8}\n";
+        
+        sb.AppendFormat(standardFormat, "Date", "Credit", "Debit", "Balance");
+        sb.Append("------------------------------------------------\n");
+
+        foreach (var transaction in Transactions)
+        {
+            sb.AppendFormat(standardFormat,
+                transaction.Date.ToString("dd/MM/yyyy"), 
+                transaction.TransactionType == TransactionType.Deposit ? transaction.Amount : 0, 
+                transaction.TransactionType == TransactionType.Withdrawal ? transaction.Amount : 0, 
+                calculatedBalance);
+            
+            calculatedBalance += transaction.TransactionType == TransactionType.Deposit ? -transaction.Amount : transaction.Amount;
+        }
+        
+        return sb.ToString();
     }
     
     private decimal CalculateBalance()
@@ -67,5 +88,11 @@ public abstract class Account
         }
         
         return balance;
+    }
+    
+    // Sort transactions. Necessary for calculating account balance on the spot
+    private List<Transaction> SortTransactions()
+    {
+        return _transactions.OrderByDescending(t => t.Date).ToList();
     }
 }
