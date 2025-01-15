@@ -21,6 +21,12 @@ namespace Boolean.CSharp.Test
             person.CreateCurrentAccount();
             Assert.That(person.GetCurrentAccount(), Is.Not.EqualTo(null));
         }
-
+        [Test]
+        public void CreateSavingsAccount()
+        {
+            Person person = new Customer();
+            person.CreateSavingsAccount();
+            Assert.That(person.GetSavingsAccount(), Is.Not.EqualTo(null));
+        }
     }
 }
