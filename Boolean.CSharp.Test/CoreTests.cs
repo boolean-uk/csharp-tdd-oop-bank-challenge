@@ -34,8 +34,10 @@ namespace Boolean.CSharp.Test
             Iperson customer = new Customer();
             customer.CreateSavingsAccount();
             Iaccount SavingsAccount = customer.GetSavingsAccount();
+            SavingsAccount.Deposit(100);
+            SavingsAccount.Withdraw(50);
             SavingsAccount.GenerateBankStatements();
-            throw new NotImplementedException();
+            //check terminal
         }
         [Test]
         public void Deposit()

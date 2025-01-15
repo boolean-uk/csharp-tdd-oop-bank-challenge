@@ -38,7 +38,24 @@ namespace Boolean.CSharp.Main
 
         public string GenerateBankStatements()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("date                || credit             || debit                || balance                 ||");
+            history.ForEach(transaction =>
+            {
+                
+                if (transaction.type == "Withdraw")
+                {
+                    Console.WriteLine($"{DateTime.Now} ||                    || {transaction.amount}                     ||{this.CalculateBalance()}             ||");
+                }
+                else if (transaction.type == "Deposit")
+                {
+                    Console.WriteLine($"{DateTime.Now} ||{transaction.amount}                    ||                      ||{this.CalculateBalance()}             ||");
+                }
+
+
+            });
+             return "";
+
+
         }
 
         public void Withdraw(decimal amount)
@@ -46,7 +63,7 @@ namespace Boolean.CSharp.Main
             Transaction transaction = new Transaction("Withdraw", amount);
             history.Add(transaction);
         }
-
+        
 
     }
 }
