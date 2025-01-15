@@ -12,12 +12,14 @@ namespace Boolean.CSharp.Main.AccountType
         public List<Transaction> transactions { get; set; }
         public Customer customer { get; set; }
         public double balance { get; set; }
+        public double lowerBalanceLimit { get; set; }
 
         public CurrentAccount(Customer customer)
         {
             this.transactions = new List<Transaction>();
             this.customer = customer;
             this.balance = 0;
+            this.lowerBalanceLimit = 0;
         }
 
         public double deposit(double amount)
@@ -38,6 +40,19 @@ namespace Boolean.CSharp.Main.AccountType
                 transactions.Add(new Transaction(-amount));
             }
             return this.balance;
+        }
+        public string transactionListToString()
+        {
+            double total = 0;
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat("{0,-20}{1,15}{2,15}{3,15}", "date", "|| credit", "|| debit", "|| balance \n");
+            foreach (Transaction t in transactions)
+            {
+                total = total + t.amount;
+                sb.AppendFormat("{0,-20}{1,12}{2,16}{3,13}", t.date, $"|| {(t.amount > 0 ? t.amount : "   ")}", $"||{(t.amount < 0 ? t.amount : "    ")}", $"|| {total} \n");
+            }
+
+            return sb.ToString();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Security.Cryptography.X509Certificates;
 using System.Security.Principal;
+using Boolean.CSharp.Main;
 using Boolean.CSharp.Main.AccountType;
 using NUnit.Framework;
 
@@ -10,18 +11,22 @@ namespace Boolean.CSharp.Test
     {
         public Bank Bank { get; set; }
         public Customer Customer { get; set; }
+        public Branch Branch { get; set; }
         [SetUp]
         public void SetUp()
         {
             Bank = new Bank();
-            Customer = new Customer("John", Bank);
-            Bank.CustomerList.Add(Customer);
+            Branch = new Branch("Cooperations", Bank);
+            new Branch("Cooperations", Bank);
+            Bank.BranchList.Add(Branch);
+            Customer = new Customer("John", Branch);
+            Branch.CustomerList.Add(Customer);
         }
 
         [Test]
         public void CreateNewAccountOnExistingCustomerTest()
         {
-            IAccount account = Bank.CreateAccount(Customer, 'c');
+            IAccount account = Branch.CreateAccount(Customer, 'c');
             Assert.That(account, Is.EqualTo(Customer.accounts[0]));
             Assert.AreEqual(account.GetType(), typeof(CurrentAccount));
         }
@@ -29,7 +34,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void createNewAccountOnNonExistingCustomerTest()
         {
-            IAccount account = Bank.CreateAccount(Customer, 's');
+            IAccount account = Branch.CreateAccount(Customer, 's');
             Assert.That(account, Is.EqualTo(Customer.accounts[0]));
             Assert.AreEqual(account.GetType(), typeof(SavingsAccount));
         }
@@ -37,7 +42,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void DepositAmountToSavingsAccountTest()
         {
-            IAccount customerAccount = Bank.CreateAccount(Customer, 's');
+            IAccount customerAccount = Branch.CreateAccount(Customer, 's');
             double depositBalance = Customer.Deposit(customerAccount, 100);
             Assert.AreEqual(customerAccount.balance, depositBalance);
         }
@@ -45,7 +50,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void WithDrawFromSavingsAccount()
         {
-            IAccount customerAccount = Bank.CreateAccount(Customer, 's');
+            IAccount customerAccount = Branch.CreateAccount(Customer, 's');
             Customer.Deposit(customerAccount, 100);
             double withdrawBalance = Customer.Withdraw(customerAccount, 90);
             Assert.AreEqual(customerAccount.balance, withdrawBalance);
@@ -54,7 +59,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void AttemptWithdrawNegativeNumberTest()
         {
-            IAccount customerAccount = Bank.CreateAccount(Customer, 'c');
+            IAccount customerAccount = Branch.CreateAccount(Customer, 'c');
             Customer.Deposit(customerAccount, 200);
             Customer.Withdraw(customerAccount, -200);
             Assert.AreEqual(customerAccount.balance, 200);
@@ -64,7 +69,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TransactionsAddsUpTest()
         {
-            IAccount customerAccount = Bank.CreateAccount(Customer, 's');
+            IAccount customerAccount = Branch.CreateAccount(Customer, 's');
             Customer.Deposit(customerAccount, 100);     // 100
             Customer.Deposit(customerAccount, 200);     // 300
             Customer.Deposit(customerAccount, 300);     // 600

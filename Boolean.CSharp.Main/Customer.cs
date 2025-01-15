@@ -1,4 +1,5 @@
-﻿using Boolean.CSharp.Main.AccountType;
+﻿using Boolean.CSharp.Main;
+using Boolean.CSharp.Main.AccountType;
 
 namespace Boolean.CSharp.Test
 {
@@ -7,13 +8,13 @@ namespace Boolean.CSharp.Test
         public List<IAccount> accounts { get; set; }
         public Guid customerId { get; set; }
         public string name { get; set; }
-        public Bank bank { get; set; }
+        public Branch branch { get; set; }
 
-        public Customer(string name, Bank bank) {
+        public Customer(string name, Branch branch) {
             this.customerId = Guid.NewGuid();
             this.accounts = new List<IAccount>();
             this.name = name;
-            this.bank = bank;
+            this.branch = branch;
         }
 
         public double Deposit(IAccount account, double amount)

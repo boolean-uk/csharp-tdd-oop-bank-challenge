@@ -14,6 +14,7 @@ namespace Boolean.CSharp.Main.AccountType
         double balance { get; set; }
         double deposit(double amount);
         double withdraw(double amount);
+        string transactionListToString();
         
     }
 }
