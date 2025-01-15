@@ -81,3 +81,10 @@ So I can stay up to date,
 I want statements to be sent as messages to my phone.
 ```
 
+
+Own notes: 
+-Could make a collection for the overdraft
+-Give a probability to 
+-Treat it as another ouput from ur account class, send sms fex.
+-When u created an account, u want it to be located with ur city. Branch= ur place
+-

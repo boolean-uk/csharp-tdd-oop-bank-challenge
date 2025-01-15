@@ -1,4 +1,5 @@
-﻿using Boolean.CSharp.Main;
+﻿using System.Runtime.CompilerServices;
+using Boolean.CSharp.Main;
 using NUnit.Framework;
 
 namespace Boolean.CSharp.Test
@@ -6,19 +7,103 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class CoreTests
     {
-        private Core _core;
+
 
         public CoreTests()
         {
-            _core = new Core();
+
 
         }
 
         [Test]
-        public void TestQuestion1()
+        public void checkSavings()
+
         {
+            //Arrange
+
+
+            //Act
+
+
+
+            //Assert
+            
+
 
         }
+
+        [Test]
+        public void CreatingAccount()
+           
+        {
+            
+            //Arrange
+            var account1 = new Account("Declan", "Rice", Branch.London);
+
+            //Act
+            accountInfo = account1.showAccountInfo();
+
+            //Assert
+            Assert.That(accountInfo, Is.EqualTo("Declan Rice", London));
+
+
+
+        }
+        [Test]
+        public void Generatestatements()
+        {
+
+            //Arrange
+
+
+            //Act
+
+
+            //Assert
+
+        }
+        [Test]
+        public void CalculateBalance()
+        {
+            //Arrange
+
+
+            //Act
+
+
+
+            //Assert
+        }
+        [Test]
+        public void DepositOrWithdraw()
+        { 
+            //Arrange
+
+
+            //Act
+
+
+            //Assert
+        
+        
+
+        }
+        [Test]
+        public void ApproveOrRejectOverdraft()
+
+        {
+
+            //Arrange
+
+
+            //Act
+
+
+            //Assert
+        }
+
+            
+
 
     }
 }
