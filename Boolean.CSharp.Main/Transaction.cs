@@ -8,21 +8,17 @@ namespace Boolean.CSharp.Main
 {
     public class Transaction
     {
-        private decimal Amount { get; set; }
-        public decimal Balance { get; set; }
+        public decimal Amount { get; set; }
 
         public DateTime Date { get; set; }
         public TransactionType Type { get; set; }
 
-
-
-        public Transaction(decimal amount, decimal balance, TransactionType type)
+        public Transaction(decimal amount, TransactionType type)
         {
             Date = DateTime.Now;
             Amount = amount;
             Type = type;
             
-
 
 
         }

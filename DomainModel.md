@@ -9,7 +9,7 @@
 
 | Classes    | Methods/Properties     | Scenario                                                                              | Outputs                                                     |
 |------------|------------------------|---------------------------------------------------------------------------------------|-------------------------------------------------------------|
-| Account.cs | CurrentAccount()       | Creating a current account                                                            |                                                             |
+|            | CurrentAccount()       | Creating a current account                                                            |                                                             |
 |            | SavingsAccount()       | Create a savings account                                                              |                                                             |
 |            | GenerateStatement()    | Generate bank statements                                                              | String Transaction date, decimal amount and decimal balance |
 |            | DepositOrWithdraw()    | Deposit and withdraw funds                                                            |                                                             |
