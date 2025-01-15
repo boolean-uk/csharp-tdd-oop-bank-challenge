@@ -7,21 +7,16 @@ using Boolean.CSharp.Main.Enums;
 
 namespace Boolean.CSharp.Main.AccountTypes
 {
-    public class CurrentAccount : Account
+    public class CurrentAccount(string name, Branch branch) : Account(name, branch)
     {
-
         public decimal OverdraftLimit { get; set; }
-        public CurrentAccount(string name, Branch branch) : base(name, branch)
-        {
-
-        }
 
         public override void Withdraw(decimal amount)
         {
             var balance = CalculateBalance();
             if (balance >= amount || amount <= OverdraftLimit + balance)
             {
-                Transaction debit = new Transaction(amount, Enums.TransactionType.Debit);
+                Transaction debit = new Transaction(amount, TransactionType.Debit);
                 TransactionHistory.Add(debit);
             }
             else

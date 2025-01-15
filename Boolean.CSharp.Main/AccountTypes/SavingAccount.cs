@@ -7,10 +7,7 @@ using Boolean.CSharp.Main.Enums;
 
 namespace Boolean.CSharp.Main.AccountTypes
 {
-    public class SavingAccount : Account
+    public class SavingAccount(string name, Branch branch) : Account(name, branch)
     {
-        public SavingAccount(string name, Branch branch) : base(name, branch)
-        {
-        }
     }
 }

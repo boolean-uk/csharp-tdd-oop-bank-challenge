@@ -43,3 +43,24 @@ I want to approve or reject overdraft requests.
 As a customer,
 So I can stay up to date,
 I want statements to be sent as messages to my phone.
+
+
+## Domain Model 
+
+
+| Class                    | Methods/properties                                                | Scenario                                       | Outputs          |
+|--------------------------|-------------------------------------------------------------------|------------------------------------------------|------------------|
+| Account                  | Deposit(decimal amount)                                           | store money in account                         |                  |
+| Account                  | Withdraw(decimal amount)                                          | withdraw money from account                    |                  |
+| Account                  | List<Transaction> TransactionHistory                              | store transaction history                      |                  |
+| Account                  | AddTransaction(Transaction t)                                     | add a transaction to history                   |                  |
+| Account                  | GenerateBankStatement()                                           | generate bank statement                        | string           |
+| Account                  | CalculateBalance()                                                | calculate balance based on transaction history | decimal          |
+| Account                  | Branch branch                                                     | account associated with a specific branch      |                  |
+| Customer                 | RequestOverdraft(CurrentAccount account, decimal amount)          | request overdraft                              | OverdraftRequest |
+| Customer                 | List<Account> accounts                                            | hold all accounts                              |                  |
+| CurrentAccount : Account | OverdraftLimit                                                    | limit for overdraft                            |                  |
+| SavingAccount : Account  |                                                                   |                                                |                  |
+| BankManager              | HandleOverdraftRequest(OverdraftRequest request, bool isApproved) | approve or reject an overdraft request         |                  |
+| OverdraftRequest         | Account, RequestedAmount, RequestStatus                           |                                                |                  |
+| Transaction              | Date, Amount, Credit/debit                                        |                                                |                  |

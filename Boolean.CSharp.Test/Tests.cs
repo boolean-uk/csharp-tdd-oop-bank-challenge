@@ -10,8 +10,8 @@ namespace Boolean.CSharp.Test
     public class Tests
     {
 
-        private Customer _customer;
-        private BankManager _bankManager;
+        private Customer _customer = null!;
+        private BankManager _bankManager = null!;
         [SetUp]
         public void Setup()
         {
@@ -77,6 +77,10 @@ namespace Boolean.CSharp.Test
             _bankManager.HandleOverdraftRequest(request, true);
             Assert.That(request.RequestStatus, Is.EqualTo(RequestStatus.Approved));
             Assert.That(account.OverdraftLimit, Is.EqualTo(1000m));
+
+            account.Withdraw(500m);
+            Assert.That(account.CalculateBalance(), Is.EqualTo(-500m));
+
         }
 
         [Test]
