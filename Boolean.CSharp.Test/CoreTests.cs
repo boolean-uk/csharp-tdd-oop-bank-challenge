@@ -15,9 +15,11 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        public void TestQuestion1()
+        public void CreateCurrentAccount()
         {
-
+            Person person = new Customer();
+            person.CreateCurrentAccount();
+            Assert.That(person.GetCurrentAccount(), Is.Not.EqualTo(null));
         }
 
     }

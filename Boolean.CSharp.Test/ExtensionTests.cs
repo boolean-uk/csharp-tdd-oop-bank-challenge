@@ -19,12 +19,12 @@ namespace Boolean.CSharp.Test
         [Test]
         private void TestQuestion1()
         {
-
+            return; 
         }
         [Test]
         private void TestQuestion2()
         {
-
+            return;
         }
     }
 }
