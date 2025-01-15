@@ -23,14 +23,6 @@ namespace Boolean.CSharp.Test
         {
             _currentAccount = new CurrentAccount(Role.Customer);
             _savingAccount = new SavingAccount(Role.Customer);
-
-            _currentAccount.Deposit(1000, new DateTime(2012, 1, 10));
-
-            _currentAccount.Withdraw(500);
-            _currentAccount.Withdraw(500);
-            _currentAccount.Withdraw(500);
-
-
         }
 
         [Test]
@@ -58,7 +50,12 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestOverdraft()
         {
-            throw new NotImplementedException();
+            OverdraftRequest request = new OverdraftRequest(_currentAccount);
+
+            _currentAccount.Deposit(1000);
+            bool approvedOverdraft = request.Overdraft(1500);
+
+            Assert.That(approvedOverdraft, Is.True);
         }
         [Test]
         public void TestOverdraftRequestApprovalAndRejection()
