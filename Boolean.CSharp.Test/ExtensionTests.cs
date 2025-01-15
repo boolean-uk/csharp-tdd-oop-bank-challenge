@@ -60,7 +60,37 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestOverdraftRequestApprovalAndRejection()
         {
-            throw new NotImplementedException();
+            OverdraftRequest requestCurrent = new OverdraftRequest(_currentAccount);
+            OverdraftRequest requestSaving = new OverdraftRequest(_savingAccount);
+
+            _currentAccount.Deposit(1000);
+            _savingAccount.Deposit(1000);
+            bool currentOverdraft = requestCurrent.Overdraft(1500);
+            bool savingOverdraft = requestSaving.Overdraft(1500);
+
+            if (currentOverdraft)
+            {
+                requestCurrent.Approve();
+            }
+            else
+            {
+                requestCurrent.Reject();
+            }
+
+            if (savingOverdraft)
+            {
+                requestSaving.Approve();
+            }
+            else
+            {
+                requestSaving.Reject();
+            }
+
+
+            Assert.That(currentOverdraft, Is.True);
+            Assert.That(savingOverdraft, Is.False);
+            Assert.That(_currentAccount.CalculateBalance(), Is.EqualTo(-500));
+            Assert.That(_savingAccount.CalculateBalance(), Is.EqualTo(1000));
         }
         [Test]
         public void TestStatementMessage()

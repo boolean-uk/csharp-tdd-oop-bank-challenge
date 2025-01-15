@@ -25,7 +25,7 @@ namespace Boolean.CSharp.Main.Abstract
 
         public void Withdraw(decimal amount, DateTime? customDate = null) 
         {
-            if (CalculateBalance() - amount < 0)
+            if (CalculateBalance() - amount < 0 && this is not IOverdraftable)
             {
                 Console.WriteLine("You cannot withdraw more funds");
             }

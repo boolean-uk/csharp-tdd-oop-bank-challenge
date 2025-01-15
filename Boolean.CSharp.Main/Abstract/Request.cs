@@ -15,11 +15,17 @@ namespace Boolean.CSharp.Main.Abstract
     public abstract class Request
     {
         private Account _account;
+        private bool _approved;
        public Request(ref Account account) 
         {
             _account = account;
         }
 
+        public abstract void Approve();
+
+        public abstract void Reject();
+
         public Account Account { get => _account; set => _account = value; }
+        public bool Approved { get => _approved; set => _approved = value; }
     }
 }
