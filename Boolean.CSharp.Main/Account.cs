@@ -10,6 +10,17 @@ namespace Boolean.CSharp.Main
     {
 
         public List<Transaction> history = new List<Transaction>();
+        public List<Request> requests { get; set; } = new List<Request>();
+        public Person owner { get; set; }
+        public string accountID { get; set; } = ""; //only unique within one person ssn. ID is going to be current or savings
+        public decimal overdraft { get; set; } = 0;
+        public Account(string accountName, Person Owner) 
+        {
+            accountID = accountName;
+            owner = Owner;
+
+        }
+ 
         public decimal CalculateBalance()
         {
             decimal balance = 0;
@@ -38,32 +49,49 @@ namespace Boolean.CSharp.Main
 
         public string GenerateBankStatements()
         {
+            decimal balance = 0;
             Console.WriteLine("date                || credit             || debit                || balance                 ||");
             history.ForEach(transaction =>
             {
-                
                 if (transaction.type == "Withdraw")
                 {
-                    Console.WriteLine($"{DateTime.Now} ||                    || {transaction.amount}                     ||{this.CalculateBalance()}             ||");
+                    balance -= transaction.amount;
+                    Console.WriteLine($"{DateTime.Now} ||                    || {transaction.amount}                     ||{balance}             ||");
                 }
                 else if (transaction.type == "Deposit")
                 {
-                    Console.WriteLine($"{DateTime.Now} ||{transaction.amount}                    ||                      ||{this.CalculateBalance()}             ||");
+                    balance += transaction.amount;
+                    Console.WriteLine($"{DateTime.Now} ||{transaction.amount}                    ||                      ||{balance}             ||");
                 }
-
-
             });
              return "";
-
-
         }
+
+
 
         public void Withdraw(decimal amount)
         {
-            Transaction transaction = new Transaction("Withdraw", amount);
-            history.Add(transaction);
-        }
-        
+            //fetch the overdraft requests
+            owner.GetRequestResponse();
+            if ((CalculateBalance() + overdraft) >= amount)
+            {
+                Transaction transaction = new Transaction("Withdraw", amount);
+                history.Add(transaction);
+            }
 
+        }
+        public Request RequestOverdraft(decimal amount, string accountID)
+        {
+            Request request = new Request("Overdraft", amount, owner.ssn ,accountID);
+            requests.Add(request);
+            return request;
+            
+
+        }
+
+        public string GetAccountID()
+        {
+            return accountID;
+        }
     }
 }

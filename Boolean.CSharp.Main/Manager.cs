@@ -8,6 +8,18 @@ namespace Boolean.CSharp.Main
 {
     public class Manager : Person, Imanager
     {
+        string ssn {  get; set; }   
+        Bank bank { get; set; }
+        List<Request> requests { get; set; }= new List<Request>();
+        public Manager(string Ssn, Bank Bank) :base(Ssn, Bank)
+        {
+            ssn = Ssn;
+            bank = Bank;
+        }
+        public void FetchRequests()
+        {
+            requests = bank.UpdateRequests();
+        }
         public string ActivateSmsStatements()
         {
             throw new NotImplementedException();
@@ -15,7 +27,8 @@ namespace Boolean.CSharp.Main
 
         public void ApproveOverdraft(Request request)
         {
-            throw new NotImplementedException();
+            bank.requests.Remove(request);
+            bank.approvedRequests.Add(request);
         }
 
         public void CreateCurrentAccount()

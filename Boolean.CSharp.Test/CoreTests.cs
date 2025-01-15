@@ -17,21 +17,24 @@ namespace Boolean.CSharp.Test
         [Test]
         public void CreateCurrentAccount()
         {
-            Person person = new Customer();
+            Bank bank = new Bank();
+            Iperson person = new Customer("11101010111", bank);
             person.CreateCurrentAccount();
             Assert.That(person.GetCurrentAccount(), Is.Not.EqualTo(null));
         }
         [Test]
         public void CreateSavingsAccount()
         {
-            Person person = new Customer();
+            Bank bank = new Bank();
+            Iperson person = new Customer("11101010111", bank);
             person.CreateSavingsAccount();
             Assert.That(person.GetSavingsAccount(), Is.Not.EqualTo(null));
         }
         [Test]
         public void GenerateBankStatements()
         {
-            Iperson customer = new Customer();
+            Bank bank = new Bank();
+            Iperson customer = new Customer("11101010111",bank);
             customer.CreateSavingsAccount();
             Iaccount SavingsAccount = customer.GetSavingsAccount();
             SavingsAccount.Deposit(100);
@@ -42,7 +45,8 @@ namespace Boolean.CSharp.Test
         [Test]
         public void Deposit()
         {
-            Customer customer = new Customer();
+            Bank bank = new Bank();
+            Iperson customer = new Customer("11101010111", bank);
             customer.CreateCurrentAccount();
             Iaccount CurrentAccount = customer.GetCurrentAccount();
             CurrentAccount.Deposit(100);
@@ -51,12 +55,39 @@ namespace Boolean.CSharp.Test
         [Test]
         public void Withdraw()
         {
-            Customer customer = new Customer();
+            Bank bank = new Bank();
+            Iperson customer = new Customer("11101010111", bank);
             customer.CreateCurrentAccount();
             Iaccount CurrentAccount = customer.GetCurrentAccount();
             CurrentAccount.Deposit(100);
             CurrentAccount.Withdraw(50);
             Assert.That(CurrentAccount.CalculateBalance(), Is.EqualTo(50));
+        }
+        [Test]
+        public void RequestOverdraft()
+        {
+            Bank bank = new Bank();
+            Iperson customer = new Customer("11101010111", bank);
+            Manager manager = new Manager("22222222222", bank );
+            customer.CreateCurrentAccount();
+            //request overdraft
+            Iaccount account = customer.GetCurrentAccount();
+            Request request = account.RequestOverdraft(10000, account.GetAccountID());
+            manager.ApproveOverdraft(request);
+            account.Withdraw(1000);
+            Assert.That(account.CalculateBalance(), Is.EqualTo((decimal)-1000));
+        }
+        [Test]
+        public void RequestOverdraft2()
+        {
+            Bank bank = new Bank();
+            Iperson customer = new Customer("11101010111", bank);
+            Manager manager = new Manager("22222222222", bank);
+            customer.CreateCurrentAccount();
+            //request overdraft
+            Iaccount account = customer.GetCurrentAccount();
+            account.Withdraw(1000);
+            Assert.That(account.CalculateBalance(), Is.EqualTo(0));
         }
     }
 }

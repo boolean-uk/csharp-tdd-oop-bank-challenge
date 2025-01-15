@@ -11,9 +11,11 @@ namespace Boolean.CSharp.Main
         public void CreateCurrentAccount();
         public void CreateSavingsAccount();
         public string ActivateSmsStatements();
-        public Request RequestOverdraft();
+      
         public Iaccount GetCurrentAccount();
-        public Iaccount GetSavingsAccount();    
+        public Iaccount GetSavingsAccount();
+        public void GetRequestResponse();
+
 
     }
 }

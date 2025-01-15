@@ -8,5 +8,14 @@ namespace Boolean.CSharp.Main
 {
     public class Customer : Person
     {
+
+
+        public Customer(string Ssn, Bank Bank) : base(Ssn,Bank)
+        {
+
+        }
+        
+        
+
     }
 }
