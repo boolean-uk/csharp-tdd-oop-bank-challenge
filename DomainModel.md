@@ -1,0 +1,10 @@
+| Classes                      | Methods/Properties                                  | Scenario                                                                  | Outputs                                  |
+|------------------------------|-----------------------------------------------------|---------------------------------------------------------------------------|------------------------------------------|
+| User.cs                      | CreateAccount()                                     | Creates a new Account for the user                                        | --                                       |
+| User.cs                      | CreateSavingAccount()                               | Creates new SavingAccount for the user                                    | --                                       |
+| Account.cs /SavingAccount.cs | Deposit(decimal money)                              | Adds money into the account                                               | --                                       |
+| Account.cs /SavingAccount.cs | Withdraw(decimal money)                             | Takes money out of the account as long as balance will not be negative    | bool true if successful                  |
+| Account.cs /SavingAccount.cs | OverdraftRequest(decimal money)                     | Adds request for Overdraft which is withdraw that allows negative balance | --                                       |
+| Account.cs /SavingAccount.cs | OverdraftApproval(bool admin, bool accept, Guid id) | Adds Overdraft request into transaction if you have authority and accepts | bool true if successful                  |
+| Account.cs /SavingAccount.cs | Total()                                             | Finds total balance in account                                            | decimal which adds together transactions |
+| Account.cs /SavingAccount.cs | BankStatement()                                     | Prints string with list of transactions and balance                       | string like in image of README           |
