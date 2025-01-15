@@ -28,5 +28,15 @@ namespace Boolean.CSharp.Test
             person.CreateSavingsAccount();
             Assert.That(person.GetSavingsAccount(), Is.Not.EqualTo(null));
         }
+        [Test]
+        public void GenerateBankStatements()
+        {
+            Iperson customer = new Customer();
+            customer.CreateSavingsAccount();
+            Iaccount SavingsAccount = customer.GetSavingsAccount();
+            SavingsAccount.GenerateBankStatements();
+            throw new NotImplementedException();
+        }
+        
     }
 }

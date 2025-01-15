@@ -9,6 +9,7 @@ namespace Boolean.CSharp.Main
     public abstract class Person : Iperson
     {
         public Iaccount? CurrentAccount { get; set; } 
+        public Iaccount? SavingsAccount { get; set; }   
 
         public string ActivateSmsStatements()
         {
@@ -25,9 +26,12 @@ namespace Boolean.CSharp.Main
         }
         public void CreateSavingsAccount()
         {
-            throw new NotImplementedException();
+            SavingsAccount= new Account();
         }
-
+        public Iaccount? GetSavingsAccount()
+        {
+            return SavingsAccount;
+        }
         public string GenerateBankStatements()
         {
             throw new NotImplementedException();

@@ -10,9 +10,10 @@ namespace Boolean.CSharp.Main
     {
         public void CreateCurrentAccount();
         public void CreateSavingsAccount();
-        public string GenerateBankStatements();
         public string ActivateSmsStatements();
         public Request RequestOverdraft();
         public Iaccount GetCurrentAccount();
+        public Iaccount GetSavingsAccount();    
+
     }
 }

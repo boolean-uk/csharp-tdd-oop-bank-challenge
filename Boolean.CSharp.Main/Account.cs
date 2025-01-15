@@ -18,6 +18,11 @@ namespace Boolean.CSharp.Main
             throw new NotImplementedException();
         }
 
+        public string GenerateBankStatements()
+        {
+            throw new NotImplementedException();
+        }
+
         public void Withdraw()
         {
             throw new NotImplementedException();

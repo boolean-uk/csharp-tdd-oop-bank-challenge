@@ -11,6 +11,6 @@ namespace Boolean.CSharp.Main
         public void Deposit();
         public void Withdraw();
         public void CalculateBalance();
-
+        public string GenerateBankStatements();
     }
 }
