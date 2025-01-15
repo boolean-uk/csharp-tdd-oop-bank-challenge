@@ -62,7 +62,12 @@ I want to utilze Inheritence
 | 10              | Bank | AccountDictionary            | allows for polymorphism  | allows for all accounts subclass instances to be stored in one single container |
 |              | |             |  | |
 | 1             |  CurrentAccount | inherit from Account | differentiate between Current and Saving account types |  |
-| 2             |  SavingsAccount | inherit from Account | differentiate between Current and Saving account types |  |
+| 7             |  CurrentAccount | Overdraft (prop, from IOverdraftable interface) | User does not have any money, but like to buy something anyway. | If Overdraft is setup, money will be withdrawn from that amount until limit is reached |
+| 7             |  CurrentAccount | Overdraft (prop) | Only CurrentAccount may request and use Overdraft... | other AccountTypes does not have it |
+|              | |             |  | |
+| 7,10             |  IOverdraftable | interface | defined contract required for a account to be able to overdraft | |
+|              | |             |  | |
+| 2             |  SavingsAccount | inherit from Account | differentiate between Current and Saving account types | SavingsAccount does not support overdrafting... (by my design)  |
 |              | |             |  | |
 | 11             | Account  |  Abstract class  | Will be inherited by CurrentAccount class and SavingsAccount class | |
 | 3             |  Account | AccountID (prop:int)             | To differenciate and reference account | A Personal account is created that can contain currency |
@@ -73,8 +78,7 @@ I want to utilze Inheritence
 | 4             |  Account |  Records (prop:Dictionary<Date,Record>) | Records are kept per Account | a account stores all its transaction in Records |
 | 5             |  Account |  GetBalance (prop) | User request to see account balance | the current balance is calculated based on the records and returned |
 | 6             |  Account |  Branch (prop) | Accounts belongs to a certain Branch | the branch of which a account belongs to is definied in the account |
-| 7             |  Account | Overdraft (prop) | User does not have any money, but like to buy something anyway. | If Overdraft is setup, money will be withdrawn from that amount until limit is reached |
-| 9             |  Account | RequestStatement | User wants a summary of all the transactions over a specific perio of time | a list of Records is returned |
+| 9             |  Account | RequestStatement | User wants a summary of all the transactions over a specific period of time | a list of Records is returned |
 | 9             |  Account | PresentStatements | User wants to see the Statemnt for a given time period | The statement is presented in a terminal (substitute for sms) |
 |              | |             |  | |
 | 3             | Record |  Constructor           | A record contains  all bank transactions for a account  | purpose to store records  with info regarding transactions, their dates, amounts, balance at the time of transaction |
@@ -85,5 +89,6 @@ I want to utilze Inheritence
 |              | |             |  | |
 
 
-|              | |             |  | |
-|              | |             |  | |
+<!-- | 7, 8           |  Bank | HandleOverdraftRequest | loop through all requests, lets the staff answer individually |   | -->
+<!--|              | |             |  | |-->
+<!--|              | |             |  | |-->
