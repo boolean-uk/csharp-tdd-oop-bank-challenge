@@ -22,13 +22,13 @@ namespace Boolean.CSharp.Main.Accounts
             }
         }
         public DateTime WithdrawalLock { get { return _withdrawalLock; } }
-        public SavingsAccount(string name, double withdrawalLimit, DateTime withdrawalLock, Branch branch = Branch.Trondheim) : base(name, branch)
+        public SavingsAccount(string name, double withdrawalLimit, DateTime withdrawalLock, Branch branch = Branch.Trondheim, string bankSecret = "") : base(name, branch, bankSecret)
         {
             _withdrawalLimit = withdrawalLimit;
             _withdrawalLock = withdrawalLock;
         }
 
-        public SavingsAccount(string name, double withdrawalLimit, Branch branch = Branch.Trondheim) : base(name, branch)
+        public SavingsAccount(string name, double withdrawalLimit, Branch branch = Branch.Trondheim, string bankSecret = "") : base(name, branch, bankSecret)
         {
             _withdrawalLimit = withdrawalLimit;
             _withdrawalLock = DateTime.Now;

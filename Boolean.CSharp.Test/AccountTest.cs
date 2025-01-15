@@ -15,7 +15,7 @@ namespace Boolean.CSharp.Test
     public class AccountTest
     {
         [Test]
-        public void RegularAccountTest()
+        public void TestRegularAccount()
         {
             RegularAccount account = new("Regular", Branch.Trondheim);
             Assert.That(account, Is.Not.Null);
@@ -23,7 +23,7 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        public void RegularAccountDepositTest()
+        public void TestRegularAccountDeposit()
         {
             RegularAccount account = new("Regular", Branch.Trondheim);
             double amount = 200;
@@ -37,7 +37,7 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        public void RegularAccountWithdrawTest()
+        public void TestRegularAccountWithdraw()
         {
             double depositAmount = 2000;
             double withdrawAmount = 200;
@@ -53,7 +53,7 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        public void RegularAccountBalanceTest()
+        public void TestRegularAccountBalance()
         {
             List<AccountTransaction> transactions = new List<AccountTransaction>();
             RegularAccount account = new("Regular", Branch.Trondheim);
@@ -77,7 +77,7 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        public void SavingsAccountTest()
+        public void TestSavingsAccount()
         {
             SavingsAccount account = new("Savings", 500, Branch.Trondheim);
             Assert.That(account, Is.Not.Null);
@@ -87,7 +87,7 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        public void SavingsAccountWithdrawalLimitTest()
+        public void TestSavingsAccountWithdrawalLimit()
         {
             DateTime withdrawalLock = DateTime.Now.AddDays(1);
             SavingsAccount account = new("Savings", 500, Branch.Trondheim);
@@ -104,7 +104,7 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        public void SavingsAccountWithdrawTest()
+        public void TestSavingsAccountWithdraw()
         {
             double withdrawalLimit = 500;
             double depositAmount = 2000;

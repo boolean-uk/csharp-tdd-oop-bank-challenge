@@ -10,7 +10,7 @@ namespace Boolean.CSharp.Main.Accounts
 {
     public class RegularAccount : Account
     {
-        public RegularAccount(string name, Branch branch = Branch.Trondheim) : base(name, branch) { }
+        public RegularAccount(string name, Branch branch = Branch.Trondheim, string bankSecret = "") : base(name, branch, bankSecret) { }
 
         public override AccountTransaction Deposit(double amount)
         {
