@@ -1,0 +1,7 @@
+| Classes | Methods                                  | Scenario                                                                                      | Output                                        |
+|---------|------------------------------------------|-----------------------------------------------------------------------------------------------|-----------------------------------------------|
+| User    | CreateCurr()                             | User creates a current account                                                                | "Current account created"                     |
+| User    | CreateSavings()                          | User creates a savings account                                                                | "Savings account created"                     |
+| User    | GenerateReport()                         | User generates report with transaction dates, amounts, balance at the time of the transaction | "Date: date, Amount: double, Balance: double" |
+| User    | Deposit(Account account, double amount)  | User deposits amount into selected account                                                    | "(amount) was deposited into  (account)"      |
+| User    | Withdraw(Account account, double amount) | User withdraws amount from selected account                                                   | "(amount was withdrawn from  (account)"      |
