@@ -35,11 +35,52 @@ namespace Boolean.CSharp.Test
             string result4 = user.CreateSavingsAccount("This should not be added 2");
 
             Assert.That(result2, Is.EqualTo("Account already exists"));
-            Assert.That(result2, Is.EqualTo("Account already exists"));
+            Assert.That(result4, Is.EqualTo("Account already exists"));
             Assert.That(user.Accounts.Count, Is.EqualTo(2));
-
-
         }
 
+        [Test]
+        public void DepositFundsToCurrentAccount()
+        {
+            User user = new User("giar");
+            user.CreateCurrentAccount("My Current");
+            var curr = user.GetCurrentAccount();
+            user.Deposit(curr, 500);
+
+            Assert.That(curr.Balance, Is.EqualTo(500));
+
+        }
+        [Test]
+        public void DepositNegativeFundsToCurrentAccount()
+        {
+            User user = new User("giar");
+            user.CreateCurrentAccount("My Current");
+            var acc = user.GetCurrentAccount();
+            user.Deposit(acc, -233);
+
+            Assert.That(acc.Balance, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void WithdrawFundsFromSavingsAccount()
+        {
+            User user = new User("giar");
+            user.CreateSavingsAccount("My Savings");
+            var acc = user.GetSavingsAccount();
+            user.Deposit(acc, 500);
+            user.Withdraw(acc, 300);
+
+            Assert.That(acc.Balance, Is.EqualTo(200));
+        }
+        [Test]
+        public void WithdrawNonExistingFundsFromSavingsAccount()
+        {
+            User user = new User("giar");
+            user.CreateSavingsAccount("My Savings");
+            var acc = user.GetSavingsAccount();
+            user.Withdraw(acc, 600);
+
+            Assert.That(acc.Balance, Is.EqualTo(0));
+        }
     }
 }

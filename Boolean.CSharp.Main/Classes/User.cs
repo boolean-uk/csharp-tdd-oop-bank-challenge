@@ -25,7 +25,7 @@ namespace Boolean.CSharp.Main.Classes
                 return "Account already exists";
             }
 
-            SavingAccount savingAccount = new SavingAccount(name);
+            IAccount savingAccount = new SavingAccount(name);
             Accounts.Add(savingAccount);
             return "Successfully created account";
         }
@@ -37,22 +37,38 @@ namespace Boolean.CSharp.Main.Classes
                 return "Account already exists";
             }
 
-            CurrentAccount currentAccount = new CurrentAccount(name);
+            IAccount currentAccount = new CurrentAccount(name);
             Accounts.Add(currentAccount);
             return "Successfully created account";
         }
 
+        public IAccount? GetCurrentAccount()
+        {
+            return Accounts.FirstOrDefault(a => a.GetType() == typeof(CurrentAccount));
+        }
+        public IAccount? GetSavingsAccount()
+        {
+            return Accounts.FirstOrDefault(a => a.GetType() == typeof(SavingAccount));
+        }
+
         public void Deposit(IAccount account, double amount)
         {
-            throw new NotImplementedException();
+            if(amount < 0)
+            {
+                return;
+            }
+            account.Balance += amount;
+        }
+        public void Withdraw(IAccount account, double amount)
+        {
+            if(amount > account.Balance)
+            {
+                return;
+            }
+            account.Balance -= amount;
         }
 
         public void GenerateReport()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Withdraw(IAccount account, double amount)
         {
             throw new NotImplementedException();
         }
