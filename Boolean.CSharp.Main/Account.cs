@@ -10,9 +10,7 @@ public class Account
     public readonly string accountName;
     public readonly Guid userId;
     public BankBranch bankBranch;
-
-    private decimal _accountBalance;
-    private List<BankTransaction> _transactions;
+    public List<BankTransaction> transactions { get; private set; }
 
 
     public Account(string accountName, Guid userId, BankBranch bankBranch)
@@ -21,13 +19,12 @@ public class Account
         this.accountName = accountName;
         this.userId = userId;
         this.bankBranch = bankBranch;
-        this._accountBalance = 0;
-        this._transactions = new List<BankTransaction>();
+        this.transactions = new List<BankTransaction>();
     }
 
     public decimal getAccountBalance()
     {
-        return _transactions.Sum(t => t.transactionAmount);
+        return transactions.Sum(t => t.transactionAmount);
     }
 
     public void deposit(decimal amount)
@@ -42,7 +39,7 @@ public class Account
 
     private void newTransaction(decimal amount, TransactionTypes transactionType)
     {
-        var transaction = new BankTransaction(DateTime.Now, transactionType.ToString(), amount);
+        var transaction = new BankTransaction(DateTime.Now, transactionType, amount, getAccountBalance());
 
 
         if (transactionType == TransactionTypes.Withdrawal && getAccountBalance() < Math.Abs(amount))
@@ -56,13 +53,13 @@ public class Account
 
         else
         {
-            _transactions.Add(transaction);
+            transactions.Add(transaction);
         }
         
     }
 
     private void OnOverdraftApproved(OverdraftRequest request)
     {
-        _transactions.Add(request.transaction);
+        transactions.Add(request.transaction);
     }
 }

@@ -16,7 +16,7 @@ namespace Boolean.CSharp.Main.Tests
         public void Setup()
         {
             bankBranch = new BankBranch("test branch");
-            overdraftRequest = new OverdraftRequest(new Guid(), new BankTransaction(DateTime.Now, "asd", 0.2m));
+            overdraftRequest = new OverdraftRequest(new Guid(), new BankTransaction(DateTime.Now, TransactionTypes.Withdrawal, 0.2m, 22m));
         }
 
         [Test]
@@ -42,7 +42,7 @@ namespace Boolean.CSharp.Main.Tests
         [Test]
         public void GetOverdraftRequests()
         {
-            var overdraftRequest2 = new OverdraftRequest(new Guid(), new BankTransaction(DateTime.Now, "asdasd", 2.2m));
+            var overdraftRequest2 = new OverdraftRequest(new Guid(), new BankTransaction(DateTime.Now, TransactionTypes.Deposit, 2.2m, 22m));
             bankBranch.AddOverdraftRequest(overdraftRequest);
             bankBranch.AddOverdraftRequest(overdraftRequest2);
 

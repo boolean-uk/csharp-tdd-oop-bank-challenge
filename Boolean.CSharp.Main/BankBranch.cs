@@ -22,7 +22,7 @@ public class BankBranch
         this.overdraftRequests.Add(overdraftRequest);
     }
 
-    public void RemoveOverdraftRequest(OverdraftRequest overdraftRequest)
+    public void RejectOverdraftRequest(OverdraftRequest overdraftRequest)
     {
         this.overdraftRequests.Remove(overdraftRequest);
     }
