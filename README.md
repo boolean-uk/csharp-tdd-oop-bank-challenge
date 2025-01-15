@@ -55,4 +55,5 @@ Message API is to be determined
 Deposit
 Withdrawal
 
-![Screenshot](C:\Users\NEkse1\csharp6\csharp-tdd-oop-bank-challenge\Boolean.CSharp.Main\Images\ClassDiagram.png)
+![classDiagram.png](puml/classDiagram.png)
+
