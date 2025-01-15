@@ -73,9 +73,10 @@ I want to deposit and withdraw funds.
 | Savings.cs            | Fields - accountBalance, accountHolder, name, accountType, list of transactions, location
 | Savings.cs            | Savings(string _name, string _location)      | Initializing savings account                       | Constructor                      |
 | Savings.cs            | GetTransactions()                            | Getting a list of transactions                     | List of transactions             |
-
-                                                        
-
+| Manager.cs            | Fields - accountLocations                     
+| Manager.cs            | RespondToOverdraft(string response)          | A manager accepting or rejecting overdraft req     | True/False					   |
+| Manager.cs            | AddAccount(IAccount account)                 | Adding an account to list of accountLocations      | Void							   |
+| Manager.cs            | GetAccounts(string location)				   | Getting list of all accounts for given location    | List of all accounts for location|
 
 ## Acceptance Criteria
 
