@@ -40,3 +40,14 @@ I want to approve or reject overdraft requests.
 9. As a customer,
 So I can stay up to date,
 I want statements to be sent as messages to my phone.
+
+## Developers User Stories: 
+*stories to ensure that all requirements are fulfilled*
+
+10. As a developer,
+So that object-oriented principles are demonstrated, 
+I want to utilze Encapsulation, and Polymorphism
+
+11. As a developer,
+So that I can demonstrate usage of Inheritence in my solution,
+I want to utilze Inheritence 
