@@ -30,7 +30,10 @@ namespace Boolean.CSharp.Main
             bank.requests.Remove(request);
             bank.approvedRequests.Add(request);
         }
-
+        public void RejectOverdraft(Request request)
+        {
+            bank.requests.Remove(request);
+        }
         public void CreateCurrentAccount()
         {
             throw new NotImplementedException();

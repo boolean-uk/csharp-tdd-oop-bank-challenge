@@ -17,14 +17,44 @@ namespace Boolean.CSharp.Test
             _extension = new Extension();
         }
         [Test]
-        private void TestQuestion1()
+        public void RequestOverdraft()
         {
-            return; 
+            Bank bank = new Bank();
+            Iperson customer = new Customer("11101010111", bank);
+            Manager manager = new Manager("22222222222", bank);
+            customer.CreateCurrentAccount();
+            //request overdraft
+            Iaccount account = customer.GetCurrentAccount();
+            Request request = account.RequestOverdraft(10000, account.GetAccountID());
+            manager.ApproveOverdraft(request);
+            account.Withdraw(1000);
+            Assert.That(account.CalculateBalance(), Is.EqualTo((decimal)-1000));
         }
         [Test]
-        private void TestQuestion2()
+        public void RequestAndApproveOverdraft()
         {
-            return;
+            Bank bank = new Bank();
+            Iperson customer = new Customer("11101010111", bank);
+            Manager manager = new Manager("22222222222", bank);
+            customer.CreateCurrentAccount();
+            //request overdraft
+            Iaccount account = customer.GetCurrentAccount();
+            account.Withdraw(1000);
+            Assert.That(account.CalculateBalance(), Is.EqualTo(0));
+        }
+        [Test]
+        public void DisapproveOverdraft()
+        {
+            Bank bank = new Bank();
+            Iperson customer = new Customer("11101010111", bank);
+            Manager manager = new Manager("22222222222", bank);
+            customer.CreateCurrentAccount();
+            //request overdraft
+            Iaccount account = customer.GetCurrentAccount();
+            Request request = account.RequestOverdraft(10000, account.GetAccountID());
+            manager.RejectOverdraft(request);
+            account.Withdraw(1000);
+            Assert.That(account.CalculateBalance(), Is.EqualTo((decimal)0));
         }
     }
 }

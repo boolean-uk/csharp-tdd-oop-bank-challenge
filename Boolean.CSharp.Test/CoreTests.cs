@@ -63,31 +63,7 @@ namespace Boolean.CSharp.Test
             CurrentAccount.Withdraw(50);
             Assert.That(CurrentAccount.CalculateBalance(), Is.EqualTo(50));
         }
-        [Test]
-        public void RequestOverdraft()
-        {
-            Bank bank = new Bank();
-            Iperson customer = new Customer("11101010111", bank);
-            Manager manager = new Manager("22222222222", bank );
-            customer.CreateCurrentAccount();
-            //request overdraft
-            Iaccount account = customer.GetCurrentAccount();
-            Request request = account.RequestOverdraft(10000, account.GetAccountID());
-            manager.ApproveOverdraft(request);
-            account.Withdraw(1000);
-            Assert.That(account.CalculateBalance(), Is.EqualTo((decimal)-1000));
-        }
-        [Test]
-        public void RequestOverdraft2()
-        {
-            Bank bank = new Bank();
-            Iperson customer = new Customer("11101010111", bank);
-            Manager manager = new Manager("22222222222", bank);
-            customer.CreateCurrentAccount();
-            //request overdraft
-            Iaccount account = customer.GetCurrentAccount();
-            account.Withdraw(1000);
-            Assert.That(account.CalculateBalance(), Is.EqualTo(0));
-        }
+      
+       
     }
 }
