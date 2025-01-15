@@ -19,8 +19,20 @@ namespace Boolean.CSharp.Main
             this.transactionAmount = _transactionAmount;
             this.transactionDate = DateTime.Now;
         }
+
+        public void PrintTransactions()
+        {
+            string formattedDate = transactionDate.ToString("dd.MM.yyyy");
+            Console.WriteLine($"{formattedDate,-12}|| {"",-8} || {transactionAmount,-8:F2} || {balance:F2}");
             
-       
-       
+        }
+
+        public string PrintTransactionsString()
+        {
+            string formattedDate = transactionDate.ToString("dd.MM.yyyy");
+            return $"{formattedDate,-12}|| {"",-8} || {transactionAmount,-8:F2} || {balance:F2}";
+            
+        }
+
     }
 }

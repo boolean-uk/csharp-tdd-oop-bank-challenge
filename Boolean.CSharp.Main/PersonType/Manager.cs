@@ -9,7 +9,7 @@ namespace Boolean.CSharp.Main.PersonType
 {
     public class Manager
     {
-        string name { get; set; }
+        
         private Dictionary<string, List<IAccount>> accountLocations = new Dictionary<string, List<IAccount>>();
         public bool RespondToOverdraft(string response)
         {
@@ -23,6 +23,7 @@ namespace Boolean.CSharp.Main.PersonType
 
         public void AddAccount(IAccount account)
         {
+            // match accounts with different locations
             if (accountLocations.ContainsKey(account.location))
             {
                 accountLocations[account.location].Add(account);

@@ -13,11 +13,13 @@ namespace Boolean.CSharp.Main.PersonType
     public class Customer
     {
     
-        public decimal accountBalance { get; set; }
+     
         public string name { get; set; }
         List<IAccount> accounts = new List<IAccount>();
         string location { get; set; }
         decimal overdraftAmount { get; set; } = 0;
+
+        public List<string>statements = new List<string>();
         public Customer(string _name, string _location)
         {
             name = _name;
@@ -33,6 +35,14 @@ namespace Boolean.CSharp.Main.PersonType
         public void CreateAccount(string type, string _name)
         {
             string toLower = type.ToLower();
+
+            foreach (IAccount a in accounts)
+            {
+                if (a.name == _name)
+                {
+                    throw new Exception("You already have an account with that name");
+                }
+            }
 
             if (toLower == "checkings")
             {
@@ -81,6 +91,20 @@ namespace Boolean.CSharp.Main.PersonType
                 }
             }
 
+        public void AddStatement(IAccount account)
+        {
+            string statement = "";
+
+            statement += "date        || credit   || debit    || balance\n";
+
+            foreach (ITransaction transaction in account.GetTransactions())
+            {
+                statement += transaction.PrintTransactionsString() + "\n";
+            }
+
+            statements.Add(statement);
+        }
+
         public IAccount GetAccount(string name)
         {
             foreach (IAccount account in accounts)
@@ -110,6 +134,7 @@ namespace Boolean.CSharp.Main.PersonType
             {
                 transaction.PrintTransactions();    
             }
+            
 
         }
 
@@ -130,6 +155,7 @@ namespace Boolean.CSharp.Main.PersonType
             }
             return balance;
         }
+
 
 
     }
