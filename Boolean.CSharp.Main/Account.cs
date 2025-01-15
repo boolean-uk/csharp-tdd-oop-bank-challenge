@@ -5,7 +5,7 @@ namespace Boolean.CSharp.Main;
 public abstract class Account
 {
     private Guid _accountNumber = Guid.NewGuid();
-    private Branch _branch;
+    internal Branch _branch;
     private User _accountHolder;
     internal List<Transaction> _transactions = new List<Transaction>();
     
@@ -16,6 +16,12 @@ public abstract class Account
     public Account(ref User accountHolder)
     {
         _accountHolder = accountHolder;
+        _branch = Branch.Kristiansand;
+    }
+    public Account(ref User accountHolder, Branch branch)
+    {
+        _accountHolder = accountHolder;
+        _branch = branch;
     }
     
     public bool Withdraw(decimal amount, DateTime date)
@@ -49,7 +55,15 @@ public abstract class Account
     {
         var calculatedBalance = Balance;
         StringBuilder sb = new StringBuilder();
-        var standardFormat = "{0, -10} || {1, -6} || {2, -6} || {3, -8}\n";
+        var standardFormat = "{0, -10} || {1, -8:F2} || {2, -8:F2} || {3, -9:F2}\n";
+        
+        sb.AppendLine("---------------Account  Statement---------------");
+        sb.AppendFormat("Account holder: {0} {1} ({2})\n",
+            _accountHolder.FirstName,
+            _accountHolder.LastName,
+            _accountHolder.DOB.ToString("dd/MM/yyyy"));
+        sb.AppendFormat("Account number: ***-*-*-*-{0} ({1} Branch)\n", shortenedAccountNumber(), _branch);
+        sb.AppendLine("------------------------------------------------");
         
         sb.AppendFormat(standardFormat, "Date", "Credit", "Debit", "Balance");
         sb.Append("------------------------------------------------\n");
@@ -94,5 +108,10 @@ public abstract class Account
     private List<Transaction> SortTransactions()
     {
         return _transactions.OrderByDescending(t => t.Date).ToList();
+    }
+    
+    private string shortenedAccountNumber()
+    {
+        return _accountNumber.ToString().Substring(30, 6);
     }
 }

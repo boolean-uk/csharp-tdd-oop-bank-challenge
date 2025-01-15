@@ -8,6 +8,12 @@ public class CheckingAccount : Account, IOverdraftable
     public CheckingAccount(ref User accountHolder) : base(ref accountHolder)
     {
         OverdraftRequests = new List<OverdraftRequest>();
+        _branch = Branch.Kristiansand;
+    }
+    
+    public CheckingAccount(ref User accountHolder, Branch branch) : base(ref accountHolder, branch)
+    {
+        OverdraftRequests = new List<OverdraftRequest>();
     }
     
     public void RequestOverdraft(decimal amount)
