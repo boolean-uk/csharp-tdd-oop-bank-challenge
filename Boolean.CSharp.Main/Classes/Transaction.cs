@@ -6,21 +6,22 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main.Classes
 {
-    public class Transactions
+    public class Transaction
     {
-        public DateTime date;
+        public string date;
 
-        public double amount;
+        public double credit;
+        public double debit;
 
         public double balance;
 
 
-        public Transactions(DateTime date, double amount, double balance) 
+        public Transaction(string date, double credit, double debit, double balance) 
         {
             this.date = date;
-            this.amount = amount;
+            this.credit = credit;
+            this.debit = debit;
             this.balance = balance;
         }
-
     }
 }

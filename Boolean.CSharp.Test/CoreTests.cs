@@ -83,5 +83,24 @@ namespace Boolean.CSharp.Test
 
             Assert.That(acc.Balance, Is.EqualTo(0));
         }
+        [Test]
+        public void GenerateTransactionLog()
+        {
+            User user = new User("giar");
+            user.CreateSavingsAccount("My Savings");
+            var acc = user.GetSavingsAccount();
+
+            acc.Deposit(400);
+            acc.Deposit(300);
+            acc.Withdraw(100);
+            acc.Withdraw(50);
+            // 700 - 150 = 550
+
+            string report = acc.GenerateReport();
+
+            Assert.That(report, Is.Not.Empty);
+
+
+        }
     }
 }
