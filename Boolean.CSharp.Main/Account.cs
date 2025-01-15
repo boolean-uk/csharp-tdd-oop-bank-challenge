@@ -49,14 +49,14 @@ namespace Boolean.CSharp.Main
         {
             if (transaction.Type == TransactionType.Deposit)
             {
-                Balance += transaction.Amount;  // Deposit increases the balance
+                Balance += transaction.Amount;  
                 Console.WriteLine(Balance);
             }
             else if (transaction.Type == TransactionType.Withdrawal)
             {
                 if (Balance - transaction.Amount >= -OverdraftLimit)
                 {
-                    Balance -= transaction.Amount;  // Withdrawal decreases the balance
+                    Balance -= transaction.Amount;  
                 }
                 else 
                 {

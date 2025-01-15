@@ -57,6 +57,12 @@ namespace Boolean.CSharp.Main
                 OverdraftLimit = amount;
             return $"Overdraft request approved and changed from {OverdraftLimit} to {amount}";
         }
+
+        public decimal calculateBalance()
+        {
+            return Balance;
+        
+        }
     }
 }
 

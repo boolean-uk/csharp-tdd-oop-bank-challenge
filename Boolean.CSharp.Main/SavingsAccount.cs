@@ -47,5 +47,11 @@ namespace Boolean.CSharp.Main
             ApplyTransaction(transaction);  
         }
 
+        public decimal calculateBalance()
+        {
+            return Balance;
+
+        }
+
     }
 }

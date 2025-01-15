@@ -16,22 +16,6 @@ namespace Boolean.CSharp.Test
 
         }
 
-        [Test]
-        public void checkSavings()
-
-        {
-            //Arrange
-
-
-            //Act
-
-
-
-            //Assert
-
-
-
-        }
 
         [Test]
         public void CreatingAccount()
@@ -81,32 +65,24 @@ namespace Boolean.CSharp.Test
 
         }
 
-        public void GenerateBankStatement()
-
-        {
-            //Arrange
-            var savingsAccount = new SavingsAccount("Declan", "Rice", Branch.London);
-
-            //Act
-
-
-            //Assert
-
-
-        }
-
 
         [Test]
         public void CalculateBalance()
         {
             //Arrange
+            var savingsAccount = new SavingsAccount("Declan", "Rice", Branch.London);
+            var currentAccount = new CurrentAccount("Declan", "Rice", Branch.London);
 
 
             //Act
-
-
+            currentAccount.Deposit(500M);
+            savingsAccount.Deposit(1000M);
+            decimal savingsBalance = savingsAccount.calculateBalance();
+          
 
             //Assert
+            Assert.That(savingsBalance, Is.EqualTo(1000M));
+            
         }
         [Test]
         public void DepositO()
@@ -192,10 +168,9 @@ namespace Boolean.CSharp.Test
             string statement2 = currentAccount.GenerateStatement();
 
 
-
-
             //Assert
             Assert.NotNull(statement);
+        
 
         }
 
