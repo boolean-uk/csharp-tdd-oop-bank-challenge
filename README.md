@@ -75,6 +75,6 @@ Message API is to be determined
 | TransactionType | TransactionType|
 | Branch  | Branch|
 
-
+### Class diagram
 ![classDiagram.png](puml/classDiagram.png)
 
