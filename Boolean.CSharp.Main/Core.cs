@@ -47,7 +47,8 @@ namespace Boolean.CSharp.Main
 
             public List<Transaction> TransactionList => transactionList;
 
-            public double GetBalance
+            // Extension User Story 1
+            public virtual double GetBalance
             {
                 get
                 {

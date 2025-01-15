@@ -56,27 +56,16 @@ namespace Boolean.CSharp.Main
             }
 
             // Extension User Story 1
-            public new double GetBalance
+            public override double GetBalance
             {
                 get
                 {
-                    double calculatedBalance = 0;
-
-                    foreach (var transaction in TransactionList)
-                    {
-                        if (transaction.Type == "Deposit")
-                        {
-                            calculatedBalance += transaction.Amount;
-                        }
-                        else if (transaction.Type == "Withdrawal")
-                        {
-                            calculatedBalance -= transaction.Amount;
-                        }
-                    }
-
+                    double calculatedBalance = base.GetBalance;
                     return calculatedBalance;
                 }
+
             }
+
 
 
             // Extension User Story 3
