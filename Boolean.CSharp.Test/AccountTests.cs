@@ -32,5 +32,26 @@ namespace Boolean.CSharp.Test
             Assert.AreEqual(-100, customer1.GetCurrentAccount.Balance());
 
         }
+        [Test]
+        public void savingAccountTest()
+        {
+            Branch branch = new Branch("Gåsbu Branch");
+            Customer customer1 = new Customer("Customer1", branch);
+
+            customer1.GetSavingAccount.deposit(100);
+            Assert.AreEqual(100, customer1.GetSavingAccount.Balance());
+
+            customer1.GetSavingAccount.withdraw(100);
+            Assert.AreEqual(0, customer1.GetSavingAccount.Balance());
+
+            // check if account is negative
+            customer1.GetSavingAccount.withdraw(100);
+            Assert.AreEqual(0, customer1.GetSavingAccount.Balance());
+
+            customer1.GetSavingAccount.setOverDrawAmount(100);
+            customer1.GetSavingAccount.withdraw(100);
+            Assert.AreEqual(-100, customer1.GetSavingAccount.Balance());
+
+        }
     }
 }

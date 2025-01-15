@@ -17,14 +17,14 @@ namespace Boolean.CSharp.Main
 
         public Transaction(double amount, string type)
         {
-            this.date = DateTime.Now;
+            date = DateTime.Now;
             this.amount = amount;
             this.type = type;
         }
 
         public string Date()
         {
-            return this.date.ToString(timeFormat, CultureInfo.InvariantCulture);
+            return date.ToString(timeFormat, CultureInfo.InvariantCulture);
         }
 
         public double Amount => amount;
