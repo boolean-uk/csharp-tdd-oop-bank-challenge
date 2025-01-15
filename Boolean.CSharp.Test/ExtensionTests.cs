@@ -16,15 +16,12 @@ namespace Boolean.CSharp.Test
         {
             _extension = new Extension();
         }
-        [Test]
-        private void TestQuestion1()
-        {
 
-        }
-        [Test]
-        private void TestQuestion2()
-        {
-
-        }
+        // NOTE: All tests, including the extension tests are located in the CoreTests.cs file
+        // NOTE: All tests, including the extension tests are located in the CoreTests.cs file
+        // NOTE: All tests, including the extension tests are located in the CoreTests.cs file
+        // NOTE: All tests, including the extension tests are located in the CoreTests.cs file
+        // NOTE: All tests, including the extension tests are located in the CoreTests.cs file
+        // NOTE: All tests, including the extension tests are located in the CoreTests.cs file
     }
 }
