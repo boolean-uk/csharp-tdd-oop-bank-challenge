@@ -36,12 +36,40 @@ namespace Boolean.CSharp.Main.Abstract
         public decimal CalculateBalance()
         {
             decimal balance = 0;
-            _transactions.Sort((x, y) => x.TransactionDate.CompareTo(y.TransactionDate));
+            _transactions.Sort((x, y) => y.TransactionDate.CompareTo(x.TransactionDate)); // Descending order
             foreach (Transaction transaction in _transactions)
             {
                 balance = transaction.Type == TransactionType.Deposit ? balance + transaction.Balance : balance - transaction.Balance;
             }
             return balance;
+        }
+
+        public override string ToString()
+        {
+            var builder = new StringBuilder();
+            builder.AppendLine("date       || credit  || debit  || balance");
+
+            decimal runningBalance = 0;
+            _transactions.Sort((x, y) => x.TransactionDate.CompareTo(y.TransactionDate)); // Ascending order
+
+            // Store the transactions in a list so we can reverse it before printing the statement
+            List<string> transactions = new List<string>();
+            foreach (var transaction in _transactions)
+            {
+                decimal credit = transaction.Type == TransactionType.Deposit ? transaction.Balance : 0;
+                decimal debit = transaction.Type == TransactionType.Withdrawal ? transaction.Balance : 0;
+                runningBalance += credit - debit;
+
+                transactions.Add($"{transaction.TransactionDate:dd/MM/yyyy} || {credit,7} || {debit,6} || {runningBalance,7}");
+            }
+
+            transactions.Reverse();
+            transactions.ForEach(x =>
+            {
+                builder.AppendLine(x);
+            });
+            
+            return builder.ToString();
         }
         public Guid AccountNumber { get; set; } = Guid.NewGuid();
         public Branch Branch { get; set; }

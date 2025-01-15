@@ -1,8 +1,10 @@
-﻿using Boolean.CSharp.Main;
+﻿using System.Transactions;
+using Boolean.CSharp.Main;
 using Boolean.CSharp.Main.Abstract;
 using Boolean.CSharp.Main.Class;
 using Boolean.CSharp.Main.Enums;
 using NUnit.Framework;
+using Transaction = Boolean.CSharp.Main.Class.Transaction;
 
 namespace Boolean.CSharp.Test
 {
@@ -21,9 +23,8 @@ namespace Boolean.CSharp.Test
             _savingAccount = new SavingAccount(Role.Customer);
 
             _currentAccount.Deposit(1000);
-            _savingAccount.Deposit(5000);
 
-
+            _currentAccount.Withdraw(500);
         }
 
         [Test]
@@ -41,13 +42,18 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestBankStatement()
         {
+            List<Transaction> transactions = _currentAccount.Transactions;
+            Transaction transaction = transactions[0];
 
+            Assert.That(transaction.TransactionDate, Is.TypeOf<DateTime>());
+            Assert.That(transaction.Type, Is.TypeOf<TransactionType>());
+            Assert.That(transaction.Balance, Is.GreaterThan(0));
         }
 
         [Test]
         public void TestDepositAndWithdrawal()
         {
-
+            throw new NotImplementedException();
         }
 
     }
