@@ -8,7 +8,7 @@ namespace Boolean.CSharp.Main
 {
     public class Account : Iaccount
     {
-        public void CalculateBalance()
+        public decimal CalculateBalance()
         {
             throw new NotImplementedException();
         }

@@ -37,6 +37,23 @@ namespace Boolean.CSharp.Test
             SavingsAccount.GenerateBankStatements();
             throw new NotImplementedException();
         }
-        
+        [Test]
+        public void Deposit()
+        {
+            Customer customer = new Customer();
+            customer.CreateCurrentAccount();
+            Iaccount CurrentAccount = customer.GetCurrentAccount();
+            CurrentAccount.Deposit(100);
+            Assert.That(CurrentAccount.CalculateBalance(), Is.EqualTo(100));
+        }
+        public void Withdraw()
+        {
+            Customer customer = new Customer();
+            customer.CreateCurrentAccount();
+            Iaccount CurrentAccount = customer.GetCurrentAccount();
+            CurrentAccount.Deposit(100);
+            CurrentAccount.Withdraw(50);
+            Assert.That(CurrentAccount.CalculateBalance(), Is.EqualTo(50));
+        }
     }
 }

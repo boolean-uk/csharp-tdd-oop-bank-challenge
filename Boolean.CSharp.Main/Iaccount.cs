@@ -8,9 +8,9 @@ namespace Boolean.CSharp.Main
 {
     public interface Iaccount
     {
-        public void Deposit();
-        public void Withdraw();
-        public void CalculateBalance();
+        public void Deposit(decimal amount);
+        public void Withdraw(decimal amount);
+        public decimal CalculateBalance();
         public string GenerateBankStatements();
     }
 }
