@@ -12,6 +12,11 @@ abstract Account {
 +List<Transaction> transactions
 }
 
+class Bank {
+List<User> Users
+List<Account> Accounts
+}
+
 enum Branch {
 +Oslo
 +Trondheim
@@ -43,9 +48,8 @@ class SavingsAccount {
 
 struct Transaction {
 ---
-+Guid Account
-+Account? ToAccount
-+Account? FromAccount
++Guid? ToAccountNumber
++Guid? FromAccountNumber
 +float Amount
 +DateTime TimeOfTransaction
 }
@@ -66,6 +70,9 @@ class User {
 Account <|-- CurrentAccount
 Account <|-- SavingsAccount
 Account <|-- Transaction
+
+Bank -- User
+Bank -- Account
 
 Branch <|-- Account
 

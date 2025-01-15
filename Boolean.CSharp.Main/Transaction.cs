@@ -13,13 +13,12 @@ namespace Boolean.CSharp.Main
         private Guid? _toAccountNumber;
         private Guid? _fromAccountNumber;
         private float _amount;
-        private DateTime _timeOfTransaction;
+        private DateTime _timeOfTransaction = DateTime.Now;
 
-        public Transaction(Guid? toAccount, Guid? fromAccount, float amount, DateTime timeOfTransaction) {
-            _toAccountNumber = toAccount;
+        public Transaction(Guid? fromAccount, Guid? toAccount, float amount) {
             _fromAccountNumber = fromAccount;
+            _toAccountNumber = toAccount;
             _amount = amount;
-            _timeOfTransaction = timeOfTransaction;
         }
 
         public Guid? ToAccountNumber { get { return _toAccountNumber; } }

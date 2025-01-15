@@ -10,29 +10,57 @@ namespace Boolean.CSharp.Main.Abstract
 {
     public abstract class Account
     {
-        private Branch? _branch;
+        public Account(Guid ownerID, string accountName)
+        {
+            OwnerID = ownerID;
+            AccountName = accountName;
+        }
 
         public float CalculateFunds()
         {
             float funds = 0f;
 
+            foreach(Transaction transaction in BankData.Transactions)
+            {
+                if (AccountNumber == transaction.FromAccountNumber)
+                {
+                    funds -= transaction.Amount;
+                    Console.WriteLine(transaction.Amount);
+                }
+                else if (AccountNumber == transaction.ToAccountNumber)
+                    funds += transaction.Amount;
+            }
+
             return funds;
         }
 
-        public void TransferTo(float amount, Account account)
+        public void TransferTo(Guid accountNumber, float amount)
         {
+            if (amount <= 0)
+                return;
 
+            if (this is CurrentAccount)
+                if (CalculateFunds() - amount < -((CurrentAccount)this).OverdraftAmount)
+                    return;
+
+            if (this is SavingsAccount)
+                if (CalculateFunds() - amount < 0f)
+                    return;
+
+            Transaction transaction = new Transaction(AccountNumber, accountNumber, amount);
+
+            BankData.Transactions.Add(transaction);
         }
 
-        public void SetBranch(Branch branch)
+        public void SetBranch(Role role, Branch branch)
         {
-            _branch = branch;
+            if (role == Role.Manager)
+                Branch = branch;
         }
 
         public Guid AccountNumber { get; set; } = Guid.NewGuid();
-        public string Owner { get; set; }
+        public Guid OwnerID { get; set; }
         public string AccountName { get; set; }
-        public Branch? Branch { get { return _branch; } }
-        List<Transaction> transactions { get; set; }
+        public Branch? Branch { get; set; }
     }
 }

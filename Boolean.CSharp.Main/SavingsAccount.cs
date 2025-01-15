@@ -9,21 +9,21 @@ namespace Boolean.CSharp.Main
 {
     public class SavingsAccount : Account
     {
-        private bool _locked;
+        private bool _locked = false;
 
-        public SavingsAccount()
+        public SavingsAccount(Guid ownerID, string accountName) : base(ownerID, accountName)
         {
-            _locked = false;
+            
         }
 
         public void LockAccount()
         {
-
+            _locked = true;
         }
 
         public void UnlockAccount()
         {
-
+            _locked = false;
         }
 
         public bool Locked { get { return _locked; } }
