@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Transactions;
 using Boolean.CSharp.Main.Class;
 using Boolean.CSharp.Main.Enums;
+using Boolean.CSharp.Main.Interface;
 using Transaction = Boolean.CSharp.Main.Class.Transaction;
 
 namespace Boolean.CSharp.Main.Abstract
@@ -21,15 +22,28 @@ namespace Boolean.CSharp.Main.Abstract
             _transactions = new List<Transaction>();
         }
 
-        public void Withdraw(decimal amount) 
+        public void Withdraw(decimal amount, DateTime? customDate = null) 
         {
-            Transaction transaction = new Transaction(amount, TransactionType.Withdrawal);
-            _transactions.Add(transaction);
+            if (this is IOverdraftable overdraftable && CalculateBalance() - amount > -overdraftable.OverdraftLimit)
+            {
+                Transaction transaction = new Transaction(amount, TransactionType.Withdrawal, customDate);
+                _transactions.Add(transaction);
+            }
+            else if (CalculateBalance() - amount < 0)
+            {
+                Console.WriteLine("You cannot withdraw more funds");
+            }
+            else
+            {
+                Transaction transaction = new Transaction(amount, TransactionType.Withdrawal, customDate);
+                _transactions.Add(transaction);
+            }
+           
         }
 
-        public void Deposit(decimal amount)
+        public void Deposit(decimal amount, DateTime? customDate = null)
         {
-            Transaction transaction = new Transaction(amount, TransactionType.Deposit);
+            Transaction transaction = new Transaction(amount, TransactionType.Deposit, customDate);
             _transactions.Add(transaction);
         }
 

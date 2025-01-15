@@ -34,27 +34,36 @@ namespace Boolean.CSharp.Test
         }
 
         [Test]
-        private void TestBalanceCalculation()
+        public void TestBalanceCalculation()
+        {
+
+            _savingAccount.Deposit(5000);
+            _savingAccount.Withdraw(500);
+            _savingAccount.Deposit(1000);
+            _savingAccount.Withdraw(3000);
+
+            decimal balance = _savingAccount.CalculateBalance();
+
+            Assert.That(balance, Is.EqualTo(2500));
+            
+        }
+        [Test]
+        public void TestBranches()
         {
             throw new NotImplementedException();
         }
         [Test]
-        private void TestBranches()
+        public void TestOverdraft()
         {
             throw new NotImplementedException();
         }
         [Test]
-        private void TestOverdraft()
+        public void TestOverdraftRequestApprovalAndRejection()
         {
             throw new NotImplementedException();
         }
         [Test]
-        private void TestOverdraftRequestApprovalAndRejection()
-        {
-            throw new NotImplementedException();
-        }
-        [Test]
-        private void TestStatementMessage()
+        public void TestStatementMessage()
         {
             throw new NotImplementedException();
         }

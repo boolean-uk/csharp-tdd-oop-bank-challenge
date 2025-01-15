@@ -13,11 +13,11 @@ namespace Boolean.CSharp.Main.Class
         private TransactionType _type;
         private DateTime _transactionDate;
 
-        public Transaction(decimal balance, TransactionType type) 
+        public Transaction(decimal balance, TransactionType type, DateTime? date) 
         {
             _balance = balance;
             _type = type;
-            _transactionDate = DateTime.Now;
+            _transactionDate = date ?? DateTime.Now;
         }
         public Guid Id { get; set; } = Guid.NewGuid();
         public DateTime TransactionDate { get => _transactionDate; set => _transactionDate = value; }

@@ -22,9 +22,13 @@ namespace Boolean.CSharp.Test
             _currentAccount = new CurrentAccount(Role.Customer);
             _savingAccount = new SavingAccount(Role.Customer);
 
-            _currentAccount.Deposit(1000);
+            _currentAccount.Deposit(1000, new DateTime(2012, 1, 10));
 
             _currentAccount.Withdraw(500);
+            _currentAccount.Withdraw(500);
+            _currentAccount.Withdraw(500);
+
+           
         }
 
         [Test]
@@ -45,6 +49,7 @@ namespace Boolean.CSharp.Test
             List<Transaction> transactions = _currentAccount.Transactions;
             Transaction transaction = transactions[0];
 
+            Console.WriteLine(_currentAccount.ToString());
             Assert.That(transaction.TransactionDate, Is.TypeOf<DateTime>());
             Assert.That(transaction.Type, Is.TypeOf<TransactionType>());
             Assert.That(transaction.Balance, Is.GreaterThan(0));
