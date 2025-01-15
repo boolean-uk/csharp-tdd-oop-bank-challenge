@@ -1,0 +1,9 @@
+| Entity          | Attributes                                           | Methods                                                      | Relationships                              |
+|------------------|-----------------------------------------------------|-------------------------------------------------------------|-------------------------------------------|
+| Customer        | `userId`, `name`, `phoneNumber`, `_accountList`      | `CreateAccount(account)`, `DeleteAccount(account)`, `getStatement(accountId)` | Has many Accounts                         |
+| Account         | `accountId`, `accountName`, `userId`, `bankBranch`, `transactions` | `getAccountBalance()`, `deposit(amount)`, `withdraw(amount)` | Belongs to Customer, belongs to BankBranch, has many Transactions |
+| BankBranch      | `branchId`, `branchName`, `overdraftRequests`        | `AddOverdraftRequest(overdraftRequest)`, `RejectOverdraftRequest(overdraftRequest)`, `ApproveOverdraftRequest(overdraftRequest, role)` | Has many Accounts, has many OverdraftRequests |
+| Transaction     | `transactionId`, `transactionDate`, `transactionType`, `transactionAmount`, `currentBalance` | `ToString()`                                                | Belongs to Account                        |
+| BankStatement   | `statementId`, `accountId`, `transactions`           | `ToString()`                                                | Includes many Transactions, belongs to Account |
+| OverdraftRequest| `accountId`, `transaction`, `_approved`              | `Approve(role)`                                             | Belongs to Account, triggers BankBranch actions |
+| User            | `userId`, `name`, `role`                             | (Abstract)                                                  | Extended by Customer                      |
