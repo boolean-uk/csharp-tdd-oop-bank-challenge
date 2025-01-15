@@ -36,10 +36,10 @@ namespace Boolean.CSharp.Test
             Assert.AreEqual(account.balance, 600);
         }
         [Test]
-<        public void RequestOverdraftPendingTest()
+        public void RequestOverdraftPendingTest()
         {
             CurrentAccount account = (CurrentAccount) Branch.CreateAccount(Customer, 'c');
-            CurrentAccount.RequestOverDraft();
+            Customer.RequestOverdraftOnAccount(account);
             Assert.True(Branch.OverdraftRequests.Count == 1);
         }
 
@@ -47,8 +47,8 @@ namespace Boolean.CSharp.Test
         public void AcceptOverdraftTest()
         {
             CurrentAccount account = (CurrentAccount)Branch.CreateAccount(Customer, 'c');
-            CurrentAccount.RequestOverDraft();
-            Branch.AcceptOverdraft(account);
+            Customer.RequestOverdraftOnAccount(account);
+            Branch.AnswerOverdraft(account, true);
             Assert.True(account.lowerBalanceLimit == -500);
         }
 
@@ -56,8 +56,8 @@ namespace Boolean.CSharp.Test
         public void DenyOverdraftTest()
         {
             CurrentAccount account = (CurrentAccount)Branch.CreateAccount(Customer, 'c');
-            CurrentAccount.RequestOverDraft();
-            Branch.DenyOverdraft(account);
+            Customer.RequestOverdraftOnAccount(account);
+            Branch.AnswerOverdraft(account, false);
             Assert.True(account.lowerBalanceLimit == 0);
         }
 
@@ -65,8 +65,8 @@ namespace Boolean.CSharp.Test
         public void WithdrawFromOverdraftedAccountTest()
         {
             CurrentAccount account = (CurrentAccount)Branch.CreateAccount(Customer, 'c');
-            CurrentAccount.RequestOverDraft();
-            Branch.AcceptOverdraft(account);
+            Customer.RequestOverdraftOnAccount(account);
+            Branch.AnswerOverdraft(account, true);
             Customer.Withdraw(account, 300);
             Assert.AreEqual(account.balance, -300);
         }

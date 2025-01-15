@@ -34,7 +34,7 @@ namespace Boolean.CSharp.Main.AccountType
 
         public double withdraw(double amount)
         {
-            if(this.balance >= amount && amount > 0)
+            if(this.balance-lowerBalanceLimit >= amount && amount > lowerBalanceLimit)
             {
                 this.balance -= amount;
                 transactions.Add(new Transaction(-amount));
@@ -54,5 +54,6 @@ namespace Boolean.CSharp.Main.AccountType
 
             return sb.ToString();
         }
+
     }
 }

@@ -14,12 +14,14 @@ namespace Boolean.CSharp.Main
         public List<Customer> CustomerList { get; set; }
         public List<IAccount> Accounts { get; set; }
         public Bank bank { get; set; }
+        public List<CurrentAccount> OverdraftRequests { get; set; }
 
         public Branch(string name, Bank bank)
         {
             this.CustomerList = new List<Customer>();
             this.Accounts = new List<IAccount>();
             this.bank = bank;
+            this.OverdraftRequests = new List<CurrentAccount>();
         }
 
         public IAccount CreateAccount(Customer customer, char type)
@@ -44,7 +46,17 @@ namespace Boolean.CSharp.Main
                 throw new InvalidDataException("Type (char) is not valid");
             }
         }
+        public void AnswerOverdraft(CurrentAccount account, bool answer)
+        {
 
+            if(answer && OverdraftRequests.Contains(account))
+            {
+                account.lowerBalanceLimit = -500;
+                OverdraftRequests.Remove(account);
+            }
+
+        }
+    
 
     }
 }

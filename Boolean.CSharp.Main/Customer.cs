@@ -26,5 +26,15 @@ namespace Boolean.CSharp.Test
         {
             return account.withdraw(amount);
         }
+
+        public bool RequestOverdraftOnAccount(IAccount account)
+        {
+            if((account is SavingsAccount))
+            {
+                return false;
+            }
+            branch.OverdraftRequests.Add((CurrentAccount)account);
+            return true;
+        }
     }
 }
