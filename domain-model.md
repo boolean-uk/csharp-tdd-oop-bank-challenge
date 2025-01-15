@@ -2,15 +2,15 @@
 
 ## User stories
 
-- [ ] Must create current account
-- [ ] Must create savings account
+- [x] Must create current account
+- [x] Must create savings account
 - [x] Must be able to generate bank statements with transaction dates, amounts, and balance at the time of transaction
 - [x] Must be able to deposit funds
 - [x] Must be able to withdraw funds
 - [x] Should be able to calculate balance based on transaction history
 - [ ] Accounts should be associated with specific branches
-- [ ] Should be possible to request an overdraft on checking account, NOT savings account
-- [ ] Should be possible for manager to approve or reject overdraft requests
+- [x] Should be possible to request an overdraft on checking account, NOT savings account
+- [x] Should be possible for manager to approve or reject overdraft requests
 - [ ] Statements should be sent as messages to phone
 
 ## Classes

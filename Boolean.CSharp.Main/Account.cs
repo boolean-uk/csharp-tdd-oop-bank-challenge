@@ -7,7 +7,7 @@ public abstract class Account
     private Guid _accountNumber = Guid.NewGuid();
     private Branch _branch;
     private User _accountHolder;
-    private List<Transaction> _transactions = new List<Transaction>();
+    internal List<Transaction> _transactions = new List<Transaction>();
     
     public Guid AccountNumber => _accountNumber;
     public decimal Balance => CalculateBalance();
