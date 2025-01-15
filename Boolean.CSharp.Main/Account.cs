@@ -22,11 +22,11 @@ namespace Boolean.CSharp.Main
         {
             this.customer = customer;
         }
-        public void deposit(double amount)
+        public void deposit(double amount, DateTime date)
         {
-            transactions.Add(new Transaction(amount, "DEPOSIT"));
+            transactions.Add(new Transaction(amount, "DEPOSIT", date));
         }
-        public void withdraw(double amount)
+        public void withdraw(double amount, DateTime date)
         {
             if (amount > Balance() + overDrawAmount)
             {
@@ -34,7 +34,7 @@ namespace Boolean.CSharp.Main
             }
             else
             {
-                transactions.Add(new Transaction(-amount, "WITHDRAWAL"));
+                transactions.Add(new Transaction(-amount, "WITHDRAWAL", date));
             }
         }
         public string setOverDrawAmount(double overDrawAmount)

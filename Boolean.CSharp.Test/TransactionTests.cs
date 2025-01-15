@@ -15,7 +15,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void transtactionWithdraw()
         {
-            Main.Transaction transaction = new(100, "WITHDRAW");
+            Main.Transaction transaction = new(100, "WITHDRAW", new DateTime(2012, 1, 10));
 
             Assert.AreEqual(100, transaction.Amount);
 
@@ -24,7 +24,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void transactionWithdraw()
         {
-            Main.Transaction transaction = new(100, "DEPOSIT");
+            Main.Transaction transaction = new(100, "DEPOSIT", new DateTime(2012, 1, 10));
 
             Assert.AreEqual(100, transaction.Amount);
             Assert.AreEqual("DEPOSIT", transaction.Type);

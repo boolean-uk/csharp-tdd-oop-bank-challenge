@@ -10,16 +10,20 @@ namespace Boolean.CSharp.Main
     {
         private string customerId;
         private CurrentAccount currentAccount;
+        private SavingAccount savingAccount;
 
         public Customer(string customerId, Branch branch) 
         {
             this.customerId = customerId;
-            this.currentAccount = new CurrentAccount(branch);
+            currentAccount = new CurrentAccount(branch);
+            savingAccount = new SavingAccount(branch);
 
-            this.currentAccount.setCustomer(this);
+            currentAccount.setCustomer(this);
         }
         public string GetCustomerId { get { return customerId; } }
 
         public CurrentAccount GetCurrentAccount { get { return currentAccount; } }
+
+        public SavingAccount GetSavingAccount { get {return savingAccount; } }
     }
 }

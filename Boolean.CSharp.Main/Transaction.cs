@@ -13,16 +13,16 @@ namespace Boolean.CSharp.Main
         private double amount;
         private string type;
 
-        private static readonly string timeFormat = "dd-MM-yyyy HH:mm:ss";
+        private static readonly string timeFormat = "dd-MM-yyyy";
 
-        public Transaction(double amount, string type)
+        public Transaction(double amount, string type, DateTime date)
         {
-            date = DateTime.Now;
+            this.date = date;
             this.amount = amount;
             this.type = type;
         }
 
-        public string Date()
+        public string GetDate()
         {
             return date.ToString(timeFormat, CultureInfo.InvariantCulture);
         }
@@ -30,5 +30,6 @@ namespace Boolean.CSharp.Main
         public double Amount => amount;
 
         public string Type => type;
+        public DateTime DateTimeTrans => date;
     }
 }

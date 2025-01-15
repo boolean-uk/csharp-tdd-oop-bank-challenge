@@ -17,18 +17,18 @@ namespace Boolean.CSharp.Test
             Branch branch = new Branch("Gåsbu Branch");
             Customer customer1 = new Customer("Customer1", branch);
 
-            customer1.GetCurrentAccount.deposit(100);
+            customer1.GetCurrentAccount.deposit(100, new DateTime(2012, 1, 10));
             Assert.AreEqual(100, customer1.GetCurrentAccount.Balance());
 
-            customer1.GetCurrentAccount.withdraw(100);
+            customer1.GetCurrentAccount.withdraw(100, new DateTime(2012, 1, 10));
             Assert.AreEqual(0, customer1.GetCurrentAccount.Balance());
 
             // check if account is negative
-            customer1.GetCurrentAccount.withdraw(100);
+            customer1.GetCurrentAccount.withdraw(100, new DateTime(2012, 1, 10));
             Assert.AreEqual(0, customer1.GetCurrentAccount.Balance());
 
             customer1.GetCurrentAccount.setOverDrawAmount(100);
-            customer1.GetCurrentAccount.withdraw(100);
+            customer1.GetCurrentAccount.withdraw(100, new DateTime(2012, 1, 10));
             Assert.AreEqual(-100, customer1.GetCurrentAccount.Balance());
 
         }
@@ -38,19 +38,19 @@ namespace Boolean.CSharp.Test
             Branch branch = new Branch("Gåsbu Branch");
             Customer customer1 = new Customer("Customer1", branch);
 
-            customer1.GetSavingAccount.deposit(100);
+            customer1.GetSavingAccount.deposit(100, new DateTime(2012, 1, 10));
             Assert.AreEqual(100, customer1.GetSavingAccount.Balance());
 
-            customer1.GetSavingAccount.withdraw(100);
+            customer1.GetSavingAccount.withdraw(100, new DateTime(2012, 1, 10));
             Assert.AreEqual(0, customer1.GetSavingAccount.Balance());
 
             // check if account is negative
-            customer1.GetSavingAccount.withdraw(100);
+            customer1.GetSavingAccount.withdraw(100, new DateTime(2012, 1, 10));
             Assert.AreEqual(0, customer1.GetSavingAccount.Balance());
 
+            // can not overdraw savings account
             customer1.GetSavingAccount.setOverDrawAmount(100);
-            customer1.GetSavingAccount.withdraw(100);
-            Assert.AreEqual(-100, customer1.GetSavingAccount.Balance());
+            Assert.AreEqual(0, customer1.GetSavingAccount.overDrawAmount);
 
         }
     }
