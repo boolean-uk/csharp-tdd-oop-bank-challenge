@@ -9,13 +9,14 @@ namespace Boolean.CSharp.Main
     public abstract class Account
     {
         public string AccountNumber { get; set; }
-        public string Name { get; set; }
-        public Roles Role { get; set; }
+        public string OwnerName { get; set; }
+        public Roles OwnerRole { get; set; }
+        public Branches Branch { get; set; } = Branches.Oslo;
         public double Balance { get; set; } = 0;
 
         public struct Transaction 
         {
-            public DateTime Date {  get; set; }
+            public DateTime Date { get; set; }
             public double Amount { get; set; }
             public double CurrentBalance { get; set; }
 
@@ -36,13 +37,13 @@ namespace Boolean.CSharp.Main
         public Account(string accountnumber, string name, Roles role) 
         { 
             AccountNumber = accountnumber;
-            Name = name;
-            Role = role;
+            OwnerName = name;
+            OwnerRole = role;
         }
 
         public double GetBalance()
         {
-            if (Role == Roles.Engineer)
+            if (OwnerRole == Roles.Engineer)
             {
                 return Transactions.Sum(t => t.Amount);
             }
@@ -64,7 +65,7 @@ namespace Boolean.CSharp.Main
         {
             const int aligned = -10;
             
-            Console.WriteLine($"-----Bank Statement - {Name} - {DateTime.Today.ToString("dd/MM/yyyy")}-----");
+            Console.WriteLine($"-----Bank Statement - {OwnerName} - {DateTime.Today.ToString("dd/MM/yyyy")}-----");
             Console.WriteLine($"{"Date",aligned} || {"Credit",aligned}|| {"Debit",aligned}|| {"Balance",aligned}");
 
             foreach ( Transaction transaction in Transactions)

@@ -11,7 +11,8 @@ namespace Boolean.CSharp.Main
         {
             if (base.Balance < amount && !overdraftApproval) 
             {
-                throw new ArgumentException($"Unsuficcinet funds! Balance: {base.Balance}");
+
+                throw new ArgumentException($"Insuficcinet funds! Balance: {base.Balance}\n Sent overdraft request to manager!");
             }
             else {
                 base.Balance -= amount;
@@ -22,6 +23,8 @@ namespace Boolean.CSharp.Main
             }
         }
 
-        public CurrentAccount(string accountnumber, string name, Roles role ) : base(accountnumber, name, role) { }
+        public CurrentAccount(string accountnumber, string name, Roles ownerRrole ) : base(accountnumber, name, ownerRrole) { }
+
+
     }
 }

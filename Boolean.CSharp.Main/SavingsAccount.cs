@@ -17,7 +17,7 @@ namespace Boolean.CSharp.Main
             {
                 string addMessage = "";
                 if (overdraftApproval) { addMessage = " - Savings accounts can never be overdrafted";  }
-                throw new ArgumentException($"Unsuficcinet funds! Balance: {base.Balance}{addMessage}");
+                throw new ArgumentException($"Insuficcinet funds! Balance: {base.Balance}{addMessage}");
             }
             else if(FreeWithdrawals < 1) { throw new ArgumentException($"You have excceded the limt of free withdrawals"); }
             else

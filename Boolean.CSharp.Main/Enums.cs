@@ -12,4 +12,12 @@ namespace Boolean.CSharp.Main
         Engineer
     }
 
+    public enum Branches
+    {
+        Trondheim,
+        Oslo, 
+        Stavanger,
+        Bergen
+    }
+
 }
