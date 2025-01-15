@@ -31,7 +31,7 @@ namespace Boolean.CSharp.Main.Classes
 
             Transaction transaction = new Transaction(DateTime.Now.ToString("dd/MM/yyyy"), 0, amount, Balance);
             Transactions.Add(transaction);
-            this.Balance -= amount;
+            this.Balance = Transactions.Sum(t => t.credit - t.debit);
         }
 
     }
