@@ -54,6 +54,7 @@ public class Bank : IOverdraftOwner
 
         return true; 
     }
+
     public float withdraw(int accountId, float sumToWithdraw )
     {
         if (!_accounts.ContainsKey(accountId))
@@ -64,6 +65,7 @@ public class Bank : IOverdraftOwner
         
         return warnAndReturnVal($"Provided accountId [{accountId}] has too little in balance, no money for you", 0.0f);
     }
+
     public float? getBalance(int accountId)
     {
         if (!_accounts.ContainsKey(accountId))
@@ -74,18 +76,29 @@ public class Bank : IOverdraftOwner
     public string requestAccountStatement(int accountId)
     {
         if (!_accounts.ContainsKey(accountId))
-            return warnAndReturnVal($"Provided accountId [{accountId}] does not exist, no statement for you", null);
+            return warnAndReturnVal($"Provided accountId [{accountId}] does not exist, no statement for you", "null");
 
         var accountStatement = _accounts[accountId].getAccountStatement();
 
         return accountStatement;
-
-
     }
+    
+    public void presentAccountStatement(int accountId)
+    {
+        if (!_accounts.ContainsKey(accountId))
+        {
+            warnAndReturnVal($"Provided accountId [{accountId}] does not exist, no statement will be presented", "null");
+            return;
+        }
+
+        Console.WriteLine(_accounts[accountId].getAccountStatement());
+    }
+
     public void requestOverdraft(int accountId, float amount)
     {
         if (!_accounts.ContainsKey(accountId))
             return;
+
         if(_accounts[accountId] is not IOverdraftable)
         {
             warnAndReturnVal($"Provided accountId [{accountId}], is not a overdraftable account");
@@ -110,6 +123,8 @@ public class Bank : IOverdraftOwner
 
     public void setConfigFunc(Overdraft overdraft, Action<float> configOverdraft, Account acc)
     {
+        // Note: the design/impl of overdrafting is designed to make it harder for people outside the bank to change it
+        // It's somewhat of an excuse to add more object oriented stuff to the challange...
         if (overdraftConfigs.ContainsKey(acc.ID))
         {
             warnAndReturnVal($"OverdraftConfig already exists for {acc.ID}");
@@ -117,6 +132,5 @@ public class Bank : IOverdraftOwner
         }
 
         overdraftConfigs[acc.ID] = configOverdraft;
-
     }
 }

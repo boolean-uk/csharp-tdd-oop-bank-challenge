@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System.Collections.Generic;
+using System.Linq;
 using Boolean.CSharp.Main.Enums;
 using Boolean.CSharp.Main.Interfaces;
 
@@ -55,8 +56,19 @@ public abstract class Account : IInitializable
 
     }
 
-    internal string getAccountStatement()
+    public string getAccountStatement()
     {
-        throw new NotImplementedException();
+        var statementStringList = this.records.OrderBy(x => x.Key).Select(x => x.Value.stringify());
+
+        var header = string.Format("{0}{1,25}{2,10}{3,10}{4,15}",
+            "Date",
+            "Sender",
+            "Reciever",
+            "Amount",
+            "Balance"
+            
+            );
+        string noteToUser = "Note: both Sender and Reciever may be -1, that refers to outside the bank as no bankID could be provided";
+        return $"{header}\n{string.Join('\n',statementStringList)}\n\n{noteToUser}";
     }
 }

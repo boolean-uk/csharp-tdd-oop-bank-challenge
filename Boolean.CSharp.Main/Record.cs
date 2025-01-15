@@ -17,4 +17,15 @@ public class Record
         _balanceAtTransaction = account.GetBalance; // TODO FIX
 
     }
+
+    public string stringify()
+    {
+        return string.Format("{0}{1,10}{2,10}{3,10}{4,15}",
+            _transactionDate,
+            _senderAccountId,
+            _recieverAccountId,
+            _amount,
+            _balanceAtTransaction
+            );
+    }
 }
