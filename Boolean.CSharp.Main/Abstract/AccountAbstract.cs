@@ -32,16 +32,7 @@ namespace Boolean.CSharp.Main.Abstract
             Transactions.Add(transaction);
             this.Balance += amount;
         }
-        public void Withdraw(double amount)
-        {
-            if (amount > this.Balance)
-            {
-                return;
-            }
-            Transaction transaction = new Transaction(DateTime.Now.ToString("dd/MM/yyyy"), 0, amount, Balance);
-            Transactions.Add(transaction);
-            this.Balance -= amount;
-        }
+        public abstract void Withdraw(double amount);
         public string GenerateReport()
         {
             StringBuilder sb = new StringBuilder();

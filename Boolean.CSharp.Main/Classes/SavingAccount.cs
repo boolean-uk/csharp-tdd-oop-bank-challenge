@@ -14,5 +14,15 @@ namespace Boolean.CSharp.Main.Classes
         {
 
         }
+        public override void Withdraw(double amount)
+        {
+            if (amount > this.Balance)
+            {
+                return;
+            }
+            Transaction transaction = new Transaction(DateTime.Now.ToString("dd/MM/yyyy"), 0, amount, Balance);
+            Transactions.Add(transaction);
+            this.Balance -= amount;
+        }
     }
 }

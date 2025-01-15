@@ -1,4 +1,5 @@
 ﻿using Boolean.CSharp.Main;
+using Boolean.CSharp.Main.Abstract;
 using Boolean.CSharp.Main.Classes;
 using Boolean.CSharp.Main.Interface;
 using NUnit.Framework;
@@ -19,7 +20,7 @@ namespace Boolean.CSharp.Test
             string result2 = user.CreateSavingsAccount("My Saving");
 
             Assert.That(result1, Is.EqualTo("Successfully created account"));
-            Assert.That(result2, Is.EqualTo("Successfully created account")); 
+            Assert.That(result2, Is.EqualTo("Successfully created account"));
             Assert.That(user.Accounts.Count, Is.EqualTo(2));
         }
 
@@ -99,8 +100,29 @@ namespace Boolean.CSharp.Test
             string report = acc.GenerateReport();
 
             Assert.That(report, Is.Not.Empty);
+        }
 
+        // EXTENSIONS:
 
+        // Overdraft
+        [Test]
+        public void SetOverdraftTrue()
+        {
+            User user = new User("giar");
+            user.CreateCurrentAccount("My Savings");
+            CurrentAccount? acc = user.GetCurrentAccount();
+
+            acc.Deposit(400);
+            acc.Deposit(300);
+            acc.Withdraw(100);
+            acc.Withdraw(50);
+            // 700 - 150 = 550
+            acc.SetOverdraft(true);
+
+            acc.Withdraw(750);
+            // 550 - 750 = -200
+
+            Assert.That(acc.Balance, Is.EqualTo(-200));
         }
     }
 }

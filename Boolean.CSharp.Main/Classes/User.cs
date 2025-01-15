@@ -43,13 +43,13 @@ namespace Boolean.CSharp.Main.Classes
             return "Successfully created account";
         }
 
-        public AccountAbstract? GetCurrentAccount()
+        public CurrentAccount? GetCurrentAccount()
         {
-            return Accounts.FirstOrDefault(a => a.GetType() == typeof(CurrentAccount));
+            return (CurrentAccount?)Accounts.FirstOrDefault(a => a.GetType() == typeof(CurrentAccount));
         }
-        public AccountAbstract? GetSavingsAccount()
+        public SavingAccount? GetSavingsAccount()
         {
-            return Accounts.FirstOrDefault(a => a.GetType() == typeof(SavingAccount));
+            return (SavingAccount?)Accounts.FirstOrDefault(a => a.GetType() == typeof(SavingAccount));
         }
     }
 }
