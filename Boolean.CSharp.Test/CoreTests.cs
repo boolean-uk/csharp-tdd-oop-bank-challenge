@@ -44,10 +44,10 @@ namespace Boolean.CSharp.Test
         {
             User user = new User("giar");
             user.CreateCurrentAccount("My Current");
-            var curr = user.GetCurrentAccount();
-            user.Deposit(curr, 500);
+            var acc = user.GetCurrentAccount();
+            acc.Deposit(500);
 
-            Assert.That(curr.Balance, Is.EqualTo(500));
+            Assert.That(acc.Balance, Is.EqualTo(500));
 
         }
         [Test]
@@ -56,7 +56,7 @@ namespace Boolean.CSharp.Test
             User user = new User("giar");
             user.CreateCurrentAccount("My Current");
             var acc = user.GetCurrentAccount();
-            user.Deposit(acc, -233);
+            acc.Deposit(-233);
 
             Assert.That(acc.Balance, Is.EqualTo(0));
         }
@@ -67,8 +67,9 @@ namespace Boolean.CSharp.Test
             User user = new User("giar");
             user.CreateSavingsAccount("My Savings");
             var acc = user.GetSavingsAccount();
-            user.Deposit(acc, 500);
-            user.Withdraw(acc, 300);
+
+            acc.Deposit(500);
+            acc.Withdraw(300);
 
             Assert.That(acc.Balance, Is.EqualTo(200));
         }
@@ -78,7 +79,7 @@ namespace Boolean.CSharp.Test
             User user = new User("giar");
             user.CreateSavingsAccount("My Savings");
             var acc = user.GetSavingsAccount();
-            user.Withdraw(acc, 600);
+            acc.Withdraw(600);
 
             Assert.That(acc.Balance, Is.EqualTo(0));
         }

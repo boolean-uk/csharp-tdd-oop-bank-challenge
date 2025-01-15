@@ -1,4 +1,5 @@
-﻿using Boolean.CSharp.Main.Interface;
+﻿using Boolean.CSharp.Main.Abstract;
+using Boolean.CSharp.Main.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,10 @@ namespace Boolean.CSharp.Main.Classes
 
 
         public string Name { get; set; }
-        public List<IAccount> Accounts { get; set; }
+        public List<AccountAbstract> Accounts { get; set; }
         public User(string username) {
             this.Name = username;
-            this.Accounts = new List<IAccount>();
+            this.Accounts = new List<AccountAbstract>();
         }
 
         public string CreateSavingsAccount(string name)
@@ -25,7 +26,7 @@ namespace Boolean.CSharp.Main.Classes
                 return "Account already exists";
             }
 
-            IAccount savingAccount = new SavingAccount(name);
+            AccountAbstract savingAccount = new SavingAccount(name);
             Accounts.Add(savingAccount);
             return "Successfully created account";
         }
@@ -37,40 +38,18 @@ namespace Boolean.CSharp.Main.Classes
                 return "Account already exists";
             }
 
-            IAccount currentAccount = new CurrentAccount(name);
+            AccountAbstract currentAccount = new CurrentAccount(name);
             Accounts.Add(currentAccount);
             return "Successfully created account";
         }
 
-        public IAccount? GetCurrentAccount()
+        public AccountAbstract? GetCurrentAccount()
         {
             return Accounts.FirstOrDefault(a => a.GetType() == typeof(CurrentAccount));
         }
-        public IAccount? GetSavingsAccount()
+        public AccountAbstract? GetSavingsAccount()
         {
             return Accounts.FirstOrDefault(a => a.GetType() == typeof(SavingAccount));
-        }
-
-        public void Deposit(IAccount account, double amount)
-        {
-            if(amount < 0)
-            {
-                return;
-            }
-            account.Balance += amount;
-        }
-        public void Withdraw(IAccount account, double amount)
-        {
-            if(amount > account.Balance)
-            {
-                return;
-            }
-            account.Balance -= amount;
-        }
-
-        public void GenerateReport()
-        {
-            throw new NotImplementedException();
         }
     }
 }

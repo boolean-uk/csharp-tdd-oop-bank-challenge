@@ -11,9 +11,5 @@ namespace Boolean.CSharp.Main.Interface
     {
         public string CreateSavingsAccount(string name);
         public string CreateCurrentAccount(string name);
-
-        public void GenerateReport();
-        public void Deposit(IAccount account, double amount);
-        public void Withdraw(IAccount account, double amount);
     }
 }
