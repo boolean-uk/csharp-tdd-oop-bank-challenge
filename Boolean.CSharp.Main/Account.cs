@@ -50,6 +50,11 @@ public abstract class Account
     {
         return Deposit(amount, DateTime.Now);
     }
+    
+    public void SendStatement(IMessageProvider messageProvider)
+    {
+        messageProvider.Send(ToString());
+    }
 
     public override string ToString()
     {
