@@ -7,13 +7,11 @@ using Boolean.CSharp.Main.Abstract;
 
 namespace Boolean.CSharp.Main
 {
-    public class CurrentAccount : Account
+    internal class SavingsAccount : Account
     {
-        public CurrentAccount()
+        public SavingsAccount()
         {
 
         }
-
-        public object Role { get; set; }
     }
 }

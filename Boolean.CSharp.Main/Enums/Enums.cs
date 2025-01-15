@@ -14,4 +14,11 @@ namespace Boolean.CSharp.Main.Enums
         Trondheim,
         Bournemouth
     }
+
+    public enum Role
+    {
+        Customer,
+        Engineer,
+        Manager
+    }
 }

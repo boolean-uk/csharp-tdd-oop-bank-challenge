@@ -1,47 +1,77 @@
 @startuml
 
-interface IAccount {
+abstract Account {
++CalculateFunds()
++TransferTo(float amount, Account account)
++SetBranch(Branch branch)
+---
 +Guid AccountNumber
-+Branch Branch
++string Owner
++string AccountName
++Branch? Branch
++List<Transaction> transactions
 }
 
 enum Branch {
-
++Oslo
++Trondheim
++Kristiansand
++Bergen
 }
 
 class CurrentAccount {
-
++Deposit(float amount)
++Withdraw(float amount)
++RequestOverdraft(float amount)
++ManageOverdraftRequest(bool approve)
+---
+float OverdraftAmount
 }
 
-class Customer {
-
-}
-
-class Engineer {
-
-}
-
-class Manager {
-
+enum Role {
++Customer
++Engineer
++Manager
 }
 
 class SavingsAccount {
-
++LockAccount()
++UnlockAccount()
+---
++bool Locked()
 }
 
-interface IUser {
+struct Transaction {
+---
++Guid Account
++Account? ToAccount
++Account? FromAccount
++float Amount
++DateTime TimeOfTransaction
++string Message
+}
+
+class User {
++CreateCurrentAccount(string name)
++CreateSavingsAccount(string name)
++GenerateBankStatement()
++SendBankStatementToPhone(string number)
+---
++Role Role
++string Username
 
 }
 
 ''''''''''''''''''''''''''''''''''''''''
 
-IAccount <|-- CurrentAccount
-IAccount <|-- SavingsAccount
+Account <|-- CurrentAccount
+Account <|-- SavingsAccount
+Account <|-- Transaction
 
 Branch <|-- Account
 
-IUser <|-- Customer
-IUser <|-- Engineer
-IUser <|-- Manager
+Role <|-- User
+
+User <|-- Account
 
 @enduml

@@ -7,8 +7,9 @@ namespace Boolean.CSharp.Test
     [TestFixture]
     public class CoreTests
     {
-        private Core _core;
+        private 
 
+        [SetUp]
         public CoreTests()
         {
             _core = new Core();
@@ -22,7 +23,7 @@ namespace Boolean.CSharp.Test
             Assert.That(current.AccountNumber, Is.TypeOf(Guid));
 
             current.Branch = Main.Enums.Branch.Bournemouth;
-            current.Role = Console.Enums.Role.Customer;
+            current.Role = Main.Enums.Role.Customer;
         }
 
     }
