@@ -15,6 +15,7 @@ namespace Boolean.CSharp.Main.Abstract
     {
         private Role _owner;
         private List<Transaction> _transactions;
+        private Branch _branch;
 
         public Account(Role owner)
         {
@@ -86,7 +87,7 @@ namespace Boolean.CSharp.Main.Abstract
             return builder.ToString();
         }
         public Guid AccountNumber { get; set; } = Guid.NewGuid();
-        public Branch Branch { get; set; }
+        public Branch Branch { get => _branch; set => _branch = value; }
         public List<Transaction> Transactions { get => _transactions; set => _transactions = value; }
     }
 }

@@ -50,7 +50,10 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestBranches()
         {
-            throw new NotImplementedException();
+            _savingAccount.Branch = Main.Enums.Branch.Oslo;
+
+            Assert.That(_savingAccount.Branch, Is.TypeOf<Main.Enums.Branch>());
+            Assert.That(_savingAccount.Branch, Is.EqualTo(Main.Enums.Branch.Oslo));
         }
         [Test]
         public void TestOverdraft()
