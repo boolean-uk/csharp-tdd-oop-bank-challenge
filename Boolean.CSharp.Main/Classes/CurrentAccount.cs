@@ -10,7 +10,7 @@ namespace Boolean.CSharp.Main.Classes
 {
     public class CurrentAccount : AccountAbstract
     {
-        bool overdraft = false;
+        public bool overdraft = false;
         public CurrentAccount(string name) : base(name)
         {
             

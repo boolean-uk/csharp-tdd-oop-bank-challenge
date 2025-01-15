@@ -124,5 +124,64 @@ namespace Boolean.CSharp.Test
 
             Assert.That(acc.Balance, Is.EqualTo(-200));
         }
+
+        [Test]
+        public void BankWithSpecificBranches()
+        {
+
+            Bank bank = new Bank("Sparebank 1");
+            BankBranch branch = bank.CreateBranch("Oslo");
+
+            User user = new User("giar");
+            user.CreateCurrentAccount("My Current");
+            CurrentAccount? acc = user.GetCurrentAccount();
+            branch.AddUser(user);
+
+            acc.Deposit(400);
+            acc.Deposit(300);
+            acc.Withdraw(100);
+            acc.Withdraw(50);
+            // 700 - 150 = 550
+            acc.SetOverdraft(true);
+
+            acc.Withdraw(750);
+            // 550 - 750 = -200
+
+            Assert.That(acc.Balance, Is.EqualTo(-200));
+        }
+        [Test]
+        public void ApproveOrRejectOverdraftRequests()
+        {
+
+            Bank bank = new Bank("Sparebank 1");
+            BankBranch branch = bank.CreateBranch("Oslo");
+
+            User user = new User("giar");
+            user.CreateCurrentAccount("My Current");
+            CurrentAccount? acc = user.GetCurrentAccount();
+            branch.AddUser(user);
+
+            user.RequestOverdraft(acc);
+            Assert.That(branch.currAccounts.Count, Is.EqualTo(1));
+
+            branch.AnswerOverdraftRequest(acc, true);
+
+            Assert.That(branch.currAccounts.Count, Is.EqualTo(0));
+            Assert.True(acc.overdraft);
+
+
+
+
+
+            acc.Deposit(400);
+            acc.Deposit(300);
+            acc.Withdraw(100);
+            acc.Withdraw(50);
+            // 700 - 150 = 550
+            acc.Withdraw(750);
+            // 550 - 750 = -200
+
+            Assert.That(acc.Balance, Is.EqualTo(-200));
+        }
     }
 }

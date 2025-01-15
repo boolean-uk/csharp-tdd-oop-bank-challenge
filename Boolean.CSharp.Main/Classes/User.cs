@@ -14,10 +14,14 @@ namespace Boolean.CSharp.Main.Classes
 
         public string Name { get; set; }
         public List<AccountAbstract> Accounts { get; set; }
+        public BankBranch branch;
+
+
         public User(string username) {
             this.Name = username;
             this.Accounts = new List<AccountAbstract>();
         }
+
 
         public string CreateSavingsAccount(string name)
         {
@@ -50,6 +54,17 @@ namespace Boolean.CSharp.Main.Classes
         public SavingAccount? GetSavingsAccount()
         {
             return (SavingAccount?)Accounts.FirstOrDefault(a => a.GetType() == typeof(SavingAccount));
+        }
+
+        public bool RequestOverdraft(AccountAbstract account)
+        {
+            if(account is SavingAccount)
+            {
+                return false;
+            }
+
+            branch.currAccounts.Add((CurrentAccount)account);
+            return true;
         }
     }
 }
