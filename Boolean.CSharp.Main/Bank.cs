@@ -16,6 +16,8 @@ namespace Boolean.CSharp.Main
         private Dictionary<int, Tuple<Guid, double>> _overdraftRequests = [];
         private Dictionary<int, Tuple<Guid, double>> _rejectedOverdraftRequests = [];
         private int _runningOverdraftId = 0;
+
+        public Dictionary<int, Tuple<Guid, double>> OverdraftRequests { get { return _overdraftRequests.ToDictionary(); } }
         public Guid CreateAccount(string name, Branch branch)
         {
             Account newAccount = new RegularAccount(name, branch, _bankSecret);
