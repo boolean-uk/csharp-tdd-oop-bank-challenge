@@ -81,3 +81,22 @@ So I can stay up to date,
 I want statements to be sent as messages to my phone.
 ```
 
+## Domain model
+
+| Class               | Methods/Properties  | Scenario                                                | Output                            |
+|---------------------|---------------------|---------------------------------------------------------|-----------------------------------|
+| Bank.cs             | AddCustomer         | Add a customer to the bank                              |                                   |
+| Bank.cs             | GetCustomers        | Fetch all customers                                     | A list of Customer objects        |
+| Customer.cs         | CreateBankAccount   | Create a bank account with given branch and accounttype |                                   |
+| BankAccount.cs      | RequestOverdraft    | Creates an overdraftRequest to be reviewed              |                                   |
+| BankAccount.cs      | GetBalance          | Finds the balance from the most recent transaction      | A decimal of the accounts balance |
+| BankAccount.cs      | CreateBankStatement | Creates a list of transactions to get an overview       | A list of Transactions            |
+| OverdraftRequest.cs | Approve             | Bank manager approves the request                       |                                   |
+| OverdraftRequest.cs | Decline             | Bank manager declines the request                       |                                   |
+| BankAccount.cs      | CreateTransaction   | Creates a new transaction                               |                                   |
+| BankAccount.cs      | SendBankStatement   | Sends the bank statement by SMS or by console           |                                   |
+
+
+## Class Diagram
+
+![Class Diagram](./assets/classdiagram.png)
