@@ -42,6 +42,42 @@ So I can use my account,
 I want to deposit and withdraw funds.
 ```
 
+## Domain Model
+
+| Classes               | Methods/Properties                           | Scenario                                           | Outputs                          |
+|-----------------------|----------------------------------------------|----------------------------------------------------|----------------------------------|
+| IAccount.cs           | Fields - accountType, accountBalance, Id, name, accountHolder, location, transactions
+| IAccount.cs           | GetTransactions()                            | Returning a list of transactions                   | List of transactions             |
+| IAccount.cs           | AddTransaction()                             | Adding a transaction to the list of transactions   | Void                             |
+| ITransaction.cs       | Fields - type, balance, transactionAmount, transactionDate,  PrintTransactions(), PrintTransactionsString() 
+| Customer.cs           | Fields - name, list of accounts, location, overdraftAmount, list of statements
+| Customer.cs           | Customer(string _name, string _location)     | Initializing a customer                            | Constructor                      |
+| Customer.cs           | GetAccountsCount()                           | Getting the number of accounts for the customer    | Returns the number of accounts   |
+| Customer.cs           | CreateAccount()                              | Creating an account                                | Void                             |
+| Customer.cs           | RequestOverdraft()                           | Requesting an overdraft for an account             | Void                             |
+| Customer.cs           | Withdrawal()                                 | Doing a withdrawal from an account                 | Void                             |
+| Customer.cs           | AddStatement()                               | Receiving a bank statement                         | Void                             |
+| Customer.cs           | GetAccount()                                 | Retrieving an account by its name                  | an account                       |
+| Customer.cs           | Deposit()                                    | Depositing funds into an account                   | Void                             |
+| Customer.cs           | PrintBankStatement()                         | Printing bank statement to console                 | Void                             |
+| Customer.cs           | GetAccountBalanceFromTransactions()          | Calculating balance based on transactions          | returning the balance            |
+| DebitTransaction.cs   | DebitTransaction(decimal _transactionAmount) | Initializing a Debit Transaction                   | Constructor                      |
+| DebitTransaction.cs   | PrintTransactions()                          | Prints formatted transaction                       | Void                             |
+| DebitTransaction.cs   | PrintTransactionsString()                    | Returns formatted string of transaction            | String rep of transactions       |
+| CreditTransaction.cs  | CreditTransaction(decimal _transactionAmount)| Initializing a Debit Transaction                   | Constructor                      |
+| CreditTransaction.cs  | PrintTransactions()                          | Prints formatted transaction                       | Void                             |
+| CreditTransaction.cs  | PrintTransactionsString()                    | Returns formatted string of transaction            | String rep of transaction        |
+| Checkings.cs          | Fields - accountBalance, accountHolder, name, accountType, list of transactions, location
+| Checkings.cs          | Checkings(string _name, string _location)    | Initializing checkings account                     | Constructor                      |
+| Checkings.cs          | GetTransactions()                            | Getting a list of transactions                     | Returns list of transactions     |
+| Savings.cs            | Fields - accountBalance, accountHolder, name, accountType, list of transactions, location
+| Savings.cs            | Savings(string _name, string _location)      | Initializing savings account                       | Constructor                      |
+| Savings.cs            | GetTransactions()                            | Getting a list of transactions                     | List of transactions             |
+| Manager.cs            | Fields - accountLocations                     
+| Manager.cs            | RespondToOverdraft(string response)          | A manager accepting or rejecting overdraft req     | True/False					   |
+| Manager.cs            | AddAccount(IAccount account)                 | Adding an account to list of accountLocations      | Void							   |
+| Manager.cs            | GetAccounts(string location)				   | Getting list of all accounts for given location    | List of all accounts for location|
+
 ## Acceptance Criteria
 
 **Given** a client makes a deposit of 1000 on 10-01-2012  
