@@ -53,7 +53,10 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestDepositAndWithdrawal()
         {
-            throw new NotImplementedException();
+            _savingAccount.Deposit(1000);
+            _savingAccount.Withdraw(500);
+
+            Assert.That(_savingAccount.CalculateBalance(), Is.EqualTo(500));
         }
 
     }
