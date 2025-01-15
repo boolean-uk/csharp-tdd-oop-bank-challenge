@@ -1,5 +1,9 @@
 # Domain model
 
+Full class diagram
+
+![full-class-diagram.png](full-class-diagram.png)
+
 ## User stories
 
 - [x] Must create current account
