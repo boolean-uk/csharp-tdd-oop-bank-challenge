@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 using Boolean.CSharp.Main.Interface;
 using NUnit.Framework;
 
@@ -12,13 +14,14 @@ namespace Boolean.CSharp.Main.PersonType
     {
     
         public decimal accountBalance { get; set; }
-        string name { get; set; }
+        public string name { get; set; }
         List<IAccount> accounts = new List<IAccount>();
-        
-
-        public Customer(string _name)
+        string location { get; set; }
+        decimal overdraftAmount { get; set; } = 0;
+        public Customer(string _name, string _location)
         {
             name = _name;
+            location = _location;
         }
 
 
@@ -27,18 +30,22 @@ namespace Boolean.CSharp.Main.PersonType
             return accounts.Count;
         }
 
-        public void CreateAccount(string type, string name)
+        public void CreateAccount(string type, string _name)
         {
             string toLower = type.ToLower();
 
             if (toLower == "checkings")
             {
-                accounts.Add(new Checkings(name));
+                Checkings checking = new Checkings(_name, location);
+                checking.accountHolder = name;
+                accounts.Add(checking);
             }
 
             else if (toLower == "savings")
             {
-                accounts.Add(new Savings(name));
+                Savings savings = new Savings(_name, location);
+                savings.accountHolder = name;
+                accounts.Add(savings);
             }
 
             else
@@ -48,18 +55,29 @@ namespace Boolean.CSharp.Main.PersonType
         
         }
 
-        public void Withdrawal(ITransaction transaction, decimal amount, bool hasOverdraft, IAccount account)
+        public void RequestOverdraft(decimal number, bool response, IAccount account)
         {
+            if (response)
+            {
+                overdraftAmount += number;
+                
+            }
+        }
 
-            if (!hasOverdraft && amount > account.accountBalance)
+        public void Withdrawal(IAccount account, ITransaction transaction)
+        {
+            decimal maxNum = account.accountBalance + overdraftAmount;
+            if (transaction.transactionAmount > maxNum)
             { 
-                    throw new Exception($"You don't have enough in your balance to withdraw the £{amount}");
+                    throw new Exception($"You don't have enough in your balance to withdraw the £{transaction.transactionAmount}");
                 }
 
-                if (hasOverdraft && amount > accountBalance || amount < account.accountBalance)
+                if (transaction.transactionAmount <= overdraftAmount + account.accountBalance)
                 {
-                    account.accountBalance -= amount;
+                    account.accountBalance -= transaction.transactionAmount;
+                    transaction.balance = account.accountBalance;
                     account.AddTransaction(transaction);
+                    
                 }
             }
 
@@ -76,16 +94,41 @@ namespace Boolean.CSharp.Main.PersonType
         }
 
 
-        public void Deposit(decimal amount, IAccount account)
+        public void Deposit(IAccount account, ITransaction transaction)
         {
-            account.accountBalance += amount;
-            account.AddTransaction(new CreditTransaction(amount));
+            account.accountBalance += transaction.transactionAmount;
+            transaction.balance = account.accountBalance;
+            account.AddTransaction(transaction);
+            
         }
 
         public void PrintBankStatement(IAccount account)
         {
+            Console.WriteLine("date        || credit   || debit    || balance");
 
+            foreach(ITransaction transaction in account.GetTransactions())
+            {
+                transaction.PrintTransactions();    
+            }
 
+        }
+
+        public decimal GetAccountBalanceFromTransactions(IAccount account)
+        {
+            decimal balance = 0;
+            
+            foreach(ITransaction transaction in account.GetTransactions())
+            {
+                if (transaction.type == "Credit")
+                {
+                    balance += transaction.transactionAmount;
+                }
+                else
+                {
+                    balance -= transaction.transactionAmount;
+                }
+            }
+            return balance;
         }
 
 

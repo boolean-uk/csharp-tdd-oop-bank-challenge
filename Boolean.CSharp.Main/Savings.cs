@@ -14,17 +14,21 @@ namespace Boolean.CSharp.Main
         public string accountType { get; set; } = "Savings";
         public decimal accountBalance { get; set; } = 0;
         public string name { get; set; }
+        public string accountHolder { get; set; }
         public List<ITransaction> transactions { get; set; }
+        public string location { get; set; }
+       
         
-        public Savings(string _name)
+        public Savings(string _name, string _location)
         {
             name = _name;
             transactions = new List<ITransaction>();
+            location = _location;   
         }
 
         public List<ITransaction> GetTransactions()
         {
-            return transactions;
+            return transactions.OrderByDescending(t => t.transactionDate).ToList();
         }
     }
 }

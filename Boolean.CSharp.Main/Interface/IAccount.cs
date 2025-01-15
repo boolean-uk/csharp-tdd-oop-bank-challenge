@@ -12,6 +12,9 @@ namespace Boolean.CSharp.Main.Interface
         string accountType { get; set; }
         decimal accountBalance { get; set; }
         string name { get; set; }
+        string accountHolder { get; set; }
+        string location { get; set; }
+
 
         List<ITransaction> transactions { get; set; }
 

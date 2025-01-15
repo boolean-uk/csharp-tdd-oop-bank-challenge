@@ -11,12 +11,13 @@ namespace Boolean.CSharp.Main
     {
         public decimal transactionAmount { get; set; }
         public DateTime transactionDate { get; set;  }
-       
+        public string type { get; set; } = "Credit";
+        public decimal balance { get; set; }
 
         public CreditTransaction(decimal _transactionAmount)
         {
             this.transactionAmount = _transactionAmount;
-            this.transactionDate = new DateTime();
+            this.transactionDate = DateTime.Now;
         }
             
        
