@@ -21,6 +21,11 @@ namespace Boolean.CSharp.Main
             _amount = amount;
         }
 
+        public void SetTimeOfTransaction(DateTime dateTime)
+        {
+            _timeOfTransaction = dateTime;
+        }
+
         public Guid? ToAccountNumber { get { return _toAccountNumber; } }
         public Guid? FromAccountNumber { get { return _fromAccountNumber; } }
         public float Amount {  get { return _amount; } }

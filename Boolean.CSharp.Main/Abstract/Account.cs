@@ -34,6 +34,27 @@ namespace Boolean.CSharp.Main.Abstract
             return funds;
         }
 
+        public float CalculateFundsBeforeDateTime(DateTime dateTime)
+        {
+            float funds = 0f;
+
+            foreach (Transaction transaction in BankData.Transactions)
+            {
+                if (transaction.TimeOfTransaction > dateTime)
+                    return funds;
+
+                if (AccountNumber == transaction.FromAccountNumber)
+                {
+                    funds -= transaction.Amount;
+                    Console.WriteLine(transaction.Amount);
+                }
+                else if (AccountNumber == transaction.ToAccountNumber)
+                    funds += transaction.Amount;
+            }
+
+            return funds;
+        }
+
         public void TransferTo(Guid accountNumber, float amount)
         {
             if (amount <= 0)
@@ -56,6 +77,11 @@ namespace Boolean.CSharp.Main.Abstract
         {
             if (role == Role.Manager)
                 Branch = branch;
+        }
+
+        public string GenerateBankStatement()
+        {
+            throw new NotImplementedException();
         }
 
         public Guid AccountNumber { get; set; } = Guid.NewGuid();
