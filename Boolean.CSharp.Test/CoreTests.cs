@@ -49,6 +49,7 @@ namespace Boolean.CSharp.Test
             List<Transaction> transactions = _currentAccount.Transactions;
             Transaction transaction = transactions[0];
 
+
             Console.WriteLine(_currentAccount.ToString());
             Assert.That(transaction.TransactionDate, Is.TypeOf<DateTime>());
             Assert.That(transaction.Type, Is.TypeOf<TransactionType>());

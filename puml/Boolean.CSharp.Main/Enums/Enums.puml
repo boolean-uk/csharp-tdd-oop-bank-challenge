@@ -1,0 +1,18 @@
+@startuml
+enum Branch {
+    Oslo,
+    Stockholm,
+    London,
+    Trondheim,
+    Bournemouth,
+}
+enum Role {
+    Manager,
+    Customer,
+    Engineer,
+}
+enum TransactionType {
+    Withdrawal,
+    Deposit,
+}
+@enduml

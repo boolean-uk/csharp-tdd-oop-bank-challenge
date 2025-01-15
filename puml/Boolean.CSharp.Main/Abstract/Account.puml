@@ -1,0 +1,14 @@
+@startuml
+abstract class Account {
+    + Account(owner:Role)
+    + Withdraw(amount:decimal, customDate:DateTime?) : void
+    + Deposit(amount:decimal, customDate:DateTime?) : void
+    + CalculateBalance() : decimal
+    + <<override>> ToString() : string
+}
+class "List`1"<T> {
+}
+Account o-> "AccountNumber" Guid
+Account --> "Branch" Branch
+Account --> "Transactions<Transaction>" "List`1"
+@enduml

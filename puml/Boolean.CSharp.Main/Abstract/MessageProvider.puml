@@ -1,0 +1,8 @@
+@startuml
+abstract class MessageProvider {
+    + MessageProvider(message:string)
+    + {abstract} SendMessage() : void
+    + Message : string <<get>> <<set>>
+}
+IMessage <|-- MessageProvider
+@enduml

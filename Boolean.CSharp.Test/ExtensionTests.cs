@@ -2,6 +2,7 @@
 using Boolean.CSharp.Main.Abstract;
 using Boolean.CSharp.Main.Class;
 using Boolean.CSharp.Main.Enums;
+using Boolean.CSharp.Main.Interface;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -95,7 +96,15 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestStatementMessage()
         {
-            throw new NotImplementedException();
+            _currentAccount.Deposit(1500);
+            _currentAccount.Withdraw(1000);
+
+            string message = _currentAccount.ToString();
+            MessageProvider consoleMessage = new ConsoleMessage(message);
+            consoleMessage.SendMessage();
+
+            Assert.That(consoleMessage.Message, Is.TypeOf<string>());
+            Assert.That(consoleMessage, Is.InstanceOf<IMessage>());
         }
     }
 }

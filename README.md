@@ -19,6 +19,7 @@
 | Account  | Branch branch  |                              |         |
 | Withdraw | decimal amount | Withdraws money from account | bool    |
 | Deposit  | decimal amount | Deposits money into account  | bool    |
+| CalculateBalance|  | Calculate the balance  | void    |
 | ToString |                | Returns an account statement |         |
 
 ### IOverdraftable (interface)
@@ -54,3 +55,4 @@ Message API is to be determined
 Deposit
 Withdrawal
 
+![Screenshot](C:\Users\NEkse1\csharp6\csharp-tdd-oop-bank-challenge\Boolean.CSharp.Main\Images\ClassDiagram.png)
