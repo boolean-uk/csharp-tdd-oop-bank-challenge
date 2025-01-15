@@ -1,26 +1,50 @@
 # Domain model
 
-## User stories
-
-- [ ] Must create current account
-
 ## Classes
 
 ### Transaction
 
 | Method      | Params               | Action | Returns |
 |-------------|----------------------|--------|---------|
-| Transaction | TransactionType type |        |         |
+| Transaction | decimal balance, TransactionType type, DateTime? date |        | Transaction        |
 
 
 ### Account (abstract class)
 | Method   | Params         | Action                       | Returns |
 |----------|----------------|------------------------------|---------|
-| Account  | Branch branch  |                              |         |
+| Account  | Role owner |                              |         |
 | Withdraw | decimal amount | Withdraws money from account | bool    |
 | Deposit  | decimal amount | Deposits money into account  | bool    |
 | CalculateBalance|  | Calculate the balance  | void    |
-| ToString |                | Returns an account statement |         |
+| ToString |                | Returns an account statement | string        |
+
+### SavingAccount
+| Method   | Params         | Action                       | Returns |
+|----------|----------------|------------------------------|---------|
+| SavingAccount  | Role owner  |  Extends account class                            |   Account      |
+
+### CurrentAccount
+| Method   | Params         | Action                       | Returns |
+|----------|----------------|------------------------------|---------|
+| CurrentAccount  | Role owner  |  Extends account class                            | Account        |
+| OverdraftLimit  | decimal amount  |  How much the account can overdraft                            | decimal        |
+
+### OverdraftRequest
+| Method           | Params                                     | Action                                               | Returns |
+|------------------|--------------------------------------------|------------------------------------------------------|---------|
+| OverdraftRequest | ref IOverdraftable account |                                                      | OverdraftRequest    |
+| Overdraft			| decimal amount                             | Requests an overdraft to account | bool |
+| Approve          |                              | Approves the request | void    |
+| Reject          |                              | Rejects the request | void    |
+
+### MessageProvider
+Message API is to be determined
+
+| Method | Params                           | Action                      | Returns    |
+|--------|----------------------------------|-----------------------------|------------|
+| Message       | string message                                 | Constructs a new message object                             |  Message          |
+| SendMessage   |  | Send a message to recipient | Task<bool> |
+
 
 ### IOverdraftable (interface)
 
@@ -28,32 +52,29 @@
 |-----------------|--------|-------------|---------|
 | OverdraftLimit  |        | Get and set | decimal |
 
-### OverdraftRequest
-- Account
+### IMessage (interface)
 
-| Method           | Params                                     | Action                                               | Returns |
-|------------------|--------------------------------------------|------------------------------------------------------|---------|
-| OverdraftRequest | ref IOverdraftable account, decimal amount |                                                      | bool    |
-| Verdict          | bool approved                              | Approves or rejects a request for an overdraft limit | void    |
+| Method/variable | Params | Action      | Return  |
+|-----------------|--------|-------------|---------|
+| Message  |        | Get and set | string |
 
-### IMessageProvider
-Message API is to be determined
+### IBalanceRequest (interface)
 
-| Method | Params                           | Action                      | Returns    |
-|--------|----------------------------------|-----------------------------|------------|
-| Send   | string recipient, string message | Send a message to recipient | Task<bool> |
-|        |                                  |                             |            |
+| Method/variable | Params | Action      | Return  |
+|-----------------|--------|-------------|---------|
+| Balance |        | Get and set | decimal |
 
 
-### Branch (enum)
 
-| Method   | Params | Action                           | Return |
-|----------|--------|----------------------------------|--------|
-| ToString |        | Displays branch name as a string | string |
 
-### TransactionType (enum)
-Deposit
-Withdrawal
+### Enums (enum)
+
+| EnumType | Return |
+|----------|--------|
+| Role| Role |
+| TransactionType | TransactionType|
+| Branch  | Branch|
+
 
 ![classDiagram.png](puml/classDiagram.png)
 
