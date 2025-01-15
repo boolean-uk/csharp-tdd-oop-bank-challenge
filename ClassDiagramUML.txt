@@ -1,0 +1,94 @@
+@startuml
+
+abstract Account {
++CalculateFunds()
++CalculateFundsBeforeDateTime(DateTime dateTime)
++TransferTo(Guid accountNumber, float amount)
++SetBranch(Role role, Branch branch)
++GenerateBankStatement()
+---
++Guid AccountNumber
++string OwnerID
++string AccountName
++Branch? Branch
+}
+
+class BankData {
+---
+{static} +List<User> Users
+{static} +List<Account> Accounts
+{static} +List<Transaction> Transactions
+}
+
+enum Branch {
++Oslo
++Trondheim
++Kristiansand
++Bergen
+}
+
+class CurrentAccount {
++Deposit(float amount)
++Withdraw(float amount)
++RequestOverdraft(float amount)
++ManageOverdraftRequest(Role role, bool approve)
+---
++float OverdraftAmount
++OverdraftRequest? OverdraftRequest
+}
+
+struct OverdraftRequest {
+---
++Guid Account
++float amount
+}
+
+enum Role {
++Customer
++Engineer
++Manager
+}
+
+class SavingsAccount {
++LockAccount()
++UnlockAccount()
+---
++bool Locked()
+}
+
+struct Transaction {
+---
++Guid? ToAccountNumber
++Guid? FromAccountNumber
++float Amount
++DateTime TimeOfTransaction
+}
+
+class User {
++CreateCurrentAccount(string name)
++CreateSavingsAccount(string name)
+---
++Guid UserID
++Role Role
++string Username
+}
+
+''''''''''''''''''''''''''''''''''''''''
+
+Account <|-- CurrentAccount
+Account <|-- SavingsAccount
+Account <|-- Transaction
+
+BankData -- User
+BankData -- Account
+BankData -- OverdraftRequest
+
+Branch <|-- Account
+
+OverdraftRequest -- CurrentAccount
+
+Role <|-- User
+
+User <|-- Account
+
+@enduml

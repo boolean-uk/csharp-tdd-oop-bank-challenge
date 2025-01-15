@@ -1,0 +1,12 @@
+| Classes        | Actor    | Methods/Properties                          | Scenarios                                      | Outputs                                                                      |
+|----------------|----------|---------------------------------------------|------------------------------------------------|------------------------------------------------------------------------------|
+| User           | Customer | CreateCurrentAccount()                      | create a current account                       | create new CurrentAccount object for user                                    |
+| User           | Customer | CreateSavingsAccount()                      | create a savings account                       | create new SavingsAccount object for user                                    |
+| Account        | Customer | GenerateBankStatement()                     | generate a bank statement                      | return bank statement string of all accounts of user                         |
+| CurrentAccount | Customer | Deposit()                                   | deposit (external) money to account            | adds money to CurrentAccount                                                 |
+| CurrentAccount | Customer | Withdraw()                                  | withdraw money from account                    | subtracts and returns money from CurrentAccount                              |
+| Account        | Customer | TransferTo(float amount, Account toAccount) | transfer money to account from another account | removes money from one account and adds it to another                        |
+| Account        | Engineer | CalculateFunds()                            | check account balance                          | returns the sum of all incoming and outgoing transactions                    |
+| Account        | Manager  | SetBranch()                                 | set account branch                             | account branch set to one of the valid branches                              |
+| CurrentAccount | Customer | RequestOverdraft(float amount)              | request overdraft on account by amount         | creates an RequestOverdraft object and adds it to RequestOverdraftList       |
+| CurrentAccount | Manager  | ManageOverdraftRequest(bool approve)        | approve or deny an overdraft request           | approves or denies an RequestOverdraft, removes it from RequestOverdraftList |
