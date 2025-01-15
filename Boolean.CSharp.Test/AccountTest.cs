@@ -13,7 +13,7 @@ public class AccountTest
     {
         Customer customer = new Customer("testcostumer", "83747564");
         BankBranch branch = new BankBranch("testbranch");
-        _account = new Account("testaccount", customer.userId, branch.branchId);
+        _account = new Account("testaccount", customer.userId, branch);
     }
 
     [Test]

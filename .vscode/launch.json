@@ -1,0 +1,10 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+    {
+        "name": "C#: Boolean test Debug",
+        "type": "dotnet",
+        "request": "launch",
+        "projectPath": "${workspaceFolder}/Boolean.CSharp.Test/Boolean.CSharp.Test.csproj"    }
+    ],
+}

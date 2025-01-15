@@ -16,4 +16,6 @@ public class BankTransaction
         this.transactionType = transactionType;
         this.transactionAmount = transactionAmount;
     }
+
+    
 }

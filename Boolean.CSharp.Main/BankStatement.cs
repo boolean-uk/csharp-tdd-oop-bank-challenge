@@ -14,4 +14,6 @@ public class BankStatement
         this.accountId = accountId;
         this.statementDate = statementDate;
     }
+
+    
 }
