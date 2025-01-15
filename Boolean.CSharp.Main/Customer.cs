@@ -28,6 +28,15 @@ public class Customer : User
 
     public string getStatement(Guid accountId)
     {
-        return "Statement";
+        var account = _accountList.Find(a => a.accountId == accountId);
+        if (account == null)
+        {
+            return "Account not found";
+        }
+
+        BankStatement statement = new BankStatement(account.accountId, account.transactions);
+
+        
+        return statement.ToString();
     }
 }
