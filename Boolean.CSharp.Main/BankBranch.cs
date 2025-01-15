@@ -4,15 +4,13 @@ namespace Boolean.CSharp.Main;
 
 public class BankBranch
 {
-    public readonly Guid brachId;
+    public readonly Guid branchId;
     public string branchName;
-    public string branchAddress;
 
-    public BankBranch(string branchName, string branchAddress)
+    public BankBranch(string branchName)
     {
-        this.brachId = Guid.NewGuid();
+        this.branchId = Guid.NewGuid();
         this.branchName = branchName;
-        this.branchAddress = branchAddress;
     }
 
 }
