@@ -15,6 +15,10 @@ class Program
 
         customer.GetCurrentAccount.withdraw(500, new DateTime(2012, 1, 14));
 
+        customer.GetCurrentAccount.SetOverDrawAmount(100);
+
+        Console.WriteLine(customer.GetCurrentAccount.overDrawAmount);
+
         BankStatement.printStatement(customer.GetCurrentAccount);
     }
 }

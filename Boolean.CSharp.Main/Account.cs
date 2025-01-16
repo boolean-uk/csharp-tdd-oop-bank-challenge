@@ -37,19 +37,34 @@ namespace Boolean.CSharp.Main
                 transactions.Add(new Transaction(-amount, "WITHDRAWAL", date));
             }
         }
-        public string setOverDrawAmount(double overDrawAmount)
+        public string SetOverDrawAmount(double overDrawAmount)
         {
             if (overDrawAmount > Balance() + overDrawAmount)
             {
-                Console.WriteLine("insufficient balance");
+                Console.WriteLine("Insufficient balance");
+                return "Operation canceled.";
             }
             else
             {
-                this.overDrawAmount = overDrawAmount;
-                return "New over draw amount: " + overDrawAmount;
+                Console.WriteLine($"requested overDrawAmount: {overDrawAmount}. Allow (y/n)");
+                string confirmation = Console.ReadLine()?.Trim().ToLower();
+
+                if (confirmation == "y")
+                {
+                    this.overDrawAmount = overDrawAmount;
+                    return "new overdraw amount: " + overDrawAmount;
+                }
+                else if (confirmation == "n")
+                {
+                    return "new amount not allowed.";
+                }
+                else
+                {
+                    return "Invalid input";
+                }
             }
-            return "OK";
         }
+
         public double Balance()
         {
             return transactions.Sum(transaction => transaction.Amount);
